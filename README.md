@@ -113,12 +113,13 @@ o nome na tipografia da casa, dentro do mesmo cartão. Assim a parede lê-se
 como uma só coisa mesmo com logótipos a faltar, e um que chegue amanhã entra
 sem mexer em mais nada. Os logótipos vivem numa placa branca de propósito:
 quase todos são desenhados para fundo claro e desapareceriam no tema escuro.
+Para os que são desenhados a branco — a Lusíadas Saúde só publica essa versão
+— há `"fundo": "escuro"`, que dá àquele cartão uma placa escura, em vez de se
+andar a recolorir o logótipo de outra gente.
 
-**Os grupos estão separados de propósito.** «Apoio institucional» é quem
-seleciona, forma e financia; «Equipamento» são as marcas que ela joga e veste.
-Dizer que a Cobra e a Puma «apoiam» sem haver contrato seria afirmar o que não
-se sabe — e isso pode dar problemas a quem tem o nome no site. Se algum deles
-for mesmo um patrocínio, muda-se o item de grupo.
+**Os grupos são por natureza da relação**, e isso é uma escolha: patrocinador
+principal, parceiro, apoio institucional e campo de casa não são a mesma
+coisa, e uma parede que os misturasse dizia menos do que parece.
 
 ### Instagram
 

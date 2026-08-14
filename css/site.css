@@ -644,6 +644,7 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
            width:min(100%,190px);height:4.6rem;background:#FFF;
            border:1px solid var(--linha);border-radius:10px;padding:.75rem;
            transition:box-shadow .4s var(--curva)}
+.apoio__cx--escuro{background:#16202B;border-color:#16202B}
 .apoio__cx img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
 .apoio:hover .apoio__cx{box-shadow:0 8px 22px -12px rgba(18,40,30,.45)}
 .apoio__n{font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 24;

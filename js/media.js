@@ -85,8 +85,11 @@ export async function apoios(cx, lingua = 'pt') {
     const dentro = i.logo
       ? `<img src="img/logos/${i.logo}" alt="${i.nome}" loading="lazy" decoding="async" data-credito-feito="1" />`
       : `<span class="apoio__n">${i.nome}</span>`;
+    /* placa escura para logótipos desenhados a branco — a Lusíadas só publica
+       a versão branca, e numa placa branca não se via nada */
+    const placa = i.fundo === 'escuro' ? ' apoio__cx--escuro' : '';
     const corpo = `
-      <span class="apoio__cx">${dentro}</span>
+      <span class="apoio__cx${placa}">${dentro}</span>
       <span class="apoio__x">${tx(i.x, lingua)}</span>`;
     return i.url
       ? `<a class="apoio" href="${i.url}" target="_blank" rel="noopener" data-mag>${corpo}</a>`
