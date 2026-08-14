@@ -4,6 +4,39 @@
     "pt": "Voltas e classificações recolhidas do arquivo de notícias da Federação Portuguesa de Golfe, do European Golf Rankings, das federações organizadoras e da imprensa desportiva. Cada prova indica a fonte. Onde a classificação final não está publicada, fica o marcador e não se inventa o lugar.",
     "en": "Rounds and placings taken from the Portuguese Golf Federation's news archive, the European Golf Rankings, the organising federations and the sports press. Every event names its source. Where a final placing has not been published, the card is shown and no position is invented."
   },
+  "proximas": [
+    {
+      "id": "italia-2026",
+      "ano": 2026,
+      "data": "2026-09-03",
+      "dataTexto": {
+        "pt": "3–5 setembro 2026",
+        "en": "3–5 September 2026"
+      },
+      "torneio": {
+        "pt": "Italian International Girls U18",
+        "en": "Italian International Girls U18"
+      },
+      "campo": "",
+      "local": {
+        "pt": "Itália",
+        "en": "Italy"
+      },
+      "pais": "IT",
+      "escalao": {
+        "pt": "Sub-18",
+        "en": "U18"
+      },
+      "nota": {
+        "pt": "Anunciada pela FPG no balanço do English Girls’ Open. As datas são as do calendário da European Golf Association.",
+        "en": "Announced by the federation in its English Girls’ Open round-up. The dates come from the European Golf Association calendar."
+      },
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/francisca-salgado-termina-english-girls-open-em-28-o-lugar/"
+      }
+    }
+  ],
   "provas": [
     {
       "id": "andalucia-2026",
@@ -23,33 +56,31 @@
         "en": "Málaga, Spain"
       },
       "pais": "ES",
-      "pos": null,
-      "posTexto": {
-        "pt": "Top 10",
-        "en": "Top 10"
-      },
+      "pos": 9,
       "voltas": [
         79,
         74,
         74
       ],
       "total": 227,
-      "par": null,
+      "par": 11,
       "escalao": {
         "pt": "Sub-18",
         "en": "U18"
       },
       "selos": [
+        "wagr",
         "selecao"
       ],
       "nota": {
-        "pt": "Fechou em crescendo — 79, 74, 74 — para acabar dentro dos dez primeiros. A FPG não publicou o lugar exato.",
-        "en": "Finished in a crescendo — 79, 74, 74 — to end inside the top ten. The federation did not publish the exact placing."
+        "pt": "Fechou em crescendo — 79, 74, 74 — num dia em que só quatro jogadoras foram abaixo das 73. Partilhou o 9.º lugar da classificação geral feminina com a companheira de seleção Eva Silva.",
+        "en": "Finished in a crescendo — 79, 74, 74 — on a day when only four players broke 73. She shared ninth place in the women's overall standings with national-team colleague Eva Silva."
       },
       "fonte": {
         "nome": "FPG",
         "url": "https://portal.fpg.pt/noticias/atletas-nacionais-de-portugal-de-cabeca-erguida-na-despedida-de-malaga/"
-      }
+      },
+      "posT": true
     },
     {
       "id": "english-girls-2026",

@@ -2,6 +2,10 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": false,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/apoiar.html", "destination": "/parcerias.html", "permanent": true },
+    { "source": "/apoiar", "destination": "/parcerias.html", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/fonts/(.*)",

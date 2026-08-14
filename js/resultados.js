@@ -246,6 +246,20 @@ export async function palmares(cx, lingua = 'pt') {
     </article>`).join('');
 }
 
+/* ── a próxima prova, se houver ───────────────────────────── */
+/* Só entra aqui prova anunciada por fonte identificada. Passada a data, sai
+   sozinha da lista e o hero volta ao último resultado — sem ninguém ter de
+   se lembrar de a apagar. */
+export async function proxima(lingua = 'pt') {
+  const { proximas = [] } = await carregar();
+  const hoje = new Date().toISOString().slice(0, 10);
+  const p = proximas
+    .filter((x) => x.data && x.data >= hoje)
+    .sort((a, b) => a.data.localeCompare(b.data))[0];
+  if (!p) return null;
+  return { prova: p, texto: `${dataCurta(p, lingua)} · ${tx(p.torneio, lingua)}` };
+}
+
 /* ── o resultado mais recente, para o hero ────────────────── */
 
 export async function ultimo(lingua = 'pt') {

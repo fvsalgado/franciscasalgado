@@ -3,6 +3,7 @@
    contentor e volta a ser chamada quando se muda de língua. */
 
 import { icone } from './icones.js';
+import { buscar } from './rankings.js';
 
 const cache = {};
 async function ler(nome) {
@@ -37,12 +38,31 @@ export async function numeros(cx, lingua = 'pt', chave = 'numeros') {
 }
 
 /* ── factos (a ficha, em duas colunas) ────────────────────── */
+/* A linha das classificações trazia dois números escritos à mão, que estavam
+   certos no dia em que se escreveram e passavam a estar errados na semana
+   seguinte. Marcada com `vivo: "rankings"`, passa a vir das mesmas fontes que
+   alimentam os cartões — e se elas não responderem, fica o que está no
+   ficheiro, que é o pior caso e não uma página partida. */
 export async function factos(cx, lingua = 'pt') {
   if (!cx) return;
   const { factos: fs = [] } = await ler('perfil');
   cx.className = 'factos';
-  cx.innerHTML = fs.map((f) => `
-    <div><dt>${tx(f.dt, lingua)}</dt><dd>${tx(f.dd, lingua)}</dd></div>`).join('');
+  cx.innerHTML = fs.map((f, i) => `
+    <div${f.vivo ? ` data-vivo="${f.vivo}" data-i="${i}"` : ''}>
+      <dt>${tx(f.dt, lingua)}</dt><dd>${tx(f.dd, lingua)}</dd></div>`).join('');
+
+  const alvo = cx.querySelector('[data-vivo="rankings"] dd');
+  if (!alvo) return;
+  const [m, e] = await Promise.all([
+    buscar('/api/wagr', 'data/wagr.json'),
+    buscar('/api/egr', 'data/egr.json'),
+  ]);
+  const en = lingua === 'en';
+  const ord = (n) => (en ? `${n}${['th', 'st', 'nd', 'rd'][n % 100 >= 11 && n % 100 <= 13 ? 0 : n % 10] || 'th'}` : `${n}.ª`);
+  const partes = [];
+  if (m?.d?.posicao) partes.push(`${ord(m.d.posicao)}${en ? ' on the WAGR' : ' no WAGR'}`);
+  if (e?.d?.posicao) partes.push(`${ord(e.d.posicao)}${en ? ' on the European Golf Rankings' : ' no European Golf Rankings'}`);
+  if (partes.length) alvo.textContent = partes.join(' · ');
 }
 
 /* ── linha do tempo ───────────────────────────────────────── */
@@ -59,18 +79,24 @@ export async function percurso(cx, lingua = 'pt') {
 }
 
 /* ── escalões de apoio ────────────────────────────────────── */
+/* Três cartões lado a lado, e não três barras empilhadas: são alternativas
+   entre si, não passos de uma escada, e ler-se em coluna fazia-as parecer
+   níveis de preço por ordem crescente — que é exatamente o que não são. */
 export async function escadas(cx, lingua = 'pt') {
   if (!cx) return;
   const { escadas: es = [] } = await ler('perfil');
+  const en = lingua === 'en';
   cx.className = 'escadas';
-  cx.innerHTML = es.map((e) => `
-    <div class="degrau">
-      <div class="degrau__t">
-        <h3 class="degrau__n">${tx(e.n, lingua)}</h3>
-        <span class="degrau__e">${tx(e.e, lingua)}</span>
-      </div>
+  cx.innerHTML = es.map((e, i) => `
+    <article class="degrau">
+      <span class="degrau__i num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+      <span class="degrau__e">${tx(e.e, lingua)}</span>
+      <h3 class="degrau__n">${tx(e.n, lingua)}</h3>
       <p class="degrau__x">${tx(e.x, lingua)}</p>
-    </div>`).join('');
+      ${e.inclui?.length ? `<ul class="degrau__u">${e.inclui
+        .map((u) => `<li>${tx(u, lingua)}</li>`).join('')}</ul>` : ''}
+      <a class="degrau__b" href="#contacto" data-mag>${en ? 'Talk about this' : 'Falar sobre isto'}</a>
+    </article>`).join('');
 }
 
 /* ── canais e ligações ────────────────────────────────────── */
