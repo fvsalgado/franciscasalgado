@@ -3,6 +3,7 @@
    diferentes. */
 
 import { icone } from './icones.js';
+import { outraLingua } from './i18n.js';
 
 export const PAGINAS = [
   { href: 'index.html', pt: 'Início', en: 'Home' },
@@ -93,7 +94,9 @@ export function nav(lingua = 'pt') {
                 aria-label="${en ? 'Switch theme' : 'Alternar tema'}" aria-pressed="false">
           <span class="ico" id="btTemaI">${icone('lua', 'ic')}</span>
         </button>
-        <button class="cap" id="btLang" type="button" aria-label="Language">${en ? 'PT' : 'EN'}</button>
+        <a class="cap" id="btLang" href="${outraLingua()}" hreflang="${en ? 'pt-PT' : 'en'}"
+           data-sem-seta aria-label="${en ? 'Ver em portugu\u00eas' : 'Read this page in English'}"
+           >${en ? 'PT' : 'EN'}</a>
         <a class="cap cap--cheio nav__cta" href="parcerias.html#contacto" data-mag>${en ? 'Get in touch' : 'Contactar'}</a>
         <button class="ham" id="btMenu" type="button" aria-expanded="false" aria-controls="menu"
                 aria-label="Menu"><i></i><i></i></button>

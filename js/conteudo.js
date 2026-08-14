@@ -9,7 +9,7 @@ const cache = {};
 async function ler(nome) {
   if (cache[nome]) return cache[nome];
   try {
-    cache[nome] = await (await fetch(`data/${nome}.json`, { cache: 'no-cache' })).json();
+    cache[nome] = await (await fetch(`/data/${nome}.json`, { cache: 'no-cache' })).json();
   } catch (e) {
     console.warn(`${nome}:`, e.message);
     cache[nome] = {};
@@ -61,8 +61,8 @@ export async function factos(cx, lingua = 'pt') {
    das fontes responde — quem chama fica com o que já lá estava. */
 export async function linhaRankings(lingua = 'pt') {
   const [m, e] = await Promise.all([
-    buscar('/api/wagr', 'data/wagr.json'),
-    buscar('/api/egr', 'data/egr.json'),
+    buscar('/api/wagr', '/data/wagr.json'),
+    buscar('/api/egr', '/data/egr.json'),
   ]);
   const en = lingua === 'en';
   const ord = (n) => (en

@@ -58,5 +58,4 @@ carga().then(() => {
   // disto deve atrasar o primeiro desenho da página
   const pintarIg = (l) => { perfilIg($('igPerfil'), l); instagram($('ig'), l, 4, false); };
   pintarIg(i18n.lingua());
-  document.addEventListener('fs:lingua', (e) => pintarIg(e.detail));
 });

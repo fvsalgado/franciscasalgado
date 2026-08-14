@@ -117,10 +117,4 @@ export function cookies(lingua = 'pt') {
     banner(document.documentElement.lang.startsWith('en') ? 'en' : 'pt');
   });
 
-  // se trocar de língua com o banner aberto, o banner troca com ela
-  document.addEventListener('fs:lingua', (e) => {
-    if (!document.getElementById('ck')) return;
-    document.getElementById('ck').remove();
-    banner(e.detail === 'en' ? 'en' : 'pt');
-  });
 }

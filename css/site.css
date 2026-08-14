@@ -939,3 +939,28 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
   .sobe-i{opacity:1 !important;transform:none !important}
   .grao{animation:none}
 }
+
+/* ── convite para a outra língua ────────────────────────── */
+/* Aparece a quem chega com o browser em inglês numa página portuguesa. Não
+   reencaminha — oferece. Fecha-se uma vez e não volta. Fica em baixo à
+   esquerda, do lado oposto ao banner dos cookies, para os dois não se
+   taparem: o dos cookies fica à esquerda, este à direita, e num ecrã estreito
+   este só nasce quando o outro já saiu. */
+.convite-l{position:fixed;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:60;
+           display:flex;align-items:center;gap:.9rem;max-width:min(92vw,34rem);
+           padding:.85rem 1rem .85rem 1.2rem;background:var(--papel);
+           border:1px solid var(--linha);border-radius:16px;
+           box-shadow:0 18px 40px -24px rgba(18,40,30,.55);
+           animation:convite-entra .5s var(--curva) both}
+@keyframes convite-entra{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.convite-l p{margin:0;font-size:.86rem;line-height:1.4;color:var(--tinta)}
+.convite-l .cap{flex:0 0 auto;white-space:nowrap}
+.convite-l__x{flex:0 0 auto;width:1.7rem;height:1.7rem;display:grid;place-items:center;
+              border:0;background:transparent;cursor:pointer;font-size:1.15rem;line-height:1;
+              color:var(--tinta-fraca);border-radius:50%}
+.convite-l__x:hover{background:var(--relva-clara);color:var(--tinta)}
+@media (max-width:560px){
+  .convite-l{flex-wrap:wrap;left:clamp(1rem,3vw,2rem)}
+  .convite-l p{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){.convite-l{animation:none}}

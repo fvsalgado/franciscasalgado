@@ -2,8 +2,13 @@ User-agent: *
 Allow: /
 Disallow: /privacidade.html
 Disallow: /termos.html
+Disallow: /en/privacidade.html
+Disallow: /en/termos.html
 Disallow: /scripts/
 
+# O sítio existe em português, na raiz, e em inglês, em /en/. As duas versões
+# declaram-se uma à outra em hreflang; o português é o x-default.
+#
 # Os assistentes que leem este sítio são bem-vindos. Há um resumo em texto
 # simples, com os factos e a fonte de cada um, em /llms.txt — e os dados em
 # bruto, abertos, em /data/. As classificações de ranking mudam todas as

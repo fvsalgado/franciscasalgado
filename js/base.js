@@ -5,7 +5,7 @@
 import { nav, rodape, tema } from './casca.js';
 import { creditos } from './creditos.js';
 import { cursor, partirTitulos, rolagem, observar, reduzido } from './movimento.js';
-import { criarLingua, linguaEscolhida } from './i18n.js';
+import { lingua, convidarLingua } from './i18n.js';
 import { cookies } from './cookies.js';
 import { canais } from './conteudo.js';
 
@@ -53,19 +53,22 @@ export function carga() {
 }
 
 /**
- * Liga a casca e devolve o controlo da língua.
+ * Liga a casca e desenha a página.
  * @param {(lingua:string)=>void|Promise<void>} pintar
- *        Desenha o conteúdo próprio da página. É chamado no arranque e outra
- *        vez sempre que se troca de língua.
+ *        Desenha o conteúdo próprio da página, na língua em que ela está.
+ *
+ * A língua já não muda a meio: cada página nasce escrita na sua, e o botão do
+ * cabeçalho leva à mesma página na outra. Foi isto que fez desaparecer o
+ * repintar-tudo-outra-vez, e com ele os títulos que perdiam a máscara e o
+ * conteúdo que ficava invisível por não ter voltado ao observador.
  */
 export function iniciar(pintar) {
   tema();
-  cookies(linguaEscolhida());
+  const l = lingua();
+  cookies(l);
 
   const repintar = async (l) => {
     nav(l);
-    // os títulos voltam a ser partidos: o i18n reescreveu o innerHTML deles e
-    // levou a máscara à frente
     partirTitulos();
     const lista = await canais(l);
     rodape(l, lista);
@@ -76,23 +79,20 @@ export function iniciar(pintar) {
     creditos(l);
   };
 
-  /* O criarLingua tem de vir antes do partirTitulos: é ele que guarda o
-     português tal como está escrito no HTML, e se a máscara já lá estivesse
-     era a máscara que ficava guardada como se fosse texto.
-     No arranque aplica o dicionário sem disparar o aviso de mudança — quem
-     pinta a primeira vez é a chamada explícita mais abaixo. */
-  const i18n = criarLingua((l) => { repintar(l); });
-
   partirTitulos();
   document.querySelectorAll('.nome__l').forEach((el, i) => el.style.setProperty('--i', i));
 
   // a casca entra já, para a página não nascer sem cabeçalho
-  nav(i18n.lingua());
-  rodape(i18n.lingua(), []);
+  nav(l);
+  rodape(l, []);
   cursor();
   rolagem();
 
-  repintar(i18n.lingua());
+  repintar(l);
+  convidarLingua();
 
+  /* Devolve-se `i18n` com a mesma forma de antes — quem chama só lhe pergunta
+     a língua, e não tem de saber que ela deixou de mudar sem recarregar. */
+  const i18n = { lingua: () => l };
   return { i18n, repintar };
 }

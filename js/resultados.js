@@ -12,7 +12,7 @@ let CACHE = null;
 export async function carregar() {
   if (CACHE) return CACHE;
   try {
-    CACHE = await (await fetch('data/resultados.json', { cache: 'no-cache' })).json();
+    CACHE = await (await fetch('/data/resultados.json', { cache: 'no-cache' })).json();
   } catch (e) {
     console.warn('resultados:', e.message);
     CACHE = { provas: [] };

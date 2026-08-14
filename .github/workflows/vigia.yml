@@ -37,9 +37,12 @@ jobs:
         id: correr
         run: node scripts/vigia.mjs
 
-      # Os dados estruturados, o sitemap e o llms.txt saem dos mesmos ficheiros
-      # de dados. Correndo a seguir ao vigia, aquilo que os motores e os
-      # assistentes leem nunca fica atrás do que a página diz.
+      # A ordem importa: as páginas inglesas nascem das portuguesas, e os dados
+      # estruturados escrevem-se nas duas. Correndo a seguir ao vigia, o que os
+      # motores e os assistentes leem nunca fica atrás do que a página diz.
+      - name: Reescrever as páginas em /en/
+        run: node scripts/traduzir.mjs
+
       - name: Refazer dados estruturados, sitemap e llms.txt
         run: node scripts/seo.mjs
 
@@ -52,12 +55,12 @@ jobs:
         run: |
           git config user.name  'Vigia'
           git config user.email 'vigia@users.noreply.github.com'
-          if [ -z "$(git status --porcelain data/ sitemap.xml llms.txt ./*.html)" ]; then
+          if [ -z "$(git status --porcelain data/ sitemap.xml llms.txt ./*.html en/)" ]; then
             echo "mudou=nao" >> "$GITHUB_OUTPUT"
             echo "Nada de novo."
             exit 0
           fi
-          git add data/ sitemap.xml llms.txt ./*.html
+          git add data/ sitemap.xml llms.txt ./*.html en/
           git commit -m "Vigia: novidades de $(date -u +%Y-%m-%d)
 
           $(sed -n '/^- /p' VIGIA.md | head -20)"
