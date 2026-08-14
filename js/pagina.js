@@ -102,7 +102,7 @@ const PINTAR = {
       factos($('factos'), l),
       citacoes($('citacoes'), l),
       pecas($('pecas'), l),
-      saiuEm($('saiuEm')),
+      saiuEm($('saiuEm'), l),
       ligacoes($('ligacoes'), l),
       galeria($('gal'), l),
     ]);

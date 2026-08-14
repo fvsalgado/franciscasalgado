@@ -187,11 +187,29 @@ export async function pecas(cx, lingua = 'pt') {
     </li>`).join('');
 }
 
-export async function saiuEm(cx) {
+/* Cada casa que já escreveu sobre ela, com o símbolo e a ligação para o sítio.
+   Era uma fila de nomes em texto: dizia o mesmo e não se via nada. Os símbolos
+   estão em img/imprensa/, copiados uma vez pelo scripts/logos-imprensa.mjs —
+   pedi-los a oito servidores diferentes de cada vez que a página abre seria
+   entregar o endereço de quem lê a oito casas que não têm nada a ver com
+   isto. */
+export async function saiuEm(cx, lingua = 'pt') {
   if (!cx) return;
   const { saiuEm: ss = [] } = await ler('imprensa');
+  const en = lingua === 'en';
   cx.className = 'saiu__l';
-  cx.innerHTML = ss.map((s) => `<li>${s}</li>`).join('');
+  cx.innerHTML = ss.map((s) => {
+    const nome = typeof s === 'string' ? s : s.nome;
+    const logo = typeof s === 'string' ? '' : s.logo;
+    const url = typeof s === 'string' ? '' : s.url;
+    const dentro = `${logo
+      ? `<img src="/img/imprensa/${logo}" alt="" loading="lazy" decoding="async" data-credito-feito="1" />`
+      : ''}<span>${nome}</span>`;
+    return `<li>${url
+      ? `<a href="${url}" target="_blank" rel="noopener" data-sem-seta data-mag
+            title="${en ? `Open ${nome} in a new window` : `Abrir ${nome} numa janela nova`}">${dentro}</a>`
+      : dentro}</li>`;
+  }).join('');
 }
 
 /* ── as portas para as outras páginas ─────────────────────── */
@@ -252,18 +270,23 @@ export async function portas(cx, lingua = 'pt') {
     },
   ];
 
+  /* Linhas, e não cartões com fotografia grande. Em cartões isto lia-se como
+     uma galeria e ninguém percebia que eram caminhos; em linha, com o número
+     de ordem à esquerda, o nome da página em maiúsculas e a seta à direita,
+     é um índice — e um índice ninguém confunde com outra coisa. */
   cx.className = 'portas';
-  cx.innerHTML = PORTAS.map((p) => `
-    <a class="porta sobe-i" href="${p.href}" data-mag>
-      <figure class="porta__f">
-        <img src="/img/${p.img}" alt="" loading="lazy" decoding="async" />
-      </figure>
-      <div class="porta__q">
+  cx.innerHTML = PORTAS.map((p, i) => `
+    <a class="porta" href="${p.href}" data-mag>
+      <span class="porta__i num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+      <span class="porta__q">
         <span class="porta__r">${tx(p.r, lingua)}</span>
-        <h3 class="porta__t">${tx(p.t, lingua)}</h3>
-        <p class="porta__x">${tx(p.x, lingua)}</p>
-        <span class="porta__n"><b class="num">${p.n}</b> ${tx(p.u, lingua)}</span>
-      </div>
+        <span class="porta__t">${tx(p.t, lingua)}</span>
+        <span class="porta__x">${tx(p.x, lingua)}</span>
+      </span>
+      <span class="porta__n"><b class="num">${p.n}</b> ${tx(p.u, lingua)}</span>
+      <span class="porta__f" aria-hidden="true">
+        <img src="/img/${p.img}" alt="" loading="lazy" decoding="async" data-credito-feito="1" />
+      </span>
       <span class="porta__s" aria-hidden="true">→</span>
     </a>`).join('');
 }

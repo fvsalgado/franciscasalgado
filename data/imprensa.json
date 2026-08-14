@@ -408,15 +408,53 @@
     }
   ],
   "saiuEm": [
-    "FPG",
-    "Record",
-    "Golftattoo",
-    "Confederação do Desporto de Portugal",
-    "Fundação do Desporto",
-    "O Atleta",
-    "Gazeta das Caldas",
-    "SAPO",
-    "Praia D'El Rey",
-    "Amendoeira Golf Resort"
+    {
+      "nome": "FPG",
+      "logo": "fpg.webp",
+      "url": "https://portal.fpg.pt/",
+      "dominio": "portal.fpg.pt"
+    },
+    {
+      "nome": "Record",
+      "logo": "record.webp",
+      "url": "https://www.record.pt/",
+      "dominio": "record.pt"
+    },
+    {
+      "nome": "Golftattoo",
+      "logo": "golftattoo.webp",
+      "url": "https://www.golftattoo.com/",
+      "dominio": "golftattoo.com"
+    },
+    {
+      "nome": "CDP",
+      "logo": "cdp.webp",
+      "url": "https://www.cdp.pt/",
+      "dominio": "cdp.pt"
+    },
+    {
+      "nome": "Praia D'El Rey",
+      "logo": "praia-d-el-rey.webp",
+      "url": "https://clubedegolfe.praia-del-rey.com/",
+      "dominio": "clubedegolfe.praia-del-rey.com"
+    },
+    {
+      "nome": "Fundação do Desporto",
+      "logo": "fundacao-do-desporto.webp",
+      "url": "https://fundacaodesporto.pt/",
+      "dominio": "fundacaodesporto.pt"
+    },
+    {
+      "nome": "O Atleta",
+      "logo": "o-atleta.webp",
+      "url": "https://oatleta.pt/",
+      "dominio": "oatleta.pt"
+    },
+    {
+      "nome": "Gazeta das Caldas",
+      "logo": "gazeta-das-caldas.webp",
+      "url": "https://gazetadascaldas.pt/",
+      "dominio": "gazetadascaldas.pt"
+    }
   ]
 }
