@@ -34,6 +34,12 @@ const [perfil, resultados, imprensa, apoios] = await Promise.all([
   ler('data/imprensa.json'), ler('data/apoios.json'),
 ]);
 
+/* A mesma versão que o scripts/og.mjs carimba nas etiquetas Open Graph, para
+   os dados estruturados não apontarem para um endereço diferente da imagem. */
+const RETRATO = await ler('data/og.json')
+  .then(({ v }) => `${SITIO}/img/og.jpg?v=${v}`)
+  .catch(() => `${SITIO}/img/og.jpg`);
+
 const tx = (v, l = 'pt') => (typeof v === 'string' ? v : v?.[l] || v?.pt || '');
 const provas = resultados.provas || [];
 
@@ -58,7 +64,7 @@ const pessoa = {
   alternateName: perfil.nomeCompleto,
   description: descricaoPt,
   url: `${SITIO}/`,
-  image: `${SITIO}/img/og.jpg`,
+  image: RETRATO,
   nationality: { '@type': 'Country', name: 'Portugal' },
   jobTitle: 'Golfista amadora',
   knowsAbout: 'Golfe',

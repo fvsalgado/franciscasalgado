@@ -12,7 +12,8 @@
  * sítio em vez de ficar para trás.
  */
 
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, readdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
 
@@ -100,5 +101,30 @@ print(im.size)
 spawnSync('rm', ['-f', png.pathname]);
 if (r.status !== 0) { console.error(r.stderr); process.exit(1); }
 
-const { size } = await import('node:fs').then((fs) => fs.promises.stat(new URL('img/og.jpg', RAIZ)));
-console.log(`img/og.jpg: ${r.stdout.trim()}, ${Math.round(size / 1024)} KB`);
+/* O WhatsApp, o Facebook e o LinkedIn guardam a pré-visualização de um
+   endereço durante semanas, e vão buscá-la pelo endereço da imagem. Trocar os
+   bytes no mesmo `og.jpg` não chega: continuam a mostrar a antiga. Por isso a
+   imagem leva atrás um `?v=` tirado do seu próprio conteúdo — muda quando a
+   imagem muda, e fica igual quando se corre isto sem nada ter mudado. */
+const bytes = await readFile(new URL('img/og.jpg', RAIZ));
+const v = createHash('sha256').update(bytes).digest('hex').slice(0, 8);
+
+const paginas = [];
+for (const dir of ['', 'en/']) {
+  for (const f of await readdir(new URL(dir || './', RAIZ))) {
+    if (f.endsWith('.html')) paginas.push(`${dir}${f}`);
+  }
+}
+
+let tocadas = 0;
+for (const p of paginas) {
+  const ficheiro = new URL(p, RAIZ);
+  const antes = await readFile(ficheiro, 'utf8');
+  const depois = antes.replace(/\/img\/og\.jpg(\?v=[a-f0-9]+)?/g, `/img/og.jpg?v=${v}`);
+  if (depois !== antes) { await writeFile(ficheiro, depois); tocadas += 1; }
+}
+
+await writeFile(new URL('data/og.json', RAIZ), `${JSON.stringify({ v }, null, 2)}\n`);
+
+console.log(`img/og.jpg: ${r.stdout.trim()}, ${Math.round(bytes.length / 1024)} KB, v=${v}`);
+console.log(`${tocadas} página(s) actualizada(s).`);
