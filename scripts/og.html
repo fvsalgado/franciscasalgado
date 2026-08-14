@@ -1,0 +1,74 @@
+<!doctype html>
+<!-- Fonte da imagem de partilha (img/og.jpg). Desenha-se aqui e fotografa-se
+     com o Chromium: ver scripts/og.md. 1200 × 630. -->
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8" />
+<style>
+  @font-face{font-family:'Fraunces';font-weight:300 700;src:url('../fonts/fraunces.woff2') format('woff2')}
+  @font-face{font-family:'Manrope';font-weight:300 800;src:url('../fonts/manrope.woff2') format('woff2')}
+  *{margin:0;box-sizing:border-box}
+  body{width:1200px;height:630px;overflow:hidden;background:#0B1A14;color:#F7F5EE;
+       font-family:'Manrope',sans-serif;position:relative}
+  .topo{position:absolute;inset:0;opacity:.5}
+  .grade{position:absolute;inset:0;opacity:.16;
+         background-image:linear-gradient(rgba(79,194,139,.5) 1px,transparent 1px),
+                          linear-gradient(90deg,rgba(79,194,139,.5) 1px,transparent 1px);
+         background-size:96px 96px}
+  .q{position:absolute;inset:0;padding:58px 74px;display:flex;flex-direction:column;justify-content:space-between}
+  .rot{font-size:19px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:#7FD9AC;
+       display:flex;align-items:center;gap:18px}
+  .rot::before{content:"";width:56px;height:2px;background:#7FD9AC}
+  .nome{font-family:'Fraunces',serif;font-weight:400;font-variation-settings:'opsz' 144;
+        font-size:112px;line-height:.9;letter-spacing:-.045em}
+  .sub{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-variation-settings:'opsz' 40;
+       font-size:30px;line-height:1.3;color:#CFE3D6;max-width:24ch;margin-top:20px}
+  .pe{display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
+  .dom{font-size:22px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#F7F5EE}
+  .selos{display:flex;gap:12px}
+  .selo{font-size:17px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#CFE3D6;
+        border:1.5px solid rgba(127,217,172,.5);border-radius:999px;padding:10px 20px}
+  .band{position:absolute;right:74px;top:52px;width:104px;opacity:.9}
+</style>
+</head>
+<body>
+  <svg class="topo" viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g fill="none" stroke="#2E9C6A" stroke-width="1.6">
+      <path d="M-40 470c150-58 250 12 380-30s210-118 350-96 250 96 360 60 190-96 190-96"/>
+      <path d="M-40 520c160-62 262 14 396-30s216-122 358-100 254 100 366 64 180-92 180-92"/>
+      <path d="M-40 420c140-54 238 10 364-28s204-114 342-94 246 94 354 58 200-100 200-100"/>
+      <path d="M-40 370c130-50 226 8 348-26s198-110 334-92 242 92 348 56 210-104 210-104"/>
+      <path d="M-40 320c120-46 214 6 332-24s192-106 326-90 238 90 342 54 220-108 220-108"/>
+      <path d="M-40 264c110-42 202 4 316-22s186-102 318-88 234 88 336 52 230-112 230-112"/>
+      <path d="M-40 208c100-38 190 2 300-20s180-98 310-86 230 86 330 50 240-116 240-116"/>
+      <path d="M-40 150c90-34 178 0 284-18s174-94 302-84 226 84 324 48 250-120 250-120"/>
+    </g>
+  </svg>
+  <div class="grade"></div>
+
+  <svg class="band" viewBox="0 0 64 64" aria-hidden="true">
+    <g fill="#7FD9AC">
+      <rect x="24.6" y="12" width="3.4" height="38" rx="1.7"/>
+      <path d="M28 13.4 48 20.6 28 27.8Z"/>
+      <ellipse cx="32" cy="50.6" rx="17" ry="4.4" opacity=".38"/>
+    </g>
+  </svg>
+
+  <div class="q">
+    <div>
+      <p class="rot">Golfista amadora · Seleção Nacional</p>
+    </div>
+    <div>
+      <h1 class="nome">Francisca<br />Salgado</h1>
+      <p class="sub">Do Vale de Janelas para os campos da Europa.</p>
+    </div>
+    <div class="pe">
+      <span class="dom">franciscasalgado.golf</span>
+      <div class="selos">
+        <span class="selo">Sub-18</span>
+        <span class="selo">Vale de Janelas</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
