@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Parcerias — Francisca Salgado</title>
-<meta name="description" content="Parcerias com Francisca Salgado: quem já apoia, as três formas de entrar — época, prova ou trabalho de base — e o contacto direto." />
+<meta name="description" content="Apoiar Francisca Salgado, golfista amadora da Seleção Nacional: quem já apoia, o que um apoio cobre — época, prova ou treino — e o formulário para falar com ela." />
 <meta name="theme-color" content="#F7F5EE" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#091411" media="(prefers-color-scheme: dark)" />
 <link rel="canonical" href="https://franciscasalgado.golf/parcerias.html" />
@@ -15,7 +15,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Francisca Salgado" />
 <meta property="og:title" content="Parcerias — Francisca Salgado" />
-<meta property="og:description" content="Parcerias com Francisca Salgado: quem já apoia, as três formas de entrar — época, prova ou trabalho de base — e o contacto direto." />
+<meta property="og:description" content="Apoiar Francisca Salgado, golfista amadora da Seleção Nacional: quem já apoia, o que um apoio cobre — época, prova ou treino — e o formulário para falar com ela." />
 <meta property="og:url" content="https://franciscasalgado.golf/parcerias.html" />
 <meta property="og:image" content="https://franciscasalgado.golf/img/og.jpg?v=27a9973c" />
 <meta property="og:image:width" content="1200" />
@@ -107,11 +107,20 @@
       ]
     },
     {
-      "@type": "WebPage",
+      "@type": "ContactPage",
       "name": "Parcerias — Francisca Salgado",
       "inLanguage": "pt-PT",
       "about": {
         "@id": "https://franciscasalgado.golf/#francisca"
+      },
+      "mainEntity": {
+        "@type": "ContactPoint",
+        "email": "birdie@franciscasalgado.golf",
+        "contactType": "Parcerias e imprensa",
+        "availableLanguage": [
+          "pt",
+          "en"
+        ]
       }
     }
   ]
@@ -137,7 +146,7 @@
       <h1 class="d d--l ani" data-t="ap2_tit">Levar Portugal mais longe</h1>
       <p class="txt topo-p__t" data-t="ap2_txt">As provas que dão pontos para o ranking mundial jogam-se em Espanha, França, Inglaterra e Irlanda, e cada uma é uma viagem, uma inscrição e uma semana fora. É aí que entra quem apoia — no saco, na roupa de jogo e nas fotografias de prova.</p>
       <div class="topo-p__bt">
-        <a class="cap cap--cheio" href="contacto.html" data-t="ap2_bt1" data-mag>Quero apoiar</a>
+        <a class="cap cap--cheio" href="#contacto" data-t="ap2_bt1" data-mag>Quero apoiar</a>
         <a class="cap" href="#formas" data-t="ap2_bt2" data-mag>O que pode cobrir</a>
       </div>
     </div>
@@ -197,7 +206,7 @@
       </div>
       <div class="cab__x">
         <p class="txt" data-t="ap2_e_txt">Um apoio pode cobrir uma época inteira, uma única prova internacional, ou o trabalho de treino que não aparece nas fotografias. Não há tabela de preços: diga o que tem em mente e recebe uma proposta com provas, datas e o que fica visível.</p>
-        <a class="cap cap--cheio" href="contacto.html" data-t="ap2_e_bt" data-mag>Pedir uma proposta</a>
+        <a class="cap cap--cheio" href="#contacto" data-t="ap2_e_bt" data-mag>Pedir uma proposta</a>
       </div>
     </div>
     <div id="escadas"></div>
@@ -217,6 +226,62 @@
       </div>
     </div>
     <div id="reels"></div>
+  </div>
+</section>
+
+<!-- ═══ CONTACTO ═══════════════════════════════════════ -->
+<!-- Chegou a ser página própria. Uma página inteira para um formulário é uma
+     entrada a mais num menu de quatro, e quem escreve chega aqui depois de ler
+     o que há para apoiar — não antes. O endereço fica no rodapé de todas as
+     páginas, para quem não quer preencher nada. -->
+<section class="sec sec--fundo" id="contacto">
+  <canvas class="sec__campo" id="campo2" aria-hidden="true"></canvas>
+  <div class="env">
+    <div class="cab">
+      <div class="cab__t">
+        <p class="rot" data-t="ct_rot">Contacto</p>
+        <h2 class="d d--l ani" data-t="ct_tit">Escrever à Francisca</h2>
+      </div>
+      <div class="cab__x">
+        <p class="txt" data-t="ct_txt">Parcerias, imprensa, convites para provas e pedidos de fotografias. Ou, sem preencher nada, <a class="lig" href="mailto:birdie@franciscasalgado.golf">birdie@franciscasalgado.golf</a>.</p>
+      </div>
+    </div>
+
+    <div class="contacto">
+      <form class="form" id="form" novalidate>
+        <div class="dupla">
+          <div class="campo"><label for="fn" data-t="c1">Nome</label><input id="fn" name="nome" type="text" autocomplete="name" required /></div>
+          <div class="campo"><label for="fe" data-t="c2">Email</label><input id="fe" name="email" type="email" autocomplete="email" required /></div>
+        </div>
+        <div class="dupla">
+          <div class="campo"><label for="ft" data-t="c3">Assunto</label>
+            <select id="ft" name="assunto">
+              <option data-t="c3a">Parceria ou patrocínio</option>
+              <option data-t="c3b">Imprensa e fotografias</option>
+              <option data-t="c3c">Convite para uma prova</option>
+              <option data-t="c3d">Outro</option>
+            </select></div>
+          <div class="campo"><label for="fo" data-t="c4">Organização</label><input id="fo" name="organizacao" type="text" autocomplete="organization" /></div>
+        </div>
+        <div class="campo"><label for="fm" data-t="c5">O que tem em mente</label><textarea id="fm" name="mensagem" required></textarea></div>
+        <input type="hidden" name="_subject" value="Contacto — site da Francisca Salgado" />
+        <p class="mel" aria-hidden="true"><label for="fx">Não preencher</label><input id="fx" name="_gotcha" type="text" tabindex="-1" autocomplete="off" /></p>
+        <div class="form__pe">
+          <button class="cap cap--cheio" type="submit" data-t="c6" data-mag>Enviar</button>
+          <p class="form__msg" id="formMsg" role="status"></p>
+        </div>
+        <p class="form__nota" data-t="c9">Ao enviar, os dados são usados apenas para responder a este pedido. Ver a <a href="privacidade.html">política de privacidade</a>.</p>
+      </form>
+
+      <aside class="contacto__x">
+        <p class="rot rot--so" data-t="ct_lig">Antes de escrever</p>
+        <dl class="factos">
+          <div><dt data-t="ct_x1d">Fotografias</dt><dd data-t="ct_x1t">As de alta resolução estão na <a class="lig" href="imprensa.html">página de imprensa</a>, livres para publicar com o crédito indicado.</dd></div>
+          <div><dt data-t="ct_x2d">Factos e citações</dt><dd data-t="ct_x2t">Biografia curta, ficha e citações com fonte, também na <a class="lig" href="imprensa.html">página de imprensa</a>.</dd></div>
+          <div><dt data-t="ct_x3d">Resultados</dt><dd data-t="ct_x3t">Prova a prova e ano a ano, em <a class="lig" href="resultados.html">época a época</a>.</dd></div>
+        </dl>
+      </aside>
+    </div>
   </div>
 </section>
 

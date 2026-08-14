@@ -22,7 +22,9 @@ const T = {
     mundial: 'World Amateur Golf Ranking',
     europeu: 'European Golf Rankings',
     m_sub: 'Ranking mundial · R&A e USGA',
-    e_sub: 'Ranking europeu · escalão Sub-18',
+    e_sub: 'Ranking europeu feminino',
+    e_subEsc: (esc) => `Ranking europeu feminino · ${esc}`,
+    geral: 'Lugar entre todas',
     pos: 'Classificação',
     melhor: 'Melhor de sempre',
     media: 'Média de pontos',
@@ -43,7 +45,9 @@ const T = {
     mundial: 'World Amateur Golf Ranking',
     europeu: 'European Golf Rankings',
     m_sub: 'World ranking · The R&A and the USGA',
-    e_sub: 'European ranking · U18 category',
+    e_sub: 'European women\'s ranking',
+    e_subEsc: (esc) => `European women's ranking · ${esc}`,
+    geral: 'Place among all',
     pos: 'Ranking',
     melhor: 'Career best',
     media: 'Points average',
@@ -137,6 +141,17 @@ function cartao({ variante, rot, sub, estado, posicao, lingua, principal, miudos
    de sempre, vitórias, top 10, provas contadas — era a página de resultados
    escrita outra vez, e a página inicial não é para isso. Fica o número, de onde
    vem, de quando é, e a ligação à ficha oficial. O resto está a um clique. */
+/* A ficha do EGR publica um número só, e esse número é o lugar dela na lista
+   feminina inteira — de Sub-14 a adultas. O lugar dentro do escalão sai da
+   lista filtrada, e é o que faz sentido mostrar em grande: é entre estas que
+   ela joga. Quando a lista do escalão não responde, mostra-se o geral com o
+   rótulo do geral — nunca o geral com o rótulo do escalão. */
+const posEgr = (d) => d.posicaoEscalao || d.posicao;
+const escPt = (esc) => String(esc || '').replace(/^U(\d+)$/, 'Sub-$1');
+const subEgr = (d, t, lingua) => (d.posicaoEscalao && d.escalao
+  ? t.e_subEsc(lingua === 'en' ? d.escalao : escPt(d.escalao))
+  : t.e_sub);
+
 export async function rankings(cx, lingua = 'pt', { curto = false } = {}) {
   if (!cx) return;
   const t = T[lingua] || T.pt;
@@ -164,10 +179,15 @@ export async function rankings(cx, lingua = 'pt', { curto = false } = {}) {
   }) : vazio(t.mundial);
 
   const europeu = e ? cartao({
-    variante: 'europeu', rot: t.europeu, sub: t.e_sub, estado: e.vivo,
-    posicao: e.d.posicao, lingua,
+    variante: 'europeu', rot: t.europeu, sub: subEgr(e.d, t, lingua), estado: e.vivo,
+    posicao: posEgr(e.d), lingua,
     principal: { v: dec(e.d.mediaVolta, lingua), r: t.mediaVolta },
     miudos: [
+      /* O lugar na lista feminina inteira, quando o do escalão está a ser o
+         número grande: são dois números diferentes e é preciso ver os dois
+         para perceber qualquer um deles. */
+      ...(e.d.posicaoEscalao && e.d.posicao
+        ? [{ r: t.geral, v: `${milhares(e.d.posicao, lingua)}${ord(lingua)}` }] : []),
       { r: t.pontos, v: milhares(e.d.pontos, lingua) },
       { r: t.faceCr, v: dec(e.d.mediaCr, lingua) },
       { r: t.provas, v: e.d.provasContadas },
@@ -192,8 +212,8 @@ async function breves(cx, lingua, t) {
     return `
       <a class="rkb rkb--${v.chave}" href="${v.url(d)}" target="_blank" rel="noopener" data-sem-seta data-mag>
         <span class="rkb__r">${v.rot}</span>
-        <span class="rkb__n num">${milhares(d.posicao, lingua)}<sup>${ord(lingua)}</sup></span>
-        <span class="rkb__x">${v.sub}</span>
+        <span class="rkb__n num">${milhares(v.pos(d), lingua)}<sup>${ord(lingua)}</sup></span>
+        <span class="rkb__x">${v.sub(d)}</span>
         <span class="rkb__e">${vivo ? t.aovivo : t.guardado} · ${d.atualizado}</span>
         <span class="rkb__s" aria-hidden="true">↗</span>
       </a>`;
@@ -201,6 +221,6 @@ async function breves(cx, lingua, t) {
 
   cx.className = 'rkbs';
   cx.innerHTML =
-    um({ chave: 'mundial', rot: t.mundial, sub: t.m_sub, url: (d) => d.perfil }, m) +
-    um({ chave: 'europeu', rot: t.europeu, sub: t.e_sub, url: (d) => d.ficha }, e);
+    um({ chave: 'mundial', rot: t.mundial, sub: () => t.m_sub, pos: (d) => d.posicao, url: (d) => d.perfil }, m) +
+    um({ chave: 'europeu', rot: t.europeu, sub: (d) => subEgr(d, t, lingua), pos: posEgr, url: (d) => d.ficha }, e);
 }

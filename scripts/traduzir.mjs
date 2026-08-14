@@ -32,8 +32,8 @@ const RAIZ = new URL('../', import.meta.url);
 const SECO = process.argv.includes('--seco');
 const SITIO = 'https://franciscasalgado.golf';
 
-const PAGINAS = ['index.html', 'resultados.html', 'percurso.html', 'imprensa.html',
-                 'parcerias.html', 'contacto.html', 'privacidade.html', 'termos.html'];
+const PAGINAS = ['index.html', 'resultados.html', 'imprensa.html',
+                 'parcerias.html', 'privacidade.html', 'termos.html'];
 
 /* Os títulos e as descrições não têm `data-t` — vivem no <head>, onde não há
    elementos para marcar. Ficam aqui, ao lado do resto do inglês. */

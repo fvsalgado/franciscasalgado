@@ -91,6 +91,48 @@ export function lerEgr(html) {
   };
 }
 
+/* ── a posição dentro do escalão ───────────────────────────────────────────
+ *
+ * A ficha da jogadora publica um número só, «EGR Ranking», e esse número é o
+ * lugar dela na lista feminina inteira — de Sub-14 a adultas. O selector de
+ * escalão que lá está muda as provas que contam, não muda o lugar: pedindo a
+ * ficha com U18 vem o mesmo 620 de sempre.
+ *
+ * O ranking por escalão existe, mas noutro sítio: na lista feminina filtrada,
+ * que traz uma coluna «EGR Ranking» própria. É de lá que sai a posição entre
+ * as Sub-18 — publicada pelo EGR, não calculada aqui.
+ *
+ * Os parâmetros vazios (`last_name`, `first_name`, `club`) não são engano: sem
+ * eles a página devolve a vista de pesquisa, que não tem coluna de posição.
+ */
+const LISTA = (escalao, pagina) =>
+  'https://www.europeangolfrankings.com/search'
+  + `?gender=F&last_name=&first_name=&club=&country=Europe&open_closed=Both&age_group=${
+    encodeURIComponent(escalao)}&page=${pagina}`;
+
+export async function posicaoNoEscalao(escalao, fetchImpl = fetch, maxPaginas = 8) {
+  if (!escalao) return null;
+  for (let pagina = 1; pagina <= maxPaginas; pagina += 1) {
+    const r = await fetchImpl(LISTA(escalao, pagina), {
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; franciscasalgado.golf)', Accept: 'text/html' },
+    });
+    if (!r.ok) return null;
+    const html = await r.text();
+
+    const linhas = [...html.matchAll(/<tr class='(?:odd|even)[^']*'>([\s\S]*?)<\/tr>/g)].map((m) => m[1]);
+    if (!linhas.length) return null;                      // acabou a lista
+
+    /* Pelo número da ficha e não pelo nome: há homónimos, e o nome vem escrito
+       à maneira do EGR, que pode mudar de um dia para o outro. */
+    const dela = linhas.find((l) => l.includes(`/players/${PLAYER_ID}/`));
+    if (dela) {
+      const pos = num(limpo(/<td[^>]*>([\s\S]*?)<\/td>/.exec(dela)?.[1]));
+      return pos || null;
+    }
+  }
+  return null;
+}
+
 export async function buscarEgr(fetchImpl = fetch) {
   const r = await fetchImpl(FICHA, {
     headers: { 'User-Agent': 'Mozilla/5.0 (compatible; franciscasalgado.golf)', Accept: 'text/html' },
@@ -98,5 +140,13 @@ export async function buscarEgr(fetchImpl = fetch) {
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
   const d = lerEgr(await r.text());
   if (!d.posicao) throw new Error('ficha lida mas sem classificação — o EGR mudou de formato?');
+
+  /* Se a lista do escalão não responder, fica só a posição geral e o cartão
+     diz «feminino» em vez de «Sub-18». Nunca se mostra o número geral com o
+     rótulo do escalão, que era exactamente o erro que havia aqui. */
+  try {
+    d.posicaoEscalao = await posicaoNoEscalao(d.escalao, fetchImpl);
+  } catch { d.posicaoEscalao = null; }
+
   return d;
 }

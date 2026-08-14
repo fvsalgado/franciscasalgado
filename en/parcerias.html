@@ -107,11 +107,20 @@
       ]
     },
     {
-      "@type": "WebPage",
+      "@type": "ContactPage",
       "name": "Partnerships — Francisca Salgado",
       "inLanguage": "en",
       "about": {
         "@id": "https://franciscasalgado.golf/#francisca"
+      },
+      "mainEntity": {
+        "@type": "ContactPoint",
+        "email": "birdie@franciscasalgado.golf",
+        "contactType": "Partnerships and press",
+        "availableLanguage": [
+          "pt",
+          "en"
+        ]
       }
     }
   ]
@@ -137,7 +146,7 @@
       <h1 class="d d--l ani" data-t="ap2_tit">Taking Portugal further</h1>
       <p class="txt topo-p__t" data-t="ap2_txt">The events that carry world ranking points are played in Spain, France, England and Ireland, and each one is a journey, an entry fee and a week away. That is where a backer comes in — on the bag, on the playing kit and in the tournament photographs.</p>
       <div class="topo-p__bt">
-        <a class="cap cap--cheio" href="contacto.html" data-t="ap2_bt1" data-mag>I want to support</a>
+        <a class="cap cap--cheio" href="#contacto" data-t="ap2_bt1" data-mag>I want to support</a>
         <a class="cap" href="#formas" data-t="ap2_bt2" data-mag>What it can cover</a>
       </div>
     </div>
@@ -197,7 +206,7 @@
       </div>
       <div class="cab__x">
         <p class="txt" data-t="ap2_e_txt">Support can cover a whole season, a single international tournament, or the training work that never shows up in the photographs. There is no price list: say what you have in mind and you get a proposal with events, dates, and what gets seen.</p>
-        <a class="cap cap--cheio" href="contacto.html" data-t="ap2_e_bt" data-mag>Ask for a proposal</a>
+        <a class="cap cap--cheio" href="#contacto" data-t="ap2_e_bt" data-mag>Ask for a proposal</a>
       </div>
     </div>
     <div id="escadas"></div>
@@ -217,6 +226,62 @@
       </div>
     </div>
     <div id="reels"></div>
+  </div>
+</section>
+
+<!-- ═══ CONTACTO ═══════════════════════════════════════ -->
+<!-- Chegou a ser página própria. Uma página inteira para um formulário é uma
+     entrada a mais num menu de quatro, e quem escreve chega aqui depois de ler
+     o que há para apoiar — não antes. O endereço fica no rodapé de todas as
+     páginas, para quem não quer preencher nada. -->
+<section class="sec sec--fundo" id="contacto">
+  <canvas class="sec__campo" id="campo2" aria-hidden="true"></canvas>
+  <div class="env">
+    <div class="cab">
+      <div class="cab__t">
+        <p class="rot" data-t="ct_rot">Contact</p>
+        <h2 class="d d--l ani" data-t="ct_tit">Write to Francisca</h2>
+      </div>
+      <div class="cab__x">
+        <p class="txt" data-t="ct_txt">Partnerships, press, invitations to events and photograph requests. Or, with nothing to fill in, <a class="lig" href="mailto:birdie@franciscasalgado.golf">birdie@franciscasalgado.golf</a>.</p>
+      </div>
+    </div>
+
+    <div class="contacto">
+      <form class="form" id="form" novalidate>
+        <div class="dupla">
+          <div class="campo"><label for="fn" data-t="c1">Name</label><input id="fn" name="nome" type="text" autocomplete="name" required /></div>
+          <div class="campo"><label for="fe" data-t="c2">Email</label><input id="fe" name="email" type="email" autocomplete="email" required /></div>
+        </div>
+        <div class="dupla">
+          <div class="campo"><label for="ft" data-t="c3">Subject</label>
+            <select id="ft" name="assunto">
+              <option data-t="c3a">Partnership or sponsorship</option>
+              <option data-t="c3b">Press and photographs</option>
+              <option data-t="c3c">Invitation to an event</option>
+              <option data-t="c3d">Other</option>
+            </select></div>
+          <div class="campo"><label for="fo" data-t="c4">Organisation</label><input id="fo" name="organizacao" type="text" autocomplete="organization" /></div>
+        </div>
+        <div class="campo"><label for="fm" data-t="c5">What you have in mind</label><textarea id="fm" name="mensagem" required></textarea></div>
+        <input type="hidden" name="_subject" value="Contacto — site da Francisca Salgado" />
+        <p class="mel" aria-hidden="true"><label for="fx">Não preencher</label><input id="fx" name="_gotcha" type="text" tabindex="-1" autocomplete="off" /></p>
+        <div class="form__pe">
+          <button class="cap cap--cheio" type="submit" data-t="c6" data-mag>Send</button>
+          <p class="form__msg" id="formMsg" role="status"></p>
+        </div>
+        <p class="form__nota" data-t="c9">By sending, your data is used only to answer this request. See the <a href="privacidade.html">privacy policy</a>.</p>
+      </form>
+
+      <aside class="contacto__x">
+        <p class="rot rot--so" data-t="ct_lig">Before you write</p>
+        <dl class="factos">
+          <div><dt data-t="ct_x1d">Photographs</dt><dd data-t="ct_x1t">The high-resolution ones are on the <a class="lig" href="imprensa.html">press page</a>, free to publish with the credit given.</dd></div>
+          <div><dt data-t="ct_x2d">Facts and quotes</dt><dd data-t="ct_x2t">Short biography, fact sheet and sourced quotes, also on the <a class="lig" href="imprensa.html">press page</a>.</dd></div>
+          <div><dt data-t="ct_x3d">Results</dt><dd data-t="ct_x3t">Event by event and year by year, in <a class="lig" href="resultados.html">season by season</a>.</dd></div>
+        </dl>
+      </aside>
+    </div>
   </div>
 </section>
 

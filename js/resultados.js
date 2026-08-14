@@ -153,6 +153,34 @@ export async function ultimas(cx, lingua = 'pt', quantas = 5) {
 
 /* ── lista completa, por época, com filtros ───────────────── */
 
+/* O que aconteceu numa época não é só a lista de provas: é também o que ela
+   fez nesse ano, escrito por extenso, e o que se escreveu sobre ela. Estavam
+   em três páginas diferentes, e a ordem era a mesma nas três. Aqui vêm juntos,
+   por baixo do mesmo ano. */
+async function extras(lingua) {
+  const nada = { texto: new Map(), pecas: new Map(), casas: new Map() };
+  try {
+    const [perfil, imprensa] = await Promise.all([
+      (await fetch('/data/perfil.json', { cache: 'no-cache' })).json(),
+      (await fetch('/data/imprensa.json', { cache: 'no-cache' })).json(),
+    ]);
+
+    const texto = new Map((perfil.percurso || []).map((e) => [String(e.ano), e]));
+    const pecas = new Map();
+    for (const p of imprensa.pecas || []) {
+      const ano = String(p.data || '').slice(0, 4);
+      if (!ano) continue;
+      if (!pecas.has(ano)) pecas.set(ano, []);
+      pecas.get(ano).push(p);
+    }
+    const casas = new Map((imprensa.saiuEm || []).filter((c) => c?.logo).map((c) => [c.nome, c.logo]));
+    return { texto, pecas, casas };
+  } catch (e) {
+    console.warn('época:', e.message);
+    return nada;
+  }
+}
+
 export async function porEpoca(cx, filtrosCx, lingua = 'pt') {
   if (!cx) return;
   const { provas = [] } = await carregar();
@@ -160,6 +188,8 @@ export async function porEpoca(cx, filtrosCx, lingua = 'pt') {
     cx.innerHTML = `<p class="provas__vazio">${lingua === 'en' ? 'No results yet.' : 'Ainda sem resultados.'}</p>`;
     return;
   }
+  const mais = await extras(lingua);
+  const en = lingua === 'en';
 
   const FILTROS = [
     { chave: 'tudo', pt: 'Tudo', en: 'Everything', teste: () => true },
@@ -203,13 +233,49 @@ export async function porEpoca(cx, filtrosCx, lingua = 'pt') {
           (podios ? ` · <b>${podios}</b> pódio${podios === 1 ? '' : 's'}` : '') +
           (vitorias ? ` · <b>${vitorias}</b> vitória${vitorias === 1 ? '' : 's'}` : '');
 
+      /* A história do ano e a imprensa do ano só aparecem sem filtro posto.
+         Com «Vitórias» escolhido, a lista mostra três provas e seria estranho
+         trazer atrás o relato de uma época inteira e quarenta notícias. */
+      const inteira = ativo === 'tudo';
+      const conta = mais.texto.get(String(ano));
+      const ps = mais.pecas.get(String(ano)) || [];
+
+      const historia = inteira && conta ? `
+        <div class="epoca__conta">
+          <h3 class="epoca__t">${conta.t?.[lingua] || conta.t?.pt || ''}</h3>
+          <p class="epoca__x">${conta.x?.[lingua] || conta.x?.pt || ''}</p>
+        </div>` : '';
+
+      const imprensa = inteira && ps.length ? `
+        <details class="epoca__im">
+          <summary><span>${ps.length} ${
+            en ? `press piece${ps.length === 1 ? '' : 's'}` : `peça${ps.length === 1 ? '' : 's'} de imprensa`
+          }</span></summary>
+          <ol class="pecas">${ps.map((p) => {
+            const logo = mais.casas.get(p.o);
+            return `<li class="peca">
+              <a href="${p.url}" target="_blank" rel="noopener" data-sem-seta data-mag>
+                <span class="peca__f">${p.capa
+                  ? `<img src="/img/imprensa/pecas/${p.capa}" alt="" loading="lazy" decoding="async" data-credito-feito="1" />`
+                  : ''}</span>
+                <span class="peca__o">${logo
+                  ? `<img src="/img/imprensa/${logo}" alt="" loading="lazy" decoding="async" data-credito-feito="1" />`
+                  : ''}<span>${p.o}</span></span>
+                <span class="peca__t">${p.t?.[lingua] || p.t?.pt || ''}</span>
+                <span class="peca__a num">${p.data}<i class="peca__s" aria-hidden="true">↗</i></span>
+              </a></li>`;
+          }).join('')}</ol>
+        </details>` : '';
+
       return `
-        <section class="epoca">
+        <section class="epoca" id="e${ano}">
           <div class="epoca__cab">
             <h2 class="epoca__ano num">${ano}</h2>
             <p class="epoca__r">${resumo}</p>
           </div>
+          ${historia}
           <div class="provas">${doAno.map((p) => linhaProva(p, lingua, { comNota: true })).join('')}</div>
+          ${imprensa}
         </section>`;
     }).join('');
 

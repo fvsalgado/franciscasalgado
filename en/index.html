@@ -102,6 +102,66 @@
       "publisher": {
         "@id": "https://franciscasalgado.golf/#francisca"
       }
+    },
+    {
+      "@type": "ProfilePage",
+      "inLanguage": "en",
+      "mainEntity": {
+        "@id": "https://franciscasalgado.golf/#francisca"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Who is Francisca Salgado?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "She is a Portuguese amateur golfer from Vale de Janelas, in Óbidos. At seventeen she has four national titles and plays for the Portuguese women's amateur national team, with which she plays the European calendar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many national titles does she have?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Four. U10 in 2019, U12 in 2021, and in 2026 both the Amateur Pairs — with Rodrigo Constantino — and the U18, which she won at Aroeira leading from start to finish."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What club does she play for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vale de Janelas, in Óbidos, on Portugal's west coast. She started at Paço do Lumiar, where she won her first national title in 2019."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where does she stand in the rankings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "She is on the World Amateur Golf Ranking, the world ranking of amateur golf, and on the European Golf Rankings. Both positions are just above, and each official profile is on the press page."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are her best international results?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sixth, and the best Portuguese player, at the Belgian International U14 Championship in 2023; third at the Memorial Celia Barquín, in Asturias, in 2025; and 28th at the 2026 English Girls' Open, one of the strongest girls' U18 events in Europe, where she stood fifth at one point."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you reach her about sponsorship or press?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Through the form at the end of the partnerships page, by email to birdie@franciscasalgado.golf, or by direct message on Instagram, at @francisca_salgado_."
+          }
+        }
+      ]
     }
   ]
 }
@@ -171,6 +231,7 @@
   <div class="env">
     <p class="rot" data-t="qu_rot">Who she is</p>
     <p class="manif ani" data-t="qu_manif">She won her first national championship at ten. Seven years on she has four, plays the European calendar, and has not yet outgrown the U18 category.</p>
+    <p class="txt qu__x" data-t="qu_bio">She started at <strong>Paço do Lumiar</strong>, and it was from there that first title came. She then moved to <strong>Vale de Janelas</strong>, in Óbidos, and in 2023 made her debut for the <strong>Portuguese women's amateur national team</strong> — which in 2026 took her to Spain, France, England and Ireland in a single season.</p>
     <div id="nums"></div>
   </div>
 </section>
@@ -224,6 +285,55 @@
       <p class="rot" data-t="dz_onde">Published in</p>
       <ul id="saiuEm"></ul>
     </div>
+  </div>
+</section>
+
+<!-- ═══ PERGUNTAS ══════════════════════════════════════ -->
+<!-- As perguntas que as pessoas fazem a um motor de busca sobre uma atleta que
+     não conhecem. Estão aqui escritas por extenso, com a resposta curta e
+     verificável, porque é assim que um motor — ou um assistente — as consegue
+     citar sem inventar o resto. Vivia na página de percurso; com o percurso a
+     entrar nas épocas, o sítio certo passou a ser a raiz, que é o endereço
+     que uma pergunta sobre ela devolve. Vão em par com o FAQPage nos dados
+     estruturados, gerado por scripts/seo.mjs a partir desta mesma página. -->
+<section class="sec" id="perguntas">
+  <div class="env">
+    <div class="cab">
+      <div class="cab__t">
+        <p class="rot" data-t="fq_rot">Questions</p>
+        <h2 class="d d--l ani" data-t="fq_tit">The essentials, in six answers</h2>
+      </div>
+      <div class="cab__x">
+        <p class="txt" data-t="fq_txt">What you need to know without reading the whole site. Every answer has its source on the other pages.</p>
+      </div>
+    </div>
+
+    <dl class="fq">
+      <div class="fq__i">
+        <dt data-t="fq_1p">Who is Francisca Salgado?</dt>
+        <dd data-t="fq_1r">She is a Portuguese amateur golfer from Vale de Janelas, in Óbidos. At seventeen she has four national titles and plays for the Portuguese women's amateur national team, with which she plays the European calendar.</dd>
+      </div>
+      <div class="fq__i">
+        <dt data-t="fq_2p">How many national titles does she have?</dt>
+        <dd data-t="fq_2r">Four. U10 in 2019, U12 in 2021, and in 2026 both the Amateur Pairs — with Rodrigo Constantino — and the U18, which she won at Aroeira leading from start to finish.</dd>
+      </div>
+      <div class="fq__i">
+        <dt data-t="fq_3p">What club does she play for?</dt>
+        <dd data-t="fq_3r">Vale de Janelas, in Óbidos, on Portugal's west coast. She started at Paço do Lumiar, where she won her first national title in 2019.</dd>
+      </div>
+      <div class="fq__i" data-vivo="rankings-fq">
+        <dt data-t="fq_4p">Where does she stand in the rankings?</dt>
+        <dd data-t="fq_4r">She is on the World Amateur Golf Ranking, the world ranking of amateur golf, and on the European Golf Rankings. Both positions are just above, and each official profile is on the <a class="lig" href="imprensa.html#ligacoes">press page</a>.</dd>
+      </div>
+      <div class="fq__i">
+        <dt data-t="fq_5p">What are her best international results?</dt>
+        <dd data-t="fq_5r">Sixth, and the best Portuguese player, at the Belgian International U14 Championship in 2023; third at the Memorial Celia Barquín, in Asturias, in 2025; and 28th at the 2026 English Girls' Open, one of the strongest girls' U18 events in Europe, where she stood fifth at one point.</dd>
+      </div>
+      <div class="fq__i">
+        <dt data-t="fq_6p">How do you reach her about sponsorship or press?</dt>
+        <dd data-t="fq_6r">Through the form at the end of the <a class="lig" href="parcerias.html#contacto">partnerships page</a>, by email to birdie@franciscasalgado.golf, or by direct message on Instagram, at <a class="lig" href="https://www.instagram.com/francisca_salgado_/" target="_blank" rel="noopener">@francisca_salgado_</a>.</dd>
+      </div>
+    </dl>
   </div>
 </section>
 

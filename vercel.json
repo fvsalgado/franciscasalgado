@@ -12,6 +12,26 @@
       "source": "/apoiar",
       "destination": "/parcerias.html",
       "permanent": true
+    },
+    {
+      "source": "/percurso.html",
+      "destination": "/resultados.html",
+      "permanent": true
+    },
+    {
+      "source": "/en/percurso.html",
+      "destination": "/en/resultados.html",
+      "permanent": true
+    },
+    {
+      "source": "/contacto.html",
+      "destination": "/parcerias.html#contacto",
+      "permanent": true
+    },
+    {
+      "source": "/en/contacto.html",
+      "destination": "/en/parcerias.html#contacto",
+      "permanent": true
     }
   ],
   "rewrites": [

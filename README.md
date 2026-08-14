@@ -17,7 +17,7 @@ npx serve .          # ou: python3 -m http.server
 
 | | |
 |---|---|
-| Páginas | `index.html`, `resultados.html`, `percurso.html`, `imprensa.html`, `parcerias.html`, `contacto.html`, `privacidade.html`, `termos.html` |
+| Páginas | `index.html`, `resultados.html`, `imprensa.html`, `parcerias.html`, `privacidade.html`, `termos.html` |
 | Em inglês | `en/` — **gerado**, não se mexe à mão: ver «Idiomas» |
 | Estilo | `css/site.css` — um ficheiro, com as variáveis de tema no topo |
 | Comportamento | `js/` — módulos ES, sem empacotador |
@@ -34,8 +34,8 @@ npx serve .          # ou: python3 -m http.server
 | `base.js` | arranque partilhado: tema, consentimento, língua, casca, movimento |
 | `casca.js` | cabeçalho, menu de telemóvel, rodapé e o botão de tema |
 | `campo.js` | o fundo do hero — carta topográfica animada em WebGL |
-| `resultados.js` | a lista de provas, o marcador, os filtros e o palmarès |
-| `conteudo.js` | números, factos, linha do tempo, imprensa, ligações |
+| `resultados.js` | as épocas: o relato do ano, as provas, o marcador, os filtros e a imprensa desse ano |
+| `conteudo.js` | números, factos, citações, ligações e as quatro portas |
 | `media.js` | galeria, vídeos e a parede de apoios |
 | `rankings.js` | os dois cartões de ranking, o mundial e o europeu |
 | `instagram.js` | as publicações embutidas, ou o convite quando não há |
@@ -63,6 +63,22 @@ Correm com `node scripts/<nome>.mjs`, a partir da raiz.
 **Depois de mexer em HTML ou em `data/`**, corre-se `traduzir.mjs` e depois
 `seo.mjs`: o inglês e os dados estruturados são gerados, e ficam para trás se
 ninguém os voltar a escrever.
+
+## Quatro páginas
+
+| | |
+|---|---|
+| `index.html` | quem é, os números, os rankings em direto, as portas para o resto, uma citação, o Instagram e as seis perguntas |
+| `resultados.html` | **época a época**: cada ano com o relato, as provas e a imprensa desse ano |
+| `imprensa.html` | kit: biografia curta, ficha, citações com fonte, fotografias em alta resolução e fichas oficiais |
+| `parcerias.html` | quem apoia, o que um apoio cobre, e o formulário de contacto no fim |
+
+Eram seis. O `percurso.html` e o `resultados.html` contavam a mesma carreira
+por ordem cronológica, cada um à sua maneira, e o clipping da imprensa era uma
+terceira lista pela mesma ordem — juntaram-se numa só, por ano. O
+`contacto.html` era uma página inteira para um formulário, e passou para o fim
+das parcerias, que é onde quem escreve chega depois de ler o que há para
+apoiar. Os endereços antigos redirecionam, em `vercel.json`.
 
 ## Mexer no conteúdo
 
@@ -107,16 +123,20 @@ a ordem no sítio — mais recente primeiro):
 Uma prova ganha (`pos: 1`) entra automaticamente no palmarès da página
 inicial. Os contadores por época e os filtros também se atualizam sozinhos.
 
-### Números, factos, linha do tempo, escalões de apoio
+### Números, factos, relato de cada época, escalões de apoio
 
 Tudo em `data/perfil.json`. Os números da página inicial saem de `numeros`, a
-ficha de `factos`, o «ano a ano» de `percurso`, as formas de apoiar de
-`escadas`.
+ficha de `factos`, as formas de apoiar de `escadas`, e o relato de cada ano de
+`percurso` — que é o parágrafo que aparece por baixo do número do ano, na
+página das épocas. É o `ano` que o liga à época certa.
 
 ### Imprensa
 
 `data/imprensa.json`: `citacoes` (com ligação à peça de onde saíram), `pecas`
 (o clipping, 40 peças de 2019 a 2026) e `saiuEm` (as oito casas onde saiu).
+
+As peças aparecem na página das épocas, por baixo do ano em que saíram — a
+data (`"data": "2026-08"`) é o que as põe lá. Uma peça sem data não aparece.
 
 A miniatura de cada peça (`capa`) e o símbolo de cada casa são descarregados
 uma vez pelo `capas-imprensa.mjs` e pelo `logos-imprensa.mjs`, e ficam em
@@ -251,8 +271,22 @@ Sobretudo do arquivo de notícias da Federação Portuguesa de Golfe, que cobre
 todas as provas dela desde 2019 — e é a razão de o histórico chegar aos nove
 anos de idade. Também do European Golf Rankings, das federações organizadoras
 e da imprensa desportiva. Cada prova em `data/resultados.json` traz o campo
-`fonte` com a ligação, e a página de resultados mostra a nota de proveniência
+`fonte` com a ligação, e a página das épocas mostra a nota de proveniência
 no fim.
+
+### Os dois rankings, e um erro que é fácil cometer
+
+A ficha da jogadora no European Golf Rankings publica **um número só**, e esse
+número é o lugar dela na lista feminina inteira — de Sub-14 a adultas. O
+selector de escalão que está nessa página muda as provas que contam, não muda
+o lugar: pedindo a ficha com U18 vem exactamente o mesmo número.
+
+O ranking por escalão existe, mas noutro endereço: a lista feminina filtrada,
+que traz uma coluna «EGR Ranking» própria. É de lá que `api/_egr.js` tira
+`posicaoEscalao` — publicada pelo EGR, não calculada aqui. O cartão mostra
+essa em grande, com o escalão no rótulo, e a geral ao lado. Quando a lista do
+escalão não responde, mostra a geral **com o rótulo da geral**: o número de
+uma coisa com o nome da outra é o único resultado que não é aceitável.
 
 ## Publicar
 
