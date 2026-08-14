@@ -39,48 +39,52 @@ const html = `<!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><sty
 *{margin:0;box-sizing:border-box}
 body{width:1200px;height:630px;overflow:hidden;background:#0B1512;color:#fff;
      font-family:'Manrope',sans-serif;position:relative}
+/* A fotografia é vertical e ela está encostada à esquerda do enquadramento,
+   por isso quem manda aqui é a altura: a 5% vê-se a cara e o taco, mais
+   abaixo perdia-se a cabeça e ficava só o casaco. */
 .f{position:absolute;inset:0}
-.f img{width:100%;height:100%;object-fit:cover;object-position:64% 32%}
-/* Escurece da esquerda para a direita: o texto vive à esquerda e a jogadora
-   fica visível à direita, como na página. */
+.f img{width:100%;height:100%;object-fit:cover;object-position:50% 5%}
+
+/* Uma camada que assenta o preto no fundo, onde vive o texto, e uma vinheta
+   que fecha os cantos sem apagar a fotografia por cima. */
 .v{position:absolute;inset:0;background:
-  linear-gradient(90deg,rgba(6,14,11,.94) 0%,rgba(6,14,11,.88) 34%,rgba(6,14,11,.42) 66%,rgba(6,14,11,.22) 100%)}
-.q{position:absolute;inset:0;padding:62px 74px;display:flex;flex-direction:column;justify-content:space-between;width:760px}
-.rot{font-size:17px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#8FD9AE;
-     display:flex;align-items:center;gap:18px;white-space:nowrap}
-.rot::before{content:"";width:54px;height:2px;background:#8FD9AE}
+  linear-gradient(180deg,rgba(6,14,11,.5) 0%,rgba(6,14,11,.3) 20%,rgba(6,14,11,.86) 56%,rgba(6,14,11,.96) 84%)}
+.v2{position:absolute;inset:0;background:
+  radial-gradient(120% 92% at 34% 26%,rgba(6,14,11,0) 0%,rgba(6,14,11,.4) 54%,rgba(6,14,11,.8) 100%)}
+
+/* Composição de cima para baixo, e nada mais largo do que 560px.
+ *
+ * O WhatsApp mostra muitas vezes a pré-visualização em pequeno, e para isso
+ * corta esta imagem num quadrado tirado do meio — 630 px de largura de um
+ * total de 1200. Uma composição encostada a um dos lados desaparecia nesse
+ * corte: ficava um pedaço de palavra e mais nada. Empilhada ao centro, o
+ * corte quadrado continua a ser o cartão inteiro, só mais apertado. */
+.q{position:absolute;left:0;right:0;bottom:46px;display:flex;flex-direction:column;
+   align-items:center;text-align:center}
+.q > *{max-width:500px}
+.rot{font-size:14px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:#8FD9AE}
 .nome{font-family:'Fraunces',serif;font-weight:400;font-variation-settings:'opsz' 144;
-      font-size:104px;line-height:.9;letter-spacing:-.045em}
+      font-size:82px;line-height:.94;letter-spacing:-.042em;margin-top:15px;
+      text-shadow:0 2px 44px rgba(0,0,0,.55)}
 .sub{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-variation-settings:'opsz' 40;
-     font-size:27px;line-height:1.32;color:#D8E6DC;max-width:24ch;margin-top:20px}
-.pe{display:flex;align-items:flex-end;justify-content:space-between;gap:28px}
-.dom{font-size:20px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;white-space:nowrap}
-/* Os números são estreitos e as legendas são largas, por isso alinhados à
-   esquerda ficavam a tocar-se de coluna para coluna. Centrados, cada um
-   lê-se como um bloco só. */
-.ns{display:flex;gap:40px}
-.n{display:flex;flex-direction:column;align-items:center;gap:3px}
-.n b{font-family:'Fraunces',serif;font-weight:400;font-variation-settings:'opsz' 48;
-     font-size:40px;line-height:1;color:#8FD9AE}
-.n i{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.16em;
-     text-transform:uppercase;color:#B9CFC2;white-space:nowrap}
+     font-size:24px;line-height:1.35;color:#DCE8DF;margin-top:17px;text-wrap:balance}
+.risco{width:150px;height:1px;background:rgba(255,255,255,.34);margin:27px 0 17px}
+.ns{font-size:13px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+    color:#9FC3AC;white-space:nowrap}
+.ns b{color:#8FD9AE;font-weight:800}
+.dom{font-size:18px;font-weight:800;letter-spacing:.17em;text-transform:uppercase;
+     white-space:nowrap;margin-top:13px}
 </style></head><body>
   <div class="f"><img src="${dados.foto}" alt=""></div>
   <div class="v"></div>
+  <div class="v2"></div>
   <div class="q">
     <p class="rot">Golfista amadora · Seleção Nacional</p>
-    <div>
-      <p class="nome">Francisca<br>Salgado</p>
-      <p class="sub">Campeã nacional Sub-18. Do Vale de Janelas para os campos da Europa.</p>
-    </div>
-    <div class="pe">
-      <span class="dom">franciscasalgado.golf</span>
-      <div class="ns">
-        <span class="n"><b>${dados.titulos}</b><i>Títulos nacionais</i></span>
-        <span class="n"><b>${dados.vitorias}</b><i>Vitórias</i></span>
-        <span class="n"><b>${dados.desde}</b><i>Desde</i></span>
-      </div>
-    </div>
+    <p class="nome">Francisca<br>Salgado</p>
+    <p class="sub">Campeã nacional Sub-18. Do Vale de Janelas para os campos da Europa.</p>
+    <span class="risco"></span>
+    <p class="ns"><b>${dados.titulos}</b> títulos nacionais · <b>${dados.vitorias}</b> vitórias · desde <b>${dados.desde}</b></p>
+    <p class="dom">franciscasalgado.golf</p>
   </div>
 </body></html>`;
 
@@ -89,6 +93,16 @@ const p = await (await b.newContext({ viewport: { width: 1200, height: 630 }, de
 await p.setContent(html, { waitUntil: 'load' });
 await p.evaluate(() => document.fonts.ready);
 await p.waitForTimeout(400);
+
+/* O quadrado que o WhatsApp corta do meio vai dos 285 aos 915. Se um dia um
+   texto crescer para fora dele — um nome de patrocínio, um número com mais um
+   algarismo — a pré-visualização pequena volta a ficar cortada ao meio, e
+   ninguém dá por isso a olhar para a imagem larga. Por isso mede-se. */
+const fora = await p.evaluate(() => [...document.querySelectorAll('.q p, .q span')]
+  .map((e) => ({ t: e.textContent.trim().slice(0, 24), ...e.getBoundingClientRect().toJSON() }))
+  .filter((c) => c.width && (c.left < 295 || c.right > 905))
+  .map((c) => `${c.t} — ${Math.round(c.left)}…${Math.round(c.right)}`));
+if (fora.length) console.error(`fora do quadrado seguro:\n  ${fora.join('\n  ')}`);
 const png = new URL('img/og-tmp.png', RAIZ);
 await p.screenshot({ path: png.pathname });
 await b.close();
