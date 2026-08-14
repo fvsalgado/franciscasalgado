@@ -11,7 +11,7 @@ import { icone } from './icones.js';
 const tx = (v, l) => (typeof v === 'string' ? v : v?.[l] || v?.pt || '');
 
 async function ler(nome) {
-  try { return await (await fetch(`data/${nome}.json`, { cache: 'no-cache' })).json(); }
+  try { return await (await fetch(`/data/${nome}.json`, { cache: 'no-cache' })).json(); }
   catch (e) { console.warn(`${nome}:`, e.message); return {}; }
 }
 
@@ -24,7 +24,7 @@ export async function galeria(cx, lingua = 'pt', quantas = 99) {
   cx.className = 'galeria';
   cx.innerHTML = fotos.slice(0, quantas).map((p) => `
     <figure class="gal ${p.formato === 'largo' ? 'gal--largo' : 'gal--alto'} sobe-i">
-      <img src="img/${p.f}" alt="${tx(p.alt, lingua).replace(/"/g, '&quot;')}"
+      <img src="/img/${p.f}" alt="${tx(p.alt, lingua).replace(/"/g, '&quot;')}"
            loading="lazy" decoding="async" />
       <figcaption class="gal__l"><span class="gal__a num">${p.ano}</span> ${tx(p.l, lingua)}</figcaption>
     </figure>`).join('');
@@ -83,7 +83,7 @@ export async function apoios(cx, lingua = 'pt') {
      mexer em mais nada. */
   const cartao = (i) => {
     const dentro = i.logo
-      ? `<img src="img/logos/${i.logo}" alt="${i.nome}" loading="lazy" decoding="async" data-credito-feito="1" />`
+      ? `<img src="/img/logos/${i.logo}" alt="${i.nome}" loading="lazy" decoding="async" data-credito-feito="1" />`
       : `<span class="apoio__n">${i.nome}</span>`;
     /* A placa adapta-se ao logótipo, e não o contrário. `fundo` pode ser
        «escuro», para marcas desenhadas a branco, ou uma cor — a Lusíadas traz

@@ -34,7 +34,7 @@ const [perfil, resultados, imprensa, apoios] = await Promise.all([
   ler('data/imprensa.json'), ler('data/apoios.json'),
 ]);
 
-const tx = (v) => (typeof v === 'string' ? v : v?.pt || '');
+const tx = (v, l = 'pt') => (typeof v === 'string' ? v : v?.[l] || v?.pt || '');
 const provas = resultados.provas || [];
 
 /* ── a pessoa ──────────────────────────────────────────────────────────── */
@@ -46,12 +46,17 @@ const titulos = provas
 
 const clube = apoios.grupos.find((g) => g.id === 'campos')?.itens?.[0]?.nome || perfil.clube;
 
+const descricaoPt = `Golfista amadora portuguesa do ${clube}, em ${perfil.concelho}. ${
+  perfil.numeros?.find((n) => n.r?.pt === 'Títulos nacionais')?.v || ''} títulos nacionais. Seleção Nacional Amadora Feminina.`.replace(/\s+/g, ' ').trim();
+const descricaoEn = `Portuguese amateur golfer from ${clube}, in ${perfil.concelho}. ${
+  perfil.numeros?.find((n) => n.r?.pt === 'Títulos nacionais')?.v || ''} national titles. Portuguese women's amateur national team.`.replace(/\s+/g, ' ').trim();
+
 const pessoa = {
   '@type': 'Person',
   '@id': `${SITIO}/#francisca`,
   name: perfil.nome,
   alternateName: perfil.nomeCompleto,
-  description: `Golfista amadora portuguesa do ${clube}, em ${perfil.concelho}. ${titulos.length ? `${perfil.numeros?.find((n) => n.r?.pt === 'Títulos nacionais')?.v || ''} títulos nacionais. ` : ''}Seleção Nacional Amadora Feminina.`.replace(/\s+/g, ' ').trim(),
+  description: descricaoPt,
   url: `${SITIO}/`,
   image: `${SITIO}/img/og.jpg`,
   nationality: { '@type': 'Country', name: 'Portugal' },
@@ -74,12 +79,42 @@ const pessoa = {
   ],
 };
 
-/* ── migalhas ──────────────────────────────────────────────────────────── */
-const migalhas = (nome, ficheiro) => ({
+/* ── as duas línguas ───────────────────────────────────────────────────── */
+/* A mesma pessoa, a mesma prova, o mesmo prémio — descritos na língua da
+   página que os está a servir. O `@id` é que não muda: é a mesma entidade, e é
+   por ele que um motor percebe que /resultados.html e /en/resultados.html
+   falam da mesma jogadora e não de duas. */
+const NOMES = {
+  pt: { inicio: 'Início', resultados: 'Resultados', percurso: 'Percurso',
+        imprensa: 'Imprensa', parcerias: 'Parcerias',
+        listaR: 'Resultados de Francisca Salgado',
+        listaI: 'Imprensa sobre Francisca Salgado',
+        contacto: 'Parcerias — Francisca Salgado',
+        cargo: 'Golfista amadora', desporto: 'Golfe', lugar: 'lugar' },
+  en: { inicio: 'Home', resultados: 'Results', percurso: 'Her story',
+        imprensa: 'Press', parcerias: 'Partnerships',
+        listaR: 'Francisca Salgado — results',
+        listaI: 'Press coverage of Francisca Salgado',
+        contacto: 'Partnerships — Francisca Salgado',
+        cargo: 'Amateur golfer', desporto: 'Golf', lugar: 'place' },
+};
+const base = (l) => (l === 'en' ? `${SITIO}/en/` : `${SITIO}/`);
+/* A página de entrada de cada língua. A inglesa vai sem barra no fim, pelo
+   mesmo motivo do canonical. */
+const entrada = (l) => (l === 'en' ? `${SITIO}/en` : `${SITIO}/`);
+
+const quemE = (l) => ({
+  ...pessoa,
+  description: l === 'en' ? descricaoEn : descricaoPt,
+  jobTitle: NOMES[l].cargo,
+  knowsAbout: NOMES[l].desporto,
+});
+
+const migalhas = (chave, ficheiro, l) => ({
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Início', item: `${SITIO}/` },
-    { '@type': 'ListItem', position: 2, name: nome, item: `${SITIO}/${ficheiro}` },
+    { '@type': 'ListItem', position: 1, name: NOMES[l].inicio, item: entrada(l) },
+    { '@type': 'ListItem', position: 2, name: NOMES[l][chave], item: `${base(l)}${ficheiro}` },
   ],
 });
 
@@ -107,14 +142,14 @@ async function perguntas(html) {
 /* Uma prova de golfe é um SportsEvent, e a participação dela tem posição. É
    isto que permite a um assistente responder «em que ficou no X?» sem ter de
    adivinhar a partir da prosa. */
-const evento = (p) => {
+const evento = (p, l = 'pt') => {
   const e = {
     '@type': 'SportsEvent',
-    name: tx(p.torneio),
+    name: tx(p.torneio, l),
     sport: 'Golf',
     startDate: p.data,
-    ...(p.campo || tx(p.local) ? {
-      location: { '@type': 'Place', name: [p.campo, tx(p.local)].filter(Boolean).join(', ') },
+    ...(p.campo || tx(p.local, l) ? {
+      location: { '@type': 'Place', name: [p.campo, tx(p.local, l)].filter(Boolean).join(', ') },
     } : {}),
     competitor: { '@id': `${SITIO}/#francisca` },
   };
@@ -122,46 +157,48 @@ const evento = (p) => {
   return e;
 };
 
-const listaResultados = {
+const listaResultados = (l) => ({
   '@type': 'ItemList',
-  name: 'Resultados de Francisca Salgado',
+  name: NOMES[l].listaR,
   numberOfItems: provas.length,
   itemListOrder: 'https://schema.org/ItemListOrderDescending',
   itemListElement: provas.slice(0, 30).map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
-    ...(p.pos != null ? { name: `${tx(p.torneio)} — ${p.pos}.º lugar` } : { name: tx(p.torneio) }),
-    item: evento(p),
+    name: p.pos != null
+      ? `${tx(p.torneio, l)} — ${p.pos}.${l === 'en' ? '' : 'º '}${l === 'en' ? 'th place' : 'lugar'}`
+      : tx(p.torneio, l),
+    item: evento(p, l),
   })),
-};
+});
 
 /* ── por página ────────────────────────────────────────────────────────── */
-const sitio = {
+const sitio = (l) => ({
   '@type': 'WebSite',
   '@id': `${SITIO}/#sitio`,
-  url: `${SITIO}/`,
+  url: entrada(l),
   name: 'Francisca Salgado',
-  inLanguage: 'pt-PT',
+  inLanguage: l === 'en' ? 'en' : 'pt-PT',
   about: { '@id': `${SITIO}/#francisca` },
   publisher: { '@id': `${SITIO}/#francisca` },
-};
+});
 
 const PAGINAS = {
-  'index.html': async () => [pessoa, sitio],
-  'percurso.html': async (html) => [pessoa, migalhas('Percurso', 'percurso.html'),
-    { '@type': 'ProfilePage', mainEntity: { '@id': `${SITIO}/#francisca` } },
+  'index.html': async (html, l) => [quemE(l), sitio(l)],
+  'percurso.html': async (html, l) => [quemE(l), migalhas('percurso', 'percurso.html', l),
+    { '@type': 'ProfilePage', inLanguage: l === 'en' ? 'en' : 'pt-PT', mainEntity: { '@id': `${SITIO}/#francisca` } },
     await perguntas(html)].filter(Boolean),
-  'resultados.html': async () => [pessoa, migalhas('Resultados', 'resultados.html'), listaResultados],
-  'imprensa.html': async () => [pessoa, migalhas('Imprensa', 'imprensa.html'), {
+  'resultados.html': async (html, l) => [quemE(l), migalhas('resultados', 'resultados.html', l), listaResultados(l)],
+  'imprensa.html': async (html, l) => [quemE(l), migalhas('imprensa', 'imprensa.html', l), {
     '@type': 'ItemList',
-    name: 'Imprensa sobre Francisca Salgado',
+    name: NOMES[l].listaI,
     numberOfItems: (imprensa.pecas || []).length,
     itemListElement: (imprensa.pecas || []).slice(0, 40).map((p, i) => ({
       '@type': 'ListItem',
       position: i + 1,
       item: {
         '@type': 'NewsArticle',
-        headline: tx(p.t),
+        headline: tx(p.t, l),
         url: p.url,
         datePublished: p.data,
         publisher: { '@type': 'Organization', name: p.o },
@@ -169,9 +206,10 @@ const PAGINAS = {
       },
     })),
   }],
-  'parcerias.html': async () => [pessoa, migalhas('Parcerias', 'parcerias.html'), {
+  'parcerias.html': async (html, l) => [quemE(l), migalhas('parcerias', 'parcerias.html', l), {
     '@type': 'ContactPage',
-    name: 'Parcerias — Francisca Salgado',
+    name: NOMES[l].contacto,
+    inLanguage: l === 'en' ? 'en' : 'pt-PT',
     about: { '@id': `${SITIO}/#francisca` },
   }],
 };
@@ -179,24 +217,33 @@ const PAGINAS = {
 const INICIO = '<!-- dados:início -->';
 const FIM = '<!-- dados:fim -->';
 
+/* Corre nas duas árvores. As páginas de /en/ nascem de scripts/traduzir.mjs,
+   que corre antes desta — e trazem de lá a marca e os dados portugueses; é
+   aqui que ficam com os seus. */
 let mexidos = 0;
-for (const [ficheiro, montar] of Object.entries(PAGINAS)) {
-  const html = await lerTxt(ficheiro);
-  const i = html.indexOf(INICIO);
-  const f = html.indexOf(FIM);
-  if (i === -1 || f === -1) {
-    console.error(`${ficheiro}: falta a marca ${INICIO} … ${FIM}. Não foi tocado.`);
-    process.exitCode = 1;
-    continue;
+for (const l of ['pt', 'en']) {
+  for (const [ficheiro, montar] of Object.entries(PAGINAS)) {
+    const caminho = l === 'en' ? `en/${ficheiro}` : ficheiro;
+    let html;
+    try { html = await lerTxt(caminho); }
+    catch { console.error(`${caminho}: não existe. Correu o scripts/traduzir.mjs?`); process.exitCode = 1; continue; }
+
+    const i = html.indexOf(INICIO);
+    const f = html.indexOf(FIM);
+    if (i === -1 || f === -1) {
+      console.error(`${caminho}: falta a marca ${INICIO} … ${FIM}. Não foi tocado.`);
+      process.exitCode = 1;
+      continue;
+    }
+    const grafo = { '@context': 'https://schema.org', '@graph': await montar(html, l) };
+    const bloco = `${INICIO}\n<script type="application/ld+json">\n${
+      JSON.stringify(grafo, null, 2)}\n</script>\n${FIM}`;
+    const saida = html.slice(0, i) + bloco + html.slice(f + FIM.length);
+    if (saida === html) continue;
+    if (!SECO) await writeFile(new URL(caminho, RAIZ), saida);
+    mexidos += 1;
+    console.log(`${caminho}: ${grafo['@graph'].map((n) => n['@type']).join(', ')}`);
   }
-  const grafo = { '@context': 'https://schema.org', '@graph': await montar(html) };
-  const bloco = `${INICIO}\n<script type="application/ld+json">\n${
-    JSON.stringify(grafo, null, 2)}\n</script>\n${FIM}`;
-  const saida = html.slice(0, i) + bloco + html.slice(f + FIM.length);
-  if (saida === html) continue;
-  if (!SECO) await writeFile(new URL(ficheiro, RAIZ), saida);
-  mexidos += 1;
-  console.log(`${ficheiro}: ${grafo['@graph'].map((n) => n['@type']).join(', ')}`);
 }
 
 /* ── sitemap ───────────────────────────────────────────────────────────── */
@@ -212,18 +259,34 @@ const MAPA = [
   ['parcerias.html', 'monthly', '0.7'],
 ];
 const quando = `${resultados.atualizado || perfil.atualizado}-01`.slice(0, 10);
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${MAPA.map(([f, freq, pri]) => `  <url>
-    <loc>${SITIO}/${f}</loc>
+
+/* Cada endereço declara no sitemap as duas versões — a sua e a da outra
+   língua. É redundante com o hreflang do <head>, e é a redundância que o
+   Google pede: com as duas, o par sobrevive a uma delas falhar. */
+const alternativas = (f) => [
+  `    <xhtml:link rel="alternate" hreflang="pt-PT" href="${SITIO}/${f}" />`,
+  `    <xhtml:link rel="alternate" hreflang="en" href="${f ? `${SITIO}/en/${f}` : `${SITIO}/en`}" />`,
+  `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITIO}/${f}" />`,
+].join('\n');
+
+const linha = (loc, f, freq, pri) => `  <url>
+    <loc>${loc}</loc>
+${alternativas(f)}
     <lastmod>${quando}</lastmod>
     <changefreq>${freq}</changefreq>
     <priority>${pri}</priority>
-  </url>`).join('\n')}
+  </url>`;
+
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${MAPA.map(([f, freq, pri]) => linha(`${SITIO}/${f}`, f, freq, pri)).join('\n')}
+${MAPA.map(([f, freq, pri]) => linha(f ? `${SITIO}/en/${f}` : `${SITIO}/en`, f, freq,
+    (Number(pri) - 0.1).toFixed(1))).join('\n')}
 </urlset>
 `;
 if (!SECO) await writeFile(new URL('sitemap.xml', RAIZ), sitemap);
-console.log(`sitemap.xml: ${MAPA.length} endereços, lastmod ${quando}`);
+console.log(`sitemap.xml: ${MAPA.length * 2} endereços nas duas línguas, lastmod ${quando}`);
 
 /* ── llms.txt ──────────────────────────────────────────────────────────── */
 /* Para quem lê o sítio com um modelo de linguagem em vez de um browser. É um
@@ -256,6 +319,12 @@ ${titulos.map((t) => `- ${t}`).join('\n')}
 ## Percurso
 
 ${(perfil.percurso || []).map((p) => `- ${p.ano} — ${tx(p.t)}: ${tx(p.x)}`).join('\n')}
+
+## Línguas
+
+O sítio existe em português, na raiz, e em inglês, em ${SITIO}/en/. Cada página
+tem as duas versões, com o mesmo nome de ficheiro, e declaram-se uma à outra em
+hreflang. O português é o original; o inglês é tradução dele.
 
 ## Páginas
 

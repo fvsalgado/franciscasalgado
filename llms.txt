@@ -44,6 +44,12 @@ oficiais em vez de escritas à mão.
 - 2025 — A época que a pôs no mapa europeu: Estreou-se num Europeu de equipas absoluto, aos dezasseis anos. Foi convidada a jogar, como amadora, o Super Bock Ladies Open at Vidago Palace — a primeira prova do circuito profissional europeu feminino em Portugal em oito anos. Venceu o Drive Tour no Tejo, foi vice-campeã da Taça da FPG em Santo Estêvão, e fechou o ano em terceiro nas Astúrias, no Memorial Celia Barquín.
 - 2026 — Campeã nacional Sub-18 e de Pares: Dois títulos nacionais em dois meses: os Pares Amador no Montado, com Rodrigo Constantino, e o Sub-18 na Aroeira, liderado do princípio ao fim. Pelo meio, mais uma vitória no Circuito Aquapor. E o calendário a abrir-se para fora: Penina, Guadalmina, Saint-Cloud, Slieve Russell com a Seleção, Prestbury — onde chegou a ser quinta no English Girls' Open — e Málaga.
 
+## Línguas
+
+O sítio existe em português, na raiz, e em inglês, em https://franciscasalgado.golf/en/. Cada página
+tem as duas versões, com o mesmo nome de ficheiro, e declaram-se uma à outra em
+hreflang. O português é o original; o inglês é tradução dele.
+
 ## Páginas
 
 - https://franciscasalgado.golf/ — apresentação, números da época, últimos resultados

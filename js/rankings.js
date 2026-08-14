@@ -138,8 +138,8 @@ export async function rankings(cx, lingua = 'pt') {
   const t = T[lingua] || T.pt;
 
   const [m, e] = await Promise.all([
-    buscar('/api/wagr', 'data/wagr.json'),
-    buscar('/api/egr', 'data/egr.json'),
+    buscar('/api/wagr', '/data/wagr.json'),
+    buscar('/api/egr', '/data/egr.json'),
   ]);
 
   const vazio = (nome) => `<article class="rk rk--vazio"><p>${nome}: ${t.falha}</p></article>`;

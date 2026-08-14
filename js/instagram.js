@@ -20,7 +20,7 @@ export const CONTA = 'francisca_salgado_';
 const tx = (v, l) => (typeof v === 'string' ? v : v?.[l] || v?.pt || '');
 
 async function ficheiro() {
-  try { return await (await fetch('data/instagram.json', { cache: 'no-cache' })).json(); }
+  try { return await (await fetch('/data/instagram.json', { cache: 'no-cache' })).json(); }
   catch (e) { console.warn('instagram:', e.message); return {}; }
 }
 
@@ -97,7 +97,7 @@ export async function perfilIg(cx, lingua = 'pt') {
   cx.className = 'igp';
   cx.innerHTML = `
     <div class="igp__cab">
-      <img class="igp__f" src="img/avatar.webp" alt="${p.nome || 'Francisca Salgado'}"
+      <img class="igp__f" src="/img/avatar.webp" alt="${p.nome || 'Francisca Salgado'}"
            width="280" height="280" loading="lazy" decoding="async" data-credito-feito="1" />
       <div class="igp__id">
         <p class="igp__a">@${p.arroba || CONTA}</p>

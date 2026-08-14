@@ -41,7 +41,7 @@ function colocar(img, texto) {
 export async function creditos(idioma = 'pt') {
   if (!TABELA) {
     try {
-      TABELA = await (await fetch('data/creditos.json', { cache: 'no-cache' })).json();
+      TABELA = await (await fetch('/data/creditos.json', { cache: 'no-cache' })).json();
     } catch (e) {
       console.warn('créditos:', e.message);
       return;
