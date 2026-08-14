@@ -768,14 +768,24 @@
 <main id="conteudo">
 
 <section class="topo-p">
+  <canvas class="sec__campo" id="campo" aria-hidden="true"></canvas>
   <div class="env">
     <p class="rot" data-t="rs_rot">Results</p>
     <h1 class="d d--l ani" data-t="rs_tit">Event by event, season by season</h1>
-    <p class="txt topo-p__t" data-t="rs_txt">Everything on the record: the rounds, the total and the score against par. Where a final placing has not been published, the card stays and the position box says it does not know — less pretty than inventing a number, and the right thing to do.</p>
+    <p class="txt topo-p__t" data-t="rs_txt">Every event, with the rounds, the total and the score to par. Where a final placing was never published, the card stays and the position is left unknown.</p>
     <div class="topo-p__bt">
       <a class="cap cap--cheio" href="https://www.europeangolfrankings.com/players/39992" target="_blank" rel="noopener" data-t="rs_egr" data-mag>European Golf Rankings profile</a>
       <a class="cap" href="https://portal.fpg.pt/perfil/francisca-salgado/" target="_blank" rel="noopener" data-t="rs_fpg" data-mag>Portuguese Golf Federation profile</a>
     </div>
+  </div>
+</section>
+
+<!-- ═══ A SEGUIR ═══════════════════════════════════════ -->
+<!-- O que ainda não aconteceu é a primeira pergunta de quem chega a uma
+     página de resultados, e estava só na página inicial. -->
+<section class="sec sec--curta" id="aseguir">
+  <div class="env">
+    <div id="proximas"></div>
   </div>
 </section>
 
@@ -787,7 +797,7 @@
         <h2 class="d d--l ani" data-t="rk_tit">The official records, as they stand</h2>
       </div>
       <div class="cab__x">
-        <p class="txt" data-t="rk_txt2">Read the moment the page opens. The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category, and it decides access to much of the international calendar.</p>
+        <p class="txt" data-t="rk_txt2">The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category, and it decides access to much of the international calendar.</p>
       </div>
     </div>
     <div id="rankings"></div>

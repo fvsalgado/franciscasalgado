@@ -3,7 +3,9 @@
    sem haver um ficheiro de arranque por página. */
 
 import { iniciar } from './base.js';
-import { porEpoca, carregar } from './resultados.js';
+import { iniciarCampo } from './campo.js';
+import { reduzido } from './movimento.js';
+import { porEpoca, carregar, proximas } from './resultados.js';
 import { factos, percurso, citacoes, pecas, saiuEm, escadas, ligacoes, numeros,
          rankingsNaPergunta } from './conteudo.js';
 import { galeria, videos, apoios } from './media.js';
@@ -86,7 +88,8 @@ function formulario(lingua) {
 /* ── o que cada página pinta ──────────────────────────────── */
 const PINTAR = {
   async resultados(l) {
-    await Promise.all([porEpoca($('epocas'), $('filtros'), l), rankings($('rankings'), l)]);
+    await Promise.all([porEpoca($('epocas'), $('filtros'), l), rankings($('rankings'), l),
+                       proximas($('proximas'), l)]);
     const d = await carregar();
     const nota = $('notaFonte');
     if (nota && d.nota) nota.textContent = d.nota[l] || d.nota.pt;
@@ -118,5 +121,11 @@ const PINTAR = {
 };
 
 const { i18n } = iniciar(async (l) => { await PINTAR[qual]?.(l); });
+
+/* O mapa de curvas, onde a página o tiver. Fica fora do ciclo da língua: não
+   tem texto nenhum, e recriá-lo seria deitar fora o contexto de WebGL por
+   nada. */
+const campo = iniciarCampo($('campo'), { reduzido });
+document.addEventListener('fs:tema', () => campo?.tema?.());
 
 formulario(() => i18n.lingua());

@@ -274,3 +274,36 @@ export async function ultimo(lingua = 'pt') {
     texto: `${dataCurta(p, lingua)} · ${lugar} · ${tx(p.torneio, lingua)}`,
   };
 }
+
+/* ── o que ainda não aconteceu ────────────────────────────── */
+/* A primeira pergunta de quem abre uma página de resultados não é o que já
+   houve — é o que vem aí. Só entram aqui provas anunciadas por fonte
+   identificada, e cada uma sai sozinha da lista assim que a data passa. */
+export async function proximas(cx, lingua = 'pt') {
+  if (!cx) return;
+  const { proximas: ps = [] } = await carregar();
+  const hoje = new Date().toISOString().slice(0, 10);
+  const lista = ps.filter((p) => p.data && p.data >= hoje)
+    .sort((a, b) => a.data.localeCompare(b.data));
+  if (!lista.length) { cx.innerHTML = ''; return; }
+  const en = lingua === 'en';
+
+  cx.className = 'aseguir';
+  cx.innerHTML = `
+    <p class="rot rot--so">${en ? 'Coming up' : 'A seguir'}</p>
+    <div class="aseguir__l">${lista.map((p) => {
+      const onde = [p.campo, tx(p.local, lingua)].filter(Boolean).join(' · ');
+      return `
+      <article class="prox-p">
+        <span class="prox-p__d num">${dataCurta(p, lingua)}</span>
+        <div class="prox-p__q">
+          <h3 class="prox-p__t">${tx(p.torneio, lingua)}</h3>
+          ${onde ? `<p class="prox-p__l">${onde}</p>` : ''}
+          ${p.nota ? `<p class="prox-p__x">${tx(p.nota, lingua)}</p>` : ''}
+        </div>
+        ${p.escalao ? `<span class="selo selo--selecao">${tx(p.escalao, lingua)}</span>` : ''}
+        ${p.fonte?.url ? `<p class="prova__f"><a href="${p.fonte.url}" target="_blank" rel="noopener" data-mag>${
+          en ? 'Source' : 'Fonte'}: ${p.fonte.nome}</a></p>` : ''}
+      </article>`;
+    }).join('')}</div>`;
+}

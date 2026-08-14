@@ -18,13 +18,13 @@ export const EN = {
 
   vi_rot: 'On video',
   vi_tit: 'From nine years old to now',
-  vi_txt: 'From the interview at the Super Bock Ladies Open to the oldest footage there is of her on a course — the 2018 Open World Kids Golf, in the Algarve, where she plays alongside Amélia Gabin, today a national-team colleague. Nothing loads from YouTube until you press play.',
+  vi_txt: 'From the interview at the Super Bock Ladies Open to the oldest footage there is of her on a course — the 2018 Open World Kids Golf, in the Algarve, where she plays alongside Amélia Gabin, today a national-team colleague.',
 
 
   rk_rot: 'Rankings',
   rk_tit: 'The official records, as they stand',
-  rk_txt: 'The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category. These two cards read her records the moment the page opens — not one of these numbers is typed in by hand.',
-  rk_txt2: 'Read the moment the page opens. The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category, and it decides access to much of the international calendar.',
+  rk_txt: 'The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category. Between them they decide access to much of the international calendar.',
+  rk_txt2: 'The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category, and it decides access to much of the international calendar.',
 
   /* ── página inicial ─────────────────────────────────────── */
   hero_rot: 'Amateur golfer · Portuguese national team · U18',
@@ -55,7 +55,7 @@ export const EN = {
   /* ── resultados ─────────────────────────────────────────── */
   rs_rot: 'Results',
   rs_tit: 'Event by event, season by season',
-  rs_txt: 'Everything on the record: the rounds, the total and the score against par. Where a final placing has not been published, the card stays and the position box says it does not know — less pretty than inventing a number, and the right thing to do.',
+  rs_txt: 'Every event, with the rounds, the total and the score to par. Where a final placing was never published, the card stays and the position is left unknown.',
   rs_egr: 'European Golf Rankings profile',
   rs_fpg: 'Portuguese Golf Federation profile',
 
@@ -76,7 +76,7 @@ export const EN = {
   fq_3p: 'What club does she play for?',
   fq_3r: 'Vale de Janelas, in Óbidos, on Portugal\'s west coast. She started at Paço do Lumiar, where she won her first national title in 2019.',
   fq_4p: 'Where does she stand in the rankings?',
-  fq_4r: 'She is on the World Amateur Golf Ranking, the world ranking of amateur golf, and on the European Golf Rankings. Both positions are read from the official profiles the moment the page opens, and are on the <a class="lig" href="resultados.html">results page</a>.',
+  fq_4r: 'She is on the World Amateur Golf Ranking, the world ranking of amateur golf, and on the European Golf Rankings. Both positions are on the <a class="lig" href="resultados.html">results page</a>.',
   fq_5p: 'What are her best international results?',
   fq_5r: 'Sixth, and the best Portuguese player, at the Belgian International U14 Championship in 2023; third at the Memorial Celia Barquín, in Asturias, in 2025; and 28th at the 2026 English Girls\' Open, one of the strongest girls\' U18 events in Europe, where she stood fifth at one point.',
   fq_6p: 'How do you reach her about sponsorship or press?',

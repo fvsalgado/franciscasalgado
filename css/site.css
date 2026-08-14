@@ -25,7 +25,7 @@
   --grao:.05;
   --sombra:0 26px 64px -32px rgba(18,40,30,.5);
 
-  --larg:min(1440px,100% - clamp(2rem,6vw,7rem));
+  --larg:min(1440px,100% - clamp(3rem,10vw,9rem));
   --sec:clamp(3.6rem,6.4vw,6.6rem);
   --curva:cubic-bezier(.22,.61,.36,1);
   --curva-f:cubic-bezier(.76,0,.24,1);
@@ -1101,9 +1101,19 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
   .porta{grid-template-columns:auto minmax(0,1fr) auto 6.5rem auto}
 }
 .porta:hover{background:var(--relva-clara);padding-inline:clamp(.6rem,1.6vw,1.2rem)}
-.porta__i{font-family:var(--display);font-weight:300;font-variation-settings:'opsz' 48;
-          font-size:clamp(1.5rem,3vw,2.1rem);line-height:1;color:var(--relva);opacity:.4;
-          min-width:1.9em}
+/* Ícone e número juntos, numa placa. Só o número não chegava para se perceber
+   que aquilo era um menu — podia ser uma lista de qualquer coisa numerada. Com
+   o desenho do assunto ao lado, lê-se logo o que há do outro lado. */
+.porta__i{display:flex;align-items:center;gap:.55rem;flex:none;
+          padding:.5rem .7rem;border-radius:12px;border:1px solid var(--linha);
+          background:var(--papel);color:var(--relva);
+          transition:background-color .4s var(--curva),border-color .4s var(--curva),
+                     color .4s var(--curva)}
+.sec--fundo .porta__i{background:var(--superficie)}
+.porta__i .ic{width:1.35rem;height:1.35rem}
+.porta__i b{font-family:var(--display);font-weight:300;font-variation-settings:'opsz' 40;
+            font-size:1.12rem;line-height:1;opacity:.55}
+.porta:hover .porta__i{background:var(--relva);border-color:var(--relva);color:#FFF}
 .porta__q{display:flex;flex-direction:column;gap:.22rem;min-width:0}
 .porta__r{font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:var(--relva)}
 .porta__t{font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 30;
@@ -1169,3 +1179,32 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
    ocupa agora o direito, e o dos cookies já saiu quando este aparece. */
 .convite-l{right:auto;left:clamp(1rem,3vw,2rem)}
 @media (max-width:560px){.convite-l{right:clamp(1rem,3vw,2rem);bottom:5.5rem}}
+
+/* ── a seguir (página de resultados) ────────────────────── */
+.aseguir{display:flex;flex-direction:column;gap:1rem}
+.aseguir__l{display:grid;gap:1px}
+.prox-p{position:relative;display:grid;gap:.35rem 1.4rem;align-items:center;
+        grid-template-columns:1fr;padding:clamp(1.2rem,2.6vw,1.7rem);
+        background:var(--relva-clara);box-shadow:0 0 0 1px var(--linha)}
+@media (min-width:760px){
+  .prox-p{grid-template-columns:11rem minmax(0,1fr) auto;align-items:start}
+  .prox-p .prova__f{grid-column:2/-1}
+}
+.prox-p__d{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--relva)}
+.prox-p__q{min-width:0;display:flex;flex-direction:column;gap:.25rem}
+.prox-p__t{margin:0;font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 28;
+           font-size:clamp(1.1rem,2vw,1.35rem);line-height:1.2;letter-spacing:-.015em}
+.prox-p__l{margin:0;font-size:.85rem;color:var(--tinta-fraca)}
+.prox-p__x{margin:.2rem 0 0;font-size:.82rem;line-height:1.5;color:var(--tinta-fraca);max-width:58ch}
+
+/* ── âncoras dentro da página ───────────────────────────── */
+/* O cabeçalho é fixo: sem isto, um link para #contacto punha o título da
+   secção por baixo dele e quem carregava aterrava a meio do formulário. Num
+   telemóvel, onde o cabeçalho ocupa mais do ecrã, era pior. */
+[id]{scroll-margin-top:clamp(5.5rem,12vh,7.5rem)}
+
+/* O mapa de curvas nas páginas interiores: por trás do cabeçalho de cada uma,
+   fundo claro, discreto. Na inicial vive na faixa escura dos rankings. */
+.topo-p{position:relative;isolation:isolate;overflow:hidden}
+.topo-p .sec__campo{opacity:.4;mix-blend-mode:normal}
+.sec--fundo .sec__campo{opacity:.35}

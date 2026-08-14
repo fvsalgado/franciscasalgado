@@ -233,7 +233,7 @@ export async function portas(cx, lingua = 'pt') {
 
   const PORTAS = [
     {
-      href: 'resultados.html', img: 'swing.webp',
+      href: 'resultados.html', img: 'swing.webp', ic: 'taca',
       n: provas.length,
       r: { pt: 'Resultados', en: 'Results' },
       t: { pt: 'Prova a prova, desde 2018', en: 'Event by event, since 2018' },
@@ -242,7 +242,7 @@ export async function portas(cx, lingua = 'pt') {
       u: { pt: 'provas', en: 'events' },
     },
     {
-      href: 'percurso.html', img: 'aquapor.webp',
+      href: 'percurso.html', img: 'aquapor.webp', ic: 'mapa',
       n: epocas,
       r: { pt: 'Percurso', en: 'Her story' },
       t: { pt: 'De campeã de Sub-10 a campeã de Sub-18', en: 'From U10 champion to U18 champion' },
@@ -251,7 +251,7 @@ export async function portas(cx, lingua = 'pt') {
       u: { pt: 'épocas', en: 'seasons' },
     },
     {
-      href: 'imprensa.html', img: 'trofeu.webp',
+      href: 'imprensa.html', img: 'trofeu.webp', ic: 'jornal',
       n: (imp.pecas || []).length,
       r: { pt: 'Imprensa', en: 'Press' },
       t: { pt: 'Para quem escreve sobre golfe', en: 'For people who write about golf' },
@@ -260,7 +260,7 @@ export async function portas(cx, lingua = 'pt') {
       u: { pt: 'peças publicadas', en: 'published pieces' },
     },
     {
-      href: 'parcerias.html', img: 'english.webp',
+      href: 'parcerias.html', img: 'english.webp', ic: 'aperto',
       n: apoiantes,
       r: { pt: 'Parcerias', en: 'Partnerships' },
       t: { pt: 'Levar Portugal mais longe', en: 'Taking Portugal further' },
@@ -277,7 +277,9 @@ export async function portas(cx, lingua = 'pt') {
   cx.className = 'portas';
   cx.innerHTML = PORTAS.map((p, i) => `
     <a class="porta" href="${p.href}" data-mag>
-      <span class="porta__i num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+      <span class="porta__i" aria-hidden="true">
+        ${icone(p.ic, 'ic')}<b class="num">${String(i + 1).padStart(2, '0')}</b>
+      </span>
       <span class="porta__q">
         <span class="porta__r">${tx(p.r, lingua)}</span>
         <span class="porta__t">${tx(p.t, lingua)}</span>
