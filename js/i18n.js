@@ -52,7 +52,7 @@ export const EN = {
 
   in_rot: 'Instagram',
   in_tit: 'Day to day',
-  in_txt: 'Practice, travel, and whatever happens between tournaments.',
+  in_txt: 'Practice, travel, and whatever happens between tournaments. The posts are loaded from Instagram.',
 
   ap_rot: 'Support',
   ap_tit: 'Taking Portugal further',
@@ -106,9 +106,13 @@ export const EN = {
   ap2_e_tit: 'Three of them',
   ap2_e_txt: 'There is no fixed price list on this page, deliberately: every partnership is drawn up with whoever comes in. Say what you have in mind and you get a concrete proposal.',
   ap2_e_bt: 'Talk about it',
+  pr_rot: 'Partnerships',
+  pr_tit: 'What it looks like',
+  pr_txt: 'The work with the brands, exactly as it goes out on her Instagram. It is the most concrete argument for anyone thinking of coming in: not a promise of visibility, but visibility already delivered.',
+
   ap2_q_rot: 'Already on board',
   ap2_q_tit: 'Good company',
-  ap2_q_txt: 'Those already walking the road with her. They are in separate groups on purpose: institutional backing and a brand of equipment she plays are not the same thing.',
+  ap2_q_txt: 'Those already walking the road with her, grouped by the nature of the relationship.',
 
   ct_rot: 'Contact',
   ct_tit: 'Talk to the team',

@@ -95,7 +95,7 @@ export async function apoios(cx, lingua = 'pt') {
 
   cx.className = 'apoios';
   cx.innerHTML = grupos.map((g) => `
-    <section class="apoios__g">
+    <section class="apoios__g${g.destaque ? ' apoios__g--destaque' : ''}">
       <div class="apoios__cab">
         <p class="rot rot--so">${tx(g.t, lingua)}</p>
         <p class="apoios__x">${tx(g.x, lingua)}</p>

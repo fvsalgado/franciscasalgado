@@ -1,4 +1,46 @@
 {
-  "_leia-me": "Códigos de publicações do Instagram, usados quando não há token da Graph API (ver api/instagram.js). O código é o que vem depois de /p/ ou /reel/ no endereço da publicação — em instagram.com/p/C8xYzAbCdEf/ o código é C8xYzAbCdEf. Enquanto a lista estiver vazia, o site mostra o convite a seguir a conta, e não uma caixa vazia. Aceita textos simples ou objetos { codigo, tipo: 'p' | 'reel', conta }.",
-  "publicacoes": []
+  "_leia-me": "Instagram. O 'perfil' alimenta o cartão de seguidores; os números só aparecem quando estão preenchidos — mais vale não mostrar do que mostrar errado. Com um token da Graph API em IG_TOKEN (ver api/instagram.js) tudo isto passa a vir sozinho e em direto, e este ficheiro deixa de ser preciso. Os códigos são o que vem depois de /p/ ou /reel/ no endereço da publicação.",
+
+  "perfil": {
+    "arroba": "francisca_salgado_",
+    "nome": "Francisca Salgado",
+    "bio": {
+      "pt": "Golfista amadora · Seleção Nacional · Campeã nacional Sub-18",
+      "en": "Amateur golfer · Portuguese national team · National U18 champion"
+    },
+    "seguidores": null,
+    "aSeguir": null,
+    "publicacoes": null,
+    "atualizado": ""
+  },
+
+  "publicacoes": [
+    { "codigo": "Db1E8VDACIn", "tipo": "p" },
+    { "codigo": "Dblt0EVgLDT", "tipo": "p" },
+    { "codigo": "DbQZXc4AEzK", "tipo": "p" },
+    { "codigo": "DYSS6TYCmUC", "tipo": "p" }
+  ],
+
+  "parcerias": [
+    {
+      "codigo": "DZXButZk32u", "tipo": "reel", "marca": "Lusíadas Saúde",
+      "t": { "pt": "Com a Lusíadas Saúde", "en": "With Lusíadas Saúde" }
+    },
+    {
+      "codigo": "DWqeTFXAFGV", "tipo": "reel", "marca": "Skip Portugal",
+      "t": { "pt": "Com a Skip Portugal", "en": "With Skip Portugal" }
+    },
+    {
+      "codigo": "DVT_LlLALMj", "tipo": "reel", "marca": "Cobra Golf",
+      "t": { "pt": "Com a Cobra Golf", "en": "With Cobra Golf" }
+    },
+    {
+      "codigo": "DUv6OVuAEUp", "tipo": "reel", "marca": "Puma Golf · Cobra Golf",
+      "t": { "pt": "Com a Puma e a Cobra Golf", "en": "With Puma and Cobra Golf" }
+    },
+    {
+      "codigo": "CqqrICircDQ", "tipo": "reel", "marca": "ECCO Golf",
+      "t": { "pt": "Com a ECCO Golf", "en": "With ECCO Golf" }
+    }
+  ]
 }
