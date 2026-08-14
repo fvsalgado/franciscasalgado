@@ -142,9 +142,27 @@ export async function ligacoes(cx, lingua = 'pt') {
 }
 
 /* ── imprensa ─────────────────────────────────────────────── */
-export async function citacoes(cx, lingua = 'pt', quantas = 99) {
+/* `grande` serve a página inicial, onde entra uma citação só: aí a frase é o
+   elemento da secção, e não um item de uma lista. Cresce, centra-se e ocupa a
+   largura toda — a mesma peça que está na página de parcerias. */
+export async function citacoes(cx, lingua = 'pt', quantas = 99, { grande = false } = {}) {
   if (!cx) return;
   const { citacoes: cs = [] } = await ler('imprensa');
+
+  if (grande) {
+    const c = cs[0];
+    if (!c) { cx.innerHTML = ''; return; }
+    cx.className = '';
+    cx.innerHTML = `
+      <figure class="cita">
+        <blockquote class="cita__t">${tx(c.t, lingua)}</blockquote>
+        <figcaption class="cita__f">${c.url
+          ? `<a href="${c.url}" target="_blank" rel="noopener" data-mag>${tx(c.f, lingua)}</a>`
+          : tx(c.f, lingua)}</figcaption>
+      </figure>`;
+    return;
+  }
+
   cx.className = 'citacoes';
   cx.innerHTML = cs.slice(0, quantas).map((c) => `
     <figure class="cit sobe-i">
@@ -174,4 +192,78 @@ export async function saiuEm(cx) {
   const { saiuEm: ss = [] } = await ler('imprensa');
   cx.className = 'saiu__l';
   cx.innerHTML = ss.map((s) => `<li>${s}</li>`).join('');
+}
+
+/* ── as portas para as outras páginas ─────────────────────── */
+/* A página inicial tinha, inteiras, secções que já existiam noutras páginas: o
+   palmarès, a galeria, a parede de apoios, o dossier de imprensa. Quem descia
+   a página lia tudo duas vezes e não chegava a ter razão nenhuma para clicar
+   em nada.
+
+   Ficam quatro portas. Cada uma diz o que há lá dentro e traz um número que o
+   prova — e o número é contado aqui, dos ficheiros, para não haver mais um
+   sítio no sítio onde alguém tenha de se lembrar de mudar um algarismo. */
+export async function portas(cx, lingua = 'pt') {
+  if (!cx) return;
+  const en = lingua === 'en';
+  const [res, imp, apo] = await Promise.all([ler('resultados'), ler('imprensa'), ler('apoios')]);
+
+  const provas = res.provas || [];
+  const anos = provas.map((p) => p.ano).filter(Boolean);
+  const epocas = anos.length ? Math.max(...anos) - Math.min(...anos) + 1 : 0;
+  const apoiantes = (apo.grupos || []).reduce((n, g) => n + (g.itens?.length || 0), 0);
+
+  const PORTAS = [
+    {
+      href: 'resultados.html', img: 'swing.webp',
+      n: provas.length,
+      r: { pt: 'Resultados', en: 'Results' },
+      t: { pt: 'Prova a prova, desde 2018', en: 'Event by event, since 2018' },
+      x: { pt: 'As voltas, o total e o resultado face ao par. Cada prova diz de onde veio.',
+           en: 'The rounds, the total and the score to par. Every event names its source.' },
+      u: { pt: 'provas', en: 'events' },
+    },
+    {
+      href: 'percurso.html', img: 'aquapor.webp',
+      n: epocas,
+      r: { pt: 'Percurso', en: 'Her story' },
+      t: { pt: 'De campeã de Sub-10 a campeã de Sub-18', en: 'From U10 champion to U18 champion' },
+      x: { pt: 'A história ano a ano, os vídeos mais antigos que há dela, e as perguntas do costume.',
+           en: 'The story year by year, the oldest footage there is of her, and the usual questions.' },
+      u: { pt: 'épocas', en: 'seasons' },
+    },
+    {
+      href: 'imprensa.html', img: 'trofeu.webp',
+      n: (imp.pecas || []).length,
+      r: { pt: 'Imprensa', en: 'Press' },
+      t: { pt: 'Para quem escreve sobre golfe', en: 'For people who write about golf' },
+      x: { pt: 'Biografia curta, factos que se confirmam, citações com fonte e fotografias em alta resolução.',
+           en: 'Short biography, checkable facts, sourced quotes and high-resolution photographs.' },
+      u: { pt: 'peças publicadas', en: 'published pieces' },
+    },
+    {
+      href: 'parcerias.html', img: 'english.webp',
+      n: apoiantes,
+      r: { pt: 'Parcerias', en: 'Partnerships' },
+      t: { pt: 'Levar Portugal mais longe', en: 'Taking Portugal further' },
+      x: { pt: 'Quem já apoia, o que cada forma de entrar cobre, e o contacto direto.',
+           en: 'Who already backs her, what each way in covers, and how to get in touch.' },
+      u: { pt: 'já a apoiar', en: 'already on board' },
+    },
+  ];
+
+  cx.className = 'portas';
+  cx.innerHTML = PORTAS.map((p) => `
+    <a class="porta sobe-i" href="${p.href}" data-mag>
+      <figure class="porta__f">
+        <img src="/img/${p.img}" alt="" loading="lazy" decoding="async" />
+      </figure>
+      <div class="porta__q">
+        <span class="porta__r">${tx(p.r, lingua)}</span>
+        <h3 class="porta__t">${tx(p.t, lingua)}</h3>
+        <p class="porta__x">${tx(p.x, lingua)}</p>
+        <span class="porta__n"><b class="num">${p.n}</b> ${tx(p.u, lingua)}</span>
+      </div>
+      <span class="porta__s" aria-hidden="true">→</span>
+    </a>`).join('');
 }

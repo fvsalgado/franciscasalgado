@@ -15,9 +15,6 @@ export const EN = {
   /* ── partilhado ─────────────────────────────────────────── */
   dz_onde: 'Published in',
 
-  ga_rot: 'In play',
-  ga_tit: 'Seven years on the course',
-  ga_txt: 'From the national U10 champion, in 2019, to the tee at the English Girls\' Open. Photographs from the Portuguese Golf Federation and the clubs, published with permission and with the credit in plain sight.',
 
   vi_rot: 'On video',
   vi_tit: 'From nine years old to now',
@@ -35,14 +32,12 @@ export const EN = {
   prox_r: 'Next event',
   prox_carregar: 'Loading…',
 
-  nu_rot: 'The season',
-  nu_tit: 'Where she stands',
-  nu_txt: 'What counts in an amateur career: the titles, the wins, the lowest round — and how long this has been going on.',
 
   qu_rot: 'Who she is',
-  qu_tit: 'National champion at ten, and again at seventeen',
-  qu_txt: 'She won her first national championship in 2019, in the U10 category. She plays for <strong>Vale de Janelas</strong>, in Óbidos, and wears the shirt of the <strong>Portuguese women\'s amateur national team</strong>. In 2026 she added two more titles: the Amateur Pairs and the U18.',
-  qu_bt: 'See her story',
+  qu_manif: 'She won her first national championship at ten. Seven years on she has four, plays the European calendar, and has not yet outgrown the U18 category.',
+  po_rot: 'The rest',
+  po_tit: 'Where to go next',
+  po_txt: 'Each of these pages carries the whole subject — the events with their rounds and their sources, the story year by year, the file for people who write, and the ways in as a partner.',
 
   re_rot: 'Results',
   re_tit: 'The latest events',
@@ -50,23 +45,12 @@ export const EN = {
   re_bt: 'See every result',
   re_carregar: 'Loading results…',
 
-  pa_rot: 'Honours',
-  pa_tit: 'What she has won',
-  pa_txt: 'Events she finished on top of — four national championships, the GJG Algarve Juniors, the Drive Tour and the Aquapor Circuit, where she also won a whole season\'s ranking.',
 
-  dz_rot: 'Press',
-  dz_tit: 'What has been written',
-  dz_txt: 'High-resolution photographs, biography and results record are on the press page.',
-  dz_bt: 'See the press kit',
 
   in_rot: 'Instagram',
   in_tit: 'Day to day',
   in_txt: 'Practice, travel, and whatever happens between tournaments. The posts are loaded from Instagram.',
 
-  ap_rot: 'Support',
-  ap_tit: 'Taking Portugal further',
-  ap_txt: 'An amateur career is built on travel, entry fees and hours on the course. Partners go on the bag, on the playing apparel and into the tournament photographs — at home and abroad.',
-  ap_bt: 'How to support',
 
   /* ── resultados ─────────────────────────────────────────── */
   rs_rot: 'Results',
