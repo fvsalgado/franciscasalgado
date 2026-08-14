@@ -111,7 +111,12 @@ function compilar(gl, tipo, fonte) {
   return s;
 }
 
-export function iniciarCampo(canvas, { reduzido = false } = {}) {
+/* `escuro: 'sempre'` força a paleta escura independentemente do tema da
+   página. Serve a faixa escura da página inicial: lá o mapa vive sobre fundo
+   quase preto, e com a paleta clara ficava um borrão pálido que era preciso
+   apagar até 16% de opacidade para não destoar — e a 16% já não se via que
+   se mexia. Com a paleta certa corre a 100% e volta a ver-se. */
+export function iniciarCampo(canvas, { reduzido = false, escuro: forcarEscuro = false } = {}) {
   if (!canvas) return { tema() {}, destruir() {} };
 
   const gl = canvas.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'low-power' });
@@ -151,11 +156,11 @@ export function iniciarCampo(canvas, { reduzido = false } = {}) {
 
   function lerPaleta() {
     const e = getComputedStyle(document.documentElement);
-    const escuro = document.documentElement.dataset.tema === 'escuro';
+    const escuro = forcarEscuro || document.documentElement.dataset.tema === 'escuro';
     paleta = {
       baixo: hex(escuro ? '#0C1D17' : '#D9E5D6'),
       alto: hex(escuro ? '#1C4735' : '#A9C9A8'),
-      papel: hex(e.getPropertyValue('--papel') || (escuro ? '#091411' : '#F7F5EE')),
+      papel: hex(forcarEscuro ? '#0B1512' : (e.getPropertyValue('--papel') || (escuro ? '#091411' : '#F7F5EE'))),
       linha: hex(escuro ? '#4FC28B' : '#1B6B47'),
       escuro: escuro ? 1 : 0,
     };

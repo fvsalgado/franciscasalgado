@@ -26,7 +26,7 @@
   --sombra:0 26px 64px -32px rgba(18,40,30,.5);
 
   --larg:min(1440px,100% - clamp(3rem,10vw,9rem));
-  --sec:clamp(3.6rem,6.4vw,6.6rem);
+  --sec:clamp(2.4rem,4vw,4.2rem);
   --curva:cubic-bezier(.22,.61,.36,1);
   --curva-f:cubic-bezier(.76,0,.24,1);
 
@@ -359,16 +359,18 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .sec--escura .rot::before{background:#8FD9AE}
 .sec--escura .d,.sec--escura .txt{color:rgba(255,255,255,.9)}
 .sec--escura .txt strong{color:#FFF}
-.sec__campo{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.16;
-            mix-blend-mode:screen}
-.sec--curta{padding-block:calc(var(--sec) * .72)}
+.sec__campo{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.62;
+            /* Esbate nas pontas, para a faixa não começar e acabar a corte. */
+            -webkit-mask-image:linear-gradient(transparent,#000 16%,#000 74%,transparent);
+                    mask-image:linear-gradient(transparent,#000 16%,#000 74%,transparent)}
+.sec--curta{padding-block:calc(var(--sec) * .78)}
 
 /* Duas secções seguidas somavam o espaço de baixo de uma ao de cima da outra
    — eram 317px de nada entre o fim de um assunto e o título do seguinte. Onde
    as duas têm o mesmo fundo não há sequer uma linha a justificá-lo, e o
    encontro colapsa para uma folga só. Onde o fundo muda, a faixa de cor já
    marca a mudança e chega menos ar. */
-.sec + .sec{padding-top:calc(var(--sec) * .58)}
+.sec + .sec{padding-top:calc(var(--sec) * .55)}
 .sec--fundo + .sec:not(.sec--fundo),
 .sec:not(.sec--fundo) + .sec--fundo{padding-top:var(--sec)}
 .cab{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.6rem 3rem;
@@ -1206,5 +1208,11 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 /* O mapa de curvas nas páginas interiores: por trás do cabeçalho de cada uma,
    fundo claro, discreto. Na inicial vive na faixa escura dos rankings. */
 .topo-p{position:relative;isolation:isolate;overflow:hidden}
-.topo-p .sec__campo{opacity:.4;mix-blend-mode:normal}
-.sec--fundo .sec__campo{opacity:.35}
+/* Nas páginas interiores o mapa entra pela direita e desaparece por baixo do
+   título: o desenho é para se sentir, não para se ler por cima dele. */
+.topo-p .sec__campo{opacity:.5;
+  -webkit-mask-image:linear-gradient(102deg,transparent 4%,rgba(0,0,0,.35) 34%,#000 78%);
+          mask-image:linear-gradient(102deg,transparent 4%,rgba(0,0,0,.35) 34%,#000 78%)}
+.sec--fundo .sec__campo{opacity:.45;
+  -webkit-mask-image:linear-gradient(102deg,transparent 6%,rgba(0,0,0,.3) 38%,#000 82%);
+          mask-image:linear-gradient(102deg,transparent 6%,rgba(0,0,0,.3) 38%,#000 82%)}
