@@ -24,8 +24,7 @@ export const EN = {
 
 
   rk_rot: 'Rankings',
-  rk_tit: 'Where she stands, in the world and in Europe',
-  rk_txt: 'The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category. Between them they decide access to much of the international calendar.',
+  rk_tit: 'Where she stands today',
   rk_txt2: 'The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category, and it decides access to much of the international calendar.',
 
   /* ── página inicial ─────────────────────────────────────── */
@@ -41,11 +40,6 @@ export const EN = {
   po_tit: 'Where to find what',
   po_txt: 'Every event and every ranking. The story, year by year. The file for journalists. And how to support her.',
 
-  re_rot: 'Results',
-  re_tit: 'The latest events',
-  re_txt: 'The most recent ones, with the rounds and the score against par. The full record, season by season and with filters, is on the results page.',
-  re_bt: 'See every result',
-  re_carregar: 'Loading results…',
 
 
 
@@ -64,10 +58,9 @@ export const EN = {
   /* ── percurso ───────────────────────────────────────────── */
   pc_rot: 'Her story',
   pc_tit: 'National champion at ten, and again at seventeen',
-  pc_sub: 'Amateur golfer from Vale de Janelas, in Óbidos. Portuguese women\'s amateur national team. Reigning national U18 champion.',
-  bio_1: 'She plays for <strong>Vale de Janelas</strong>, in Óbidos, and represents the <strong>Portuguese women\'s amateur national team</strong>. Four national titles in seven years — U10, U12, Amateur Pairs and U18 — and a season that has already taken her to Spain, France, England and Ireland. She is supported by the Fundação do Desporto.',
-  bio_2: 'What follows is the story year by year, from that first national podium to the seventeen years old she is now. Every event, with its rounds and its source, is on the <a class="lig" href="resultados.html">results page</a>.',
-  bio_l: 'She won her first national championship at ten. Seven years on she has four, plays the European calendar, and has not yet outgrown the U18 category.',
+  pc_sub: 'Eight seasons of competition, from a first podium at the Jamor to the courses of Europe.',
+  bio_1: 'She started at <strong>Paço do Lumiar</strong>, and it was from there that the first national title came, at ten. She then moved to <strong>Vale de Janelas</strong>, in Óbidos, and in 2023 made her debut for the <strong>Portuguese women\'s amateur national team</strong> — which in 2026 took her to Spain, France, England and Ireland in a single season.',
+  bio_2: 'Every event below has its rounds, its total and its source on the <a class="lig" href="resultados.html">results page</a>.',
   fq_rot: 'Questions',
   fq_tit: 'The essentials, in six answers',
   fq_txt: 'What you need to know without reading the whole page. Every answer is sourced elsewhere on this site.',
@@ -82,7 +75,7 @@ export const EN = {
   fq_5p: 'What are her best international results?',
   fq_5r: 'Sixth, and the best Portuguese player, at the Belgian International U14 Championship in 2023; third at the Memorial Celia Barquín, in Asturias, in 2025; and 28th at the 2026 English Girls\' Open, one of the strongest girls\' U18 events in Europe, where she stood fifth at one point.',
   fq_6p: 'How do you reach her about sponsorship or press?',
-  fq_6r: 'Through the form on the <a class="lig" href="parcerias.html#contacto">partnerships page</a> or by direct message on Instagram, at <a class="lig" href="https://www.instagram.com/francisca_salgado_/" target="_blank" rel="noopener">@francisca_salgado_</a>. Requests for high-resolution photographs go through the <a class="lig" href="imprensa.html">press page</a>.',
+  fq_6r: 'Through the <a class="lig" href="contacto.html">contact page</a>, by email to birdie@franciscasalgado.golf, or by direct message on Instagram, at <a class="lig" href="https://www.instagram.com/francisca_salgado_/" target="_blank" rel="noopener">@francisca_salgado_</a>.',
 
   pc_lt: 'Year by year',
 
@@ -102,6 +95,7 @@ export const EN = {
   im_fot_txt: 'Published with the permission of the Portuguese Golf Federation and the clubs. They may be reproduced in pieces about the player, always with the credit visible, exactly as it appears beneath each one. For the files at original resolution, just ask.',
   im_cl_rot: 'Clipping',
   im_cl_tit: 'What has run',
+  im_cl_txt: 'Everything published about her since 2019, with each outlet\'s mark and a link to the piece.',
   im_lig_rot: 'Links',
   im_lig_tit: 'Official profiles',
   im_lig_txt: 'To check results and placings at the source, without going through here.',
@@ -109,7 +103,7 @@ export const EN = {
   /* ── parcerias ──────────────────────────────────────────── */
   ap2_rot: 'Partnerships',
   ap2_tit: 'Taking Portugal further',
-  ap2_txt: 'At seventeen she has four national titles and plays the European calendar. The events that give world-ranking points are played in Spain, France, England and Ireland, and each one is a journey, an entry fee and a week away. That is where a partner comes in — on the bag, on the playing apparel and into the tournament photographs.',
+  ap2_txt: 'The events that carry world ranking points are played in Spain, France, England and Ireland, and each one is a journey, an entry fee and a week away. That is where a backer comes in — on the bag, on the playing kit and in the tournament photographs.',
   ap2_bt1: 'I want to support',
   ap2_bt2: 'What it can cover',
   ap2_cit: 'She led from start to finish on her way to the girls U18 title.',
@@ -127,10 +121,15 @@ export const EN = {
   ap2_q_txt: 'The brands and institutions already behind her, and what each one covers.',
 
   ct_rot: 'Contact',
-  ct_tit: 'Talk to Francisca',
-  ct_txt: 'Partnerships, press, invitations to events and photograph requests. Write to <a class="lig" href="mailto:birdie@franciscasalgado.golf">birdie@franciscasalgado.golf</a> or use the form below.',
-  ct_lig: 'Official links',
-  ct_nota: 'The form opens your email app ready to send. If you prefer, write straight to <a class="lig" href="mailto:birdie@franciscasalgado.golf">birdie@franciscasalgado.golf</a> or send a message on Instagram.',
+  ct_tit: 'Write to Francisca',
+  ct_txt: 'Partnerships, press, invitations to events and photograph requests.',
+  ct_lig: 'Before you write',
+  ct_x1d: 'Photographs',
+  ct_x1t: 'The high-resolution ones are on the <a class="lig" href="imprensa.html">press page</a>, free to publish with the credit given.',
+  ct_x2d: 'Facts and quotes',
+  ct_x2t: 'Short biography, fact sheet and sourced quotes, also on the <a class="lig" href="imprensa.html">press page</a>.',
+  ct_x3d: 'Results',
+  ct_x3t: 'Event by event, with the rounds and the source, on the <a class="lig" href="resultados.html">results page</a>.',
 
   c1: 'Name', c2: 'Email', c3: 'Subject',
   c3a: 'Partnership or sponsorship', c3b: 'Press and photographs',
@@ -143,7 +142,7 @@ export const EN = {
   pv_tit: 'How we handle your data',
   pv_sub: 'What is collected, what it is for, and what you can demand. In plain language, no small print.',
   pv_1: 'Who handles the data',
-  pv_1t: 'This site belongs to the golfer Francisca Salgado. For anything about personal data, or to exercise the rights below, use the <a class="lig" href="parcerias.html#contacto">contact form</a> or a direct message on Instagram.',
+  pv_1t: 'This site belongs to the golfer Francisca Salgado. For anything about personal data, or to exercise the rights below, use the <a class="lig" href="contacto.html">contact form</a> or a direct message on Instagram.',
   pv_2: 'What is collected',
   pv_2t: 'Two sets only, and neither is collected unless the visitor causes it:',
   pv_2a: '<b>What you type into the contact form:</b> name, email and, if you fill them in, organisation and message.',
