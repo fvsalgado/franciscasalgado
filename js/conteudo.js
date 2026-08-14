@@ -186,12 +186,15 @@ export async function pecas(cx, lingua = 'pt') {
     const logo = simbolo.get(p.o);
     return `
     <li class="peca">
-      <a href="${p.url}" target="_blank" rel="noopener" data-mag>
+      <a href="${p.url}" target="_blank" rel="noopener" data-sem-seta data-mag>
+        <span class="peca__f">${p.capa
+          ? `<img src="/img/imprensa/pecas/${p.capa}" alt="" loading="lazy" decoding="async" data-credito-feito="1" />`
+          : ''}</span>
         <span class="peca__o">${logo
           ? `<img src="/img/imprensa/${logo}" alt="" loading="lazy" decoding="async" data-credito-feito="1" />`
           : ''}<span>${p.o}</span></span>
         <span class="peca__t">${tx(p.t, lingua)}</span>
-        <span class="peca__a num">${p.data}</span>
+        <span class="peca__a num">${p.data}<i class="peca__s" aria-hidden="true">↗</i></span>
       </a>
     </li>`;
   }).join('');

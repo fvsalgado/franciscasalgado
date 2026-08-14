@@ -98,7 +98,6 @@ export function nav(lingua = 'pt') {
         <a class="cap" id="btLang" href="${outraLingua()}" hreflang="${en ? 'pt-PT' : 'en'}"
            data-sem-seta aria-label="${en ? 'Ver em portugu\u00eas' : 'Read this page in English'}"
            >${en ? 'PT' : 'EN'}</a>
-        <a class="cap cap--cheio nav__cta" href="contacto.html" data-mag>${en ? 'Get in touch' : 'Contactar'}</a>
         <button class="ham" id="btMenu" type="button" aria-expanded="false" aria-controls="menu"
                 aria-label="Menu"><i></i><i></i></button>
       </div>
@@ -107,7 +106,6 @@ export function nav(lingua = 'pt') {
     <div class="menu" id="menu" hidden>
       <div class="menu__in">
         <nav class="menu__l" aria-label="${en ? 'Main' : 'Principal'}">${links(false)}</nav>
-        <a class="cap cap--cheio menu__b" href="contacto.html">${en ? 'Get in touch' : 'Contactar'}</a>
       </div>
     </div>`;
   /* Numa página que abre com fotografia a sangrar, o cabeçalho está por cima
