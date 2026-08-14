@@ -1,12 +1,45 @@
 {
-  "_leia-me": "Tabela de créditos obrigatórios de imagem. A chave de porFicheiro é o nome do ficheiro tal como está em img/. Sempre que entrar uma fotografia nova no site, acrescenta-se aqui a linha correspondente — o js/creditos.js avisa na consola quando encontra uma imagem sem crédito.",
+  "_leia-me": "Créditos obrigatórios de imagem. A chave de porFicheiro é o nome do ficheiro tal como está em img/. Sempre que entrar uma fotografia nova, acrescenta-se aqui a linha correspondente — o js/creditos.js avisa na consola quando encontra uma imagem sem crédito. O campo _origem não é mostrado no site: fica só para se saber de onde veio cada ficheiro e se poder confirmar a autoria com quem a detém.",
   "porFicheiro": {
-    "retrato.webp": { "pt": "Fotografia: por creditar", "en": "Photograph: credit pending" },
-    "retrato-quadrado.webp": { "pt": "Fotografia: por creditar", "en": "Photograph: credit pending" },
-    "og.jpg": { "pt": "Fotografia: por creditar", "en": "Photograph: credit pending" }
+    "retrato.webp": {
+      "pt": "Foto: Federação Portuguesa de Golfe",
+      "en": "Photo: Portuguese Golf Federation",
+      "_origem": "https://portal.fpg.pt/perfil/francisca-salgado/"
+    },
+    "retrato-quadrado.webp": {
+      "pt": "Foto: Federação Portuguesa de Golfe",
+      "en": "Photo: Portuguese Golf Federation",
+      "_origem": "https://www.cdp.pt/2025/12/12/francisca-salgado-no-podio/ — a peça credita a fotografia à FPG"
+    },
+    "jogo.webp": {
+      "pt": "Foto: Praia D'El Rey Golf Course",
+      "en": "Photo: Praia D'El Rey Golf Course",
+      "_origem": "https://clubedegolfe.praia-del-rey.com/vice-champion-francisca-salgado/"
+    },
+    "trofeu.webp": {
+      "pt": "Foto: Federação Portuguesa de Golfe",
+      "en": "Photo: Portuguese Golf Federation",
+      "_origem": "Taça FPG 2025, publicada em https://clubedegolfe.praia-del-rey.com/vice-champion-francisca-salgado/"
+    },
+    "og.jpg": {
+      "pt": "Foto: Federação Portuguesa de Golfe",
+      "en": "Photo: Portuguese Golf Federation",
+      "_origem": "https://portal.fpg.pt/perfil/francisca-salgado/"
+    }
   },
   "porDominio": {
-    "scontent.cdninstagram.com": { "pt": "Instagram · @francisca_salgado_", "en": "Instagram · @francisca_salgado_" },
-    "instagram.com": { "pt": "Instagram · @francisca_salgado_", "en": "Instagram · @francisca_salgado_" }
+    "assets-us-01.kc-usercontent.com": {
+      "pt": "Foto: World Amateur Golf Ranking",
+      "en": "Photo: World Amateur Golf Ranking",
+      "_origem": "imagem do perfil oficial da jogadora no wagr.com"
+    },
+    "scontent.cdninstagram.com": {
+      "pt": "Instagram · @francisca_salgado_",
+      "en": "Instagram · @francisca_salgado_"
+    },
+    "instagram.com": {
+      "pt": "Instagram · @francisca_salgado_",
+      "en": "Instagram · @francisca_salgado_"
+    }
   }
 }

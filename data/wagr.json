@@ -1,0 +1,16 @@
+{
+  "_leia-me": "Instantâneo da ficha da jogadora no World Amateur Golf Ranking. Serve de recurso quando /api/wagr não está disponível (alojamento estático, função em baixo). Para refrescar: node scripts/wagr.mjs",
+  "atualizado": "2026-08-14",
+  "playerId": 43158,
+  "perfil": "https://www.wagr.com/playerprofile/francisca-salgado-43158",
+  "nome": "Francisca Salgado",
+  "pais": "Portugal",
+  "posicao": 1944,
+  "mediaPontos": "387.9299",
+  "divisor": 14.7169,
+  "melhorPosicao": 1650,
+  "vitorias": 1,
+  "top10": 10,
+  "provasContadas": 19,
+  "imagem": "https://assets-us-01.kc-usercontent.com:443/1c53f270-a09c-0004-54d1-d3397f8725e5/c716d0fb-2dff-4c5c-986d-383c3f5f87db/638977935779008740.jpg"
+}

@@ -490,6 +490,79 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
            display:flex;gap:.8rem;align-items:baseline}
 .kit__l li::before{content:"◇";color:var(--relva);font-size:.7rem;flex:none}
 
+/* ── cartão do WAGR ─────────────────────────────────────── */
+/* Vive numa caixa escura em qualquer dos temas: é a ficha de outra entidade,
+   e a diferença de fundo diz, sem legenda nenhuma, que aquele número não foi
+   calculado aqui. */
+.wagr{--w-tinta:#EAF3EC;--w-fundo:#0C1D17;--w-linha:rgba(111,217,164,.26);--w-viva:#6FD9A4;
+      background:var(--w-fundo);color:var(--w-tinta);border:1px solid var(--w-linha);
+      border-radius:20px;padding:clamp(1.5rem,3.4vw,2.4rem);
+      display:flex;flex-direction:column;gap:clamp(1.3rem,2.6vw,1.9rem);position:relative;overflow:hidden}
+.wagr::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(111,217,164,.14) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(111,217,164,.14) 1px,transparent 1px);
+  background-size:52px 52px;
+  -webkit-mask-image:radial-gradient(120% 90% at 85% 0%,#000 10%,transparent 70%);
+          mask-image:radial-gradient(120% 90% at 85% 0%,#000 10%,transparent 70%)}
+.wagr > *{position:relative;z-index:1}
+
+.wagr__cabeca{display:flex;align-items:center;gap:1rem}
+.wagr__f{width:clamp(46px,6vw,58px);height:clamp(46px,6vw,58px);border-radius:50%;flex:none;
+         display:grid;place-items:center;border:1px solid var(--w-linha);color:var(--w-viva);
+         background:color-mix(in srgb,var(--w-viva) 9%,transparent)}
+.wagr__f .ic{width:1.3rem;height:1.3rem;fill:none}
+.wagr__id{display:flex;flex-direction:column;gap:.15rem;min-width:0;flex:1}
+.wagr__rot{margin:0;font-size:.61rem;font-weight:800;text-transform:uppercase;letter-spacing:.18em;
+           color:var(--w-viva)}
+.wagr__n{margin:0;font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 40;
+         font-size:clamp(1.15rem,2.1vw,1.5rem);line-height:1.15;letter-spacing:-.02em}
+.wagr__p{margin:0;font-size:.76rem;color:color-mix(in srgb,var(--w-tinta) 62%,transparent)}
+.wagr__estado{align-self:flex-start;font-size:.58rem;font-weight:800;text-transform:uppercase;
+              letter-spacing:.14em;padding:.3rem .6rem;border-radius:999px;flex:none;
+              border:1px solid var(--w-linha);color:color-mix(in srgb,var(--w-tinta) 70%,transparent)}
+.wagr__estado--vivo{color:var(--w-viva);border-color:color-mix(in srgb,var(--w-viva) 55%,transparent)}
+.wagr__estado--vivo::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--w-viva);margin-right:.42rem;vertical-align:.06em;animation:pulsa 2.6s infinite}
+
+.wagr__grande{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1.4rem;
+              padding-block:clamp(.4rem,1.4vw,1rem);border-block:1px solid var(--w-linha)}
+.wagr__pos{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 120;
+           font-size:clamp(3.4rem,9vw,6rem);line-height:.9;letter-spacing:-.04em;
+           font-variant-numeric:tabular-nums}
+.wagr__pos sup{font-size:.34em;vertical-align:super;color:var(--w-viva)}
+.wagr__pr{font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.17em;
+          color:var(--w-viva)}
+.wagr__media{margin-left:auto;font-size:1.1rem;font-weight:700;display:flex;flex-direction:column;
+             align-items:flex-end;gap:.1rem;font-variant-numeric:tabular-nums}
+.wagr__media i{font-style:normal;font-size:.6rem;font-weight:800;text-transform:uppercase;
+               letter-spacing:.15em;color:color-mix(in srgb,var(--w-tinta) 58%,transparent)}
+
+.wagr__l{margin:0;display:grid;gap:1rem clamp(1rem,3vw,2rem);
+         grid-template-columns:repeat(auto-fit,minmax(min(100%,86px),1fr))}
+.wagr__l dt{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;
+            color:color-mix(in srgb,var(--w-tinta) 58%,transparent);margin-bottom:.28rem}
+.wagr__l dd{margin:0;font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 40;
+            font-size:clamp(1.5rem,2.8vw,2rem);line-height:1;letter-spacing:-.02em;
+            font-variant-numeric:tabular-nums}
+
+.wagr__pe{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.9rem}
+.wagr__pe .cap{background:var(--w-viva);border-color:var(--w-viva);color:#08150F}
+.wagr__pe .cap::before{background:var(--w-tinta)}
+.wagr__pe .cap:hover{color:#08150F}
+.wagr__data{font-size:.66rem;color:color-mix(in srgb,var(--w-tinta) 55%,transparent)}
+
+/* na página inicial, o cartão anda ao lado do texto que o explica */
+.mundial{display:grid;gap:clamp(1.8rem,4vw,3.5rem);align-items:center}
+@media (min-width:900px){.mundial{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}}
+
+/* ── fotografias ────────────────────────────────────────── */
+.foto{width:100%;height:auto;display:block;border:1px solid var(--linha);background:var(--superficie)}
+.fotos{display:grid;gap:clamp(1rem,2.5vw,2rem)}
+@media (min-width:680px){.fotos{grid-template-columns:repeat(3,1fr)}}
+.fotos figure{margin:0}
+.fotos img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block;
+           border:1px solid var(--linha);background:var(--superficie)}
+
 /* ── ligações oficiais ──────────────────────────────────── */
 .plats{display:grid;gap:.5rem}
 .plat{display:flex;align-items:center;gap:.95rem;padding:1rem 1.15rem;
