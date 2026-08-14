@@ -669,7 +669,10 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 @media (min-width:760px){.videos{grid-template-columns:repeat(2,1fr)}}
 .vid{margin:0;display:flex;flex-direction:column;gap:.9rem}
 .vid__bt{width:100%;padding:0;border:0;background:none;cursor:pointer;display:block}
-.vid__capa{position:relative;display:grid;place-items:center;aspect-ratio:16/9;
+/* O botão de leitura fica no canto, e não ao centro: ao centro caía em cima
+   da cara de quem está no vídeo. */
+.vid__capa{position:relative;display:grid;place-items:end start;aspect-ratio:16/9;
+           padding:clamp(.9rem,2vw,1.3rem);
            border-radius:14px;background:var(--superficie);overflow:hidden;
            box-shadow:0 0 0 1px var(--linha);
            transition:box-shadow .45s var(--curva),transform .45s var(--curva)}
@@ -684,7 +687,7 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .vid__bt:hover .vid__capa img{transform:scale(1.04)}
 .vid__ano{position:absolute;top:.85rem;left:1rem;z-index:1;font-size:.66rem;font-weight:800;
           letter-spacing:.18em;color:#FFF;opacity:.92;text-shadow:0 1px 3px rgba(0,0,0,.5)}
-.vid__seta{position:relative;z-index:1;display:grid;place-items:center;width:3.9rem;height:3.9rem;
+.vid__seta{position:relative;z-index:1;display:grid;place-items:center;width:3.4rem;height:3.4rem;
            border-radius:50%;background:var(--relva);color:#FFF;
            box-shadow:0 6px 20px -6px rgba(0,0,0,.45);
            transition:transform .4s var(--curva)}

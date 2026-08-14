@@ -63,11 +63,9 @@ export const EN = {
   pc_rot: 'Her story',
   pc_tit: 'National champion at ten, and again at seventeen',
   pc_sub: 'Amateur golfer from Vale de Janelas, in Óbidos. Portuguese women\'s amateur national team. Reigning national U18 champion.',
+  bio_1: 'She plays for <strong>Vale de Janelas</strong>, in Óbidos, and represents the <strong>Portuguese women\'s amateur national team</strong>. Four national titles in seven years — U10, U12, Amateur Pairs and U18 — and a season that has already taken her to Spain, France, England and Ireland. She is supported by the Fundação do Desporto.',
+  bio_2: 'What follows is the story year by year, from that first national podium to the seventeen years old she is now. Every event, with its rounds and its source, is on the <a class="lig" href="resultados.html">results page</a>.',
   bio_l: 'She won her first national championship at ten. Seven years on she has four, plays the European calendar, and has not yet outgrown the U18 category.',
-  bio_1: 'Francisca Salgado plays for <strong>Vale de Janelas</strong>, in Óbidos, and represents the <strong>Portuguese women\'s amateur national team</strong>. She started early: in 2018 she was national U10 runner-up, at the Jamor, and was playing the Open World Kids Golf in Amendoeira. The following year, at Miramar, she won her first national title. In 2021 she added the U12 and, in 2022, was U14 runner-up.',
-  bio_2: 'Her international debut for Portugal came in 2023, at the Belgian International U14 Championship: sixth, and the best Portuguese player there, lowering her score day after day — 78, 75, 73. <strong>2024 was the year she won everything</strong>: the first two Aquapor Circuit tournaments, the women\'s season-long “Gold” ranking, and the GJG Algarve Juniors International, in Castro Marim, where she was the only one of the twelve women to sign a sub-par round on Seve Ballesteros\'s design. In between, national U16 runner-up.',
-  bio_3: 'In 2025 she made her senior European team debut, at sixteen, and was invited to play, as an amateur, the Super Bock Ladies Open at Vidago Palace — the first women\'s European professional event in Portugal in eight years. She won the Drive Tour at the Tejo, was runner-up in the FPG Cup and third in Asturias.',
-  bio_4: '2026 brought two national titles in two months: the <strong>Amateur Pairs</strong>, at Montado, with Rodrigo Constantino, and the <strong>U18</strong>, at Aroeira, led from start to finish. The season took her to Penina, Guadalmina, Saint-Cloud, Slieve Russell with the national team, Prestbury — where she stood fifth at one point in the English Girls\' Open and finished 28th — and Málaga. She is supported by the Fundação do Desporto.',
   fq_rot: 'Questions',
   fq_tit: 'The essentials, in six answers',
   fq_txt: 'What you need to know without reading the whole page. Every answer is sourced elsewhere on this site.',
@@ -85,7 +83,6 @@ export const EN = {
   fq_6r: 'Through the form on the <a class="lig" href="parcerias.html#contacto">partnerships page</a> or by direct message on Instagram, at <a class="lig" href="https://www.instagram.com/francisca_salgado_/" target="_blank" rel="noopener">@francisca_salgado_</a>. Requests for high-resolution photographs go through the <a class="lig" href="imprensa.html">press page</a>.',
 
   pc_lt: 'Year by year',
-  pc_fim: 'Every result, with rounds and cards, is on the <a class="lig" href="resultados.html">results page</a>.',
 
   /* ── imprensa ───────────────────────────────────────────── */
   im_rot: 'Press',
