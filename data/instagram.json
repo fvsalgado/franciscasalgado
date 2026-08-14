@@ -1,4 +1,4 @@
 {
-  "_leia-me": "Códigos de publicações do Instagram a mostrar na página inicial. O código é o que vem depois de /p/ ou /reel/ no endereço da publicação — por exemplo, em instagram.com/p/C8xYzAbCdEf/ o código é C8xYzAbCdEf. Enquanto esta lista estiver vazia, o site mostra o convite a seguir a conta, e não uma caixa vazia. Aceita textos simples ou objetos { codigo, tipo: 'p' | 'reel', conta }.",
+  "_leia-me": "Códigos de publicações do Instagram, usados quando não há token da Graph API (ver api/instagram.js). O código é o que vem depois de /p/ ou /reel/ no endereço da publicação — em instagram.com/p/C8xYzAbCdEf/ o código é C8xYzAbCdEf. Enquanto a lista estiver vazia, o site mostra o convite a seguir a conta, e não uma caixa vazia. Aceita textos simples ou objetos { codigo, tipo: 'p' | 'reel', conta }.",
   "publicacoes": []
 }

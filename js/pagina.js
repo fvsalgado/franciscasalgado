@@ -6,7 +6,7 @@ import { iniciar } from './base.js';
 import { porEpoca, carregar } from './resultados.js';
 import { factos, percurso, citacoes, pecas, saiuEm, escadas, ligacoes } from './conteudo.js';
 import { galeria, videos, apoios } from './media.js';
-import { wagr } from './wagr.js';
+import { rankings } from './rankings.js';
 
 const $ = (id) => document.getElementById(id);
 const qual = document.currentScript?.dataset.pagina
@@ -72,7 +72,7 @@ function formulario(lingua) {
 /* ── o que cada página pinta ──────────────────────────────── */
 const PINTAR = {
   async resultados(l) {
-    await Promise.all([porEpoca($('epocas'), $('filtros'), l), wagr($('wagr'), l)]);
+    await Promise.all([porEpoca($('epocas'), $('filtros'), l), rankings($('rankings'), l)]);
     const d = await carregar();
     const nota = $('notaFonte');
     if (nota && d.nota) nota.textContent = d.nota[l] || d.nota.pt;

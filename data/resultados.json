@@ -6,355 +6,1167 @@
   },
   "provas": [
     {
-      "id": "andalucia-2026", "ano": 2026, "data": "2026-08-02",
-      "dataTexto": { "pt": "31 julho – 2 agosto 2026", "en": "31 July – 2 August 2026" },
-      "torneio": { "pt": "Campeonato Andalucía Sub-18", "en": "Andalucía U18 Championship" },
-      "campo": "Parador Málaga del Golf", "local": { "pt": "Málaga, Espanha", "en": "Málaga, Spain" }, "pais": "ES",
-      "pos": null, "posTexto": { "pt": "Top 10", "en": "Top 10" },
-      "voltas": [79, 74, 74], "total": 227, "par": null,
-      "escalao": { "pt": "Sub-18", "en": "U18" }, "selos": ["selecao"],
+      "id": "andalucia-2026",
+      "ano": 2026,
+      "data": "2026-08-02",
+      "dataTexto": {
+        "pt": "31 julho – 2 agosto 2026",
+        "en": "31 July – 2 August 2026"
+      },
+      "torneio": {
+        "pt": "Campeonato Andalucía Sub-18",
+        "en": "Andalucía U18 Championship"
+      },
+      "campo": "Parador Málaga del Golf",
+      "local": {
+        "pt": "Málaga, Espanha",
+        "en": "Málaga, Spain"
+      },
+      "pais": "ES",
+      "pos": null,
+      "posTexto": {
+        "pt": "Top 10",
+        "en": "Top 10"
+      },
+      "voltas": [
+        79,
+        74,
+        74
+      ],
+      "total": 227,
+      "par": null,
+      "escalao": {
+        "pt": "Sub-18",
+        "en": "U18"
+      },
+      "selos": [
+        "selecao"
+      ],
       "nota": {
         "pt": "Fechou em crescendo — 79, 74, 74 — para acabar dentro dos dez primeiros. A FPG não publicou o lugar exato.",
         "en": "Finished in a crescendo — 79, 74, 74 — to end inside the top ten. The federation did not publish the exact placing."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/atletas-nacionais-de-portugal-de-cabeca-erguida-na-despedida-de-malaga/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/atletas-nacionais-de-portugal-de-cabeca-erguida-na-despedida-de-malaga/"
+      }
     },
     {
-      "id": "english-girls-2026", "ano": 2026, "data": "2026-07-28",
-      "dataTexto": { "pt": "21–24 julho 2026", "en": "21–24 July 2026" },
-      "torneio": { "pt": "English Girls' Open Amateur Stroke Play", "en": "English Girls' Open Amateur Stroke Play" },
-      "campo": "Prestbury Golf Club", "local": { "pt": "Cheshire, Inglaterra", "en": "Cheshire, England" }, "pais": "GB",
-      "pos": 28, "voltas": [75, 83, 75, 82], "total": 315, "par": null,
-      "escalao": { "pt": "Sub-18", "en": "U18" }, "selos": ["wagr"],
+      "id": "english-girls-2026",
+      "ano": 2026,
+      "data": "2026-07-28",
+      "dataTexto": {
+        "pt": "21–24 julho 2026",
+        "en": "21–24 July 2026"
+      },
+      "torneio": {
+        "pt": "English Girls' Open Amateur Stroke Play",
+        "en": "English Girls' Open Amateur Stroke Play"
+      },
+      "campo": "Prestbury Golf Club",
+      "local": {
+        "pt": "Cheshire, Inglaterra",
+        "en": "Cheshire, England"
+      },
+      "pais": "GB",
+      "pos": 28,
+      "voltas": [
+        75,
+        83,
+        75,
+        82
+      ],
+      "total": 315,
+      "par": null,
+      "escalao": {
+        "pt": "Sub-18",
+        "en": "U18"
+      },
+      "selos": [
+        "wagr"
+      ],
       "nota": {
         "pt": "Um dos torneios Sub-18 femininos mais fortes do calendário europeu. Chegou a ser 5.ª no fim do primeiro dia, passou o cut — só as 40 melhores seguiram — e acabou em 28.º. Prova apoiada pela Fundação do Desporto.",
         "en": "One of the strongest girls' U18 events in Europe. She stood 5th after day one, made the cut — only the top 40 went through — and finished 28th. The trip was backed by the Fundação do Desporto."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/francisca-salgado-termina-english-girls-open-em-28-o-lugar/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/francisca-salgado-termina-english-girls-open-em-28-o-lugar/"
+      }
     },
     {
-      "id": "euro-equipas-2026", "ano": 2026, "data": "2026-07-07",
-      "dataTexto": { "pt": "7–11 julho 2026", "en": "7–11 July 2026" },
-      "torneio": { "pt": "Campeonato da Europa Amador por Equipas Feminino", "en": "European Ladies' Amateur Team Championship" },
-      "campo": "Slieve Russell Hotel Golf & Country Club", "local": { "pt": "Ballyconnell, Irlanda", "en": "Ballyconnell, Ireland" }, "pais": "IE",
-      "pos": null, "voltas": [83, 89], "total": 172, "par": null,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["selecao"],
-      "nota": {
-        "pt": "Ao serviço da Seleção Nacional, em stroke play e depois em match play. Nenhum dos dois cartões de qualificação foi contabilizado para a equipa. Portugal acabou a fase inicial em 21.º.",
-        "en": "For the national team, in stroke play and then match play. Neither of her qualifying cards counted for the team. Portugal ended the opening phase 21st."
+      "id": "euro-equipas-2026",
+      "ano": 2026,
+      "data": "2026-07-07",
+      "dataTexto": {
+        "pt": "7–11 julho 2026",
+        "en": "7–11 July 2026"
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/17o-lugar-para-selecao-feminina-no-inicio-do-europeu-amador-por-equipas/" }
+      "torneio": {
+        "pt": "Campeonato da Europa Amador por Equipas Feminino",
+        "en": "European Ladies' Amateur Team Championship"
+      },
+      "campo": "Slieve Russell Hotel Golf & Country Club",
+      "local": {
+        "pt": "Ballyconnell, Irlanda",
+        "en": "Ballyconnell, Ireland"
+      },
+      "pais": "IE",
+      "pos": 131,
+      "voltas": [
+        83,
+        89
+      ],
+      "total": 172,
+      "par": null,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "selecao"
+      ],
+      "nota": {
+        "pt": "Ao serviço da Seleção Nacional, em stroke play e depois em match play. Nenhum dos dois cartões de qualificação foi contabilizado para a equipa. Portugal acabou a fase inicial em 21.º. Individualmente, o European Golf Rankings coloca-a em 131.º entre todas as jogadoras da prova.",
+        "en": "For the national team, in stroke play and then match play. Neither of her qualifying cards counted for the team. Portugal ended the opening phase 21st. Individually, the European Golf Rankings places her 131st across the whole field."
+      },
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/17o-lugar-para-selecao-feminina-no-inicio-do-europeu-amador-por-equipas/"
+      }
     },
     {
-      "id": "nacional-amador-2026", "ano": 2026, "data": "2026-06-13",
-      "dataTexto": { "pt": "junho 2026", "en": "June 2026" },
-      "torneio": { "pt": "Campeonato Nacional Amador Feminino", "en": "National Amateur Championship, women" },
-      "campo": "", "local": { "pt": "Portugal", "en": "Portugal" }, "pais": "PT",
-      "pos": null, "voltas": [], "total": null, "par": 15,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": [],
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/tomas-santos-silva-triplo-campeao-nacional/" }
+      "id": "nacional-amador-2026",
+      "ano": 2026,
+      "data": "2026-06-13",
+      "dataTexto": {
+        "pt": "junho 2026",
+        "en": "June 2026"
+      },
+      "torneio": {
+        "pt": "Campeonato Nacional Amador Feminino",
+        "en": "National Amateur Championship, women"
+      },
+      "campo": "",
+      "local": {
+        "pt": "Portugal",
+        "en": "Portugal"
+      },
+      "pais": "PT",
+      "pos": null,
+      "voltas": [],
+      "total": null,
+      "par": 15,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [],
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/tomas-santos-silva-triplo-campeao-nacional/"
+      }
     },
     {
-      "id": "nacional-jovens-2026", "ano": 2026, "data": "2026-05-03",
-      "dataTexto": { "pt": "1–3 maio 2026", "en": "1–3 May 2026" },
-      "torneio": { "pt": "Campeonato Nacional de Jovens · Sub-18 Feminino", "en": "National Youth Championship · Girls U18" },
-      "campo": "PGA Aroeira n.º 2", "local": { "pt": "Charneca de Caparica, Portugal", "en": "Charneca de Caparica, Portugal" }, "pais": "PT",
-      "pos": 1, "posTexto": { "pt": "Campeã Nacional", "en": "National Champion" },
-      "voltas": [78, 80, 77], "total": 235, "par": null,
-      "escalao": { "pt": "Sub-18", "en": "U18" }, "selos": ["titulo"],
+      "id": "nacional-jovens-2026",
+      "ano": 2026,
+      "data": "2026-05-03",
+      "dataTexto": {
+        "pt": "1–3 maio 2026",
+        "en": "1–3 May 2026"
+      },
+      "torneio": {
+        "pt": "Campeonato Nacional de Jovens · Sub-18 Feminino",
+        "en": "National Youth Championship · Girls U18"
+      },
+      "campo": "PGA Aroeira n.º 2",
+      "local": {
+        "pt": "Charneca de Caparica, Portugal",
+        "en": "Charneca de Caparica, Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "posTexto": {
+        "pt": "Campeã Nacional",
+        "en": "National Champion"
+      },
+      "voltas": [
+        78,
+        80,
+        77
+      ],
+      "total": 235,
+      "par": null,
+      "escalao": {
+        "pt": "Sub-18",
+        "en": "U18"
+      },
+      "selos": [
+        "titulo"
+      ],
       "nota": {
         "pt": "Liderou do princípio ao fim: 78 no primeiro dia, cinco pancadas de vantagem às 36 voltas, e um 77 a fechar. É o título de campeã nacional Sub-18.",
         "en": "In front from first hole to last: a 78 on day one, five shots clear after 36 holes, and a closing 77. This is the national U18 title."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/pga-aroeira-no-2-consagrou-campeoes-nacionais-nos-escaloes-jovens/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/pga-aroeira-no-2-consagrou-campeoes-nacionais-nos-escaloes-jovens/"
+      }
     },
     {
-      "id": "franca-2026", "ano": 2026, "data": "2026-04-02",
-      "dataTexto": { "pt": "1–2 abril 2026", "en": "1–2 April 2026" },
-      "torneio": { "pt": "Internacionais Juniores de França", "en": "French International Juniors" },
-      "campo": "Golf de Saint-Cloud", "local": { "pt": "Paris, França", "en": "Paris, France" }, "pais": "FR",
-      "pos": null, "voltas": [81, 79], "total": 160, "par": 18,
-      "escalao": { "pt": "Sub-21", "en": "U21" }, "selos": ["wagr", "selecao"],
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/nicole-sardinha-e-francisca-salgado-concluem-participacao-nos-internacionais-juniores-de-franca/" }
+      "id": "franca-2026",
+      "ano": 2026,
+      "data": "2026-04-02",
+      "dataTexto": {
+        "pt": "1–2 abril 2026",
+        "en": "1–2 April 2026"
+      },
+      "torneio": {
+        "pt": "Internacionais Juniores de França",
+        "en": "French International Juniors"
+      },
+      "campo": "Golf de Saint-Cloud",
+      "local": {
+        "pt": "Paris, França",
+        "en": "Paris, France"
+      },
+      "pais": "FR",
+      "pos": 109,
+      "voltas": [
+        81,
+        79
+      ],
+      "total": 160,
+      "par": 18,
+      "escalao": {
+        "pt": "Sub-21",
+        "en": "U21"
+      },
+      "selos": [
+        "wagr",
+        "selecao"
+      ],
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/nicole-sardinha-e-francisca-salgado-concluem-participacao-nos-internacionais-juniores-de-franca/"
+      }
     },
     {
-      "id": "espanha-sub18-2026", "ano": 2026, "data": "2026-03-19",
-      "torneio": { "pt": "Campeonato de Espanha Sub-18", "en": "Spanish U18 Championship" },
-      "campo": "Real Club de Golf Guadalmina (Sur)", "local": { "pt": "Marbella, Espanha", "en": "Marbella, Spain" }, "pais": "ES",
-      "pos": null, "voltas": [82, 81, 84], "total": 247, "par": null,
-      "escalao": { "pt": "Sub-18", "en": "U18" }, "selos": ["wagr"],
-      "fonte": { "nome": "European Golf Rankings", "url": "https://www.europeangolfrankings.com/players/39992" }
+      "id": "espanha-sub18-2026",
+      "ano": 2026,
+      "data": "2026-03-19",
+      "torneio": {
+        "pt": "Campeonato de Espanha Sub-18",
+        "en": "Spanish U18 Championship"
+      },
+      "campo": "Real Club de Golf Guadalmina (Sur)",
+      "local": {
+        "pt": "Marbella, Espanha",
+        "en": "Marbella, Spain"
+      },
+      "pais": "ES",
+      "pos": 64,
+      "voltas": [
+        82,
+        81,
+        84
+      ],
+      "total": 247,
+      "par": null,
+      "escalao": {
+        "pt": "Sub-18",
+        "en": "U18"
+      },
+      "selos": [
+        "wagr"
+      ],
+      "fonte": {
+        "nome": "European Golf Rankings",
+        "url": "https://www.europeangolfrankings.com/players/39992"
+      }
     },
     {
-      "id": "aquapor-2-2026", "ano": 2026, "data": "2026-03-15",
-      "dataTexto": { "pt": "14–15 março 2026", "en": "14–15 March 2026" },
-      "torneio": { "pt": "2.º Torneio do Circuito Aquapor", "en": "2nd Aquapor Circuit Tournament" },
-      "campo": "Quinta do Peru Golfe & Country Club", "local": { "pt": "Sesimbra, Portugal", "en": "Sesimbra, Portugal" }, "pais": "PT",
-      "pos": 1, "posTexto": { "pt": "Vencedora", "en": "Winner" },
-      "voltas": [76, 80], "total": 156, "par": 12,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["titulo"],
+      "id": "aquapor-2-2026",
+      "ano": 2026,
+      "data": "2026-03-15",
+      "dataTexto": {
+        "pt": "14–15 março 2026",
+        "en": "14–15 March 2026"
+      },
+      "torneio": {
+        "pt": "2.º Torneio do Circuito Aquapor",
+        "en": "2nd Aquapor Circuit Tournament"
+      },
+      "campo": "Quinta do Peru Golfe & Country Club",
+      "local": {
+        "pt": "Sesimbra, Portugal",
+        "en": "Sesimbra, Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "posTexto": {
+        "pt": "Vencedora",
+        "en": "Winner"
+      },
+      "voltas": [
+        76,
+        80
+      ],
+      "total": 156,
+      "par": 12,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "titulo"
+      ],
       "nota": {
         "pt": "Liderou desde a primeira volta e aguentou pela diferença mínima: uma pancada sobre Luciana Reis (157).",
         "en": "In front from the first round and held on by the smallest margin: one shot over Luciana Reis (157)."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/francisca-salgado-e-joao-miguel-pereira-vencem-2o-torneio-do-circuito-aquapor/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/francisca-salgado-e-joao-miguel-pereira-vencem-2o-torneio-do-circuito-aquapor/"
+      }
     },
     {
-      "id": "pares-2026", "ano": 2026, "data": "2026-03-08",
-      "dataTexto": { "pt": "7–8 março 2026", "en": "7–8 March 2026" },
-      "torneio": { "pt": "Campeonato Nacional de Pares Amador", "en": "National Amateur Pairs Championship" },
-      "campo": "Montado Hotel & Golf Resort", "local": { "pt": "Palmela, Portugal", "en": "Palmela, Portugal" }, "pais": "PT",
-      "pos": 1, "posTexto": { "pt": "Campeã Nacional", "en": "National Champion" },
-      "voltas": [71, 74], "total": 145, "par": 1,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["titulo"],
+      "id": "pares-2026",
+      "ano": 2026,
+      "data": "2026-03-08",
+      "dataTexto": {
+        "pt": "7–8 março 2026",
+        "en": "7–8 March 2026"
+      },
+      "torneio": {
+        "pt": "Campeonato Nacional de Pares Amador",
+        "en": "National Amateur Pairs Championship"
+      },
+      "campo": "Montado Hotel & Golf Resort",
+      "local": {
+        "pt": "Palmela, Portugal",
+        "en": "Palmela, Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "posTexto": {
+        "pt": "Campeã Nacional",
+        "en": "National Champion"
+      },
+      "voltas": [
+        71,
+        74
+      ],
+      "total": 145,
+      "par": 1,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "titulo"
+      ],
       "nota": {
         "pt": "Em dupla com Rodrigo Constantino (Belas Clube de Campo): 71 em Better Ball, para partilhar a liderança, e 74 em foursomes, três pancadas à frente de Filipe Pinheiro e Luís Filipe Pinheiro (148).",
         "en": "Paired with Rodrigo Constantino (Belas Clube de Campo): a 71 in better ball to share the lead, then a 74 in foursomes, three clear of Filipe Pinheiro and Luís Filipe Pinheiro (148)."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/francisca-salgado-e-rodrigo-constantino-campeoes-nacionais-de-pares/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/francisca-salgado-e-rodrigo-constantino-campeoes-nacionais-de-pares/"
+      }
     },
     {
-      "id": "penina-2026", "ano": 2026, "data": "2026-01-30",
-      "dataTexto": { "pt": "28–30 janeiro 2026", "en": "28–30 January 2026" },
-      "torneio": { "pt": "96.º Campeonato Internacional Amador de Portugal Feminino", "en": "96th Portuguese International Ladies' Amateur Championship" },
-      "campo": "Penina Hotel & Golf Resort", "local": { "pt": "Portimão, Portugal", "en": "Portimão, Portugal" }, "pais": "PT",
-      "pos": 81, "posT": true, "voltas": [80, 75, 79], "total": 234, "par": 15,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["wagr", "selecao"],
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/checa-anna-ludvova-aumenta-vantagem-no-lnternacional-amador-de-portugal/" }
+      "id": "penina-2026",
+      "ano": 2026,
+      "data": "2026-01-30",
+      "dataTexto": {
+        "pt": "28–30 janeiro 2026",
+        "en": "28–30 January 2026"
+      },
+      "torneio": {
+        "pt": "96.º Campeonato Internacional Amador de Portugal Feminino",
+        "en": "96th Portuguese International Ladies' Amateur Championship"
+      },
+      "campo": "Penina Hotel & Golf Resort",
+      "local": {
+        "pt": "Portimão, Portugal",
+        "en": "Portimão, Portugal"
+      },
+      "pais": "PT",
+      "pos": 81,
+      "posT": true,
+      "voltas": [
+        80,
+        75,
+        79
+      ],
+      "total": 234,
+      "par": 15,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "wagr",
+        "selecao"
+      ],
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/checa-anna-ludvova-aumenta-vantagem-no-lnternacional-amador-de-portugal/"
+      }
     },
-
     {
-      "id": "asturias-2025", "ano": 2025, "data": "2025-12-07",
-      "dataTexto": { "pt": "5–7 dezembro 2025", "en": "5–7 December 2025" },
-      "torneio": { "pt": "VIII Memorial Celia Barquín Arozamena · Copa Principado de Asturias", "en": "VIII Memorial Celia Barquín Arozamena · Copa Principado de Asturias" },
-      "campo": "Real Club de Golf La Barganiza", "local": { "pt": "Oviedo, Espanha", "en": "Oviedo, Spain" }, "pais": "ES",
-      "pos": 3, "posT": true, "voltas": [75, 73, 75], "total": 223, "par": 13,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["wagr", "podio"],
+      "id": "asturias-2025",
+      "ano": 2025,
+      "data": "2025-12-07",
+      "dataTexto": {
+        "pt": "5–7 dezembro 2025",
+        "en": "5–7 December 2025"
+      },
+      "torneio": {
+        "pt": "VIII Memorial Celia Barquín Arozamena · Copa Principado de Asturias",
+        "en": "VIII Memorial Celia Barquín Arozamena · Copa Principado de Asturias"
+      },
+      "campo": "Real Club de Golf La Barganiza",
+      "local": {
+        "pt": "Oviedo, Espanha",
+        "en": "Oviedo, Spain"
+      },
+      "pais": "ES",
+      "pos": 3,
+      "posT": true,
+      "voltas": [
+        75,
+        73,
+        75
+      ],
+      "total": 223,
+      "par": 13,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "wagr",
+        "podio"
+      ],
       "nota": {
         "pt": "Três voltas sem um único duplo-bogey: 4 birdies, 33 pares e 17 bogeys em 54 buracos.",
         "en": "Three rounds without a single double bogey: 4 birdies, 33 pars and 17 bogeys over 54 holes."
       },
-      "fonte": { "nome": "Confederação do Desporto de Portugal", "url": "https://www.cdp.pt/2025/12/12/francisca-salgado-no-podio/" }
+      "fonte": {
+        "nome": "Confederação do Desporto de Portugal",
+        "url": "https://www.cdp.pt/2025/12/12/francisca-salgado-no-podio/"
+      }
     },
     {
-      "id": "taca-fpg-2025", "ano": 2025, "data": "2025-10-07",
-      "dataTexto": { "pt": "5–7 outubro 2025", "en": "5–7 October 2025" },
-      "torneio": { "pt": "Taça da FPG – BPI", "en": "Portuguese Golf Federation Cup" },
-      "campo": "Santo Estêvão Golfe", "local": { "pt": "Benavente, Portugal", "en": "Benavente, Portugal" }, "pais": "PT",
-      "pos": 2, "posTexto": { "pt": "Vice-campeã", "en": "Runner-up" },
-      "voltas": [], "total": null, "par": null,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["podio"],
+      "id": "taca-fpg-2025",
+      "ano": 2025,
+      "data": "2025-10-07",
+      "dataTexto": {
+        "pt": "5–7 outubro 2025",
+        "en": "5–7 October 2025"
+      },
+      "torneio": {
+        "pt": "Taça da FPG – BPI",
+        "en": "Portuguese Golf Federation Cup"
+      },
+      "campo": "Santo Estêvão Golfe",
+      "local": {
+        "pt": "Benavente, Portugal",
+        "en": "Benavente, Portugal"
+      },
+      "pais": "PT",
+      "pos": 2,
+      "posTexto": {
+        "pt": "Vice-campeã",
+        "en": "Runner-up"
+      },
+      "voltas": [],
+      "total": null,
+      "par": null,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "podio"
+      ],
       "nota": {
         "pt": "Apurada entre as oito melhores em stroke play, bateu Eva Silva no buraco 18 por 1 up e Matilde Leal Gouveia por 2&1 antes de perder a final com Francisca Rocha, por 4&3.",
         "en": "Through to the last eight in stroke play, she beat Eva Silva on the 18th 1 up and Matilde Leal Gouveia 2&1 before losing the final to Francisca Rocha, 4&3."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/francisca-rocha-e-gabriel-sardo-conquistam-taca-da-fpg-bpi/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/francisca-rocha-e-gabriel-sardo-conquistam-taca-da-fpg-bpi/"
+      }
     },
     {
-      "id": "andalucia-2025", "ano": 2025, "data": "2025-08-03",
-      "dataTexto": { "pt": "1–3 agosto 2025", "en": "1–3 August 2025" },
-      "torneio": { "pt": "Campeonato Andalucía Sub-18", "en": "Andalucía U18 Championship" },
-      "campo": "", "local": { "pt": "Andaluzia, Espanha", "en": "Andalusia, Spain" }, "pais": "ES",
-      "pos": 8, "voltas": [82, 78, 78], "total": 238, "par": 22,
-      "escalao": { "pt": "Sub-18", "en": "U18" }, "selos": ["selecao"],
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/amelia-gabin-vice-campea-no-campeonato-andalucia-sub-18-e-afonso-rui-oliveira-no-podio/" }
+      "id": "andalucia-2025",
+      "ano": 2025,
+      "data": "2025-08-03",
+      "dataTexto": {
+        "pt": "1–3 agosto 2025",
+        "en": "1–3 August 2025"
+      },
+      "torneio": {
+        "pt": "Campeonato Andalucía Sub-18",
+        "en": "Andalucía U18 Championship"
+      },
+      "campo": "",
+      "local": {
+        "pt": "Andaluzia, Espanha",
+        "en": "Andalusia, Spain"
+      },
+      "pais": "ES",
+      "pos": 8,
+      "voltas": [
+        82,
+        78,
+        78
+      ],
+      "total": 238,
+      "par": 22,
+      "escalao": {
+        "pt": "Sub-18",
+        "en": "U18"
+      },
+      "selos": [
+        "selecao"
+      ],
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/amelia-gabin-vice-campea-no-campeonato-andalucia-sub-18-e-afonso-rui-oliveira-no-podio/"
+      }
     },
     {
-      "id": "euro-equipas-2025", "ano": 2025, "data": "2025-07-12",
-      "dataTexto": { "pt": "8–12 julho 2025", "en": "8–12 July 2025" },
-      "torneio": { "pt": "Campeonato da Europa Amador por Equipas Feminino", "en": "European Ladies' Amateur Team Championship" },
-      "campo": "", "local": { "pt": "Europa", "en": "Europe" }, "pais": "EU",
-      "pos": null, "voltas": [82, 80], "total": 162, "par": null,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["selecao"],
+      "id": "euro-equipas-2025",
+      "ano": 2025,
+      "data": "2025-07-12",
+      "dataTexto": {
+        "pt": "8–12 julho 2025",
+        "en": "8–12 July 2025"
+      },
+      "torneio": {
+        "pt": "Campeonato da Europa Amador por Equipas Feminino",
+        "en": "European Ladies' Amateur Team Championship"
+      },
+      "campo": "",
+      "local": {
+        "pt": "Europa",
+        "en": "Europe"
+      },
+      "pais": "EU",
+      "pos": null,
+      "voltas": [
+        82,
+        80
+      ],
+      "total": 162,
+      "par": null,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "selecao"
+      ],
       "nota": {
         "pt": "A primeira presença dela num Europeu de equipas absoluto, aos dezasseis anos.",
         "en": "Her first senior European team championship, at sixteen."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/portugal-em-14o-lugar-no-arranque-do-europeu-amador-por-equipas-feminino/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/portugal-em-14o-lugar-no-arranque-do-europeu-amador-por-equipas-feminino/"
+      }
     },
     {
-      "id": "drive-tour-2025", "ano": 2025, "data": "2025-06-01",
-      "torneio": { "pt": "3.º Torneio Drive Tour – Tejo", "en": "3rd Drive Tour – Tejo" },
-      "campo": "Ribagolfe Oaks", "local": { "pt": "Benavente, Portugal", "en": "Benavente, Portugal" }, "pais": "PT",
-      "pos": 1, "posTexto": { "pt": "Vencedora", "en": "Winner" },
-      "voltas": [], "total": null, "par": null,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["titulo"],
+      "id": "drive-tour-2025",
+      "ano": 2025,
+      "data": "2025-06-01",
+      "torneio": {
+        "pt": "3.º Torneio Drive Tour – Tejo",
+        "en": "3rd Drive Tour – Tejo"
+      },
+      "campo": "Ribagolfe Oaks",
+      "local": {
+        "pt": "Benavente, Portugal",
+        "en": "Benavente, Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "posTexto": {
+        "pt": "Vencedora",
+        "en": "Winner"
+      },
+      "voltas": [],
+      "total": null,
+      "par": null,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "titulo"
+      ],
       "nota": {
         "pt": "Venceu de forma destacada a classificação de stroke play individual mista — à frente de rapazes e raparigas.",
         "en": "A clear win in the mixed individual stroke play — ahead of the boys and the girls."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/francisca-salgado-vence-3-o-torneio-drive-tour-tejo/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/francisca-salgado-vence-3-o-torneio-drive-tour-tejo/"
+      }
     },
     {
-      "id": "aquapor-4-2025", "ano": 2025, "data": "2025-05-18",
-      "dataTexto": { "pt": "17–18 maio 2025", "en": "17–18 May 2025" },
-      "torneio": { "pt": "4.º Torneio do Circuito Aquapor", "en": "4th Aquapor Circuit Tournament" },
-      "campo": "Ribagolfe Oaks", "local": { "pt": "Benavente, Portugal", "en": "Benavente, Portugal" }, "pais": "PT",
-      "pos": 2, "voltas": [72, 74], "total": 146, "par": 2,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["podio"],
+      "id": "aquapor-4-2025",
+      "ano": 2025,
+      "data": "2025-05-18",
+      "dataTexto": {
+        "pt": "17–18 maio 2025",
+        "en": "17–18 May 2025"
+      },
+      "torneio": {
+        "pt": "4.º Torneio do Circuito Aquapor",
+        "en": "4th Aquapor Circuit Tournament"
+      },
+      "campo": "Ribagolfe Oaks",
+      "local": {
+        "pt": "Benavente, Portugal",
+        "en": "Benavente, Portugal"
+      },
+      "pais": "PT",
+      "pos": 2,
+      "voltas": [
+        72,
+        74
+      ],
+      "total": 146,
+      "par": 2,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "podio"
+      ],
       "nota": {
         "pt": "«Tentei manter o foco na minha rotina e jogar um golfe inteligente. Estou satisfeita com o resultado e motivada para o próximo torneio.»",
         "en": "“I tried to stay focused on my routine and play intelligent golf. I'm happy with the result and motivated for the next tournament.”"
       },
-      "fonte": { "nome": "Fundação do Desporto", "url": "https://fundacaodesporto.pt/noticias/francisca-salgado-com-grande-performance/" }
+      "fonte": {
+        "nome": "Fundação do Desporto",
+        "url": "https://fundacaodesporto.pt/noticias/francisca-salgado-com-grande-performance/"
+      }
     },
     {
-      "id": "vidago-2025", "ano": 2025, "data": "2025-05-06",
-      "dataTexto": { "pt": "6–8 maio 2025", "en": "6–8 May 2025" },
-      "torneio": { "pt": "Super Bock Ladies Open at Vidago Palace", "en": "Super Bock Ladies Open at Vidago Palace" },
-      "campo": "Vidago Palace Golf", "local": { "pt": "Vidago, Portugal", "en": "Vidago, Portugal" }, "pais": "PT",
-      "pos": null, "voltas": [], "total": null, "par": null,
-      "escalao": { "pt": "Profissional (LETAS)", "en": "Professional (LETAS)" }, "selos": [],
+      "id": "vidago-2025",
+      "ano": 2025,
+      "data": "2025-05-06",
+      "dataTexto": {
+        "pt": "6–8 maio 2025",
+        "en": "6–8 May 2025"
+      },
+      "torneio": {
+        "pt": "Super Bock Ladies Open at Vidago Palace",
+        "en": "Super Bock Ladies Open at Vidago Palace"
+      },
+      "campo": "Vidago Palace Golf",
+      "local": {
+        "pt": "Vidago, Portugal",
+        "en": "Vidago, Portugal"
+      },
+      "pais": "PT",
+      "pos": null,
+      "voltas": [],
+      "total": null,
+      "par": null,
+      "escalao": {
+        "pt": "Profissional (LETAS)",
+        "en": "Professional (LETAS)"
+      },
+      "selos": [],
       "nota": {
         "pt": "Convidada a jogar, como amadora, a primeira prova do circuito profissional europeu feminino em Portugal em oito anos. Foram seis portuguesas em campo, um recorde.",
         "en": "Invited to play, as an amateur, the first women's European professional event held in Portugal in eight years. Six Portuguese players teed it up — a record."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/todo-o-top-10-do-ranking-letas-e-sueca-karoline-lund-vence-o-pro-am/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/todo-o-top-10-do-ranking-letas-e-sueca-karoline-lund-vence-o-pro-am/"
+      }
     },
     {
-      "id": "penina-2025", "ano": 2025, "data": "2025-01-31",
-      "dataTexto": { "pt": "29–31 janeiro 2025", "en": "29–31 January 2025" },
-      "torneio": { "pt": "95.º Campeonato Internacional Amador de Portugal Feminino", "en": "95th Portuguese International Ladies' Amateur Championship" },
-      "campo": "Penina Hotel & Golf Resort", "local": { "pt": "Portimão, Portugal", "en": "Portimão, Portugal" }, "pais": "PT",
-      "pos": null, "voltas": [81, 81, 83], "total": 245, "par": 26,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["wagr", "selecao"],
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/amelia-gabin-mantem-6-o-lugar-para-ultima-volta-do-internacional-amador-de-portugal-feminino/" }
+      "id": "penina-2025",
+      "ano": 2025,
+      "data": "2025-01-31",
+      "dataTexto": {
+        "pt": "29–31 janeiro 2025",
+        "en": "29–31 January 2025"
+      },
+      "torneio": {
+        "pt": "95.º Campeonato Internacional Amador de Portugal Feminino",
+        "en": "95th Portuguese International Ladies' Amateur Championship"
+      },
+      "campo": "Penina Hotel & Golf Resort",
+      "local": {
+        "pt": "Portimão, Portugal",
+        "en": "Portimão, Portugal"
+      },
+      "pais": "PT",
+      "pos": null,
+      "voltas": [
+        81,
+        81,
+        83
+      ],
+      "total": 245,
+      "par": 26,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "wagr",
+        "selecao"
+      ],
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/amelia-gabin-mantem-6-o-lugar-para-ultima-volta-do-internacional-amador-de-portugal-feminino/"
+      }
     },
     {
-      "id": "aquapor-1-2025", "ano": 2025, "data": "2025-01-19",
-      "dataTexto": { "pt": "18–19 janeiro 2025", "en": "18–19 January 2025" },
-      "torneio": { "pt": "1.º Torneio do Circuito Aquapor", "en": "1st Aquapor Circuit Tournament" },
-      "campo": "Penina Hotel & Golf Resort", "local": { "pt": "Portimão, Portugal", "en": "Portimão, Portugal" }, "pais": "PT",
-      "pos": 3, "voltas": [], "total": 165, "par": 19,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["podio"],
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/joao-pereira-e-amelia-gabin-triunfam-no-1-o-torneio-do-circuito-aquapor/" }
+      "id": "aquapor-1-2025",
+      "ano": 2025,
+      "data": "2025-01-19",
+      "dataTexto": {
+        "pt": "18–19 janeiro 2025",
+        "en": "18–19 January 2025"
+      },
+      "torneio": {
+        "pt": "1.º Torneio do Circuito Aquapor",
+        "en": "1st Aquapor Circuit Tournament"
+      },
+      "campo": "Penina Hotel & Golf Resort",
+      "local": {
+        "pt": "Portimão, Portugal",
+        "en": "Portimão, Portugal"
+      },
+      "pais": "PT",
+      "pos": 3,
+      "voltas": [],
+      "total": 165,
+      "par": 19,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "podio"
+      ],
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/joao-pereira-e-amelia-gabin-triunfam-no-1-o-torneio-do-circuito-aquapor/"
+      }
     },
-
     {
-      "id": "gjg-algarve-2024", "ano": 2024, "data": "2024-12-30",
-      "dataTexto": { "pt": "28–30 dezembro 2024", "en": "28–30 December 2024" },
-      "torneio": { "pt": "GJG Algarve Juniors International", "en": "GJG Algarve Juniors International" },
-      "campo": "Quinta do Vale Golf", "local": { "pt": "Castro Marim, Portugal", "en": "Castro Marim, Portugal" }, "pais": "PT",
-      "pos": 1, "posTexto": { "pt": "Campeã", "en": "Champion" },
-      "voltas": [77, 76, 70], "total": 223, "par": 7,
-      "escalao": { "pt": "Sub-18", "en": "U18" }, "selos": ["titulo", "wagr", "selecao"],
+      "id": "gjg-algarve-2024",
+      "ano": 2024,
+      "data": "2024-12-30",
+      "dataTexto": {
+        "pt": "28–30 dezembro 2024",
+        "en": "28–30 December 2024"
+      },
+      "torneio": {
+        "pt": "GJG Algarve Juniors International",
+        "en": "GJG Algarve Juniors International"
+      },
+      "campo": "Quinta do Vale Golf",
+      "local": {
+        "pt": "Castro Marim, Portugal",
+        "en": "Castro Marim, Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "posTexto": {
+        "pt": "Campeã",
+        "en": "Champion"
+      },
+      "voltas": [
+        77,
+        76,
+        70
+      ],
+      "total": 223,
+      "par": 7,
+      "escalao": {
+        "pt": "Sub-18",
+        "en": "U18"
+      },
+      "selos": [
+        "titulo",
+        "wagr",
+        "selecao"
+      ],
       "nota": {
         "pt": "Venceu a classificação geral feminina e o escalão Sub-18, na frente do primeiro ao último buraco. Foi a única das doze jogadoras a assinar uma volta abaixo do par no desenho de Seve Ballesteros — 70 (−2) no dia final. Quatro pancadas à frente da alemã Grace Vetter (227) e catorze na frente da finlandesa Iiris Ahti no Sub-18.",
         "en": "She won both the women's overall title and the U18 category, leading from the first hole to the last. She was the only one of the twelve women to sign a sub-par round on Seve Ballesteros's design — a closing 70 (−2). Four shots clear of Germany's Grace Vetter (227) and fourteen clear of Finland's Iiris Ahti in the U18."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/francisco-reis-e-francisca-salgado-selam-triunfos-no-gjg-algarve-juniors-international/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/francisco-reis-e-francisca-salgado-selam-triunfos-no-gjg-algarve-juniors-international/"
+      }
     },
     {
-      "id": "nacional-jovens-2024", "ano": 2024, "data": "2024-11-24",
-      "torneio": { "pt": "Campeonato Nacional de Jovens · Sub-16 Feminino", "en": "National Youth Championship · Girls U16" },
-      "campo": "Troiagolf", "local": { "pt": "Tróia, Portugal", "en": "Tróia, Portugal" }, "pais": "PT",
-      "pos": 2, "posTexto": { "pt": "Vice-campeã Nacional", "en": "National runner-up" },
-      "voltas": [], "total": null, "par": null,
-      "escalao": { "pt": "Sub-16", "en": "U16" }, "selos": ["podio"],
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/campeoes-nacionais-de-jovens-consagrados-em-troia/" }
+      "id": "nacional-jovens-2024",
+      "ano": 2024,
+      "data": "2024-11-24",
+      "torneio": {
+        "pt": "Campeonato Nacional de Jovens · Sub-16 Feminino",
+        "en": "National Youth Championship · Girls U16"
+      },
+      "campo": "Troiagolf",
+      "local": {
+        "pt": "Tróia, Portugal",
+        "en": "Tróia, Portugal"
+      },
+      "pais": "PT",
+      "pos": 2,
+      "posTexto": {
+        "pt": "Vice-campeã Nacional",
+        "en": "National runner-up"
+      },
+      "voltas": [],
+      "total": null,
+      "par": null,
+      "escalao": {
+        "pt": "Sub-16",
+        "en": "U16"
+      },
+      "selos": [
+        "podio"
+      ],
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/campeoes-nacionais-de-jovens-consagrados-em-troia/"
+      }
     },
     {
-      "id": "aquapor-ranking-2024", "ano": 2024, "data": "2024-11-17",
-      "dataTexto": { "pt": "época 2024", "en": "2024 season" },
-      "torneio": { "pt": "Circuito Aquapor · Ranking Ouro Feminino", "en": "Aquapor Circuit · Women's Gold Ranking" },
-      "campo": "", "local": { "pt": "Portugal", "en": "Portugal" }, "pais": "PT",
-      "pos": 1, "posTexto": { "pt": "1.ª do ranking", "en": "Ranking winner" },
-      "voltas": [], "total": null, "par": null,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["titulo"],
+      "id": "aquapor-ranking-2024",
+      "ano": 2024,
+      "data": "2024-11-17",
+      "dataTexto": {
+        "pt": "época 2024",
+        "en": "2024 season"
+      },
+      "torneio": {
+        "pt": "Circuito Aquapor · Ranking Ouro Feminino",
+        "en": "Aquapor Circuit · Women's Gold Ranking"
+      },
+      "campo": "",
+      "local": {
+        "pt": "Portugal",
+        "en": "Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "posTexto": {
+        "pt": "1.ª do ranking",
+        "en": "Ranking winner"
+      },
+      "voltas": [],
+      "total": null,
+      "par": null,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "titulo"
+      ],
       "nota": {
         "pt": "Ganhou o ranking «Ouro» (gross) feminino de toda a época do Circuito Aquapor, à frente de Amélia Gabin e Francisca Rocha.",
         "en": "She won the women's season-long “Gold” (gross) ranking on the Aquapor Circuit, ahead of Amélia Gabin and Francisca Rocha."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/figueiredo-belchior-e-pereira-vencem-torneio-do-circuito-aquapor/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/figueiredo-belchior-e-pereira-vencem-torneio-do-circuito-aquapor/"
+      }
     },
     {
-      "id": "aquapor-2-2024", "ano": 2024, "data": "2024-04-07",
-      "torneio": { "pt": "2.º Torneio do Circuito Aquapor", "en": "2nd Aquapor Circuit Tournament" },
-      "campo": "", "local": { "pt": "Portugal", "en": "Portugal" }, "pais": "PT",
-      "pos": 1, "posTexto": { "pt": "Vencedora", "en": "Winner" },
-      "voltas": [75, 72], "total": 147, "par": null,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["titulo"],
+      "id": "aquapor-2-2024",
+      "ano": 2024,
+      "data": "2024-04-07",
+      "torneio": {
+        "pt": "2.º Torneio do Circuito Aquapor",
+        "en": "2nd Aquapor Circuit Tournament"
+      },
+      "campo": "",
+      "local": {
+        "pt": "Portugal",
+        "en": "Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "posTexto": {
+        "pt": "Vencedora",
+        "en": "Winner"
+      },
+      "voltas": [
+        75,
+        72
+      ],
+      "total": 147,
+      "par": null,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "titulo"
+      ],
       "nota": {
         "pt": "Repetiu o triunfo do Algarve, desta vez por uma pancada sobre Inês Belchior.",
         "en": "She repeated her Algarve win, this time by a shot from Inês Belchior."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/pedro-figueiredo-joao-miguel-pereira-e-francisca-salgado-vencedores-no-2o-torneio-do-circuito-aquapor/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/pedro-figueiredo-joao-miguel-pereira-e-francisca-salgado-vencedores-no-2o-torneio-do-circuito-aquapor/"
+      }
     },
     {
-      "id": "aquapor-1-2024", "ano": 2024, "data": "2024-02-04",
-      "torneio": { "pt": "1.º Torneio do Circuito Aquapor", "en": "1st Aquapor Circuit Tournament" },
-      "campo": "", "local": { "pt": "Algarve, Portugal", "en": "Algarve, Portugal" }, "pais": "PT",
-      "pos": 1, "posTexto": { "pt": "Vencedora", "en": "Winner" },
-      "voltas": [78, 75], "total": 153, "par": 9,
-      "escalao": { "pt": "Absoluto", "en": "Open" }, "selos": ["titulo"],
+      "id": "aquapor-1-2024",
+      "ano": 2024,
+      "data": "2024-02-04",
+      "torneio": {
+        "pt": "1.º Torneio do Circuito Aquapor",
+        "en": "1st Aquapor Circuit Tournament"
+      },
+      "campo": "",
+      "local": {
+        "pt": "Algarve, Portugal",
+        "en": "Algarve, Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "posTexto": {
+        "pt": "Vencedora",
+        "en": "Winner"
+      },
+      "voltas": [
+        78,
+        75
+      ],
+      "total": 153,
+      "par": 9,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Open"
+      },
+      "selos": [
+        "titulo"
+      ],
       "nota": {
         "pt": "Recuperou duas pancadas de desvantagem para Amélia Gabin na última volta.",
         "en": "She came from two shots behind Amélia Gabin in the final round."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/alexandre-abreu-francisca-salgado-e-alexander-amey-vencem-no-1o-torneio-do-circuito-aquapor/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/alexandre-abreu-francisca-salgado-e-alexander-amey-vencem-no-1o-torneio-do-circuito-aquapor/"
+      }
     },
-
     {
-      "id": "belgica-2023", "ano": 2023, "data": "2023-07-07",
-      "torneio": { "pt": "Campeonato Internacional da Bélgica Sub-14", "en": "Belgian International U14 Championship" },
-      "campo": "Royal Waterloo Golf Club", "local": { "pt": "Waterloo, Bélgica", "en": "Waterloo, Belgium" }, "pais": "BE",
-      "pos": 6, "voltas": [78, 75, 73], "total": 226, "par": 10,
-      "escalao": { "pt": "Sub-14", "en": "U14" }, "selos": ["selecao"],
+      "id": "belgica-2023",
+      "ano": 2023,
+      "data": "2023-07-07",
+      "torneio": {
+        "pt": "Campeonato Internacional da Bélgica Sub-14",
+        "en": "Belgian International U14 Championship"
+      },
+      "campo": "Royal Waterloo Golf Club",
+      "local": {
+        "pt": "Waterloo, Bélgica",
+        "en": "Waterloo, Belgium"
+      },
+      "pais": "BE",
+      "pos": 6,
+      "voltas": [
+        78,
+        75,
+        73
+      ],
+      "total": 226,
+      "par": 10,
+      "escalao": {
+        "pt": "Sub-14",
+        "en": "U14"
+      },
+      "selos": [
+        "selecao"
+      ],
       "nota": {
         "pt": "A melhor portuguesa da prova, a baixar o resultado dia após dia — 78, 75, 73 — entre 41 jogadoras. Foi a estreia dela ao serviço da Seleção Nacional.",
         "en": "The best Portuguese player in the field, lowering her score day by day — 78, 75, 73 — among 41 players. It was her national-team debut."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/francisca-salgado-no-sexto-lugar-e-portugal-1-em-oitavo-nos-internacionais-da-belgica-sub-14/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/francisca-salgado-no-sexto-lugar-e-portugal-1-em-oitavo-nos-internacionais-da-belgica-sub-14/"
+      }
     },
-
     {
-      "id": "nacional-jovens-2022", "ano": 2022, "data": "2022-11-01",
-      "dataTexto": { "pt": "2022", "en": "2022" },
-      "torneio": { "pt": "Campeonato Nacional de Jovens · Sub-14 Feminino", "en": "National Youth Championship · Girls U14" },
-      "campo": "", "local": { "pt": "Portugal", "en": "Portugal" }, "pais": "PT",
-      "pos": 2, "posTexto": { "pt": "Vice-campeã Nacional", "en": "National runner-up" },
-      "voltas": [], "total": null, "par": null,
-      "escalao": { "pt": "Sub-14", "en": "U14" }, "selos": ["podio"],
-      "fonte": { "nome": "Record", "url": "https://www.record.pt/modalidades/golfe/detalhe/campeoes-nacionais-juvenis-de-2022-mesmo-a-concluir-a-epoca" }
+      "id": "nacional-jovens-2022",
+      "ano": 2022,
+      "data": "2022-11-01",
+      "dataTexto": {
+        "pt": "2022",
+        "en": "2022"
+      },
+      "torneio": {
+        "pt": "Campeonato Nacional de Jovens · Sub-14 Feminino",
+        "en": "National Youth Championship · Girls U14"
+      },
+      "campo": "",
+      "local": {
+        "pt": "Portugal",
+        "en": "Portugal"
+      },
+      "pais": "PT",
+      "pos": 2,
+      "posTexto": {
+        "pt": "Vice-campeã Nacional",
+        "en": "National runner-up"
+      },
+      "voltas": [],
+      "total": null,
+      "par": null,
+      "escalao": {
+        "pt": "Sub-14",
+        "en": "U14"
+      },
+      "selos": [
+        "podio"
+      ],
+      "fonte": {
+        "nome": "Record",
+        "url": "https://www.record.pt/modalidades/golfe/detalhe/campeoes-nacionais-juvenis-de-2022-mesmo-a-concluir-a-epoca"
+      }
     },
-
     {
-      "id": "nacional-sub12-2021", "ano": 2021, "data": "2021-06-01",
-      "dataTexto": { "pt": "2021", "en": "2021" },
-      "torneio": { "pt": "Campeonato Nacional de Jovens · Sub-12 Feminino", "en": "National Youth Championship · Girls U12" },
-      "campo": "", "local": { "pt": "Portugal", "en": "Portugal" }, "pais": "PT",
-      "pos": 1, "posTexto": { "pt": "Campeã Nacional", "en": "National Champion" },
-      "voltas": [], "total": null, "par": null,
-      "escalao": { "pt": "Sub-12", "en": "U12" }, "selos": ["titulo"],
-      "fonte": { "nome": "Gazeta das Caldas", "url": "https://gazetadascaldas.pt/desporto/golfe-francisca-salgado-sagra-se-campea-nacional-de-sub-12/" }
+      "id": "nacional-sub12-2021",
+      "ano": 2021,
+      "data": "2021-06-01",
+      "dataTexto": {
+        "pt": "2021",
+        "en": "2021"
+      },
+      "torneio": {
+        "pt": "Campeonato Nacional de Jovens · Sub-12 Feminino",
+        "en": "National Youth Championship · Girls U12"
+      },
+      "campo": "",
+      "local": {
+        "pt": "Portugal",
+        "en": "Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "posTexto": {
+        "pt": "Campeã Nacional",
+        "en": "National Champion"
+      },
+      "voltas": [],
+      "total": null,
+      "par": null,
+      "escalao": {
+        "pt": "Sub-12",
+        "en": "U12"
+      },
+      "selos": [
+        "titulo"
+      ],
+      "fonte": {
+        "nome": "Gazeta das Caldas",
+        "url": "https://gazetadascaldas.pt/desporto/golfe-francisca-salgado-sagra-se-campea-nacional-de-sub-12/"
+      }
     },
-
     {
-      "id": "nacional-sub10-2019", "ano": 2019, "data": "2019-07-31",
-      "torneio": { "pt": "Campeonato Nacional Sub-10 Feminino", "en": "National U10 Championship, girls" },
-      "campo": "Club de Golf de Miramar", "local": { "pt": "Vila Nova de Gaia, Portugal", "en": "Vila Nova de Gaia, Portugal" }, "pais": "PT",
-      "pos": 1, "posTexto": { "pt": "Campeã Nacional", "en": "National Champion" },
-      "voltas": [], "total": null, "par": null,
-      "escalao": { "pt": "Sub-10", "en": "U10" }, "selos": ["titulo"],
+      "id": "nacional-sub10-2019",
+      "ano": 2019,
+      "data": "2019-07-31",
+      "torneio": {
+        "pt": "Campeonato Nacional Sub-10 Feminino",
+        "en": "National U10 Championship, girls"
+      },
+      "campo": "Club de Golf de Miramar",
+      "local": {
+        "pt": "Vila Nova de Gaia, Portugal",
+        "en": "Vila Nova de Gaia, Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "posTexto": {
+        "pt": "Campeã Nacional",
+        "en": "National Champion"
+      },
+      "voltas": [],
+      "total": null,
+      "par": null,
+      "escalao": {
+        "pt": "Sub-10",
+        "en": "U10"
+      },
+      "selos": [
+        "titulo"
+      ],
       "nota": {
         "pt": "O primeiro título nacional, aos dez anos e ainda pelo Paço do Lumiar. Era segunda aos 18 buracos, com 12 pontos; juntou-lhes mais 10 na última volta e ganhou com três de vantagem sobre Irene Liang.",
         "en": "Her first national title, at ten, still playing for Paço do Lumiar. She was second after 18 holes on 12 points; she added 10 more in the final round and won by three from Irene Liang."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/campeonato-nacional-de-sub10-francisco-reis-e-maria-francisca-salgado-sao-os-novos-campeoes-sub10/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/campeonato-nacional-de-sub10-francisco-reis-e-maria-francisca-salgado-sao-os-novos-campeoes-sub10/"
+      }
     },
     {
-      "id": "nacional-sub10-2018", "ano": 2018, "data": "2018-07-01",
-      "dataTexto": { "pt": "2018", "en": "2018" },
-      "torneio": { "pt": "Campeonato Nacional Sub-10 Feminino", "en": "National U10 Championship, girls" },
-      "campo": "Jamor", "local": { "pt": "Oeiras, Portugal", "en": "Oeiras, Portugal" }, "pais": "PT",
-      "pos": 2, "posTexto": { "pt": "Vice-campeã Nacional", "en": "National runner-up" },
-      "voltas": [], "total": null, "par": null,
-      "escalao": { "pt": "Sub-10", "en": "U10" }, "selos": ["podio"],
+      "id": "nacional-sub10-2018",
+      "ano": 2018,
+      "data": "2018-07-01",
+      "dataTexto": {
+        "pt": "2018",
+        "en": "2018"
+      },
+      "torneio": {
+        "pt": "Campeonato Nacional Sub-10 Feminino",
+        "en": "National U10 Championship, girls"
+      },
+      "campo": "Jamor",
+      "local": {
+        "pt": "Oeiras, Portugal",
+        "en": "Oeiras, Portugal"
+      },
+      "pais": "PT",
+      "pos": 2,
+      "posTexto": {
+        "pt": "Vice-campeã Nacional",
+        "en": "National runner-up"
+      },
+      "voltas": [],
+      "total": null,
+      "par": null,
+      "escalao": {
+        "pt": "Sub-10",
+        "en": "U10"
+      },
+      "selos": [
+        "podio"
+      ],
       "nota": {
         "pt": "O primeiro pódio nacional, aos nove anos.",
         "en": "Her first national podium, at nine."
       },
-      "fonte": { "nome": "FPG", "url": "https://portal.fpg.pt/noticias/campeonato-nacional-de-sub10-francisco-reis-e-maria-francisca-salgado-sao-os-novos-campeoes-sub10/" }
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/campeonato-nacional-de-sub10-francisco-reis-e-maria-francisca-salgado-sao-os-novos-campeoes-sub10/"
+      }
     }
   ]
 }
