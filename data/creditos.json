@@ -31,20 +31,10 @@
       "en": "Photo: Portuguese Golf Federation",
       "_origem": "3.º Torneio Drive Tour – Tejo, 2025 — https://portal.fpg.pt/noticias/francisca-salgado-vence-3-o-torneio-drive-tour-tejo/"
     },
-    "seleccao.webp": {
-      "pt": "Foto: Federação Portuguesa de Golfe",
-      "en": "Photo: Portuguese Golf Federation",
-      "_origem": "Estágio da Seleção no Jamor, 2026 — https://portal.fpg.pt/noticias/nicole-sardinha-e-francisca-salgado-competem-nos-internacionais-juniores-de-franca/"
-    },
     "english.webp": {
       "pt": "Foto: Pedro Salgado / Federação Portuguesa de Golfe",
       "en": "Photo: Pedro Salgado / Portuguese Golf Federation",
       "_origem": "English Girls' Open, 2026 — a peça da FPG credita «Texto e Fotografia © Pedro Salgado»"
-    },
-    "franca.webp": {
-      "pt": "Foto: Federação Portuguesa de Golfe",
-      "en": "Photo: Portuguese Golf Federation",
-      "_origem": "Internacionais Juniores de França, 2026 — https://portal.fpg.pt/noticias/nicole-sardinha-e-francisca-salgado-concluem-participacao-nos-internacionais-juniores-de-franca/"
     },
     "pares.webp": {
       "pt": "Foto: Federação Portuguesa de Golfe",
@@ -96,10 +86,20 @@
       "en": "Praia D'El Rey Golf Course",
       "_origem": "logótipo fornecido pela atleta"
     },
-    "lusiadas.svg": {
+    "lusiadas.webp": {
       "pt": "Lusíadas Saúde",
       "en": "Lusíadas Saúde",
-      "_origem": "logótipo oficial, lusiadas.pt"
+      "_origem": "logótipo da marca, fornecido pela atleta"
+    },
+    "ecco-golf.webp": {
+      "pt": "ECCO Golf",
+      "en": "ECCO Golf",
+      "_origem": "logótipo da marca, fornecido pela atleta"
+    },
+    "skip.webp": {
+      "pt": "Skip Portugal",
+      "en": "Skip Portugal",
+      "_origem": "logótipo da marca, fornecido pela atleta"
     }
   },
   "porDominio": {

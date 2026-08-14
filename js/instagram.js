@@ -141,7 +141,7 @@ export async function instagram(cx, lingua = 'pt', quantas = 3, comConvite = tru
   if (pubs.length) {
     cx.innerHTML = `
       <div class="ig__g ig__g--fotos">${pubs.slice(0, quantas).map((p) => `
-        <a class="ig__foto" href="${p.url}" target="_blank" rel="noopener" data-mag>
+        <a class="ig__foto" href="${p.url}" target="_blank" rel="noopener" data-sem-seta data-mag>
           <img src="${p.imagem}" alt="${(p.legenda || '').replace(/"/g, '&quot;')}"
                loading="lazy" decoding="async" data-credito-feito="1" />
           ${p.legenda ? `<span class="ig__cap">${p.legenda}</span>` : ''}

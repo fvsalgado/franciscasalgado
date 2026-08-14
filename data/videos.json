@@ -1,6 +1,29 @@
 {
-  "_leia-me": "Vídeos no YouTube. O 'id' é o que vem depois de watch?v= no endereço. A miniatura é carregada do YouTube só quando o vídeo é aberto — até lá não há pedido nenhum a servidores deles, e é por isso que o cartão mostra a capa desenhada aqui e não a deles.",
+  "_leia-me": "Vídeos no YouTube. O 'id' é o que vem depois de watch?v= ou de /shorts/ no endereço. O 'ano' é opcional: quando não se sabe a data de publicação, deixa-se vazio e o cartão sai sem o selo do ano, em vez de levar um ano inventado. Nada é carregado do YouTube antes de alguém carregar no botão — nem sequer a miniatura.",
   "videos": [
+    {
+      "id": "uDeZhoU1SUA",
+      "titulo": {
+        "pt": "Entrevista no Super Bock Ladies Open",
+        "en": "Interview at the Super Bock Ladies Open"
+      },
+      "canal": "Federação Portuguesa de Golfe TV",
+      "ano": "2025",
+      "nota": {
+        "pt": "Ao fim do segundo dia em Vidago Palace, a jogar como amadora a primeira prova do circuito profissional europeu feminino em Portugal em oito anos.",
+        "en": "At the end of day two at Vidago Palace, playing as an amateur in the first women's European professional event held in Portugal in eight years."
+      }
+    },
+    {
+      "id": "FNCrZzSNKQg",
+      "titulo": { "pt": "Francisca Salgado", "en": "Francisca Salgado" },
+      "canal": "Fundação do Desporto",
+      "ano": "",
+      "nota": {
+        "pt": "Retrato curto da Fundação do Desporto, que apoia o percurso dela desde 2025.",
+        "en": "A short portrait by the Fundação do Desporto, which has backed her since 2025."
+      }
+    },
     {
       "id": "lM9DlKYnomo",
       "titulo": {

@@ -43,7 +43,7 @@ export async function videos(cx, lingua = 'pt') {
       <button class="vid__bt" type="button"
               aria-label="${ver}: ${tx(v.titulo, lingua).replace(/"/g, '&quot;')}">
         <span class="vid__capa" aria-hidden="true">
-          <span class="vid__ano num">${v.ano}</span>
+          ${v.ano ? `<span class="vid__ano num">${v.ano}</span>` : ''}
           <span class="vid__seta">${icone('seta', 'ic')}</span>
         </span>
       </button>
@@ -85,14 +85,16 @@ export async function apoios(cx, lingua = 'pt') {
     const dentro = i.logo
       ? `<img src="img/logos/${i.logo}" alt="${i.nome}" loading="lazy" decoding="async" data-credito-feito="1" />`
       : `<span class="apoio__n">${i.nome}</span>`;
-    /* placa escura para logótipos desenhados a branco — a Lusíadas só publica
-       a versão branca, e numa placa branca não se via nada */
+    /* A placa adapta-se ao logótipo, e não o contrário. `fundo` pode ser
+       «escuro», para marcas desenhadas a branco, ou uma cor — a Lusíadas traz
+       o azul da casa por trás, e com a placa da mesma cor não se vê emenda. */
+    const cor = i.fundo && i.fundo !== 'escuro' ? ` style="background:${i.fundo};border-color:${i.fundo}"` : '';
     const placa = i.fundo === 'escuro' ? ' apoio__cx--escuro' : '';
     const corpo = `
-      <span class="apoio__cx${placa}">${dentro}</span>
+      <span class="apoio__cx${placa}"${cor}>${dentro}</span>
       <span class="apoio__x">${tx(i.x, lingua)}</span>`;
     return i.url
-      ? `<a class="apoio" href="${i.url}" target="_blank" rel="noopener" data-mag>${corpo}</a>`
+      ? `<a class="apoio" href="${i.url}" target="_blank" rel="noopener" data-sem-seta data-mag>${corpo}</a>`
       : `<div class="apoio">${corpo}</div>`;
   };
 

@@ -139,7 +139,7 @@ export function rodape(lingua = 'pt', canais = []) {
         <div>
           <p class="rot">${t.onde}</p>
           <ul class="pe__l">${canais.map((c) => `
-            <li><a href="${c.url}" target="_blank" rel="noopener" data-mag>${icone(c.chave, 'ic ic--pe')}<span>${c.nome}</span></a></li>`).join('')}</ul>
+            <li><a href="${c.url}" target="_blank" rel="noopener" data-sem-seta data-mag>${icone(c.chave, 'ic ic--pe')}<span>${c.nome}</span></a></li>`).join('')}</ul>
         </div>
         <div>
           <p class="rot">${t.ver}</p>
