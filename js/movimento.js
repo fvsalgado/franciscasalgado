@@ -109,7 +109,6 @@ export function rolagem() {
 
     if (nav) {
       nav.classList.toggle('colada', y > 40);
-      nav.classList.toggle('escondida', y > ultimo && y > 340);
     }
     ultimo = y;
     varrer();

@@ -162,9 +162,8 @@ body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color
 
 /* ── nav ────────────────────────────────────────────────── */
 .nav{position:fixed;top:0;left:0;right:0;z-index:120;transition:transform .5s var(--curva)}
-/* Esconder o cabeçalho ao rolar poupa uns pixels e tira o menu a quem mais
-   precisa dele. Num telemóvel fica sempre visível. */
-@media (min-width:900px){.nav.escondida{transform:translateY(-105%)}}
+/* O cabeçalho não se esconde. Escondê-lo ao rolar poupava uns pixels e tirava
+   o menu — e o nome da atleta — de quem estava a meio de uma página comprida. */
 .nav__in{width:var(--larg);margin-inline:auto;display:flex;align-items:center;gap:clamp(1rem,3vw,2.5rem);
          padding-block:1.05rem;transition:padding .4s var(--curva)}
 .nav.colada .nav__in{padding-block:.6rem}
@@ -578,18 +577,34 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 
 .pecas{list-style:none;margin:1.2rem 0 0;padding:0;border-top:1px solid var(--linha)}
 .peca{border-bottom:1px solid var(--linha)}
-.peca a{display:grid;grid-template-columns:minmax(7rem,auto) minmax(0,1fr) auto;gap:.3rem 1.2rem;
-        align-items:baseline;padding:.9rem .2rem;transition:padding-left .3s var(--curva),color .3s var(--curva)}
+.peca a{display:grid;grid-template-columns:4.5rem minmax(7rem,auto) minmax(0,1fr) auto;gap:.3rem 1.1rem;
+        align-items:center;padding:.7rem .2rem;transition:padding-left .3s var(--curva),color .3s var(--curva)}
+/* A imagem de abertura de cada notícia, em pequeno. Numa lista de quarenta
+   linhas é o que faz distinguir uma peça de outra sem ler o título todo. */
+.peca__f{width:4.5rem;aspect-ratio:3/2;border-radius:7px;overflow:hidden;
+         background:var(--superficie);box-shadow:0 0 0 1px var(--linha)}
+.peca__f img{width:100%;height:100%;object-fit:cover;
+             transition:transform .6s var(--curva)}
+.peca a:hover .peca__f img{transform:scale(1.07)}
 .peca a:hover{padding-left:.8rem;color:var(--relva)}
 .peca__o{display:inline-flex;align-items:center;gap:.45rem;font-size:.65rem;font-weight:800;
          text-transform:uppercase;letter-spacing:.16em;color:var(--relva)}
 .peca__o img{width:1.15rem;height:1.15rem;border-radius:50%;object-fit:contain;
              background:#FFF;padding:1px;flex:none}
-.peca__t{font-size:.9rem;min-width:0}
-.peca__a{font-size:.72rem;color:var(--tinta-fraca);font-variant-numeric:tabular-nums}
+.peca__t{font-size:.9rem;min-width:0;line-height:1.4}
+/* A seta de «abre fora» vai dentro da célula da data. Como item solto da
+   grelha, caía para uma linha só dela por baixo de tudo. */
+.peca__a{display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap;
+         font-size:.72rem;color:var(--tinta-fraca);font-variant-numeric:tabular-nums}
+.peca__s{font-style:normal;opacity:.6;transition:transform .3s var(--curva),opacity .3s var(--curva)}
+.peca a:hover .peca__s{opacity:1;transform:translate(.15rem,-.15rem)}
 @media (max-width:640px){
-  .peca a{grid-template-columns:1fr auto}
-  .peca__t{grid-column:1/-1}
+  /* No telemóvel a miniatura fica à esquerda, e o resto empilha ao lado. */
+  .peca a{grid-template-columns:3.6rem minmax(0,1fr) auto;gap:.25rem .8rem;align-items:center}
+  .peca__f{width:3.6rem}
+  .peca__f{grid-row:1/3}
+  .peca__t{grid-column:2/-1}
+  .peca__o{grid-column:2}
 }
 
 .kit{display:grid;gap:clamp(1.5rem,4vw,4rem)}
