@@ -10,9 +10,8 @@
    Em qualquer dos casos o cartão diz de quando são os dados e leva a ligação
    para a ficha oficial: quem quiser confirmar, confirma na fonte.
 
-   O cartão não mostra a fotografia que o WAGR tem na ficha dela. Seria mais um
-   pedido ao servidor de terceiros a cada visita, e a fotografia é deles — o
-   cartão é sobre um número, e a cara dela já está no resto da página. */
+   O retrato é servido daqui, e não o que o WAGR tem na ficha: aquele obrigava
+   a um pedido a servidor de terceiros em cada visita, e a fotografia é deles. */
 
 import { icone } from './icones.js';
 
@@ -105,7 +104,8 @@ export async function wagr(cx, lingua = 'pt') {
   cx.className = 'wagr';
   cx.innerHTML = `
     <div class="wagr__cabeca">
-      <span class="wagr__f">${icone('taca', 'ic')}</span>
+      <img class="wagr__f" src="img/avatar.webp" alt="Francisca Salgado"
+           width="280" height="280" loading="lazy" decoding="async" data-credito-feito="1" />
       <div class="wagr__id">
         <p class="wagr__rot">${t.rot}</p>
         <p class="wagr__n">${d.nome || 'Francisca Salgado'}</p>

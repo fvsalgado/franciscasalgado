@@ -72,16 +72,6 @@ export async function escadas(cx, lingua = 'pt') {
     </div>`).join('');
 }
 
-/* ── apoios já existentes ─────────────────────────────────── */
-export async function apoios(cx, lingua = 'pt') {
-  if (!cx) return;
-  const { apoios: as = [] } = await ler('perfil');
-  cx.className = 'marcas';
-  cx.innerHTML = as.map((a) => (a.url
-    ? `<li><a href="${a.url}" target="_blank" rel="noopener" data-mag>${a.nome}</a></li>`
-    : `<li>${a.nome}</li>`)).join('');
-}
-
 /* ── canais e ligações ────────────────────────────────────── */
 export async function canais(lingua = 'pt') {
   const { canais: cs = [] } = await ler('canais');

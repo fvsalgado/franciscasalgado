@@ -34,7 +34,9 @@ npx serve .          # ou: python3 -m http.server
 | `campo.js` | o fundo do hero — carta topográfica animada em WebGL |
 | `resultados.js` | a lista de provas, o marcador, os filtros e o palmarès |
 | `conteudo.js` | números, factos, linha do tempo, imprensa, ligações |
+| `media.js` | galeria, vídeos e a parede de apoios |
 | `wagr.js` | o cartão do ranking mundial |
+| `instagram.js` | as publicações embutidas, ou o convite quando não há |
 | `i18n.js` | português (lido do HTML) e inglês (escrito aqui) |
 | `movimento.js` | cursor, revelação ao rolar, barra de navegação |
 | `creditos.js` | o crédito obrigatório por baixo de cada fotografia |
@@ -92,7 +94,31 @@ ficha de `factos`, o «ano a ano» de `percurso`, as formas de apoiar de
 ### Imprensa
 
 `data/imprensa.json`: `citacoes` (com ligação à peça de onde saíram), `pecas`
-(o clipping) e `saiuEm` (os nomes das publicações).
+(o clipping, 38 peças de 2019 a 2026) e `saiuEm` (os nomes das publicações).
+
+### Galeria, vídeos e apoios
+
+| | |
+|---|---|
+| `data/galeria.json` | as fotografias e as legendas. O crédito **não** se escreve aqui — vem de `creditos.json` |
+| `data/videos.json` | vídeos do YouTube. O `id` é o que vem depois de `watch?v=` |
+| `data/apoios.json` | a parede de apoios, em grupos |
+
+Os vídeos não carregam nada do YouTube antes de alguém carregar no botão —
+nem sequer a miniatura. Até lá é uma capa desenhada em CSS, e quem passa pela
+página não é seguido por causa de um vídeo que não chegou a ver.
+
+Na parede de apoios, um item com `logo` mostra o logótipo; sem `logo`, mostra
+o nome na tipografia da casa, dentro do mesmo cartão. Assim a parede lê-se
+como uma só coisa mesmo com logótipos a faltar, e um que chegue amanhã entra
+sem mexer em mais nada. Os logótipos vivem numa placa branca de propósito:
+quase todos são desenhados para fundo claro e desapareceriam no tema escuro.
+
+**Os grupos estão separados de propósito.** «Apoio institucional» é quem
+seleciona, forma e financia; «Equipamento» são as marcas que ela joga e veste.
+Dizer que a Cobra e a Puma «apoiam» sem haver contrato seria afirmar o que não
+se sabe — e isso pode dar problemas a quem tem o nome no site. Se algum deles
+for mesmo um patrocínio, muda-se o item de grupo.
 
 ### Instagram
 
@@ -114,10 +140,19 @@ creditadas. O crédito não é decorativo: é a condição.
 
 | Ficheiro | O quê | Crédito | Onde aparece |
 |---|---|---|---|
-| `retrato.webp` | retrato oficial, 1080×1350 | Federação Portuguesa de Golfe | hero, imprensa, imagem de partilha |
-| `retrato-quadrado.webp` | retrato próximo, 596×596 | Federação Portuguesa de Golfe | «Quem é», na inicial |
-| `jogo.webp` | em prova, 1068×1335 | Praia D'El Rey Golf Course | percurso, imprensa |
-| `trofeu.webp` | com o troféu da Taça FPG, 880×1100 | Federação Portuguesa de Golfe | imprensa |
+| `retrato.webp` | retrato oficial | Federação Portuguesa de Golfe | hero, imagem de partilha |
+| `retrato-quadrado.webp` | retrato próximo | Federação Portuguesa de Golfe | «Quem é», na inicial |
+| `avatar.webp` | rosto, para o cartão do WAGR | Praia D'El Rey Golf Course | cartão do ranking mundial |
+| `jogo.webp` | em prova, taco na mão | Praia D'El Rey Golf Course | percurso |
+| `trofeu.webp` | com o troféu da Taça da FPG | Federação Portuguesa de Golfe | galeria |
+| `swing.webp` | swing, Drive Tour 2025 | Federação Portuguesa de Golfe | galeria |
+| `seleccao.webp` | swing, estágio da Seleção | Federação Portuguesa de Golfe | galeria |
+| `english.webp` | tee do English Girls' Open | Pedro Salgado / FPG | galeria |
+| `franca.webp` | com o saco, em Saint-Cloud | Federação Portuguesa de Golfe | galeria |
+| `pares.webp` | campeões nacionais de pares | Federação Portuguesa de Golfe | galeria |
+| `aquapor.webp` | vitória no Circuito Aquapor | Federação Portuguesa de Golfe | galeria |
+| `podio-2024.webp` | pódio do Aquapor de 2024 | Federação Portuguesa de Golfe | galeria |
+| `sub10.webp` | campeã nacional Sub-10, 2019 | Filipe Guerra / GolfTattoo / FPG | galeria |
 
 Os créditos vivem todos em `data/creditos.json`, num sítio só, e o
 `js/creditos.js` põe-nos por baixo de cada imagem em português e em inglês.
@@ -180,10 +215,12 @@ navegador de quem visita.
 
 ## De onde vêm os resultados
 
-Fichas oficiais da Federação Portuguesa de Golfe, European Golf Rankings,
-federações organizadoras e imprensa desportiva. Cada prova em
-`data/resultados.json` traz o campo `fonte` com a ligação, e a página de
-resultados mostra a nota de proveniência no fim.
+Sobretudo do arquivo de notícias da Federação Portuguesa de Golfe, que cobre
+todas as provas dela desde 2019 — e é a razão de o histórico chegar aos nove
+anos de idade. Também do European Golf Rankings, das federações organizadoras
+e da imprensa desportiva. Cada prova em `data/resultados.json` traz o campo
+`fonte` com a ligação, e a página de resultados mostra a nota de proveniência
+no fim.
 
 ## Publicar
 

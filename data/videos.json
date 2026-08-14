@@ -1,0 +1,31 @@
+{
+  "_leia-me": "Vídeos no YouTube. O 'id' é o que vem depois de watch?v= no endereço. A miniatura é carregada do YouTube só quando o vídeo é aberto — até lá não há pedido nenhum a servidores deles, e é por isso que o cartão mostra a capa desenhada aqui e não a deles.",
+  "videos": [
+    {
+      "id": "lM9DlKYnomo",
+      "titulo": {
+        "pt": "Duas boas amigas no torneio de sub-9",
+        "en": "Two good friends in the under-9 event"
+      },
+      "canal": "Amendoeira Golf Resort",
+      "ano": "2018",
+      "nota": {
+        "pt": "Open World Kids Golf, na Amendoeira. Francisca Salgado e Amélia Gabin, aos nove anos — hoje companheiras na Seleção Nacional.",
+        "en": "Open World Kids Golf, at Amendoeira. Francisca Salgado and Amélia Gabin, aged nine — today national-team colleagues."
+      }
+    },
+    {
+      "id": "LotwRqdggjk",
+      "titulo": {
+        "pt": "Francisca Salgado e Pedro Salgado",
+        "en": "Francisca Salgado and Pedro Salgado"
+      },
+      "canal": "Amendoeira Golf Resort",
+      "ano": "2018",
+      "nota": {
+        "pt": "No mesmo Open World Kids Golf, com o pai a fazer de caddie.",
+        "en": "At the same Open World Kids Golf, with her father on the bag."
+      }
+    }
+  ]
+}

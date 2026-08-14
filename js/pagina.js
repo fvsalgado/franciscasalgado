@@ -4,7 +4,8 @@
 
 import { iniciar } from './base.js';
 import { porEpoca, carregar } from './resultados.js';
-import { factos, percurso, citacoes, pecas, saiuEm, escadas, apoios, ligacoes } from './conteudo.js';
+import { factos, percurso, citacoes, pecas, saiuEm, escadas, ligacoes } from './conteudo.js';
+import { galeria, videos, apoios } from './media.js';
 import { wagr } from './wagr.js';
 
 const $ = (id) => document.getElementById(id);
@@ -78,7 +79,7 @@ const PINTAR = {
   },
 
   async percurso(l) {
-    await Promise.all([factos($('factos'), l), percurso($('percurso'), l)]);
+    await Promise.all([factos($('factos'), l), percurso($('percurso'), l), videos($('videos'), l)]);
   },
 
   async imprensa(l) {
@@ -88,6 +89,7 @@ const PINTAR = {
       pecas($('pecas'), l),
       saiuEm($('saiuEm')),
       ligacoes($('ligacoes'), l),
+      galeria($('gal'), l),
     ]);
   },
 

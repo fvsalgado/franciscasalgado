@@ -5,6 +5,16 @@ export const EN = {
   /* ── partilhado ─────────────────────────────────────────── */
   dz_onde: 'Published in',
 
+  ga_rot: 'In play',
+  ga_tit: 'Seven years on the course',
+  ga_txt: 'From the national U10 champion, in 2019, to the tee at the English Girls\' Open. Photographs from the Portuguese Golf Federation and the clubs, published with permission and with the credit in plain sight.',
+
+  vi_rot: 'Archive',
+  vi_tit: 'At nine, in Amendoeira',
+  vi_txt: 'The oldest footage there is of her on a course: the 2018 Open World Kids Golf, in the Algarve. In one of the rounds she plays alongside Amélia Gabin — today a national-team colleague. Nothing loads from YouTube until you press play.',
+
+  ap2_q_txt2: 'Those already walking the road with her. They are in separate groups on purpose: institutional backing and a brand of equipment she plays are not the same thing.',
+
   wa_rot: 'World ranking',
   wa_tit: 'The official record, as it stands',
   wa_txt: 'The <strong>World Amateur Golf Ranking</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA. This card reads her record there the moment the page opens — it is not a number typed in by hand.',
@@ -13,17 +23,17 @@ export const EN = {
 
   /* ── página inicial ─────────────────────────────────────── */
   hero_rot: 'Amateur golfer · Portuguese national team · U18',
-  hero_frase: 'From Vale de Janelas to the courses of Europe. Two national titles, and the season is only half done.',
+  hero_frase: 'From Vale de Janelas to the courses of Europe. Four national titles, and the season is only half done.',
   prox: 'Latest result',
   prox_carregar: 'Loading…',
 
   nu_rot: 'The season',
   nu_tit: 'Where she stands',
-  nu_txt: 'The numbers that matter in an amateur career: where she sits in the European ranking, what she averages per round, and what she has already won.',
+  nu_txt: 'What counts in an amateur career: the titles, the wins, the lowest round — and how long this has been going on.',
 
   qu_rot: 'Who she is',
-  qu_tit: 'She started at twelve and never stopped',
-  qu_txt: 'National U12 champion in 2021, she plays for <strong>Vale de Janelas</strong>, in Óbidos, and wears the shirt of the <strong>Portuguese women\'s amateur national team</strong>. In 2026 she is national pairs champion and is playing the European U18 calendar.',
+  qu_tit: 'National champion at ten, and again at seventeen',
+  qu_txt: 'She won her first national championship in 2019, in the U10 category. She plays for <strong>Vale de Janelas</strong>, in Óbidos, and wears the shirt of the <strong>Portuguese women\'s amateur national team</strong>. In 2026 she added two more titles: the Amateur Pairs and the U18.',
   qu_bt: 'See her story',
 
   re_rot: 'Results',
@@ -34,7 +44,7 @@ export const EN = {
 
   pa_rot: 'Honours',
   pa_tit: 'What she has won',
-  pa_txt: 'Events she finished on top of. Two national titles and three wins on the Aquapor Circuit, among others.',
+  pa_txt: 'Events she finished on top of — four national championships, the GJG Algarve Juniors, the Drive Tour and the Aquapor Circuit, where she also won a whole season\'s ranking.',
 
   dz_rot: 'Press',
   dz_tit: 'What has been written',
@@ -59,12 +69,13 @@ export const EN = {
 
   /* ── percurso ───────────────────────────────────────────── */
   pc_rot: 'Her story',
-  pc_tit: 'She started at twelve and never stopped',
-  pc_sub: 'Amateur golfer from Vale de Janelas, in Óbidos. Portuguese women\'s amateur national team. U18 category.',
-  bio_l: 'She won her first national championship at twelve. Five years on she plays the European calendar and is already national pairs champion.',
-  bio_1: 'Francisca Salgado plays for <strong>Vale de Janelas</strong>, in Óbidos, and represents the <strong>Portuguese women\'s amateur national team</strong>. She was crowned national U12 champion in 2021 and, two years later, made her national-team debut at the Belgian International U14 Championship at Royal Waterloo, finishing sixth while lowering her score day after day — 78, 75, 73.',
-  bio_2: '2025 was the year she started to count. National U16 runner-up, second on the Aquapor Circuit at Ribagolfe Oaks, and then <strong>champion of the GJG Algarve Juniors International</strong>, at Castro Marim: in front from the first hole to the last, she won both the women\'s overall title and the U18 category, and was the only one of the twelve women to sign a sub-par round on Seve Ballesteros\'s design — a closing 70. She ended the year as FPG Cup runner-up and third in Asturias, at the Memorial Celia Barquín, a world-ranking event.',
-  bio_3: 'In March 2026 she added a second national title: the <strong>National Amateur Pairs Championship</strong>, at Montado, with Rodrigo Constantino, on 145 — a 71 in fourball and a 74 in foursomes. The season took her to Penina, Guadalmina, Saint-Cloud, Slieve Russell with the national team, and Prestbury. She is supported by the Fundação do Desporto.',
+  pc_tit: 'National champion at ten, and again at seventeen',
+  pc_sub: 'Amateur golfer from Vale de Janelas, in Óbidos. Portuguese women\'s amateur national team. Reigning national U18 champion.',
+  bio_l: 'She won her first national championship at ten. Seven years on she has four, plays the European calendar, and has not yet outgrown the U18 category.',
+  bio_1: 'Francisca Salgado plays for <strong>Vale de Janelas</strong>, in Óbidos, and represents the <strong>Portuguese women\'s amateur national team</strong>. She started early: in 2018 she was national U10 runner-up, at the Jamor, and was playing the Open World Kids Golf in Amendoeira. The following year, at Miramar, she won her first national title. In 2021 she added the U12 and, in 2022, was U14 runner-up.',
+  bio_2: 'Her international debut for Portugal came in 2023, at the Belgian International U14 Championship: sixth, and the best Portuguese player there, lowering her score day after day — 78, 75, 73. <strong>2024 was the year she won everything</strong>: the first two Aquapor Circuit tournaments, the women\'s season-long “Gold” ranking, and the GJG Algarve Juniors International, in Castro Marim, where she was the only one of the twelve women to sign a sub-par round on Seve Ballesteros\'s design. In between, national U16 runner-up.',
+  bio_3: 'In 2025 she made her senior European team debut, at sixteen, and was invited to play, as an amateur, the Super Bock Ladies Open at Vidago Palace — the first women\'s European professional event in Portugal in eight years. She won the Drive Tour at the Tejo, was runner-up in the FPG Cup and third in Asturias.',
+  bio_4: '2026 brought two national titles in two months: the <strong>Amateur Pairs</strong>, at Montado, with Rodrigo Constantino, and the <strong>U18</strong>, at Aroeira, led from start to finish. The season took her to Penina, Guadalmina, Saint-Cloud, Slieve Russell with the national team, Prestbury — where she stood fifth at one point in the English Girls\' Open and finished 28th — and Málaga. She is supported by the Fundação do Desporto, and plays left-handed.',
   pc_lt: 'Year by year',
   pc_fim: 'Every result, with rounds and cards, is on the <a class="lig" href="resultados.html">results page</a>.',
 
@@ -74,14 +85,14 @@ export const EN = {
   im_txt: 'Short biography, checkable facts, sourced quotes and the official profiles. For high-resolution photographs, just ask.',
   im_bt: 'Request photographs',
   im_bio_rot: 'Short biography',
-  im_bio: 'Francisca Salgado (b. Portugal) is an amateur golfer from Vale de Janelas, in Óbidos, and a member of the Portuguese women\'s amateur national team. National U12 champion in 2021 and national Amateur Pairs champion in 2026, alongside Rodrigo Constantino. In 2025 she won the GJG Algarve Juniors International, was runner-up in the FPG Cup and finished third at the Memorial Celia Barquín, in Asturias. She competes in the U18 category and is supported by the Fundação do Desporto.',
+  im_bio: 'Francisca Salgado is an amateur golfer from Vale de Janelas, in Óbidos, and a member of the Portuguese women\'s amateur national team. She has four national titles: U10 in 2019, U12 in 2021 and, in 2026, the Amateur Pairs — alongside Rodrigo Constantino — and the U18. She won the GJG Algarve Juniors International in 2024, was runner-up in the FPG Cup in 2025 and third at the Memorial Celia Barquín, in Asturias. In 2026 she finished the English Girls\' Open in 28th. She is supported by the Fundação do Desporto, and plays left-handed.',
   im_factos: 'Facts',
   im_cit_rot: 'In her own words',
   im_cit_tit: 'Quotes',
   im_cit_txt: 'Every quote on this page links to the piece it came from. They may be reproduced with the source named.',
   im_fot_rot: 'Photographs',
   im_fot_tit: 'High resolution',
-  im_fot_txt: 'Tournament photographs belong to those who took them — the Portuguese Golf Federation and the event photographers. This site does not redistribute them on its own account: ask, and they are sent with the credit they must carry.',
+  im_fot_txt: 'Published with the permission of the Portuguese Golf Federation and the clubs. They may be reproduced in pieces about the player, always with the credit visible, exactly as it appears beneath each one. For the files at original resolution, just ask.',
   im_cl_rot: 'Clipping',
   im_cl_tit: 'What has run',
   im_lig_rot: 'Links',
@@ -98,7 +109,7 @@ export const EN = {
   ap2_e_bt: 'Talk about it',
   ap2_q_rot: 'Already on board',
   ap2_q_tit: 'Good company',
-  ap2_q_txt: 'Institutions and brands already following the journey.',
+  ap2_q_txt: 'Those already walking the road with her. They are in separate groups on purpose: institutional backing and a brand of equipment she plays are not the same thing.',
 
   ct_rot: 'Contact',
   ct_tit: 'Talk to the team',
