@@ -1,5 +1,5 @@
 {
-  "_leia-me": "Vídeos no YouTube. O 'id' é o que vem depois de watch?v= ou de /shorts/ no endereço. O 'ano' é opcional: quando não se sabe a data de publicação, deixa-se vazio e o cartão sai sem o selo do ano, em vez de levar um ano inventado. Nada é carregado do YouTube antes de alguém carregar no botão — nem sequer a miniatura.",
+  "_leia-me": "Vídeos no YouTube. O 'id' é o que vem depois de watch?v= ou de /shorts/ no endereço. O 'ano' é opcional: quando não se sabe a data de publicação, deixa-se vazio e o cartão sai sem o selo do ano, em vez de levar um ano inventado. A capa de cada vídeo está em img/videos/<id>.webp, copiada uma vez pelo scripts/capas.mjs — assim mostra-se a imagem verdadeira sem pedir nada ao YouTube antes de alguém carregar no botão.",
   "videos": [
     {
       "id": "uDeZhoU1SUA",
@@ -16,13 +16,17 @@
     },
     {
       "id": "FNCrZzSNKQg",
-      "titulo": { "pt": "Francisca Salgado", "en": "Francisca Salgado" },
+      "titulo": {
+        "pt": "A parceria com a Skip",
+        "en": "The Skip partnership"
+      },
       "canal": "Fundação do Desporto",
       "ano": "",
       "nota": {
-        "pt": "Retrato curto da Fundação do Desporto, que apoia o percurso dela desde 2025.",
-        "en": "A short portrait by the Fundação do Desporto, which has backed her since 2025."
-      }
+        "pt": "No canal da Fundação do Desporto, que apoia o percurso dela desde 2025.",
+        "en": "On the Fundação do Desporto channel, which has backed her since 2025."
+      },
+      "vertical": true
     },
     {
       "id": "lM9DlKYnomo",

@@ -1,10 +1,14 @@
 /* Fotografias e vídeos.
 
    Os vídeos são do YouTube, mas não se carrega nada do YouTube até alguém
-   carregar no botão: até lá é uma capa desenhada aqui, e nem sequer a
-   miniatura vem de lá. Assim quem passa pela página não é seguido por causa
-   de um vídeo que não chegou a ver — e a página não fica presa a três
-   iframes de terceiros que nunca ninguém abre. */
+   carregar no botão. A capa é a imagem verdadeira do vídeo — copiada uma vez
+   para img/videos/ pelo scripts/capas.mjs e servida daqui. Pedi-la a
+   i.ytimg.com quando a página abre seria mandar o endereço de quem lê para um
+   servidor da Google por causa de um vídeo que talvez nunca veja; assim
+   mostra-se a mesma imagem sem esse pedido.
+
+   Antes era um retângulo verde desenhado em CSS. Cumpria a promessa e não
+   dizia nada sobre o vídeo. */
 
 import { icone } from './icones.js';
 
@@ -43,6 +47,8 @@ export async function videos(cx, lingua = 'pt') {
       <button class="vid__bt" type="button"
               aria-label="${ver}: ${tx(v.titulo, lingua).replace(/"/g, '&quot;')}">
         <span class="vid__capa" aria-hidden="true">
+          <img src="/img/videos/${v.id}.webp" alt="" loading="lazy" decoding="async"
+               data-credito-feito="1" />
           ${v.ano ? `<span class="vid__ano num">${v.ano}</span>` : ''}
           <span class="vid__seta">${icone('seta', 'ic')}</span>
         </span>

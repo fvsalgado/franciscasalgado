@@ -50,6 +50,12 @@ O sítio existe em português, na raiz, e em inglês, em https://franciscasalgad
 tem as duas versões, com o mesmo nome de ficheiro, e declaram-se uma à outra em
 hreflang. O português é o original; o inglês é tradução dele.
 
+## Contacto
+
+- birdie@franciscasalgado.golf — parcerias, imprensa, convites e pedidos de
+  fotografias
+- Instagram: @francisca_salgado_
+
 ## Páginas
 
 - https://franciscasalgado.golf/ — apresentação, números da época, últimos resultados

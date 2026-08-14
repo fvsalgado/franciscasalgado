@@ -16,11 +16,14 @@ const qual = document.currentScript?.dataset.pagina
   || '';
 
 /* ── formulário ───────────────────────────────────────────── */
-/* ENTREGA está vazio de propósito: enquanto não houver serviço de entrega
-   escolhido (Formspree, Resend, uma função serverless — o que for), o
-   formulário valida, não finge que enviou, e encaminha para o Instagram, que
-   é o canal que existe mesmo. Basta pôr aqui o endereço no dia em que houver. */
+/* ENTREGA está vazio enquanto não houver serviço de entrega escolhido —
+   Formspree, Resend, uma função serverless, o que for. Até lá o formulário não
+   finge que enviou: valida, compõe a mensagem e abre o email do próprio já
+   preenchido para birdie@franciscasalgado.golf. É menos elegante do que um
+   envio silencioso, e chega mesmo. Basta pôr aqui o endereço no dia em que
+   houver serviço. */
 const ENTREGA = '';
+const EMAIL = 'birdie@franciscasalgado.golf';
 const INSTAGRAM = 'https://www.instagram.com/francisca_salgado_/';
 
 function formulario(lingua) {
@@ -42,10 +45,19 @@ function formulario(lingua) {
     }
 
     if (!ENTREGA) {
-      msg.classList.add('erro');
+      /* Sem serviço de entrega, o formulário não finge que enviou: abre o
+         email do próprio com tudo já escrito. É menos elegante do que um
+         envio silencioso e chega mesmo ao destino, que é o que interessa. */
+      const d = new FormData(form);
+      const corpo = en
+        ? `Name: ${d.get('nome')}\nEmail: ${d.get('email')}\nOrganisation: ${d.get('organizacao') || '—'}\n\n${d.get('mensagem')}`
+        : `Nome: ${d.get('nome')}\nEmail: ${d.get('email')}\nOrganização: ${d.get('organizacao') || '—'}\n\n${d.get('mensagem')}`;
+      const url = `mailto:${EMAIL}?subject=${encodeURIComponent(String(d.get('assunto') || 'Contacto'))}&body=${encodeURIComponent(corpo)}`;
+      msg.classList.remove('erro');
       msg.innerHTML = en
-        ? `This form is not connected yet — please send a direct message on <a class="lig" href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram</a>.`
-        : `Este formulário ainda não está ligado — envie mensagem direta no <a class="lig" href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram</a>.`;
+        ? `Opening your email app. If nothing happens, write to <a class="lig" href="mailto:${EMAIL}">${EMAIL}</a>.`
+        : `A abrir o seu email. Se não acontecer nada, escreva para <a class="lig" href="mailto:${EMAIL}">${EMAIL}</a>.`;
+      location.href = url;
       return;
     }
 

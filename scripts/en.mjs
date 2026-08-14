@@ -131,7 +131,7 @@ export const EN = {
   ct_tit: 'Talk to the team',
   ct_txt: 'Partnerships, press, invitations and photograph requests. The more concrete the request, the more concrete the answer.',
   ct_lig: 'Official links',
-  ct_nota: 'This form is not yet connected to a delivery service. In the meantime, the quickest route is a direct message on Instagram.',
+  ct_nota: 'The form opens your email app ready to send. If you prefer, write straight to <a class="lig" href="mailto:birdie@franciscasalgado.golf">birdie@franciscasalgado.golf</a> or send a message on Instagram.',
 
   c1: 'Name', c2: 'Email', c3: 'Subject',
   c3a: 'Partnership or sponsorship', c3b: 'Press and photographs',

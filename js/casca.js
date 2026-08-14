@@ -109,6 +109,12 @@ export function nav(lingua = 'pt') {
         <a class="cap cap--cheio menu__b" href="parcerias.html#contacto">${en ? 'Get in touch' : 'Contactar'}</a>
       </div>
     </div>`;
+  /* Numa página que abre com fotografia a sangrar, o cabeçalho está por cima
+     dela enquanto não se rola: tem de ser branco, ou não se lê. Marca-se aqui,
+     em JavaScript, e não com :has() em CSS, porque isto é um facto da página e
+     não uma consequência do que lá está. */
+  alvo.classList.toggle('nav--sobre-foto', !!document.querySelector('.hero'));
+
   menuMovel(alvo);
   document.dispatchEvent(new CustomEvent('fs:nav'));
 }

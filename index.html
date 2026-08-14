@@ -50,6 +50,7 @@
       },
       "jobTitle": "Golfista amadora",
       "knowsAbout": "Golfe",
+      "email": "birdie@franciscasalgado.golf",
       "homeLocation": {
         "@type": "Place",
         "address": {
@@ -128,37 +129,33 @@
 <main id="conteudo">
 
 <!-- ═══ HERO ═══════════════════════════════════════════ -->
+<!-- A fotografia a sangrar, do topo ao fim do ecrã, e o nome por cima.
+     Antes era um retrato pequeno numa caixa, ao lado do nome, sobre um fundo
+     claro: era arrumado e não era ninguém. Uma página de atleta abre com a
+     atleta a jogar — o resto do sítio é que explica. -->
 <section class="hero" id="topo">
-  <canvas class="hero__campo" id="campo" aria-hidden="true"></canvas>
-  <div class="hero__grade" aria-hidden="true"></div>
+  <figure class="hero__f">
+    <img class="hero__img" src="/img/swing.webp"
+         alt="Francisca Salgado no fim do swing, com o driver ao ombro"
+         width="1080" height="1350" fetchpriority="high" decoding="async" />
+    <figcaption class="hero__cred"></figcaption>
+  </figure>
 
   <div class="hero__in">
-    <!-- A fotografia entra no fluxo, dentro de <figure>, e não como camada de
-         fundo: assim o js/creditos.js pode pôr o crédito obrigatório por baixo
-         dela, como faz em todo o lado. O <figcaption> nasce vazio de propósito
-         — é o creditos.js que o preenche, a partir de data/creditos.json. -->
-    <figure class="hero__f">
-      <img class="hero__img" src="/img/retrato.webp" alt="Retrato de Francisca Salgado"
-           width="1080" height="1350" fetchpriority="high" decoding="async" />
-      <figcaption class="hero__leg"></figcaption>
-    </figure>
+    <p class="rot rot--claro" data-t="hero_rot">Golfista amadora · Seleção Nacional · Sub-18</p>
+    <h1 class="nome" id="nome" aria-label="Francisca Salgado">
+      <span class="nome__p"><span class="nome__l">F</span><span class="nome__l">r</span><span class="nome__l">a</span><span class="nome__l">n</span><span class="nome__l">c</span><span class="nome__l">i</span><span class="nome__l">s</span><span class="nome__l">c</span><span class="nome__l">a</span></span><span class="nome__e"> </span><span class="nome__p"><span class="nome__l">S</span><span class="nome__l">a</span><span class="nome__l">l</span><span class="nome__l">g</span><span class="nome__l">a</span><span class="nome__l">d</span><span class="nome__l">o</span></span>
+    </h1>
+    <p class="hero__frase" data-t="hero_frase">Do Vale de Janelas para os campos da Europa. Quatro títulos nacionais, e a época ainda vai a meio.</p>
 
-    <div class="hero__q">
-      <p class="rot rot--claro" data-t="hero_rot">Golfista amadora · Seleção Nacional · Sub-18</p>
-      <h1 class="nome" id="nome" aria-label="Francisca Salgado">
-        <span class="nome__p"><span class="nome__l">F</span><span class="nome__l">r</span><span class="nome__l">a</span><span class="nome__l">n</span><span class="nome__l">c</span><span class="nome__l">i</span><span class="nome__l">s</span><span class="nome__l">c</span><span class="nome__l">a</span></span><span class="nome__e"> </span><span class="nome__p"><span class="nome__l">S</span><span class="nome__l">a</span><span class="nome__l">l</span><span class="nome__l">g</span><span class="nome__l">a</span><span class="nome__l">d</span><span class="nome__l">o</span></span>
-      </h1>
-      <p class="hero__frase" data-t="hero_frase">Do Vale de Janelas para os campos da Europa. Quatro títulos nacionais, e a época ainda vai a meio.</p>
+    <div class="hero__pe">
+      <a class="prox" href="resultados.html" id="prox" data-mag>
+        <span class="prox__p"><i class="ponto"></i><span id="proxR" data-t="prox_r">Próxima prova</span></span>
+        <span class="prox__q num" id="proxQ" data-t="prox_carregar">A carregar…</span>
+        <span class="prox__s" aria-hidden="true">→</span>
+      </a>
+      <span class="rolar" aria-hidden="true"><i></i></span>
     </div>
-  </div>
-
-  <div class="hero__pe">
-    <a class="prox" href="resultados.html" id="prox" data-mag>
-      <span class="prox__p"><i class="ponto"></i><span id="proxR" data-t="prox_r">Próxima prova</span></span>
-      <span class="prox__q num" id="proxQ" data-t="prox_carregar">A carregar…</span>
-      <span class="prox__s" aria-hidden="true">→</span>
-    </a>
-    <span class="rolar" aria-hidden="true"><i></i></span>
   </div>
 </section>
 
@@ -179,7 +176,8 @@
 <!-- Fica na página inicial porque é a única coisa aqui que acontece à frente
      de quem chega: os dois cartões vão às fichas oficiais no momento em que a
      página abre. -->
-<section class="sec sec--curta sec--fundo" id="classificacoes">
+<section class="sec sec--curta sec--escura" id="classificacoes">
+  <canvas class="sec__campo" id="campo" aria-hidden="true"></canvas>
   <div class="env">
     <div class="cab">
       <div class="cab__t">
