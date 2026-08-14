@@ -15,6 +15,22 @@
 
 export const CONTA = 'francisca_salgado_';
 
+const tx = (v, l) => (typeof v === 'string' ? v : v?.[l] || v?.pt || '');
+
+async function ficheiro() {
+  try { return await (await fetch('data/instagram.json', { cache: 'no-cache' })).json(); }
+  catch (e) { console.warn('instagram:', e.message); return {}; }
+}
+
+/* Números como o Instagram os escreve: 12,4 mil em vez de 12 400. */
+function curto(n, lingua) {
+  if (n == null || !Number.isFinite(Number(n))) return null;
+  const v = Number(n);
+  if (v < 1000) return String(v);
+  const mil = (v / 1000).toFixed(v < 10000 ? 1 : 0).replace(/\.0$/, '');
+  return lingua === 'en' ? `${mil.replace(',', '.')}K` : `${mil.replace('.', ',')} mil`;
+}
+
 function convite(lingua) {
   const en = lingua === 'en';
   return `
@@ -41,16 +57,85 @@ async function daApi() {
 /* 2 — códigos escritos à mão */
 async function dosCodigos() {
   try {
-    const d = await (await fetch('data/instagram.json', { cache: 'no-cache' })).json();
+    const d = await ficheiro();
     return (d.publicacoes || [])
       .map((p) => (typeof p === 'string' ? { codigo: p } : p))
       .filter((p) => p?.codigo)
       .map((p) => ({ codigo: p.codigo, tipo: p.tipo === 'reel' ? 'reel' : 'p', conta: p.conta || CONTA }));
-  } catch (e) { console.warn('instagram:', e.message); return []; }
+  } catch { return []; }
 }
 
-export async function instagram(cx, lingua = 'pt', quantas = 3) {
+/* ── cartão de perfil ─────────────────────────────────────── */
+/* Uma réplica sóbria do cabeçalho do Instagram, na tipografia da casa. Os
+   números só aparecem quando se sabem: com token vêm da Graph API, sem token
+   vêm do bloco `perfil` de data/instagram.json, e se não estiverem em lado
+   nenhum o cartão mostra-se na mesma — só sem contas. Um número de
+   seguidores inventado seria pior do que número nenhum. */
+export async function perfilIg(cx, lingua = 'pt') {
   if (!cx) return;
+  const en = lingua === 'en';
+  const { perfil: p = {} } = await ficheiro();
+
+  let n = { seguidores: p.seguidores, aSeguir: p.aSeguir, publicacoes: p.publicacoes };
+  let vivo = false;
+  try {
+    const r = await fetch('/api/instagram', { cache: 'no-cache' });
+    if (r.ok) {
+      const d = await r.json();
+      if (d?.perfil?.seguidores != null) { n = d.perfil; vivo = true; }
+    }
+  } catch { /* sem função — ficam os números do ficheiro */ }
+
+  const contas = [
+    { v: curto(n.publicacoes, lingua), r: en ? 'posts' : 'publicações' },
+    { v: curto(n.seguidores, lingua), r: en ? 'followers' : 'seguidores' },
+    { v: curto(n.aSeguir, lingua), r: en ? 'following' : 'a seguir' },
+  ].filter((c) => c.v);
+
+  cx.className = 'igp';
+  cx.innerHTML = `
+    <div class="igp__cab">
+      <img class="igp__f" src="img/avatar.webp" alt="${p.nome || 'Francisca Salgado'}"
+           width="280" height="280" loading="lazy" decoding="async" data-credito-feito="1" />
+      <div class="igp__id">
+        <p class="igp__a">@${p.arroba || CONTA}</p>
+        <p class="igp__n">${p.nome || 'Francisca Salgado'}</p>
+      </div>
+    </div>
+    ${contas.length ? `<dl class="igp__c">${contas.map((c) => `
+      <div><dd class="num">${c.v}</dd><dt>${c.r}</dt></div>`).join('')}</dl>` : ''}
+    <p class="igp__b">${tx(p.bio, lingua)}</p>
+    <a class="cap cap--cheio igp__bt" href="https://www.instagram.com/${p.arroba || CONTA}/"
+       target="_blank" rel="noopener" data-mag>${en ? 'Follow' : 'Seguir'}</a>
+    ${vivo ? `<span class="igp__vivo">${en ? 'Live' : 'Em direto'}</span>` : ''}`;
+}
+
+/* ── parcerias em vídeo ───────────────────────────────────── */
+/* Os reels de marca, na página de apoios: mostram o trabalho de patrocínio a
+   acontecer, que é o argumento mais forte para quem está a pensar entrar. */
+export async function parcerias(cx, lingua = 'pt') {
+  if (!cx) return;
+  const { parcerias: ps = [] } = await ficheiro();
+  if (!ps.length) { cx.innerHTML = ''; return; }
+
+  cx.className = 'reels';
+  cx.innerHTML = ps.map((p) => `
+    <figure class="reel sobe-i">
+      <iframe class="reel__f" title="Instagram · ${p.marca}" loading="lazy" scrolling="no"
+        src="https://www.instagram.com/reel/${encodeURIComponent(p.codigo)}/embed/captioned/"
+        frameborder="0" allow="encrypted-media"></iframe>
+      <figcaption class="reel__l">
+        <span class="reel__m">${p.marca}</span>
+        <a href="https://www.instagram.com/${CONTA}/reel/${p.codigo}/" target="_blank" rel="noopener" data-mag>${tx(p.t, lingua)}</a>
+      </figcaption>
+    </figure>`).join('');
+}
+
+/* `comConvite` fica falso quando o cartão de perfil já está ao lado: dois
+   blocos a dizer «@francisca_salgado_ · Seguir» na mesma secção é repetição. */
+export async function instagram(cx, lingua = 'pt', quantas = 3, comConvite = true) {
+  if (!cx) return;
+  const rodape = () => (comConvite ? convite(lingua) : '');
 
   const pubs = await daApi();
   if (pubs.length) {
@@ -61,7 +146,7 @@ export async function instagram(cx, lingua = 'pt', quantas = 3) {
                loading="lazy" decoding="async" data-credito-feito="1" />
           ${p.legenda ? `<span class="ig__cap">${p.legenda}</span>` : ''}
         </a>`).join('')}</div>
-      ${convite(lingua)}`;
+      ${rodape()}`;
     return;
   }
 
@@ -81,5 +166,5 @@ export async function instagram(cx, lingua = 'pt', quantas = 3) {
         <figcaption class="ig__l"><a href="${url}" target="_blank" rel="noopener" data-mag>@${p.conta}</a></figcaption>
       </figure>`;
     }).join('')}</div>
-    ${convite(lingua)}`;
+    ${rodape()}`;
 }

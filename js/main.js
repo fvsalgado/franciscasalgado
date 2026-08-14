@@ -6,7 +6,7 @@ import { reduzido } from './movimento.js';
 import { ultimas, palmares, ultimo } from './resultados.js';
 import { numeros, citacoes, saiuEm } from './conteudo.js';
 import { galeria, apoios } from './media.js';
-import { instagram } from './instagram.js';
+import { instagram, perfilIg } from './instagram.js';
 import { rankings } from './rankings.js';
 
 const $ = (id) => document.getElementById(id);
@@ -42,6 +42,7 @@ document.addEventListener('fs:tema', () => campo.tema?.());
 carga().then(() => {
   // o Instagram entra depois da cortina: são iframes de terceiros, e nada
   // disto deve atrasar o primeiro desenho da página
-  instagram($('ig'), i18n.lingua());
-  document.addEventListener('fs:lingua', (e) => instagram($('ig'), e.detail));
+  const pintarIg = (l) => { perfilIg($('igPerfil'), l); instagram($('ig'), l, 4, false); };
+  pintarIg(i18n.lingua());
+  document.addEventListener('fs:lingua', (e) => pintarIg(e.detail));
 });

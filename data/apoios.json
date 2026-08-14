@@ -1,6 +1,47 @@
 {
-  "_leia-me": "Quem acompanha o percurso. Os grupos estão separados de propósito: um apoio institucional e uma marca de material que ela joga não são a mesma coisa, e pôr tudo debaixo de «patrocinadores» seria dizer o que não se sabe. Se algum destes for, de facto, um contrato de patrocínio, muda-se o item de grupo. Para acrescentar um logótipo: guarde o ficheiro em img/logos/ e ponha o nome em 'logo'; sem 'logo', entra o nome composto na tipografia do sítio, e a parede continua a ler-se como uma só.",
+  "_leia-me": "Quem acompanha o percurso, por natureza da relação. Para acrescentar um logótipo: guarde o ficheiro em img/logos/ e ponha o nome em 'logo'; sem 'logo', entra o nome composto na tipografia do sítio, dentro do mesmo cartão, e a parede continua a ler-se como uma só. Os créditos e a proveniência de cada logótipo vivem em data/creditos.json.",
   "grupos": [
+    {
+      "id": "patrocinadores",
+      "destaque": true,
+      "t": { "pt": "Patrocinadores principais", "en": "Principal sponsors" },
+      "x": {
+        "pt": "As marcas com que joga e se veste em prova, em contrato.",
+        "en": "The brands she plays and wears in competition, under contract."
+      },
+      "itens": [
+        {
+          "nome": "Cobra Golf", "logo": "cobra-golf.svg", "url": "https://www.cobragolf.com/",
+          "x": { "pt": "Tacos", "en": "Clubs" }
+        },
+        {
+          "nome": "Puma Golf", "logo": "puma-golf.webp", "url": "https://eu.puma.com/",
+          "x": { "pt": "Vestuário", "en": "Apparel" }
+        }
+      ]
+    },
+    {
+      "id": "parceiros",
+      "t": { "pt": "Parceiros", "en": "Partners" },
+      "x": {
+        "pt": "Quem acompanha o dia a dia — do calçado de jogo à saúde.",
+        "en": "Those alongside her day to day — from playing shoes to healthcare."
+      },
+      "itens": [
+        {
+          "nome": "ECCO Golf", "logo": "", "url": "https://global.ecco.com/",
+          "x": { "pt": "Calçado", "en": "Footwear" }
+        },
+        {
+          "nome": "Lusíadas Saúde", "logo": "lusiadas.svg", "url": "https://www.lusiadas.pt/",
+          "x": { "pt": "Saúde e desporto", "en": "Health and sport" }
+        },
+        {
+          "nome": "Skip Portugal", "logo": "", "url": "",
+          "x": { "pt": "Parceiro", "en": "Partner" }
+        }
+      ]
+    },
     {
       "id": "institucionais",
       "t": { "pt": "Apoio institucional", "en": "Institutional support" },
@@ -10,35 +51,34 @@
       },
       "itens": [
         {
-          "nome": "Federação Portuguesa de Golfe",
-          "logo": "fpg.webp",
+          "nome": "Federação Portuguesa de Golfe", "logo": "fpg.webp",
           "url": "https://portal.fpg.pt/perfil/francisca-salgado/",
           "x": { "pt": "Seleção Nacional Amadora Feminina", "en": "Women's amateur national team" }
         },
         {
-          "nome": "Fundação do Desporto",
-          "logo": "fundacao-desporto.webp",
+          "nome": "Fundação do Desporto", "logo": "fundacao-desporto.webp",
           "url": "https://fundacaodesporto.pt/",
           "x": { "pt": "Atleta apoiada desde 2025", "en": "Supported athlete since 2025" }
-        },
-        {
-          "nome": "Vale de Janelas",
-          "logo": "",
-          "url": "",
-          "x": { "pt": "Clube, em Óbidos", "en": "Her club, in Óbidos" }
         }
       ]
     },
     {
-      "id": "equipamento",
-      "t": { "pt": "Equipamento", "en": "Equipment" },
+      "id": "campos",
+      "t": { "pt": "Onde joga", "en": "Where she plays" },
       "x": {
-        "pt": "As marcas com que joga e se veste em prova.",
-        "en": "The brands she plays and wears in competition."
+        "pt": "Os campos de casa, no Oeste.",
+        "en": "Her home courses, on Portugal's west coast."
       },
       "itens": [
-        { "nome": "Cobra Golf", "logo": "", "url": "https://www.cobragolf.com/", "x": { "pt": "Tacos", "en": "Clubs" } },
-        { "nome": "Puma Golf", "logo": "puma-golf.webp", "url": "https://eu.puma.com/", "x": { "pt": "Vestuário", "en": "Apparel" } }
+        {
+          "nome": "Vale de Janelas", "logo": "", "url": "",
+          "x": { "pt": "Clube, em Óbidos", "en": "Her club, in Óbidos" }
+        },
+        {
+          "nome": "Praia D'El Rey", "logo": "praia-del-rey.webp",
+          "url": "https://clubedegolfe.praia-del-rey.com/",
+          "x": { "pt": "Óbidos", "en": "Óbidos" }
+        }
       ]
     }
   ]

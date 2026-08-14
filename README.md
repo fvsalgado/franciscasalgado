@@ -122,96 +122,39 @@ for mesmo um patrocínio, muda-se o item de grupo.
 
 ### Instagram
 
-`data/instagram.json`. Enquanto a lista `publicacoes` estiver vazia, o sítio
-mostra o convite a seguir a conta — e não uma caixa vazia, que é pior. Para
-mostrar publicações, junte os códigos:
+Três caminhos, por esta ordem, e o site usa o primeiro que funcionar:
+
+1. **`/api/instagram`** — a Graph API da Meta, se houver token. Traz as
+   publicações **e** as contas do perfil (seguidores, a seguir, publicações),
+   e o cartão passa a dizer «Em direto».
+2. **`data/instagram.json`** — os códigos das publicações e o bloco `perfil`,
+   escritos à mão. É o que está a ser usado agora.
+3. O convite a seguir a conta, quando não há nem um nem outro.
+
+**A conta ser pública não chega para o caminho 1.** O Instagram deixou de
+servir o conteúdo do perfil a quem não tem sessão: a página devolve 600 KB de
+JavaScript sem uma publicação lá dentro, e a API de perfil responde
+`require_login` a pedidos vindos de servidores. Para ter isto automático, a
+conta é dela, por isso pode emitir um token de longa duração na Graph API e
+guardá-lo na Vercel como `IG_TOKEN`. Sem token, `api/instagram.js` responde
+501 — não finge.
+
+**O cartão de seguidores** só mostra números quando os sabe. Com token vêm da
+Graph API; sem token vêm do bloco `perfil` de `data/instagram.json`, que está
+com `null` à espera de serem preenchidos:
 
 ```json
-{ "publicacoes": ["C8xYzAbCdEf", { "codigo": "D1a2B3c4D5e", "tipo": "reel" }] }
+"perfil": { "seguidores": 1440, "aSeguir": 320, "publicacoes": 180 }
 ```
 
-O código é o que vem depois de `/p/` ou `/reel/` no endereço da publicação.
+Enquanto estiverem a `null` o cartão desenha-se na mesma, com a fotografia, o
+arroba e o botão — só sem contas. Um número de seguidores inventado seria pior
+do que número nenhum. Nota: `followers_count` só existe em contas Business ou
+Creator; numa conta pessoal a Graph API dá as publicações mas não as contas.
 
-## Fotografias
-
-As fotografias são da **Federação Portuguesa de Golfe** e dos **clubes**, e
-estão publicadas com autorização expressa para a Francisca as usar, desde que
-creditadas. O crédito não é decorativo: é a condição.
-
-| Ficheiro | O quê | Crédito | Onde aparece |
-|---|---|---|---|
-| `retrato.webp` | retrato oficial | Federação Portuguesa de Golfe | hero, imagem de partilha |
-| `retrato-quadrado.webp` | retrato próximo | Federação Portuguesa de Golfe | «Quem é», na inicial |
-| `avatar.webp` | rosto, para o cartão do WAGR | Praia D'El Rey Golf Course | cartão do ranking mundial |
-| `jogo.webp` | em prova, taco na mão | Praia D'El Rey Golf Course | percurso |
-| `trofeu.webp` | com o troféu da Taça da FPG | Federação Portuguesa de Golfe | galeria |
-| `swing.webp` | swing, Drive Tour 2025 | Federação Portuguesa de Golfe | galeria |
-| `seleccao.webp` | swing, estágio da Seleção | Federação Portuguesa de Golfe | galeria |
-| `english.webp` | tee do English Girls' Open | Pedro Salgado / FPG | galeria |
-| `franca.webp` | com o saco, em Saint-Cloud | Federação Portuguesa de Golfe | galeria |
-| `pares.webp` | campeões nacionais de pares | Federação Portuguesa de Golfe | galeria |
-| `aquapor.webp` | vitória no Circuito Aquapor | Federação Portuguesa de Golfe | galeria |
-| `podio-2024.webp` | pódio do Aquapor de 2024 | Federação Portuguesa de Golfe | galeria |
-| `sub10.webp` | campeã nacional Sub-10, 2019 | Filipe Guerra / GolfTattoo / FPG | galeria |
-
-Os créditos vivem todos em `data/creditos.json`, num sítio só, e o
-`js/creditos.js` põe-nos por baixo de cada imagem em português e em inglês.
-Cada entrada tem um campo `_origem` — não é mostrado no site — a dizer de que
-página veio o ficheiro, para se poder confirmar a autoria com quem a detém e
-afinar o crédito se for caso disso.
-
-Para trocar uma fotografia: guarde a nova em `img/` com o mesmo nome e as
-mesmas medidas, e confirme a linha correspondente em `data/creditos.json`. Uma
-imagem que entre sem crédito deixa aviso na consola — de propósito.
-
-A imagem de partilha (`img/og.jpg`) é composta a partir do retrato oficial;
-o desenho está em `scripts/og.html` e as instruções em `scripts/og.md`.
-
-## Rankings (WAGR e EGR)
-
-Os dois cartões leem as fichas oficiais na hora. Cada um tem dois caminhos:
-
-1. **`/api/wagr` e `/api/egr`** — funções serverless. Têm de ser do lado do
-   servidor, e por razões diferentes: o WAGR responde
-   `access-control-allow-origin: https://www.wagr.com` e mais nenhum, e o EGR
-   nem sequer manda cabeçalho de CORS — serve HTML. Nenhum dos dois exige
-   chave. Seis horas de cache, mais um dia a servir enquanto revalida.
-2. **`data/wagr.json` e `data/egr.json`** — instantâneos no repositório, para
-   quando não há funções (alojamento estático, `npx serve`) ou a fonte está em
-   baixo. Refrescam-se com `node scripts/wagr.mjs` e `node scripts/egr.mjs`.
-
-O cartão diz sempre qual dos dois está a usar — «Em direto» ou «Instantâneo» —
-a data dos dados, e a ligação para a ficha. Nenhum destes números é escrito à
-mão em lado nenhum.
-
-O EGR não tem API: `api/_egr.js` lê o HTML da ficha com expressões regulares.
-Vive num ficheiro começado por `_` para a Vercel não o publicar como rota, e é
-partilhado entre a função e o script do instantâneo, para os dois lerem a
-página exactamente da mesma maneira. Se o EGR mudar de formato, o leitor
-rebenta com uma mensagem clara em vez de devolver um cartão vazio — e o site
-cai no instantâneo.
-
-## Instagram
-
-A conta ser pública **não chega**. O Instagram deixou de servir o conteúdo do
-perfil a quem não tem sessão: a página devolve 600 KB de JavaScript sem uma
-publicação lá dentro, e a API de perfil responde `require_login` a pedidos
-vindos de servidores. Há duas maneiras de ter isto a funcionar:
-
-**Com token, e fica resolvido para sempre.** A conta é dela, por isso pode
-emitir um token de longa duração na Graph API da Meta e guardá-lo na Vercel
-como variável de ambiente `IG_TOKEN`. A partir daí `api/instagram.js` traz as
-publicações sozinho. Sem token, essa função responde 501 — não finge.
-
-**À mão.** Pôr os códigos das publicações em `data/instagram.json`. O código é
-o que vem depois de `/p/` ou `/reel/` no endereço:
-
-```json
-{ "publicacoes": ["C8xYzAbCdEf", { "codigo": "D1a2B3c4D5e", "tipo": "reel" }] }
-```
-
-Enquanto não houver nem um nem outro, a secção mostra o convite a seguir a
-conta — e não uma caixa vazia, que é pior.
+**As parcerias em vídeo** (`parcerias`, em `data/instagram.json`) são os reels
+de marca, e aparecem na página de apoios. Mostram o trabalho de patrocínio já
+feito, que é o argumento mais concreto para quem está a pensar entrar.
 
 ## Ligar as coisas que faltam
 
