@@ -768,14 +768,24 @@
 <main id="conteudo">
 
 <section class="topo-p">
+  <canvas class="sec__campo" id="campo" aria-hidden="true"></canvas>
   <div class="env">
     <p class="rot" data-t="rs_rot">Resultados</p>
     <h1 class="d d--l ani" data-t="rs_tit">Prova a prova, época a época</h1>
-    <p class="txt topo-p__t" data-t="rs_txt">Tudo o que está publicado: as voltas, o total e o resultado face ao par. Onde a classificação final não foi divulgada, fica o marcador e a caixa da posição diz que não sabe — é menos bonito do que inventar um número, e é o certo.</p>
+    <p class="txt topo-p__t" data-t="rs_txt">Todas as provas, com as voltas, o total e o resultado face ao par. Onde a classificação final não foi divulgada, fica o marcador e a posição por saber.</p>
     <div class="topo-p__bt">
       <a class="cap cap--cheio" href="https://www.europeangolfrankings.com/players/39992" target="_blank" rel="noopener" data-t="rs_egr" data-mag>Ficha no European Golf Rankings</a>
       <a class="cap" href="https://portal.fpg.pt/perfil/francisca-salgado/" target="_blank" rel="noopener" data-t="rs_fpg" data-mag>Ficha na FPG</a>
     </div>
+  </div>
+</section>
+
+<!-- ═══ A SEGUIR ═══════════════════════════════════════ -->
+<!-- O que ainda não aconteceu é a primeira pergunta de quem chega a uma
+     página de resultados, e estava só na página inicial. -->
+<section class="sec sec--curta" id="aseguir">
+  <div class="env">
+    <div id="proximas"></div>
   </div>
 </section>
 
@@ -787,7 +797,7 @@
         <h2 class="d d--l ani" data-t="rk_tit">As fichas oficiais, tal como estão</h2>
       </div>
       <div class="cab__x">
-        <p class="txt" data-t="rk_txt2">Lidas no momento em que a página abre. O <strong>WAGR</strong> é o ranking mundial do golfe amador, gerido pelo R&amp;A e pela USGA; o <strong>EGR</strong> é o europeu, por escalão, e é ele que decide o acesso a boa parte do calendário internacional.</p>
+        <p class="txt" data-t="rk_txt2">O <strong>WAGR</strong> é o ranking mundial do golfe amador, gerido pelo R&amp;A e pela USGA; o <strong>EGR</strong> é o europeu, por escalão, e é ele que decide o acesso a boa parte do calendário internacional.</p>
       </div>
     </div>
     <div id="rankings"></div>

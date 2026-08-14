@@ -16,6 +16,12 @@ const P = {
     '<path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M3.8 20.2h16.4M7.4 20.2v-4.8M12 20.2V8.4M16.6 20.2v-8.2"/>',
   calendario:
     '<rect x="3.4" y="5.4" width="17.2" height="15.2" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M8 3.4v3.9M16 3.4v3.9M3.4 10.3h17.2"/>',
+  /* Uma folha de jornal dobrada, para a página de imprensa. */
+  jornal:
+    '<path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M6.2 4.4h11.4v15.2H4.8a1.6 1.6 0 0 1-1.6-1.6V8.2h3V4.4Z"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M17.6 8.2h3v9.8a1.6 1.6 0 0 1-1.6 1.6M9 8.4h5.6M9 11.6h5.6M9 14.8h3.4"/>',
+  /* Dois apertos de mão, para as parcerias. */
+  aperto:
+    '<path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m8.6 12.6 2.4-2.4a1.8 1.8 0 0 1 2.5 0l4.1 4.1M3.4 8.6 7 5h3.2M20.6 8.6 17 5h-3.2"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m10.4 17.6 1.6 1.6a1.7 1.7 0 0 0 2.4-2.4M13.4 15.2l1.9 1.9a1.7 1.7 0 0 0 2.4-2.4M6.6 10.6l-3 3a1.7 1.7 0 0 0 2.4 2.4l1.4-1.4a1.7 1.7 0 0 1 2.4 2.4"/>',
   mapa:
     '<path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M9 4.2 3.6 6.4v13.4L9 17.6l6 2.2 5.4-2.2V4.2L15 6.4 9 4.2Z"/><path fill="none" stroke="currentColor" stroke-width="1.7" d="M9 4.2v13.4M15 6.4v13.4"/>',
   seta:
