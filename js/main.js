@@ -47,7 +47,9 @@ const { i18n } = iniciar(async (l) => {
 
 /* O campo em WebGL fica de fora do ciclo da língua: não tem texto nenhum,
    e recriá-lo a cada troca era deitar fora o contexto por nada. */
-const campo = iniciarCampo($('campo'), { reduzido });
+/* Na inicial o mapa vive na faixa escura dos rankings: leva a paleta escura à
+   força, para poder correr a toda a opacidade e voltar a ver-se a mexer. */
+const campo = iniciarCampo($('campo'), { reduzido, escuro: true });
 document.addEventListener('fs:tema', () => campo.tema?.());
 
 carga().then(() => {
