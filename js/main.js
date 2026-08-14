@@ -3,9 +3,8 @@
 import { iniciar, carga } from './base.js';
 import { iniciarCampo } from './campo.js';
 import { reduzido } from './movimento.js';
-import { ultimas, palmares, ultimo, proxima } from './resultados.js';
-import { numeros, citacoes, saiuEm } from './conteudo.js';
-import { galeria, apoios } from './media.js';
+import { ultimas, ultimo, proxima } from './resultados.js';
+import { numeros, citacoes, saiuEm, portas } from './conteudo.js';
 import { instagram, perfilIg } from './instagram.js';
 import { rankings } from './rankings.js';
 
@@ -37,12 +36,10 @@ async function proximo(lingua) {
 const { i18n } = iniciar(async (l) => {
   await Promise.all([
     numeros($('nums'), l),
-    ultimas($('ultimas'), l, 5),
-    palmares($('palm'), l),
-    citacoes($('citacoes'), l, 2),
+    ultimas($('ultimas'), l, 4),
+    citacoes($('citacoes'), l, 1, { grande: true }),
     saiuEm($('saiuEm')),
-    galeria($('gal'), l, 6),
-    apoios($('apoios'), l),
+    portas($('portas'), l),
     rankings($('rankings'), l),
     proximo(l),
   ]);
@@ -56,6 +53,6 @@ document.addEventListener('fs:tema', () => campo.tema?.());
 carga().then(() => {
   // o Instagram entra depois da cortina: são iframes de terceiros, e nada
   // disto deve atrasar o primeiro desenho da página
-  const pintarIg = (l) => { perfilIg($('igPerfil'), l); instagram($('ig'), l, 4, false); };
+  const pintarIg = (l) => { perfilIg($('igPerfil'), l); instagram($('ig'), l, 3, false); };
   pintarIg(i18n.lingua());
 });

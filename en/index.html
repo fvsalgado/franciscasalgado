@@ -162,24 +162,24 @@
   </div>
 </section>
 
-<!-- ═══ NÚMEROS ════════════════════════════════════════ -->
-<section class="sec sec--curta" id="numeros">
+<!-- ═══ QUEM É, EM QUATRO NÚMEROS ══════════════════════ -->
+<!-- Isto era duas secções: uma com o retrato e a frase de quem ela é, outra
+     com os números. Diziam a mesma coisa em dois sítios, e o retrato era o
+     segundo da página. Agora é uma: a frase grande, e os números por baixo a
+     sustentá-la. -->
+<section class="sec" id="quem">
   <div class="env">
-    <div class="cab">
-      <div class="cab__t">
-        <p class="rot" data-t="nu_rot">The season</p>
-        <h2 class="d d--l ani" data-t="nu_tit">Where she stands</h2>
-      </div>
-      <div class="cab__x">
-        <p class="txt" data-t="nu_txt">What counts in an amateur career: the titles, the wins, the lowest round — and how long this has been going on.</p>
-      </div>
-    </div>
+    <p class="rot" data-t="qu_rot">Who she is</p>
+    <p class="manif ani" data-t="qu_manif">She won her first national championship at ten. Seven years on she has four, plays the European calendar, and has not yet outgrown the U18 category.</p>
     <div id="nums"></div>
   </div>
 </section>
 
 <!-- ═══ RANKINGS ═══════════════════════════════════════ -->
-<section class="sec sec--curta" id="classificacoes">
+<!-- Fica na página inicial porque é a única coisa aqui que acontece à frente
+     de quem chega: os dois cartões vão às fichas oficiais no momento em que a
+     página abre. -->
+<section class="sec sec--curta sec--fundo" id="classificacoes">
   <div class="env">
     <div class="cab">
       <div class="cab__t">
@@ -194,23 +194,7 @@
   </div>
 </section>
 
-<!-- ═══ QUEM É ═════════════════════════════════════════ -->
-<section class="sec sec--fundo" id="quem">
-  <div class="env abre">
-    <figure class="abre__f">
-      <img class="abre__img" src="/img/retrato-quadrado.webp" alt="Francisca Salgado num campo de golfe"
-           width="596" height="596" loading="lazy" decoding="async" />
-    </figure>
-    <div class="abre__q">
-      <p class="rot" data-t="qu_rot">Who she is</p>
-      <p class="d d--m ani" data-t="qu_tit">National champion at ten, and again at seventeen</p>
-      <p class="txt" data-t="qu_txt">She won her first national championship in 2019, in the U10 category. She plays for <strong>Vale de Janelas</strong>, in Óbidos, and wears the shirt of the <strong>Portuguese women's amateur national team</strong>. In 2026 she added two more titles: the Amateur Pairs and the U18.</p>
-      <p><a class="cap cap--cheio" href="percurso.html" data-t="qu_bt" data-mag>See her story</a></p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ ÚLTIMOS RESULTADOS ═════════════════════════════ -->
+<!-- ═══ ÚLTIMAS PROVAS ═════════════════════════════════ -->
 <section class="sec" id="resultados">
   <div class="env">
     <div class="cab">
@@ -227,57 +211,16 @@
   </div>
 </section>
 
-<!-- ═══ PALMARÈS ═══════════════════════════════════════ -->
-<section class="sec sec--fundo" id="palmares">
+<!-- ═══ UMA FRASE DE FORA ══════════════════════════════ -->
+<!-- Eram duas citações, uma lista de onde saiu e um botão. Fica uma frase, e
+     a lista por baixo — que é o que se lê num relance. O resto está na
+     página de imprensa, e é para lá que a porta lá em baixo leva. -->
+<section class="sec sec--curta sec--fundo" id="dizem">
   <div class="env">
-    <div class="cab">
-      <div class="cab__t">
-        <p class="rot" data-t="pa_rot">Honours</p>
-        <h2 class="d d--l ani" data-t="pa_tit">What she has won</h2>
-      </div>
-      <div class="cab__x">
-        <p class="txt" data-t="pa_txt">Events she finished on top of — four national championships, the GJG Algarve Juniors, the Drive Tour and the Aquapor Circuit, where she also won a whole season's ranking.</p>
-      </div>
-    </div>
-    <div id="palm"></div>
-  </div>
-</section>
-
-<!-- ═══ GALERIA ════════════════════════════════════════ -->
-<section class="sec" id="fotos">
-  <div class="env">
-    <div class="cab">
-      <div class="cab__t">
-        <p class="rot" data-t="ga_rot">In play</p>
-        <h2 class="d d--l ani" data-t="ga_tit">Seven years on the course</h2>
-      </div>
-      <div class="cab__x">
-        <p class="txt" data-t="ga_txt">From the national U10 champion, in 2019, to the tee at the English Girls' Open. Photographs from the Portuguese Golf Federation and the clubs, published with permission and with the credit in plain sight.</p>
-      </div>
-    </div>
-    <div id="gal"></div>
-  </div>
-</section>
-
-<!-- ═══ IMPRENSA ═══════════════════════════════════════ -->
-<section class="sec sec--fundo" id="dizem">
-  <div class="env">
-    <div class="cab">
-      <div class="cab__t">
-        <p class="rot" data-t="dz_rot">Press</p>
-        <h2 class="d d--l ani" data-t="dz_tit">What has been written</h2>
-      </div>
-      <div class="cab__x">
-        <p class="txt" data-t="dz_txt">High-resolution photographs, biography and results record are on the press page.</p>
-        <a class="cap cap--cheio" href="imprensa.html" data-t="dz_bt" data-mag>See the press kit</a>
-      </div>
-    </div>
-    <div class="dizem">
-      <div id="citacoes"></div>
-      <div class="saiu">
-        <p class="rot" data-t="dz_onde">Published in</p>
-        <ul id="saiuEm"></ul>
-      </div>
+    <div id="citacoes"></div>
+    <div class="saiu saiu--fila">
+      <p class="rot" data-t="dz_onde">Published in</p>
+      <ul id="saiuEm"></ul>
     </div>
   </div>
 </section>
@@ -301,20 +244,23 @@
   </div>
 </section>
 
-<!-- ═══ APOIAR ═════════════════════════════════════════ -->
-<section class="sec sec--fundo" id="apoiar">
+<!-- ═══ AS QUATRO PORTAS ═══════════════════════════════ -->
+<!-- O palmarès, a galeria, a parede de apoios e o dossier de imprensa estavam
+     todos aqui, inteiros, e todos outra vez nas páginas deles. Saíram. No
+     lugar ficam quatro portas com fotografia: dizem o que há lá dentro, com
+     um número a prová-lo, e levam lá. -->
+<section class="sec sec--fundo" id="portas">
   <div class="env">
     <div class="cab">
       <div class="cab__t">
-        <p class="rot" data-t="ap_rot">Support</p>
-        <h2 class="d d--l ani" data-t="ap_tit">Taking Portugal further</h2>
+        <p class="rot" data-t="po_rot">The rest</p>
+        <h2 class="d d--l ani" data-t="po_tit">Where to go next</h2>
       </div>
       <div class="cab__x">
-        <p class="txt" data-t="ap_txt">An amateur career is built on travel, entry fees and hours on the course. Partners go on the bag, on the playing apparel and into the tournament photographs — at home and abroad.</p>
-        <a class="cap cap--cheio" href="parcerias.html" data-t="ap_bt" data-mag>How to support</a>
+        <p class="txt" data-t="po_txt">Each of these pages carries the whole subject — the events with their rounds and their sources, the story year by year, the file for people who write, and the ways in as a partner.</p>
       </div>
     </div>
-    <div id="apoios"></div>
+    <div id="portas"></div>
   </div>
 </section>
 

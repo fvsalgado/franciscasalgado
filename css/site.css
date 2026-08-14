@@ -726,7 +726,11 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .igp__f{width:clamp(56px,8vw,72px);height:clamp(56px,8vw,72px);border-radius:50%;flex:none;
         object-fit:cover;object-position:50% 32%;border:2px solid var(--linha-forte)}
 .igp__id{display:flex;flex-direction:column;gap:.1rem;min-width:0}
-.igp__a{margin:0;font-size:1rem;font-weight:800;letter-spacing:-.01em;word-break:break-word}
+/* O arroba não parte: «@francisca_salgado_» deixava o underscore final
+   sozinho na linha de baixo, a parecer um traço perdido. Encolhe em vez de
+   partir, que numa coluna estreita é o mal menor. */
+.igp__a{margin:0;font-size:clamp(.82rem,1.5vw,1rem);font-weight:800;
+        letter-spacing:-.015em;white-space:nowrap}
 .igp__n{margin:0;font-size:.84rem;color:var(--tinta-fraca)}
 .igp__c{margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;
         padding-block:clamp(.7rem,1.6vw,1rem);border-block:1px solid var(--linha);text-align:center}
@@ -740,14 +744,18 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .igp__vivo{position:absolute;top:1.1rem;right:1.1rem;font-size:.56rem;font-weight:800;
            text-transform:uppercase;letter-spacing:.14em;color:var(--relva)}
 
-/* perfil à esquerda, publicações à direita */
-.ig{display:grid;gap:clamp(1.4rem,3vw,2.4rem);align-items:start}
-@media (min-width:900px){.ig{grid-template-columns:minmax(0,.42fr) minmax(0,1fr)}}
-.ig__pubs{min-width:0}
-/* duas colunas dentro da coluna das publicações: os embeds são altos, e com
-   três por linha ficava sempre um sozinho na fila de baixo */
-.ig__pubs .ig__g{grid-template-columns:repeat(2,1fr)}
-@media (max-width:520px){.ig__pubs .ig__g{grid-template-columns:1fr}}
+/* Uma fila só: o cartão de perfil e as publicações lado a lado, como itens
+   iguais da mesma grelha. Antes o perfil tinha uma coluna estreita à esquerda
+   e as publicações uma grelha à direita — e como os embeds do Instagram são
+   muito mais altos do que o cartão, ficava meio metro de branco por baixo
+   dele. O `display:contents` desmancha os invólucros e deixa as publicações
+   caírem directamente na grelha de cima, sem mudar o que o JavaScript
+   escreve. */
+.ig{display:grid;gap:clamp(1.2rem,2.6vw,1.8rem);align-items:start;grid-template-columns:1fr}
+@media (min-width:900px){.ig{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:560px) and (max-width:899px){.ig{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ig__pubs{min-width:0;display:contents}
+.ig__pubs .ig__g{display:contents}
 
 /* ── reels de parceria ──────────────────────────────────── */
 /* Carril em vez de grelha: os reels são verticais e são cinco — numa grelha
@@ -829,7 +837,7 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
    mais nesta página do que qualquer adjetivo nosso — por isso ocupa a
    largura toda e não leva mais nada à volta. */
 .cita{margin:0;display:flex;flex-direction:column;align-items:center;gap:1.4rem;text-align:center}
-.cita__t{margin:0;max-width:22ch;font-family:var(--display);font-weight:300;font-style:italic;
+.cita__t{margin:0;max-width:26ch;font-family:var(--display);font-weight:300;font-style:italic;
          font-variation-settings:'opsz' 96;font-size:clamp(1.6rem,4.2vw,3rem);
          line-height:1.15;letter-spacing:-.02em;color:var(--tinta);
          padding-block:.1em;margin-block:-.1em}
@@ -964,3 +972,57 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
   .convite-l p{flex:1 1 100%}
 }
 @media (prefers-reduced-motion:reduce){.convite-l{animation:none}}
+
+/* ── manifesto da página inicial ────────────────────────── */
+/* A frase que diz quem ela é, em tamanho de cartaz. Substituiu uma secção
+   inteira com retrato e três parágrafos — que era o segundo retrato da página
+   e repetia o título da página do percurso. */
+.manif{margin:1.2rem 0 clamp(2.4rem,5vw,3.6rem);max-width:20ch;
+       font-family:var(--display);font-weight:300;font-variation-settings:'opsz' 144;
+       font-size:clamp(2.1rem,6.2vw,4.6rem);line-height:1.04;letter-spacing:-.028em;
+       color:var(--tinta);padding-block:.08em;margin-block-start:1.2rem}
+@media (min-width:900px){.manif{max-width:24ch}}
+
+/* «Saiu em» numa fila só, por baixo da citação, em vez de numa coluna ao lado */
+.saiu--fila{margin-top:clamp(2.4rem,5vw,3.6rem);display:flex;flex-direction:column;
+            align-items:center;gap:1rem;text-align:center}
+.saiu--fila .rot{margin:0}
+.saiu--fila ul{display:flex;flex-wrap:wrap;justify-content:center;
+               gap:.5rem .8rem;margin:0;padding:0;list-style:none;max-width:64rem}
+
+/* ── as portas para as outras páginas ───────────────────── */
+/* Quatro cartões com fotografia. A fotografia é o que faz alguém carregar; o
+   número é o que faz acreditar que vale a pena. */
+.portas{display:grid;gap:1px;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}
+.porta{position:relative;display:flex;flex-direction:column;background:var(--papel);
+       box-shadow:0 0 0 1px var(--linha);overflow:hidden;
+       transition:background-color .45s var(--curva),transform .45s var(--curva)}
+.sec--fundo .porta{background:var(--superficie)}
+.porta:hover{background:var(--relva-clara);transform:translateY(-4px);z-index:1}
+.porta__f{margin:0;aspect-ratio:4/3;overflow:hidden;background:var(--superficie);position:relative}
+/* Véu no topo da fotografia: o crédito é obrigatório e tem de se ler, e há
+   fotografias com céu claro onde o branco desaparecia. */
+.porta__f::after{content:"";position:absolute;inset:0 0 auto;height:4.5rem;pointer-events:none;
+                 background:linear-gradient(to bottom,rgba(9,20,17,.45),transparent)}
+.porta__f img{width:100%;height:100%;object-fit:cover;object-position:center 28%;
+              transition:transform .8s var(--curva)}
+.porta:hover .porta__f img{transform:scale(1.045)}
+/* O crédito obrigatório entra aqui pelo creditos.js. Fica pequeno e por cima
+   do canto da fotografia, para creditar sem tomar conta do cartão. */
+.porta__f figcaption{position:absolute;top:.55rem;left:.7rem;right:.7rem;
+                     font-size:.52rem;font-weight:700;text-transform:uppercase;
+                     letter-spacing:.1em;color:#FFF;opacity:.9;z-index:1;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.porta__q{display:flex;flex-direction:column;align-items:flex-start;gap:.5rem;
+          padding:clamp(1.3rem,2.6vw,1.8rem);flex:1}
+.porta__r{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.17em;color:var(--relva)}
+.porta__t{margin:0;font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 28;
+          font-size:clamp(1.18rem,2vw,1.4rem);line-height:1.18;letter-spacing:-.015em;color:var(--tinta)}
+.porta__x{margin:0;font-size:.85rem;line-height:1.55;color:var(--tinta-fraca);max-width:38ch}
+.porta__n{margin-top:auto;padding-top:1rem;font-size:.66rem;font-weight:800;
+          text-transform:uppercase;letter-spacing:.13em;color:var(--tinta-fraca)}
+.porta__n b{font-size:1.5rem;font-weight:400;font-family:var(--display);
+            font-variation-settings:'opsz' 32;letter-spacing:-.01em;color:var(--relva);
+            margin-right:.32rem;vertical-align:-.06em}
+.porta__s{position:absolute;right:clamp(1.3rem,2.6vw,1.8rem);bottom:clamp(1.2rem,2.4vw,1.6rem);
+          font-size:1.1rem;color:var(--relva);transition:transform .45s var(--curva)}
+.porta:hover .porta__s{transform:translateX(.35rem)}
