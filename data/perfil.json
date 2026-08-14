@@ -18,7 +18,7 @@
       }
     },
     {
-      "v": "11",
+      "v": "10",
       "r": {
         "pt": "Vitórias",
         "en": "Wins"
@@ -91,16 +91,6 @@
       "dd": {
         "pt": "1944.ª no WAGR · 620.ª no European Golf Rankings",
         "en": "1944th on the WAGR · 620th on the European Golf Rankings"
-      }
-    },
-    {
-      "dt": {
-        "pt": "Joga",
-        "en": "Plays"
-      },
-      "dd": {
-        "pt": "Canhota",
-        "en": "Left-handed"
       }
     },
     {
@@ -221,10 +211,22 @@
         "en": "A whole season, at home and abroad. It is the most visible of the three, and the only one that ends with a written account of what happened."
       },
       "inclui": [
-        { "pt": "Marca no saco e no vestuário de jogo", "en": "Brand on the bag and on playing apparel" },
-        { "pt": "Presença nas fotografias de prova", "en": "Presence in tournament photography" },
-        { "pt": "Calendário nacional e internacional", "en": "Home and international calendar" },
-        { "pt": "Relatório de época: provas, resultados e imprensa", "en": "Season report: events, results and press" }
+        {
+          "pt": "Marca no saco e no vestuário de jogo",
+          "en": "Brand on the bag and on playing apparel"
+        },
+        {
+          "pt": "Presença nas fotografias de prova",
+          "en": "Presence in tournament photography"
+        },
+        {
+          "pt": "Calendário nacional e internacional",
+          "en": "Home and international calendar"
+        },
+        {
+          "pt": "Relatório de época: provas, resultados e imprensa",
+          "en": "Season report: events, results and press"
+        }
       ]
     },
     {
@@ -241,10 +243,22 @@
         "en": "One international tournament, start to finish. That is how the English Girls' Open, in England, was made possible, with the Fundação do Desporto behind it."
       },
       "inclui": [
-        { "pt": "Deslocação e estadia", "en": "Travel and accommodation" },
-        { "pt": "Inscrição na prova", "en": "Tournament entry" },
-        { "pt": "Caddie", "en": "Caddie" },
-        { "pt": "Créditos no sítio e nas redes dela", "en": "Credit on her site and channels" }
+        {
+          "pt": "Deslocação e estadia",
+          "en": "Travel and accommodation"
+        },
+        {
+          "pt": "Inscrição na prova",
+          "en": "Tournament entry"
+        },
+        {
+          "pt": "Caddie",
+          "en": "Caddie"
+        },
+        {
+          "pt": "Créditos no sítio e nas redes dela",
+          "en": "Credit on her site and channels"
+        }
       ]
     },
     {
@@ -261,10 +275,22 @@
         "en": "The work that never shows up in the photographs, and that is what separates a 74 from a 70."
       },
       "inclui": [
-        { "pt": "Bolas e campo de treino", "en": "Balls and range time" },
-        { "pt": "Aulas e acompanhamento técnico", "en": "Lessons and coaching" },
-        { "pt": "Preparação física", "en": "Physical preparation" },
-        { "pt": "Material de treino", "en": "Training equipment" }
+        {
+          "pt": "Bolas e campo de treino",
+          "en": "Balls and range time"
+        },
+        {
+          "pt": "Aulas e acompanhamento técnico",
+          "en": "Lessons and coaching"
+        },
+        {
+          "pt": "Preparação física",
+          "en": "Physical preparation"
+        },
+        {
+          "pt": "Material de treino",
+          "en": "Training equipment"
+        }
       ]
     }
   ],
@@ -292,7 +318,7 @@
       }
     },
     {
-      "v": "38",
+      "v": "40",
       "r": {
         "pt": "Peças de imprensa",
         "en": "Press pieces"

@@ -40,8 +40,8 @@
         "en": "Partners"
       },
       "x": {
-        "pt": "Quem acompanha o dia a dia — do calçado de jogo à saúde.",
-        "en": "Those alongside her day to day — from playing shoes to healthcare."
+        "pt": "Quem acompanha o dia a dia, em relação direta com a atleta.",
+        "en": "Those alongside her day to day, in a direct relationship with the player."
       },
       "itens": [
         {
@@ -52,37 +52,18 @@
             "pt": "Calçado",
             "en": "Footwear"
           }
-        },
-        {
-          "nome": "Lusíadas Saúde",
-          "logo": "lusiadas.webp",
-          "url": "https://www.lusiadas.pt/",
-          "x": {
-            "pt": "Saúde e desporto",
-            "en": "Health and sport"
-          },
-          "fundo": "#002F7B"
-        },
-        {
-          "nome": "Skip Portugal",
-          "logo": "skip.webp",
-          "url": "https://www.instagram.com/skipportugal/",
-          "x": {
-            "pt": "Parceiro",
-            "en": "Partner"
-          }
         }
       ]
     },
     {
       "id": "institucionais",
       "t": {
-        "pt": "Apoio institucional",
-        "en": "Institutional support"
+        "pt": "Seleção Nacional e apoio institucional",
+        "en": "National team and institutional support"
       },
       "x": {
-        "pt": "Quem seleciona, forma e financia o percurso — em Portugal e nas deslocações lá fora.",
-        "en": "Those who select, develop and fund the journey — at home and on the road."
+        "pt": "Quem seleciona, forma e financia o percurso, e as marcas que apoiam as Seleções Nacionais de que ela faz parte — e não a atleta a título individual.",
+        "en": "Those who select, develop and fund the journey, and the brands backing the national teams she plays for — not the player individually."
       },
       "itens": [
         {
@@ -101,6 +82,25 @@
           "x": {
             "pt": "Atleta apoiada desde 2025",
             "en": "Supported athlete since 2025"
+          }
+        },
+        {
+          "nome": "Lusíadas Saúde",
+          "logo": "lusiadas.webp",
+          "url": "https://www.lusiadas.pt/",
+          "x": {
+            "pt": "Parceira das Seleções Nacionais",
+            "en": "Partner of the national teams"
+          },
+          "fundo": "#002F7B"
+        },
+        {
+          "nome": "Skip Portugal",
+          "logo": "skip.webp",
+          "url": "https://www.instagram.com/skipportugal/",
+          "x": {
+            "pt": "Parceira das Seleções Nacionais",
+            "en": "Partner of the national teams"
           }
         }
       ]

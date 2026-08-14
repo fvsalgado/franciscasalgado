@@ -808,6 +808,23 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .apoio-abre__f img{width:100%;height:auto;display:block;border:1px solid var(--linha);
                    background:var(--superficie)}
 
+/* ── perguntas frequentes ───────────────────────────────── */
+/* Uma lista de definições, que é o que isto é: pergunta e resposta. Sem
+   acordeão — o que está escondido atrás de um clique não é lido por quem
+   passa os olhos nem, muitas vezes, por quem indexa. */
+.fq{display:grid;gap:1px;margin:0}
+.fq__i{background:var(--papel);box-shadow:0 0 0 1px var(--linha);
+       padding:clamp(1.3rem,2.6vw,1.9rem);display:grid;gap:.6rem;align-content:start}
+@media (min-width:820px){
+  .fq{grid-template-columns:repeat(2,1fr)}
+  .fq__i{grid-template-columns:minmax(0,1fr);gap:.7rem}
+}
+.sec--fundo .fq__i{background:var(--superficie)}
+.fq__i dt{font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 28;
+          font-size:clamp(1.06rem,1.7vw,1.22rem);line-height:1.25;letter-spacing:-.012em;
+          color:var(--tinta)}
+.fq__i dd{margin:0;font-size:.9rem;line-height:1.6;color:var(--tinta-fraca);max-width:56ch}
+
 /* Citação sozinha, entre secções. Uma frase escrita por outra pessoa vale
    mais nesta página do que qualquer adjetivo nosso — por isso ocupa a
    largura toda e não leva mais nada à volta. */

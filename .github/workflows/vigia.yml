@@ -1,0 +1,82 @@
+# Vigia diário.
+#
+# Vai ao European Golf Rankings, ao WAGR e ao portal da Federação, escreve o
+# que é estruturado nos ficheiros de dados, e abre um issue com o que precisa
+# de uma pessoa a decidir.
+#
+# O que ele escreve entra no ramo de produção; a Vercel publica a seguir,
+# sozinha. Não abre ramos nem pull requests: este repositório tem um ramo só.
+
+name: Vigia
+
+on:
+  schedule:
+    # 06:10 UTC todos os dias — a FPG publica as crónicas ao fim do dia
+    - cron: '10 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: vigia
+  cancel-in-progress: false
+
+jobs:
+  vigiar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Procurar novidades
+        id: correr
+        run: node scripts/vigia.mjs
+
+      # Os dados estruturados, o sitemap e o llms.txt saem dos mesmos ficheiros
+      # de dados. Correndo a seguir ao vigia, aquilo que os motores e os
+      # assistentes leem nunca fica atrás do que a página diz.
+      - name: Refazer dados estruturados, sitemap e llms.txt
+        run: node scripts/seo.mjs
+
+      - name: Pôr o resumo no sumário da ação
+        if: always()
+        run: cat VIGIA.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+
+      - name: Guardar o que mudou
+        id: commit
+        run: |
+          git config user.name  'Vigia'
+          git config user.email 'vigia@users.noreply.github.com'
+          if [ -z "$(git status --porcelain data/ sitemap.xml llms.txt ./*.html)" ]; then
+            echo "mudou=nao" >> "$GITHUB_OUTPUT"
+            echo "Nada de novo."
+            exit 0
+          fi
+          git add data/ sitemap.xml llms.txt ./*.html
+          git commit -m "Vigia: novidades de $(date -u +%Y-%m-%d)
+
+          $(sed -n '/^- /p' VIGIA.md | head -20)"
+          git push
+          echo "mudou=sim" >> "$GITHUB_OUTPUT"
+
+      - name: Abrir issue com o que precisa de olhos
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ ! -s VIGIA-ATENCAO.md ]; then
+            echo "Nada que precise de uma pessoa."
+            exit 0
+          fi
+          gh issue create \
+            --title "Vigia: há coisas para rever ($(date -u +%Y-%m-%d))" \
+            --body-file VIGIA-ATENCAO.md \
+            --label vigia 2>/dev/null \
+          || gh issue create \
+            --title "Vigia: há coisas para rever ($(date -u +%Y-%m-%d))" \
+            --body-file VIGIA-ATENCAO.md

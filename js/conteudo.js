@@ -53,16 +53,38 @@ export async function factos(cx, lingua = 'pt') {
 
   const alvo = cx.querySelector('[data-vivo="rankings"] dd');
   if (!alvo) return;
+  const l = await linhaRankings(lingua);
+  if (l) alvo.textContent = l;
+}
+
+/* As duas posições numa linha só, lidas na hora. Devolve nulo quando nenhuma
+   das fontes responde — quem chama fica com o que já lá estava. */
+export async function linhaRankings(lingua = 'pt') {
   const [m, e] = await Promise.all([
     buscar('/api/wagr', 'data/wagr.json'),
     buscar('/api/egr', 'data/egr.json'),
   ]);
   const en = lingua === 'en';
-  const ord = (n) => (en ? `${n}${['th', 'st', 'nd', 'rd'][n % 100 >= 11 && n % 100 <= 13 ? 0 : n % 10] || 'th'}` : `${n}.ª`);
+  const ord = (n) => (en
+    ? `${n}${['th', 'st', 'nd', 'rd'][n % 100 >= 11 && n % 100 <= 13 ? 0 : n % 10] || 'th'}`
+    : `${n}.ª`);
   const partes = [];
   if (m?.d?.posicao) partes.push(`${ord(m.d.posicao)}${en ? ' on the WAGR' : ' no WAGR'}`);
   if (e?.d?.posicao) partes.push(`${ord(e.d.posicao)}${en ? ' on the European Golf Rankings' : ' no European Golf Rankings'}`);
-  if (partes.length) alvo.textContent = partes.join(' · ');
+  return partes.length ? partes.join(' · ') : null;
+}
+
+/* A resposta às perguntas frequentes ganha à frente as duas posições do dia.
+   Assim, um assistente que cite esta página cita um número certo hoje, e não
+   um número que era certo no dia em que a página foi escrita. */
+export async function rankingsNaPergunta(lingua = 'pt') {
+  const dd = document.querySelector('[data-vivo="rankings-fq"] dd');
+  if (!dd) return;
+  const l = await linhaRankings(lingua);
+  if (!l) return;
+  const forte = document.createElement('strong');
+  forte.textContent = lingua === 'en' ? `Currently ${l}. ` : `Neste momento, ${l}. `;
+  dd.prepend(forte);
 }
 
 /* ── linha do tempo ───────────────────────────────────────── */

@@ -4,7 +4,8 @@
 
 import { iniciar } from './base.js';
 import { porEpoca, carregar } from './resultados.js';
-import { factos, percurso, citacoes, pecas, saiuEm, escadas, ligacoes, numeros } from './conteudo.js';
+import { factos, percurso, citacoes, pecas, saiuEm, escadas, ligacoes, numeros,
+         rankingsNaPergunta } from './conteudo.js';
 import { galeria, videos, apoios } from './media.js';
 import { reels } from './instagram.js';
 import { rankings } from './rankings.js';
@@ -80,7 +81,8 @@ const PINTAR = {
   },
 
   async percurso(l) {
-    await Promise.all([factos($('factos'), l), percurso($('percurso'), l), videos($('videos'), l)]);
+    await Promise.all([factos($('factos'), l), percurso($('percurso'), l), videos($('videos'), l),
+                       rankingsNaPergunta(l)]);
   },
 
   async imprensa(l) {

@@ -1,0 +1,322 @@
+/* Vigia: procura sozinho o que há de novo sobre a Francisca e escreve-o nos
+ * ficheiros de dados.
+ *
+ *   node scripts/vigia.mjs            # escreve
+ *   node scripts/vigia.mjs --seco     # só diz o que faria
+ *
+ * Corre todos os dias pelo GitHub Actions (.github/workflows/vigia.yml). O que
+ * escreve entra no repositório, e a Vercel publica sozinha a seguir.
+ *
+ * ── A regra que manda em tudo ────────────────────────────────────────────
+ * Só é escrito automaticamente aquilo que vem em estrutura: uma tabela com
+ * colunas, uma resposta de API com campos. Isso lê-se sempre da mesma maneira
+ * e ou está lá ou não está.
+ *
+ * O que vem em prosa — «em setembro marcará presença no…», «terminou no top
+ * 10» — não é escrito por ninguém a não ser uma pessoa. O vigia deteta,
+ * levanta a mão em VIGIA-ATENCAO.md, e fica à espera. Já houve duas datas
+ * erradas e duas fotografias de outra atleta publicadas neste sítio por se ter
+ * confiado em prosa; não se repete de forma automática.
+ *
+ * ── Fontes ───────────────────────────────────────────────────────────────
+ * 1. European Golf Rankings — tabela de provas contadas, com posição, voltas e
+ *    pontos. Estruturado: entra sozinho.
+ * 2. WAGR — API oficial. Estruturado: refresca o instantâneo sozinho.
+ * 3. Federação Portuguesa de Golfe — o portal é WordPress e tem API REST
+ *    aberta. Título, data e endereço são estruturados: as peças de imprensa
+ *    entram sozinhas. O corpo do artigo é prosa: fica para leitura humana.
+ */
+
+import { readFile, writeFile } from 'node:fs/promises';
+import { buscarEgr } from '../api/_egr.js';
+
+const RAIZ = new URL('../', import.meta.url);
+const SECO = process.argv.includes('--seco');
+const hoje = new Date().toISOString().slice(0, 10);
+
+const ler = async (p) => JSON.parse(await readFile(new URL(p, RAIZ), 'utf8'));
+const gravar = async (p, d) => {
+  if (SECO) return;
+  await writeFile(new URL(p, RAIZ), `${JSON.stringify(d, null, 2)}\n`);
+};
+
+/* Comparar provas entre fontes diferentes: o EGR escreve «Portuguese
+   International Ladies' Amateur 2026» e nós escrevemos «96.º Campeonato
+   Internacional Amador de Portugal Feminino». Por texto não casam nunca.
+   Casam pela data — uma jogadora não está em dois sítios no mesmo fim de
+   semana — com margem larga, porque o EGR data pelo primeiro dia e nós às
+   vezes datámos pelo último. E casam também por palavras em comum, para o
+   caso de as datas estarem ambas erradas. */
+const CHOQUE_DIAS = 10;
+const dist = (a, b) => Math.abs((new Date(a) - new Date(b)) / 86400000);
+
+const VAZIAS = new Set(['de', 'da', 'do', 'the', 'of', 'and', 'e', 'a', 'o', 'no', 'na',
+  'championship', 'campeonato', 'torneio', 'tournament', 'open', 'cup', 'taca', 'taça']);
+const fichas = (s) => new Set(String(s || '')
+  .normalize('NFD').replace(/[̀-ͯ]/g, '')
+  .toLowerCase().replace(/[^a-z0-9 ]/g, ' ')
+  .split(/\s+/)
+  .filter((w) => w.length > 2 && !VAZIAS.has(w) && !/^\d{4}$/.test(w)));
+
+function mesmaProva(nossa, dela) {
+  if (nossa.data && dela.data && dist(nossa.data, dela.data) <= CHOQUE_DIAS) return true;
+  if (nossa.ano !== Number(String(dela.data || '').slice(0, 4))) return false;
+  const a = fichas(nossa.torneio?.pt);
+  const b = fichas(dela.evento);
+  let comuns = 0;
+  for (const w of b) if (a.has(w)) comuns += 1;
+  return comuns >= 2;
+}
+
+const novidades = [];
+const atencao = [];
+const falhas = [];
+
+/* ── 1. European Golf Rankings ─────────────────────────────────────────── */
+async function egr() {
+  const d = await buscarEgr();
+
+  await gravar('data/egr.json', {
+    '_leia-me': 'Instantâneo da ficha no European Golf Rankings. Recurso para quando /api/egr não está disponível. Refrescado pelo vigia; para o fazer à mão: node scripts/egr.mjs',
+    ...d,
+  });
+
+  const res = await ler('data/resultados.json');
+  const conhecidas = res.provas.filter((p) => p.data);
+  const porEntrar = [];
+
+  for (const p of d.provas || []) {
+    if (!p.data) continue;
+    const ja = conhecidas.find((q) => mesmaProva(q, p));
+    if (ja) {
+      // já cá está; só se aproveita para corrigir a posição, se faltava
+      if (ja.pos == null && p.pos != null) {
+        ja.pos = p.pos;
+        ja.fonte = ja.fonte || { nome: 'European Golf Rankings', url: d.ficha };
+        novidades.push(`posição preenchida: ${ja.torneio?.pt || ja.id} → ${p.pos}.º (EGR)`);
+      }
+      continue;
+    }
+    porEntrar.push({
+      id: `egr-${p.data}`,
+      ano: Number(p.data.slice(0, 4)),
+      data: p.data,
+      torneio: { pt: p.evento, en: p.evento },
+      campo: p.campo || '',
+      local: { pt: p.pais || '', en: p.pais || '' },
+      pos: p.pos ?? null,
+      voltas: p.voltas || [],
+      total: p.total ?? null,
+      par: null,
+      escalao: { pt: d.escalao || '', en: d.escalao || '' },
+      selos: ['wagr'],
+      nota: {
+        pt: 'Entrada automática a partir da ficha no European Golf Rankings. Falta confirmar o nome em português, o par e a nota de prova.',
+        en: 'Added automatically from the European Golf Rankings profile. The Portuguese name, the score to par and the event note are still to be confirmed.',
+      },
+      porRever: true,
+      fonte: { nome: 'European Golf Rankings', url: d.ficha },
+    });
+  }
+
+  if (porEntrar.length) {
+    res.provas = [...porEntrar, ...res.provas].sort((a, b) => (b.data || '').localeCompare(a.data || ''));
+    res.atualizado = hoje.slice(0, 7);
+    await gravar('data/resultados.json', res);
+    for (const p of porEntrar) {
+      novidades.push(`prova nova: ${p.data} · ${p.torneio.pt} · ${p.pos ?? 's/ posição'}`);
+      atencao.push(`**Prova nova (entrou já no sítio, marcada \`porRever\`)** — ${p.data} · ${p.torneio.pt}, ${p.campo}. Falta o nome em português, o par e a nota. Fonte: ${d.ficha}`);
+    }
+  } else if (porEntrar.length === 0) {
+    // mesmo sem provas novas, a posição pode ter mudado — o ficheiro já foi gravado
+  }
+
+  return d;
+}
+
+/* ── 2. WAGR ───────────────────────────────────────────────────────────── */
+const WAGR_ID = 43158;
+const WAGR_API = 'https://worldgolfranking2021api.wagr.com/api/wagr/playerprofile/getPlayerById';
+
+async function wagr() {
+  const atual = await ler('data/wagr.json').catch(() => ({}));
+  const r = await fetch(`${WAGR_API}?profileId=${WAGR_ID}`, { headers: { Accept: 'application/json' } });
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  const j = await r.json();
+  const s = j.playerStatisticsInfo || {};
+  const d = {
+    '_leia-me': 'Instantâneo da ficha no World Amateur Golf Ranking. Recurso para quando /api/wagr não está disponível. Refrescado pelo vigia; à mão: node scripts/wagr.mjs',
+    atualizado: hoje,
+    playerId: j.playerId,
+    perfil: `https://www.wagr.com/playerprofile/${j.playerProfileLink || ''}`,
+    nome: j.name,
+    pais: j.countryName,
+    posicao: j.position,
+    mediaPontos: j.pointsAverage,
+    divisor: j.divisor,
+    melhorPosicao: s.bestRanking,
+    vitorias: s.wins,
+    top10: s.top10Finishes,
+    provasContadas: s.countingEvents,
+    imagem: j.imageUrl,
+  };
+  if (!d.posicao) throw new Error('ficha lida mas sem classificação — o WAGR mudou de formato?');
+  if (atual.posicao && d.posicao !== atual.posicao) {
+    novidades.push(`WAGR: ${atual.posicao}.º → ${d.posicao}.º`);
+  }
+  await gravar('data/wagr.json', d);
+  return d;
+}
+
+/* ── 3. Federação Portuguesa de Golfe ──────────────────────────────────── */
+/* O portal é WordPress, e a API REST responde sem chave. A pesquisa do
+   WordPress é generosa — devolve tudo o que tenha «Francisca» ou «Salgado» —
+   por isso filtra-se aqui pelo nome inteiro. */
+const NOME = /francisca\s+salgado/i;
+
+/* Frases que só aparecem quando se está a anunciar prova que ainda não houve.
+   Não servem para escrever nada: servem para o vigia levantar a mão. */
+/* Só intenção declarada. Uma versão anterior também aceitava «em setembro» e
+   afins, e passou a assinalar todos os artigos que tinham um mês escrito —
+   que são todos. */
+const FUTURO = /(marcar[áa] presen[çc]a|vai disputar|ir[áa] disputar|regressa[ráa]* [àa] competi|vai competir|ir[áa] competir|est[áa] convocad|foi convocad|pr[óo]xim[ao] (prova|torneio|compromisso|desafio)|segue para|parte para)/i;
+
+const ENTIDADES = { 8216: '‘', 8217: '’', 8220: '“', 8221: '”', 8211: '–', 8212: '—',
+                    38: '&', 39: "'", 34: '"', 60: '<', 62: '>', 160: ' ' };
+const semTags = (s) => (s || '')
+  .replace(/<[^>]+>/g, ' ')
+  .replace(/&#(\d+);/g, (_, n) => ENTIDADES[n] || ' ')
+  .replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&[a-z]+;/g, ' ')
+  .replace(/\s+/g, ' ').trim();
+
+/* Ela aparece em dezenas de artigos da FPG que não são sobre ela: listas de
+   convocados, tabelas de resultados de provas ganhas por outras pessoas. Pôr
+   tudo isso na página de imprensa era transformá-la num arquivo da federação.
+   Por isso a régua é o título: se o nome está no título, a peça é sobre ela e
+   entra sozinha. Se está só no corpo, o vigia aponta e uma pessoa decide. */
+async function fpg() {
+  const imprensa = await ler('data/imprensa.json');
+  const jaTemos = new Set(imprensa.pecas.map((p) => p.url.replace(/\/$/, '')));
+
+  const achados = [];
+  for (let pagina = 1; pagina <= 5; pagina += 1) {
+    const u = new URL('https://portal.fpg.pt/wp-json/wp/v2/posts');
+    u.searchParams.set('search', 'Francisca Salgado');
+    u.searchParams.set('per_page', '100');
+    u.searchParams.set('page', String(pagina));
+    u.searchParams.set('_fields', 'id,date,link,title,content');
+    u.searchParams.set('orderby', 'date');
+    const r = await fetch(u, { headers: { 'User-Agent': 'franciscasalgado.golf' } });
+    if (r.status === 400) break; // passou da última página
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const lote = await r.json();
+    if (!Array.isArray(lote) || !lote.length) break;
+    achados.push(...lote);
+    if (lote.length < 100) break;
+  }
+
+  const novas = [];
+  const soNoCorpo = [];
+  for (const p of achados) {
+    const titulo = semTags(p.title?.rendered);
+    const corpo = semTags(p.content?.rendered);
+    const url = (p.link || '').replace(/\/$/, '');
+    if (!url || jaTemos.has(url)) continue;
+
+    if (NOME.test(titulo)) {
+      novas.push({ o: 'FPG', data: (p.date || '').slice(0, 7), t: { pt: titulo, en: titulo }, url: `${url}/` });
+    } else if (NOME.test(corpo)) {
+      soNoCorpo.push({ titulo, url, data: (p.date || '').slice(0, 10), futuro: FUTURO.test(corpo) });
+      continue;                                    // não entra sozinho no sítio
+    } else {
+      continue;                                    // nem sequer a menciona
+    }
+
+    if (FUTURO.test(corpo)) {
+      atencao.push(`**Pode anunciar prova futura** — [${titulo}](${url}/), ${(p.date || '').slice(0, 10)}. O vigia não escreve calendário a partir de prosa: se confirmar, acrescente à lista \`proximas\` em \`data/resultados.json\`.`);
+    }
+  }
+
+  if (novas.length) {
+    imprensa.pecas = [...novas, ...imprensa.pecas]
+      .sort((a, b) => (b.data || '').localeCompare(a.data || ''));
+    await gravar('data/imprensa.json', imprensa);
+    for (const n of novas) novidades.push(`imprensa: ${n.data} · ${n.t.pt}`);
+  }
+
+  /* As menções de passagem ficam listadas, e nunca mais são listadas outra
+     vez: o ficheiro guarda o que já foi mostrado, para o aviso não repetir
+     todos os dias o mesmo artigo de 2024. */
+  if (soNoCorpo.length) {
+    const vistas = await ler('data/vigia-vistas.json').catch(() => ({ urls: [] }));
+    const jaMostradas = new Set(vistas.urls || []);
+    const frescas = soNoCorpo.filter((m) => !jaMostradas.has(m.url))
+      .sort((a, b) => b.data.localeCompare(a.data));
+    if (frescas.length) {
+      atencao.push(`**${frescas.length} peça(s) que a mencionam sem ser no título** — cobertura de prova, listas de convocadas, tabelas de resultados. Entram só se alguém decidir que valem:\n${
+        frescas.slice(0, 25).map((m) => `  - ${m.data} · [${m.titulo}](${m.url}/)${m.futuro ? ' · *pode anunciar prova futura*' : ''}`).join('\n')}${
+        frescas.length > 25 ? `\n  - …e mais ${frescas.length - 25}.` : ''}`);
+      await gravar('data/vigia-vistas.json', {
+        '_leia-me': 'Endereços de peças que o vigia já mostrou em VIGIA-ATENCAO.md e não deve voltar a mostrar. Apagar uma linha faz a peça reaparecer no próximo aviso.',
+        urls: [...jaMostradas, ...frescas.map((m) => m.url)].sort(),
+      });
+    }
+  }
+
+  return novas.length;
+}
+
+/* ── correr ────────────────────────────────────────────────────────────── */
+const passo = async (nome, fn) => {
+  try { return await fn(); }
+  catch (e) { falhas.push(`${nome}: ${e.message}`); return null; }
+};
+
+await passo('EGR', egr);
+await passo('WAGR', wagr);
+await passo('FPG', fpg);
+
+/* Contagens que se derivam dos dados e estavam escritas à mão. */
+await passo('contagens', async () => {
+  const [res, imp, perfil] = await Promise.all([
+    ler('data/resultados.json'), ler('data/imprensa.json'), ler('data/perfil.json'),
+  ]);
+  const vitorias = res.provas.filter((p) => p.pos === 1).length;
+  /* Amplitude, e não contagem de anos distintos: o rótulo diz «do primeiro
+     pódio até à época que está a correr», e há anos pelo meio de que não há
+     registo — 2020, por exemplo. Contar anos distintos dava 8 e dizia, sem
+     querer, que ela esteve um ano parada. */
+  const anos = res.provas.map((p) => p.ano).filter(Boolean);
+  const epocas = anos.length ? Math.max(...anos) - Math.min(...anos) + 1 : 0;
+  const mexeu = [];
+  const pôr = (lista, rotulo, valor) => {
+    const n = lista?.find((x) => x.r?.pt === rotulo);
+    if (n && n.v !== String(valor)) { mexeu.push(`${rotulo}: ${n.v} → ${valor}`); n.v = String(valor); }
+  };
+  pôr(perfil.numeros, 'Vitórias', vitorias);
+  pôr(perfil.apoioNumeros, 'Peças de imprensa', imp.pecas.length);
+  pôr(perfil.apoioNumeros, 'Épocas em prova', epocas);
+  if (mexeu.length) { await gravar('data/perfil.json', perfil); novidades.push(...mexeu.map((m) => `número: ${m}`)); }
+});
+
+/* ── o que ficou ───────────────────────────────────────────────────────── */
+const resumo = [
+  `# Vigia — ${hoje}`,
+  '',
+  novidades.length ? `## ${novidades.length} novidade(s)\n\n${novidades.map((n) => `- ${n}`).join('\n')}` : '## Sem novidades',
+  falhas.length ? `\n## Fontes que não responderam\n\n${falhas.map((f) => `- ${f}`).join('\n')}` : '',
+].filter(Boolean).join('\n');
+
+const paraOlhar = atencao.length
+  ? [`# Precisa de olhos — ${hoje}`, '', ...atencao.map((a) => `- ${a}`), '',
+     'Isto não é escrito automaticamente porque vem em prosa, e prosa lida por uma máquina já pôs datas erradas neste sítio.'].join('\n')
+  : '';
+
+if (!SECO) {
+  await writeFile(new URL('VIGIA.md', RAIZ), `${resumo}\n`);
+  await writeFile(new URL('VIGIA-ATENCAO.md', RAIZ), paraOlhar ? `${paraOlhar}\n` : '');
+}
+
+console.log(resumo);
+if (paraOlhar) console.log(`\n${paraOlhar}`);
+if (falhas.length && !novidades.length) process.exitCode = 1;
