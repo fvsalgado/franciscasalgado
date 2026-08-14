@@ -17,11 +17,13 @@ npx serve .          # ou: python3 -m http.server
 
 | | |
 |---|---|
-| Páginas | `index.html`, `resultados.html`, `percurso.html`, `imprensa.html`, `apoiar.html`, `privacidade.html`, `termos.html` |
+| Páginas | `index.html`, `resultados.html`, `percurso.html`, `imprensa.html`, `parcerias.html`, `contacto.html`, `privacidade.html`, `termos.html` |
+| Em inglês | `en/` — **gerado**, não se mexe à mão: ver «Idiomas» |
 | Estilo | `css/site.css` — um ficheiro, com as variáveis de tema no topo |
 | Comportamento | `js/` — módulos ES, sem empacotador |
 | Conteúdo | `data/*.json` — é aqui que se mexe no dia a dia |
-| Funções | `api/` — `wagr.js`, `egr.js` e `instagram.js` |
+| Funções | `api/` — `wagr.js`, `egr.js`, `instagram.js` e `contacto.js` |
+| Manutenção | `scripts/*.mjs` — correm à mão ou pelo GitHub Actions, e nunca chegam ao servidor (`.vercelignore`) |
 | Tipos de letra | `fonts/` — Fraunces e Manrope, alojados aqui e não no Google |
 | Fotografias | `img/` — ver «Fotografias», mais abaixo |
 
@@ -37,10 +39,30 @@ npx serve .          # ou: python3 -m http.server
 | `media.js` | galeria, vídeos e a parede de apoios |
 | `rankings.js` | os dois cartões de ranking, o mundial e o europeu |
 | `instagram.js` | as publicações embutidas, ou o convite quando não há |
-| `i18n.js` | português (lido do HTML) e inglês (escrito aqui) |
+| `i18n.js` | qual é a língua da página e qual é o endereço da outra |
+| `icones.js` | os desenhos, num sítio só |
 | `movimento.js` | cursor, revelação ao rolar, barra de navegação |
 | `creditos.js` | o crédito obrigatório por baixo de cada fotografia |
 | `main.js` / `pagina.js` | pontos de entrada: a inicial e as interiores |
+
+### Os scripts de manutenção
+
+Correm com `node scripts/<nome>.mjs`, a partir da raiz.
+
+| | |
+|---|---|
+| `vigia.mjs` | a ronda diária às fontes — ver «O que se atualiza sozinho» |
+| `traduzir.mjs` | escreve o `en/` inteiro a partir do HTML português e de `en.mjs` |
+| `seo.mjs` | dados estruturados, `sitemap.xml` e `llms.txt` |
+| `en.mjs` | o dicionário inglês. É dado, não é script: só `traduzir.mjs` o lê |
+| `og.mjs` | refaz a imagem de partilha e carimba-lhe a versão |
+| `capas.mjs` | as miniaturas dos vídeos, guardadas cá |
+| `capas-imprensa.mjs` / `logos-imprensa.mjs` | as fotografias e os símbolos da lista de imprensa |
+| `wagr.mjs` / `egr.mjs` | refrescam à mão os instantâneos dos rankings |
+
+**Depois de mexer em HTML ou em `data/`**, corre-se `traduzir.mjs` e depois
+`seo.mjs`: o inglês e os dados estruturados são gerados, e ficam para trás se
+ninguém os voltar a escrever.
 
 ## Mexer no conteúdo
 
@@ -94,7 +116,14 @@ ficha de `factos`, o «ano a ano» de `percurso`, as formas de apoiar de
 ### Imprensa
 
 `data/imprensa.json`: `citacoes` (com ligação à peça de onde saíram), `pecas`
-(o clipping, 38 peças de 2019 a 2026) e `saiuEm` (os nomes das publicações).
+(o clipping, 40 peças de 2019 a 2026) e `saiuEm` (as oito casas onde saiu).
+
+A miniatura de cada peça (`capa`) e o símbolo de cada casa são descarregados
+uma vez pelo `capas-imprensa.mjs` e pelo `logos-imprensa.mjs`, e ficam em
+`img/imprensa/`. Guardados cá de propósito: pedi-los na hora seriam quarenta
+pedidos a oito servidores de cada vez que a página abre, cada um a levar o
+endereço de quem está a ler. Uma peça sem miniatura mostra na mesma o símbolo
+da casa e o título.
 
 ### Galeria, vídeos e apoios
 
@@ -159,22 +188,54 @@ feito, que é o argumento mais concreto para quem está a pensar entrar.
 
 ## Ligar as coisas que faltam
 
-Três pontas ficaram deliberadamente por atar, cada uma com uma constante
-vazia e um comentário no sítio certo:
+Cada ponta por atar tem uma variável vazia e um comentário no sítio certo, e
+nenhuma delas parte o sítio enquanto estiver por ligar:
 
 | O quê | Onde | Como |
 |---|---|---|
-| Entrega do formulário | `js/pagina.js`, `const ENTREGA` | o endereço do serviço (Formspree, uma função serverless…). Enquanto estiver vazio, o formulário valida e encaminha para o Instagram, em vez de fingir que enviou |
+| Entrega do formulário | `RESEND_API_KEY` e `CONTACTO_DE`, nas variáveis de ambiente | ver «O formulário de contacto» |
+| Receção do correio | registos MX de `franciscasalgado.golf` | sem MX, `birdie@` não recebe nada — nem o que o formulário enviar |
 | Medição de tráfego | `js/cookies.js`, `const MEDICAO` | o identificador `G-…` do Google Analytics. Vazio significa que não há nada a carregar — e o banner continua a perguntar na mesma |
 | Publicações do Instagram | `IG_TOKEN`, nas variáveis de ambiente | ver a secção «Instagram» |
-| Correio de contacto | `js/casca.js`, rodapé | não há endereço público conhecido; quando houver, entra ao lado das restantes ligações |
+
+### O formulário de contacto
+
+`api/contacto.js` recebe o POST e entrega por Resend a `birdie@franciscasalgado.golf`.
+Precisa de duas variáveis na Vercel: `RESEND_API_KEY` e `CONTACTO_DE` (um
+remetente de um domínio verificado lá). **Sem a chave responde 501** e diz o
+que falta — e o browser, ao ver 501, abre o email da própria pessoa já
+preenchido. Nunca diz que enviou sem ter enviado.
 
 ## Idiomas
 
-Português e inglês. **O português é o que está escrito no HTML** — não se
-repete em lado nenhum, é lido do DOM ao carregar. Só o inglês vive em
-`js/i18n.js`. Um texto novo leva um `data-t="chave"` no HTML e a mesma chave
-no dicionário `EN`. Se faltar a tradução, fica o português: nunca fica vazio.
+Português e inglês, cada um no seu endereço real: `/resultados.html` e
+`/en/resultados.html`. Isto é preciso para o `hreflang` — uma página que
+trocasse de língua no browser era, para um motor de busca, uma página só.
+
+**O português é o que está escrito no HTML.** O inglês vive em
+`scripts/en.mjs` e o `scripts/traduzir.mjs` escreve o `en/` inteiro a partir
+dos dois. Um texto novo leva um `data-t="chave"` no HTML e a mesma chave no
+dicionário; sem tradução fica o português, nunca fica vazio.
+
+**O `en/` não se edita** — é gerado, e a próxima passagem do `traduzir.mjs`
+apaga o que lá se escrever à mão.
+
+## O que se atualiza sozinho
+
+`scripts/vigia.mjs` corre todos os dias às 06:10 UTC pelo GitHub Actions
+(`.github/workflows/vigia.yml`) e vai ver o WAGR, o European Golf Rankings e o
+arquivo de notícias da FPG.
+
+A regra é uma só: **o que é número entra sozinho, o que é texto espera por
+uma pessoa.** Rankings e datas de provas são escritos nos `data/*.json` e
+seguem para o sítio; uma notícia nova, uma prova que mude de sítio ou
+qualquer coisa que precise de uma frase escrita fica anotada em
+`VIGIA-ATENCAO.md`, que abre um *issue* no GitHub. Uma prova que entre por
+esta via fica marcada `porRever` até alguém confirmar.
+
+Uma notícia só entra sozinha na lista se o **título** trouxer o nome dela. Se
+o nome aparecer apenas no corpo — o que acontece em quase todas as crónicas de
+prova, que citam dezenas de jogadoras — fica para revisão e não entra.
 
 ## Privacidade
 

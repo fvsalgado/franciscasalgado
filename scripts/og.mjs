@@ -55,8 +55,11 @@ body{width:1200px;height:630px;overflow:hidden;background:#0B1512;color:#fff;
      font-size:27px;line-height:1.32;color:#D8E6DC;max-width:24ch;margin-top:20px}
 .pe{display:flex;align-items:flex-end;justify-content:space-between;gap:28px}
 .dom{font-size:20px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;white-space:nowrap}
-.ns{display:flex;gap:34px}
-.n{display:flex;flex-direction:column;gap:2px}
+/* Os números são estreitos e as legendas são largas, por isso alinhados à
+   esquerda ficavam a tocar-se de coluna para coluna. Centrados, cada um
+   lê-se como um bloco só. */
+.ns{display:flex;gap:40px}
+.n{display:flex;flex-direction:column;align-items:center;gap:3px}
 .n b{font-family:'Fraunces',serif;font-weight:400;font-variation-settings:'opsz' 48;
      font-size:40px;line-height:1;color:#8FD9AE}
 .n i{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.16em;
