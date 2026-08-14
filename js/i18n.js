@@ -9,9 +9,9 @@ export const EN = {
   ga_tit: 'Seven years on the course',
   ga_txt: 'From the national U10 champion, in 2019, to the tee at the English Girls\' Open. Photographs from the Portuguese Golf Federation and the clubs, published with permission and with the credit in plain sight.',
 
-  vi_rot: 'Archive',
-  vi_tit: 'At nine, in Amendoeira',
-  vi_txt: 'The oldest footage there is of her on a course: the 2018 Open World Kids Golf, in the Algarve. In one of the rounds she plays alongside Amélia Gabin — today a national-team colleague. Nothing loads from YouTube until you press play.',
+  vi_rot: 'On video',
+  vi_tit: 'From nine years old to now',
+  vi_txt: 'From the interview at the Super Bock Ladies Open to the oldest footage there is of her on a course — the 2018 Open World Kids Golf, in the Algarve, where she plays alongside Amélia Gabin, today a national-team colleague. Nothing loads from YouTube until you press play.',
 
   ap2_q_txt2: 'Those already walking the road with her. They are in separate groups on purpose: institutional backing and a brand of equipment she plays are not the same thing.',
 
@@ -101,7 +101,10 @@ export const EN = {
   /* ── apoiar ─────────────────────────────────────────────── */
   ap2_rot: 'Support',
   ap2_tit: 'Taking Portugal further',
-  ap2_txt: 'An amateur career does not pay for itself. The events that give world-ranking points are played in Spain, France, England and Ireland, and each one of them is a journey, an entry fee and a week away. Partners go on the bag, on the playing apparel and into the tournament photographs.',
+  ap2_txt: 'At seventeen she has four national titles and plays the European calendar. The events that give world-ranking points are played in Spain, France, England and Ireland, and each one is a journey, an entry fee and a week away. That is where a partner comes in — on the bag, on the playing apparel and into the tournament photographs.',
+  ap2_bt1: 'Talk about a partnership',
+  ap2_bt2: 'See the ways in',
+  ap2_rem: 'None of this is a fixed price list. Say what you have in mind and you get a concrete proposal — with events, dates, and what gets seen.',
   ap2_e_rot: 'Ways in',
   ap2_e_tit: 'Three of them',
   ap2_e_txt: 'There is no fixed price list on this page, deliberately: every partnership is drawn up with whoever comes in. Say what you have in mind and you get a concrete proposal.',

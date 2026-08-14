@@ -46,7 +46,7 @@
       "itens": [
         {
           "nome": "ECCO Golf",
-          "logo": "",
+          "logo": "ecco-golf.webp",
           "url": "https://global.ecco.com/",
           "x": {
             "pt": "Calçado",
@@ -55,18 +55,18 @@
         },
         {
           "nome": "Lusíadas Saúde",
-          "logo": "lusiadas.svg",
+          "logo": "lusiadas.webp",
           "url": "https://www.lusiadas.pt/",
           "x": {
             "pt": "Saúde e desporto",
             "en": "Health and sport"
           },
-          "fundo": "escuro"
+          "fundo": "#002F7B"
         },
         {
           "nome": "Skip Portugal",
-          "logo": "",
-          "url": "",
+          "logo": "skip.webp",
+          "url": "https://www.instagram.com/skipportugal/",
           "x": {
             "pt": "Parceiro",
             "en": "Partner"

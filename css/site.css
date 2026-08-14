@@ -64,7 +64,13 @@ body{
   -webkit-font-smoothing:antialiased;
   transition:background-color .6s var(--curva),color .6s var(--curva);
 }
+/* `height:auto` aqui é defesa, não estética: os <img> deste sítio levam os
+   atributos width e height para o navegador reservar o espaço certo, e sem
+   esta linha é esse height que manda quando a largura encolhe — a imagem sai
+   esticada. Quem precisa mesmo de altura fixa põe-na na sua própria classe,
+   que ganha por especificidade. */
 img,canvas{display:block;max-width:100%}
+img{height:auto}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 :focus-visible{outline:2px solid var(--relva);outline-offset:4px}
@@ -93,6 +99,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .txt strong{color:var(--tinta);font-weight:700}
 .lig{color:var(--relva);border-bottom:1px solid var(--linha-forte);transition:border-color .3s var(--curva)}
 .lig:hover{border-color:var(--relva)}
+
+/* Sinal de que a ligação sai daqui. Vale para os botões-cápsula e para as
+   ligações dentro de texto; fica de fora quem já tem seta própria — as fichas
+   oficiais, os cartões de apoio — através do data-sem-seta. */
+a[target="_blank"]:not([data-sem-seta])::after{
+  content:"↗";font-size:.82em;margin-left:.34em;display:inline-block;
+  transform:translateY(-.06em);opacity:.75;
+  transition:transform .3s var(--curva),opacity .3s var(--curva)}
+a[target="_blank"]:not([data-sem-seta]):hover::after{transform:translate(.1em,-.16em);opacity:1}
+/* dentro do botão-cápsula a seta tem de ficar por cima do preenchimento */
+.cap[target="_blank"]::after{position:relative;z-index:1}
 
 /* ── botões cápsula ─────────────────────────────────────── */
 .cap{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
@@ -365,6 +382,10 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .prova__data{font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.17em;
              color:var(--relva);transition:color .4s var(--curva)}
 .prova__a{display:flex;align-items:center;gap:.6rem;justify-content:flex-end;flex-wrap:wrap}
+.prova__f{margin:.5rem 0 0;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.13em}
+.prova__f a{color:var(--relva);border-bottom:1px solid transparent;transition:border-color .3s var(--curva)}
+.prova__f a:hover{border-bottom-color:var(--relva)}
+.prova.tocada .prova__f a{color:color-mix(in srgb,var(--papel) 88%,transparent)}
 
 /* marcador: as voltas e o total, em fila, com o par a fechar */
 .marcador{display:inline-flex;align-items:stretch;border:1px solid var(--linha);border-radius:10px;
@@ -559,6 +580,9 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .rk__pe .cap:hover{color:#08150F}
 .rk__data{font-size:.62rem;color:color-mix(in srgb,var(--rk-tinta) 55%,transparent)}
 
+/* ── fotografias ────────────────────────────────────────── */
+.foto{width:100%;height:auto;display:block;border:1px solid var(--linha);background:var(--superficie)}
+
 /* ── galeria ────────────────────────────────────────────── */
 /* Mosaico: as horizontais ocupam duas colunas, as verticais uma. Com um
    número ímpar de fotografias nunca fica um buraco no fim, porque a grelha
@@ -641,8 +665,8 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
    ignora-o — o logótipo saía com o tamanho original. Com flex e uma altura
    definida na caixa, a percentagem tem contra o que medir. */
 .apoio__cx{display:flex;align-items:center;justify-content:center;
-           width:min(100%,190px);height:4.6rem;background:#FFF;
-           border:1px solid var(--linha);border-radius:10px;padding:.75rem;
+           width:min(100%,190px);height:5rem;background:#FFF;
+           border:1px solid var(--linha);border-radius:10px;padding:.65rem;
            transition:box-shadow .4s var(--curva)}
 .apoio__cx--escuro{background:#16202B;border-color:#16202B}
 .apoio__cx img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
@@ -726,9 +750,17 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 @media (max-width:520px){.ig__pubs .ig__g{grid-template-columns:1fr}}
 
 /* ── reels de parceria ──────────────────────────────────── */
-.reels{display:grid;gap:clamp(1rem,2.4vw,1.8rem);
-       grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
-.reel{margin:0;display:flex;flex-direction:column;gap:.7rem}
+/* Carril em vez de grelha: os reels são verticais e são cinco — numa grelha
+   sobrava sempre um sozinho na última fila. Assim deslizam, que é como se
+   veem no telemóvel, e a fila fica sempre cheia. */
+.reels{display:flex;gap:clamp(1rem,2.4vw,1.6rem);overflow-x:auto;scroll-snap-type:x proximity;
+       scrollbar-width:thin;padding-bottom:1rem;
+       margin-inline:calc(-1 * clamp(1rem,3vw,2rem));
+       padding-inline:clamp(1rem,3vw,2rem)}
+.reels::-webkit-scrollbar{height:6px}
+.reels::-webkit-scrollbar-thumb{background:var(--linha-forte);border-radius:99px}
+.reel{margin:0;display:flex;flex-direction:column;gap:.7rem;
+      flex:0 0 clamp(240px,26vw,300px);scroll-snap-align:start}
 .reel__f{width:100%;min-height:560px;border:1px solid var(--linha);border-radius:14px;
          background:var(--superficie)}
 .reel__l{margin:0;display:flex;flex-direction:column;gap:.2rem;
@@ -736,6 +768,24 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .reel__m{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:var(--relva)}
 .reel__l a{color:var(--tinta-fraca);border-bottom:1px solid var(--linha)}
 .reel__l a:hover{color:var(--relva);border-color:var(--relva)}
+
+/* ── apoiar: abertura ───────────────────────────────────── */
+/* A página abre com a fotografia ao lado do argumento, e não com um título
+   sozinho: quem chega aqui está a decidir se investe, e a primeira coisa que
+   tem de ver é a atleta. */
+.apoio-abre{padding:clamp(6.5rem,13vh,9.5rem) 0 clamp(2rem,5vw,4rem);border-bottom:1px solid var(--linha)}
+.apoio-abre__in{display:grid;gap:clamp(1.8rem,4vw,3.5rem);align-items:center}
+@media (min-width:860px){.apoio-abre__in{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}}
+.apoio-abre__q{display:flex;flex-direction:column;align-items:flex-start;gap:1.2rem;min-width:0}
+.apoio-abre__q .topo-p__t,.apoio-abre__q .topo-p__bt{margin-top:0}
+.apoio-abre__f{margin:0;max-width:440px;justify-self:center}
+.apoio-abre__f img{width:100%;height:auto;display:block;border:1px solid var(--linha);
+                   background:var(--superficie)}
+
+.apoio-remate{margin:clamp(1.6rem,3vw,2.4rem) 0 0;max-width:62ch;
+              font-family:var(--display);font-weight:300;font-style:italic;
+              font-variation-settings:'opsz' 36;font-size:clamp(1.05rem,1.9vw,1.35rem);
+              line-height:1.4;color:var(--tinta)}
 
 /* ── apoiar / patrocínios ───────────────────────────────── */
 /* o formulário à esquerda, as ligações à direita */

@@ -19,9 +19,10 @@ async function ler(nome) {
 const tx = (v, lingua) => (typeof v === 'string' ? v : v?.[lingua] || v?.pt || '');
 
 /* ── números ──────────────────────────────────────────────── */
-export async function numeros(cx, lingua = 'pt') {
+export async function numeros(cx, lingua = 'pt', chave = 'numeros') {
   if (!cx) return;
-  const { numeros: ns = [] } = await ler('perfil');
+  const perfil = await ler('perfil');
+  const ns = perfil[chave] || [];
   cx.className = 'nums';
   cx.innerHTML = ns.map((n) => {
     // a vírgula decimal é portuguesa; em inglês o ponto
@@ -82,7 +83,7 @@ export async function ligacoes(cx, lingua = 'pt') {
   if (!cx) return;
   const cs = await canais(lingua);
   cx.innerHTML = cs.map((c) => `
-    <a class="plat" href="${c.url}" target="_blank" rel="noopener" data-mag>
+    <a class="plat" href="${c.url}" target="_blank" rel="noopener" data-sem-seta data-mag>
       <span class="plat__i">${icone(c.chave, 'ic')}</span>
       <span class="plat__q">
         <span class="plat__n">${c.nome}</span>

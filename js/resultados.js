@@ -96,6 +96,12 @@ function linhaProva(p, lingua, { comNota = false } = {}) {
   const especial = p.posTexto ? `<span class="selo selo--titulo">${tx(p.posTexto, lingua)}</span>` : '';
   const nota = comNota && p.nota
     ? `<p class="prova__l" style="margin-top:.45rem">${tx(p.nota, lingua)}</p>` : '';
+  /* De onde veio este resultado. Está no ficheiro desde o princípio; faltava
+     mostrá-lo, e é ele que faz a diferença entre um número e um número que
+     alguém pode ir verificar. */
+  const fonte = comNota && p.fonte?.url
+    ? `<p class="prova__f"><a href="${p.fonte.url}" target="_blank" rel="noopener" data-mag>${
+        lingua === 'en' ? 'Source' : 'Fonte'}: ${p.fonte.nome}</a></p>` : '';
 
   return `
     <article class="prova" data-ano="${p.ano}" data-id="${p.id}">
@@ -105,6 +111,7 @@ function linhaProva(p, lingua, { comNota = false } = {}) {
         <h3 class="prova__t">${tx(p.torneio, lingua)}</h3>
         ${local ? `<p class="prova__l">${local}</p>` : ''}
         ${nota}
+        ${fonte}
       </div>
       <div class="prova__a">
         ${marcador(p)}

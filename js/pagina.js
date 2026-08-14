@@ -4,7 +4,7 @@
 
 import { iniciar } from './base.js';
 import { porEpoca, carregar } from './resultados.js';
-import { factos, percurso, citacoes, pecas, saiuEm, escadas, ligacoes } from './conteudo.js';
+import { factos, percurso, citacoes, pecas, saiuEm, escadas, ligacoes, numeros } from './conteudo.js';
 import { galeria, videos, apoios } from './media.js';
 import { parcerias } from './instagram.js';
 import { rankings } from './rankings.js';
@@ -96,6 +96,7 @@ const PINTAR = {
 
   async apoiar(l) {
     await Promise.all([escadas($('escadas'), l), apoios($('apoios'), l),
+                       numeros($('numsApoio'), l, 'apoioNumeros'),
                        parcerias($('reels'), l), ligacoes($('ligacoes'), l)]);
   },
 
