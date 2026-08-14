@@ -62,6 +62,7 @@ const pessoa = {
   nationality: { '@type': 'Country', name: 'Portugal' },
   jobTitle: 'Golfista amadora',
   knowsAbout: 'Golfe',
+  email: 'birdie@franciscasalgado.golf',
   homeLocation: {
     '@type': 'Place',
     address: { '@type': 'PostalAddress', addressLocality: perfil.concelho, addressCountry: 'PT' },
@@ -211,6 +212,12 @@ const PAGINAS = {
     name: NOMES[l].contacto,
     inLanguage: l === 'en' ? 'en' : 'pt-PT',
     about: { '@id': `${SITIO}/#francisca` },
+    mainEntity: {
+      '@type': 'ContactPoint',
+      email: 'birdie@franciscasalgado.golf',
+      contactType: l === 'en' ? 'Partnerships and press' : 'Parcerias e imprensa',
+      availableLanguage: ['pt', 'en'],
+    },
   }],
 };
 
@@ -325,6 +332,12 @@ ${(perfil.percurso || []).map((p) => `- ${p.ano} — ${tx(p.t)}: ${tx(p.x)}`).jo
 O sítio existe em português, na raiz, e em inglês, em ${SITIO}/en/. Cada página
 tem as duas versões, com o mesmo nome de ficheiro, e declaram-se uma à outra em
 hreflang. O português é o original; o inglês é tradução dele.
+
+## Contacto
+
+- birdie@franciscasalgado.golf — parcerias, imprensa, convites e pedidos de
+  fotografias
+- Instagram: @francisca_salgado_
 
 ## Páginas
 
