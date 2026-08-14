@@ -38,9 +38,9 @@ const { i18n } = iniciar(async (l) => {
     numeros($('nums'), l),
     ultimas($('ultimas'), l, 4),
     citacoes($('citacoes'), l, 1, { grande: true }),
-    saiuEm($('saiuEm')),
+    saiuEm($('saiuEm'), l),
     portas($('portas'), l),
-    rankings($('rankings'), l),
+    rankings($('rankings'), l, { curto: true }),
     proximo(l),
   ]);
 });

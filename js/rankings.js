@@ -133,9 +133,15 @@ function cartao({ variante, rot, sub, estado, posicao, lingua, principal, miudos
 }
 
 /* ── os dois, lado a lado ─────────────────────────────────── */
-export async function rankings(cx, lingua = 'pt') {
+/* `curto` serve a página inicial. Lá o cartão inteiro — média de pontos, melhor
+   de sempre, vitórias, top 10, provas contadas — era a página de resultados
+   escrita outra vez, e a página inicial não é para isso. Fica o número, de onde
+   vem, de quando é, e a ligação à ficha oficial. O resto está a um clique. */
+export async function rankings(cx, lingua = 'pt', { curto = false } = {}) {
   if (!cx) return;
   const t = T[lingua] || T.pt;
+
+  if (curto) return breves(cx, lingua, t);
 
   const [m, e] = await Promise.all([
     buscar('/api/wagr', '/data/wagr.json'),
@@ -171,4 +177,30 @@ export async function rankings(cx, lingua = 'pt') {
 
   cx.className = 'rks';
   cx.innerHTML = mundial + europeu;
+}
+
+/* ── versão reduzida ──────────────────────────────────────── */
+async function breves(cx, lingua, t) {
+  const [m, e] = await Promise.all([
+    buscar('/api/wagr', '/data/wagr.json'),
+    buscar('/api/egr', '/data/egr.json'),
+  ]);
+
+  const um = (v, dados) => {
+    if (!dados) return '';
+    const { d, vivo } = dados;
+    return `
+      <a class="rkb rkb--${v.chave}" href="${v.url(d)}" target="_blank" rel="noopener" data-sem-seta data-mag>
+        <span class="rkb__r">${v.rot}</span>
+        <span class="rkb__n num">${milhares(d.posicao, lingua)}<sup>${ord(lingua)}</sup></span>
+        <span class="rkb__x">${v.sub}</span>
+        <span class="rkb__e">${vivo ? t.aovivo : t.guardado} · ${d.atualizado}</span>
+        <span class="rkb__s" aria-hidden="true">↗</span>
+      </a>`;
+  };
+
+  cx.className = 'rkbs';
+  cx.innerHTML =
+    um({ chave: 'mundial', rot: t.mundial, sub: t.m_sub, url: (d) => d.perfil }, m) +
+    um({ chave: 'europeu', rot: t.europeu, sub: t.e_sub, url: (d) => d.ficha }, e);
 }

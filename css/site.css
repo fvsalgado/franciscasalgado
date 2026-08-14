@@ -328,6 +328,29 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 /* ── secções ────────────────────────────────────────────── */
 .sec{padding-block:var(--sec);position:relative}
 .sec--fundo{background:var(--superficie)}
+/* ── rankings, versão reduzida (página inicial) ─────────── */
+/* Só o número, de onde vem, de quando é, e a ligação à ficha. O cartão
+   inteiro vive na página de resultados; aqui era a mesma coisa escrita duas
+   vezes no mesmo sítio. */
+.rkbs{display:grid;gap:1px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.rkb{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:.3rem;
+     padding:clamp(1.4rem,3vw,2.1rem);background:rgba(255,255,255,.045);
+     box-shadow:0 0 0 1px rgba(255,255,255,.12);
+     transition:background-color .45s var(--curva)}
+.rkb:hover{background:rgba(255,255,255,.09)}
+.rkb__r{font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:#8FD9AE}
+.rkb--europeu .rkb__r{color:#E4C36A}
+.rkb__n{font-family:var(--display);font-weight:300;font-variation-settings:'opsz' 144;
+        font-size:clamp(3.4rem,8vw,5.6rem);line-height:.95;letter-spacing:-.035em;color:#FFF;
+        margin-block:.1em -.02em}
+.rkb__n sup{font-size:.3em;vertical-align:.9em;margin-left:.06em}
+.rkb__x{font-size:.86rem;color:rgba(255,255,255,.72)}
+.rkb__e{margin-top:.7rem;font-size:.58rem;font-weight:700;text-transform:uppercase;
+        letter-spacing:.14em;color:rgba(255,255,255,.45)}
+.rkb__s{position:absolute;top:clamp(1.4rem,3vw,2.1rem);right:clamp(1.4rem,3vw,2.1rem);
+        color:rgba(255,255,255,.5);transition:transform .4s var(--curva),color .4s var(--curva)}
+.rkb:hover .rkb__s{color:#FFF;transform:translate(.2rem,-.2rem)}
+
 /* Faixa escura, com o mapa de curvas por trás. O canvas vivia no hero, onde
    ficou tapado pela fotografia; aqui é que se vê — e dá à página um segundo
    momento visual, a meio, em vez de sete secções todas com o mesmo tom. */
@@ -1049,41 +1072,100 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
             align-items:center;gap:1rem;text-align:center}
 .saiu--fila .rot{margin:0}
 .saiu--fila ul{display:flex;flex-wrap:wrap;justify-content:center;
-               gap:.5rem .8rem;margin:0;padding:0;list-style:none;max-width:64rem}
+               gap:.5rem .7rem;margin:0;padding:0;list-style:none;max-width:64rem}
+/* Símbolo e nome, em pastilha. A pastilha abre o sítio da casa numa janela
+   nova — quem quiser confirmar que a peça existe vai lá ver. */
+.saiu__l li > *{display:inline-flex;align-items:center;gap:.5rem;
+                padding:.4rem .85rem .4rem .5rem;border-radius:999px;
+                border:1px solid var(--linha);background:var(--papel);
+                font-size:.66rem;font-weight:800;text-transform:uppercase;
+                letter-spacing:.11em;color:var(--tinta-fraca);
+                transition:border-color .35s var(--curva),color .35s var(--curva),
+                           background-color .35s var(--curva)}
+.sec--fundo .saiu__l li > *{background:var(--superficie)}
+.saiu__l a:hover{border-color:var(--relva);color:var(--tinta);background:var(--relva-clara)}
+.saiu__l img{width:1.35rem;height:1.35rem;border-radius:50%;object-fit:contain;
+             background:#FFF;padding:1px;flex:none}
 
 /* ── as portas para as outras páginas ───────────────────── */
-/* Quatro cartões com fotografia. A fotografia é o que faz alguém carregar; o
-   número é o que faz acreditar que vale a pena. */
-.portas{display:grid;gap:1px;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}
-.porta{position:relative;display:flex;flex-direction:column;background:var(--papel);
-       box-shadow:0 0 0 1px var(--linha);overflow:hidden;
-       transition:background-color .45s var(--curva),transform .45s var(--curva)}
-.sec--fundo .porta{background:var(--superficie)}
-.porta:hover{background:var(--relva-clara);transform:translateY(-4px);z-index:1}
-.porta__f{margin:0;aspect-ratio:4/3;overflow:hidden;background:var(--superficie);position:relative}
-/* Véu no topo da fotografia: o crédito é obrigatório e tem de se ler, e há
-   fotografias com céu claro onde o branco desaparecia. */
-.porta__f::after{content:"";position:absolute;inset:0 0 auto;height:4.5rem;pointer-events:none;
-                 background:linear-gradient(to bottom,rgba(9,20,17,.45),transparent)}
+/* Um índice, não uma galeria. Cada página é uma linha: número de ordem, nome
+   em maiúsculas, uma frase, o número que a sustenta, uma miniatura e a seta.
+   Em cartões grandes com fotografia isto lia-se como galeria de fotografias e
+   ninguém percebia que eram caminhos — que é a única coisa que têm de ser. */
+.portas{display:flex;flex-direction:column;border-top:1px solid var(--linha)}
+.porta{position:relative;display:grid;align-items:center;gap:clamp(.9rem,2.4vw,2rem);
+       grid-template-columns:auto minmax(0,1fr) auto;
+       padding:clamp(1.1rem,2.4vw,1.6rem) 0;border-bottom:1px solid var(--linha);
+       transition:background-color .4s var(--curva),padding-inline .4s var(--curva)}
+@media (min-width:820px){
+  .porta{grid-template-columns:auto minmax(0,1fr) auto 6.5rem auto}
+}
+.porta:hover{background:var(--relva-clara);padding-inline:clamp(.6rem,1.6vw,1.2rem)}
+.porta__i{font-family:var(--display);font-weight:300;font-variation-settings:'opsz' 48;
+          font-size:clamp(1.5rem,3vw,2.1rem);line-height:1;color:var(--relva);opacity:.4;
+          min-width:1.9em}
+.porta__q{display:flex;flex-direction:column;gap:.22rem;min-width:0}
+.porta__r{font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:var(--relva)}
+.porta__t{font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 30;
+          font-size:clamp(1.16rem,2.2vw,1.55rem);line-height:1.15;letter-spacing:-.018em;color:var(--tinta)}
+.porta__x{font-size:.85rem;line-height:1.5;color:var(--tinta-fraca);max-width:52ch}
+.porta__n{font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+          color:var(--tinta-fraca);white-space:nowrap}
+.porta__n b{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 30;
+            font-size:1.4rem;letter-spacing:-.01em;color:var(--relva);margin-right:.3rem;
+            vertical-align:-.08em}
+.porta__f{display:none;width:6.5rem;height:4.4rem;border-radius:10px;overflow:hidden;
+          background:var(--superficie);box-shadow:0 0 0 1px var(--linha)}
+@media (min-width:820px){.porta__f{display:block}}
 .porta__f img{width:100%;height:100%;object-fit:cover;object-position:center 28%;
-              transition:transform .8s var(--curva)}
-.porta:hover .porta__f img{transform:scale(1.045)}
-/* O crédito obrigatório entra aqui pelo creditos.js. Fica pequeno e por cima
-   do canto da fotografia, para creditar sem tomar conta do cartão. */
-.porta__f figcaption{position:absolute;top:.55rem;left:.7rem;right:.7rem;
-                     font-size:.52rem;font-weight:700;text-transform:uppercase;
-                     letter-spacing:.1em;color:#FFF;opacity:.9;z-index:1;text-shadow:0 1px 3px rgba(0,0,0,.5)}
-.porta__q{display:flex;flex-direction:column;align-items:flex-start;gap:.5rem;
-          padding:clamp(1.3rem,2.6vw,1.8rem);flex:1}
-.porta__r{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.17em;color:var(--relva)}
-.porta__t{margin:0;font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 28;
-          font-size:clamp(1.18rem,2vw,1.4rem);line-height:1.18;letter-spacing:-.015em;color:var(--tinta)}
-.porta__x{margin:0;font-size:.85rem;line-height:1.55;color:var(--tinta-fraca);max-width:38ch}
-.porta__n{margin-top:auto;padding-top:1rem;font-size:.66rem;font-weight:800;
-          text-transform:uppercase;letter-spacing:.13em;color:var(--tinta-fraca)}
-.porta__n b{font-size:1.5rem;font-weight:400;font-family:var(--display);
-            font-variation-settings:'opsz' 32;letter-spacing:-.01em;color:var(--relva);
-            margin-right:.32rem;vertical-align:-.06em}
-.porta__s{position:absolute;right:clamp(1.3rem,2.6vw,1.8rem);bottom:clamp(1.2rem,2.4vw,1.6rem);
-          font-size:1.1rem;color:var(--relva);transition:transform .45s var(--curva)}
-.porta:hover .porta__s{transform:translateX(.35rem)}
+              transition:transform .7s var(--curva)}
+.porta:hover .porta__f img{transform:scale(1.06)}
+.porta__s{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:50%;
+          border:1px solid var(--linha-forte);color:var(--relva);font-size:.95rem;flex:none;
+          transition:background-color .4s var(--curva),color .4s var(--curva),
+                     border-color .4s var(--curva),transform .4s var(--curva)}
+.porta:hover .porta__s{background:var(--relva);border-color:var(--relva);color:#FFF;transform:translateX(.2rem)}
+@media (max-width:819px){
+  .porta{grid-template-columns:auto minmax(0,1fr) auto}
+  .porta__n{display:none}
+}
+
+/* ── botão flutuante de contacto ────────────────────────── */
+/* Sempre à mão, em qualquer página. O contacto vivia no fim de uma página só;
+   quem chegava a meio de outra tinha de o ir procurar, que é quando desiste.
+   Fica no canto direito de baixo — o dos cookies fica à esquerda, e o convite
+   da língua mudou-se para lá também, para os três nunca disputarem o mesmo
+   canto. */
+.fala{position:fixed;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:110;
+      display:flex;flex-direction:column;align-items:flex-end;gap:.6rem}
+.fala__b{display:inline-flex;align-items:center;gap:.55rem;padding:.8rem 1.15rem;
+         border-radius:999px;border:0;cursor:pointer;background:var(--relva);color:#FFF;
+         font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;
+         box-shadow:0 12px 30px -12px rgba(18,40,30,.7);
+         transition:transform .4s var(--curva),background-color .4s var(--curva)}
+.fala__b:hover{transform:translateY(-2px)}
+.fala__b .ic{width:1rem;height:1rem}
+.fala--aberto .fala__b{background:var(--tinta)}
+.fala__l{display:flex;flex-direction:column;gap:.4rem;align-items:flex-end;
+         animation:fala-entra .32s var(--curva) both}
+@keyframes fala-entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fala__l[hidden]{display:none}
+.fala__a{display:inline-flex;align-items:center;gap:.6rem;padding:.62rem .95rem;
+         border-radius:999px;background:var(--papel);border:1px solid var(--linha);
+         font-size:.78rem;color:var(--tinta);white-space:nowrap;
+         box-shadow:0 10px 26px -16px rgba(18,40,30,.5);
+         transition:border-color .35s var(--curva),background-color .35s var(--curva)}
+.fala__a:hover{border-color:var(--relva);background:var(--relva-clara)}
+.fala__a .ic{width:1rem;height:1rem;color:var(--relva);flex:none}
+@media (max-width:520px){
+  .fala__b span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .fala__b{padding:.95rem;border-radius:50%}
+  .fala__b .ic{width:1.15rem;height:1.15rem}
+  .fala__a span{font-size:.72rem}
+}
+@media (prefers-reduced-motion:reduce){.fala__l{animation:none}}
+
+/* O convite da língua muda-se para o canto esquerdo: o botão de contacto
+   ocupa agora o direito, e o dos cookies já saiu quando este aparece. */
+.convite-l{right:auto;left:clamp(1rem,3vw,2rem)}
+@media (max-width:560px){.convite-l{right:clamp(1rem,3vw,2rem);bottom:5.5rem}}

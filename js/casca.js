@@ -199,3 +199,45 @@ export function tema() {
   document.addEventListener('fs:nav', pintar);
   pintar();
 }
+
+/* ── botão flutuante de contacto ──────────────────────────── */
+/* Duas maneiras de falar com ela, sempre à mão, em qualquer página e em
+   qualquer ponto da página. O sítio tem o contacto no fim de uma página só, e
+   quem chega a meio de outra teria de o ir procurar — que é precisamente
+   quando desiste.
+
+   Fechado é um botão; aberto mostra o email e o Instagram. Não abre sozinho e
+   não tapa nada: fica no canto de baixo, do lado oposto ao banner dos cookies
+   e ao convite da língua. */
+export function flutuante(lingua = 'pt') {
+  if (document.getElementById('fala')) return;
+  const en = lingua === 'en';
+  const cx = document.createElement('div');
+  cx.className = 'fala';
+  cx.id = 'fala';
+  cx.innerHTML = `
+    <div class="fala__l" id="falaL" hidden>
+      <a class="fala__a" href="mailto:birdie@franciscasalgado.golf" data-sem-seta>
+        ${icone('email', 'ic')}<span>birdie@franciscasalgado.golf</span>
+      </a>
+      <a class="fala__a" href="https://www.instagram.com/francisca_salgado_/"
+         target="_blank" rel="noopener" data-sem-seta>
+        ${icone('instagram', 'ic')}<span>@francisca_salgado_</span>
+      </a>
+    </div>
+    <button class="fala__b" id="falaB" type="button" aria-expanded="false" aria-controls="falaL">
+      ${icone('email', 'ic')}<span>${en ? 'Get in touch' : 'Falar'}</span>
+    </button>`;
+  document.body.append(cx);
+
+  const bt = cx.querySelector('#falaB');
+  const lista = cx.querySelector('#falaL');
+  const abrir = (sim) => {
+    lista.hidden = !sim;
+    bt.setAttribute('aria-expanded', String(sim));
+    cx.classList.toggle('fala--aberto', sim);
+  };
+  bt.addEventListener('click', () => abrir(lista.hidden));
+  document.addEventListener('click', (e) => { if (!cx.contains(e.target)) abrir(false); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') abrir(false); });
+}
