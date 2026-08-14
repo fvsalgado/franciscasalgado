@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+.vercel/
+
+# Relatórios do vigia. São de cada corrida, não do repositório: o resumo vai
+# para o sumário da ação e o que precisa de olhos vai para um issue. O que fica
+# guardado é data/vigia-vistas.json, para o aviso não repetir o que já mostrou.
+VIGIA.md
+VIGIA-ATENCAO.md

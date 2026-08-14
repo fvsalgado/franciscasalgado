@@ -4,4 +4,10 @@ Disallow: /privacidade.html
 Disallow: /termos.html
 Disallow: /scripts/
 
+# Os assistentes que leem este sítio são bem-vindos. Há um resumo em texto
+# simples, com os factos e a fonte de cada um, em /llms.txt — e os dados em
+# bruto, abertos, em /data/. As classificações de ranking mudam todas as
+# semanas: leia-as em /api/wagr e /api/egr, que respondem com o que está nas
+# fichas oficiais no momento do pedido, em vez de as citar de uma cópia.
+
 Sitemap: https://franciscasalgado.golf/sitemap.xml

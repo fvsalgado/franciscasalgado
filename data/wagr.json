@@ -1,5 +1,5 @@
 {
-  "_leia-me": "Instantâneo da ficha da jogadora no World Amateur Golf Ranking. Serve de recurso quando /api/wagr não está disponível (alojamento estático, função em baixo). Para refrescar: node scripts/wagr.mjs",
+  "_leia-me": "Instantâneo da ficha no World Amateur Golf Ranking. Recurso para quando /api/wagr não está disponível. Refrescado pelo vigia; à mão: node scripts/wagr.mjs",
   "atualizado": "2026-08-14",
   "playerId": 43158,
   "perfil": "https://www.wagr.com/playerprofile/francisca-salgado-43158",
