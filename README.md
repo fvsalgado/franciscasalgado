@@ -21,6 +21,7 @@ npx serve .          # ou: python3 -m http.server
 | Estilo | `css/site.css` — um ficheiro, com as variáveis de tema no topo |
 | Comportamento | `js/` — módulos ES, sem empacotador |
 | Conteúdo | `data/*.json` — é aqui que se mexe no dia a dia |
+| Funções | `api/wagr.js` — a única, e serve o cartão do ranking mundial |
 | Tipos de letra | `fonts/` — Fraunces e Manrope, alojados aqui e não no Google |
 | Fotografias | `img/` — ver «Fotografias», mais abaixo |
 
@@ -33,6 +34,7 @@ npx serve .          # ou: python3 -m http.server
 | `campo.js` | o fundo do hero — carta topográfica animada em WebGL |
 | `resultados.js` | a lista de provas, o marcador, os filtros e o palmarès |
 | `conteudo.js` | números, factos, linha do tempo, imprensa, ligações |
+| `wagr.js` | o cartão do ranking mundial |
 | `i18n.js` | português (lido do HTML) e inglês (escrito aqui) |
 | `movimento.js` | cursor, revelação ao rolar, barra de navegação |
 | `creditos.js` | o crédito obrigatório por baixo de cada fotografia |
@@ -106,31 +108,49 @@ O código é o que vem depois de `/p/` ou `/reel/` no endereço da publicação.
 
 ## Fotografias
 
-**Não há fotografias neste repositório**, e isso é uma decisão, não um
-esquecimento. As fotografias que existem online de Francisca Salgado
-pertencem à Federação Portuguesa de Golfe e aos fotógrafos das provas;
-descarregá-las e publicá-las aqui seria usar trabalho de outros sem licença.
-Nos sítios onde entra uma fotografia está, em vez dela, um lugar marcado com
-as dimensões certas.
+As fotografias são da **Federação Portuguesa de Golfe** e dos **clubes**, e
+estão publicadas com autorização expressa para a Francisca as usar, desde que
+creditadas. O crédito não é decorativo: é a condição.
 
-Para as pôr:
+| Ficheiro | O quê | Crédito | Onde aparece |
+|---|---|---|---|
+| `retrato.webp` | retrato oficial, 1080×1350 | Federação Portuguesa de Golfe | hero, imprensa, imagem de partilha |
+| `retrato-quadrado.webp` | retrato próximo, 596×596 | Federação Portuguesa de Golfe | «Quem é», na inicial |
+| `jogo.webp` | em prova, 1068×1335 | Praia D'El Rey Golf Course | percurso, imprensa |
+| `trofeu.webp` | com o troféu da Taça FPG, 880×1100 | Federação Portuguesa de Golfe | imprensa |
 
-1. Guarde os ficheiros em `img/` — em `.webp`, com estas medidas:
-   - `retrato.webp` — 1080 × 1350 (retrato oficial, hero e percurso)
-   - `retrato-quadrado.webp` — 1200 × 1200 (secção «Quem é»)
-   - `jogo.webp` — 1200 × 1500 (em prova, página de imprensa)
-2. Substitua o bloco `<div class="ph …">…</div>` pela imagem:
-   ```html
-   <img class="hero__img" src="img/retrato.webp" alt="Retrato de Francisca Salgado"
-        width="1080" height="1350" fetchpriority="high" decoding="async" />
-   ```
-3. **Acrescente o crédito em `data/creditos.json`.** Sem isso o `creditos.js`
-   deixa aviso na consola e a fotografia fica sem a autoria à vista — que é
-   precisamente o que não se quer fazer a quem a tirou.
+Os créditos vivem todos em `data/creditos.json`, num sítio só, e o
+`js/creditos.js` põe-nos por baixo de cada imagem em português e em inglês.
+Cada entrada tem um campo `_origem` — não é mostrado no site — a dizer de que
+página veio o ficheiro, para se poder confirmar a autoria com quem a detém e
+afinar o crédito se for caso disso.
 
-A imagem de partilha (`img/og.jpg`) é gerada e não tem fotografia: o desenho
-está em `scripts/og.html`. Para a refazer depois de mudar alguma coisa, veja
-`scripts/og.md`.
+Para trocar uma fotografia: guarde a nova em `img/` com o mesmo nome e as
+mesmas medidas, e confirme a linha correspondente em `data/creditos.json`. Uma
+imagem que entre sem crédito deixa aviso na consola — de propósito.
+
+A imagem de partilha (`img/og.jpg`) é composta a partir do retrato oficial;
+o desenho está em `scripts/og.html` e as instruções em `scripts/og.md`.
+
+## Ranking mundial (WAGR)
+
+O cartão do World Amateur Golf Ranking lê a ficha oficial dela na hora. O
+caminho é este, e a razão de ser dele também:
+
+1. **`/api/wagr`** — função serverless que chama a API do WAGR. Tem de ser do
+   lado do servidor: a API responde
+   `access-control-allow-origin: https://www.wagr.com` e mais nenhum, por isso
+   o navegador nunca a conseguiria chamar a partir deste domínio. Não há chave
+   nem segredo — é o mesmo pedido público que o sítio deles faz a si próprio.
+   A resposta fica em cache seis horas, com mais um dia a servir enquanto
+   revalida.
+2. **`data/wagr.json`** — instantâneo guardado no repositório. Entra quando
+   não há funções (alojamento estático, `npx serve` local) ou quando o WAGR
+   está em baixo. Refresca-se com `node scripts/wagr.mjs`.
+
+O cartão diz qual dos dois está a ser usado — «Em direto» ou «Instantâneo» —
+e mostra sempre a data dos dados e a ligação para a ficha oficial. O número
+nunca é escrito à mão em lado nenhum.
 
 ## Ligar as coisas que faltam
 

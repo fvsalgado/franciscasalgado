@@ -3,9 +3,13 @@
 
 export const EN = {
   /* ── partilhado ─────────────────────────────────────────── */
-  ph_retrato: 'Official portrait',
-  ph_jogo: 'In play',
   dz_onde: 'Published in',
+
+  wa_rot: 'World ranking',
+  wa_tit: 'The official record, as it stands',
+  wa_txt: 'The <strong>World Amateur Golf Ranking</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA. This card reads her record there the moment the page opens — it is not a number typed in by hand.',
+  wa_txt2: 'Every international event she plays moves it. The points average is what decides the placing: points earned divided by counting events.',
+  wa_txt3: 'Read from the <strong>World Amateur Golf Ranking</strong> the moment the page opens. It is the world ranking of amateur golf, run by The R&amp;A and the USGA, and it decides access to much of the international calendar.',
 
   /* ── página inicial ─────────────────────────────────────── */
   hero_rot: 'Amateur golfer · Portuguese national team · U18',

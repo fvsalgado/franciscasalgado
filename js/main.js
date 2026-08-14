@@ -6,6 +6,7 @@ import { reduzido } from './movimento.js';
 import { ultimas, palmares, ultimo } from './resultados.js';
 import { numeros, citacoes, saiuEm, escadas } from './conteudo.js';
 import { instagram } from './instagram.js';
+import { wagr } from './wagr.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -26,6 +27,7 @@ const { i18n } = iniciar(async (l) => {
     citacoes($('citacoes'), l, 2),
     saiuEm($('saiuEm')),
     escadas($('escadas'), l),
+    wagr($('wagr'), l),
     proximo(l),
   ]);
 });

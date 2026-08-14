@@ -78,13 +78,11 @@
   <div class="hero__in">
     <!-- A fotografia entra no fluxo, dentro de <figure>, e não como camada de
          fundo: assim o js/creditos.js pode pôr o crédito obrigatório por baixo
-         dela, como faz em todo o lado. Enquanto não houver retrato, fica o
-         lugar marcado — ver README.md, secção «Fotografias». -->
+         dela, como faz em todo o lado. O <figcaption> nasce vazio de propósito
+         — é o creditos.js que o preenche, a partir de data/creditos.json. -->
     <figure class="hero__f">
-      <div class="ph ph--45"><div class="ph__c">
-        <p class="ph__n" data-t="ph_retrato">Retrato oficial</p>
-        <p class="ph__d num">1080 × 1350</p>
-      </div></div>
+      <img class="hero__img" src="img/retrato.webp" alt="Retrato de Francisca Salgado"
+           width="1080" height="1350" fetchpriority="high" decoding="async" />
       <figcaption class="hero__leg"></figcaption>
     </figure>
 
@@ -123,14 +121,25 @@
   </div>
 </section>
 
+<!-- ═══ RANKING MUNDIAL ════════════════════════════════ -->
+<section class="sec sec--curta" id="mundial">
+  <div class="env mundial">
+    <div>
+      <p class="rot" data-t="wa_rot">Ranking mundial</p>
+      <h2 class="d d--m ani" style="margin-top:1.1rem" data-t="wa_tit">A ficha oficial, tal como está</h2>
+      <p class="txt" style="margin-top:1.1rem" data-t="wa_txt">O <strong>World Amateur Golf Ranking</strong> é o ranking mundial do golfe amador, gerido pelo R&amp;A e pela USGA. Este cartão lê a ficha dela lá, no momento em que a página abre — não é um número escrito à mão.</p>
+      <p class="txt" data-t="wa_txt2">Cada prova internacional que joga mexe aqui. A média de pontos é o que conta para a classificação: pontos ganhos a dividir pelas provas contabilizadas.</p>
+    </div>
+    <div id="wagr"></div>
+  </div>
+</section>
+
 <!-- ═══ QUEM É ═════════════════════════════════════════ -->
 <section class="sec sec--fundo" id="quem">
   <div class="env abre">
     <figure class="abre__f">
-      <div class="ph ph--1"><div class="ph__c">
-        <p class="ph__n" data-t="ph_jogo">Em prova</p>
-        <p class="ph__d num">1200 × 1200</p>
-      </div></div>
+      <img class="abre__img" src="img/retrato-quadrado.webp" alt="Francisca Salgado num campo de golfe"
+           width="596" height="596" loading="lazy" decoding="async" />
     </figure>
     <div class="abre__q">
       <p class="rot" data-t="qu_rot">Quem é</p>
