@@ -9,7 +9,7 @@ export const PAGINAS = [
   { href: 'resultados.html', pt: 'Resultados', en: 'Results' },
   { href: 'percurso.html', pt: 'Percurso', en: 'Her story' },
   { href: 'imprensa.html', pt: 'Imprensa', en: 'Press' },
-  { href: 'apoiar.html', pt: 'Apoiar', en: 'Support' },
+  { href: 'parcerias.html', pt: 'Parcerias', en: 'Partnerships' },
 ];
 
 const aqui = () => {
@@ -94,7 +94,7 @@ export function nav(lingua = 'pt') {
           <span class="ico" id="btTemaI">${icone('lua', 'ic')}</span>
         </button>
         <button class="cap" id="btLang" type="button" aria-label="Language">${en ? 'PT' : 'EN'}</button>
-        <a class="cap cap--cheio nav__cta" href="apoiar.html#contacto" data-mag>${en ? 'Get in touch' : 'Contactar'}</a>
+        <a class="cap cap--cheio nav__cta" href="parcerias.html#contacto" data-mag>${en ? 'Get in touch' : 'Contactar'}</a>
         <button class="ham" id="btMenu" type="button" aria-expanded="false" aria-controls="menu"
                 aria-label="Menu"><i></i><i></i></button>
       </div>
@@ -103,7 +103,7 @@ export function nav(lingua = 'pt') {
     <div class="menu" id="menu" hidden>
       <div class="menu__in">
         <nav class="menu__l" aria-label="${en ? 'Main' : 'Principal'}">${links(false)}</nav>
-        <a class="cap cap--cheio menu__b" href="apoiar.html#contacto">${en ? 'Get in touch' : 'Contactar'}</a>
+        <a class="cap cap--cheio menu__b" href="parcerias.html#contacto">${en ? 'Get in touch' : 'Contactar'}</a>
       </div>
     </div>`;
   menuMovel(alvo);
@@ -148,7 +148,7 @@ export function rodape(lingua = 'pt', canais = []) {
         <div>
           <p class="rot">${t.falar}</p>
           <ul class="pe__l">
-            <li><a href="apoiar.html#contacto" data-mag>${t.apoiar}</a></li>
+            <li><a href="parcerias.html#contacto" data-mag>${t.apoiar}</a></li>
             <li><a href="imprensa.html" data-mag>${t.kit}</a></li>
           </ul>
         </div>

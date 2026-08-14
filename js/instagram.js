@@ -13,6 +13,8 @@
    nada: a página devolve JavaScript sem publicações lá dentro, e a API de
    perfil responde `require_login` a pedidos vindos de servidores. */
 
+import { icone } from './icones.js';
+
 export const CONTA = 'francisca_salgado_';
 
 const tx = (v, l) => (typeof v === 'string' ? v : v?.[l] || v?.pt || '');
@@ -111,24 +113,68 @@ export async function perfilIg(cx, lingua = 'pt') {
 }
 
 /* ── parcerias em vídeo ───────────────────────────────────── */
-/* Os reels de marca, na página de apoios: mostram o trabalho de patrocínio a
-   acontecer, que é o argumento mais forte para quem está a pensar entrar. */
-export async function parcerias(cx, lingua = 'pt') {
+/* Os reels de marca: mostram o trabalho de patrocínio a acontecer, que é o
+   argumento mais forte para quem está a pensar entrar.
+
+   A legenda diz o nome da marca uma vez e, a seguir, o que a parceria cobre.
+   Antes dizia «Lusíadas Saúde» e por baixo «Com a Lusíadas Saúde», que é a
+   mesma informação escrita duas vezes e nenhuma delas útil.
+
+   Por trás do iframe fica uma ligação: se o Instagram não desenhar — bloqueador
+   de conteúdos, rede fechada, embed retirado — o cartão continua a levar ao
+   vídeo em vez de ficar um retângulo vazio. */
+export async function reels(cx, lingua = 'pt') {
   if (!cx) return;
   const { parcerias: ps = [] } = await ficheiro();
   if (!ps.length) { cx.innerHTML = ''; return; }
+  const en = lingua === 'en';
 
   cx.className = 'reels';
-  cx.innerHTML = ps.map((p) => `
-    <figure class="reel sobe-i">
-      <iframe class="reel__f" title="Instagram · ${p.marca}" loading="lazy" scrolling="no"
-        src="https://www.instagram.com/reel/${encodeURIComponent(p.codigo)}/embed/captioned/"
-        frameborder="0" allow="encrypted-media"></iframe>
-      <figcaption class="reel__l">
-        <span class="reel__m">${p.marca}</span>
-        <a href="https://www.instagram.com/${CONTA}/reel/${p.codigo}/" target="_blank" rel="noopener" data-mag>${tx(p.t, lingua)}</a>
-      </figcaption>
-    </figure>`).join('');
+  cx.innerHTML = `
+    <div class="reels__c" data-carril>${ps.map((p) => {
+      const url = `https://www.instagram.com/reel/${p.codigo}/`;
+      return `
+      <figure class="reel sobe-i">
+        <div class="reel__f">
+          <a class="reel__fb" href="${url}" target="_blank" rel="noopener" data-sem-seta>
+            <span>${en ? 'Watch on Instagram' : 'Ver no Instagram'}</span>
+          </a>
+          <iframe title="Instagram · ${p.marca}" loading="lazy" scrolling="no"
+            src="https://www.instagram.com/reel/${encodeURIComponent(p.codigo)}/embed/"
+            frameborder="0" allow="encrypted-media"></iframe>
+        </div>
+        <figcaption class="reel__l">
+          <a class="reel__m" href="${url}" target="_blank" rel="noopener" data-sem-seta data-mag>${p.marca}</a>
+          <span class="reel__x">${tx(p.x, lingua)}</span>
+        </figcaption>
+      </figure>`;
+    }).join('')}</div>
+    <div class="reels__n">
+      <button class="reels__b" type="button" data-ir="-1"
+              aria-label="${en ? 'Previous' : 'Anterior'}">${icone('seta', 'ic')}</button>
+      <button class="reels__b" type="button" data-ir="1"
+              aria-label="${en ? 'Next' : 'Seguinte'}">${icone('seta', 'ic')}</button>
+    </div>`;
+
+  const carril = cx.querySelector('[data-carril]');
+  cx.querySelector('.reels__n').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-ir]');
+    if (!b) return;
+    const passo = carril.querySelector('.reel')?.getBoundingClientRect().width || 280;
+    carril.scrollBy({ left: Number(b.dataset.ir) * (passo + 20), behavior: 'smooth' });
+  });
+
+  /* As setas desligam-se nas pontas: um botão que não faz nada é pior do que
+     um botão que se vê que não dá. */
+  const pontas = () => {
+    const [ant, seg] = cx.querySelectorAll('[data-ir]');
+    const fim = carril.scrollWidth - carril.clientWidth - 4;
+    ant.disabled = carril.scrollLeft <= 4;
+    seg.disabled = carril.scrollLeft >= fim;
+  };
+  carril.addEventListener('scroll', pontas, { passive: true });
+  addEventListener('resize', pontas);
+  pontas();
 }
 
 /* `comConvite` fica falso quando o cartão de perfil já está ao lado: dois

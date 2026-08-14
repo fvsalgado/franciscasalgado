@@ -83,6 +83,7 @@
       }
     },
     {
+      "vivo": "rankings",
       "dt": {
         "pt": "Rankings",
         "en": "Rankings"
@@ -216,9 +217,15 @@
         "en": "Season partner"
       },
       "x": {
-        "pt": "Presença no saco, no vestuário de jogo e nas fotografias de prova, ao longo de um calendário inteiro — nacional e internacional. Relatório de época com provas, resultados e cobertura de imprensa.",
-        "en": "Presence on the bag, on playing apparel and in tournament photography across a full calendar — at home and abroad. End-of-season report with events, results and press coverage."
-      }
+        "pt": "Uma época inteira, dentro e fora de Portugal. É a forma com mais presença, e a única que fecha com um relatório do que aconteceu.",
+        "en": "A whole season, at home and abroad. It is the most visible of the three, and the only one that ends with a written account of what happened."
+      },
+      "inclui": [
+        { "pt": "Marca no saco e no vestuário de jogo", "en": "Brand on the bag and on playing apparel" },
+        { "pt": "Presença nas fotografias de prova", "en": "Presence in tournament photography" },
+        { "pt": "Calendário nacional e internacional", "en": "Home and international calendar" },
+        { "pt": "Relatório de época: provas, resultados e imprensa", "en": "Season report: events, results and press" }
+      ]
     },
     {
       "e": {
@@ -230,9 +237,15 @@
         "en": "Event support"
       },
       "x": {
-        "pt": "Cobre a deslocação, a inscrição e o caddie de um torneio internacional. Foi assim que se fez o English Girls' Open, em Inglaterra, com o apoio da Fundação do Desporto.",
-        "en": "Covers travel, entry and caddie for one international tournament. That is how the English Girls' Open, in England, was made possible, with the Fundação do Desporto behind it."
-      }
+        "pt": "Um torneio internacional, do princípio ao fim. Foi assim que se fez o English Girls' Open, em Inglaterra, com a Fundação do Desporto por trás.",
+        "en": "One international tournament, start to finish. That is how the English Girls' Open, in England, was made possible, with the Fundação do Desporto behind it."
+      },
+      "inclui": [
+        { "pt": "Deslocação e estadia", "en": "Travel and accommodation" },
+        { "pt": "Inscrição na prova", "en": "Tournament entry" },
+        { "pt": "Caddie", "en": "Caddie" },
+        { "pt": "Créditos no sítio e nas redes dela", "en": "Credit on her site and channels" }
+      ]
     },
     {
       "e": {
@@ -244,9 +257,15 @@
         "en": "Support for the groundwork"
       },
       "x": {
-        "pt": "Bolas, campo, aulas, preparação física e acompanhamento. Não aparece nas fotografias, mas é o que separa um 74 de um 70.",
-        "en": "Balls, range, lessons, physical preparation and coaching. It never shows up in the photographs, but it is what separates a 74 from a 70."
-      }
+        "pt": "O trabalho que não aparece nas fotografias, e que é o que separa um 74 de um 70.",
+        "en": "The work that never shows up in the photographs, and that is what separates a 74 from a 70."
+      },
+      "inclui": [
+        { "pt": "Bolas e campo de treino", "en": "Balls and range time" },
+        { "pt": "Aulas e acompanhamento técnico", "en": "Lessons and coaching" },
+        { "pt": "Preparação física", "en": "Physical preparation" },
+        { "pt": "Material de treino", "en": "Training equipment" }
+      ]
     }
   ],
   "apoioNumeros": [

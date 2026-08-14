@@ -84,7 +84,7 @@ const dataLonga = (iso, lingua) => {
     { day: 'numeric', month: 'long', year: 'numeric' });
 };
 
-async function buscar(rota, instantaneo) {
+export async function buscar(rota, instantaneo) {
   try {
     const r = await fetch(rota, { cache: 'no-cache' });
     if (r.ok) {

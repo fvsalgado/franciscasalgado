@@ -24,23 +24,23 @@
   "parcerias": [
     {
       "codigo": "DZXButZk32u", "tipo": "reel", "marca": "Lusíadas Saúde",
-      "t": { "pt": "Com a Lusíadas Saúde", "en": "With Lusíadas Saúde" }
+      "x": { "pt": "Saúde e recuperação", "en": "Health and recovery" }
     },
     {
       "codigo": "DWqeTFXAFGV", "tipo": "reel", "marca": "Skip Portugal",
-      "t": { "pt": "Com a Skip Portugal", "en": "With Skip Portugal" }
+      "x": { "pt": "Campanha de marca", "en": "Brand campaign" }
     },
     {
       "codigo": "DVT_LlLALMj", "tipo": "reel", "marca": "Cobra Golf",
-      "t": { "pt": "Com a Cobra Golf", "en": "With Cobra Golf" }
+      "x": { "pt": "Tacos em prova", "en": "Clubs in play" }
     },
     {
       "codigo": "DUv6OVuAEUp", "tipo": "reel", "marca": "Puma Golf · Cobra Golf",
-      "t": { "pt": "Com a Puma e a Cobra Golf", "en": "With Puma and Cobra Golf" }
+      "x": { "pt": "Vestuário e tacos", "en": "Apparel and clubs" }
     },
     {
       "codigo": "CqqrICircDQ", "tipo": "reel", "marca": "ECCO Golf",
-      "t": { "pt": "Com a ECCO Golf", "en": "With ECCO Golf" }
+      "x": { "pt": "Calçado de jogo", "en": "Playing shoes" }
     }
   ]
 }

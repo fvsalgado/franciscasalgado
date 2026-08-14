@@ -753,21 +753,47 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 /* Carril em vez de grelha: os reels são verticais e são cinco — numa grelha
    sobrava sempre um sozinho na última fila. Assim deslizam, que é como se
    veem no telemóvel, e a fila fica sempre cheia. */
-.reels{display:flex;gap:clamp(1rem,2.4vw,1.6rem);overflow-x:auto;scroll-snap-type:x proximity;
-       scrollbar-width:thin;padding-bottom:1rem;
-       margin-inline:calc(-1 * clamp(1rem,3vw,2rem));
-       padding-inline:clamp(1rem,3vw,2rem)}
-.reels::-webkit-scrollbar{height:6px}
-.reels::-webkit-scrollbar-thumb{background:var(--linha-forte);border-radius:99px}
-.reel{margin:0;display:flex;flex-direction:column;gap:.7rem;
-      flex:0 0 clamp(240px,26vw,300px);scroll-snap-align:start}
-.reel__f{width:100%;min-height:560px;border:1px solid var(--linha);border-radius:14px;
-         background:var(--superficie)}
-.reel__l{margin:0;display:flex;flex-direction:column;gap:.2rem;
-         text-transform:none;letter-spacing:normal;font-weight:400;font-size:.88rem;color:var(--tinta)}
-.reel__m{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:var(--relva)}
-.reel__l a{color:var(--tinta-fraca);border-bottom:1px solid var(--linha)}
-.reel__l a:hover{color:var(--relva);border-color:var(--relva)}
+.reels{position:relative}
+.reels__c{display:flex;gap:clamp(1rem,2.4vw,1.6rem);overflow-x:auto;scroll-snap-type:x mandatory;
+          scrollbar-width:none;padding-block:.4rem 1rem;
+          margin-inline:calc(-1 * clamp(1rem,3vw,2rem));
+          padding-inline:clamp(1rem,3vw,2rem)}
+.reels__c::-webkit-scrollbar{display:none}
+.reel{margin:0;display:flex;flex-direction:column;gap:.85rem;
+      flex:0 0 clamp(238px,24vw,286px);scroll-snap-align:start}
+
+/* O rácio é o do reel mais a barra do Instagram por cima. Fixá-lo em vez de
+   pôr uma altura em pixels mantém os cinco cartões alinhados em qualquer
+   largura, que é o que faltava para isto parecer uma fila e não um monte. */
+.reel__f{position:relative;aspect-ratio:9/18.5;border-radius:16px;overflow:hidden;
+         background:var(--superficie);box-shadow:0 0 0 1px var(--linha);
+         transition:box-shadow .45s var(--curva),transform .45s var(--curva)}
+.reel:hover .reel__f{transform:translateY(-3px);box-shadow:0 0 0 1px var(--linha-forte),0 16px 34px -20px rgba(18,40,30,.5)}
+.reel__f iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:1}
+/* Por baixo do iframe. Só se vê se o Instagram não desenhar. */
+.reel__fb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+          padding:1.2rem;text-align:center;font-size:.66rem;font-weight:800;
+          text-transform:uppercase;letter-spacing:.15em;color:var(--tinta-fraca)}
+.reel__l{margin:0;display:flex;flex-direction:column;gap:.15rem;
+         text-transform:none;letter-spacing:normal;font-weight:400;color:var(--tinta)}
+.reel__m{font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 24;
+         font-size:1.04rem;line-height:1.25;letter-spacing:-.01em;color:var(--tinta);
+         border:0;transition:color .35s var(--curva)}
+.reel:hover .reel__m{color:var(--relva)}
+.reel__x{font-size:.66rem;font-weight:800;text-transform:uppercase;
+         letter-spacing:.14em;color:var(--tinta-fraca)}
+
+/* setas do carril */
+.reels__n{display:flex;gap:.5rem;justify-content:flex-end;margin-top:.4rem}
+.reels__b{display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:50%;
+          border:1px solid var(--linha-forte);background:transparent;cursor:pointer;
+          color:var(--tinta);transition:background-color .35s var(--curva),
+          color .35s var(--curva),opacity .35s var(--curva)}
+.reels__b:hover:not(:disabled){background:var(--relva);border-color:var(--relva);color:#FFF}
+.reels__b:disabled{opacity:.28;cursor:default}
+.reels__b .ic{width:1rem;height:1rem}
+.reels__b[data-ir="-1"] .ic{transform:rotate(180deg)}
+@media (max-width:640px){.reels__n{display:none}}
 
 /* ── apoiar: abertura ───────────────────────────────────── */
 /* A página abre com a fotografia ao lado do argumento, e não com um título
@@ -782,23 +808,53 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .apoio-abre__f img{width:100%;height:auto;display:block;border:1px solid var(--linha);
                    background:var(--superficie)}
 
-.apoio-remate{margin:clamp(1.6rem,3vw,2.4rem) 0 0;max-width:62ch;
-              font-family:var(--display);font-weight:300;font-style:italic;
-              font-variation-settings:'opsz' 36;font-size:clamp(1.05rem,1.9vw,1.35rem);
-              line-height:1.4;color:var(--tinta)}
+/* Citação sozinha, entre secções. Uma frase escrita por outra pessoa vale
+   mais nesta página do que qualquer adjetivo nosso — por isso ocupa a
+   largura toda e não leva mais nada à volta. */
+.cita{margin:0;display:flex;flex-direction:column;align-items:center;gap:1.4rem;text-align:center}
+.cita__t{margin:0;max-width:22ch;font-family:var(--display);font-weight:300;font-style:italic;
+         font-variation-settings:'opsz' 96;font-size:clamp(1.6rem,4.2vw,3rem);
+         line-height:1.15;letter-spacing:-.02em;color:var(--tinta);
+         padding-block:.1em;margin-block:-.1em}
+.cita__t::before{content:"“"}
+.cita__t::after{content:"”"}
+.cita__f{font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.17em}
+.cita__f a{color:var(--relva);transition:opacity .35s var(--curva)}
+.cita__f a:hover{opacity:.65}
 
 /* ── apoiar / patrocínios ───────────────────────────────── */
 /* o formulário à esquerda, as ligações à direita */
 .contacto{display:grid;gap:clamp(2rem,5vw,5rem)}
 @media (min-width:900px){.contacto{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}}
-.escadas{display:grid;gap:1px}
-.degrau{background:var(--papel);padding:clamp(1.3rem,2.6vw,1.9rem);display:flex;flex-direction:column;gap:.5rem;
-        box-shadow:0 0 0 1px var(--linha)}
+/* Três cartões a par, e não três barras empilhadas. Empilhadas liam-se como
+   degraus de preço por ordem crescente, que é o contrário do que são: são
+   três maneiras diferentes de entrar, e nenhuma é maior do que a outra. */
+.escadas{display:grid;gap:1px;grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr))}
+.degrau{position:relative;overflow:hidden;background:var(--papel);
+        padding:clamp(1.5rem,3vw,2.1rem);display:flex;flex-direction:column;
+        align-items:flex-start;gap:.55rem;box-shadow:0 0 0 1px var(--linha);
+        transition:background-color .45s var(--curva)}
 .sec--fundo .degrau{background:var(--superficie)}
-.degrau__t{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-.degrau__n{margin:0;font-size:1.02rem;font-weight:700}
-.degrau__e{font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:var(--relva)}
-.degrau__x{margin:0;font-size:.86rem;color:var(--tinta-fraca);max-width:52ch}
+.degrau:hover{background:var(--relva-clara)}
+/* O numeral fica atrás do texto, grande e quase apagado: dá ordem de leitura
+   aos três cartões sem gastar uma linha a dizer «1, 2, 3». */
+.degrau__i{position:absolute;top:-.12em;right:.1em;font-family:var(--display);
+           font-weight:300;font-variation-settings:'opsz' 144;font-size:7rem;
+           line-height:1;color:var(--relva);opacity:.07;pointer-events:none;user-select:none}
+.degrau__e{font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:var(--relva)}
+.degrau__n{margin:0;font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 32;
+           font-size:clamp(1.28rem,2.2vw,1.55rem);line-height:1.15;letter-spacing:-.015em}
+.degrau__x{margin:0;font-size:.88rem;line-height:1.55;color:var(--tinta-fraca);max-width:42ch}
+.degrau__u{list-style:none;margin:.55rem 0 0;padding:0;display:flex;flex-direction:column;gap:.42rem;
+           border-top:1px solid var(--linha);padding-top:.9rem;width:100%}
+.degrau__u li{position:relative;padding-left:1.15rem;font-size:.82rem;line-height:1.45;color:var(--tinta)}
+.degrau__u li::before{content:"";position:absolute;left:0;top:.52em;width:.42rem;height:.42rem;
+                      border-radius:50%;background:var(--relva);opacity:.5}
+.degrau__b{margin-top:auto;padding-top:1.1rem;font-size:.68rem;font-weight:800;
+           text-transform:uppercase;letter-spacing:.14em;color:var(--relva);
+           display:inline-flex;align-items:center;gap:.4rem}
+.degrau__b::after{content:"→";transition:transform .35s var(--curva)}
+.degrau:hover .degrau__b::after{transform:translateX(.28rem)}
 
 /* ── formulário ─────────────────────────────────────────── */
 .form{display:grid;gap:1rem}

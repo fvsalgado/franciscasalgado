@@ -6,7 +6,7 @@ import { iniciar } from './base.js';
 import { porEpoca, carregar } from './resultados.js';
 import { factos, percurso, citacoes, pecas, saiuEm, escadas, ligacoes, numeros } from './conteudo.js';
 import { galeria, videos, apoios } from './media.js';
-import { parcerias } from './instagram.js';
+import { reels } from './instagram.js';
 import { rankings } from './rankings.js';
 
 const $ = (id) => document.getElementById(id);
@@ -94,10 +94,10 @@ const PINTAR = {
     ]);
   },
 
-  async apoiar(l) {
+  async parcerias(l) {
     await Promise.all([escadas($('escadas'), l), apoios($('apoios'), l),
                        numeros($('numsApoio'), l, 'apoioNumeros'),
-                       parcerias($('reels'), l), ligacoes($('ligacoes'), l)]);
+                       reels($('reels'), l), ligacoes($('ligacoes'), l)]);
   },
 
   async legal() { /* as páginas legais são só texto */ },
