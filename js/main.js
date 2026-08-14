@@ -4,7 +4,8 @@ import { iniciar, carga } from './base.js';
 import { iniciarCampo } from './campo.js';
 import { reduzido } from './movimento.js';
 import { ultimas, palmares, ultimo } from './resultados.js';
-import { numeros, citacoes, saiuEm, escadas } from './conteudo.js';
+import { numeros, citacoes, saiuEm } from './conteudo.js';
+import { galeria, apoios } from './media.js';
 import { instagram } from './instagram.js';
 import { wagr } from './wagr.js';
 
@@ -26,7 +27,8 @@ const { i18n } = iniciar(async (l) => {
     palmares($('palm'), l),
     citacoes($('citacoes'), l, 2),
     saiuEm($('saiuEm')),
-    escadas($('escadas'), l),
+    galeria($('gal'), l, 6),
+    apoios($('apoios'), l),
     wagr($('wagr'), l),
     proximo(l),
   ]);
