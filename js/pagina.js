@@ -6,8 +6,7 @@ import { iniciar } from './base.js';
 import { iniciarCampo } from './campo.js';
 import { reduzido } from './movimento.js';
 import { porEpoca, carregar, proximas } from './resultados.js';
-import { factos, percurso, citacoes, pecas, escadas, ligacoes, numeros,
-         rankingsNaPergunta } from './conteudo.js';
+import { factos, citacoes, escadas, ligacoes, numeros } from './conteudo.js';
 import { galeria, videos, apoios } from './media.js';
 import { reels } from './instagram.js';
 import { rankings } from './rankings.js';
@@ -96,23 +95,17 @@ function formulario(lingua) {
 const PINTAR = {
   async resultados(l) {
     await Promise.all([porEpoca($('epocas'), $('filtros'), l), rankings($('rankings'), l),
-                       proximas($('proximas'), l)]);
+                       proximas($('proximas'), l), videos($('videos'), l)]);
     const d = await carregar();
     const nota = $('notaFonte');
     if (nota && d.nota) nota.textContent = d.nota[l] || d.nota.pt;
-  },
-
-  async percurso(l) {
-    await Promise.all([factos($('factos'), l), percurso($('percurso'), l), videos($('videos'), l),
-                       rankingsNaPergunta(l)]);
   },
 
   async imprensa(l) {
     await Promise.all([
       factos($('factos'), l),
       citacoes($('citacoes'), l),
-      pecas($('pecas'), l),
-      ligacoes($('ligacoes'), l, 'ficha'),
+      ligacoes($('plats'), l, 'ficha'),
       galeria($('gal'), l),
     ]);
   },
@@ -123,8 +116,6 @@ const PINTAR = {
                        reels($('reels'), l)]);
   },
 
-  async contacto() { /* a página de contacto é o formulário, e está no HTML */ },
-
   async legal() { /* as páginas legais são só texto */ },
 };
 
@@ -133,7 +124,7 @@ const { i18n } = iniciar(async (l) => { await PINTAR[qual]?.(l); });
 /* O mapa de curvas, onde a página o tiver. Fica fora do ciclo da língua: não
    tem texto nenhum, e recriá-lo seria deitar fora o contexto de WebGL por
    nada. */
-const campo = iniciarCampo($('campo'), { reduzido });
-document.addEventListener('fs:tema', () => campo?.tema?.());
+const campos = [$('campo'), $('campo2')].filter(Boolean).map((c) => iniciarCampo(c, { reduzido }));
+document.addEventListener('fs:tema', () => campos.forEach((c) => c?.tema?.()));
 
 formulario(() => i18n.lingua());

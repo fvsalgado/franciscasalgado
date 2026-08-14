@@ -20,15 +20,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://franciscasalgado.golf/percurso.html</loc>
-    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://franciscasalgado.golf/percurso.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://franciscasalgado.golf/en/percurso.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://franciscasalgado.golf/percurso.html" />
-    <lastmod>2026-08-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://franciscasalgado.golf/imprensa.html</loc>
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://franciscasalgado.golf/imprensa.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://franciscasalgado.golf/en/imprensa.html" />
@@ -45,15 +36,6 @@
     <lastmod>2026-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://franciscasalgado.golf/contacto.html</loc>
-    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://franciscasalgado.golf/contacto.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://franciscasalgado.golf/en/contacto.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://franciscasalgado.golf/contacto.html" />
-    <lastmod>2026-08-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://franciscasalgado.golf/en</loc>
@@ -74,15 +56,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://franciscasalgado.golf/en/percurso.html</loc>
-    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://franciscasalgado.golf/percurso.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://franciscasalgado.golf/en/percurso.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://franciscasalgado.golf/percurso.html" />
-    <lastmod>2026-08-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://franciscasalgado.golf/en/imprensa.html</loc>
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://franciscasalgado.golf/imprensa.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://franciscasalgado.golf/en/imprensa.html" />
@@ -99,14 +72,5 @@
     <lastmod>2026-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://franciscasalgado.golf/en/contacto.html</loc>
-    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://franciscasalgado.golf/contacto.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://franciscasalgado.golf/en/contacto.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://franciscasalgado.golf/contacto.html" />
-    <lastmod>2026-08-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
 </urlset>

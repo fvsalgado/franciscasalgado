@@ -24,7 +24,6 @@ const d = await r.json();
 const s = d.playerStatisticsInfo || {};
 
 const saida = {
-  '_leia-me': 'Instantâneo da ficha da jogadora no World Amateur Golf Ranking. Serve de recurso quando /api/wagr não está disponível (alojamento estático, função em baixo). Para refrescar: node scripts/wagr.mjs',
   atualizado: new Date().toISOString().slice(0, 10),
   playerId: d.playerId,
   perfil: `https://www.wagr.com/playerprofile/${d.playerProfileLink || ''}`,

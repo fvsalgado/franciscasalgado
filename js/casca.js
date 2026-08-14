@@ -5,13 +5,15 @@
 import { icone } from './icones.js';
 import { outraLingua } from './i18n.js';
 
+/* Quatro páginas, e não seis. O percurso, as provas e o clipping eram três
+   registos cronológicos da mesma carreira, e liam-se melhor juntos, época a
+   época; o contacto era uma página inteira para um formulário, e voltou para
+   onde é preciso — o fim das parcerias, e o rodapé de todas as páginas. */
 export const PAGINAS = [
   { href: 'index.html', pt: 'Início', en: 'Home' },
-  { href: 'resultados.html', pt: 'Resultados', en: 'Results' },
-  { href: 'percurso.html', pt: 'Percurso', en: 'Her story' },
+  { href: 'resultados.html', pt: 'Época a época', en: 'Season by season' },
   { href: 'imprensa.html', pt: 'Imprensa', en: 'Press' },
   { href: 'parcerias.html', pt: 'Parcerias', en: 'Partnerships' },
-  { href: 'contacto.html', pt: 'Contacto', en: 'Contact' },
 ];
 
 const aqui = () => {

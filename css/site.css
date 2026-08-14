@@ -515,6 +515,29 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
           color:var(--tinta-fraca);margin:0}
 .epoca__r b{color:var(--relva)}
 
+/* O relato do ano, entre o número e a lista de provas. */
+.epoca__conta{margin:clamp(1.3rem,2.6vw,1.9rem) 0 clamp(1.5rem,3vw,2.2rem);
+              max-width:62ch}
+.epoca__t{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 36;
+          font-size:clamp(1.15rem,2.2vw,1.5rem);line-height:1.22;letter-spacing:-.01em;margin:0}
+.epoca__x{margin:.6rem 0 0;font-size:.92rem;line-height:1.68;color:var(--tinta-fraca)}
+
+/* A imprensa do ano fica fechada: são quarenta peças no total, e abertas de
+   uma vez enterravam as provas, que é o que se vem cá ver. */
+.epoca__im{margin-top:clamp(1.4rem,3vw,2rem);border-top:1px solid var(--linha);padding-top:.35rem}
+.epoca__im summary{list-style:none;cursor:pointer;padding:.7rem 0;
+                   font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;
+                   color:var(--tinta-fraca);display:flex;align-items:center;gap:.6rem;
+                   transition:color .3s var(--curva)}
+.epoca__im summary::-webkit-details-marker{display:none}
+.epoca__im summary::before{content:"";width:.5rem;height:.5rem;flex:none;
+                           border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+                           transform:rotate(45deg) translate(-2px,-2px);
+                           transition:transform .3s var(--curva)}
+.epoca__im[open] summary::before{transform:rotate(225deg) translate(-1px,-1px)}
+.epoca__im summary:hover{color:var(--relva)}
+.epoca__im .pecas{margin-top:.4rem}
+
 /* ── palmarès ───────────────────────────────────────────── */
 .palm{display:grid;gap:1px}
 @media (min-width:760px){.palm{grid-template-columns:repeat(2,1fr)}}
@@ -1085,6 +1108,9 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
        font-size:clamp(2.1rem,6.2vw,4.6rem);line-height:1.04;letter-spacing:-.028em;
        color:var(--tinta);padding-block:.08em;margin-block-start:1.2rem}
 @media (min-width:900px){.manif{max-width:24ch}}
+/* A frase grande dá o tom; este parágrafo é o que a sustenta em factos, e
+   vinha da página de percurso quando ela deixou de existir. */
+.qu__x{max-width:58ch;margin:calc(clamp(2.4rem,5vw,3.6rem) * -.45) 0 clamp(2.2rem,4.5vw,3.2rem)}
 
 /* «Saiu em» numa fila só, por baixo da citação, em vez de numa coluna ao lado */
 .saiu--fila{margin-top:clamp(2.4rem,5vw,3.6rem);display:flex;flex-direction:column;

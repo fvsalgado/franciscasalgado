@@ -1,5 +1,5 @@
 /* Tudo o que vem dos ficheiros JSON e não são resultados: os números, os
-   factos, a linha do tempo, a imprensa e as ligações. Cada função pinta um
+   factos, as citações e as ligações. Cada função pinta um
    contentor e volta a ser chamada quando se muda de língua. */
 
 import { icone } from './icones.js';
@@ -70,7 +70,15 @@ export async function linhaRankings(lingua = 'pt') {
     : `${n}.ª`);
   const partes = [];
   if (m?.d?.posicao) partes.push(`${ord(m.d.posicao)}${en ? ' on the WAGR' : ' no WAGR'}`);
-  if (e?.d?.posicao) partes.push(`${ord(e.d.posicao)}${en ? ' on the European Golf Rankings' : ' no European Golf Rankings'}`);
+  /* O lugar no escalão quando existe, e o rótulo a dizer qual é. Sem ele, o
+     lugar geral e o rótulo do geral — o que não pode acontecer é o número de
+     uma coisa com o nome da outra. */
+  if (e?.d?.posicaoEscalao && e?.d?.escalao) {
+    const esc = en ? e.d.escalao : String(e.d.escalao).replace(/^U(\d+)$/, 'Sub-$1');
+    partes.push(`${ord(e.d.posicaoEscalao)}${en ? ` on the European Golf Rankings ${esc}` : ` no European Golf Rankings ${esc}`}`);
+  } else if (e?.d?.posicao) {
+    partes.push(`${ord(e.d.posicao)}${en ? ' on the European Golf Rankings' : ' no European Golf Rankings'}`);
+  }
   return partes.length ? partes.join(' · ') : null;
 }
 
@@ -85,19 +93,6 @@ export async function rankingsNaPergunta(lingua = 'pt') {
   const forte = document.createElement('strong');
   forte.textContent = lingua === 'en' ? `Currently ${l}. ` : `Neste momento, ${l}. `;
   dd.prepend(forte);
-}
-
-/* ── linha do tempo ───────────────────────────────────────── */
-export async function percurso(cx, lingua = 'pt') {
-  if (!cx) return;
-  const { percurso: ps = [] } = await ler('perfil');
-  cx.className = 'linha-t';
-  cx.innerHTML = ps.map((p) => `
-    <li${p.marco ? ' data-marco="1"' : ''}>
-      <span class="linha-t__a">${p.ano}</span>
-      <h3 class="linha-t__t">${tx(p.t, lingua)}</h3>
-      <p class="linha-t__x">${tx(p.x, lingua)}</p>
-    </li>`).join('');
 }
 
 /* ── escalões de apoio ────────────────────────────────────── */
@@ -117,7 +112,7 @@ export async function escadas(cx, lingua = 'pt') {
       <p class="degrau__x">${tx(e.x, lingua)}</p>
       ${e.inclui?.length ? `<ul class="degrau__u">${e.inclui
         .map((u) => `<li>${tx(u, lingua)}</li>`).join('')}</ul>` : ''}
-      <a class="degrau__b" href="contacto.html" data-mag>${en ? 'Ask for a proposal' : 'Pedir uma proposta'}</a>
+      <a class="degrau__b" href="parcerias.html#contacto" data-mag>${en ? 'Ask for a proposal' : 'Pedir uma proposta'}</a>
     </article>`).join('');
 }
 
@@ -177,33 +172,6 @@ export async function citacoes(cx, lingua = 'pt', quantas = 99, { grande = false
     </figure>`).join('');
 }
 
-export async function pecas(cx, lingua = 'pt') {
-  if (!cx) return;
-  const { pecas: ps = [], saiuEm: casas = [] } = await ler('imprensa');
-  /* O símbolo de cada casa, indexado pelo nome, para cada peça o mostrar ao
-     lado do título. Numa lista de quarenta linhas, o desenho é o que deixa
-     encontrar o Record no meio das notícias da federação sem ler tudo. */
-  const simbolo = new Map(casas.filter((c) => c && c.logo).map((c) => [c.nome, c.logo]));
-
-  cx.className = 'pecas';
-  cx.innerHTML = ps.map((p) => {
-    const logo = simbolo.get(p.o);
-    return `
-    <li class="peca">
-      <a href="${p.url}" target="_blank" rel="noopener" data-sem-seta data-mag>
-        <span class="peca__f">${p.capa
-          ? `<img src="/img/imprensa/pecas/${p.capa}" alt="" loading="lazy" decoding="async" data-credito-feito="1" />`
-          : ''}</span>
-        <span class="peca__o">${logo
-          ? `<img src="/img/imprensa/${logo}" alt="" loading="lazy" decoding="async" data-credito-feito="1" />`
-          : ''}<span>${p.o}</span></span>
-        <span class="peca__t">${tx(p.t, lingua)}</span>
-        <span class="peca__a num">${p.data}<i class="peca__s" aria-hidden="true">↗</i></span>
-      </a>
-    </li>`;
-  }).join('');
-}
-
 /* Cada casa que já escreveu sobre ela, com o símbolo e a ligação para o sítio.
    Era uma fila de nomes em texto: dizia o mesmo e não se via nada. Os símbolos
    estão em img/imprensa/, copiados uma vez pelo scripts/logos-imprensa.mjs —
@@ -253,20 +221,12 @@ export async function portas(cx, lingua = 'pt') {
       /* Não `swing.webp`: é a fotografia que abre a página inicial, e a porta
          ficava a mostrar outra vez, meio ecrã abaixo, a mesma imagem. */
       href: 'resultados.html', img: 'podio-2024.webp', ic: 'taca',
-      n: provas.length,
-      r: { pt: 'Resultados', en: 'Results' },
-      t: { pt: 'Prova a prova, desde 2018', en: 'Event by event, since 2018' },
-      x: { pt: 'As voltas, o total e o resultado face ao par. Cada prova diz de onde veio.',
-           en: 'The rounds, the total and the score to par. Every event names its source.' },
-      u: { pt: 'provas', en: 'events' },
-    },
-    {
-      href: 'percurso.html', img: 'aquapor.webp', ic: 'mapa',
       n: epocas,
-      r: { pt: 'Percurso', en: 'Her story' },
-      t: { pt: 'De campeã de Sub-10 a campeã de Sub-18', en: 'From U10 champion to U18 champion' },
-      x: { pt: 'A história ano a ano, os vídeos mais antigos que há dela, e as perguntas do costume.',
-           en: 'The story year by year, the oldest footage there is of her, and the usual questions.' },
+      r: { pt: 'Época a época', en: 'Season by season' },
+      t: { pt: `De campeã de Sub-10 a campeã de Sub-18, em ${provas.length} provas`,
+           en: `From U10 champion to U18 champion, across ${provas.length} events` },
+      x: { pt: 'Cada ano com o que aconteceu, as provas com as voltas e o total, e o que se escreveu nesse ano.',
+           en: 'Each year with what happened, the events with rounds and totals, and what was written that year.' },
       u: { pt: 'épocas', en: 'seasons' },
     },
     {
@@ -283,8 +243,8 @@ export async function portas(cx, lingua = 'pt') {
       n: apoiantes,
       r: { pt: 'Parcerias', en: 'Partnerships' },
       t: { pt: 'Levar Portugal mais longe', en: 'Taking Portugal further' },
-      x: { pt: 'Quem já apoia, o que cada forma de entrar cobre, e o contacto direto.',
-           en: 'Who already backs her, what each way in covers, and how to get in touch.' },
+      x: { pt: 'Quem já apoia, o que cada apoio cobre, e o formulário para falar com ela.',
+           en: 'Who already backs her, what each kind of support covers, and the form to reach her.' },
       u: { pt: 'já a apoiar', en: 'already on board' },
     },
   ];

@@ -92,17 +92,15 @@ const pessoa = {
    por ele que um motor percebe que /resultados.html e /en/resultados.html
    falam da mesma jogadora e não de duas. */
 const NOMES = {
-  pt: { inicio: 'Início', resultados: 'Resultados', percurso: 'Percurso',
-        imprensa: 'Imprensa', parcerias: 'Parcerias', contacto: 'Contacto',
+  pt: { inicio: 'Início', resultados: 'Época a época',
+        imprensa: 'Imprensa', parcerias: 'Parcerias',
         listaR: 'Resultados de Francisca Salgado',
         listaI: 'Imprensa sobre Francisca Salgado',
-        pgContacto: 'Contacto — Francisca Salgado',
         cargo: 'Golfista amadora', desporto: 'Golfe', lugar: 'lugar' },
-  en: { inicio: 'Home', resultados: 'Results', percurso: 'Her story',
-        imprensa: 'Press', parcerias: 'Partnerships', contacto: 'Contact',
+  en: { inicio: 'Home', resultados: 'Season by season',
+        imprensa: 'Press', parcerias: 'Partnerships',
         listaR: 'Francisca Salgado — results',
         listaI: 'Press coverage of Francisca Salgado',
-        pgContacto: 'Contact — Francisca Salgado',
         cargo: 'Amateur golfer', desporto: 'Golf', lugar: 'place' },
 };
 const base = (l) => (l === 'en' ? `${SITIO}/en/` : `${SITIO}/`);
@@ -191,11 +189,31 @@ const sitio = (l) => ({
 });
 
 const PAGINAS = {
-  'index.html': async (html, l) => [quemE(l), sitio(l)],
-  'percurso.html': async (html, l) => [quemE(l), migalhas('percurso', 'percurso.html', l),
+  /* A raiz é o endereço que uma pergunta sobre ela devolve, e é onde estão
+     agora as seis respostas — por isso é aqui que vive o FAQPage, e também o
+     ProfilePage, que andava na página de percurso. */
+  'index.html': async (html, l) => [quemE(l), sitio(l),
     { '@type': 'ProfilePage', inLanguage: l === 'en' ? 'en' : 'pt-PT', mainEntity: { '@id': `${SITIO}/#francisca` } },
     await perguntas(html)].filter(Boolean),
-  'resultados.html': async (html, l) => [quemE(l), migalhas('resultados', 'resultados.html', l), listaResultados(l)],
+  /* A página das épocas leva as provas e as notícias, que é o que lá está. */
+  'resultados.html': async (html, l) => [quemE(l), migalhas('resultados', 'resultados.html', l),
+    listaResultados(l), {
+      '@type': 'ItemList',
+      name: NOMES[l].listaI,
+      numberOfItems: (imprensa.pecas || []).length,
+      itemListElement: (imprensa.pecas || []).slice(0, 40).map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'NewsArticle',
+          headline: tx(p.t, l),
+          url: p.url,
+          datePublished: p.data,
+          publisher: { '@type': 'Organization', name: p.o },
+          about: { '@id': `${SITIO}/#francisca` },
+        },
+      })),
+    }],
   'imprensa.html': async (html, l) => [quemE(l), migalhas('imprensa', 'imprensa.html', l), {
     '@type': 'ItemList',
     name: NOMES[l].listaI,
@@ -213,15 +231,11 @@ const PAGINAS = {
       },
     })),
   }],
+  /* As parcerias passaram a levar o formulário, por isso são também a página
+     de contacto — e é o ContactPoint que diz isso a um assistente. */
   'parcerias.html': async (html, l) => [quemE(l), migalhas('parcerias', 'parcerias.html', l), {
-    '@type': 'WebPage',
-    name: l === 'en' ? 'Partnerships — Francisca Salgado' : 'Parcerias — Francisca Salgado',
-    inLanguage: l === 'en' ? 'en' : 'pt-PT',
-    about: { '@id': `${SITIO}/#francisca` },
-  }],
-  'contacto.html': async (html, l) => [quemE(l), migalhas('contacto', 'contacto.html', l), {
     '@type': 'ContactPage',
-    name: NOMES[l].pgContacto,
+    name: l === 'en' ? 'Partnerships — Francisca Salgado' : 'Parcerias — Francisca Salgado',
     inLanguage: l === 'en' ? 'en' : 'pt-PT',
     about: { '@id': `${SITIO}/#francisca` },
     mainEntity: {
@@ -273,10 +287,8 @@ for (const l of ['pt', 'en']) {
 const MAPA = [
   ['', 'weekly', '1.0'],
   ['resultados.html', 'weekly', '0.9'],
-  ['percurso.html', 'monthly', '0.8'],
   ['imprensa.html', 'monthly', '0.7'],
   ['parcerias.html', 'monthly', '0.7'],
-  ['contacto.html', 'monthly', '0.6'],
 ];
 const quando = `${resultados.atualizado || perfil.atualizado}-01`.slice(0, 10);
 
@@ -354,12 +366,10 @@ hreflang. O português é o original; o inglês é tradução dele.
 
 ## Páginas
 
-- ${SITIO}/ — apresentação, números da época, últimos resultados
-- ${SITIO}/resultados.html — todas as provas, com voltas, total e fonte
-- ${SITIO}/percurso.html — biografia, ano a ano, e perguntas frequentes
-- ${SITIO}/imprensa.html — biografia curta, citações com fonte, fotografias
-- ${SITIO}/parcerias.html — quem apoia, e o que um apoio pode cobrir
-- ${SITIO}/contacto.html — email, Instagram e formulário
+- ${SITIO}/ — quem é, números da época, rankings em direto e perguntas frequentes
+- ${SITIO}/resultados.html — época a época: o que aconteceu em cada ano, as provas com voltas, total e fonte, e a imprensa desse ano
+- ${SITIO}/imprensa.html — biografia curta, ficha, citações com fonte, fotografias e fichas oficiais
+- ${SITIO}/parcerias.html — quem apoia, o que um apoio pode cobrir, e o formulário de contacto
 
 ## Dados abertos
 

@@ -10,6 +10,7 @@ import { writeFile } from 'node:fs/promises';
 import { buscarEgr } from '../api/_egr.js';
 
 const d = await buscarEgr();
-d['_leia-me'] = 'Instantâneo da ficha no European Golf Rankings. Recurso para quando /api/egr não está disponível. Para refrescar: node scripts/egr.mjs';
 await writeFile(new URL('../data/egr.json', import.meta.url), `${JSON.stringify(d, null, 2)}\n`);
-console.log(`data/egr.json: ${d.posicao}.º da Europa, ${d.pontos} pontos, média ${d.mediaVolta} (${d.atualizado})`);
+console.log(`data/egr.json: ${d.posicaoEscalao
+  ? `${d.posicaoEscalao}.ª em ${d.escalao} e ${d.posicao}.ª entre todas`
+  : `${d.posicao}.ª entre todas`}, ${d.pontos} pontos, média ${d.mediaVolta} (${d.atualizado})`);
