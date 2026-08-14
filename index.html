@@ -137,8 +137,8 @@
   <figure class="hero__f">
     <img class="hero__img" src="/img/swing.webp"
          alt="Francisca Salgado no fim do swing, com o driver ao ombro"
-         width="1080" height="1350" fetchpriority="high" decoding="async" />
-    <figcaption class="hero__cred"></figcaption>
+         width="1080" height="1350" fetchpriority="high" decoding="async"
+         data-credito-em="heroCred" />
   </figure>
 
   <div class="hero__in">
@@ -154,7 +154,10 @@
         <span class="prox__q num" id="proxQ" data-t="prox_carregar">A carregar…</span>
         <span class="prox__s" aria-hidden="true">→</span>
       </a>
-      <span class="rolar" aria-hidden="true"><i></i></span>
+      <div class="hero__pe-d">
+        <p class="hero__cred" id="heroCred"></p>
+        <span class="rolar" aria-hidden="true"><i></i></span>
+      </div>
     </div>
   </div>
 </section>
@@ -181,11 +184,11 @@
   <div class="env">
     <div class="cab">
       <div class="cab__t">
-        <p class="rot" data-t="po_rot">O sítio</p>
-        <h2 class="d d--l ani" data-t="po_tit">Quatro páginas</h2>
+        <p class="rot" data-t="po_rot">Ver também</p>
+        <h2 class="d d--l ani" data-t="po_tit">Onde encontrar o quê</h2>
       </div>
       <div class="cab__x">
-        <p class="txt" data-t="po_txt">Cada uma tem o assunto todo: as provas com as voltas e a fonte, a história ano a ano, o dossier para quem escreve, e as formas de entrar como parceiro.</p>
+        <p class="txt" data-t="po_txt">Todas as provas e classificações. A história, ano a ano. O dossier para jornalistas. E como apoiar.</p>
       </div>
     </div>
     <div id="portas"></div>
@@ -202,7 +205,7 @@
     <div class="cab">
       <div class="cab__t">
         <p class="rot" data-t="rk_rot">Rankings</p>
-        <h2 class="d d--l ani" data-t="rk_tit">As fichas oficiais, tal como estão</h2>
+        <h2 class="d d--l ani" data-t="rk_tit">Onde está no mundo e na Europa</h2>
       </div>
       <div class="cab__x">
         <p class="txt" data-t="rk_txt">O <strong>WAGR</strong> é o ranking mundial do golfe amador, gerido pelo R&amp;A e pela USGA; o <strong>EGR</strong> é o europeu, por escalão. É neles que se decide o acesso a boa parte do calendário internacional.</p>

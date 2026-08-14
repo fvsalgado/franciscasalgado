@@ -7,8 +7,7 @@
    servidor da Google por causa de um vídeo que talvez nunca veja; assim
    mostra-se a mesma imagem sem esse pedido.
 
-   Antes era um retângulo verde desenhado em CSS. Cumpria a promessa e não
-   dizia nada sobre o vídeo. */
+*/
 
 import { icone } from './icones.js';
 
@@ -50,7 +49,7 @@ export async function videos(cx, lingua = 'pt') {
           <img src="/img/videos/${v.id}.webp" alt="" loading="lazy" decoding="async"
                data-credito-feito="1" />
           ${v.ano ? `<span class="vid__ano num">${v.ano}</span>` : ''}
-          <span class="vid__seta">${icone('seta', 'ic')}</span>
+          <span class="vid__play">${icone('play', 'ic')}</span>
         </span>
       </button>
       <figcaption class="vid__q">

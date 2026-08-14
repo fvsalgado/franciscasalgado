@@ -33,7 +33,7 @@ const SECO = process.argv.includes('--seco');
 const SITIO = 'https://franciscasalgado.golf';
 
 const PAGINAS = ['index.html', 'resultados.html', 'percurso.html', 'imprensa.html',
-                 'parcerias.html', 'privacidade.html', 'termos.html'];
+                 'parcerias.html', 'contacto.html', 'privacidade.html', 'termos.html'];
 
 /* Os títulos e as descrições não têm `data-t` — vivem no <head>, onde não há
    elementos para marcar. Ficam aqui, ao lado do resto do inglês. */
@@ -57,6 +57,10 @@ const CABECALHOS = {
   'parcerias.html': {
     titulo: 'Partnerships — Francisca Salgado',
     desc: 'Partnering with Francisca Salgado: who already backs her, the three ways in — season, event or groundwork — and how to get in touch.',
+  },
+  'contacto.html': {
+    titulo: 'Contact — Francisca Salgado',
+    desc: 'Get in touch with Francisca Salgado: partnerships, press, invitations and photograph requests. Direct email and a form.',
   },
   'privacidade.html': { titulo: 'Privacy — Francisca Salgado', desc: 'How this site handles personal data.' },
   'termos.html': { titulo: 'Terms — Francisca Salgado', desc: 'Terms of use for this site.' },

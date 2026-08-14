@@ -1,5 +1,4 @@
 {
-  "_leia-me": "Instantâneo da ficha no European Golf Rankings. Recurso para quando /api/egr não está disponível. Refrescado pelo vigia; para o fazer à mão: node scripts/egr.mjs",
   "atualizado": "2026-08-14",
   "playerId": 39992,
   "ficha": "https://www.europeangolfrankings.com/players/39992",

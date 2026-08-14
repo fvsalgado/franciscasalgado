@@ -1,6 +1,4 @@
 {
-  "_leia-me": "Instagram. O 'perfil' alimenta o cartão de seguidores; os números só aparecem quando estão preenchidos — mais vale não mostrar do que mostrar errado. Com um token da Graph API em IG_TOKEN (ver api/instagram.js) tudo isto passa a vir sozinho e em direto, e este ficheiro deixa de ser preciso. Os códigos são o que vem depois de /p/ ou /reel/ no endereço da publicação.",
-
   "perfil": {
     "arroba": "francisca_salgado_",
     "nome": "Francisca Salgado",
@@ -13,34 +11,69 @@
     "publicacoes": null,
     "atualizado": ""
   },
-
   "publicacoes": [
-    { "codigo": "Db1E8VDACIn", "tipo": "p" },
-    { "codigo": "Dblt0EVgLDT", "tipo": "p" },
-    { "codigo": "DbQZXc4AEzK", "tipo": "p" },
-    { "codigo": "DYSS6TYCmUC", "tipo": "p" }
+    {
+      "codigo": "Db1E8VDACIn",
+      "tipo": "p"
+    },
+    {
+      "codigo": "Dblt0EVgLDT",
+      "tipo": "p"
+    },
+    {
+      "codigo": "DbQZXc4AEzK",
+      "tipo": "p"
+    },
+    {
+      "codigo": "DYSS6TYCmUC",
+      "tipo": "p"
+    }
   ],
-
   "parcerias": [
     {
-      "codigo": "DZXButZk32u", "tipo": "reel", "marca": "Lusíadas Saúde",
-      "x": { "pt": "Parceira das Seleções Nacionais", "en": "Partner of the national teams" }
+      "codigo": "DZXButZk32u",
+      "tipo": "reel",
+      "marca": "Lusíadas Saúde",
+      "x": {
+        "pt": "Parceira das Seleções Nacionais",
+        "en": "Partner of the national teams"
+      }
     },
     {
-      "codigo": "DWqeTFXAFGV", "tipo": "reel", "marca": "Skip Portugal",
-      "x": { "pt": "Parceira das Seleções Nacionais", "en": "Partner of the national teams" }
+      "codigo": "DWqeTFXAFGV",
+      "tipo": "reel",
+      "marca": "Skip Portugal",
+      "x": {
+        "pt": "Parceira das Seleções Nacionais",
+        "en": "Partner of the national teams"
+      }
     },
     {
-      "codigo": "DVT_LlLALMj", "tipo": "reel", "marca": "Cobra Golf",
-      "x": { "pt": "Tacos em prova", "en": "Clubs in play" }
+      "codigo": "DVT_LlLALMj",
+      "tipo": "reel",
+      "marca": "Cobra Golf",
+      "x": {
+        "pt": "Tacos em prova",
+        "en": "Clubs in play"
+      }
     },
     {
-      "codigo": "DUv6OVuAEUp", "tipo": "reel", "marca": "Puma Golf · Cobra Golf",
-      "x": { "pt": "Vestuário e tacos", "en": "Apparel and clubs" }
+      "codigo": "DUv6OVuAEUp",
+      "tipo": "reel",
+      "marca": "Puma Golf · Cobra Golf",
+      "x": {
+        "pt": "Vestuário e tacos",
+        "en": "Apparel and clubs"
+      }
     },
     {
-      "codigo": "CqqrICircDQ", "tipo": "reel", "marca": "ECCO Golf",
-      "x": { "pt": "Calçado de jogo", "en": "Playing shoes" }
+      "codigo": "CqqrICircDQ",
+      "tipo": "reel",
+      "marca": "ECCO Golf",
+      "x": {
+        "pt": "Calçado de jogo",
+        "en": "Playing shoes"
+      }
     }
   ]
 }

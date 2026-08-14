@@ -162,7 +162,9 @@ body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color
 
 /* ── nav ────────────────────────────────────────────────── */
 .nav{position:fixed;top:0;left:0;right:0;z-index:120;transition:transform .5s var(--curva)}
-.nav.escondida{transform:translateY(-105%)}
+/* Esconder o cabeçalho ao rolar poupa uns pixels e tira o menu a quem mais
+   precisa dele. Num telemóvel fica sempre visível. */
+@media (min-width:900px){.nav.escondida{transform:translateY(-105%)}}
 .nav__in{width:var(--larg);margin-inline:auto;display:flex;align-items:center;gap:clamp(1rem,3vw,2.5rem);
          padding-block:1.05rem;transition:padding .4s var(--curva)}
 .nav.colada .nav__in{padding-block:.6rem}
@@ -282,8 +284,10 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
              max-width:34ch;margin:clamp(1rem,2.4vw,1.9rem) 0 0;
              font-variation-settings:'opsz' 40;text-wrap:balance;color:rgba(255,255,255,.88)}
 
-.hero__pe{width:100%;margin:clamp(2rem,5vh,3.4rem) 0 0;display:flex;align-items:flex-end;
-          justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.hero__pe{width:100%;margin:clamp(1.6rem,4vh,3rem) 0 0;display:flex;align-items:center;
+          justify-content:space-between;gap:1rem clamp(1rem,3vw,2rem);flex-wrap:wrap}
+.hero__pe-d{display:flex;align-items:center;gap:clamp(1rem,2.4vw,1.8rem);margin-left:auto}
+@media (max-width:620px){.hero__pe-d .rolar{display:none}}
 .prox{display:inline-flex;align-items:center;gap:.9rem;padding:.72rem 1.2rem;border-radius:999px;
       border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.1);
       backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#FFF;
@@ -577,7 +581,10 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .peca a{display:grid;grid-template-columns:minmax(7rem,auto) minmax(0,1fr) auto;gap:.3rem 1.2rem;
         align-items:baseline;padding:.9rem .2rem;transition:padding-left .3s var(--curva),color .3s var(--curva)}
 .peca a:hover{padding-left:.8rem;color:var(--relva)}
-.peca__o{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:var(--relva)}
+.peca__o{display:inline-flex;align-items:center;gap:.45rem;font-size:.65rem;font-weight:800;
+         text-transform:uppercase;letter-spacing:.16em;color:var(--relva)}
+.peca__o img{width:1.15rem;height:1.15rem;border-radius:50%;object-fit:contain;
+             background:#FFF;padding:1px;flex:none}
 .peca__t{font-size:.9rem;min-width:0}
 .peca__a{font-size:.72rem;color:var(--tinta-fraca);font-variant-numeric:tabular-nums}
 @media (max-width:640px){
@@ -696,7 +703,7 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .vid__bt{width:100%;padding:0;border:0;background:none;cursor:pointer;display:block}
 /* O botão de leitura fica no canto, e não ao centro: ao centro caía em cima
    da cara de quem está no vídeo. */
-.vid__capa{position:relative;display:grid;place-items:end start;aspect-ratio:16/9;
+.vid__capa{position:relative;display:grid;place-items:center;aspect-ratio:16/9;
            padding:clamp(.9rem,2vw,1.3rem);
            border-radius:14px;background:var(--superficie);overflow:hidden;
            box-shadow:0 0 0 1px var(--linha);
@@ -712,12 +719,12 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .vid__bt:hover .vid__capa img{transform:scale(1.04)}
 .vid__ano{position:absolute;top:.85rem;left:1rem;z-index:1;font-size:.66rem;font-weight:800;
           letter-spacing:.18em;color:#FFF;opacity:.92;text-shadow:0 1px 3px rgba(0,0,0,.5)}
-.vid__seta{position:relative;z-index:1;display:grid;place-items:center;width:3.4rem;height:3.4rem;
+.vid__play{position:relative;z-index:1;display:grid;place-items:center;width:3.4rem;height:3.4rem;
            border-radius:50%;background:var(--relva);color:#FFF;
            box-shadow:0 6px 20px -6px rgba(0,0,0,.45);
            transition:transform .4s var(--curva)}
-.vid__seta .ic{width:1.2rem;height:1.2rem}
-.vid__bt:hover .vid__seta{transform:scale(1.12)}
+.vid__play .ic{width:1.25rem;height:1.25rem;margin-left:.12rem}
+.vid__bt:hover .vid__play{transform:scale(1.12)}
 .vid__cx{position:relative;aspect-ratio:16/9;border:1px solid var(--linha);overflow:hidden;background:#000}
 .vid__cx iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 /* o .vid__q é um <figcaption>, e a regra geral dos créditos põe maiúsculas e
@@ -831,12 +838,10 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
            text-transform:uppercase;letter-spacing:.14em;color:var(--relva)}
 
 /* Uma fila só: o cartão de perfil e as publicações lado a lado, como itens
-   iguais da mesma grelha. Antes o perfil tinha uma coluna estreita à esquerda
-   e as publicações uma grelha à direita — e como os embeds do Instagram são
-   muito mais altos do que o cartão, ficava meio metro de branco por baixo
-   dele. O `display:contents` desmancha os invólucros e deixa as publicações
-   caírem directamente na grelha de cima, sem mudar o que o JavaScript
-   escreve. */
+   iguais da mesma grelha. Os embeds do Instagram são muito mais altos do que
+   o cartão, e em duas colunas sobrava branco por baixo dele. O
+   `display:contents` desmancha os invólucros e deixa as publicações caírem
+   directamente na grelha de cima, sem mudar o que o JavaScript escreve. */
 .ig{display:grid;gap:clamp(1.2rem,2.6vw,1.8rem);align-items:start;grid-template-columns:1fr}
 @media (min-width:900px){.ig{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (min-width:560px) and (max-width:899px){.ig{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -1102,30 +1107,45 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 @media (min-width:820px){
   .porta{grid-template-columns:auto minmax(0,1fr) auto 6.5rem auto}
 }
-.porta:hover{background:var(--relva-clara);padding-inline:clamp(.6rem,1.6vw,1.2rem)}
+/* Cada caminho tem a sua cor, e ela só aparece ao passar por cima: em repouso
+   a lista lê-se como uma lista, e ao tocar cada linha diz «sou outra coisa».
+   É o que distingue quatro entradas de um menu de quatro parágrafos. */
+.porta{--cor:var(--relva)}
+.porta:nth-child(1){--cor:#1B6B47}
+.porta:nth-child(2){--cor:#A8791F}
+.porta:nth-child(3){--cor:#2C5D8A}
+.porta:nth-child(4){--cor:#8A3A52}
+.porta::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cor);
+               transform:scaleY(0);transform-origin:top;transition:transform .45s var(--curva)}
+.porta:hover::before{transform:scaleY(1)}
+.porta:hover{background:color-mix(in srgb,var(--cor) 7%,transparent);
+             padding-inline:clamp(.6rem,1.6vw,1.2rem)}
+.porta__r,.porta__n b,.porta__i{color:var(--cor)}
+.porta:hover .porta__i{background:var(--cor);border-color:var(--cor);color:#FFF}
+.porta:hover .porta__s{background:var(--cor);border-color:var(--cor);color:#FFF;transform:translateX(.2rem)}
+.porta__s{color:var(--cor)}
 /* Ícone e número juntos, numa placa. Só o número não chegava para se perceber
    que aquilo era um menu — podia ser uma lista de qualquer coisa numerada. Com
    o desenho do assunto ao lado, lê-se logo o que há do outro lado. */
 .porta__i{display:flex;align-items:center;gap:.55rem;flex:none;
           padding:.5rem .7rem;border-radius:12px;border:1px solid var(--linha);
-          background:var(--papel);color:var(--relva);
+          background:var(--papel);
           transition:background-color .4s var(--curva),border-color .4s var(--curva),
                      color .4s var(--curva)}
 .sec--fundo .porta__i{background:var(--superficie)}
 .porta__i .ic{width:1.35rem;height:1.35rem}
 .porta__i b{font-family:var(--display);font-weight:300;font-variation-settings:'opsz' 40;
             font-size:1.12rem;line-height:1;opacity:.55}
-.porta:hover .porta__i{background:var(--relva);border-color:var(--relva);color:#FFF}
+
 .porta__q{display:flex;flex-direction:column;gap:.22rem;min-width:0}
-.porta__r{font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:var(--relva)}
+.porta__r{font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.18em}
 .porta__t{font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 30;
           font-size:clamp(1.16rem,2.2vw,1.55rem);line-height:1.15;letter-spacing:-.018em;color:var(--tinta)}
 .porta__x{font-size:.85rem;line-height:1.5;color:var(--tinta-fraca);max-width:52ch}
 .porta__n{font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
           color:var(--tinta-fraca);white-space:nowrap}
 .porta__n b{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 30;
-            font-size:1.4rem;letter-spacing:-.01em;color:var(--relva);margin-right:.3rem;
-            vertical-align:-.08em}
+            font-size:1.4rem;letter-spacing:-.01em;margin-right:.3rem;vertical-align:-.08em}
 .porta__f{display:none;width:6.5rem;height:4.4rem;border-radius:10px;overflow:hidden;
           background:var(--superficie);box-shadow:0 0 0 1px var(--linha)}
 @media (min-width:820px){.porta__f{display:block}}
@@ -1133,10 +1153,10 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
               transition:transform .7s var(--curva)}
 .porta:hover .porta__f img{transform:scale(1.06)}
 .porta__s{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:50%;
-          border:1px solid var(--linha-forte);color:var(--relva);font-size:.95rem;flex:none;
+          border:1px solid var(--linha-forte);font-size:.95rem;flex:none;
           transition:background-color .4s var(--curva),color .4s var(--curva),
                      border-color .4s var(--curva),transform .4s var(--curva)}
-.porta:hover .porta__s{background:var(--relva);border-color:var(--relva);color:#FFF;transform:translateX(.2rem)}
+
 @media (max-width:819px){
   .porta{grid-template-columns:auto minmax(0,1fr) auto}
   .porta__n{display:none}

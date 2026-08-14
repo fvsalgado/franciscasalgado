@@ -137,8 +137,8 @@
   <figure class="hero__f">
     <img class="hero__img" src="/img/swing.webp"
          alt="Francisca Salgado no fim do swing, com o driver ao ombro"
-         width="1080" height="1350" fetchpriority="high" decoding="async" />
-    <figcaption class="hero__cred"></figcaption>
+         width="1080" height="1350" fetchpriority="high" decoding="async"
+         data-credito-em="heroCred" />
   </figure>
 
   <div class="hero__in">
@@ -154,7 +154,10 @@
         <span class="prox__q num" id="proxQ" data-t="prox_carregar">Loading…</span>
         <span class="prox__s" aria-hidden="true">→</span>
       </a>
-      <span class="rolar" aria-hidden="true"><i></i></span>
+      <div class="hero__pe-d">
+        <p class="hero__cred" id="heroCred"></p>
+        <span class="rolar" aria-hidden="true"><i></i></span>
+      </div>
     </div>
   </div>
 </section>
@@ -181,11 +184,11 @@
   <div class="env">
     <div class="cab">
       <div class="cab__t">
-        <p class="rot" data-t="po_rot">The rest</p>
-        <h2 class="d d--l ani" data-t="po_tit">Where to go next</h2>
+        <p class="rot" data-t="po_rot">Also here</p>
+        <h2 class="d d--l ani" data-t="po_tit">Where to find what</h2>
       </div>
       <div class="cab__x">
-        <p class="txt" data-t="po_txt">Each of these pages carries the whole subject — the events with their rounds and their sources, the story year by year, the file for people who write, and the ways in as a partner.</p>
+        <p class="txt" data-t="po_txt">Every event and every ranking. The story, year by year. The file for journalists. And how to support her.</p>
       </div>
     </div>
     <div id="portas"></div>
@@ -202,7 +205,7 @@
     <div class="cab">
       <div class="cab__t">
         <p class="rot" data-t="rk_rot">Rankings</p>
-        <h2 class="d d--l ani" data-t="rk_tit">The official records, as they stand</h2>
+        <h2 class="d d--l ani" data-t="rk_tit">Where she stands, in the world and in Europe</h2>
       </div>
       <div class="cab__x">
         <p class="txt" data-t="rk_txt">The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category. Between them they decide access to much of the international calendar.</p>

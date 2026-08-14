@@ -12,6 +12,13 @@ const dominio = (src) => { try { return new URL(src, location.href).hostname; } 
     Vive sempre num <span> próprio, para poder ser reescrito ao mudar de
     língua sem apagar a legenda que veio na marcação. */
 function colocar(img, texto) {
+  /* `data-credito-em` aponta um elemento onde o crédito deve ir. Serve o hero
+     da página inicial, onde a fotografia sangra por trás de tudo e o crédito
+     tem de viver na fila de baixo, longe do resto. */
+  if (img.dataset.creditoEm) {
+    const alvo = document.getElementById(img.dataset.creditoEm);
+    if (alvo) { alvo.textContent = texto; return; }
+  }
   const fig = img.closest('figure');
   if (fig) {
     let leg = fig.querySelector('figcaption');

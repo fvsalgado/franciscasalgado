@@ -87,16 +87,16 @@ const pessoa = {
    falam da mesma jogadora e não de duas. */
 const NOMES = {
   pt: { inicio: 'Início', resultados: 'Resultados', percurso: 'Percurso',
-        imprensa: 'Imprensa', parcerias: 'Parcerias',
+        imprensa: 'Imprensa', parcerias: 'Parcerias', contacto: 'Contacto',
         listaR: 'Resultados de Francisca Salgado',
         listaI: 'Imprensa sobre Francisca Salgado',
-        contacto: 'Parcerias — Francisca Salgado',
+        pgContacto: 'Contacto — Francisca Salgado',
         cargo: 'Golfista amadora', desporto: 'Golfe', lugar: 'lugar' },
   en: { inicio: 'Home', resultados: 'Results', percurso: 'Her story',
-        imprensa: 'Press', parcerias: 'Partnerships',
+        imprensa: 'Press', parcerias: 'Partnerships', contacto: 'Contact',
         listaR: 'Francisca Salgado — results',
         listaI: 'Press coverage of Francisca Salgado',
-        contacto: 'Partnerships — Francisca Salgado',
+        pgContacto: 'Contact — Francisca Salgado',
         cargo: 'Amateur golfer', desporto: 'Golf', lugar: 'place' },
 };
 const base = (l) => (l === 'en' ? `${SITIO}/en/` : `${SITIO}/`);
@@ -208,8 +208,14 @@ const PAGINAS = {
     })),
   }],
   'parcerias.html': async (html, l) => [quemE(l), migalhas('parcerias', 'parcerias.html', l), {
+    '@type': 'WebPage',
+    name: l === 'en' ? 'Partnerships — Francisca Salgado' : 'Parcerias — Francisca Salgado',
+    inLanguage: l === 'en' ? 'en' : 'pt-PT',
+    about: { '@id': `${SITIO}/#francisca` },
+  }],
+  'contacto.html': async (html, l) => [quemE(l), migalhas('contacto', 'contacto.html', l), {
     '@type': 'ContactPage',
-    name: NOMES[l].contacto,
+    name: NOMES[l].pgContacto,
     inLanguage: l === 'en' ? 'en' : 'pt-PT',
     about: { '@id': `${SITIO}/#francisca` },
     mainEntity: {
@@ -264,6 +270,7 @@ const MAPA = [
   ['percurso.html', 'monthly', '0.8'],
   ['imprensa.html', 'monthly', '0.7'],
   ['parcerias.html', 'monthly', '0.7'],
+  ['contacto.html', 'monthly', '0.6'],
 ];
 const quando = `${resultados.atualizado || perfil.atualizado}-01`.slice(0, 10);
 
@@ -345,7 +352,8 @@ hreflang. O português é o original; o inglês é tradução dele.
 - ${SITIO}/resultados.html — todas as provas, com voltas, total e fonte
 - ${SITIO}/percurso.html — biografia, ano a ano, e perguntas frequentes
 - ${SITIO}/imprensa.html — biografia curta, citações com fonte, fotografias
-- ${SITIO}/parcerias.html — quem apoia, formas de entrar, contacto
+- ${SITIO}/parcerias.html — quem apoia, e o que um apoio pode cobrir
+- ${SITIO}/contacto.html — email, Instagram e formulário
 
 ## Dados abertos
 

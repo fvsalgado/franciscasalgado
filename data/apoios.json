@@ -1,5 +1,4 @@
 {
-  "_leia-me": "Quem acompanha o percurso, por natureza da relação. Para acrescentar um logótipo: guarde o ficheiro em img/logos/ e ponha o nome em 'logo'; sem 'logo', entra o nome composto na tipografia do sítio, dentro do mesmo cartão, e a parede continua a ler-se como uma só. Um item com \"fundo\": \"escuro\" ganha placa escura — é para logótipos desenhados a branco, que numa placa branca desapareciam. Os créditos e a proveniência de cada logótipo vivem em data/creditos.json.",
   "grupos": [
     {
       "id": "patrocinadores",
