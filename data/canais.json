@@ -2,6 +2,7 @@
   "canais": [
     {
       "chave": "email",
+      "tipo": "contacto",
       "nome": "birdie@franciscasalgado.golf",
       "sub": {
         "pt": "Parcerias, imprensa e convites",
@@ -11,12 +12,14 @@
     },
     {
       "chave": "instagram",
+      "tipo": "contacto",
       "nome": "Instagram",
       "sub": "@francisca_salgado_",
       "url": "https://www.instagram.com/francisca_salgado_/"
     },
     {
       "chave": "bandeira",
+      "tipo": "ficha",
       "nome": "Ficha na FPG",
       "sub": {
         "pt": "Federação Portuguesa de Golfe",
@@ -26,6 +29,7 @@
     },
     {
       "chave": "ranking",
+      "tipo": "ficha",
       "nome": "European Golf Rankings",
       "sub": {
         "pt": "Ficha e resultados",
@@ -35,6 +39,7 @@
     },
     {
       "chave": "taca",
+      "tipo": "ficha",
       "nome": "WAGR",
       "sub": {
         "pt": "World Amateur Golf Ranking",

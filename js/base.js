@@ -70,7 +70,10 @@ export function iniciar(pintar) {
   const repintar = async (l) => {
     nav(l);
     partirTitulos();
-    const lista = await canais(l);
+    /* Só os canais de contacto. As fichas oficiais — FPG, EGR, WAGR — vivem na
+       página de imprensa; no rodapé, debaixo de «onde seguir», estavam a
+       repetir-se em todas as páginas e nem sequer eram sítios que se sigam. */
+    const lista = (await canais(l)).filter((c) => c.tipo === 'contacto');
     rodape(l, lista);
     await pintar?.(l);
     // o que acabou de nascer entra no observador; sem isto ficava a zero de

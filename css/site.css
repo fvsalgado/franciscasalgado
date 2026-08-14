@@ -537,9 +537,6 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 @media (min-width:900px){.sobre{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);align-items:start}}
 .sobre__q{display:flex;flex-direction:column;gap:1.3rem}
 .bio > p{margin:0}
-.bio__linha{font-family:var(--display);font-weight:300;font-style:italic;
-            font-size:clamp(1.28rem,2.4vw,1.8rem);line-height:1.32;
-            font-variation-settings:'opsz' 40;color:var(--tinta);max-width:34ch}
 
 .factos{margin:1rem 0 0;display:grid}
 .factos > div{display:grid;grid-template-columns:minmax(7.5rem,auto) 1fr;gap:.4rem 1.4rem;

@@ -6,7 +6,7 @@ import { iniciar } from './base.js';
 import { iniciarCampo } from './campo.js';
 import { reduzido } from './movimento.js';
 import { porEpoca, carregar, proximas } from './resultados.js';
-import { factos, percurso, citacoes, pecas, saiuEm, escadas, ligacoes, numeros,
+import { factos, percurso, citacoes, pecas, escadas, ligacoes, numeros,
          rankingsNaPergunta } from './conteudo.js';
 import { galeria, videos, apoios } from './media.js';
 import { reels } from './instagram.js';
@@ -112,8 +112,7 @@ const PINTAR = {
       factos($('factos'), l),
       citacoes($('citacoes'), l),
       pecas($('pecas'), l),
-      saiuEm($('saiuEm'), l),
-      ligacoes($('ligacoes'), l),
+      ligacoes($('ligacoes'), l, 'ficha'),
       galeria($('gal'), l),
     ]);
   },
@@ -121,12 +120,10 @@ const PINTAR = {
   async parcerias(l) {
     await Promise.all([escadas($('escadas'), l), apoios($('apoios'), l),
                        numeros($('numsApoio'), l, 'apoioNumeros'),
-                       reels($('reels'), l), ligacoes($('ligacoes'), l)]);
+                       reels($('reels'), l)]);
   },
 
-  async contacto(l) {
-    await ligacoes($('ligacoes'), l);
-  },
+  async contacto() { /* a página de contacto é o formulário, e está no HTML */ },
 
   async legal() { /* as páginas legais são só texto */ },
 };

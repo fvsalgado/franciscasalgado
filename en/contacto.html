@@ -142,8 +142,8 @@
   <canvas class="sec__campo" id="campo" aria-hidden="true"></canvas>
   <div class="env">
     <p class="rot" data-t="ct_rot">Contact</p>
-    <h1 class="d d--l ani" data-t="ct_tit">Talk to Francisca</h1>
-    <p class="txt topo-p__t" data-t="ct_txt">Partnerships, press, invitations to events and photograph requests. Write to <a class="lig" href="mailto:birdie@franciscasalgado.golf">birdie@franciscasalgado.golf</a> or use the form below.</p>
+    <h1 class="d d--l ani" data-t="ct_tit">Write to Francisca</h1>
+    <p class="txt topo-p__t" data-t="ct_txt">Partnerships, press, invitations to events and photograph requests.</p>
     <div class="topo-p__bt">
       <a class="cap cap--cheio" href="mailto:birdie@franciscasalgado.golf" data-t="ct_bt1" data-sem-seta data-mag>birdie@franciscasalgado.golf</a>
       <a class="cap" href="https://www.instagram.com/francisca_salgado_/" target="_blank" rel="noopener" data-t="ct_bt2" data-mag>@francisca_salgado_</a>
@@ -181,11 +181,18 @@
         <p class="form__nota" data-t="c9">By sending, your data is used only to answer this request. See the <a href="privacidade.html">privacy policy</a>.</p>
       </form>
 
-      <div>
-        <p class="rot rot--so" data-t="ct_lig">Official links</p>
-        <div class="plats" id="ligacoes" style="margin-top:1.2rem"></div>
-        <p class="txt" style="margin-top:1.6rem;font-size:.85rem" data-t="ct_nota">The form opens your email app ready to send. If you prefer, write straight to <a class="lig" href="mailto:birdie@franciscasalgado.golf">birdie@franciscasalgado.golf</a> or send a message on Instagram.</p>
-      </div>
+      <!-- Aqui estava outra vez a lista de email e Instagram, que já são os
+           dois botões lá em cima. No lugar ficam os caminhos que esta página
+           não serve: quem quer fotografias, factos ou fichas oficiais tem
+           tudo na de imprensa, e não precisa de escrever a pedir. -->
+      <aside class="contacto__x">
+        <p class="rot rot--so" data-t="ct_lig">Before you write</p>
+        <dl class="factos">
+          <div><dt data-t="ct_x1d">Photographs</dt><dd data-t="ct_x1t">The high-resolution ones are on the <a class="lig" href="imprensa.html">press page</a>, free to publish with the credit given.</dd></div>
+          <div><dt data-t="ct_x2d">Facts and quotes</dt><dd data-t="ct_x2t">Short biography, fact sheet and sourced quotes, also on the <a class="lig" href="imprensa.html">press page</a>.</dd></div>
+          <div><dt data-t="ct_x3d">Results</dt><dd data-t="ct_x3t">Event by event, with the rounds and the source, on the <a class="lig" href="resultados.html">results page</a>.</dd></div>
+        </dl>
+      </aside>
     </div>
   </div>
 </section>

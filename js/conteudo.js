@@ -127,9 +127,13 @@ export async function canais(lingua = 'pt') {
   return cs.map((c) => ({ ...c, sub: tx(c.sub, lingua) }));
 }
 
-export async function ligacoes(cx, lingua = 'pt') {
+/* `tipo` separa as duas coisas que esta lista tinha à mistura: os sítios onde
+   se fala com ela (email, Instagram) e as fichas oficiais onde se confirmam os
+   resultados (FPG, EGR, WAGR). Sem essa separação a lista inteira aparecia na
+   página de contacto e outra vez na de imprensa, igual das duas vezes. */
+export async function ligacoes(cx, lingua = 'pt', tipo = null) {
   if (!cx) return;
-  const cs = await canais(lingua);
+  const cs = (await canais(lingua)).filter((c) => !tipo || c.tipo === tipo);
   cx.innerHTML = cs.map((c) => `
     <a class="plat" href="${c.url}" target="_blank" rel="noopener" data-sem-seta data-mag>
       <span class="plat__i">${icone(c.chave, 'ic')}</span>
@@ -246,7 +250,9 @@ export async function portas(cx, lingua = 'pt') {
 
   const PORTAS = [
     {
-      href: 'resultados.html', img: 'swing.webp', ic: 'taca',
+      /* Não `swing.webp`: é a fotografia que abre a página inicial, e a porta
+         ficava a mostrar outra vez, meio ecrã abaixo, a mesma imagem. */
+      href: 'resultados.html', img: 'podio-2024.webp', ic: 'taca',
       n: provas.length,
       r: { pt: 'Resultados', en: 'Results' },
       t: { pt: 'Prova a prova, desde 2018', en: 'Event by event, since 2018' },

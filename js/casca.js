@@ -123,17 +123,17 @@ export function rodape(lingua = 'pt', canais = []) {
   if (!alvo) return;
   const en = lingua === 'en';
 
+  /* Havia aqui uma quarta coluna, «Falar com», com «Ser parceiro» e «Kit de
+     imprensa» — que são as duas páginas já listadas na coluna do lado. Saiu:
+     um rodapé que repete a mesma ligação em duas colunas lê-se pior do que um
+     com três. */
   const t = en
     ? { frase: 'Amateur golfer. Vale de Janelas, Óbidos. Portuguese national team.',
-        onde: 'Where to follow', ver: 'Pages', falar: 'Get in touch',
-        kit: 'Press kit', apoiar: 'Become a partner',
+        onde: 'Contact', ver: 'Pages',
         cred: '© 2026 Francisca Salgado', legal: 'Privacy', termos: 'Terms', cookies: 'Cookies' }
     : { frase: 'Golfista amadora. Vale de Janelas, Óbidos. Seleção Nacional.',
-        onde: 'Onde seguir', ver: 'Páginas', falar: 'Falar com',
-        kit: 'Kit de imprensa', apoiar: 'Ser parceiro',
+        onde: 'Contacto', ver: 'Páginas',
         cred: '© 2026 Francisca Salgado', legal: 'Privacidade', termos: 'Termos', cookies: 'Cookies' };
-
-  const sub = (c) => (typeof c.sub === 'string' ? c.sub : c.sub?.[lingua] || '');
 
   alvo.className = 'pe';
   alvo.innerHTML = `
@@ -152,13 +152,6 @@ export function rodape(lingua = 'pt', canais = []) {
         <div>
           <p class="rot">${t.ver}</p>
           <ul class="pe__l">${PAGINAS.map((p) => `<li><a href="${p.href}" data-mag>${p[lingua]}</a></li>`).join('')}</ul>
-        </div>
-        <div>
-          <p class="rot">${t.falar}</p>
-          <ul class="pe__l">
-            <li><a href="contacto.html" data-mag>${t.apoiar}</a></li>
-            <li><a href="imprensa.html" data-mag>${t.kit}</a></li>
-          </ul>
         </div>
       </div>
       <div class="pe__f">
