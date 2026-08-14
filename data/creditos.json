@@ -1,0 +1,12 @@
+{
+  "_leia-me": "Tabela de créditos obrigatórios de imagem. A chave de porFicheiro é o nome do ficheiro tal como está em img/. Sempre que entrar uma fotografia nova no site, acrescenta-se aqui a linha correspondente — o js/creditos.js avisa na consola quando encontra uma imagem sem crédito.",
+  "porFicheiro": {
+    "retrato.webp": { "pt": "Fotografia: por creditar", "en": "Photograph: credit pending" },
+    "retrato-quadrado.webp": { "pt": "Fotografia: por creditar", "en": "Photograph: credit pending" },
+    "og.jpg": { "pt": "Fotografia: por creditar", "en": "Photograph: credit pending" }
+  },
+  "porDominio": {
+    "scontent.cdninstagram.com": { "pt": "Instagram · @francisca_salgado_", "en": "Instagram · @francisca_salgado_" },
+    "instagram.com": { "pt": "Instagram · @francisca_salgado_", "en": "Instagram · @francisca_salgado_" }
+  }
+}

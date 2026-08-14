@@ -1,0 +1,99 @@
+{
+  "citacoes": [
+    {
+      "t": {
+        "pt": "Tentei manter o foco na minha rotina e jogar um golfe inteligente. Estou satisfeita com o resultado e motivada para o próximo torneio.",
+        "en": "I tried to stay focused on my routine and play intelligent golf. I'm happy with the result and motivated for the next tournament."
+      },
+      "f": { "pt": "Francisca Salgado · Fundação do Desporto, 2025", "en": "Francisca Salgado · Fundação do Desporto, 2025" },
+      "url": "https://fundacaodesporto.pt/noticias/francisca-salgado-com-grande-performance/"
+    },
+    {
+      "t": {
+        "pt": "Estou muito contente com o resultado e com a forma como joguei esta semana. Apesar de não ter começado muito bem, com algumas dificuldades no putt, joguei muito bem nos matches.",
+        "en": "I'm very happy with the result and with the way I played this week. Although I didn't start very well, with some putting difficulties, I played great in the matches."
+      },
+      "f": { "pt": "Francisca Salgado · Taça FPG, outubro de 2025", "en": "Francisca Salgado · FPG Cup, October 2025" },
+      "url": "https://clubedegolfe.praia-del-rey.com/vice-champion-francisca-salgado/"
+    },
+    {
+      "t": {
+        "pt": "Fez uma exibição em crescendo, melhorando o resultado e o posicionamento na classificação dia após dia.",
+        "en": "She put in a crescendo of a performance, improving her score and her position in the standings day after day."
+      },
+      "f": { "pt": "Federação Portuguesa de Golfe · Bélgica Sub-14, 2023", "en": "Portuguese Golf Federation · Belgium U14, 2023" },
+      "url": "https://www.record.pt/modalidades/golfe/detalhe/francisca-salgado-6-no-campeonato-internacional-da-belgica-de-sub-14"
+    }
+  ],
+
+  "pecas": [
+    {
+      "o": "Record",
+      "data": "2026-03",
+      "t": { "pt": "Francisca Salgado e Rodrigo Constantino vencem Campeonato Nacional de Pares Amador", "en": "Francisca Salgado and Rodrigo Constantino win the National Amateur Pairs Championship" },
+      "url": "https://www.record.pt/modalidades/golfe/detalhe/francisca-salgado-e-rodrigo-constantino-vencem-campeonato-nacional-de-pares-amador"
+    },
+    {
+      "o": "FPG",
+      "data": "2026-03",
+      "t": { "pt": "Francisca Salgado e Rodrigo Constantino campeões nacionais de pares", "en": "Francisca Salgado and Rodrigo Constantino, national pairs champions" },
+      "url": "https://portal.fpg.pt/noticias/francisca-salgado-e-rodrigo-constantino-campeoes-nacionais-de-pares/"
+    },
+    {
+      "o": "Record",
+      "data": "2026-03",
+      "t": { "pt": "Quatro campeões diferentes nos primeiros torneios do Circuito Aquapor de golfe", "en": "Four different champions in the opening Aquapor Circuit tournaments" },
+      "url": "https://www.record.pt/modalidades/golfe/detalhe/quatro-campeoes-diferentes-em-dois-torneios-do-circuito-aquapor-de-golfe"
+    },
+    {
+      "o": "FPG",
+      "data": "2026-05",
+      "t": { "pt": "Domingo de decisões no Campeonato Nacional de Jovens na Aroeira", "en": "A Sunday of decisions at the National Youth Championship in Aroeira" },
+      "url": "https://portal.fpg.pt/noticias/domingo-de-decisoes-no-campeonato-nacional-de-jovens-na-aroeira/"
+    },
+    {
+      "o": "CDP",
+      "data": "2025-12",
+      "t": { "pt": "Francisca Salgado no pódio", "en": "Francisca Salgado on the podium" },
+      "url": "https://www.cdp.pt/2025/12/12/francisca-salgado-no-podio/"
+    },
+    {
+      "o": "Praia D'El Rey",
+      "data": "2025-10",
+      "t": { "pt": "Vice-campeã · Francisca Salgado", "en": "Vice-champion · Francisca Salgado" },
+      "url": "https://clubedegolfe.praia-del-rey.com/vice-champion-francisca-salgado/"
+    },
+    {
+      "o": "Record",
+      "data": "2025-08",
+      "t": { "pt": "Francisca Salgado campeã do GJG Algarve Juniors International", "en": "Francisca Salgado, GJG Algarve Juniors International champion" },
+      "url": "https://www.record.pt/modalidades/golfe/detalhe/francisca-salgado-campea-do-gjg-algarve-juniors-international"
+    },
+    {
+      "o": "O Atleta",
+      "data": "2025-08",
+      "t": { "pt": "Francisco Reis e Francisca Salgado ganham no Algarve", "en": "Francisco Reis and Francisca Salgado win in the Algarve" },
+      "url": "https://oatleta.pt/francisco-reis-e-francisca-salgado-ganham-no-algarve/"
+    },
+    {
+      "o": "Fundação do Desporto",
+      "data": "2025-05",
+      "t": { "pt": "Francisca Salgado com grande performance!", "en": "A big performance from Francisca Salgado" },
+      "url": "https://fundacaodesporto.pt/noticias/francisca-salgado-com-grande-performance/"
+    },
+    {
+      "o": "Record",
+      "data": "2023-07",
+      "t": { "pt": "Francisca Salgado 6.ª no Campeonato Internacional da Bélgica de Sub-14", "en": "Francisca Salgado 6th at the Belgian International U14 Championship" },
+      "url": "https://www.record.pt/modalidades/golfe/detalhe/francisca-salgado-6-no-campeonato-internacional-da-belgica-de-sub-14"
+    },
+    {
+      "o": "Gazeta das Caldas",
+      "data": "2021",
+      "t": { "pt": "Golfe: Francisca Salgado sagra-se campeã nacional de sub-12", "en": "Golf: Francisca Salgado crowned national U12 champion" },
+      "url": "https://gazetadascaldas.pt/desporto/golfe-francisca-salgado-sagra-se-campea-nacional-de-sub-12/"
+    }
+  ],
+
+  "saiuEm": ["Record", "FPG", "Confederação do Desporto de Portugal", "Fundação do Desporto", "O Atleta", "Golftattoo", "Gazeta das Caldas", "SAPO", "Praia D'El Rey"]
+}

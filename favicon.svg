@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Francisca Salgado">
+  <!-- A bandeira do buraco, que é o sinal mais reconhecível do golfe a 16px.
+       O fundo acompanha o tema do sistema: relva no claro, quase preto no
+       escuro, para o ícone não abrir um buraco branco na barra de separadores. -->
+  <style>
+    .fundo{fill:#1B6B47}
+    .marca{fill:#F7F5EE}
+    @media (prefers-color-scheme: dark){
+      .fundo{fill:#0F241B}
+      .marca{fill:#4FC28B}
+    }
+  </style>
+  <rect class="fundo" width="64" height="64" rx="14"/>
+  <g class="marca">
+    <!-- mastro -->
+    <rect x="24.6" y="12" width="3.4" height="38" rx="1.7"/>
+    <!-- galhardete -->
+    <path d="M28 13.4 48 20.6 28 27.8Z"/>
+    <!-- o green -->
+    <ellipse cx="32" cy="50.6" rx="17" ry="4.4" opacity=".38"/>
+  </g>
+</svg>

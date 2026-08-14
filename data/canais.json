@@ -1,0 +1,28 @@
+{
+  "canais": [
+    {
+      "chave": "instagram",
+      "nome": "Instagram",
+      "sub": "@francisca_salgado_",
+      "url": "https://www.instagram.com/francisca_salgado_/"
+    },
+    {
+      "chave": "bandeira",
+      "nome": "Ficha na FPG",
+      "sub": { "pt": "Federação Portuguesa de Golfe", "en": "Portuguese Golf Federation" },
+      "url": "https://portal.fpg.pt/perfil/francisca-salgado/"
+    },
+    {
+      "chave": "ranking",
+      "nome": "European Golf Rankings",
+      "sub": { "pt": "Ficha e resultados", "en": "Profile and results" },
+      "url": "https://www.europeangolfrankings.com/players/39992"
+    },
+    {
+      "chave": "taca",
+      "nome": "WAGR",
+      "sub": { "pt": "World Amateur Golf Ranking", "en": "World Amateur Golf Ranking" },
+      "url": "https://www.wagr.com/playerprofile/francisca-salgado-43158"
+    }
+  ]
+}
