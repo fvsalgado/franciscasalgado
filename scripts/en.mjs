@@ -12,6 +12,8 @@
  */
 
 export const EN = {
+  ct_bt2: '@francisca_salgado_',
+  ct_bt1: 'birdie@franciscasalgado.golf',
   /* ── partilhado ─────────────────────────────────────────── */
   dz_onde: 'Published in',
 
@@ -22,7 +24,7 @@ export const EN = {
 
 
   rk_rot: 'Rankings',
-  rk_tit: 'The official records, as they stand',
+  rk_tit: 'Where she stands, in the world and in Europe',
   rk_txt: 'The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category. Between them they decide access to much of the international calendar.',
   rk_txt2: 'The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category, and it decides access to much of the international calendar.',
 
@@ -35,9 +37,9 @@ export const EN = {
 
   qu_rot: 'Who she is',
   qu_manif: 'She won her first national championship at ten. Seven years on she has four, plays the European calendar, and has not yet outgrown the U18 category.',
-  po_rot: 'The rest',
-  po_tit: 'Where to go next',
-  po_txt: 'Each of these pages carries the whole subject — the events with their rounds and their sources, the story year by year, the file for people who write, and the ways in as a partner.',
+  po_rot: 'Also here',
+  po_tit: 'Where to find what',
+  po_txt: 'Every event and every ranking. The story, year by year. The file for journalists. And how to support her.',
 
   re_rot: 'Results',
   re_tit: 'The latest events',
@@ -108,25 +110,25 @@ export const EN = {
   ap2_rot: 'Partnerships',
   ap2_tit: 'Taking Portugal further',
   ap2_txt: 'At seventeen she has four national titles and plays the European calendar. The events that give world-ranking points are played in Spain, France, England and Ireland, and each one is a journey, an entry fee and a week away. That is where a partner comes in — on the bag, on the playing apparel and into the tournament photographs.',
-  ap2_bt1: 'Talk about a partnership',
-  ap2_bt2: 'See the ways in',
+  ap2_bt1: 'I want to support',
+  ap2_bt2: 'What it can cover',
   ap2_cit: 'She led from start to finish on her way to the girls U18 title.',
   ap2_cit_f: 'Portuguese Golf Federation · National Youth Championship, 2026',
-  ap2_e_rot: 'Ways in',
-  ap2_e_tit: 'Three ways',
-  ap2_e_txt: 'There is no fixed price list on this page, deliberately: every partnership is drawn up with whoever comes in. Say what you have in mind and you get a concrete proposal — with events, dates, and what gets seen.',
-  ap2_e_bt: 'Talk about it',
+  ap2_e_rot: 'What it can cover',
+  ap2_e_tit: 'A season, an event, or the training',
+  ap2_e_txt: 'Support can cover a whole season, a single international tournament, or the training work that never shows up in the photographs. There is no price list: say what you have in mind and you get a proposal with events, dates, and what gets seen.',
+  ap2_e_bt: 'Ask for a proposal',
   pr_rot: 'On Instagram',
-  pr_tit: 'What it looks like',
-  pr_txt: 'The work with the brands, exactly as it goes out on her Instagram. It is the most concrete argument for anyone thinking of coming in: not a promise of visibility, but visibility already delivered.',
+  pr_tit: 'What a brand gets',
+  pr_txt: 'Posts made with brands that already back her, on her own account. Not a promise of visibility — what has already gone out.',
 
   ap2_q_rot: 'Already on board',
   ap2_q_tit: 'Good company',
-  ap2_q_txt: 'Those already walking the road with her, grouped by the nature of the relationship.',
+  ap2_q_txt: 'The brands and institutions already behind her, and what each one covers.',
 
   ct_rot: 'Contact',
-  ct_tit: 'Talk to the team',
-  ct_txt: 'Partnerships, press, invitations and photograph requests. The more concrete the request, the more concrete the answer.',
+  ct_tit: 'Talk to Francisca',
+  ct_txt: 'Partnerships, press, invitations to events and photograph requests. Write to <a class="lig" href="mailto:birdie@franciscasalgado.golf">birdie@franciscasalgado.golf</a> or use the form below.',
   ct_lig: 'Official links',
   ct_nota: 'The form opens your email app ready to send. If you prefer, write straight to <a class="lig" href="mailto:birdie@franciscasalgado.golf">birdie@franciscasalgado.golf</a> or send a message on Instagram.',
 

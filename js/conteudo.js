@@ -117,7 +117,7 @@ export async function escadas(cx, lingua = 'pt') {
       <p class="degrau__x">${tx(e.x, lingua)}</p>
       ${e.inclui?.length ? `<ul class="degrau__u">${e.inclui
         .map((u) => `<li>${tx(u, lingua)}</li>`).join('')}</ul>` : ''}
-      <a class="degrau__b" href="#contacto" data-mag>${en ? 'Talk about this' : 'Falar sobre isto'}</a>
+      <a class="degrau__b" href="contacto.html" data-mag>${en ? 'Ask for a proposal' : 'Pedir uma proposta'}</a>
     </article>`).join('');
 }
 
@@ -175,16 +175,26 @@ export async function citacoes(cx, lingua = 'pt', quantas = 99, { grande = false
 
 export async function pecas(cx, lingua = 'pt') {
   if (!cx) return;
-  const { pecas: ps = [] } = await ler('imprensa');
+  const { pecas: ps = [], saiuEm: casas = [] } = await ler('imprensa');
+  /* O símbolo de cada casa, indexado pelo nome, para cada peça o mostrar ao
+     lado do título. Numa lista de quarenta linhas, o desenho é o que deixa
+     encontrar o Record no meio das notícias da federação sem ler tudo. */
+  const simbolo = new Map(casas.filter((c) => c && c.logo).map((c) => [c.nome, c.logo]));
+
   cx.className = 'pecas';
-  cx.innerHTML = ps.map((p) => `
+  cx.innerHTML = ps.map((p) => {
+    const logo = simbolo.get(p.o);
+    return `
     <li class="peca">
       <a href="${p.url}" target="_blank" rel="noopener" data-mag>
-        <span class="peca__o">${p.o}</span>
+        <span class="peca__o">${logo
+          ? `<img src="/img/imprensa/${logo}" alt="" loading="lazy" decoding="async" data-credito-feito="1" />`
+          : ''}<span>${p.o}</span></span>
         <span class="peca__t">${tx(p.t, lingua)}</span>
         <span class="peca__a num">${p.data}</span>
       </a>
-    </li>`).join('');
+    </li>`;
+  }).join('');
 }
 
 /* Cada casa que já escreveu sobre ela, com o símbolo e a ligação para o sítio.

@@ -62,7 +62,8 @@ hreflang. O português é o original; o inglês é tradução dele.
 - https://franciscasalgado.golf/resultados.html — todas as provas, com voltas, total e fonte
 - https://franciscasalgado.golf/percurso.html — biografia, ano a ano, e perguntas frequentes
 - https://franciscasalgado.golf/imprensa.html — biografia curta, citações com fonte, fotografias
-- https://franciscasalgado.golf/parcerias.html — quem apoia, formas de entrar, contacto
+- https://franciscasalgado.golf/parcerias.html — quem apoia, e o que um apoio pode cobrir
+- https://franciscasalgado.golf/contacto.html — email, Instagram e formulário
 
 ## Dados abertos
 

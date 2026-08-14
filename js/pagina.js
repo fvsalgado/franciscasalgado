@@ -18,15 +18,22 @@ const qual = document.currentScript?.dataset.pagina
   || '';
 
 /* ── formulário ───────────────────────────────────────────── */
-/* ENTREGA está vazio enquanto não houver serviço de entrega escolhido —
-   Formspree, Resend, uma função serverless, o que for. Até lá o formulário não
-   finge que enviou: valida, compõe a mensagem e abre o email do próprio já
-   preenchido para birdie@franciscasalgado.golf. É menos elegante do que um
-   envio silencioso, e chega mesmo. Basta pôr aqui o endereço no dia em que
-   houver serviço. */
-const ENTREGA = '';
+/* Envia por /api/contacto, que entrega em birdie@franciscasalgado.golf.
+   Enquanto essa função não tiver chave de envio configurada responde 501, e
+   aí o formulário abre o email do próprio já preenchido: quem escreve nunca
+   fica sem caminho por causa de uma configuração que ainda não foi feita. */
+const ENTREGA = '/api/contacto';
 const EMAIL = 'birdie@franciscasalgado.golf';
 const INSTAGRAM = 'https://www.instagram.com/francisca_salgado_/';
+
+function porEmail(form, en) {
+  const d = new FormData(form);
+  const corpo = en
+    ? `Name: ${d.get('nome')}\nEmail: ${d.get('email')}\nOrganisation: ${d.get('organizacao') || '—'}\n\n${d.get('mensagem')}`
+    : `Nome: ${d.get('nome')}\nEmail: ${d.get('email')}\nOrganização: ${d.get('organizacao') || '—'}\n\n${d.get('mensagem')}`;
+  location.href = `mailto:${EMAIL}?subject=${
+    encodeURIComponent(String(d.get('assunto') || 'Contacto'))}&body=${encodeURIComponent(corpo)}`;
+}
 
 function formulario(lingua) {
   const form = $('form');
@@ -46,39 +53,39 @@ function formulario(lingua) {
       return;
     }
 
-    if (!ENTREGA) {
-      /* Sem serviço de entrega, o formulário não finge que enviou: abre o
-         email do próprio com tudo já escrito. É menos elegante do que um
-         envio silencioso e chega mesmo ao destino, que é o que interessa. */
-      const d = new FormData(form);
-      const corpo = en
-        ? `Name: ${d.get('nome')}\nEmail: ${d.get('email')}\nOrganisation: ${d.get('organizacao') || '—'}\n\n${d.get('mensagem')}`
-        : `Nome: ${d.get('nome')}\nEmail: ${d.get('email')}\nOrganização: ${d.get('organizacao') || '—'}\n\n${d.get('mensagem')}`;
-      const url = `mailto:${EMAIL}?subject=${encodeURIComponent(String(d.get('assunto') || 'Contacto'))}&body=${encodeURIComponent(corpo)}`;
-      msg.classList.remove('erro');
-      msg.innerHTML = en
-        ? `Opening your email app. If nothing happens, write to <a class="lig" href="mailto:${EMAIL}">${EMAIL}</a>.`
-        : `A abrir o seu email. Se não acontecer nada, escreva para <a class="lig" href="mailto:${EMAIL}">${EMAIL}</a>.`;
-      location.href = url;
-      return;
-    }
-
     const bt = form.querySelector('button[type=submit]');
     if (bt) bt.disabled = true;
     msg.textContent = en ? 'Sending…' : 'A enviar…';
 
     try {
       const r = await fetch(ENTREGA, {
-        method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
       });
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      form.reset();
-      msg.textContent = en ? 'Received. You will get an answer shortly.' : 'Recebido. A resposta não deve demorar.';
+
+      if (r.ok) {
+        form.reset();
+        msg.textContent = en
+          ? 'Received. You will get an answer shortly.'
+          : 'Recebido. A resposta não deve demorar.';
+        return;
+      }
+
+      // 501: a função existe e ainda não tem por onde enviar
+      if (r.status === 501) {
+        msg.innerHTML = en
+          ? `Opening your email app. If nothing happens, write to <a class="lig" href="mailto:${EMAIL}">${EMAIL}</a>.`
+          : `A abrir o seu email. Se não acontecer nada, escreva para <a class="lig" href="mailto:${EMAIL}">${EMAIL}</a>.`;
+        porEmail(form, en);
+        return;
+      }
+      throw new Error(`HTTP ${r.status}`);
     } catch {
       msg.classList.add('erro');
       msg.innerHTML = en
-        ? `Could not send. Please try <a class="lig" href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram</a>.`
-        : `Não foi possível enviar. Tente pelo <a class="lig" href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram</a>.`;
+        ? `Could not send. Write to <a class="lig" href="mailto:${EMAIL}">${EMAIL}</a> or message her on <a class="lig" href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram</a>.`
+        : `Não foi possível enviar. Escreva para <a class="lig" href="mailto:${EMAIL}">${EMAIL}</a> ou mande mensagem no <a class="lig" href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram</a>.`;
     } finally {
       if (bt) bt.disabled = false;
     }
@@ -115,6 +122,10 @@ const PINTAR = {
     await Promise.all([escadas($('escadas'), l), apoios($('apoios'), l),
                        numeros($('numsApoio'), l, 'apoioNumeros'),
                        reels($('reels'), l), ligacoes($('ligacoes'), l)]);
+  },
+
+  async contacto(l) {
+    await ligacoes($('ligacoes'), l);
   },
 
   async legal() { /* as páginas legais são só texto */ },

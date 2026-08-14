@@ -1,5 +1,4 @@
 {
-  "_leia-me": "Vídeos no YouTube. O 'id' é o que vem depois de watch?v= ou de /shorts/ no endereço. O 'ano' é opcional: quando não se sabe a data de publicação, deixa-se vazio e o cartão sai sem o selo do ano, em vez de levar um ano inventado. A capa de cada vídeo está em img/videos/<id>.webp, copiada uma vez pelo scripts/capas.mjs — assim mostra-se a imagem verdadeira sem pedir nada ao YouTube antes de alguém carregar no botão.",
   "videos": [
     {
       "id": "uDeZhoU1SUA",

@@ -203,12 +203,12 @@
         "en": "Season"
       },
       "n": {
-        "pt": "Parceiro de época",
-        "en": "Season partner"
+        "pt": "Uma época inteira",
+        "en": "A whole season"
       },
       "x": {
-        "pt": "Uma época inteira, dentro e fora de Portugal. É a forma com mais presença, e a única que fecha com um relatório do que aconteceu.",
-        "en": "A whole season, at home and abroad. It is the most visible of the three, and the only one that ends with a written account of what happened."
+        "pt": "A marca acompanha o calendário todo, dentro e fora de Portugal, e no fim recebe um relatório do que aconteceu.",
+        "en": "The brand travels the whole calendar, at home and abroad, and gets a written account of the season at the end."
       },
       "inclui": [
         {
@@ -235,12 +235,12 @@
         "en": "Event"
       },
       "n": {
-        "pt": "Apoio a uma prova",
-        "en": "Event support"
+        "pt": "Uma prova internacional",
+        "en": "One international event"
       },
       "x": {
-        "pt": "Um torneio internacional, do princípio ao fim. Foi assim que se fez o English Girls' Open, em Inglaterra, com a Fundação do Desporto por trás.",
-        "en": "One international tournament, start to finish. That is how the English Girls' Open, in England, was made possible, with the Fundação do Desporto behind it."
+        "pt": "Cobre a viagem, a inscrição e o caddie de um torneio lá fora. Foi assim que se fez o English Girls’ Open, em Inglaterra.",
+        "en": "Covers the travel, the entry and the caddie for one tournament abroad. That is how the English Girls’ Open, in England, was made possible."
       },
       "inclui": [
         {
@@ -267,12 +267,12 @@
         "en": "Training"
       },
       "n": {
-        "pt": "Apoio ao trabalho de base",
-        "en": "Support for the groundwork"
+        "pt": "O trabalho de treino",
+        "en": "The training work"
       },
       "x": {
-        "pt": "O trabalho que não aparece nas fotografias, e que é o que separa um 74 de um 70.",
-        "en": "The work that never shows up in the photographs, and that is what separates a 74 from a 70."
+        "pt": "Bolas, campo, aulas e preparação física. Não aparece nas fotografias, e é o que separa um 74 de um 70.",
+        "en": "Balls, range, lessons and physical preparation. It never shows up in the photographs, and it is what separates a 74 from a 70."
       },
       "inclui": [
         {

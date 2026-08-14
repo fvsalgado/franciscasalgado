@@ -11,6 +11,7 @@ export const PAGINAS = [
   { href: 'percurso.html', pt: 'Percurso', en: 'Her story' },
   { href: 'imprensa.html', pt: 'Imprensa', en: 'Press' },
   { href: 'parcerias.html', pt: 'Parcerias', en: 'Partnerships' },
+  { href: 'contacto.html', pt: 'Contacto', en: 'Contact' },
 ];
 
 const aqui = () => {
@@ -97,7 +98,7 @@ export function nav(lingua = 'pt') {
         <a class="cap" id="btLang" href="${outraLingua()}" hreflang="${en ? 'pt-PT' : 'en'}"
            data-sem-seta aria-label="${en ? 'Ver em portugu\u00eas' : 'Read this page in English'}"
            >${en ? 'PT' : 'EN'}</a>
-        <a class="cap cap--cheio nav__cta" href="parcerias.html#contacto" data-mag>${en ? 'Get in touch' : 'Contactar'}</a>
+        <a class="cap cap--cheio nav__cta" href="contacto.html" data-mag>${en ? 'Get in touch' : 'Contactar'}</a>
         <button class="ham" id="btMenu" type="button" aria-expanded="false" aria-controls="menu"
                 aria-label="Menu"><i></i><i></i></button>
       </div>
@@ -106,7 +107,7 @@ export function nav(lingua = 'pt') {
     <div class="menu" id="menu" hidden>
       <div class="menu__in">
         <nav class="menu__l" aria-label="${en ? 'Main' : 'Principal'}">${links(false)}</nav>
-        <a class="cap cap--cheio menu__b" href="parcerias.html#contacto">${en ? 'Get in touch' : 'Contactar'}</a>
+        <a class="cap cap--cheio menu__b" href="contacto.html">${en ? 'Get in touch' : 'Contactar'}</a>
       </div>
     </div>`;
   /* Numa página que abre com fotografia a sangrar, o cabeçalho está por cima
@@ -157,7 +158,7 @@ export function rodape(lingua = 'pt', canais = []) {
         <div>
           <p class="rot">${t.falar}</p>
           <ul class="pe__l">
-            <li><a href="parcerias.html#contacto" data-mag>${t.apoiar}</a></li>
+            <li><a href="contacto.html" data-mag>${t.apoiar}</a></li>
             <li><a href="imprensa.html" data-mag>${t.kit}</a></li>
           </ul>
         </div>
@@ -226,7 +227,7 @@ export function flutuante(lingua = 'pt') {
       </a>
     </div>
     <button class="fala__b" id="falaB" type="button" aria-expanded="false" aria-controls="falaL">
-      ${icone('email', 'ic')}<span>${en ? 'Get in touch' : 'Falar'}</span>
+      ${icone('email', 'ic')}<span>${en ? 'Contact' : 'Contacto'}</span>
     </button>`;
   document.body.append(cx);
 

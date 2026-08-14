@@ -16,6 +16,10 @@ const P = {
     '<path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M3.8 20.2h16.4M7.4 20.2v-4.8M12 20.2V8.4M16.6 20.2v-8.2"/>',
   calendario:
     '<rect x="3.4" y="5.4" width="17.2" height="15.2" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M8 3.4v3.9M16 3.4v3.9M3.4 10.3h17.2"/>',
+  /* Triângulo de leitura, para as capas de vídeo. Estava lá uma seta, que é
+     o que se usa para «ir para» e não para «ver». */
+  play:
+    '<path d="M9.2 6.6a.9.9 0 0 1 1.36-.77l8.1 5.4a.9.9 0 0 1 0 1.54l-8.1 5.4A.9.9 0 0 1 9.2 17.4V6.6Z"/>',
   /* Uma folha de jornal dobrada, para a página de imprensa. */
   jornal:
     '<path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M6.2 4.4h11.4v15.2H4.8a1.6 1.6 0 0 1-1.6-1.6V8.2h3V4.4Z"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M17.6 8.2h3v9.8a1.6 1.6 0 0 1-1.6 1.6M9 8.4h5.6M9 11.6h5.6M9 14.8h3.4"/>',

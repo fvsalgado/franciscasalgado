@@ -117,8 +117,6 @@ export async function perfilIg(cx, lingua = 'pt') {
    argumento mais forte para quem está a pensar entrar.
 
    A legenda diz o nome da marca uma vez e, a seguir, o que a parceria cobre.
-   Antes dizia «Lusíadas Saúde» e por baixo «Com a Lusíadas Saúde», que é a
-   mesma informação escrita duas vezes e nenhuma delas útil.
 
    Por trás do iframe fica uma ligação: se o Instagram não desenhar — bloqueador
    de conteúdos, rede fechada, embed retirado — o cartão continua a levar ao

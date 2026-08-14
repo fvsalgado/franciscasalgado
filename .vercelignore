@@ -1,0 +1,12 @@
+# O que não vai para o servidor.
+#
+# Tudo o que está no repositório é publicado pela Vercel, e havia aqui coisas
+# que são de quem mantém o sítio e não de quem o lê: os scripts de manutenção,
+# as notas de trabalho, os relatórios do vigia. Ficam no repositório e deixam
+# de estar num endereço público.
+scripts/
+docs/
+.github/
+*.md
+VIGIA.md
+VIGIA-ATENCAO.md
