@@ -21,7 +21,7 @@ npx serve .          # ou: python3 -m http.server
 | Estilo | `css/site.css` — um ficheiro, com as variáveis de tema no topo |
 | Comportamento | `js/` — módulos ES, sem empacotador |
 | Conteúdo | `data/*.json` — é aqui que se mexe no dia a dia |
-| Funções | `api/wagr.js` — a única, e serve o cartão do ranking mundial |
+| Funções | `api/` — `wagr.js`, `egr.js` e `instagram.js` |
 | Tipos de letra | `fonts/` — Fraunces e Manrope, alojados aqui e não no Google |
 | Fotografias | `img/` — ver «Fotografias», mais abaixo |
 
@@ -35,7 +35,7 @@ npx serve .          # ou: python3 -m http.server
 | `resultados.js` | a lista de provas, o marcador, os filtros e o palmarès |
 | `conteudo.js` | números, factos, linha do tempo, imprensa, ligações |
 | `media.js` | galeria, vídeos e a parede de apoios |
-| `wagr.js` | o cartão do ranking mundial |
+| `rankings.js` | os dois cartões de ranking, o mundial e o europeu |
 | `instagram.js` | as publicações embutidas, ou o convite quando não há |
 | `i18n.js` | português (lido do HTML) e inglês (escrito aqui) |
 | `movimento.js` | cursor, revelação ao rolar, barra de navegação |
@@ -167,25 +167,51 @@ imagem que entre sem crédito deixa aviso na consola — de propósito.
 A imagem de partilha (`img/og.jpg`) é composta a partir do retrato oficial;
 o desenho está em `scripts/og.html` e as instruções em `scripts/og.md`.
 
-## Ranking mundial (WAGR)
+## Rankings (WAGR e EGR)
 
-O cartão do World Amateur Golf Ranking lê a ficha oficial dela na hora. O
-caminho é este, e a razão de ser dele também:
+Os dois cartões leem as fichas oficiais na hora. Cada um tem dois caminhos:
 
-1. **`/api/wagr`** — função serverless que chama a API do WAGR. Tem de ser do
-   lado do servidor: a API responde
-   `access-control-allow-origin: https://www.wagr.com` e mais nenhum, por isso
-   o navegador nunca a conseguiria chamar a partir deste domínio. Não há chave
-   nem segredo — é o mesmo pedido público que o sítio deles faz a si próprio.
-   A resposta fica em cache seis horas, com mais um dia a servir enquanto
-   revalida.
-2. **`data/wagr.json`** — instantâneo guardado no repositório. Entra quando
-   não há funções (alojamento estático, `npx serve` local) ou quando o WAGR
-   está em baixo. Refresca-se com `node scripts/wagr.mjs`.
+1. **`/api/wagr` e `/api/egr`** — funções serverless. Têm de ser do lado do
+   servidor, e por razões diferentes: o WAGR responde
+   `access-control-allow-origin: https://www.wagr.com` e mais nenhum, e o EGR
+   nem sequer manda cabeçalho de CORS — serve HTML. Nenhum dos dois exige
+   chave. Seis horas de cache, mais um dia a servir enquanto revalida.
+2. **`data/wagr.json` e `data/egr.json`** — instantâneos no repositório, para
+   quando não há funções (alojamento estático, `npx serve`) ou a fonte está em
+   baixo. Refrescam-se com `node scripts/wagr.mjs` e `node scripts/egr.mjs`.
 
-O cartão diz qual dos dois está a ser usado — «Em direto» ou «Instantâneo» —
-e mostra sempre a data dos dados e a ligação para a ficha oficial. O número
-nunca é escrito à mão em lado nenhum.
+O cartão diz sempre qual dos dois está a usar — «Em direto» ou «Instantâneo» —
+a data dos dados, e a ligação para a ficha. Nenhum destes números é escrito à
+mão em lado nenhum.
+
+O EGR não tem API: `api/_egr.js` lê o HTML da ficha com expressões regulares.
+Vive num ficheiro começado por `_` para a Vercel não o publicar como rota, e é
+partilhado entre a função e o script do instantâneo, para os dois lerem a
+página exactamente da mesma maneira. Se o EGR mudar de formato, o leitor
+rebenta com uma mensagem clara em vez de devolver um cartão vazio — e o site
+cai no instantâneo.
+
+## Instagram
+
+A conta ser pública **não chega**. O Instagram deixou de servir o conteúdo do
+perfil a quem não tem sessão: a página devolve 600 KB de JavaScript sem uma
+publicação lá dentro, e a API de perfil responde `require_login` a pedidos
+vindos de servidores. Há duas maneiras de ter isto a funcionar:
+
+**Com token, e fica resolvido para sempre.** A conta é dela, por isso pode
+emitir um token de longa duração na Graph API da Meta e guardá-lo na Vercel
+como variável de ambiente `IG_TOKEN`. A partir daí `api/instagram.js` traz as
+publicações sozinho. Sem token, essa função responde 501 — não finge.
+
+**À mão.** Pôr os códigos das publicações em `data/instagram.json`. O código é
+o que vem depois de `/p/` ou `/reel/` no endereço:
+
+```json
+{ "publicacoes": ["C8xYzAbCdEf", { "codigo": "D1a2B3c4D5e", "tipo": "reel" }] }
+```
+
+Enquanto não houver nem um nem outro, a secção mostra o convite a seguir a
+conta — e não uma caixa vazia, que é pior.
 
 ## Ligar as coisas que faltam
 
@@ -196,6 +222,7 @@ vazia e um comentário no sítio certo:
 |---|---|---|
 | Entrega do formulário | `js/pagina.js`, `const ENTREGA` | o endereço do serviço (Formspree, uma função serverless…). Enquanto estiver vazio, o formulário valida e encaminha para o Instagram, em vez de fingir que enviou |
 | Medição de tráfego | `js/cookies.js`, `const MEDICAO` | o identificador `G-…` do Google Analytics. Vazio significa que não há nada a carregar — e o banner continua a perguntar na mesma |
+| Publicações do Instagram | `IG_TOKEN`, nas variáveis de ambiente | ver a secção «Instagram» |
 | Correio de contacto | `js/casca.js`, rodapé | não há endereço público conhecido; quando houver, entra ao lado das restantes ligações |
 
 ## Idiomas

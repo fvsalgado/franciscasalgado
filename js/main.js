@@ -7,7 +7,7 @@ import { ultimas, palmares, ultimo } from './resultados.js';
 import { numeros, citacoes, saiuEm } from './conteudo.js';
 import { galeria, apoios } from './media.js';
 import { instagram } from './instagram.js';
-import { wagr } from './wagr.js';
+import { rankings } from './rankings.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -29,7 +29,7 @@ const { i18n } = iniciar(async (l) => {
     saiuEm($('saiuEm')),
     galeria($('gal'), l, 6),
     apoios($('apoios'), l),
-    wagr($('wagr'), l),
+    rankings($('rankings'), l),
     proximo(l),
   ]);
 });

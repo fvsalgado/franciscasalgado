@@ -1,0 +1,87 @@
+{
+  "atualizado": "2026-08-14",
+  "playerId": 39992,
+  "ficha": "https://www.europeangolfrankings.com/players/39992",
+  "nome": "Francisca Salgado",
+  "idEgr": "FPRT39992",
+  "pais": "Portugal",
+  "clube": "Vale de Janelas",
+  "escalao": "U18",
+  "provasContadas": 5,
+  "posicao": 620,
+  "pontos": 2745.91,
+  "mediaVolta": 79.92,
+  "mediaCr": 76.26,
+  "provas": [
+    {
+      "pos": 28,
+      "evento": "English Girls' Open Stroke Play Championship 2026",
+      "campo": "Prestbury Golf Cub",
+      "pais": "England",
+      "data": "2026-07-21",
+      "voltas": [
+        75,
+        83,
+        75,
+        82
+      ],
+      "total": 315,
+      "pontos": 1441.62
+    },
+    {
+      "pos": 131,
+      "evento": "European Ladies' Team Championship 2026",
+      "campo": "Slieve Russell Hotel Golf & CC",
+      "pais": "Ireland",
+      "data": "2026-07-07",
+      "voltas": [
+        83,
+        89
+      ],
+      "total": 172,
+      "pontos": 0
+    },
+    {
+      "pos": 109,
+      "evento": "International French U21 2026",
+      "campo": "Golf de Saint Cloud",
+      "pais": "France",
+      "data": "2026-04-01",
+      "voltas": [
+        81,
+        79
+      ],
+      "total": 160,
+      "pontos": 458.93
+    },
+    {
+      "pos": 64,
+      "evento": "Spanish U18 Championship (Closed) 2026",
+      "campo": "Real Club de Golf Guadalmina (Sur)",
+      "pais": "Spain",
+      "data": "2026-03-19",
+      "voltas": [
+        82,
+        81,
+        84
+      ],
+      "total": 247,
+      "pontos": 449.83
+    },
+    {
+      "pos": 81,
+      "evento": "Portuguese International Ladies' Amateur 2026",
+      "campo": "Penina Hotel & Golf Resort",
+      "pais": "Portugal",
+      "data": "2026-01-28",
+      "voltas": [
+        80,
+        75,
+        79
+      ],
+      "total": 234,
+      "pontos": 395.52
+    }
+  ],
+  "_leia-me": "Instantâneo da ficha no European Golf Rankings. Recurso para quando /api/egr não está disponível. Para refrescar: node scripts/egr.mjs"
+}

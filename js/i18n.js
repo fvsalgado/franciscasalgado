@@ -15,11 +15,10 @@ export const EN = {
 
   ap2_q_txt2: 'Those already walking the road with her. They are in separate groups on purpose: institutional backing and a brand of equipment she plays are not the same thing.',
 
-  wa_rot: 'World ranking',
-  wa_tit: 'The official record, as it stands',
-  wa_txt: 'The <strong>World Amateur Golf Ranking</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA. This card reads her record there the moment the page opens — it is not a number typed in by hand.',
-  wa_txt2: 'Every international event she plays moves it. The points average is what decides the placing: points earned divided by counting events.',
-  wa_txt3: 'Read from the <strong>World Amateur Golf Ranking</strong> the moment the page opens. It is the world ranking of amateur golf, run by The R&amp;A and the USGA, and it decides access to much of the international calendar.',
+  rk_rot: 'Rankings',
+  rk_tit: 'The official records, as they stand',
+  rk_txt: 'The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category. These two cards read her records the moment the page opens — not one of these numbers is typed in by hand.',
+  rk_txt2: 'Read the moment the page opens. The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category, and it decides access to much of the international calendar.',
 
   /* ── página inicial ─────────────────────────────────────── */
   hero_rot: 'Amateur golfer · Portuguese national team · U18',
