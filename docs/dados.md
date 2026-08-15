@@ -17,6 +17,25 @@ Créditos obrigatórios de imagem. A chave de porFicheiro é o nome do ficheiro 
 
 Instantâneo da ficha no European Golf Rankings. Recurso para quando /api/egr não está disponível. Refrescado pelo vigia; para o fazer à mão: node scripts/egr.mjs
 
+## `data/handicap.json`
+
+O handicap na lista de federados da FPG, mantido pelo vigia. Duas datas, que
+respondem a perguntas diferentes e não se devem trocar:
+
+- **`atualizado`** — quando fomos lá ver. Avança em todos os dias em que a
+  federação responde. Serve para saber se a ligação ainda funciona, e é o que o
+  vigia usa para avisar, ao fim de trinta dias parados, que alguém tem de ir
+  confirmar à mão.
+- **`desde`** — quando o valor mudou pela última vez. É o que diz alguma coisa
+  sobre a jogadora: um handicap parado há meses lê-se de outra maneira do que um
+  que baixou na semana passada. É esta a data que a página de recruiting mostra.
+
+Enquanto as duas forem iguais — o que acontece na primeira leitura, quando ainda
+não há leitura anterior com que comparar — a página não mostra `desde`, porque
+«sem mexer desde hoje» lê-se como «mexeu hoje».
+
+Ir buscá-lo exige três passos e uma sessão; está explicado em `api/_handicap.js`.
+
 ## `data/galeria.json`
 
 A galeria. Cada entrada aponta para um ficheiro em img/; o crédito não se escreve aqui — vem de data/creditos.json, para haver um sítio só onde a autoria vive. 'formato' escolhe a proporção do recorte: 'alto' (4:5) ou 'largo' (3:2). ATENÇÃO: só entram aqui fotografias em que a Francisca esteja identificada sem margem para dúvida. As peças da FPG cobrem muitas vezes vários atletas, e a fotografia de abertura pode ser de outra pessoa — foi o que aconteceu com duas que tiveram de sair.

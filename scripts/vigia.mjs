@@ -113,9 +113,27 @@ async function handicap() {
   const atual = await ler('data/handicap.json').catch(() => ({}));
   try {
     const d = await buscarHandicap();
-    if (d.handicap !== atual.handicap) {
-      novidades.push(`Handicap: ${atual.handicap ?? '—'} → ${d.handicap}`);
-    }
+    const mudou = atual.handicap != null && d.handicap !== atual.handicap;
+    if (mudou) novidades.push(`Handicap: ${atual.handicap} → ${d.handicap}`);
+
+    /* Duas datas, porque são duas perguntas diferentes.
+     *
+     * `atualizado` é quando fomos lá ver, e avança todos os dias em que a
+     * federação responde. Serve para saber se isto ainda funciona — e só isso:
+     * dizer «confirmado hoje» de um número que não mexe desde a primavera é
+     * verdade e não informa nada.
+     *
+     * `desde` é quando o valor mudou pela última vez, que é o que diz alguma
+     * coisa sobre a jogadora. Um handicap parado há meses lê-se de outra
+     * maneira do que um que baixou na semana passada.
+     *
+     * Da primeira vez não se sabe desde quando é: o mais antigo que se pode
+     * provar é o dia em que o valor já cá estava. Se nem isso houver, o campo
+     * fica de fora — inventar «desde hoje» era dizer que mudou hoje, que é
+     * precisamente a informação errada. */
+    if (mudou) d.desde = hoje;
+    else if (atual.desde) d.desde = atual.desde;
+    else if (atual.handicap === d.handicap && atual.atualizado) d.desde = atual.atualizado;
     await gravar('data/handicap.json', d);
   } catch (err) {
     falhas.push(`handicap: ${err.message}`);
