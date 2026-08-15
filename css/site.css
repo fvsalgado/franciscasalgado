@@ -151,6 +151,10 @@ body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color
 .carga{position:fixed;inset:0;z-index:400;background:var(--papel);display:grid;place-items:center;
        transition:opacity .7s var(--curva),visibility .7s}
 .carga.fora{opacity:0;visibility:hidden}
+/* Só quem a sabe tirar é que a vê. Sem JavaScript a cortina ficava para
+   sempre por cima da página inteira, e quem chegasse via um ecrã com o nome
+   dela e mais nada. */
+html:not(.js) .carga{display:none}
 .carga__in{display:flex;flex-direction:column;align-items:center;gap:.9rem}
 .carga__n{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 120;
           font-size:clamp(1.9rem,6.4vw,4.2rem);letter-spacing:-.02em;line-height:1;overflow:hidden}
@@ -273,6 +277,9 @@ body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color
       font-variation-settings:'opsz' 144;display:flex;flex-wrap:wrap;user-select:none}
 .nome__p{display:inline-flex}
 .nome__l{display:inline-block;transform:translateY(110%);opacity:0;will-change:transform}
+/* O nome só se esconde para entrar se houver quem o faça entrar: quem revela é
+   a classe `pronto`, posta pelo JavaScript no fim do ecrã de carga. */
+html:not(.js) .nome__l{transform:none;opacity:1}
 .nome__e{width:.22em}
 body.pronto .nome__l{transform:translateY(0);opacity:1;
   transition:transform 1.05s var(--curva),opacity .7s var(--curva);
@@ -396,11 +403,17 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
    O padding alarga a máscara e a margem negativa devolve o espaço, por isso
    nada disto mexe no alinhamento. */
 .ani{overflow:hidden;padding-block:.14em;margin-block:-.14em}
-.ani > .ani__l{display:block;transform:translateY(105%);transition:transform 1s var(--curva);
-               transition-delay:calc(var(--i) * 90ms)}
-.vis .ani > .ani__l,.ani.vis > .ani__l{transform:translateY(0)}
-.sobe-i{opacity:0;transform:translateY(24px);transition:opacity .9s var(--curva),transform .9s var(--curva)}
-.vis .sobe-i,.sobe-i.vis{opacity:1;transform:none}
+
+/* Esconder para revelar depois só se houver quem revele. Estas regras vivem
+   todas debaixo de `html.js`, marca que o js/base.js põe ao arrancar: sem
+   JavaScript — ou com ele a falhar — o texto fica simplesmente visível, em
+   vez de ficar a zero de opacidade à espera de um observador que não vem.
+   Vale para quem lê e para quem indexa. */
+.js .ani > .ani__l{display:block;transform:translateY(105%);transition:transform 1s var(--curva);
+                   transition-delay:calc(var(--i) * 90ms)}
+.js .vis .ani > .ani__l,.js .ani.vis > .ani__l{transform:translateY(0)}
+.js .sobe-i{opacity:0;transform:translateY(24px);transition:opacity .9s var(--curva),transform .9s var(--curva)}
+.js .vis .sobe-i,.js .sobe-i.vis{opacity:1;transform:none}
 
 /* ── números / cartão de estatísticas ───────────────────── */
 /* Grelhas de cartões: a moldura vive em cada cartão, por sombra, e não no

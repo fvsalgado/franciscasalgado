@@ -9,6 +9,12 @@ import { lingua, convidarLingua } from './i18n.js';
 import { cookies } from './cookies.js';
 import { canais } from './conteudo.js';
 
+/* A marca que liga as animações de revelação. Está aqui, no topo do módulo,
+   para correr no instante em que o JavaScript arranca: as regras que escondem
+   texto para o revelar a seguir vivem todas debaixo de `html.js`, e sem esta
+   linha nunca chegam a aplicar-se. Sem JavaScript, o texto fica visível. */
+document.documentElement.classList.add('js');
+
 /* ── ecrã de carga ────────────────────────────────────────── */
 /* Só a página inicial o usa. Nas interiores seria um imposto cobrado a quem
    já está dentro do sítio. */

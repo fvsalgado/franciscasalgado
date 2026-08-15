@@ -804,7 +804,27 @@
 <div class="cur" id="cur" aria-hidden="true"><span class="cur__p"></span><span class="cur__a"></span></div>
 <a class="saltar" href="#conteudo" data-t="saltar">Skip to content</a>
 
-<header id="nav"></header>
+<header class="nav" id="nav"><div class="nav__in">
+      
+  <a class="marca" href="index.html" data-mag="" aria-label="Francisca Salgado">
+    <svg class="marca__b" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M8 20.2V3.6l9.2 3.3L8 10.2"></path><ellipse cx="12" cy="20.4" rx="6.8" ry="1.7" fill="none" stroke="currentColor" stroke-width="1.5"></ellipse></svg>
+    <span class="marca__t">Francisca&nbsp;Salgado</span>
+  </a>
+      <nav class="nav__links" aria-label="Main"><a href="index.html" data-mag="">Home</a><a href="resultados.html" data-mag="">Season by season</a><a href="imprensa.html" aria-current="page" data-mag="">Press</a><a href="parcerias.html" data-mag="">Partnerships</a></nav>
+      <div class="nav__fer">
+        <button class="cap cap--ico" id="btTema" type="button" aria-label="Switch theme" aria-pressed="false">
+          <span class="ico" id="btTemaI"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg></span>
+        </button>
+        <a class="cap" id="btLang" href="/imprensa.html" hreflang="pt-PT" data-sem-seta="" aria-label="Ver em português">PT</a>
+        <button class="ham" id="btMenu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i></button>
+      </div>
+    </div>
+
+    <div class="menu" id="menu" hidden="">
+      <div class="menu__in">
+        <nav class="menu__l" aria-label="Main"><a href="index.html">Home</a><a href="resultados.html">Season by season</a><a href="imprensa.html" aria-current="page">Press</a><a href="parcerias.html">Partnerships</a></nav>
+      </div>
+    </div></header>
 
 <main id="conteudo">
 
@@ -830,7 +850,18 @@
       </div>
       <div>
         <p class="rot" data-t="im_factos">Facts</p>
-        <dl id="factos" style="margin-top:1.2rem"></dl>
+        <dl class="factos" id="factos" style="margin-top:1.2rem"><div>
+      <dt>Club</dt><dd>Vale de Janelas, Óbidos</dd></div>
+    <div>
+      <dt>National team</dt><dd>Portuguese women's amateur national team</dd></div>
+    <div>
+      <dt>Category</dt><dd>U18 — reigning national champion</dd></div>
+    <div data-vivo="rankings" data-i="3">
+      <dt>Rankings</dt><dd>1944th on the WAGR · 198th on the European Golf Rankings U18</dd></div>
+    <div>
+      <dt>Support</dt><dd>Fundação do Desporto · Portuguese Golf Federation</dd></div>
+    <div>
+      <dt>Studies</dt><dd>Secondary school, class of 2027</dd></div></dl>
       </div>
     </div>
   </div>
@@ -848,7 +879,22 @@
         <p class="txt" data-t="im_cit_txt">Every quote on this page links to the piece it came from. They may be reproduced with the source named.</p>
       </div>
     </div>
-    <div id="citacoes"></div>
+    <div class="citacoes" id="citacoes"><figure class="cit sobe-i">
+      <blockquote class="cit__t">“I tried to stay focused on my routine and play intelligent golf. I'm happy with the result and motivated for the next tournament.”</blockquote>
+      <figcaption class="cit__f"><a href="https://fundacaodesporto.pt/noticias/francisca-salgado-com-grande-performance/" target="_blank" rel="noopener" data-mag="">Francisca Salgado · Fundação do Desporto, 2025</a></figcaption>
+    </figure>
+    <figure class="cit sobe-i">
+      <blockquote class="cit__t">“I'm very happy with the result and with the way I played this week. Although I didn't start very well, with some putting difficulties, I played great in the matches.”</blockquote>
+      <figcaption class="cit__f"><a href="https://clubedegolfe.praia-del-rey.com/vice-champion-francisca-salgado/" target="_blank" rel="noopener" data-mag="">Francisca Salgado · FPG Cup, October 2025</a></figcaption>
+    </figure>
+    <figure class="cit sobe-i">
+      <blockquote class="cit__t">“She put in a crescendo of a performance, improving her score and her position in the standings day by day.”</blockquote>
+      <figcaption class="cit__f"><a href="https://portal.fpg.pt/noticias/francisca-salgado-no-sexto-lugar-e-portugal-1-em-oitavo-nos-internacionais-da-belgica-sub-14/" target="_blank" rel="noopener" data-mag="">Portuguese Golf Federation · Belgium U14, 2023</a></figcaption>
+    </figure>
+    <figure class="cit sobe-i">
+      <blockquote class="cit__t">“She led from start to finish on her way to the girls U18 title.”</blockquote>
+      <figcaption class="cit__f"><a href="https://portal.fpg.pt/noticias/pga-aroeira-no-2-consagrou-campeoes-nacionais-nos-escaloes-jovens/" target="_blank" rel="noopener" data-mag="">Portuguese Golf Federation · National Youth Championship, 2026</a></figcaption>
+    </figure></div>
   </div>
 </section>
 
@@ -864,7 +910,34 @@
         <p class="txt" data-t="im_fot_txt">Published with the permission of the Portuguese Golf Federation and the clubs. They may be reproduced in pieces about the player, always with the credit visible, exactly as it appears beneath each one. For the files at original resolution, just ask.</p>
       </div>
     </div>
-    <div id="gal"></div>
+    <div class="galeria" id="gal"><figure class="gal gal--alto sobe-i">
+      <img src="/img/english.webp" alt="Francisca Salgado teeing off at the 7th at the English Girls' Open" loading="lazy" decoding="async">
+      <figcaption class="gal__l"><span class="gal__a num">2026</span> English Girls' Open, Prestbury<span class="credito-i"> · Photo: Pedro Salgado / Portuguese Golf Federation</span></figcaption>
+    </figure>
+    <figure class="gal gal--largo sobe-i">
+      <img src="/img/pares.webp" alt="Francisca Salgado and Rodrigo Constantino with the national pairs trophies" loading="lazy" decoding="async">
+      <figcaption class="gal__l"><span class="gal__a num">2026</span> National pairs champions, at Montado<span class="credito-i"> · Photo: Portuguese Golf Federation</span></figcaption>
+    </figure>
+    <figure class="gal gal--largo sobe-i">
+      <img src="/img/aquapor.webp" alt="Francisca Salgado and João Miguel Pereira with the Aquapor Circuit trophies" loading="lazy" decoding="async">
+      <figcaption class="gal__l"><span class="gal__a num">2026</span> Winning at Quinta do Peru, Aquapor Circuit<span class="credito-i"> · Photo: Portuguese Golf Federation</span></figcaption>
+    </figure>
+    <figure class="gal gal--alto sobe-i">
+      <img src="/img/swing.webp" alt="Francisca Salgado hitting a wood" loading="lazy" decoding="async">
+      <figcaption class="gal__l"><span class="gal__a num">2025</span> Drive Tour – Tejo, Ribagolfe Oaks<span class="credito-i"> · Photo: Portuguese Golf Federation</span></figcaption>
+    </figure>
+    <figure class="gal gal--alto sobe-i">
+      <img src="/img/trofeu.webp" alt="Francisca Salgado with the FPG Cup runner-up trophy" loading="lazy" decoding="async">
+      <figcaption class="gal__l"><span class="gal__a num">2025</span> FPG Cup runner-up, Santo Estêvão<span class="credito-i"> · Photo: Portuguese Golf Federation</span></figcaption>
+    </figure>
+    <figure class="gal gal--largo sobe-i">
+      <img src="/img/podio-2024.webp" alt="Francisca Salgado on the podium at the 2024 Aquapor Circuit opener" loading="lazy" decoding="async">
+      <figcaption class="gal__l"><span class="gal__a num">2024</span> First win of the year on the Aquapor Circuit<span class="credito-i"> · Photo: Portuguese Golf Federation</span></figcaption>
+    </figure>
+    <figure class="gal gal--largo sobe-i">
+      <img src="/img/sub10.webp" alt="The 2019 national U10 champions and runners-up, with their trophies" loading="lazy" decoding="async">
+      <figcaption class="gal__l"><span class="gal__a num">2019</span> National U10 champion, at Miramar — second from the left<span class="credito-i"> · Photo: Filipe Guerra / GolfTattoo / Portuguese Golf Federation</span></figcaption>
+    </figure></div>
   </div>
 </section>
 
@@ -884,13 +957,63 @@
         <p class="txt" data-t="im_lig_txt">To check results and placings at source, without going through here. The <strong>40 pieces already published</strong> about her are in <a class="lig" href="resultados.html">season by season</a>, under the year they ran.</p>
       </div>
     </div>
-    <div class="plats" id="plats"></div>
+    <div class="plats" id="plats"><a class="plat" href="https://portal.fpg.pt/perfil/francisca-salgado/" target="_blank" rel="noopener" data-sem-seta="" data-mag="">
+      <span class="plat__i"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M8 20.2V3.6l9.2 3.3L8 10.2"></path><ellipse cx="12" cy="20.4" rx="6.8" ry="1.7" fill="none" stroke="currentColor" stroke-width="1.5"></ellipse></svg></span>
+      <span class="plat__q">
+        <span class="plat__n">Ficha na FPG</span>
+        <span class="plat__s">Portuguese Golf Federation</span>
+      </span>
+      <span class="plat__a"><svg class="ic ic--pe" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9.2 7H17v7.8"></path></svg></span>
+    </a>
+    <a class="plat" href="https://www.europeangolfrankings.com/players/39992" target="_blank" rel="noopener" data-sem-seta="" data-mag="">
+      <span class="plat__i"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M3.8 20.2h16.4M7.4 20.2v-4.8M12 20.2V8.4M16.6 20.2v-8.2"></path></svg></span>
+      <span class="plat__q">
+        <span class="plat__n">European Golf Rankings</span>
+        <span class="plat__s">Profile and results</span>
+      </span>
+      <span class="plat__a"><svg class="ic ic--pe" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9.2 7H17v7.8"></path></svg></span>
+    </a>
+    <a class="plat" href="https://www.wagr.com/playerprofile/francisca-salgado-43158" target="_blank" rel="noopener" data-sem-seta="" data-mag="">
+      <span class="plat__i"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M7.2 3.6h9.6v5.1a4.8 4.8 0 0 1-9.6 0V3.6Z"></path><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M7.2 5.3H4.4v1.5a3.2 3.2 0 0 0 3.2 3.2M16.8 5.3h2.8v1.5a3.2 3.2 0 0 1-3.2 3.2"></path><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M12 13.6v3.2M8.9 20.4h6.2l-.9-3.6H9.8l-.9 3.6Z"></path></svg></span>
+      <span class="plat__q">
+        <span class="plat__n">WAGR</span>
+        <span class="plat__s">World Amateur Golf Ranking</span>
+      </span>
+      <span class="plat__a"><svg class="ic ic--pe" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9.2 7H17v7.8"></path></svg></span>
+    </a></div>
   </div>
 </section>
 
 </main>
 
-<footer id="pe"></footer>
+<footer class="pe" id="pe"><div class="env">
+      <p class="pe__nome" aria-hidden="true">Francisca Salgado</p>
+      <div class="pe__g">
+        <div>
+          <p class="rot">Francisca Salgado</p>
+          <p class="txt" style="font-size:.85rem;margin-top:1rem">Amateur golfer. Vale de Janelas, Óbidos. Portuguese national team.</p>
+        </div>
+        <div>
+          <p class="rot">Contact</p>
+          <ul class="pe__l">
+            <li><a href="mailto:birdie@franciscasalgado.golf" target="_blank" rel="noopener" data-sem-seta="" data-mag=""><svg class="ic ic--pe" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M4.4 5.6h15.2a1.2 1.2 0 0 1 1.2 1.2v10.4a1.2 1.2 0 0 1-1.2 1.2H4.4a1.2 1.2 0 0 1-1.2-1.2V6.8a1.2 1.2 0 0 1 1.2-1.2Z"></path><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m3.9 6.6 8.1 5.9 8.1-5.9"></path></svg><span>birdie@franciscasalgado.golf</span></a></li>
+            <li><a href="https://www.instagram.com/francisca_salgado_/" target="_blank" rel="noopener" data-sem-seta="" data-mag=""><svg class="ic ic--pe" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M7.5 3.5h9a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4h-9a4 4 0 0 1-4-4v-9a4 4 0 0 1 4-4Z"></path><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"></circle><circle cx="17.1" cy="6.9" r="1.1"></circle></svg><span>Instagram</span></a></li></ul>
+        </div>
+        <div>
+          <p class="rot">Pages</p>
+          <ul class="pe__l"><li><a href="index.html" data-mag="">Home</a></li><li><a href="resultados.html" data-mag="">Season by season</a></li><li><a href="imprensa.html" data-mag="">Press</a></li><li><a href="parcerias.html" data-mag="">Partnerships</a></li></ul>
+        </div>
+      </div>
+      <div class="pe__f">
+        <span>© 2026 Francisca Salgado</span>
+        <nav class="pe__legal" aria-label="Privacy">
+          <a href="privacidade.html" data-mag="">Privacy</a>
+          <a href="termos.html" data-mag="">Terms</a>
+          <button class="pe__ck" type="button" id="abrirCookies">Cookies</button>
+        </nav>
+        <span class="num">Óbidos · 39°22′N 9°09′W</span>
+      </div>
+    </div></footer>
 
 <script type="module" src="/js/pagina.js" data-pagina="imprensa"></script>
 </body>
