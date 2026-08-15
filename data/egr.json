@@ -1,5 +1,6 @@
 {
-  "atualizado": "2026-08-14",
+  "_leia-me": "Instantâneo da ficha no European Golf Rankings. Recurso para quando /api/egr não está disponível. Refrescado pelo vigia; para o fazer à mão: node scripts/egr.mjs",
+  "atualizado": "2026-08-15",
   "playerId": 39992,
   "ficha": "https://www.europeangolfrankings.com/players/39992",
   "nome": "Francisca Salgado",
@@ -8,7 +9,7 @@
   "clube": "Vale de Janelas",
   "escalao": "U18",
   "provasContadas": 5,
-  "posicao": 620,
+  "posicao": 623,
   "pontos": 2745.91,
   "mediaVolta": 79.92,
   "mediaCr": 76.26,
@@ -83,5 +84,5 @@
       "pontos": 395.52
     }
   ],
-  "posicaoEscalao": 197
+  "posicaoEscalao": 198
 }
