@@ -9,12 +9,20 @@
  * indicador de nível que muda sozinho ao longo da época — por isso vale a pena
  * ir buscá-lo em vez de o escrever à mão e deixá-lo envelhecer.
  *
- * Aviso honesto: este leitor nunca foi visto a funcionar. A caixa onde foi
- * escrito não chega ao scoring.fpg.pt (devolve 500 a tudo), e por isso a
- * primeira prova de vida vai ser a ronda diária no GitHub Actions, que corre de
- * uma ligação normal. Se falhar lá também, não parte nada: data/handicap.json
- * continua a servir o último valor confirmado à mão, com a data, e o vigia
- * avisa quando esse valor fizer mais de um mês.
+ * Aviso honesto: este leitor nunca foi visto a funcionar, e o problema não é
+ * daqui. A 15 de agosto de 2026 o scoring.fpg.pt devolvia 500 a partir de duas
+ * redes independentes — a caixa onde isto foi escrito e a ronda diária no
+ * GitHub Actions — e o corpo da resposta é a página de «Runtime Error» do
+ * ASP.NET deles, com e sem o parâmetro `fed`. O endereço aqui em baixo é o
+ * mesmo que o portal carrega no iframe da pesquisa de handicaps, copiado de lá
+ * nesse dia: não há aqui nada para corrigir enquanto o servidor deles estiver
+ * assim.
+ *
+ * Se um dia voltar, isto começa a funcionar sozinho. Até lá não parte nada: o
+ * data/handicap.json continua a servir o último valor confirmado à mão, com a
+ * data em que foi confirmado, e o vigia põe o assunto no VIGIA-ATENCAO.md
+ * quando esse valor fizer mais de um mês — que é onde uma pessoa o vai ver e
+ * decidir se vai lá confirmar à mão.
  */
 
 export const NUMERO = 43832;
