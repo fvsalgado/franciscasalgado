@@ -36,6 +36,17 @@ não há leitura anterior com que comparar — a página não mostra `desde`, po
 
 Ir buscá-lo exige três passos e uma sessão; está explicado em `api/_handicap.js`.
 
+## `data/perfil.json` — `espanha`
+
+Idas a Espanha para competir, contadas por ano. A maioria foi por iniciativa
+própria e não ao serviço da Seleção, e é por isso que **não** entram na contagem
+de internacionalizações — essa sai do selo `selecao` em `data/resultados.json` e
+conta convocatórias, esteja a prova onde estiver, incluindo em Portugal.
+
+O cartão «Idas a Espanha» na página de parcerias mostra a soma. O vigia
+mantém-na certa a partir daqui, por isso acrescenta-se a viagem ao ano em que
+aconteceu e o total acerta-se sozinho — nunca se escreve o total à mão.
+
 ## `data/galeria.json`
 
 A galeria. Cada entrada aponta para um ficheiro em img/; o crédito não se escreve aqui — vem de data/creditos.json, para haver um sítio só onde a autoria vive. 'formato' escolhe a proporção do recorte: 'alto' (4:5) ou 'largo' (3:2). ATENÇÃO: só entram aqui fotografias em que a Francisca esteja identificada sem margem para dúvida. As peças da FPG cobrem muitas vezes vários atletas, e a fotografia de abertura pode ser de outra pessoa — foi o que aconteceu com duas que tiveram de sair.

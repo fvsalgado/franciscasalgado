@@ -22,7 +22,7 @@ const T = {
     wagr: 'WAGR', wagrS: 'Ranking mundial amador',
     egr: 'EGR Sub-18', egrS: 'Ranking europeu feminino, escalão',
     ano: 'Conclusão do secundário', anoS: 'Turma de',
-    vivo: 'Em direto', guardado: 'Confirmado a', desde: 'Sem mexer desde',
+    vivo: 'Em direto', guardado: 'Confirmado a', desde: 'Última alteração a',
     curva: 'Evolução', curvaS: 'Quanto mais alto, melhor a posição',
     prox: 'Próxima prova',
   },
@@ -31,7 +31,7 @@ const T = {
     wagr: 'WAGR', wagrS: 'World amateur ranking',
     egr: 'EGR U18', egrS: 'European women\'s ranking, age category',
     ano: 'High school graduation', anoS: 'Class of',
-    vivo: 'Live', guardado: 'Confirmed on', desde: 'Unchanged since',
+    vivo: 'Live', guardado: 'Confirmed on', desde: 'Last changed',
     curva: 'Progression', curvaS: 'Higher is a better position',
     prox: 'Next event',
   },
@@ -63,9 +63,9 @@ export async function fichaRecruiting(cx, lingua = 'pt') {
      cima, e por isso já está em cache.
    *
    * Só se mostra quando já diz alguma coisa. No primeiro dia as duas datas são
-   * a mesma — fomos lá ver hoje e não temos leitura anterior —, e «sem mexer
-   * desde hoje» lê-se como «mexeu hoje», que é o contrário do que se passa.
-   * Enquanto forem iguais, fica a nota antiga. */
+   * a mesma — fomos lá ver hoje e não temos leitura anterior —, e uma «última
+   * alteração» com a data de hoje lê-se como «mudou hoje», que é o contrário do
+   * que se passa. Enquanto forem iguais, fica a nota antiga. */
   const desde = await fetch('/data/handicap.json', { cache: 'no-cache' })
     .then((r) => r.json())
     .then((d) => (d.desde && d.desde !== d.atualizado ? d.desde : null))

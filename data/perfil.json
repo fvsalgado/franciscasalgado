@@ -338,15 +338,25 @@
       }
     },
     {
-      "v": "9",
+      "v": "25",
       "r": {
-        "pt": "Épocas em prova",
-        "en": "Seasons in competition"
+        "pt": "Idas a Espanha",
+        "en": "Trips to Spain"
       },
       "n": {
-        "pt": "Do primeiro pódio nacional, em 2018, até à época que está a correr.",
-        "en": "From her first national podium, in 2018, to the season under way."
+        "pt": "Desde 2021, a maioria por conta própria. É o que custa jogar onde há pontos.",
+        "en": "Since 2021, most of them self-funded. That is what it costs to play where the points are."
       }
     }
-  ]
+  ],
+  "espanha": {
+    "porAno": {
+      "2021": 2,
+      "2022": 2,
+      "2023": 7,
+      "2024": 6,
+      "2025": 6,
+      "2026": 2
+    }
+  }
 }
