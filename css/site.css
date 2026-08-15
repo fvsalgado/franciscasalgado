@@ -1007,25 +1007,29 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .degrau__b::after{content:"→";transition:transform .35s var(--curva)}
 .degrau:hover .degrau__b::after{transform:translateX(.28rem)}
 
-/* ── formulário ─────────────────────────────────────────── */
-.form{display:grid;gap:1rem}
-.dupla{display:grid;gap:1rem;grid-template-columns:1fr}
-@media (min-width:560px){.dupla{grid-template-columns:1fr 1fr}}
-.campo{display:flex;flex-direction:column;gap:.45rem}
-.campo label{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:var(--tinta-fraca)}
-.campo input,.campo select,.campo textarea{
-  font:inherit;font-size:.95rem;color:var(--tinta);background:transparent;border:0;
-  border-bottom:1px solid var(--linha);padding:.6rem 0;border-radius:0;width:100%;
-  transition:border-color .35s var(--curva)}
-.campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;border-bottom-color:var(--relva)}
-.campo textarea{min-height:120px;resize:vertical}
-.campo input:user-invalid,.campo textarea:user-invalid{border-bottom-color:var(--brasa)}
-.mel{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.form__pe{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:.6rem}
-.form__msg{margin:0;font-size:.82rem;color:var(--tinta-fraca)}
-.form__msg.erro{color:var(--brasa)}
-.form__nota{margin:.4rem 0 0;font-size:.76rem;color:var(--tinta-fraca)}
-.form__nota a{color:var(--relva);border-bottom:1px solid var(--linha)}
+/* ── as duas vias de contacto ───────────────────────────── */
+/* No lugar do formulário. Dois cartões grandes e nada mais: o endereço lê-se
+   e copia-se sem carregar em nada, e quem carrega vai direito ao seu próprio
+   email ou ao Instagram. */
+/* Empilhados e não lado a lado: a par, cada cartão ficava com uns 260px e o
+   endereço partia-se a meio da palavra — «birdie@franciscasalgado.g / olf». */
+.ct-vias{display:grid;gap:1px;align-content:start}
+.via{position:relative;display:grid;gap:.35rem;align-content:start;
+     padding:clamp(1.5rem,3vw,2.1rem);background:var(--papel);
+     box-shadow:0 0 0 1px var(--linha);
+     transition:background-color .4s var(--curva),box-shadow .4s var(--curva),transform .4s var(--curva)}
+.via:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--cor),0 14px 34px -22px rgba(0,0,0,.5)}
+.via--email{--cor:#1B6B47}
+.via--ig{--cor:#8A3A52}
+.via__i{display:grid;place-items:center;width:2.6rem;height:2.6rem;margin-bottom:.5rem;
+        border-radius:50%;border:1px solid var(--linha);color:var(--cor);
+        transition:background-color .4s var(--curva),color .4s var(--curva),border-color .4s var(--curva)}
+.via:hover .via__i{background:var(--cor);border-color:var(--cor);color:#fff}
+.via__r{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:var(--cor)}
+.via__n{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 32;
+        font-size:clamp(.98rem,1.7vw,1.24rem);line-height:1.2;letter-spacing:-.015em;
+        overflow-wrap:anywhere}
+.via__x{font-size:.85rem;line-height:1.6;color:var(--tinta-fraca);margin-top:.3rem;max-width:34ch}
 
 /* ── créditos de imagem ─────────────────────────────────── */
 .credito,figcaption{margin:.55rem 0 0;font-size:.63rem;font-weight:700;text-transform:uppercase;

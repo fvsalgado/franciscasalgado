@@ -22,7 +22,7 @@ npx serve .          # ou: python3 -m http.server
 | Estilo | `css/site.css` — um ficheiro, com as variáveis de tema no topo |
 | Comportamento | `js/` — módulos ES, sem empacotador |
 | Conteúdo | `data/*.json` — é aqui que se mexe no dia a dia |
-| Funções | `api/` — `wagr.js`, `egr.js`, `instagram.js` e `contacto.js` |
+| Funções | `api/` — `wagr.js`, `egr.js` e `instagram.js` |
 | Manutenção | `scripts/*.mjs` — correm à mão ou pelo GitHub Actions, e nunca chegam ao servidor (`.vercelignore`) |
 | Tipos de letra | `fonts/` — Fraunces e Manrope, alojados aqui e não no Google |
 | Fotografias | `img/` — ver «Fotografias», mais abaixo |
@@ -71,14 +71,14 @@ ninguém os voltar a escrever.
 | `index.html` | quem é, os números, os rankings em direto, as portas para o resto, uma citação, o Instagram e as seis perguntas |
 | `resultados.html` | **época a época**: cada ano com o relato, as provas e a imprensa desse ano |
 | `imprensa.html` | kit: biografia curta, ficha, citações com fonte, fotografias em alta resolução e fichas oficiais |
-| `parcerias.html` | quem apoia, o que um apoio cobre, e o formulário de contacto no fim |
+| `parcerias.html` | quem apoia, o que um apoio cobre, e o contacto no fim |
 
 Eram seis. O `percurso.html` e o `resultados.html` contavam a mesma carreira
 por ordem cronológica, cada um à sua maneira, e o clipping da imprensa era uma
 terceira lista pela mesma ordem — juntaram-se numa só, por ano. O
-`contacto.html` era uma página inteira para um formulário, e passou para o fim
-das parcerias, que é onde quem escreve chega depois de ler o que há para
-apoiar. Os endereços antigos redirecionam, em `vercel.json`.
+`contacto.html` era uma página inteira para um formulário, e o contacto passou
+para o fim das parcerias, que é onde quem escreve chega depois de ler o que há
+para apoiar. Os endereços antigos redirecionam, em `vercel.json`.
 
 ## Mexer no conteúdo
 
@@ -213,18 +213,22 @@ nenhuma delas parte o sítio enquanto estiver por ligar:
 
 | O quê | Onde | Como |
 |---|---|---|
-| Entrega do formulário | `RESEND_API_KEY` e `CONTACTO_DE`, nas variáveis de ambiente | ver «O formulário de contacto» |
-| Receção do correio | registos MX de `franciscasalgado.golf` | sem MX, `birdie@` não recebe nada — nem o que o formulário enviar |
+| Receção do correio | registos MX de `franciscasalgado.golf` | **é a única ponta que importa**: sem MX, `birdie@` não recebe nada, e o email é agora a via principal de contacto |
 | Medição de tráfego | `js/cookies.js`, `const MEDICAO` | o identificador `G-…` do Google Analytics. Vazio significa que não há nada a carregar — e o banner continua a perguntar na mesma |
 | Publicações do Instagram | `IG_TOKEN`, nas variáveis de ambiente | ver a secção «Instagram» |
 
-### O formulário de contacto
+### Não há formulário
 
-`api/contacto.js` recebe o POST e entrega por Resend a `birdie@franciscasalgado.golf`.
-Precisa de duas variáveis na Vercel: `RESEND_API_KEY` e `CONTACTO_DE` (um
-remetente de um domínio verificado lá). **Sem a chave responde 501** e diz o
-que falta — e o browser, ao ver 501, abre o email da própria pessoa já
-preenchido. Nunca diz que enviou sem ter enviado.
+Havia um, e uma função `api/contacto.js` que o entregava por Resend. Saíram os
+dois. Um formulário é uma promessa de entrega que depende de três coisas a
+funcionarem ao mesmo tempo — serviço de envio, chave válida, registos de
+correio — e quando uma falha, quem escreveu não fica a saber que a mensagem
+não chegou. O endereço e o Instagram não têm nada disso pelo meio: a mensagem
+sai da caixa de quem a escreve, e fica lá a prova de que saiu.
+
+Consequência prática: **os registos MX passaram de desejáveis a obrigatórios.**
+Enquanto `franciscasalgado.golf` não tiver MX, o `birdie@` não recebe — e não
+há segundo caminho para apanhar o que se perde.
 
 ## Idiomas
 
