@@ -321,7 +321,9 @@ async function fpg() {
 }
 
 /* ── correr ────────────────────────────────────────────────────────────── */
+let tentados = 0;
 const passo = async (nome, fn) => {
+  tentados += 1;
   try { return await fn(); }
   catch (e) { falhas.push(`${nome}: ${e.message}`); return null; }
 };
@@ -375,4 +377,19 @@ if (!SECO) {
 
 console.log(resumo);
 if (paraOlhar) console.log(`\n${paraOlhar}`);
-if (falhas.length && !novidades.length) process.exitCode = 1;
+
+/* A ronda falha quando o vigia não conseguiu fazer o trabalho — não quando um
+   sítio de terceiros esteve em baixo.
+ *
+ * A regra era falhar sempre que houvesse uma fonte sem resposta e nenhuma
+ * novidade. Num dia calmo com o servidor da federação a dar erro — que é o que
+ * ele anda a dar — isso é uma cruz vermelha todos os dias, e uma cruz vermelha
+ * todos os dias é uma cruz que ninguém lê. No dia em que falhar alguma coisa a
+ * sério, ninguém repara.
+ *
+ * Uma fonte em baixo é notícia para o relatório, e está lá escrita. Se falharem
+ * todas, então o que está partido é a rede ou o próprio vigia, e aí sim vale a
+ * pena acordar alguém. E uma fonte que fique em baixo tempo a mais acaba por
+ * aparecer no VIGIA-ATENCAO.md pelo aviso do valor com dias a mais — que é o
+ * canal certo, porque precisa de uma pessoa e não de uma nova tentativa. */
+if (falhas.length >= tentados) process.exitCode = 1;
