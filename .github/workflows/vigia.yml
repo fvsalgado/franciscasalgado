@@ -89,10 +89,20 @@ jobs:
             echo "Nada que precise de uma pessoa."
             exit 0
           fi
-          gh issue create \
-            --title "Vigia: há coisas para rever ($(date -u +%Y-%m-%d))" \
-            --body-file VIGIA-ATENCAO.md \
-            --label vigia 2>/dev/null \
-          || gh issue create \
-            --title "Vigia: há coisas para rever ($(date -u +%Y-%m-%d))" \
-            --body-file VIGIA-ATENCAO.md
+
+          # Atribuída a quem é dono do repositório, e não só etiquetada.
+          #
+          # Uma issue sem responsável só dá notificação a quem estiver a vigiar
+          # o repositório com «All Activity» — e essa é uma definição que se
+          # muda sem dar por isso, num sítio que não tem nada que ver com este
+          # projeto. Atribuída, o GitHub notifica sempre: email, telemóvel e o
+          # sino lá em cima. É a diferença entre um aviso que chega e um aviso
+          # que fica à espera de ser encontrado.
+          TITULO="Vigia: há coisas para rever ($(date -u +%Y-%m-%d))"
+          DONO='${{ github.repository_owner }}'
+
+          gh issue create --title "$TITULO" --body-file VIGIA-ATENCAO.md \
+            --assignee "$DONO" --label vigia 2>/dev/null \
+          || gh issue create --title "$TITULO" --body-file VIGIA-ATENCAO.md \
+            --assignee "$DONO" 2>/dev/null \
+          || gh issue create --title "$TITULO" --body-file VIGIA-ATENCAO.md
