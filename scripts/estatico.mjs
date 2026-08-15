@@ -50,7 +50,7 @@ const { chromium } = await (async () => {
 const RAIZ = new URL('../', import.meta.url);
 const SECO = process.argv.includes('--seco');
 
-const PAGINAS = ['index.html', 'resultados.html', 'imprensa.html', 'parcerias.html'];
+const PAGINAS = ['index.html', 'resultados.html', 'recruiting.html', 'imprensa.html', 'parcerias.html'];
 
 /* Os contentores que valem a pena guardar, por ordem de nada. Um id que não
    exista numa página é ignorado sem barulho — cada página tem os seus. */
@@ -60,6 +60,7 @@ const GUARDAR = [
   'proximas', 'filtros', 'epocas', 'videos', 'notaFonte', // épocas
   'factos', 'plats', 'gal',                           // imprensa
   'numsApoio', 'apoios', 'escadas',                   // parcerias
+  'recNums', 'curva',                                 // recruiting
 ];
 
 /* Um servidor estático mínimo. O sítio não tem passo de compilação, por isso

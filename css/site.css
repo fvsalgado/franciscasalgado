@@ -1044,6 +1044,32 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
         overflow-wrap:anywhere}
 .via__x{font-size:.85rem;line-height:1.6;color:var(--tinta-fraca);margin-top:.3rem;max-width:34ch}
 
+/* ── recruiting ─────────────────────────────────────────── */
+.recs{display:grid;gap:1px;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+.rec{background:var(--papel);box-shadow:0 0 0 1px var(--linha);
+     padding:clamp(1.4rem,3vw,2rem);display:flex;flex-direction:column;gap:.35rem}
+.rec__v{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 96;
+        font-size:clamp(2.6rem,6vw,4rem);line-height:.92;letter-spacing:-.03em;
+        color:var(--relva);font-variant-numeric:tabular-nums}
+.rec__v sup{font-size:.36em;vertical-align:super;margin-left:.06em}
+.rec__r{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;
+        color:var(--tinta);margin-top:.35rem}
+.rec__s{margin:0;font-size:.84rem;line-height:1.55;color:var(--tinta-fraca)}
+.rec__n{margin:.5rem 0 0;font-size:.62rem;font-weight:800;letter-spacing:.14em;
+        text-transform:uppercase;color:var(--tinta-fraca)}
+
+/* O gráfico é SVG escrito à mão: são duas linhas, e uma biblioteca pesaria
+   mais do que a página. O eixo está invertido de propósito — no golfe descer
+   no número é subir na carreira. */
+.curva{margin:0}
+.curva svg{width:100%;height:clamp(140px,26vw,220px);display:block;overflow:visible}
+.curva__l{display:flex;flex-wrap:wrap;align-items:center;gap:1.4rem;margin-top:1rem;
+          font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+          color:var(--tinta-fraca)}
+.curva__l span{display:inline-flex;align-items:center;gap:.5rem}
+.curva__l i{width:1.4rem;height:2px;border-radius:2px}
+.curva__d{margin-left:auto;letter-spacing:.1em}
+
 /* ── créditos de imagem ─────────────────────────────────── */
 .credito,figcaption{margin:.55rem 0 0;font-size:.63rem;font-weight:700;text-transform:uppercase;
                     letter-spacing:.14em;color:var(--tinta-fraca)}

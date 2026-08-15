@@ -99,12 +99,12 @@ const pessoa = {
    por ele que um motor percebe que /resultados.html e /en/resultados.html
    falam da mesma jogadora e não de duas. */
 const NOMES = {
-  pt: { inicio: 'Início', resultados: 'Época a época',
+  pt: { inicio: 'Início', resultados: 'Época a época', recruiting: 'College recruiting',
         imprensa: 'Imprensa', parcerias: 'Parcerias',
         listaR: 'Resultados de Francisca Salgado',
         listaI: 'Imprensa sobre Francisca Salgado',
         cargo: 'Golfista amadora', desporto: 'Golfe', lugar: 'lugar' },
-  en: { inicio: 'Home', resultados: 'Season by season',
+  en: { inicio: 'Home', resultados: 'Season by season', recruiting: 'College recruiting',
         imprensa: 'Press', parcerias: 'Partnerships',
         listaR: 'Francisca Salgado — results',
         listaI: 'Press coverage of Francisca Salgado',
@@ -221,6 +221,8 @@ const PAGINAS = {
         },
       })),
     }],
+  'recruiting.html': async (html, l) => [quemE(l), migalhas('recruiting', 'recruiting.html', l),
+    { '@type': 'ProfilePage', inLanguage: l === 'en' ? 'en' : 'pt-PT', mainEntity: { '@id': `${SITIO}/#francisca` } }],
   'imprensa.html': async (html, l) => [quemE(l), migalhas('imprensa', 'imprensa.html', l), {
     '@type': 'ItemList',
     name: NOMES[l].listaI,
@@ -345,6 +347,7 @@ for (const l of ['pt', 'en']) {
 const MAPA = [
   ['', 'weekly', '1.0'],
   ['resultados.html', 'weekly', '0.9'],
+  ['recruiting.html', 'weekly', '0.8'],
   ['imprensa.html', 'monthly', '0.7'],
   ['parcerias.html', 'monthly', '0.7'],
 ];

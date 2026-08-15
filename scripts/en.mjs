@@ -12,6 +12,20 @@
  */
 
 export const EN = {
+  rc_rot: 'College recruiting',
+  rc_tit: 'Class of 2027, looking for a program',
+  rc_txt: 'Portuguese amateur golfer, Portugal U18 national team. Here is what a coach needs to see first — and everything on this page is sourced, either elsewhere on this site or at the federation.',
+  rc_bt1: 'birdie@franciscasalgado.golf',
+  rc_bt2: 'See the results',
+  rc_ev_rot: 'Progression',
+  rc_ev_tit: 'How it has moved',
+  rc_ev_txt: 'The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category. The lower the number the better the position — the axis here is inverted, so good news goes up.',
+  rc_pa_rot: 'Record',
+  rc_pa_tit: 'Eleven wins, four national titles',
+  rc_pa_txt: 'Every event, with its rounds, total, score to par and a link to the source, is in <a class="lig" href="resultados.html">season by season</a>, year by year since 2018.',
+  rc_ct_rot: 'Contact',
+  rc_ct_tit: 'Getting in touch',
+  rc_ct_txt: 'Write to <a class="lig" href="mailto:birdie@franciscasalgado.golf?subject=College%20recruiting">birdie@franciscasalgado.golf</a>. Swing videos, transcripts and whatever else an evaluation needs — just ask.',
   saltar: 'Skip to content',
   /* ── partilhado ─────────────────────────────────────────── */
   dz_onde: 'Published in',

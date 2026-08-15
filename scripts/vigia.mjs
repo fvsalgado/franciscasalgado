@@ -29,6 +29,7 @@
 
 import { readFile, writeFile } from 'node:fs/promises';
 import { buscarEgr } from '../api/_egr.js';
+import { buscarHandicap } from '../api/_handicap.js';
 
 const RAIZ = new URL('../', import.meta.url);
 const SECO = process.argv.includes('--seco');
@@ -72,12 +73,66 @@ const novidades = [];
 const atencao = [];
 const falhas = [];
 
+/* ── 0. o histórico dos rankings ───────────────────────────────────────────
+ *
+ * Uma posição de hoje diz pouco; a linha que ela desenha ao longo de dois anos
+ * diz tudo — e é o que um treinador universitário quer ver. Como ninguém
+ * guardava isto, começa-se a guardar agora: um ponto por dia em que o número
+ * mude. Dias iguais não deixam rasto, para o ficheiro não crescer com ruído. */
+async function historico() {
+  const [w, e, h] = await Promise.all([
+    ler('data/wagr.json').catch(() => ({})),
+    ler('data/egr.json').catch(() => ({})),
+    ler('data/rankings-historico.json').catch(() => ({ pontos: [] })),
+  ]);
+  if (!w.posicao && !e.posicao) return;
+
+  const ponto = {
+    data: w.atualizado || e.atualizado,
+    wagr: w.posicao ?? null,
+    egr: e.posicao ?? null,
+    egrEscalao: e.posicaoEscalao ?? null,
+    escalao: e.escalao ?? null,
+  };
+  const pontos = h.pontos || [];
+  const ultimo = pontos[pontos.length - 1];
+  const igual = ultimo && ['wagr', 'egr', 'egrEscalao'].every((k) => ultimo[k] === ponto[k]);
+  if (igual) { if (ultimo.data !== ponto.data) ultimo.data = ponto.data; }
+  else pontos.push(ponto);
+
+  await gravar('data/rankings-historico.json', { pontos });
+}
+
+/* ── 0b. o handicap ───────────────────────────────────────────────────────
+ *
+ * O único indicador de nível que muda sozinho ao longo da época, e o primeiro
+ * que um treinador procura. Vem da lista de federados da FPG. Se não vier —
+ * e pode não vir, ver api/_handicap.js —, fica o que lá está e o vigia avisa
+ * quando esse valor fizer mais de um mês. */
+async function handicap() {
+  const atual = await ler('data/handicap.json').catch(() => ({}));
+  try {
+    const d = await buscarHandicap();
+    if (d.handicap !== atual.handicap) {
+      novidades.push(`Handicap: ${atual.handicap ?? '—'} → ${d.handicap}`);
+    }
+    await gravar('data/handicap.json', d);
+  } catch (err) {
+    falhas.push(`handicap: ${err.message}`);
+    const dias = atual.atualizado
+      ? Math.round((Date.now() - Date.parse(atual.atualizado)) / 86400000) : 999;
+    if (dias > 30) {
+      atencao.push(`**Handicap com ${dias} dias** — ${atual.handicap ?? '—'}, confirmado a ${atual.atualizado ?? '?'}. `
+        + 'Confirmar em https://portal.fpg.pt/handicaps-course-rating/pesquisa-de-handicaps/ e escrever em data/handicap.json.');
+    }
+  }
+}
+
 /* ── 1. European Golf Rankings ─────────────────────────────────────────── */
 async function egr() {
   const d = await buscarEgr();
 
   await gravar('data/egr.json', {
-    '_leia-me': 'Instantâneo da ficha no European Golf Rankings. Recurso para quando /api/egr não está disponível. Refrescado pelo vigia; para o fazer à mão: node scripts/egr.mjs',
     ...d,
   });
 
@@ -145,7 +200,6 @@ async function wagr() {
   const j = await r.json();
   const s = j.playerStatisticsInfo || {};
   const d = {
-    '_leia-me': 'Instantâneo da ficha no World Amateur Golf Ranking. Recurso para quando /api/wagr não está disponível. Refrescado pelo vigia; à mão: node scripts/wagr.mjs',
     atualizado: hoje,
     playerId: j.playerId,
     perfil: `https://www.wagr.com/playerprofile/${j.playerProfileLink || ''}`,
@@ -274,6 +328,8 @@ const passo = async (nome, fn) => {
 
 await passo('EGR', egr);
 await passo('WAGR', wagr);
+await passo('histórico', historico);
+await passo('handicap', handicap);
 await passo('FPG', fpg);
 
 /* Contagens que se derivam dos dados e estavam escritas à mão. */

@@ -32,7 +32,7 @@ const RAIZ = new URL('../', import.meta.url);
 const SECO = process.argv.includes('--seco');
 const SITIO = 'https://franciscasalgado.golf';
 
-const PAGINAS = ['index.html', 'resultados.html', 'imprensa.html',
+const PAGINAS = ['index.html', 'resultados.html', 'recruiting.html', 'imprensa.html',
                  'parcerias.html', 'privacidade.html', 'termos.html'];
 
 /* Os títulos e as descrições não têm `data-t` — vivem no <head>, onde não há
@@ -49,6 +49,10 @@ const CABECALHOS = {
   'percurso.html': {
     titulo: 'Her story — Francisca Salgado',
     desc: 'Who Francisca Salgado is: four national titles since 2019, the Portuguese national team and the European calendar. Year by year, and frequently asked questions.',
+  },
+  'recruiting.html': {
+    titulo: 'College recruiting — Francisca Salgado',
+    desc: 'Francisca Salgado, Portuguese amateur golfer, class of 2027: handicap, WAGR world ranking, European U18 ranking, schedule and results — for college coaches.',
   },
   'imprensa.html': {
     titulo: 'Press — Francisca Salgado',
