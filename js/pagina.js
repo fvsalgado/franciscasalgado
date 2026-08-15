@@ -45,7 +45,6 @@ const PINTAR = {
 
   async recruiting(l) {
     await Promise.all([fichaRecruiting($('recNums'), l), curvaRankings($('curva'), l),
-                       factos($('factos'), l), proximas($('proximas'), l),
                        witb($('witbL'), l), swing($('swingV'), l)]);
   },
 

@@ -928,6 +928,224 @@
       }
     },
     {
+      "id": "aquapor-5-2024",
+      "ano": 2024,
+      "data": "2024-11-17",
+      "dataTexto": {
+        "pt": "novembro 2024",
+        "en": "November 2024"
+      },
+      "torneio": {
+        "pt": "5.º Torneio do Circuito Aquapor",
+        "en": "5th Aquapor Circuit Tournament"
+      },
+      "campo": "Quinta do Peru Golfe & Country Club",
+      "local": {
+        "pt": "Sesimbra, Portugal",
+        "en": "Sesimbra, Portugal"
+      },
+      "pos": 3,
+      "posT": true,
+      "voltas": [
+        74,
+        83
+      ],
+      "total": 157,
+      "par": 13,
+      "selos": [
+        "podio"
+      ],
+      "nota": {
+        "pt": "Terceira, empatada com Rafaela Pinto. A prova fechou a época do Ranking Nacional BPI, que terminou com Inês Belchior em primeiro e ela em segundo.",
+        "en": "Third, level with Rafaela Pinto. The event closed the BPI national ranking season, which ended with Inês Belchior first and her second."
+      },
+      "fonte": {
+        "nome": "Record",
+        "url": "https://www.record.pt/modalidades/golfe/detalhe/ines-belchior-so-sabe-ganhar-antes-de-ir-para-os-estados-unidos"
+      }
+    },
+    {
+      "id": "andaluzia-sub16-2024",
+      "ano": 2024,
+      "data": "2024-10-27",
+      "dataTexto": {
+        "pt": "outubro 2024",
+        "en": "October 2024"
+      },
+      "torneio": {
+        "pt": "Campeonato da Andaluzia Sub-16",
+        "en": "Andalusia U16 Championship"
+      },
+      "campo": "Real Club de Golf Guadalmina",
+      "local": {
+        "pt": "Marbella, Espanha",
+        "en": "Marbella, Spain"
+      },
+      "pos": 7,
+      "posT": true,
+      "voltas": [
+        77,
+        80,
+        80
+      ],
+      "total": 237,
+      "par": 21,
+      "escalao": {
+        "pt": "Sub-16",
+        "en": "U16"
+      },
+      "selos": [],
+      "nota": {
+        "pt": "Top-10 entre trinta jogadoras, empatada com a espanhola Alba Camacho. Jogou a título individual: os outros portugueses presentes estavam ao serviço da seleção de Sub-16.",
+        "en": "A top-10 among thirty players, level with Spain’s Alba Camacho. She entered in her own right: the other Portuguese players there were with the U16 national squad."
+      },
+      "fonte": {
+        "nome": "Record",
+        "url": "https://www.record.pt/modalidades/golfe/detalhe/luis-antonio-silva-vice-campeao-na-andaluzia"
+      }
+    },
+    {
+      "id": "drive-tour-aroeira-2024",
+      "ano": 2024,
+      "data": "2024-10-20",
+      "dataTexto": {
+        "pt": "outubro 2024",
+        "en": "October 2024"
+      },
+      "torneio": {
+        "pt": "6.º Torneio do Drive Tour",
+        "en": "6th Drive Tour"
+      },
+      "campo": "Clube de Campo da Aroeira n.º 2",
+      "local": {
+        "pt": "Almada, Portugal",
+        "en": "Almada, Portugal"
+      },
+      "pos": 1,
+      "voltas": [
+        74,
+        74
+      ],
+      "total": 148,
+      "par": 8,
+      "escalao": {
+        "pt": "Sub-16",
+        "en": "U16"
+      },
+      "selos": [
+        "titulo"
+      ],
+      "nota": {
+        "pt": "Empatada com Amélia Gabin a 148 (+8) ao fim dos 36 buracos — 74 nos dois dias, as duas —, ganhou no desempate. Fechou a fase regular a liderar o ranking de Sub-16 do Drive Tour, com duas vitórias e dois segundos lugares em quatro provas.",
+        "en": "Level with Amélia Gabin on 148 (+8) after 36 holes — both shot 74 on both days — and won the play-off. She ended the regular season top of the Drive Tour U16 ranking, with two wins and two runner-up finishes in four events."
+      },
+      "fonte": {
+        "nome": "Record",
+        "url": "https://www.record.pt/modalidades/golfe/detalhe/belchior-invencivel-e-miramar-com-3-titulos-no-drive-tour-da-aroeira"
+      }
+    },
+    {
+      "id": "mendes-almeida-2024",
+      "ano": 2024,
+      "data": "2024-08-24",
+      "dataTexto": {
+        "pt": "agosto 2024",
+        "en": "August 2024"
+      },
+      "torneio": {
+        "pt": "Taça Mendes d’Almeida",
+        "en": "Mendes d’Almeida Cup"
+      },
+      "campo": "",
+      "local": {
+        "pt": "Portugal",
+        "en": "Portugal"
+      },
+      "pos": 13,
+      "voltas": [
+        73,
+        81
+      ],
+      "total": 154,
+      "par": 10,
+      "selos": [],
+      "nota": {
+        "pt": "Décima terceira da classificação geral, misturada com os homens, e segunda melhor jogadora da prova.",
+        "en": "Thirteenth overall in a mixed field, and the second-best woman in the tournament."
+      },
+      "fonte": {
+        "nome": "Record",
+        "url": "https://www.record.pt/modalidades/golfe/detalhe/miguel-cardoso-foi-o-melhor-na-taca-mendes-dalmeida"
+      }
+    },
+    {
+      "id": "nacional-absoluto-2024",
+      "ano": 2024,
+      "data": "2024-07-21",
+      "dataTexto": {
+        "pt": "julho 2024",
+        "en": "July 2024"
+      },
+      "torneio": {
+        "pt": "Campeonato Nacional Absoluto Amador Feminino",
+        "en": "National Amateur Championship"
+      },
+      "campo": "Quinta do Peru Golfe & Country Club",
+      "local": {
+        "pt": "Sesimbra, Portugal",
+        "en": "Sesimbra, Portugal"
+      },
+      "pos": 5,
+      "par": 28,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Senior"
+      },
+      "selos": [],
+      "nota": {
+        "pt": "Aos quinze anos, quinta no campeonato nacional absoluto — a prova das seniores. Era então a primeira do Ranking Nacional BPI, o ranking amador da federação.",
+        "en": "At fifteen, fifth at the national senior amateur championship. At the time she was top of the federation’s BPI national amateur ranking."
+      },
+      "fonte": {
+        "nome": "Record",
+        "url": "https://www.record.pt/modalidades/golfe/detalhe/ines-belchior-sabia-que-tinha-fortes-possibilidades-de-ganhar"
+      }
+    },
+    {
+      "id": "aquapor-3-2024",
+      "ano": 2024,
+      "data": "2024-06-18",
+      "dataTexto": {
+        "pt": "junho 2024",
+        "en": "June 2024"
+      },
+      "torneio": {
+        "pt": "3.º Torneio do Circuito Aquapor",
+        "en": "3rd Aquapor Circuit Tournament"
+      },
+      "campo": "Amarante Golfe Clube",
+      "local": {
+        "pt": "Amarante, Portugal",
+        "en": "Amarante, Portugal"
+      },
+      "pos": 2,
+      "voltas": [
+        77,
+        76
+      ],
+      "total": 153,
+      "par": 17,
+      "selos": [],
+      "nota": {
+        "pt": "Segunda na competição feminina, atrás de Rafaela Pinto, depois de ter ganho os dois primeiros torneios do circuito.",
+        "en": "Runner-up in the women’s competition, behind Rafaela Pinto, after winning the circuit’s first two tournaments."
+      },
+      "fonte": {
+        "nome": "Record",
+        "url": "https://www.record.pt/modalidades/golfe/detalhe/vasco-alves-triunfa-no-3-torneio-circuito-aquapor--open-cidade-de-amarante"
+      }
+    },
+    {
       "id": "aquapor-2-2024",
       "ano": 2024,
       "data": "2024-04-07",

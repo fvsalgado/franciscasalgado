@@ -10,3 +10,7 @@ docs/
 *.md
 VIGIA.md
 VIGIA-ATENCAO.md
+
+# O caderno do vigia: peças que já foram mostradas num aviso e não devem
+# voltar a aparecer. É memória de quem mantém, não conteúdo do sítio.
+data/vigia-vistas.json

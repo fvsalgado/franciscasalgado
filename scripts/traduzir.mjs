@@ -46,10 +46,6 @@ const CABECALHOS = {
     titulo: 'Results — Francisca Salgado',
     desc: 'Every result Francisca Salgado has on record, season by season — rounds, totals and score to par — plus her WAGR and European Golf Rankings positions.',
   },
-  'percurso.html': {
-    titulo: 'Her story — Francisca Salgado',
-    desc: 'Who Francisca Salgado is: four national titles since 2019, the Portuguese national team and the European calendar. Year by year, and frequently asked questions.',
-  },
   'recruiting.html': {
     titulo: 'College recruiting — Francisca Salgado',
     desc: 'Francisca Salgado, Portuguese amateur golfer, class of 2027: handicap, WAGR world ranking, European U18 ranking, schedule and results — for college coaches.',
@@ -61,10 +57,6 @@ const CABECALHOS = {
   'parcerias.html': {
     titulo: 'Partnerships — Francisca Salgado',
     desc: 'Partnering with Francisca Salgado: who already backs her, the three ways in — season, event or groundwork — and how to get in touch.',
-  },
-  'contacto.html': {
-    titulo: 'Contact — Francisca Salgado',
-    desc: 'Get in touch with Francisca Salgado: partnerships, press, invitations and photograph requests. Direct email and a form.',
   },
   'privacidade.html': { titulo: 'Privacy — Francisca Salgado', desc: 'How this site handles personal data.' },
   'termos.html': { titulo: 'Terms — Francisca Salgado', desc: 'Terms of use for this site.' },

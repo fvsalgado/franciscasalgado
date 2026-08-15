@@ -432,6 +432,14 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
 .numo__v sup{font-size:.4em;vertical-align:super;letter-spacing:0;margin-left:.08em;color:var(--relva)}
 .numo__r{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:var(--relva)}
 .numo__n{font-size:.8rem;color:var(--tinta-fraca);margin:0;max-width:32ch}
+/* O cartão que leva a algum lado. A seta é o único sinal de que é ligação —
+   sublinhar o número estragava a tipografia, e sem sinal nenhum ninguém lá
+   carrega. */
+a.numo--ir{text-decoration:none;color:inherit;transition:box-shadow .25s var(--curva),transform .25s var(--curva)}
+a.numo--ir .numo__r::after{content:'→';margin-left:.5em;display:inline-block;transition:transform .25s var(--curva)}
+a.numo--ir:hover,a.numo--ir:focus-visible{box-shadow:0 0 0 1px var(--relva);transform:translateY(-2px)}
+a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transform:translateX(.25em)}
+@media (prefers-reduced-motion:reduce){a.numo--ir{transition:none}a.numo--ir:hover{transform:none}}
 
 /* ── lista de resultados ────────────────────────────────── */
 .provas{border-top:1px solid var(--linha)}

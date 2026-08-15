@@ -12,7 +12,7 @@
  */
 
 import { buscar } from './rankings.js';
-import { carregar, dataCurta } from './resultados.js';
+import { proxima } from './resultados.js';
 
 const tx = (v, l) => (typeof v === 'string' ? v : v?.[l] || v?.pt || '');
 
@@ -24,7 +24,7 @@ const T = {
     ano: 'Conclusão do secundário', anoS: 'Turma de',
     vivo: 'Em direto', guardado: 'Confirmado a',
     curva: 'Evolução', curvaS: 'Quanto mais alto, melhor a posição',
-    nada: 'Ainda sem prova marcada.',
+    prox: 'Próxima prova',
   },
   en: {
     hcp: 'Handicap', hcpS: 'WHS index · Portuguese Golf Federation',
@@ -33,9 +33,13 @@ const T = {
     ano: 'High school graduation', anoS: 'Class of',
     vivo: 'Live', guardado: 'Confirmed on',
     curva: 'Progression', curvaS: 'Higher is a better position',
-    nada: 'No event scheduled yet.',
+    prox: 'Next event',
   },
 };
+
+/* A secção que depende deste contentor — a mesma que o scripts/estatico.mjs
+   marca com `data-se-vazio`. Aqui e lá, o critério é um só: há conteúdo? */
+const mostrar = (cx, sim) => cx.closest('section[data-se-vazio]')?.toggleAttribute('hidden', !sim);
 
 const ord = (n, l) => (l === 'en'
   ? `${n}${['th', 'st', 'nd', 'rd'][n % 100 >= 11 && n % 100 <= 13 ? 0 : n % 10] || 'th'}`
@@ -82,6 +86,14 @@ export async function fichaRecruiting(cx, lingua = 'pt') {
     cartoes.push(cartao({ v: perfil.secundario.ano, r: t.ano, s: `${t.anoS} ${perfil.secundario.ano}` }));
   }
 
+  /* A próxima prova em cartão, e não o calendário inteiro: esse está na página
+     das épocas, e repeti-lo aqui era a mesma lista duas vezes. */
+  const prox = await proxima(lingua);
+  if (prox) {
+    const [quando, nome] = prox.texto.split(' · ');
+    cartoes.push(cartao({ v: quando, r: t.prox, s: nome || '' }));
+  }
+
   cx.className = 'recs';
   cx.innerHTML = cartoes.join('');
 }
@@ -102,9 +114,11 @@ export async function curvaRankings(cx, lingua = 'pt') {
   let pontos = [];
   try { ({ pontos = [] } = await (await fetch('/data/rankings-historico.json', { cache: 'no-cache' })).json()); }
   catch { return; }
-  /* Sem linha para desenhar, a secção inteira sai da página — um cabeçalho
-     com nada por baixo lê-se como uma coisa que se partiu. */
-  if (pontos.length < 3) { cx.innerHTML = ''; cx.closest('section')?.remove(); return; }
+  /* Sem linha para desenhar, a secção fica escondida — um cabeçalho com nada
+     por baixo lê-se como uma coisa que se partiu. Escondida, e não removida:
+     é a mesma secção que volta sozinha no dia em que houver terceiro ponto. */
+  if (pontos.length < 3) { cx.innerHTML = ''; mostrar(cx, false); return; }
+  mostrar(cx, true);
 
   const L = 720;
   const A = 220;
@@ -168,7 +182,8 @@ export async function witb(cx, lingua = 'pt') {
     ...(d.extras || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua) })),
   ].filter((l) => l.m);
 
-  if (!linhas.length) { cx.innerHTML = ''; return; }
+  if (!linhas.length) { cx.innerHTML = ''; mostrar(cx, false); return; }
+  mostrar(cx, true);
 
   cx.className = 'factos';
   cx.innerHTML = linhas.map((l) => `
@@ -185,7 +200,8 @@ export async function swing(cx, lingua = 'pt') {
   let videos = [];
   try { ({ videos = [] } = await (await fetch('/data/swing.json', { cache: 'no-cache' })).json()); }
   catch { return; }
-  if (!videos.length) { cx.innerHTML = ''; return; }
+  if (!videos.length) { cx.innerHTML = ''; mostrar(cx, false); return; }
+  mostrar(cx, true);
 
   const { videos: pintar } = await import('./media.js');
   await pintar(cx, lingua, videos);
