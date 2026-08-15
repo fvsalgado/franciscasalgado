@@ -91,7 +91,7 @@ export async function linhaRankings(lingua = 'pt') {
    Assim, um assistente que cite esta página cita um número certo hoje, e não
    um número que era certo no dia em que a página foi escrita. */
 export async function rankingsNaPergunta(lingua = 'pt') {
-  const dd = document.querySelector('[data-vivo="rankings-fq"] dd');
+  const dd = document.querySelector('[data-vivo="rankings-fq"] .fq__r');
   if (!dd) return;
   const l = await linhaRankings(lingua);
   if (!l) return;
@@ -202,77 +202,3 @@ export async function saiuEm(cx, lingua = 'pt') {
   }).join('');
 }
 
-/* ── as portas para as outras páginas ─────────────────────── */
-/* A página inicial tinha, inteiras, secções que já existiam noutras páginas: o
-   palmarès, a galeria, a parede de apoios, o dossier de imprensa. Quem descia
-   a página lia tudo duas vezes e não chegava a ter razão nenhuma para clicar
-   em nada.
-
-   Ficam quatro portas. Cada uma diz o que há lá dentro e traz um número que o
-   prova — e o número é contado aqui, dos ficheiros, para não haver mais um
-   sítio no sítio onde alguém tenha de se lembrar de mudar um algarismo. */
-export async function portas(cx, lingua = 'pt') {
-  if (!cx) return;
-  const en = lingua === 'en';
-  const [res, imp, apo] = await Promise.all([ler('resultados'), ler('imprensa'), ler('apoios')]);
-
-  const provas = res.provas || [];
-  const anos = provas.map((p) => p.ano).filter(Boolean);
-  const epocas = anos.length ? Math.max(...anos) - Math.min(...anos) + 1 : 0;
-  const apoiantes = (apo.grupos || []).reduce((n, g) => n + (g.itens?.length || 0), 0);
-
-  const PORTAS = [
-    {
-      /* Não `swing.webp`: é a fotografia que abre a página inicial, e a porta
-         ficava a mostrar outra vez, meio ecrã abaixo, a mesma imagem. */
-      href: 'resultados.html', img: 'podio-2024.webp', ic: 'taca',
-      n: epocas,
-      r: { pt: 'Época a época', en: 'Season by season' },
-      t: { pt: `De campeã de Sub-10 a campeã de Sub-18, em ${provas.length} provas`,
-           en: `From U10 champion to U18 champion, across ${provas.length} events` },
-      x: { pt: 'Cada ano com o que aconteceu, as provas com as voltas e o total, e o que se escreveu nesse ano.',
-           en: 'Each year with what happened, the events with rounds and totals, and what was written that year.' },
-      u: { pt: 'épocas', en: 'seasons' },
-    },
-    {
-      href: 'imprensa.html', img: 'trofeu.webp', ic: 'jornal',
-      n: (imp.pecas || []).length,
-      r: { pt: 'Imprensa', en: 'Press' },
-      t: { pt: 'Para quem escreve sobre golfe', en: 'For people who write about golf' },
-      x: { pt: 'Biografia curta, factos que se confirmam, citações com fonte e fotografias em alta resolução.',
-           en: 'Short biography, checkable facts, sourced quotes and high-resolution photographs.' },
-      u: { pt: 'peças publicadas', en: 'published pieces' },
-    },
-    {
-      href: 'parcerias.html', img: 'english.webp', ic: 'aperto',
-      n: apoiantes,
-      r: { pt: 'Parcerias', en: 'Partnerships' },
-      t: { pt: 'Levar Portugal mais longe', en: 'Taking Portugal further' },
-      x: { pt: 'Quem já apoia, o que cada apoio cobre, e as duas maneiras de falar com ela.',
-           en: 'Who already backs her, what each kind of support covers, and the two ways to reach her.' },
-      u: { pt: 'já a apoiar', en: 'already on board' },
-    },
-  ];
-
-  /* Linhas, e não cartões com fotografia grande. Em cartões isto lia-se como
-     uma galeria e ninguém percebia que eram caminhos; em linha, com o número
-     de ordem à esquerda, o nome da página em maiúsculas e a seta à direita,
-     é um índice — e um índice ninguém confunde com outra coisa. */
-  cx.className = 'portas';
-  cx.innerHTML = PORTAS.map((p, i) => `
-    <a class="porta" href="${p.href}" data-mag>
-      <span class="porta__i" aria-hidden="true">
-        ${icone(p.ic, 'ic')}<b class="num">${String(i + 1).padStart(2, '0')}</b>
-      </span>
-      <span class="porta__q">
-        <span class="porta__r">${tx(p.r, lingua)}</span>
-        <span class="porta__t">${tx(p.t, lingua)}</span>
-        <span class="porta__x">${tx(p.x, lingua)}</span>
-      </span>
-      <span class="porta__n"><b class="num">${p.n}</b> ${tx(p.u, lingua)}</span>
-      <span class="porta__f" aria-hidden="true">
-        <img src="/img/${p.img}" alt="" loading="lazy" decoding="async" data-credito-feito="1" />
-      </span>
-      <span class="porta__s" aria-hidden="true">→</span>
-    </a>`).join('');
-}

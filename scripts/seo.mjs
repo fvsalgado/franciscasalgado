@@ -135,9 +135,14 @@ const migalhas = (chave, ficheiro, l) => ({
    a resposta que a pessoa lê. Se fossem escritas aqui à parte, mais dia menos
    dia diziam coisas diferentes uma da outra. */
 async function perguntas(html) {
-  const bloco = /<dl class="fq">([\s\S]*?)<\/dl>/.exec(html);
-  if (!bloco) return null;
-  const itens = [...bloco[1].matchAll(/<dt[^>]*>([\s\S]*?)<\/dt>\s*<dd[^>]*>([\s\S]*?)<\/dd>/g)];
+  /* As perguntas passaram de <dl>/<dt>/<dd> a <details>/<summary>, para se
+     poderem fechar. Não se procura o bloco e depois os itens lá dentro: o par
+     summary + .fq__r só existe aqui, e casá-lo diretamente poupa uma expressão
+     regular que tinha de saber onde a lista acaba. O FAQPage continua a levar a
+     resposta inteira — o que está fechado no ecrã está aberto nos dados, que é
+     o que um motor de busca lê. */
+  const itens = [...html.matchAll(
+    /<summary[^>]*>([\s\S]*?)<\/summary>\s*<div class="fq__r"[^>]*>([\s\S]*?)<\/div>/g)];
   if (!itens.length) return null;
   const limpo = (s) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
   return {
