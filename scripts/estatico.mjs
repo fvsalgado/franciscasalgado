@@ -57,10 +57,10 @@ const PAGINAS = ['index.html', 'resultados.html', 'recruiting.html', 'imprensa.h
 const GUARDAR = [
   'nav', 'pe',                                        // menu e rodapé: as ligações
   'nums', 'portas', 'citacoes', 'saiuEm', 'rankings', // inicial
-  'proximas', 'filtros', 'epocas', 'videos', 'notaFonte', // épocas
+  'proximas', 'contagens', 'filtros', 'epocas', 'videos', 'notaFonte', // épocas
   'factos', 'plats', 'gal',                           // imprensa
   'numsApoio', 'apoios', 'escadas',                   // parcerias
-  'recNums', 'curva',                                 // recruiting
+  'recNums', 'curva', 'witbL', 'swingV',              // recruiting
 ];
 
 /* Um servidor estático mínimo. O sítio não tem passo de compilação, por isso

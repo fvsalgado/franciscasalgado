@@ -5,9 +5,9 @@
 import { iniciar } from './base.js';
 import { iniciarCampo } from './campo.js';
 import { reduzido } from './movimento.js';
-import { porEpoca, carregar, proximas } from './resultados.js';
+import { porEpoca, contagens, carregar, proximas } from './resultados.js';
 import { factos, citacoes, escadas, ligacoes, numeros } from './conteudo.js';
-import { fichaRecruiting, curvaRankings } from './recruiting.js';
+import { fichaRecruiting, curvaRankings, witb, swing } from './recruiting.js';
 import { galeria, videos, apoios } from './media.js';
 import { reels } from './instagram.js';
 import { rankings } from './rankings.js';
@@ -20,7 +20,8 @@ const qual = document.currentScript?.dataset.pagina
 /* ── o que cada página pinta ──────────────────────────────── */
 const PINTAR = {
   async resultados(l) {
-    await Promise.all([porEpoca($('epocas'), $('filtros'), l), rankings($('rankings'), l),
+    await Promise.all([porEpoca($('epocas'), $('filtros'), l), contagens($('contagens'), l),
+                       rankings($('rankings'), l),
                        proximas($('proximas'), l), videos($('videos'), l)]);
     const d = await carregar();
     const nota = $('notaFonte');
@@ -44,7 +45,8 @@ const PINTAR = {
 
   async recruiting(l) {
     await Promise.all([fichaRecruiting($('recNums'), l), curvaRankings($('curva'), l),
-                       factos($('factos'), l), proximas($('proximas'), l)]);
+                       factos($('factos'), l), proximas($('proximas'), l),
+                       witb($('witbL'), l), swing($('swingV'), l)]);
   },
 
   async legal() { /* as páginas legais são só texto */ },

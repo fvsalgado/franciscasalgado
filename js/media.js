@@ -34,9 +34,11 @@ export async function galeria(cx, lingua = 'pt', quantas = 99) {
 }
 
 /* ── vídeos ───────────────────────────────────────────────── */
-export async function videos(cx, lingua = 'pt') {
+/* `lista` serve quem já tem os vídeos em mão — o coach's corner lê os dele de
+   data/swing.json. Sem lista, vai buscar os do arquivo, como sempre. */
+export async function videos(cx, lingua = 'pt', lista = null) {
   if (!cx) return;
-  const { videos: vs = [] } = await ler('videos');
+  const vs = lista || (await ler('videos')).videos || [];
   if (!vs.length) { cx.innerHTML = ''; return; }
 
   const ver = lingua === 'en' ? 'Play' : 'Ver';

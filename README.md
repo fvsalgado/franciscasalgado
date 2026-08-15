@@ -124,7 +124,7 @@ mostrar texto, ligações e zero elementos a opacidade zero.
 | | |
 |---|---|
 | `index.html` | quem é, os números, os rankings em direto, as portas para o resto, uma citação, o Instagram e as seis perguntas |
-| `resultados.html` | **época a época**: cada ano com o relato, as provas e a imprensa desse ano |
+| `resultados.html` | **época a época**: as contagens da carreira, e por ano o relato, os destaques, as provas e a imprensa |
 | `imprensa.html` | kit: biografia curta, ficha, citações com fonte, fotografias em alta resolução e fichas oficiais |
 | `recruiting.html` | para treinadores universitários: handicap, rankings, ano de conclusão, calendário e contacto |
 | `parcerias.html` | quem apoia, o que um apoio cobre, e o contacto no fim |
@@ -175,9 +175,20 @@ a ordem no sítio — mais recente primeiro):
 - `dataTexto` — quando só se sabe o mês, ou quando a prova durou vários dias
   («5–7 dezembro 2025»). Substitui a data formatada.
 - `selos` — `titulo`, `podio`, `wagr`, `selecao`.
+- `nacional` — `"campea"` ou `"vice"`. **É este campo, e não o nome da prova,
+  que faz as contagens de campeã e vice-campeã nacional.** Pelo nome não dava:
+  o Drive Tour também se chama «Campeonato Nacional de Jovens», e ganhar uma
+  etapa não é ser campeã nacional. Uma prova sem este campo não entra nas
+  contagens, o que é o comportamento certo por omissão.
 
-Uma prova ganha (`pos: 1`) entra automaticamente no palmarès da página
-inicial. Os contadores por época e os filtros também se atualizam sozinhos.
+Uma prova ganha (`pos: 1`) entra automaticamente no palmarès. Os contadores por
+época, as contagens da carreira e os filtros atualizam-se sozinhos.
+
+**O que fica à vista de cada ano são os destaques** — títulos nacionais,
+vitórias, vice-campeonatos e internacionalizações —, e não o resultado de cada
+volta. Uma época tem provas boas e provas más, e uma lista de todas as voltas
+afoga as primeiras nas segundas. O registo inteiro continua lá, atrás de «as N
+provas de AAAA», e é ele que alimenta os dados estruturados.
 
 ### Números, factos, relato de cada época, escalões de apoio
 

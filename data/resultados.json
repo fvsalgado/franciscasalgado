@@ -242,7 +242,8 @@
       "fonte": {
         "nome": "FPG",
         "url": "https://portal.fpg.pt/noticias/pga-aroeira-no-2-consagrou-campeoes-nacionais-nos-escaloes-jovens/"
-      }
+      },
+      "nacional": "campea"
     },
     {
       "id": "franca-2026",
@@ -404,7 +405,8 @@
       "fonte": {
         "nome": "FPG",
         "url": "https://portal.fpg.pt/noticias/francisca-salgado-e-rodrigo-constantino-campeoes-nacionais-de-pares/"
-      }
+      },
+      "nacional": "campea"
     },
     {
       "id": "penina-2026",
@@ -530,7 +532,8 @@
       "fonte": {
         "nome": "FPG",
         "url": "https://portal.fpg.pt/noticias/francisca-rocha-e-gabriel-sardo-conquistam-taca-da-fpg-bpi/"
-      }
+      },
+      "nacional": "vice"
     },
     {
       "id": "andalucia-2025",
@@ -879,7 +882,8 @@
       "fonte": {
         "nome": "FPG",
         "url": "https://portal.fpg.pt/noticias/campeoes-nacionais-de-jovens-consagrados-em-troia/"
-      }
+      },
+      "nacional": "vice"
     },
     {
       "id": "aquapor-ranking-2024",
@@ -1118,7 +1122,8 @@
       "fonte": {
         "nome": "Record",
         "url": "https://www.record.pt/modalidades/golfe/detalhe/campeoes-nacionais-juvenis-de-2022-mesmo-a-concluir-a-epoca"
-      }
+      },
+      "nacional": "vice"
     },
     {
       "id": "nacional-sub12-2021",
@@ -1156,7 +1161,8 @@
       "fonte": {
         "nome": "Gazeta das Caldas",
         "url": "https://gazetadascaldas.pt/desporto/golfe-francisca-salgado-sagra-se-campea-nacional-de-sub-12/"
-      }
+      },
+      "nacional": "campea"
     },
     {
       "id": "nacional-sub10-2019",
@@ -1194,7 +1200,8 @@
       "fonte": {
         "nome": "FPG",
         "url": "https://portal.fpg.pt/noticias/campeonato-nacional-de-sub10-francisco-reis-e-maria-francisca-salgado-sao-os-novos-campeoes-sub10/"
-      }
+      },
+      "nacional": "campea"
     },
     {
       "id": "nacional-sub10-2018",
@@ -1236,7 +1243,8 @@
       "fonte": {
         "nome": "FPG",
         "url": "https://portal.fpg.pt/noticias/campeonato-nacional-de-sub10-francisco-reis-e-maria-francisca-salgado-sao-os-novos-campeoes-sub10/"
-      }
+      },
+      "nacional": "vice"
     }
   ]
 }

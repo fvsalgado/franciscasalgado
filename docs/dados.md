@@ -36,3 +36,43 @@ Endereços de peças que o vigia já mostrou em VIGIA-ATENCAO.md e não deve vol
 ## `data/wagr.json`
 
 Instantâneo da ficha no World Amateur Golf Ranking. Recurso para quando /api/wagr não está disponível. Refrescado pelo vigia; à mão: node scripts/wagr.mjs
+
+## data/witb.json — «What's in the bag»
+
+Os tacos que ela joga, a bola, a luva e o saco. Vazio como está, a secção não
+aparece na página — um WITB com metade dos campos por preencher diz menos do
+que nenhum.
+
+```json
+{
+  "atualizado": "2026-08",
+  "tacos": [
+    { "t": "Driver", "m": "Cobra Darkspeed", "n": "9°, shaft X" },
+    { "t": "Ferros", "m": "…", "n": "4–PW" }
+  ],
+  "bola": "…",
+  "luva": "…",
+  "saco": "…",
+  "extras": [{ "t": "Marcador de bola", "m": "…" }]
+}
+```
+
+`t` é o tipo, `m` o modelo, `n` uma nota opcional. Um campo a `null` ou uma
+lista vazia simplesmente não é desenhado.
+
+## data/swing.json — o swing, para treinadores
+
+Vídeos de swing para o «coach's corner» da página de recruiting. Vazio, a
+secção não aparece.
+
+```json
+{
+  "videos": [
+    { "id": "ID_do_YouTube", "t": { "pt": "Driver, face-on", "en": "Driver, face-on" },
+      "vista": "face-on", "ano": "2026" }
+  ]
+}
+```
+
+Vistas úteis para uma avaliação: `face-on`, `down-the-line`, `short-game`,
+`putting`. O `id` é o que vem depois de `watch?v=`.
