@@ -181,6 +181,35 @@ async function extras(lingua) {
   }
 }
 
+/* As três contagens que resumem a carreira, à cabeça da página. Saem das
+   provas, e não de uma lista à parte: no dia em que ganhar outra vez, isto
+   sabe. O que conta como título nacional está marcado prova a prova, no
+   ficheiro — pelo nome não dava, porque o Drive Tour também se chama
+   «Campeonato Nacional de Jovens» e ganhar uma etapa não é ser campeã. */
+export async function contagens(cx, lingua = 'pt') {
+  if (!cx) return;
+  const { provas = [] } = await carregar();
+  const en = lingua === 'en';
+
+  const linhas = [
+    { n: provas.filter((p) => p.nacional === 'campea').length,
+      r: en ? 'National titles' : 'Títulos nacionais' },
+    { n: provas.filter((p) => p.nacional === 'vice').length,
+      r: en ? 'National runner-up' : 'Vice-campeã nacional' },
+    { n: provas.filter((p) => p.selos?.includes('selecao')).length,
+      r: en ? 'Caps for Portugal' : 'Internacionalizações' },
+    { n: provas.filter((p) => p.pos === 1).length,
+      r: en ? 'Wins' : 'Vitórias' },
+  ].filter((l) => l.n);
+
+  cx.className = 'conta';
+  cx.innerHTML = linhas.map((l) => `
+    <div class="conta__i">
+      <span class="conta__n num">${l.n}</span>
+      <span class="conta__r">${l.r}</span>
+    </div>`).join('');
+}
+
 export async function porEpoca(cx, filtrosCx, lingua = 'pt') {
   if (!cx) return;
   const { provas = [] } = await carregar();
@@ -233,9 +262,9 @@ export async function porEpoca(cx, filtrosCx, lingua = 'pt') {
           (podios ? ` · <b>${podios}</b> pódio${podios === 1 ? '' : 's'}` : '') +
           (vitorias ? ` · <b>${vitorias}</b> vitória${vitorias === 1 ? '' : 's'}` : '');
 
-      /* A história do ano e a imprensa do ano só aparecem sem filtro posto.
-         Com «Vitórias» escolhido, a lista mostra três provas e seria estranho
-         trazer atrás o relato de uma época inteira e quarenta notícias. */
+      /* O relato, os destaques e a imprensa do ano só aparecem sem filtro
+         posto. Com «Vitórias» escolhido, a lista mostra três provas e seria
+         estranho trazer atrás o relato de uma época inteira. */
       const inteira = ativo === 'tudo';
       const conta = mais.texto.get(String(ano));
       const ps = mais.pecas.get(String(ano)) || [];
@@ -267,6 +296,37 @@ export async function porEpoca(cx, filtrosCx, lingua = 'pt') {
           }).join('')}</ol>
         </details>` : '';
 
+      /* O que fica à vista de cada ano são os destaques — títulos, vitórias e
+         internacionalizações —, e não o resultado de cada volta. Uma época tem
+         provas boas e provas más, e uma lista de todas as voltas afoga as
+         primeiras nas segundas. Quem quiser o registo inteiro abre-o. */
+      const destaque = (r, itens) => (itens.length ? `
+        <div class="dest">
+          <p class="dest__r">${r}</p>
+          <ul class="dest__l">${itens.join('')}</ul>
+        </div>` : '');
+
+      const nome = (p) => tx(p.torneio, lingua);
+      const onde = (p) => tx(p.local, lingua).split(',').pop().trim();
+
+      const titulos = doAno.filter((p) => p.nacional === 'campea')
+        .map((p) => `<li><b>${nome(p)}</b></li>`);
+      const vices = doAno.filter((p) => p.nacional === 'vice')
+        .map((p) => `<li>${nome(p)}</li>`);
+      const ganhas = doAno.filter((p) => p.pos === 1 && p.nacional !== 'campea')
+        .map((p) => `<li><b>${nome(p)}</b></li>`);
+      const caps = doAno.filter((p) => p.selos?.includes('selecao'))
+        .map((p) => `<li>${nome(p)}${onde(p) ? ` <span class="dest__o">${onde(p)}</span>` : ''}</li>`);
+
+      const destaques = inteira ? [
+        destaque(en ? 'National champion' : 'Campeã nacional', titulos),
+        destaque(en ? 'Wins' : 'Vitórias', ganhas),
+        destaque(en ? 'National runner-up' : 'Vice-campeã nacional', vices),
+        destaque(en ? 'For Portugal' : 'Ao serviço da Seleção', caps),
+      ].join('') : '';
+
+      const lista = `<div class="provas">${doAno.map((p) => linhaProva(p, lingua, { comNota: true })).join('')}</div>`;
+
       return `
         <section class="epoca" id="e${ano}">
           <div class="epoca__cab">
@@ -274,7 +334,11 @@ export async function porEpoca(cx, filtrosCx, lingua = 'pt') {
             <p class="epoca__r">${resumo}</p>
           </div>
           ${historia}
-          <div class="provas">${doAno.map((p) => linhaProva(p, lingua, { comNota: true })).join('')}</div>
+          ${inteira ? `<div class="dests">${destaques}</div>
+          <details class="epoca__im epoca__todas">
+            <summary><span>${en ? `all ${doAno.length} events of ${ano}` : `as ${doAno.length} provas de ${ano}`}</span></summary>
+            ${lista}
+          </details>` : lista}
           ${imprensa}
         </section>`;
     }).join('');

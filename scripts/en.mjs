@@ -12,6 +12,12 @@
  */
 
 export const EN = {
+  rc_wi_rot: "What's in the bag",
+  rc_wi_tit: 'What she carries',
+  rc_wi_txt: 'The clubs, the ball and the rest of the kit she plays.',
+  rc_sw_rot: "Coach's corner",
+  rc_sw_tit: 'The swing, face-on and down the line',
+  rc_sw_txt: 'For anyone assessing technique. Nothing loads from YouTube until you press play.',
   rc_rot: 'College recruiting',
   rc_tit: 'Class of 2027, looking for a program',
   rc_txt: 'Portuguese amateur golfer, Portugal U18 national team. Here is what a coach needs to see first — and everything on this page is sourced, either elsewhere on this site or at the federation.',

@@ -145,3 +145,48 @@ export async function curvaRankings(cx, lingua = 'pt') {
       </figcaption>
     </figure>`;
 }
+
+/* ── what's in the bag ────────────────────────────────────────
+ *
+ * Os tacos, a bola, a luva e o saco. É a página que os jogadores de golfe
+ * abrem primeiro em qualquer sítio de atleta, e para um treinador diz coisas
+ * que um resultado não diz — que shaft aguenta, que ferros joga.
+ *
+ * Enquanto o data/witb.json estiver vazio, isto não desenha nada e a secção
+ * sai da página. Meio WITB diz menos do que nenhum. */
+export async function witb(cx, lingua = 'pt') {
+  if (!cx) return;
+  let d = {};
+  try { d = await (await fetch('/data/witb.json', { cache: 'no-cache' })).json(); } catch { return; }
+
+  const en = lingua === 'en';
+  const linhas = [
+    ...(d.tacos || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua) })),
+    ...(d.bola ? [{ r: en ? 'Ball' : 'Bola', m: d.bola }] : []),
+    ...(d.luva ? [{ r: en ? 'Glove' : 'Luva', m: d.luva }] : []),
+    ...(d.saco ? [{ r: en ? 'Bag' : 'Saco', m: d.saco }] : []),
+    ...(d.extras || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua) })),
+  ].filter((l) => l.m);
+
+  if (!linhas.length) { cx.innerHTML = ''; return; }
+
+  cx.className = 'factos';
+  cx.innerHTML = linhas.map((l) => `
+    <div><dt>${l.r}</dt><dd>${l.m}${l.n ? ` <span class="dest__o">${l.n}</span>` : ''}</dd></div>`).join('');
+}
+
+/* ── o swing, para quem avalia ────────────────────────────────
+ *
+ * Vídeos de swing por vista — face-on, down-the-line, jogo curto, putting.
+ * Não carregam nada do YouTube antes de alguém carregar no botão, como o resto
+ * do sítio. Sem vídeos, a secção sai da página. */
+export async function swing(cx, lingua = 'pt') {
+  if (!cx) return;
+  let videos = [];
+  try { ({ videos = [] } = await (await fetch('/data/swing.json', { cache: 'no-cache' })).json()); }
+  catch { return; }
+  if (!videos.length) { cx.innerHTML = ''; return; }
+
+  const { videos: pintar } = await import('./media.js');
+  await pintar(cx, lingua, videos);
+}
