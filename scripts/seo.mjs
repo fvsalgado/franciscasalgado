@@ -250,6 +250,56 @@ const PAGINAS = {
 const INICIO = '<!-- dados:início -->';
 const FIM = '<!-- dados:fim -->';
 
+/* ── a próxima prova, escrita no HTML ──────────────────────────────────────
+ *
+ * A tira do hero é preenchida por JavaScript, e no HTML que sai do servidor
+ * dizia «A carregar…». Um navegador resolve isso em milissegundos; um motor de
+ * busca ou um assistente que leia o HTML sem correr JavaScript ficava a saber
+ * que a próxima prova dela é «a carregar».
+ *
+ * Fica escrita aqui, e o JavaScript continua a reescrevê-la ao abrir — o que
+ * está no ficheiro é o que era verdade quando isto correu, e o que o visitante
+ * vê é o que é verdade agora. Se não houver prova marcada, fica o último
+ * resultado, que é o que o próprio JavaScript faria.
+ */
+const MESES_C = {
+  pt: ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'],
+  en: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+};
+
+function proximaNoHtml(html, l) {
+  if (!html.includes('id="proxQ"')) return html;
+
+  const hoje = new Date().toISOString().slice(0, 10);
+  const marcadas = (resultados.proximas || [])
+    .filter((p) => p.data && p.data >= hoje)
+    .sort((a, b) => a.data.localeCompare(b.data));
+
+  const curta = (p) => {
+    if (p.dataTexto) return tx(p.dataTexto, l);
+    const [, m, d] = p.data.split('-');
+    return `${Number(d)} ${MESES_C[l][Number(m) - 1]}`;
+  };
+
+  let rot;
+  let texto;
+  if (marcadas.length) {
+    rot = l === 'en' ? 'Next event' : 'Próxima prova';
+    texto = `${curta(marcadas[0])} · ${tx(marcadas[0].torneio, l)}`;
+  } else {
+    const ultima = provas[0];
+    if (!ultima) return html;
+    rot = l === 'en' ? 'Latest result' : 'Último resultado';
+    const lugar = ultima.posTexto ? tx(ultima.posTexto, l)
+      : (ultima.pos != null ? `${ultima.posT ? 'T' : ''}${ultima.pos}.${l === 'en' ? '' : 'º'}` : '');
+    texto = [tx(ultima.torneio, l), lugar].filter(Boolean).join(' · ');
+  }
+
+  return html
+    .replace(/(<span id="proxR"[^>]*>)[^<]*(<\/span>)/, `$1${rot}$2`)
+    .replace(/(<span class="prox__q num" id="proxQ"[^>]*>)[^<]*(<\/span>)/, `$1${texto}$2`);
+}
+
 /* Corre nas duas árvores. As páginas de /en/ nascem de scripts/traduzir.mjs,
    que corre antes desta — e trazem de lá a marca e os dados portugueses; é
    aqui que ficam com os seus. */
@@ -271,7 +321,8 @@ for (const l of ['pt', 'en']) {
     const grafo = { '@context': 'https://schema.org', '@graph': await montar(html, l) };
     const bloco = `${INICIO}\n<script type="application/ld+json">\n${
       JSON.stringify(grafo, null, 2)}\n</script>\n${FIM}`;
-    const saida = html.slice(0, i) + bloco + html.slice(f + FIM.length);
+    let saida = html.slice(0, i) + bloco + html.slice(f + FIM.length);
+    saida = proximaNoHtml(saida, l);
     if (saida === html) continue;
     if (!SECO) await writeFile(new URL(caminho, RAIZ), saida);
     mexidos += 1;

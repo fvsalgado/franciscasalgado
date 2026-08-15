@@ -12,6 +12,7 @@
  */
 
 export const EN = {
+  saltar: 'Skip to content',
   /* ── partilhado ─────────────────────────────────────────── */
   dz_onde: 'Published in',
 
@@ -27,7 +28,7 @@ export const EN = {
 
   /* ── página inicial ─────────────────────────────────────── */
   hero_rot: 'Amateur golfer · Portuguese national team · U18',
-  hero_frase: 'From Vale de Janelas to the courses of Europe. Four national titles, and the season is only half done.',
+  hero_frase: 'From Vale de Janelas to the courses of Europe. Four national titles and five countries in a single season.',
   prox_r: 'Next event',
   prox_carregar: 'Loading…',
 
@@ -54,7 +55,7 @@ export const EN = {
   rs_fpg: 'Profile at the Portuguese Golf Federation',
 
   /* ── percurso ───────────────────────────────────────────── */
-  qu_bio: 'She started at <strong>Paço do Lumiar</strong>, and it was from there that first title came. She then moved to <strong>Vale de Janelas</strong>, in Óbidos, and in 2023 made her debut for the <strong>Portuguese women\'s amateur national team</strong> — which in 2026 took her to Spain, France, England and Ireland in a single season.',
+  qu_bio: 'She started at <strong>Paço do Lumiar</strong>, and it was from there that first title came. She then moved to <strong>Vale de Janelas</strong>, in Óbidos, and in 2023 made her debut for the <strong>Portuguese women\'s amateur national team</strong>. In 2026 she played in five countries: Portugal, Spain, France, Ireland and England.',
   fq_rot: 'Questions',
   fq_tit: 'The essentials, in six answers',
   fq_txt: 'What you need to know without reading the whole site. Every answer has its source on the other pages.',
