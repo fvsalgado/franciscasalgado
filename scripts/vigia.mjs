@@ -130,7 +130,18 @@ async function handicap() {
 
 /* ── 1. European Golf Rankings ─────────────────────────────────────────── */
 async function egr() {
+  const anterior = await ler('data/egr.json').catch(() => ({}));
   const d = await buscarEgr();
+
+  /* A posição no escalão é o número que abre a página de recruiting, e mexia
+     em silêncio: só o WAGR era comparado, e o europeu entrava no ficheiro sem
+     dizer nada a ninguém. Sobe é boa notícia, desce também é notícia. */
+  if (anterior.posicaoEscalao && d.posicaoEscalao && d.posicaoEscalao !== anterior.posicaoEscalao) {
+    novidades.push(`EGR Sub-18: ${anterior.posicaoEscalao}.º → ${d.posicaoEscalao}.º`);
+  }
+  if (anterior.posicao && d.posicao && d.posicao !== anterior.posicao) {
+    novidades.push(`EGR (todas): ${anterior.posicao}.º → ${d.posicao}.º`);
+  }
 
   await gravar('data/egr.json', {
     ...d,
@@ -354,6 +365,22 @@ await passo('contagens', async () => {
   pôr(perfil.numeros, 'Vitórias', vitorias);
   pôr(perfil.apoioNumeros, 'Peças de imprensa', imp.pecas.length);
   pôr(perfil.apoioNumeros, 'Épocas em prova', epocas);
+
+  /* A linha das classificações na ficha é o recurso para quando as APIs não
+     respondem — e estava escrita à mão, portanto envelhecia calada. Ficou uma
+     semana a dizer 197.ª quando já era 198.ª, e é dela que sai o llms.txt, que
+     é precisamente o que um assistente vai ler. Passa a ser reescrita aqui, com
+     os números que este mesmo ciclo acabou de ir buscar. */
+  const [w, e] = await Promise.all([
+    ler('data/wagr.json').catch(() => ({})), ler('data/egr.json').catch(() => ({})),
+  ]);
+  const linha = perfil.factos?.find((f) => f.vivo === 'rankings');
+  if (linha && w.posicao && e.posicaoEscalao) {
+    const pt = `${w.posicao}.ª no WAGR · ${e.posicaoEscalao}.ª no European Golf Rankings Sub-18`;
+    const en = `${w.posicao}th on the WAGR · ${e.posicaoEscalao}th on the European Golf Rankings U18`;
+    if (linha.dd.pt !== pt) { mexeu.push(`ficha dos rankings: ${linha.dd.pt} → ${pt}`); linha.dd.pt = pt; linha.dd.en = en; }
+  }
+
   if (mexeu.length) { await gravar('data/perfil.json', perfil); novidades.push(...mexeu.map((m) => `número: ${m}`)); }
 });
 
