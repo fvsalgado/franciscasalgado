@@ -2,6 +2,7 @@
   "nome": "Francisca Salgado",
   "nomeCompleto": "Maria Francisca Salgado",
   "clube": "Vale de Janelas",
+  "clubeCampos": "Praia D'El Rey e West Cliffs",
   "concelho": "Óbidos",
   "escalao": "Sub-18",
   "atualizado": "2026-08",
@@ -18,14 +19,14 @@
       }
     },
     {
-      "v": "10",
+      "v": "11",
       "r": {
         "pt": "Vitórias",
         "en": "Wins"
       },
       "n": {
-        "pt": "Provas em que terminou em primeiro, dos campeonatos nacionais ao Circuito Aquapor e ao Drive Tour.",
-        "en": "Events she finished on top of, from national championships to the Aquapor Circuit and the Drive Tour."
+        "pt": "Provas em que terminou em primeiro, dos campeonatos nacionais ao Drive Tour e ao Circuito Aquapor.",
+        "en": "Events she finished on top of, from national championships to the Drive Tour and the Aquapor Circuit."
       }
     },
     {
@@ -35,8 +36,8 @@
         "en": "Lowest round"
       },
       "n": {
-        "pt": "Dois abaixo do par no desenho de Seve Ballesteros, na volta que fechou o GJG Algarve Juniors.",
-        "en": "Two under on Seve Ballesteros's design, in the round that closed out the GJG Algarve Juniors."
+        "pt": "Três abaixo do par na Penina, a fechar o 1.º Drive Tour de 2024 — cinco pancadas atrás à entrada do último dia, onze à frente no fim.",
+        "en": "Three under par at Penina, closing the first Drive Tour of 2024 — five shots behind going into the last day, eleven ahead at the end."
       }
     },
     {
@@ -58,8 +59,8 @@
         "en": "Club"
       },
       "dd": {
-        "pt": "Vale de Janelas, Óbidos",
-        "en": "Vale de Janelas, Óbidos"
+        "pt": "Vale de Janelas — Praia D'El Rey e West Cliffs, Óbidos",
+        "en": "Vale de Janelas — Praia D'El Rey and West Cliffs, Óbidos"
       }
     },
     {

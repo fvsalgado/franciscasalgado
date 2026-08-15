@@ -28,7 +28,7 @@ export const EN = {
 
   /* ── página inicial ─────────────────────────────────────── */
   hero_rot: 'Amateur golfer · Portuguese national team · U18',
-  hero_frase: 'From Vale de Janelas to the courses of Europe. Four national titles and five countries in a single season.',
+  hero_frase: 'From Lisbon to the courses of Europe. Four national titles and five countries in a single season.',
   prox_r: 'Next event',
   prox_carregar: 'Loading…',
 
@@ -55,7 +55,7 @@ export const EN = {
   rs_fpg: 'Profile at the Portuguese Golf Federation',
 
   /* ── percurso ───────────────────────────────────────────── */
-  qu_bio: 'She started at <strong>Paço do Lumiar</strong>, and it was from there that first title came. She then moved to <strong>Vale de Janelas</strong>, in Óbidos, and in 2023 made her debut for the <strong>Portuguese women\'s amateur national team</strong>. In 2026 she played in five countries: Portugal, Spain, France, Ireland and England.',
+  qu_bio: 'She started at the <strong>Jamor</strong>. It was with <strong>Paço do Lumiar</strong> that she won her first national title, at ten, and it is to the Jamor that she went back afterwards, to the <strong>national high-performance centre</strong>. In 2023 she made her debut for the <strong>Portuguese women\'s amateur national team</strong>, and in 2026 she played in five countries: Portugal, Spain, France, Ireland and England.',
   fq_rot: 'Questions',
   fq_tit: 'The essentials, in six answers',
   fq_txt: 'What you need to know without reading the whole site. Every answer has its source on the other pages.',
@@ -64,7 +64,7 @@ export const EN = {
   fq_2p: 'How many national titles does she have?',
   fq_2r: 'Four. U10 in 2019, U12 in 2021, and in 2026 both the Amateur Pairs — with Rodrigo Constantino — and the U18, which she won at Aroeira leading from start to finish.',
   fq_3p: 'What club does she play for?',
-  fq_3r: 'Vale de Janelas, in Óbidos, on Portugal\'s west coast. She started at Paço do Lumiar, where she won her first national title in 2019.',
+  fq_3r: 'At Vale de Janelas, in Óbidos — the club behind the <strong>Praia D\'El Rey</strong> and <strong>West Cliffs</strong> courses. She started at the Jamor and won her first national title with Paço do Lumiar, in 2019.',
   fq_4p: 'Where does she stand in the rankings?',
   fq_4r: 'She is on the World Amateur Golf Ranking, the world ranking of amateur golf, and on the European Golf Rankings. Both positions are just above, and each official profile is on the <a class="lig" href="imprensa.html#ligacoes">press page</a>.',
   fq_5p: 'What are her best international results?',
@@ -79,7 +79,7 @@ export const EN = {
   im_txt: 'Short biography, checkable facts, sourced quotes and the official profiles. For high-resolution photographs, just ask.',
   im_bt: 'Request photographs',
   im_bio_rot: 'Short biography',
-  im_bio: 'Francisca Salgado is an amateur golfer from Vale de Janelas, in Óbidos, and a member of the Portuguese women\'s amateur national team. She has four national titles: U10 in 2019, U12 in 2021 and, in 2026, the Amateur Pairs — alongside Rodrigo Constantino — and the U18. She won the GJG Algarve Juniors International in 2024, was runner-up in the FPG Cup in 2025 and third at the Memorial Celia Barquín, in Asturias. In 2026 she finished the English Girls\' Open in 28th. She is supported by the Fundação do Desporto.',
+  im_bio: 'Francisca Salgado is an amateur golfer from Vale de Janelas, in Óbidos, and a member of the Portuguese women\'s amateur national team. She has four national titles: U10 in 2019, U12 in 2021 and, in 2026, the Amateur Pairs — alongside Rodrigo Constantino — and the U18. She won the first Drive Tour of 2024, at Penina, with the lowest round on her record — 70, three under par — and the GJG Algarve Juniors International later that year, was runner-up in the FPG Cup in 2025 and third at the Memorial Celia Barquín, in Asturias. In 2026 she finished the English Girls\' Open in 28th. She is supported by the Fundação do Desporto.',
   im_factos: 'Facts',
   im_cit_rot: 'In her own words',
   im_cit_tit: 'Quotes',
