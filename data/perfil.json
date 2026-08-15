@@ -5,6 +5,13 @@
   "clubeCampos": "Praia D'El Rey e West Cliffs",
   "concelho": "Óbidos",
   "escalao": "Sub-18",
+  "secundario": {
+    "ano": "2027",
+    "nota": {
+      "pt": "Ensino secundário em Portugal.",
+      "en": "Secondary school in Portugal."
+    }
+  },
   "atualizado": "2026-08",
   "numeros": [
     {

@@ -88,17 +88,20 @@ const dataLonga = (iso, lingua) => {
     { day: 'numeric', month: 'long', year: 'numeric' });
 };
 
-export async function buscar(rota, instantaneo) {
+/* `valida` diz o que faz de uma resposta uma resposta boa. Era `d.posicao`
+   fixo, o que servia os dois rankings e mais nada — o handicap não tem
+   posição, tem handicap. */
+export async function buscar(rota, instantaneo, valida = (d) => d?.posicao != null) {
   try {
     const r = await fetch(rota, { cache: 'no-cache' });
     if (r.ok) {
       const d = await r.json();
-      if (d?.posicao) return { d, vivo: true };
+      if (valida(d)) return { d, vivo: true };
     }
   } catch { /* sem funções, ou sem rede — segue para o instantâneo */ }
   try {
     const d = await (await fetch(instantaneo, { cache: 'no-cache' })).json();
-    if (d?.posicao) return { d, vivo: false };
+    if (valida(d)) return { d, vivo: false };
   } catch (e) { console.warn(`${rota}:`, e.message); }
   return null;
 }

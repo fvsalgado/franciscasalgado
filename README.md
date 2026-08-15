@@ -61,6 +61,24 @@ Correm com `node scripts/<nome>.mjs`, a partir da raiz.
 | `capas-imprensa.mjs` / `logos-imprensa.mjs` | as fotografias e os símbolos da lista de imprensa |
 | `wagr.mjs` / `egr.mjs` | refrescam à mão os instantâneos dos rankings |
 
+### O handicap
+
+Vem da lista de federados da FPG (n.º **43832**), e é o número que um treinador
+universitário procura primeiro. O `api/_handicap.js` sabe lê-lo, mas **nunca foi
+visto a funcionar**: o `scoring.fpg.pt` devolve 500 a esta caixa de
+desenvolvimento. A primeira prova de vida é a ronda diária, que corre de uma
+ligação normal. Se falhar lá também, não parte nada — `data/handicap.json`
+serve o último valor confirmado à mão, com a data, e o vigia avisa quando esse
+valor fizer mais de trinta dias.
+
+### O gráfico dos rankings
+
+`data/rankings-historico.json` ganha um ponto por cada dia em que o WAGR ou o
+EGR mudem — dias iguais não deixam rasto. Começou a 15 de agosto de 2026, do
+zero, porque ninguém guardava isto. **A curva só se desenha com três pontos ou
+mais**; até lá a secção inteira sai da página, porque um cabeçalho com nada por
+baixo lê-se como uma coisa que se partiu.
+
 **Depois de mexer em HTML ou em `data/`**, corre-se, por esta ordem:
 
 ```
@@ -108,6 +126,7 @@ mostrar texto, ligações e zero elementos a opacidade zero.
 | `index.html` | quem é, os números, os rankings em direto, as portas para o resto, uma citação, o Instagram e as seis perguntas |
 | `resultados.html` | **época a época**: cada ano com o relato, as provas e a imprensa desse ano |
 | `imprensa.html` | kit: biografia curta, ficha, citações com fonte, fotografias em alta resolução e fichas oficiais |
+| `recruiting.html` | para treinadores universitários: handicap, rankings, ano de conclusão, calendário e contacto |
 | `parcerias.html` | quem apoia, o que um apoio cobre, e o contacto no fim |
 
 Eram seis. O `percurso.html` e o `resultados.html` contavam a mesma carreira

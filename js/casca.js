@@ -12,6 +12,7 @@ import { outraLingua } from './i18n.js';
 export const PAGINAS = [
   { href: 'index.html', pt: 'Início', en: 'Home' },
   { href: 'resultados.html', pt: 'Época a época', en: 'Season by season' },
+  { href: 'recruiting.html', pt: 'Recruiting', en: 'Recruiting' },
   { href: 'parcerias.html', pt: 'Parcerias', en: 'Partnerships' },
   { href: 'imprensa.html', pt: 'Imprensa', en: 'Press' },
 ];

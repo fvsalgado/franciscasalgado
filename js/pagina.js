@@ -7,6 +7,7 @@ import { iniciarCampo } from './campo.js';
 import { reduzido } from './movimento.js';
 import { porEpoca, carregar, proximas } from './resultados.js';
 import { factos, citacoes, escadas, ligacoes, numeros } from './conteudo.js';
+import { fichaRecruiting, curvaRankings } from './recruiting.js';
 import { galeria, videos, apoios } from './media.js';
 import { reels } from './instagram.js';
 import { rankings } from './rankings.js';
@@ -39,6 +40,11 @@ const PINTAR = {
     await Promise.all([escadas($('escadas'), l), apoios($('apoios'), l),
                        numeros($('numsApoio'), l, 'apoioNumeros'),
                        reels($('reels'), l)]);
+  },
+
+  async recruiting(l) {
+    await Promise.all([fichaRecruiting($('recNums'), l), curvaRankings($('curva'), l),
+                       factos($('factos'), l), proximas($('proximas'), l)]);
   },
 
   async legal() { /* as páginas legais são só texto */ },
