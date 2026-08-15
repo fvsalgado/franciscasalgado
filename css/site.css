@@ -988,21 +988,44 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
                    background:var(--superficie)}
 
 /* ── perguntas frequentes ───────────────────────────────── */
-/* Uma lista de definições, que é o que isto é: pergunta e resposta. Sem
-   acordeão — o que está escondido atrás de um clique não é lido por quem
-   passa os olhos nem, muitas vezes, por quem indexa. */
+/* Rebatíveis. Eram seis perguntas abertas em duas colunas, e isso é um muro de
+   texto a meio da página inicial: quem tem a pergunta lê seis respostas para
+   chegar à sua. Fechadas, as seis perguntas lêem-se de uma vez e abre-se a que
+   interessa.
+ *
+ * O que se perdeu com isso é real e está coberto: o que está atrás de um clique
+ * nem sempre é lido por quem indexa. Mas a resposta inteira continua a ir nos
+ * dados estruturados — o FAQPage é gerado do mesmo texto, pelo scripts/seo.mjs
+ * —, e é de lá que um motor de busca ou um assistente a cita.
+ *
+ * Uma coluna só, e não duas: um acordeão em duas colunas faz saltar o que está
+ * ao lado sempre que se abre um item. */
 .fq{display:grid;gap:1px;margin:0}
-.fq__i{background:var(--papel);box-shadow:0 0 0 1px var(--linha);
-       padding:clamp(1.3rem,2.6vw,1.9rem);display:grid;gap:.6rem;align-content:start}
-@media (min-width:820px){
-  .fq{grid-template-columns:repeat(2,1fr)}
-  .fq__i{grid-template-columns:minmax(0,1fr);gap:.7rem}
-}
+.fq__i{background:var(--papel);box-shadow:0 0 0 1px var(--linha)}
 .sec--fundo .fq__i{background:var(--superficie)}
-.fq__i dt{font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 28;
-          font-size:clamp(1.06rem,1.7vw,1.22rem);line-height:1.25;letter-spacing:-.012em;
-          color:var(--tinta)}
-.fq__i dd{margin:0;font-size:.9rem;line-height:1.6;color:var(--tinta-fraca);max-width:56ch}
+
+.fq__i summary{list-style:none;cursor:pointer;display:flex;gap:1rem;align-items:baseline;
+               justify-content:space-between;padding:clamp(1.1rem,2.2vw,1.5rem) clamp(1.3rem,2.6vw,1.9rem);
+               font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 28;
+               font-size:clamp(1.06rem,1.7vw,1.22rem);line-height:1.25;letter-spacing:-.012em;
+               color:var(--tinta);transition:color .25s var(--curva)}
+.fq__i summary::-webkit-details-marker{display:none}
+.fq__i summary:hover{color:var(--relva)}
+/* O sinal de abrir. Um «+» que roda para «×» — desenhado com uma pseudo-classe
+   e não com um ícone, porque são dois traços. */
+.fq__i summary::after{content:"";flex:0 0 auto;width:.7rem;height:.7rem;margin-top:.35em;
+                      background:
+                        linear-gradient(currentColor,currentColor) center/100% 1.5px no-repeat,
+                        linear-gradient(currentColor,currentColor) center/1.5px 100% no-repeat;
+                      transition:transform .3s var(--curva);color:var(--relva)}
+.fq__i[open] summary::after{transform:rotate(135deg)}
+.fq__i summary:focus-visible{outline:2px solid var(--relva);outline-offset:-3px}
+
+.fq__r{margin:0;padding:0 clamp(1.3rem,2.6vw,1.9rem) clamp(1.3rem,2.6vw,1.9rem);
+       font-size:.9rem;line-height:1.6;color:var(--tinta-fraca);max-width:62ch}
+@media (prefers-reduced-motion:reduce){
+  .fq__i summary,.fq__i summary::after{transition:none}
+}
 
 /* Citação sozinha, entre secções. Uma frase escrita por outra pessoa vale
    mais nesta página do que qualquer adjetivo nosso — por isso ocupa a
@@ -1206,74 +1229,6 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 .saiu__l a:hover{border-color:var(--relva);color:var(--tinta);background:var(--relva-clara)}
 .saiu__l img{width:1.35rem;height:1.35rem;border-radius:50%;object-fit:contain;
              background:#FFF;padding:1px;flex:none}
-
-/* ── as portas para as outras páginas ───────────────────── */
-/* Um índice, não uma galeria. Cada página é uma linha: número de ordem, nome
-   em maiúsculas, uma frase, o número que a sustenta, uma miniatura e a seta.
-   Em cartões grandes com fotografia isto lia-se como galeria de fotografias e
-   ninguém percebia que eram caminhos — que é a única coisa que têm de ser. */
-.portas{display:flex;flex-direction:column;border-top:1px solid var(--linha)}
-.porta{position:relative;display:grid;align-items:center;gap:clamp(.9rem,2.4vw,2rem);
-       grid-template-columns:auto minmax(0,1fr) auto;
-       padding:clamp(1.1rem,2.4vw,1.6rem) 0;border-bottom:1px solid var(--linha);
-       transition:background-color .4s var(--curva),padding-inline .4s var(--curva)}
-@media (min-width:820px){
-  .porta{grid-template-columns:auto minmax(0,1fr) auto 6.5rem auto}
-}
-/* Cada caminho tem a sua cor, e ela só aparece ao passar por cima: em repouso
-   a lista lê-se como uma lista, e ao tocar cada linha diz «sou outra coisa».
-   É o que distingue quatro entradas de um menu de quatro parágrafos. */
-.porta{--cor:var(--relva)}
-.porta:nth-child(1){--cor:#1B6B47}
-.porta:nth-child(2){--cor:#A8791F}
-.porta:nth-child(3){--cor:#2C5D8A}
-.porta:nth-child(4){--cor:#8A3A52}
-.porta::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cor);
-               transform:scaleY(0);transform-origin:top;transition:transform .45s var(--curva)}
-.porta:hover::before{transform:scaleY(1)}
-.porta:hover{background:color-mix(in srgb,var(--cor) 7%,transparent);
-             padding-inline:clamp(.6rem,1.6vw,1.2rem)}
-.porta__r,.porta__n b,.porta__i{color:var(--cor)}
-.porta:hover .porta__i{background:var(--cor);border-color:var(--cor);color:#FFF}
-.porta:hover .porta__s{background:var(--cor);border-color:var(--cor);color:#FFF;transform:translateX(.2rem)}
-.porta__s{color:var(--cor)}
-/* Ícone e número juntos, numa placa. Só o número não chegava para se perceber
-   que aquilo era um menu — podia ser uma lista de qualquer coisa numerada. Com
-   o desenho do assunto ao lado, lê-se logo o que há do outro lado. */
-.porta__i{display:flex;align-items:center;gap:.55rem;flex:none;
-          padding:.5rem .7rem;border-radius:12px;border:1px solid var(--linha);
-          background:var(--papel);
-          transition:background-color .4s var(--curva),border-color .4s var(--curva),
-                     color .4s var(--curva)}
-.sec--fundo .porta__i{background:var(--superficie)}
-.porta__i .ic{width:1.35rem;height:1.35rem}
-.porta__i b{font-family:var(--display);font-weight:300;font-variation-settings:'opsz' 40;
-            font-size:1.12rem;line-height:1;opacity:.55}
-
-.porta__q{display:flex;flex-direction:column;gap:.22rem;min-width:0}
-.porta__r{font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.18em}
-.porta__t{font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 30;
-          font-size:clamp(1.16rem,2.2vw,1.55rem);line-height:1.15;letter-spacing:-.018em;color:var(--tinta)}
-.porta__x{font-size:.85rem;line-height:1.5;color:var(--tinta-fraca);max-width:52ch}
-.porta__n{font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
-          color:var(--tinta-fraca);white-space:nowrap}
-.porta__n b{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 30;
-            font-size:1.4rem;letter-spacing:-.01em;margin-right:.3rem;vertical-align:-.08em}
-.porta__f{display:none;width:6.5rem;height:4.4rem;border-radius:10px;overflow:hidden;
-          background:var(--superficie);box-shadow:0 0 0 1px var(--linha)}
-@media (min-width:820px){.porta__f{display:block}}
-.porta__f img{width:100%;height:100%;object-fit:cover;object-position:center 28%;
-              transition:transform .7s var(--curva)}
-.porta:hover .porta__f img{transform:scale(1.06)}
-.porta__s{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:50%;
-          border:1px solid var(--linha-forte);font-size:.95rem;flex:none;
-          transition:background-color .4s var(--curva),color .4s var(--curva),
-                     border-color .4s var(--curva),transform .4s var(--curva)}
-
-@media (max-width:819px){
-  .porta{grid-template-columns:auto minmax(0,1fr) auto}
-  .porta__n{display:none}
-}
 
 /* ── botão flutuante de contacto ────────────────────────── */
 /* Sempre à mão, em qualquer página. O contacto vivia no fim de uma página só;

@@ -56,7 +56,7 @@ const PAGINAS = ['index.html', 'resultados.html', 'recruiting.html', 'imprensa.h
    exista numa página é ignorado sem barulho — cada página tem os seus. */
 const GUARDAR = [
   'nav', 'pe',                                        // menu e rodapé: as ligações
-  'nums', 'portas', 'citacoes', 'saiuEm', 'rankings', // inicial
+  'nums', 'citacoes', 'saiuEm', 'rankings', // inicial
   'proximas', 'contagens', 'filtros', 'epocas', 'videos', 'notaFonte', // épocas
   'factos', 'plats', 'gal',                           // imprensa
   'numsApoio', 'apoios', 'escadas',                   // parcerias

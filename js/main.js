@@ -4,7 +4,7 @@ import { iniciar, carga } from './base.js';
 import { iniciarCampo } from './campo.js';
 import { reduzido } from './movimento.js';
 import { ultimas, ultimo, proxima } from './resultados.js';
-import { numeros, citacoes, saiuEm, portas, rankingsNaPergunta } from './conteudo.js';
+import { numeros, citacoes, saiuEm, rankingsNaPergunta } from './conteudo.js';
 import { instagram, perfilIg } from './instagram.js';
 import { rankings } from './rankings.js';
 
@@ -39,7 +39,6 @@ const { i18n } = iniciar(async (l) => {
     ultimas($('ultimas'), l, 4),
     citacoes($('citacoes'), l, 1, { grande: true }),
     saiuEm($('saiuEm'), l),
-    portas($('portas'), l),
     rankings($('rankings'), l, { curto: true }),
     rankingsNaPergunta(l),
     proximo(l),

@@ -56,9 +56,6 @@ export const EN = {
 
   qu_rot: 'Who she is',
   qu_manif: 'She won her first national championship at ten. Seven years on she has four, plays the European calendar, and has not yet outgrown the U18 category.',
-  po_rot: 'Also here',
-  po_tit: 'Where to find what',
-  po_txt: 'Every event and every ranking. The story, year by year. The file for journalists. And how to support her.',
 
 
 
