@@ -125,6 +125,12 @@ function trocarDentro(html, id, dentro, classe) {
   return html.slice(0, m.index) + cabeca + dentro + html.slice(fecha);
 }
 
+/* Tira do ficheiro a secção que declara depender de um contentor vazio. */
+function trocarSeccaoFora(html, id) {
+  const re = new RegExp(`<section[^>]*data-se-vazio="${id}"[^>]*>[\\s\\S]*?</section>\\s*`);
+  return re.test(html) ? html.replace(re, '') : null;
+}
+
 const porta = 8123;
 const servidor = await servir(porta);
 const b = await chromium.launch({ args: ['--no-sandbox'] });
@@ -175,6 +181,16 @@ for (const arv of ['', 'en/']) {
 
     let html = await readFile(new URL(caminho, RAIZ), 'utf8');
     let mudou = false;
+
+    /* Uma secção marcada com `data-se-vazio="id"` sai do ficheiro quando esse
+       contentor não trouxe nada. Serve a curva dos rankings, que só existe com
+       histórico suficiente: sem isto, quem lê sem JavaScript ficava com um
+       cabeçalho e nada por baixo — que se lê como uma coisa partida. */
+    for (const [, id] of html.matchAll(/data-se-vazio="([\w-]+)"/g)) {
+      if (pedacos[id]?.html) continue;
+      const fora = trocarSeccaoFora(html, id);
+      if (fora) { html = fora; mudou = true; }
+    }
 
     for (const [id, { html: dentro, classe }] of Object.entries(pedacos)) {
       if (!dentro) continue;
