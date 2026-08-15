@@ -1006,6 +1006,45 @@
       }
     },
     {
+      "id": "drive-tour-penina-2024",
+      "ano": 2024,
+      "data": "2024-01-13",
+      "dataTexto": {
+        "pt": "13–14 janeiro 2024",
+        "en": "13–14 January 2024"
+      },
+      "torneio": {
+        "pt": "1.º Torneio Drive Tour · Campeonato Nacional de Jovens",
+        "en": "1st Drive Tour · National Youth Championship"
+      },
+      "campo": "Penina Hotel & Golf Resort",
+      "local": {
+        "pt": "Portimão, Portugal",
+        "en": "Portimão, Portugal"
+      },
+      "pos": 1,
+      "voltas": [
+        70
+      ],
+      "total": null,
+      "par": -3,
+      "escalao": {
+        "pt": "Sub-16",
+        "en": "U16"
+      },
+      "selos": [
+        "titulo"
+      ],
+      "nota": {
+        "pt": "Estava a cinco pancadas da liderança ao fim da primeira volta. Fechou com 70 — três abaixo do par, a melhor volta que lhe está registada — e ganhou o Sub-16 Femininos com onze pancadas de vantagem.",
+        "en": "Five shots off the lead after round one. She closed with a 70 — three under par, the lowest round on her record — and won the U16 Girls by eleven shots."
+      },
+      "fonte": {
+        "nome": "FPG",
+        "url": "https://portal.fpg.pt/noticias/penina-consagrou-primeiros-vencedores-de-2024-do-drive-tour/"
+      }
+    },
+    {
       "id": "belgica-2023",
       "ano": 2023,
       "data": "2023-07-07",

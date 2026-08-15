@@ -50,11 +50,18 @@ const titulos = provas
   .filter((p) => p.pos === 1)
   .map((p) => `${tx(p.torneio)}${p.ano ? `, ${p.ano}` : ''}`);
 
-const clube = apoios.grupos.find((g) => g.id === 'campos')?.itens?.[0]?.nome || perfil.clube;
+/* O clube é o clube, e vem de data/perfil.json. Já foi lido do primeiro item da
+   parede de «campos onde joga», e no dia em que essa lista passou a ter os
+   campos em vez do clube, os dados estruturados começaram a dizer que ela era
+   de outro sítio. Um dado sobre a pessoa não se infere de uma lista de sítios. */
+const clube = perfil.clube;
+/* O nome do clube não diz nada a quem está de fora; os campos dele dizem. Onde
+   houver espaço para uma frase, vão os dois. */
+const clubeLongo = perfil.clubeCampos ? `${clube} (${perfil.clubeCampos})` : clube;
 
-const descricaoPt = `Golfista amadora portuguesa do ${clube}, em ${perfil.concelho}. ${
+const descricaoPt = `Golfista amadora portuguesa do ${clubeLongo}, em ${perfil.concelho}. ${
   perfil.numeros?.find((n) => n.r?.pt === 'Títulos nacionais')?.v || ''} títulos nacionais. Seleção Nacional Amadora Feminina.`.replace(/\s+/g, ' ').trim();
-const descricaoEn = `Portuguese amateur golfer from ${clube}, in ${perfil.concelho}. ${
+const descricaoEn = `Portuguese amateur golfer from ${clubeLongo}, in ${perfil.concelho}. ${
   perfil.numeros?.find((n) => n.r?.pt === 'Títulos nacionais')?.v || ''} national titles. Portuguese women's amateur national team.`.replace(/\s+/g, ' ').trim();
 
 const pessoa = {

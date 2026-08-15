@@ -33,28 +33,6 @@
       ]
     },
     {
-      "id": "parceiros",
-      "t": {
-        "pt": "Parceiros",
-        "en": "Partners"
-      },
-      "x": {
-        "pt": "Quem acompanha o dia a dia, em relação direta com a atleta.",
-        "en": "Those alongside her day to day, in a direct relationship with the player."
-      },
-      "itens": [
-        {
-          "nome": "ECCO Golf",
-          "logo": "ecco-golf.webp",
-          "url": "https://global.ecco.com/",
-          "x": {
-            "pt": "Calçado",
-            "en": "Footwear"
-          }
-        }
-      ]
-    },
-    {
       "id": "institucionais",
       "t": {
         "pt": "Seleção Nacional e apoio institucional",
@@ -88,8 +66,8 @@
           "logo": "lusiadas.webp",
           "url": "https://www.lusiadas.pt/",
           "x": {
-            "pt": "Parceira das Seleções Nacionais",
-            "en": "Partner of the national teams"
+            "pt": "Parceira das Seleções Nacionais, não patrocinadora dela",
+            "en": "A partner of the national teams, not a personal sponsor"
           },
           "fundo": "#002F7B"
         },
@@ -98,8 +76,8 @@
           "logo": "skip.webp",
           "url": "https://www.instagram.com/skipportugal/",
           "x": {
-            "pt": "Parceira das Seleções Nacionais",
-            "en": "Partner of the national teams"
+            "pt": "Parceira das Seleções Nacionais, não patrocinadora dela",
+            "en": "A partner of the national teams, not a personal sponsor"
           }
         }
       ]
@@ -107,8 +85,8 @@
     {
       "id": "campos",
       "t": {
-        "pt": "Onde joga",
-        "en": "Where she plays"
+        "pt": "Campos onde joga",
+        "en": "Courses she plays"
       },
       "x": {
         "pt": "Os campos de casa, no Oeste.",
@@ -116,21 +94,36 @@
       },
       "itens": [
         {
-          "nome": "Vale de Janelas",
-          "logo": "",
-          "url": "",
-          "x": {
-            "pt": "Clube, em Óbidos",
-            "en": "Her club, in Óbidos"
-          }
-        },
-        {
           "nome": "Praia D'El Rey",
           "logo": "praia-del-rey.webp",
           "url": "https://clubedegolfe.praia-del-rey.com/",
           "x": {
-            "pt": "Óbidos",
-            "en": "Óbidos"
+            "pt": "Vale de Janelas · Óbidos",
+            "en": "Vale de Janelas · Óbidos"
+          }
+        },
+        {
+          "nome": "West Cliffs",
+          "url": "",
+          "x": {
+            "pt": "Vale de Janelas · Óbidos",
+            "en": "Vale de Janelas · Óbidos"
+          }
+        },
+        {
+          "nome": "Quinta do Peru",
+          "url": "",
+          "x": {
+            "pt": "Sesimbra",
+            "en": "Sesimbra"
+          }
+        },
+        {
+          "nome": "Jamor",
+          "url": "",
+          "x": {
+            "pt": "Centro de Alto Rendimento · Oeiras",
+            "en": "National high-performance centre · Oeiras"
           }
         }
       ]

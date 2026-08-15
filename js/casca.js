@@ -12,8 +12,8 @@ import { outraLingua } from './i18n.js';
 export const PAGINAS = [
   { href: 'index.html', pt: 'Início', en: 'Home' },
   { href: 'resultados.html', pt: 'Época a época', en: 'Season by season' },
-  { href: 'imprensa.html', pt: 'Imprensa', en: 'Press' },
   { href: 'parcerias.html', pt: 'Parcerias', en: 'Partnerships' },
+  { href: 'imprensa.html', pt: 'Imprensa', en: 'Press' },
 ];
 
 const aqui = () => {
@@ -130,10 +130,10 @@ export function rodape(lingua = 'pt', canais = []) {
      um rodapé que repete a mesma ligação em duas colunas lê-se pior do que um
      com três. */
   const t = en
-    ? { frase: 'Amateur golfer. Vale de Janelas, Óbidos. Portuguese national team.',
+    ? { frase: 'Amateur golfer. Vale de Janelas — Praia D\'El Rey and West Cliffs, Óbidos. Portuguese national team.',
         onde: 'Contact', ver: 'Pages',
         cred: '© 2026 Francisca Salgado', legal: 'Privacy', termos: 'Terms', cookies: 'Cookies' }
-    : { frase: 'Golfista amadora. Vale de Janelas, Óbidos. Seleção Nacional.',
+    : { frase: 'Golfista amadora. Vale de Janelas — Praia D\'El Rey e West Cliffs, Óbidos. Seleção Nacional.',
         onde: 'Contacto', ver: 'Páginas',
         cred: '© 2026 Francisca Salgado', legal: 'Privacidade', termos: 'Termos', cookies: 'Cookies' };
 
