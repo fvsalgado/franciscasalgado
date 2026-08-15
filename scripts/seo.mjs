@@ -429,8 +429,9 @@ hreflang. O português é o original; o inglês é tradução dele.
 
 - ${SITIO}/ — quem é, números da época, rankings em direto e perguntas frequentes
 - ${SITIO}/resultados.html — época a época: o que aconteceu em cada ano, as provas com voltas, total e fonte, e a imprensa desse ano
+- ${SITIO}/recruiting.html — para treinadores universitários: handicap, rankings, calendário e contacto
 - ${SITIO}/imprensa.html — biografia curta, ficha, citações com fonte, fotografias e fichas oficiais
-- ${SITIO}/parcerias.html — quem apoia, o que um apoio pode cobrir, e o formulário de contacto
+- ${SITIO}/parcerias.html — quem apoia, o que um apoio pode cobrir, e como falar com ela
 
 ## Dados abertos
 

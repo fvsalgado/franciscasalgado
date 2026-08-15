@@ -20,6 +20,10 @@ async function ler(nome) {
 const tx = (v, lingua) => (typeof v === 'string' ? v : v?.[lingua] || v?.pt || '');
 
 /* ── números ──────────────────────────────────────────────── */
+/* Um número que tenha `ir` deixa de ser só um número: se as 42 peças de
+   imprensa estão a uma página de distância, o cartão é o caminho mais curto
+   para lá — e ninguém adivinha que se pode carregar num número que não parece
+   uma ligação. Em inglês o destino é o mesmo caminho debaixo de /en/. */
 export async function numeros(cx, lingua = 'pt', chave = 'numeros') {
   if (!cx) return;
   const perfil = await ler('perfil');
@@ -28,12 +32,13 @@ export async function numeros(cx, lingua = 'pt', chave = 'numeros') {
   cx.innerHTML = ns.map((n) => {
     // a vírgula decimal é portuguesa; em inglês o ponto
     const v = lingua === 'en' && n.vEn ? n.vEn : n.v;
-    return `
-      <div class="numo sobe-i">
+    const dentro = `
         <span class="numo__v num">${v}${n.sup ? `<sup>${n.sup}</sup>` : ''}</span>
         <span class="numo__r">${tx(n.r, lingua)}</span>
-        <p class="numo__n">${tx(n.n, lingua)}</p>
-      </div>`;
+        <p class="numo__n">${tx(n.n, lingua)}</p>`;
+    return n.ir
+      ? `<a class="numo numo--ir sobe-i" href="${lingua === 'en' ? `/en${n.ir}` : n.ir}">${dentro}</a>`
+      : `<div class="numo sobe-i">${dentro}</div>`;
   }).join('');
 }
 

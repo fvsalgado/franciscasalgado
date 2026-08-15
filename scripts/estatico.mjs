@@ -125,10 +125,24 @@ function trocarDentro(html, id, dentro, classe) {
   return html.slice(0, m.index) + cabeca + dentro + html.slice(fecha);
 }
 
-/* Tira do ficheiro a secção que declara depender de um contentor vazio. */
-function trocarSeccaoFora(html, id) {
-  const re = new RegExp(`<section[^>]*data-se-vazio="${id}"[^>]*>[\\s\\S]*?</section>\\s*`);
-  return re.test(html) ? html.replace(re, '') : null;
+/* Esconde — ou volta a mostrar — a secção que declara depender de um
+   contentor.
+ *
+ * Escondia-se apagando, e isso apagava-a do ficheiro de origem: a curva dos
+ * rankings, o WITB e o coach's corner desapareceram do recruiting.html e não
+ * voltariam no dia em que houvesse dados para eles. Um passo de geração não
+ * pode destruir aquilo que gera. Agora mexe-se num atributo, e o ficheiro
+ * guarda sempre a secção inteira. */
+function esconderSeccao(html, id, esconder) {
+  const re = new RegExp(`<section([^>]*\\bdata-se-vazio="${id}"[^>]*)>`);
+  const m = re.exec(html);
+  if (!m) return null;
+  const tem = /\bhidden\b/.test(m[1]);
+  if (tem === esconder) return html;
+  const novo = esconder
+    ? `<section${m[1]} hidden>`
+    : `<section${m[1].replace(/\s*\bhidden\b/, '')}>`;
+  return html.slice(0, m.index) + novo + html.slice(m.index + m[0].length);
 }
 
 const porta = 8123;
@@ -186,10 +200,9 @@ for (const arv of ['', 'en/']) {
        contentor não trouxe nada. Serve a curva dos rankings, que só existe com
        histórico suficiente: sem isto, quem lê sem JavaScript ficava com um
        cabeçalho e nada por baixo — que se lê como uma coisa partida. */
-    for (const [, id] of html.matchAll(/data-se-vazio="([\w-]+)"/g)) {
-      if (pedacos[id]?.html) continue;
-      const fora = trocarSeccaoFora(html, id);
-      if (fora) { html = fora; mudou = true; }
+    for (const [, id] of [...html.matchAll(/data-se-vazio="([\w-]+)"/g)]) {
+      const novo = esconderSeccao(html, id, !pedacos[id]?.html);
+      if (novo && novo !== html) { html = novo; mudou = true; }
     }
 
     for (const [id, { html: dentro, classe }] of Object.entries(pedacos)) {
