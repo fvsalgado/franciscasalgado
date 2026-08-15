@@ -230,10 +230,12 @@
 </section>
 
 <!-- ═══ CONTACTO ═══════════════════════════════════════ -->
-<!-- Chegou a ser página própria. Uma página inteira para um formulário é uma
-     entrada a mais num menu de quatro, e quem escreve chega aqui depois de ler
-     o que há para apoiar — não antes. O endereço fica no rodapé de todas as
-     páginas, para quem não quer preencher nada. -->
+<!-- Aqui esteve um formulário. Um formulário é uma promessa de entrega que
+     depende de um serviço de envio, de uma chave e de registos de correio a
+     funcionarem os três ao mesmo tempo — e quando um falha, quem escreveu não
+     sabe que a mensagem não chegou. O endereço e o Instagram não têm nada
+     disso pelo meio: a mensagem sai da caixa de quem a escreve, e fica lá a
+     prova de que saiu. -->
 <section class="sec sec--fundo" id="contacto">
   <canvas class="sec__campo" id="campo2" aria-hidden="true"></canvas>
   <div class="env">
@@ -243,35 +245,25 @@
         <h2 class="d d--l ani" data-t="ct_tit">Write to Francisca</h2>
       </div>
       <div class="cab__x">
-        <p class="txt" data-t="ct_txt">Partnerships, press, invitations to events and photograph requests. Or, with nothing to fill in, <a class="lig" href="mailto:birdie@franciscasalgado.golf">birdie@franciscasalgado.golf</a>.</p>
+        <p class="txt" data-t="ct_txt">Partnerships, press, invitations to events and photograph requests.</p>
       </div>
     </div>
 
     <div class="contacto">
-      <form class="form" id="form" novalidate>
-        <div class="dupla">
-          <div class="campo"><label for="fn" data-t="c1">Name</label><input id="fn" name="nome" type="text" autocomplete="name" required /></div>
-          <div class="campo"><label for="fe" data-t="c2">Email</label><input id="fe" name="email" type="email" autocomplete="email" required /></div>
-        </div>
-        <div class="dupla">
-          <div class="campo"><label for="ft" data-t="c3">Subject</label>
-            <select id="ft" name="assunto">
-              <option data-t="c3a">Partnership or sponsorship</option>
-              <option data-t="c3b">Press and photographs</option>
-              <option data-t="c3c">Invitation to an event</option>
-              <option data-t="c3d">Other</option>
-            </select></div>
-          <div class="campo"><label for="fo" data-t="c4">Organisation</label><input id="fo" name="organizacao" type="text" autocomplete="organization" /></div>
-        </div>
-        <div class="campo"><label for="fm" data-t="c5">What you have in mind</label><textarea id="fm" name="mensagem" required></textarea></div>
-        <input type="hidden" name="_subject" value="Contacto — site da Francisca Salgado" />
-        <p class="mel" aria-hidden="true"><label for="fx">Não preencher</label><input id="fx" name="_gotcha" type="text" tabindex="-1" autocomplete="off" /></p>
-        <div class="form__pe">
-          <button class="cap cap--cheio" type="submit" data-t="c6" data-mag>Send</button>
-          <p class="form__msg" id="formMsg" role="status"></p>
-        </div>
-        <p class="form__nota" data-t="c9">By sending, your data is used only to answer this request. See the <a href="privacidade.html">privacy policy</a>.</p>
-      </form>
+      <div class="ct-vias">
+        <a class="via via--email" href="mailto:birdie@franciscasalgado.golf" data-sem-seta data-mag>
+          <span class="via__i" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M4.4 5.6h15.2a1.2 1.2 0 0 1 1.2 1.2v10.4a1.2 1.2 0 0 1-1.2 1.2H4.4a1.2 1.2 0 0 1-1.2-1.2V6.8a1.2 1.2 0 0 1 1.2-1.2Z"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m3.9 6.6 8.1 5.9 8.1-5.9"/></svg></span>
+          <span class="via__r" data-t="ct_v1r">Email</span>
+          <span class="via__n">birdie@franciscasalgado.golf</span>
+          <span class="via__x" data-t="ct_v1x">For partnership proposals, press and invitations. It is the most direct route.</span>
+        </a>
+        <a class="via via--ig" href="https://www.instagram.com/francisca_salgado_/" target="_blank" rel="noopener" data-sem-seta data-mag>
+          <span class="via__i" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M7.5 3.5h9a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4h-9a4 4 0 0 1-4-4v-9a4 4 0 0 1 4-4Z"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.1" cy="6.9" r="1.1"/></svg></span>
+          <span class="via__r" data-t="ct_v2r">Instagram</span>
+          <span class="via__n">@francisca_salgado_</span>
+          <span class="via__x" data-t="ct_v2x">Direct message, for anything short.</span>
+        </a>
+      </div>
 
       <aside class="contacto__x">
         <p class="rot rot--so" data-t="ct_lig">Before you write</p>

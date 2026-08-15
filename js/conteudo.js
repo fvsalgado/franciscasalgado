@@ -243,8 +243,8 @@ export async function portas(cx, lingua = 'pt') {
       n: apoiantes,
       r: { pt: 'Parcerias', en: 'Partnerships' },
       t: { pt: 'Levar Portugal mais longe', en: 'Taking Portugal further' },
-      x: { pt: 'Quem já apoia, o que cada apoio cobre, e o formulário para falar com ela.',
-           en: 'Who already backs her, what each kind of support covers, and the form to reach her.' },
+      x: { pt: 'Quem já apoia, o que cada apoio cobre, e as duas maneiras de falar com ela.',
+           en: 'Who already backs her, what each kind of support covers, and the two ways to reach her.' },
       u: { pt: 'já a apoiar', en: 'already on board' },
     },
   ];
