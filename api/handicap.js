@@ -1,9 +1,9 @@
 /* Handicap na lista de federados da FPG, em direto.
  *
- * Do lado do servidor, como o WAGR e o EGR: a lista é HTML e não manda
- * cabeçalho de CORS nenhum. Doze horas de cache, mais uma semana a servir
- * enquanto revalida — um handicap mexe depois de uma volta contada, não de
- * hora a hora.
+ * Do lado do servidor, como o WAGR e o EGR: a lista pede sessão, cookies e uma
+ * volta por três endereços, e não manda cabeçalho de CORS nenhum — nada disso
+ * se faz do browser. Doze horas de cache, mais uma semana a servir enquanto
+ * revalida: um handicap mexe depois de uma volta contada, não de hora a hora.
  *
  * A falhar, responde 502 e o lado do browser cai em data/handicap.json.
  */
