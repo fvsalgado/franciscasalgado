@@ -384,6 +384,13 @@ await passo('contagens', async () => {
   pôr(perfil.apoioNumeros, 'Peças de imprensa', imp.pecas.length);
   pôr(perfil.apoioNumeros, 'Épocas em prova', epocas);
 
+  /* As idas a Espanha vivem contadas por ano, e o cartão mostra a soma. Assim
+     acrescenta-se uma viagem onde ela aconteceu e o número acerta-se sozinho —
+     em vez de haver um total escrito à mão a envelhecer ao lado da lista que o
+     contradiz. */
+  const espanha = Object.values(perfil.espanha?.porAno || {}).reduce((s, n) => s + n, 0);
+  if (espanha) pôr(perfil.apoioNumeros, 'Idas a Espanha', espanha);
+
   /* A linha das classificações na ficha é o recurso para quando as APIs não
      respondem — e estava escrita à mão, portanto envelhecia calada. Ficou uma
      semana a dizer 197.ª quando já era 198.ª, e é dela que sai o llms.txt, que
