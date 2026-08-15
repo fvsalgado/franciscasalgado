@@ -134,7 +134,27 @@
 <div class="cur" id="cur" aria-hidden="true"><span class="cur__p"></span><span class="cur__a"></span></div>
 <a class="saltar" href="#conteudo" data-t="saltar">Saltar para o conteúdo</a>
 
-<header id="nav"></header>
+<header class="nav" id="nav"><div class="nav__in">
+      
+  <a class="marca" href="index.html" data-mag="" aria-label="Francisca Salgado">
+    <svg class="marca__b" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M8 20.2V3.6l9.2 3.3L8 10.2"></path><ellipse cx="12" cy="20.4" rx="6.8" ry="1.7" fill="none" stroke="currentColor" stroke-width="1.5"></ellipse></svg>
+    <span class="marca__t">Francisca&nbsp;Salgado</span>
+  </a>
+      <nav class="nav__links" aria-label="Principal"><a href="index.html" data-mag="">Início</a><a href="resultados.html" data-mag="">Época a época</a><a href="imprensa.html" data-mag="">Imprensa</a><a href="parcerias.html" aria-current="page" data-mag="">Parcerias</a></nav>
+      <div class="nav__fer">
+        <button class="cap cap--ico" id="btTema" type="button" aria-label="Alternar tema" aria-pressed="false">
+          <span class="ico" id="btTemaI"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg></span>
+        </button>
+        <a class="cap" id="btLang" href="/en/parcerias.html" hreflang="en" data-sem-seta="" aria-label="Read this page in English">EN</a>
+        <button class="ham" id="btMenu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i></button>
+      </div>
+    </div>
+
+    <div class="menu" id="menu" hidden="">
+      <div class="menu__in">
+        <nav class="menu__l" aria-label="Principal"><a href="index.html">Início</a><a href="resultados.html">Época a época</a><a href="imprensa.html">Imprensa</a><a href="parcerias.html" aria-current="page">Parcerias</a></nav>
+      </div>
+    </div></header>
 
 <main id="conteudo">
 
@@ -160,7 +180,26 @@
 <!-- ═══ NÚMEROS PARA QUEM APOIA ════════════════════════ -->
 <section class="sec sec--curta">
   <div class="env">
-    <div id="numsApoio"></div>
+    <div class="nums" id="numsApoio"><div class="numo sobe-i">
+        <span class="numo__v num">4</span>
+        <span class="numo__r">Títulos nacionais</span>
+        <p class="numo__n">Sub-10, Sub-12, Pares Amador e Sub-18 — o último em maio de 2026.</p>
+      </div>
+      <div class="numo sobe-i">
+        <span class="numo__v num">5</span>
+        <span class="numo__r">Países numa época</span>
+        <p class="numo__n">Portugal, Espanha, França, Irlanda e Inglaterra, só em 2026.</p>
+      </div>
+      <div class="numo sobe-i">
+        <span class="numo__v num">40</span>
+        <span class="numo__r">Peças de imprensa</span>
+        <p class="numo__n">Record, FPG, Golftattoo, CDP e imprensa regional, desde 2019.</p>
+      </div>
+      <div class="numo sobe-i">
+        <span class="numo__v num">9</span>
+        <span class="numo__r">Épocas em prova</span>
+        <p class="numo__n">Do primeiro pódio nacional, em 2018, até à época que está a correr.</p>
+      </div></div>
   </div>
 </section>
 
@@ -176,7 +215,52 @@
         <p class="txt" data-t="ap2_q_txt">As marcas e as instituições que já estão com ela, e o que cada uma cobre.</p>
       </div>
     </div>
-    <div id="apoios"></div>
+    <div class="apoios" id="apoios"><section class="apoios__g apoios__g--destaque">
+      <div class="apoios__cab">
+        <p class="rot rot--so">Patrocinadores principais</p>
+        <p class="apoios__x">As marcas com que joga e se veste em prova, em contrato.</p>
+      </div>
+      <div class="apoios__l"><a class="apoio" href="https://www.cobragolf.com/" target="_blank" rel="noopener" data-sem-seta="" data-mag="">
+      <span class="apoio__cx"><img src="/img/logos/cobra-golf.svg" alt="Cobra Golf" loading="lazy" decoding="async" data-credito-feito="1"></span>
+      <span class="apoio__x">Tacos</span></a><a class="apoio" href="https://eu.puma.com/" target="_blank" rel="noopener" data-sem-seta="" data-mag="">
+      <span class="apoio__cx"><img src="/img/logos/puma-golf.webp" alt="Puma Golf" loading="lazy" decoding="async" data-credito-feito="1"></span>
+      <span class="apoio__x">Vestuário</span></a></div>
+    </section>
+    <section class="apoios__g">
+      <div class="apoios__cab">
+        <p class="rot rot--so">Parceiros</p>
+        <p class="apoios__x">Quem acompanha o dia a dia, em relação direta com a atleta.</p>
+      </div>
+      <div class="apoios__l"><a class="apoio" href="https://global.ecco.com/" target="_blank" rel="noopener" data-sem-seta="" data-mag="">
+      <span class="apoio__cx"><img src="/img/logos/ecco-golf.webp" alt="ECCO Golf" loading="lazy" decoding="async" data-credito-feito="1"></span>
+      <span class="apoio__x">Calçado</span></a></div>
+    </section>
+    <section class="apoios__g">
+      <div class="apoios__cab">
+        <p class="rot rot--so">Seleção Nacional e apoio institucional</p>
+        <p class="apoios__x">Quem seleciona, forma e financia o percurso, e as marcas que apoiam as Seleções Nacionais de que ela faz parte — e não a atleta a título individual.</p>
+      </div>
+      <div class="apoios__l"><a class="apoio" href="https://portal.fpg.pt/perfil/francisca-salgado/" target="_blank" rel="noopener" data-sem-seta="" data-mag="">
+      <span class="apoio__cx"><img src="/img/logos/fpg.webp" alt="Federação Portuguesa de Golfe" loading="lazy" decoding="async" data-credito-feito="1"></span>
+      <span class="apoio__x">Seleção Nacional Amadora Feminina</span></a><a class="apoio" href="https://fundacaodesporto.pt/" target="_blank" rel="noopener" data-sem-seta="" data-mag="">
+      <span class="apoio__cx"><img src="/img/logos/fundacao-desporto.webp" alt="Fundação do Desporto" loading="lazy" decoding="async" data-credito-feito="1"></span>
+      <span class="apoio__x">Atleta apoiada desde 2025</span></a><a class="apoio" href="https://www.lusiadas.pt/" target="_blank" rel="noopener" data-sem-seta="" data-mag="">
+      <span class="apoio__cx" style="background:#002F7B;border-color:#002F7B"><img src="/img/logos/lusiadas.webp" alt="Lusíadas Saúde" loading="lazy" decoding="async" data-credito-feito="1"></span>
+      <span class="apoio__x">Parceira das Seleções Nacionais</span></a><a class="apoio" href="https://www.instagram.com/skipportugal/" target="_blank" rel="noopener" data-sem-seta="" data-mag="">
+      <span class="apoio__cx"><img src="/img/logos/skip.webp" alt="Skip Portugal" loading="lazy" decoding="async" data-credito-feito="1"></span>
+      <span class="apoio__x">Parceira das Seleções Nacionais</span></a></div>
+    </section>
+    <section class="apoios__g">
+      <div class="apoios__cab">
+        <p class="rot rot--so">Onde joga</p>
+        <p class="apoios__x">Os campos de casa, no Oeste.</p>
+      </div>
+      <div class="apoios__l"><div class="apoio">
+      <span class="apoio__cx"><span class="apoio__n">Vale de Janelas</span></span>
+      <span class="apoio__x">Clube, em Óbidos</span></div><a class="apoio" href="https://clubedegolfe.praia-del-rey.com/" target="_blank" rel="noopener" data-sem-seta="" data-mag="">
+      <span class="apoio__cx"><img src="/img/logos/praia-del-rey.webp" alt="Praia D'El Rey" loading="lazy" decoding="async" data-credito-feito="1"></span>
+      <span class="apoio__x">Óbidos</span></a></div>
+    </section></div>
   </div>
 </section>
 
@@ -209,7 +293,30 @@
         <a class="cap cap--cheio" href="#contacto" data-t="ap2_e_bt" data-mag>Pedir uma proposta</a>
       </div>
     </div>
-    <div id="escadas"></div>
+    <div class="escadas" id="escadas"><article class="degrau">
+      <span class="degrau__i num" aria-hidden="true">01</span>
+      <span class="degrau__e">Época</span>
+      <h3 class="degrau__n">Uma época inteira</h3>
+      <p class="degrau__x">A marca acompanha o calendário todo, dentro e fora de Portugal, e no fim recebe um relatório do que aconteceu.</p>
+      <ul class="degrau__u"><li>Marca no saco e no vestuário de jogo</li><li>Presença nas fotografias de prova</li><li>Calendário nacional e internacional</li><li>Relatório de época: provas, resultados e imprensa</li></ul>
+      <a class="degrau__b" href="parcerias.html#contacto" data-mag="">Pedir uma proposta</a>
+    </article>
+    <article class="degrau">
+      <span class="degrau__i num" aria-hidden="true">02</span>
+      <span class="degrau__e">Prova</span>
+      <h3 class="degrau__n">Uma prova internacional</h3>
+      <p class="degrau__x">Cobre a viagem, a inscrição e o caddie de um torneio lá fora. Foi assim que se fez o English Girls’ Open, em Inglaterra.</p>
+      <ul class="degrau__u"><li>Deslocação e estadia</li><li>Inscrição na prova</li><li>Caddie</li><li>Créditos no sítio e nas redes dela</li></ul>
+      <a class="degrau__b" href="parcerias.html#contacto" data-mag="">Pedir uma proposta</a>
+    </article>
+    <article class="degrau">
+      <span class="degrau__i num" aria-hidden="true">03</span>
+      <span class="degrau__e">Treino</span>
+      <h3 class="degrau__n">O trabalho de treino</h3>
+      <p class="degrau__x">Bolas, campo, aulas e preparação física. Não aparece nas fotografias, e é o que separa um 74 de um 70.</p>
+      <ul class="degrau__u"><li>Bolas e campo de treino</li><li>Aulas e acompanhamento técnico</li><li>Preparação física</li><li>Material de treino</li></ul>
+      <a class="degrau__b" href="parcerias.html#contacto" data-mag="">Pedir uma proposta</a>
+    </article></div>
   </div>
 </section>
 
@@ -279,7 +386,34 @@
 
 </main>
 
-<footer id="pe"></footer>
+<footer class="pe" id="pe"><div class="env">
+      <p class="pe__nome" aria-hidden="true">Francisca Salgado</p>
+      <div class="pe__g">
+        <div>
+          <p class="rot">Francisca Salgado</p>
+          <p class="txt" style="font-size:.85rem;margin-top:1rem">Golfista amadora. Vale de Janelas, Óbidos. Seleção Nacional.</p>
+        </div>
+        <div>
+          <p class="rot">Contacto</p>
+          <ul class="pe__l">
+            <li><a href="mailto:birdie@franciscasalgado.golf" target="_blank" rel="noopener" data-sem-seta="" data-mag=""><svg class="ic ic--pe" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M4.4 5.6h15.2a1.2 1.2 0 0 1 1.2 1.2v10.4a1.2 1.2 0 0 1-1.2 1.2H4.4a1.2 1.2 0 0 1-1.2-1.2V6.8a1.2 1.2 0 0 1 1.2-1.2Z"></path><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m3.9 6.6 8.1 5.9 8.1-5.9"></path></svg><span>birdie@franciscasalgado.golf</span></a></li>
+            <li><a href="https://www.instagram.com/francisca_salgado_/" target="_blank" rel="noopener" data-sem-seta="" data-mag=""><svg class="ic ic--pe" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M7.5 3.5h9a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4h-9a4 4 0 0 1-4-4v-9a4 4 0 0 1 4-4Z"></path><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"></circle><circle cx="17.1" cy="6.9" r="1.1"></circle></svg><span>Instagram</span></a></li></ul>
+        </div>
+        <div>
+          <p class="rot">Páginas</p>
+          <ul class="pe__l"><li><a href="index.html" data-mag="">Início</a></li><li><a href="resultados.html" data-mag="">Época a época</a></li><li><a href="imprensa.html" data-mag="">Imprensa</a></li><li><a href="parcerias.html" data-mag="">Parcerias</a></li></ul>
+        </div>
+      </div>
+      <div class="pe__f">
+        <span>© 2026 Francisca Salgado</span>
+        <nav class="pe__legal" aria-label="Privacidade">
+          <a href="privacidade.html" data-mag="">Privacidade</a>
+          <a href="termos.html" data-mag="">Termos</a>
+          <button class="pe__ck" type="button" id="abrirCookies">Cookies</button>
+        </nav>
+        <span class="num">Óbidos · 39°22′N 9°09′W</span>
+      </div>
+    </div></footer>
 
 <script type="module" src="/js/pagina.js" data-pagina="parcerias"></script>
 </body>

@@ -56,13 +56,50 @@ Correm com `node scripts/<nome>.mjs`, a partir da raiz.
 | `seo.mjs` | dados estruturados, `sitemap.xml` e `llms.txt` |
 | `en.mjs` | o dicionário inglês. É dado, não é script: só `traduzir.mjs` o lê |
 | `og.mjs` | refaz a imagem de partilha e carimba-lhe a versão |
+| `estatico.mjs` | escreve no HTML o que o JavaScript pinta — ver «Sem JavaScript» |
 | `capas.mjs` | as miniaturas dos vídeos, guardadas cá |
 | `capas-imprensa.mjs` / `logos-imprensa.mjs` | as fotografias e os símbolos da lista de imprensa |
 | `wagr.mjs` / `egr.mjs` | refrescam à mão os instantâneos dos rankings |
 
-**Depois de mexer em HTML ou em `data/`**, corre-se `traduzir.mjs` e depois
-`seo.mjs`: o inglês e os dados estruturados são gerados, e ficam para trás se
-ninguém os voltar a escrever.
+**Depois de mexer em HTML ou em `data/`**, corre-se, por esta ordem:
+
+```
+node scripts/traduzir.mjs && node scripts/seo.mjs && node scripts/estatico.mjs
+```
+
+A ordem importa: o inglês nasce do português, os dados estruturados escrevem-se
+nas duas línguas, e o `estatico.mjs` fotografa o resultado final. É a mesma
+sequência que a ação diária corre.
+
+## Sem JavaScript
+
+O sítio pinta quase tudo no navegador a partir dos `data/*.json`. Isso é bom
+para manter — muda-se um ficheiro e o sítio muda — e era mau para quem lê sem
+correr JavaScript. A página das épocas chegava a entregar **3 KB e zero
+ligações**: nem menu, nem rodapé, nem uma única prova. Um navegador resolvia
+aquilo em milissegundos; um assistente, um agregador ou uma pré-visualização
+não resolvem nada.
+
+Duas medidas, e nenhuma delas duplica código:
+
+**1. `scripts/estatico.mjs`** abre cada página num Chromium, deixa o JavaScript
+fazer o trabalho dele e guarda o resultado dentro do ficheiro. A alternativa
+era escrever o mesmo HTML duas vezes, uma em `js/` para o navegador e outra em
+`scripts/` para o ficheiro — e duas cópias da mesma coisa afastam-se sempre.
+Ao abrir a página, o JavaScript repinta por cima: o que está no ficheiro é o
+que era verdade quando aquilo correu, o que o visitante vê é o que é verdade
+agora. Guarda uma lista explícita de contentores; fica de fora o que é de
+terceiros (Instagram, YouTube) e o que tem estado (cookies, cursor, botão
+flutuante).
+
+**2. As animações de revelação passaram a depender de `html.js`,** marca que o
+`js/base.js` põe ao arrancar. Antes, o texto começava a zero de opacidade à
+espera de um observador; sem JavaScript ficava invisível para sempre — e a
+cortina de carregamento da página inicial tapava tudo. Agora, sem JavaScript, o
+texto fica simplesmente visível.
+
+O teste é `javaScriptEnabled: false` no Playwright: as quatro páginas têm de
+mostrar texto, ligações e zero elementos a opacidade zero.
 
 ## Quatro páginas
 

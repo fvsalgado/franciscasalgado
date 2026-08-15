@@ -46,6 +46,19 @@ jobs:
       - name: Refazer dados estruturados, sitemap e llms.txt
         run: node scripts/seo.mjs
 
+      # O sítio pinta o conteúdo no navegador; este passo abre cada página num
+      # Chromium e guarda o resultado no ficheiro, para quem lê sem correr
+      # JavaScript não receber contentores vazios. Corre aqui, e não só à mão,
+      # porque o vigia mexe nos dados todos os dias — sem isto, o que está
+      # escrito no HTML ficava a falar de ontem.
+      - name: Instalar o Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+
+      - name: Escrever no HTML o que o JavaScript pinta
+        run: node scripts/estatico.mjs
+
       - name: Pôr o resumo no sumário da ação
         if: always()
         run: cat VIGIA.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
