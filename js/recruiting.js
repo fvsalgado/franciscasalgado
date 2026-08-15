@@ -22,7 +22,7 @@ const T = {
     wagr: 'WAGR', wagrS: 'Ranking mundial amador',
     egr: 'EGR Sub-18', egrS: 'Ranking europeu feminino, escalão',
     ano: 'Conclusão do secundário', anoS: 'Turma de',
-    vivo: 'Em direto', guardado: 'Confirmado a',
+    vivo: 'Em direto', guardado: 'Confirmado a', desde: 'Sem mexer desde',
     curva: 'Evolução', curvaS: 'Quanto mais alto, melhor a posição',
     prox: 'Próxima prova',
   },
@@ -31,7 +31,7 @@ const T = {
     wagr: 'WAGR', wagrS: 'World amateur ranking',
     egr: 'EGR U18', egrS: 'European women\'s ranking, age category',
     ano: 'High school graduation', anoS: 'Class of',
-    vivo: 'Live', guardado: 'Confirmed on',
+    vivo: 'Live', guardado: 'Confirmed on', desde: 'Unchanged since',
     curva: 'Progression', curvaS: 'Higher is a better position',
     prox: 'Next event',
   },
@@ -57,6 +57,20 @@ export async function fichaRecruiting(cx, lingua = 'pt') {
     fetch('/data/perfil.json', { cache: 'no-cache' }).then((r) => r.json()).catch(() => ({})),
   ]);
 
+  /* Desde quando o handicap não mexe. Não vem da API — em direto lê-se um
+     número, não a história dele —, por isso vem sempre do instantâneo, que é o
+     que o vigia mantém. É o mesmo ficheiro que já serve de recurso ali em
+     cima, e por isso já está em cache.
+   *
+   * Só se mostra quando já diz alguma coisa. No primeiro dia as duas datas são
+   * a mesma — fomos lá ver hoje e não temos leitura anterior —, e «sem mexer
+   * desde hoje» lê-se como «mexeu hoje», que é o contrário do que se passa.
+   * Enquanto forem iguais, fica a nota antiga. */
+  const desde = await fetch('/data/handicap.json', { cache: 'no-cache' })
+    .then((r) => r.json())
+    .then((d) => (d.desde && d.desde !== d.atualizado ? d.desde : null))
+    .catch(() => null);
+
   const cartao = ({ v, sup, r, s, nota }) => `
     <article class="rec">
       <span class="rec__v num">${v}${sup ? `<sup>${sup}</sup>` : ''}</span>
@@ -72,7 +86,11 @@ export async function fichaRecruiting(cx, lingua = 'pt') {
     cartoes.push(cartao({
       v: lingua === 'en' ? n.toFixed(1) : n.toFixed(1).replace('.', ','),
       r: t.hcp, s: t.hcpS,
-      nota: h.vivo ? t.vivo : `${t.guardado} ${h.d.atualizado}`,
+      /* «Confirmado a hoje» é verdade e não diz nada — a data em que fomos lá
+         ver renova-se sozinha. A que informa é aquela em que o número mexeu
+         pela última vez. Enquanto não houver duas leituras diferentes para a
+         saber, fica a antiga. */
+      nota: desde ? `${t.desde} ${desde}` : (h.vivo ? t.vivo : `${t.guardado} ${h.d.atualizado}`),
     }));
   }
   if (m) cartoes.push(cartao({ v: m.d.posicao, sup: ord(m.d.posicao, lingua).replace(String(m.d.posicao), ''), r: t.wagr, s: t.wagrS }));
