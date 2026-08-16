@@ -23,7 +23,7 @@ export function outroCaminho(caminho = location.pathname) {
   const c = caminho.replace(/\/index\.html$/, '/');
   if (c === '/en' || c === '/en/') return '/';
   if (c.startsWith('/en/')) return c.slice(3);
-  if (c === '/' || c === '') return '/en';
+  if (c === '/' || c === '') return '/en/';
   return `/en${c}`;
 }
 

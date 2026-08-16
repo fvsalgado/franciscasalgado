@@ -51,6 +51,36 @@ aconteceu e o total acerta-se sozinho — nunca se escreve o total à mão.
 
 A galeria. Cada entrada aponta para um ficheiro em img/; o crédito não se escreve aqui — vem de data/creditos.json, para haver um sítio só onde a autoria vive. 'formato' escolhe a proporção do recorte: 'alto' (4:5) ou 'largo' (3:2). ATENÇÃO: só entram aqui fotografias em que a Francisca esteja identificada sem margem para dúvida. As peças da FPG cobrem muitas vezes vários atletas, e a fotografia de abertura pode ser de outra pessoa — foi o que aconteceu com duas que tiveram de sair.
 
+## `img/campos/` — fotografias dos campos
+
+O nome do ficheiro tem de coincidir com o campo `foto` do item, no grupo
+`campos` de `data/apoios.json`. Um item sem `foto` mostra só o nome e a
+localidade — que é como estão hoje o West Cliffs, a Quinta do Peru e o Jamor.
+
+| ficheiro | estado |
+|---|---|
+| `praia-del-rey.webp` | já cá está |
+| `west-cliffs.webp` | falta |
+| `quinta-do-peru.webp` | falta |
+| `jamor.webp` | falta |
+
+Formato: `.webp`, recorte 3:2 na horizontal (1400×933 serve bem). O cartão
+recorta ao centro, por isso o assunto deve estar centrado. Para acrescentar
+uma, guarde o ficheiro e ponha `foto` e `alt` no item respetivo — o `alt`
+descreve o campo para quem não vê a imagem, não é decorativo.
+
+**Créditos, e isto não é opcional.** Cada fotografia precisa de entrada em
+`data/creditos.json`, em `porFicheiro`; sem ela o `js/creditos.js` avisa na
+consola e a imagem fica sem autoria. Uma fotografia com licença Creative
+Commons leva também `licenca` e `licencaUrl`, e o crédito passa a mostrar a
+licença como ligação — que é o que a própria licença exige. Ver
+`praia-del-rey.webp` como exemplo.
+
+E o aviso que interessa: **crédito não é licença**. Nomear o autor de uma
+fotografia que não se pode republicar não dá o direito de a republicar. As
+fotografias dos sítios dos clubes são material protegido — para as usar é
+preciso autorização de quem as detém, e é isso que se deve pedir aos clubes.
+
 ## `data/instagram.json`
 
 Instagram. O 'perfil' alimenta o cartão de seguidores; os números só aparecem quando estão preenchidos — mais vale não mostrar do que mostrar errado. Com um token da Graph API em IG_TOKEN (ver api/instagram.js) tudo isto passa a vir sozinho e em direto, e este ficheiro deixa de ser preciso. Os códigos são o que vem depois de /p/ ou /reel/ no endereço da publicação.

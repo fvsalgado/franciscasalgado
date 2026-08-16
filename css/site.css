@@ -844,6 +844,35 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 .apoio__cx--escuro{background:#16202B;border-color:#16202B}
 .apoio__cx img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
 .apoio:hover .apoio__cx{box-shadow:0 8px 22px -12px rgba(18,40,30,.45)}
+
+/* ── campos onde joga ───────────────────────────────────── */
+/* Um campo não é uma marca. O logótipo de um clube não diz nada a quem nunca
+   lá jogou — a fotografia diz tudo, e é o que um treinador universitário quer
+   ver quando lê «campos onde joga». Cartões maiores e menos por linha, porque
+   uma paisagem em 168px não é uma paisagem. */
+.apoios__l--campos{grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr))}
+.campo{background:var(--papel);box-shadow:0 0 0 1px var(--linha);
+       display:flex;flex-direction:column;gap:.55rem;text-align:left;
+       padding-bottom:clamp(1.1rem,2.2vw,1.5rem);
+       transition:background-color .4s var(--curva)}
+.sec--fundo .campo{background:var(--superficie)}
+.campo:hover{background:var(--relva-clara)}
+.campo__f{margin:0 0 .5rem;overflow:hidden;background:var(--superficie)}
+.campo__f img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;
+              transition:transform .6s var(--curva)}
+.campo:hover .campo__f img{transform:scale(1.03)}
+/* O crédito da fotografia entra aqui sozinho, pelo js/creditos.js, e nas de
+   Creative Commons traz a licença como ligação. Discreto, mas legível — uma
+   atribuição que não se lê não é uma atribuição. */
+.campo__f figcaption{padding:.5rem clamp(1.1rem,2.2vw,1.5rem) 0;
+                     font-size:.7rem;letter-spacing:.02em;color:var(--tinta-fraca);opacity:.85}
+.campo__f figcaption a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.campo__n,.campo .apoio__x{padding-inline:clamp(1.1rem,2.2vw,1.5rem)}
+.campo__n{font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 28;
+          font-size:1.12rem;line-height:1.2;letter-spacing:-.012em;color:var(--tinta)}
+@media (prefers-reduced-motion:reduce){
+  .campo__f img,.campo:hover .campo__f img{transition:none;transform:none}
+}
 .apoio__n{font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 24;
           font-size:1.02rem;line-height:1.2;color:#12281E;letter-spacing:-.01em}
 .apoio__x{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;

@@ -111,9 +111,10 @@ const NOMES = {
         cargo: 'Amateur golfer', desporto: 'Golf', lugar: 'place' },
 };
 const base = (l) => (l === 'en' ? `${SITIO}/en/` : `${SITIO}/`);
-/* A página de entrada de cada língua. A inglesa vai sem barra no fim, pelo
-   mesmo motivo do canonical. */
-const entrada = (l) => (l === 'en' ? `${SITIO}/en` : `${SITIO}/`);
+/* A página de entrada de cada língua. A inglesa leva barra no fim: sem ela, as
+   ligações relativas das páginas inglesas resolvem contra a raiz e devolvem o
+   português. */
+const entrada = (l) => (l === 'en' ? `${SITIO}/en/` : `${SITIO}/`);
 
 const quemE = (l) => ({
   ...pessoa,
@@ -363,7 +364,7 @@ const quando = `${resultados.atualizado || perfil.atualizado}-01`.slice(0, 10);
    Google pede: com as duas, o par sobrevive a uma delas falhar. */
 const alternativas = (f) => [
   `    <xhtml:link rel="alternate" hreflang="pt-PT" href="${SITIO}/${f}" />`,
-  `    <xhtml:link rel="alternate" hreflang="en" href="${f ? `${SITIO}/en/${f}` : `${SITIO}/en`}" />`,
+  `    <xhtml:link rel="alternate" hreflang="en" href="${f ? `${SITIO}/en/${f}` : `${SITIO}/en/`}" />`,
   `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITIO}/${f}" />`,
 ].join('\n');
 
@@ -379,7 +380,7 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${MAPA.map(([f, freq, pri]) => linha(`${SITIO}/${f}`, f, freq, pri)).join('\n')}
-${MAPA.map(([f, freq, pri]) => linha(f ? `${SITIO}/en/${f}` : `${SITIO}/en`, f, freq,
+${MAPA.map(([f, freq, pri]) => linha(f ? `${SITIO}/en/${f}` : `${SITIO}/en/`, f, freq,
     (Number(pri) - 0.1).toFixed(1))).join('\n')}
 </urlset>
 `;

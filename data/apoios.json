@@ -60,25 +60,6 @@
             "pt": "Atleta apoiada desde 2025",
             "en": "Supported athlete since 2025"
           }
-        },
-        {
-          "nome": "Lusíadas Saúde",
-          "logo": "lusiadas.webp",
-          "url": "https://www.lusiadas.pt/",
-          "x": {
-            "pt": "Parceira das Seleções Nacionais, não patrocinadora dela",
-            "en": "A partner of the national teams, not a personal sponsor"
-          },
-          "fundo": "#002F7B"
-        },
-        {
-          "nome": "Skip Portugal",
-          "logo": "skip.webp",
-          "url": "https://www.instagram.com/skipportugal/",
-          "x": {
-            "pt": "Parceira das Seleções Nacionais, não patrocinadora dela",
-            "en": "A partner of the national teams, not a personal sponsor"
-          }
         }
       ]
     },
@@ -95,11 +76,15 @@
       "itens": [
         {
           "nome": "Praia D'El Rey",
-          "logo": "praia-del-rey.webp",
           "url": "https://clubedegolfe.praia-del-rey.com/",
           "x": {
             "pt": "Vale de Janelas · Óbidos",
             "en": "Vale de Janelas · Óbidos"
+          },
+          "foto": "praia-del-rey.webp",
+          "alt": {
+            "pt": "O campo de Praia D'El Rey, sobre as dunas e o mar, em Óbidos",
+            "en": "The Praia D'El Rey course, above the dunes and the sea, in Óbidos"
           }
         },
         {
