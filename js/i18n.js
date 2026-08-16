@@ -18,12 +18,17 @@ export function lingua() {
 
 /* As páginas inglesas vivem em /en/ com o mesmo nome de ficheiro. A conversão
    é só pôr ou tirar esse pedaço do caminho — e a raiz é caso à parte, porque
-   «/» e «/en/» não têm nome de ficheiro para preservar. */
+   «/» e «/en» não têm nome de ficheiro para preservar.
+
+   A raiz inglesa é «/en», sem barra: o `trailingSlash: false` do vercel.json
+   faz «/en/» responder 308 para «/en», e é «/en» que o canonical declara.
+   Mandar o botão de língua para a barra era um salto a mais e uma segunda
+   forma do mesmo endereço à solta pelo sítio. */
 export function outroCaminho(caminho = location.pathname) {
   const c = caminho.replace(/\/index\.html$/, '/');
   if (c === '/en' || c === '/en/') return '/';
   if (c.startsWith('/en/')) return c.slice(3);
-  if (c === '/' || c === '') return '/en/';
+  if (c === '/' || c === '') return '/en';
   return `/en${c}`;
 }
 

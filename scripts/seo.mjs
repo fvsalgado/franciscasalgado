@@ -21,6 +21,8 @@
  */
 
 import { readFile, writeFile } from 'node:fs/promises';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 const RAIZ = new URL('../', import.meta.url);
 const SECO = process.argv.includes('--seco');
@@ -119,11 +121,11 @@ const NOMES = {
         listaI: 'Press coverage of Francisca Salgado',
         cargo: 'Amateur golfer', desporto: 'Golf', lugar: 'place' },
 };
-const base = (l) => (l === 'en' ? `${SITIO}/en/` : `${SITIO}/`);
+const base = (l) => (l === 'en' ? `${SITIO}/en` : `${SITIO}/`);
 /* A página de entrada de cada língua. A inglesa leva barra no fim: sem ela, as
    ligações relativas das páginas inglesas resolvem contra a raiz e devolvem o
    português. */
-const entrada = (l) => (l === 'en' ? `${SITIO}/en/` : `${SITIO}/`);
+const entrada = (l) => (l === 'en' ? `${SITIO}/en` : `${SITIO}/`);
 
 const quemE = (l) => ({
   ...pessoa,
@@ -405,28 +407,48 @@ for (const l of ['pt', 'en']) {
    não mexeram faz o contrário e queima confiança. Por isso a data é a da
    última revisão dos dados, e não a de hoje. */
 const MAPA = [
-  ['', 'weekly', '1.0'],
-  ['resultados.html', 'weekly', '0.9'],
-  ['recruiting.html', 'weekly', '0.8'],
-  ['witb.html', 'monthly', '0.6'],
-  ['imprensa.html', 'monthly', '0.7'],
-  ['parcerias.html', 'monthly', '0.7'],
+  ['', 'weekly', '1.0', ['index.html', 'data/perfil.json']],
+  ['resultados.html', 'weekly', '0.9', ['resultados.html', 'data/resultados.json', 'data/perfil.json']],
+  ['recruiting.html', 'weekly', '0.8', ['recruiting.html', 'data/perfil.json', 'data/swing.json']],
+  ['witb.html', 'monthly', '0.6', ['witb.html', 'data/witb.json']],
+  ['imprensa.html', 'monthly', '0.7', ['imprensa.html', 'data/imprensa.json']],
+  ['parcerias.html', 'monthly', '0.7', ['parcerias.html', 'data/apoios.json', 'data/canais.json']],
 ];
-const quando = `${resultados.atualizado || perfil.atualizado}-01`.slice(0, 10);
+
+/* A data vem do git, e uma por página.
+ *
+ * Vinha do campo `atualizado` dos dados, que é um mês — e um mês vira sempre
+ * dia 1, portanto o sitemap dizia «1 de agosto» a 16 de agosto, com metade do
+ * percurso reescrito pelo meio. Um lastmod atrasado faz um motor adiar a
+ * visita; e igual em todas as páginas não distingue a que mexeu da que não
+ * mexeu, que é precisamente para o que o campo serve.
+ *
+ * `%cs` é a data do commit em ISO, sem hora. Se o git não responder — uma cópia
+ * sem histórico, por exemplo —, volta-se ao que havia, que é impreciso mas
+ * nunca inventado. */
+const gitData = (ficheiros) => {
+  const r = spawnSync('git', ['log', '-1', '--format=%cs', '--', ...ficheiros],
+    { cwd: fileURLToPath(RAIZ), encoding: 'utf8' });
+  const d = String(r.stdout || '').trim();
+  return /^\d{4}-\d{2}-\d{2}$/.test(d) ? d : null;
+};
+const RESERVA = `${resultados.atualizado || perfil.atualizado}-01`.slice(0, 10);
+const quandoDe = (ficheiros) => gitData(ficheiros) || RESERVA;
+const quando = quandoDe(['.']);
 
 /* Cada endereço declara no sitemap as duas versões — a sua e a da outra
    língua. É redundante com o hreflang do <head>, e é a redundância que o
    Google pede: com as duas, o par sobrevive a uma delas falhar. */
 const alternativas = (f) => [
   `    <xhtml:link rel="alternate" hreflang="pt-PT" href="${SITIO}/${f}" />`,
-  `    <xhtml:link rel="alternate" hreflang="en" href="${f ? `${SITIO}/en/${f}` : `${SITIO}/en/`}" />`,
+  `    <xhtml:link rel="alternate" hreflang="en" href="${f ? `${SITIO}/en/${f}` : `${SITIO}/en`}" />`,
   `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITIO}/${f}" />`,
 ].join('\n');
 
-const linha = (loc, f, freq, pri) => `  <url>
+const linha = (loc, f, freq, pri, mexeu) => `  <url>
     <loc>${loc}</loc>
 ${alternativas(f)}
-    <lastmod>${quando}</lastmod>
+    <lastmod>${mexeu}</lastmod>
     <changefreq>${freq}</changefreq>
     <priority>${pri}</priority>
   </url>`;
@@ -434,9 +456,9 @@ ${alternativas(f)}
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${MAPA.map(([f, freq, pri]) => linha(`${SITIO}/${f}`, f, freq, pri)).join('\n')}
-${MAPA.map(([f, freq, pri]) => linha(f ? `${SITIO}/en/${f}` : `${SITIO}/en/`, f, freq,
-    (Number(pri) - 0.1).toFixed(1))).join('\n')}
+${MAPA.map(([f, freq, pri, fs]) => linha(`${SITIO}/${f}`, f, freq, pri, quandoDe(fs))).join('\n')}
+${MAPA.map(([f, freq, pri, fs]) => linha(f ? `${SITIO}/en/${f}` : `${SITIO}/en`, f, freq,
+    (Number(pri) - 0.1).toFixed(1), quandoDe([...fs, `en/${f || 'index.html'}`]))).join('\n')}
 </urlset>
 `;
 if (!SECO) await writeFile(new URL('sitemap.xml', RAIZ), sitemap);
