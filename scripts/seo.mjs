@@ -52,9 +52,15 @@ const provas = resultados.provas || [];
 /* Os campeonatos do clube ficam de fora: são vitórias, e contam como tal na
    lista de provas, mas não são prémios do mesmo tamanho de um título nacional
    — e uma lista de prémios que mistura os dois faz o Google e um assistente
-   lerem quatro títulos de clube como quatro títulos. */
+   lerem quatro títulos de clube como quatro títulos.
+
+   E fica de fora o que tiver `semTitulo`. É para o Sub-12 de 2020: ela ganhou
+   o escalão, mas o título não chegou a ser atribuído — não havia inscritas que
+   chegassem para o mínimo do regulamento. É uma vitória e conta como tal na
+   lista de provas; posta aqui, com o nome do campeonato nacional ao lado do
+   ano, passava a ler-se como um título que não existe. */
 const titulos = provas
-  .filter((p) => p.pos === 1 && !String(p.id).startsWith('clube-'))
+  .filter((p) => p.pos === 1 && !p.semTitulo && !String(p.id).startsWith('clube-'))
   .map((p) => `${tx(p.torneio)}${p.ano ? `, ${p.ano}` : ''}`);
 
 /* O clube é o clube, e vem de data/perfil.json. Já foi lido do primeiro item da

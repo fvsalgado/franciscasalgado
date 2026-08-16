@@ -1,188 +1,177 @@
 {
-  "grupos": [
+ "grupos": [
+  {
+   "id": "patrocinadores",
+   "destaque": true,
+   "t": {
+    "pt": "Patrocinadores principais",
+    "en": "Principal sponsors"
+   },
+   "x": {
+    "pt": "As marcas com que joga e se veste em prova, em contrato.",
+    "en": "The brands she plays and wears in competition, under contract."
+   },
+   "itens": [
     {
-      "id": "patrocinadores",
-      "destaque": true,
-      "t": {
-        "pt": "Patrocinadores principais",
-        "en": "Principal sponsors"
-      },
-      "x": {
-        "pt": "As marcas com que joga e se veste em prova, em contrato.",
-        "en": "The brands she plays and wears in competition, under contract."
-      },
-      "itens": [
-        {
-          "nome": "Cobra Golf",
-          "logo": "cobra-golf.svg",
-          "url": "https://www.cobragolf.com/",
-          "x": {
-            "pt": "Tacos",
-            "en": "Clubs"
-          }
-        },
-        {
-          "nome": "Puma Golf",
-          "logo": "puma-golf.webp",
-          "url": "https://eu.puma.com/",
-          "x": {
-            "pt": "Vestuário",
-            "en": "Apparel"
-          }
-        }
-      ]
+     "nome": "Cobra Golf",
+     "logo": "cobra-golf.svg",
+     "url": "https://www.cobragolf.com/",
+     "x": {
+      "pt": "Tacos",
+      "en": "Clubs"
+     }
     },
     {
-      "id": "institucionais",
-      "t": {
-        "pt": "Seleção Nacional e apoio institucional",
-        "en": "National team and institutional support"
-      },
-      "x": {
-        "pt": "Quem seleciona, forma e financia o percurso, e as marcas que apoiam as Seleções Nacionais de que ela faz parte — e não a atleta a título individual.",
-        "en": "Those who select, develop and fund the journey, and the brands backing the national teams she plays for — not the player individually."
-      },
-      "itens": [
-        {
-          "nome": "Federação Portuguesa de Golfe",
-          "logo": "fpg.webp",
-          "url": "https://portal.fpg.pt/perfil/francisca-salgado/",
-          "x": {
-            "pt": "Seleção Nacional Amadora Feminina",
-            "en": "Women's amateur national team"
-          }
-        },
-        {
-          "nome": "Fundação do Desporto",
-          "logo": "fundacao-desporto.webp",
-          "url": "https://fundacaodesporto.pt/",
-          "x": {
-            "pt": "Atleta apoiada desde 2025",
-            "en": "Supported athlete since 2025"
-          }
-        }
-      ]
-    },
-    {
-      "id": "equipa",
-      "t": {
-        "pt": "Equipa técnica",
-        "en": "Coaching team"
-      },
-      "x": {
-        "pt": "Quem a treina, no clube e no Centro de Alto Rendimento.",
-        "en": "Who coaches her, at the club and at the national High-Performance Centre."
-      },
-      "itens": []
-    },
-    {
-      "id": "tecnologia",
-      "t": {
-        "pt": "Apoios tecnológicos",
-        "en": "Technology partners"
-      },
-      "x": {
-        "pt": "As ferramentas com que treina e mede o que faz — dentro e fora do campo.",
-        "en": "The tools she trains and measures with, on the course and off it."
-      },
-      "itens": [
-        {
-          "nome": "UpGame",
-          "x": {
-            "pt": "Estatísticas de jogo",
-            "en": "Game statistics"
-          }
-        },
-        {
-          "nome": "WellPutt",
-          "x": {
-            "pt": "Treino de putting",
-            "en": "Putting training"
-          }
-        },
-        {
-          "nome": "GolfVertex"
-        },
-        {
-          "nome": "Hole19",
-          "x": {
-            "pt": "GPS e voltas",
-            "en": "GPS and scoring"
-          }
-        },
-        {
-          "nome": "HackMotion",
-          "x": {
-            "pt": "Sensor de pulso",
-            "en": "Wrist sensor"
-          }
-        }
-      ]
-    },
-    {
-      "id": "campos",
-      "t": {
-        "pt": "Campos onde joga",
-        "en": "Courses she plays"
-      },
-      "x": {
-        "pt": "Os campos de casa, no Oeste.",
-        "en": "Her home courses, on Portugal's west coast."
-      },
-      "itens": [
-        {
-          "nome": "Praia D'El Rey",
-          "url": "https://clubedegolfe.praia-del-rey.com/",
-          "x": {
-            "pt": "Vale de Janelas · Óbidos",
-            "en": "Vale de Janelas · Óbidos"
-          },
-          "foto": "praia-del-rey.webp",
-          "alt": {
-            "pt": "O campo de Praia D'El Rey, sobre as dunas e o mar, em Óbidos",
-            "en": "The Praia D'El Rey course, above the dunes and the sea, in Óbidos"
-          }
-        },
-        {
-          "nome": "West Cliffs",
-          "url": "",
-          "x": {
-            "pt": "Vale de Janelas · Óbidos",
-            "en": "Vale de Janelas · Óbidos"
-          },
-          "foto": "west-cliffs.webp",
-          "alt": {
-            "pt": "O campo de West Cliffs ao entardecer, entre dunas, com o mar ao fundo",
-            "en": "The West Cliffs course at dusk, among the dunes, with the sea beyond"
-          }
-        },
-        {
-          "nome": "Quinta do Peru",
-          "url": "",
-          "x": {
-            "pt": "Sesimbra",
-            "en": "Sesimbra"
-          },
-          "foto": "quinta-do-peru.webp",
-          "alt": {
-            "pt": "Um green da Quinta do Peru, entre pinheiros, na serra da Arrábida",
-            "en": "A green at Quinta do Peru, among the pines, in the Arrábida hills"
-          }
-        },
-        {
-          "nome": "Jamor",
-          "url": "",
-          "x": {
-            "pt": "Centro de Alto Rendimento · Oeiras",
-            "en": "National high-performance centre · Oeiras"
-          },
-          "foto": "jamor.webp",
-          "alt": {
-            "pt": "O campo do Jamor, na encosta arborizada do vale, em Oeiras",
-            "en": "The Jamor course, on the wooded slope of the valley, in Oeiras"
-          }
-        }
-      ]
+     "nome": "Puma Golf",
+     "logo": "puma-golf.webp",
+     "url": "https://eu.puma.com/",
+     "x": {
+      "pt": "Vestuário",
+      "en": "Apparel"
+     }
     }
-  ]
+   ]
+  },
+  {
+   "id": "institucionais",
+   "t": {
+    "pt": "Seleção Nacional e apoio institucional",
+    "en": "National team and institutional support"
+   },
+   "x": {
+    "pt": "Quem seleciona, forma e financia o percurso, e as marcas que apoiam as Seleções Nacionais de que ela faz parte — e não a atleta a título individual.",
+    "en": "Those who select, develop and fund the journey, and the brands backing the national teams she plays for — not the player individually."
+   },
+   "itens": [
+    {
+     "nome": "Federação Portuguesa de Golfe",
+     "logo": "fpg.webp",
+     "url": "https://portal.fpg.pt/perfil/francisca-salgado/",
+     "x": {
+      "pt": "Seleção Nacional Amadora Feminina",
+      "en": "Women's amateur national team"
+     }
+    },
+    {
+     "nome": "Fundação do Desporto",
+     "logo": "fundacao-desporto.webp",
+     "url": "https://fundacaodesporto.pt/",
+     "x": {
+      "pt": "Atleta apoiada desde 2025",
+      "en": "Supported athlete since 2025"
+     }
+    }
+   ]
+  },
+  {
+   "id": "equipa",
+   "t": {
+    "pt": "Equipa técnica",
+    "en": "Coaching team"
+   },
+   "x": {
+    "pt": "Quem a treina, no clube e no Centro de Alto Rendimento.",
+    "en": "Who coaches her, at the club and at the national High-Performance Centre."
+   },
+   "itens": []
+  },
+  {
+   "id": "tecnologia",
+   "t": {
+    "pt": "Apoios tecnológicos",
+    "en": "Technology partners"
+   },
+   "x": {
+    "pt": "As ferramentas com que treina e mede o que faz — dentro e fora do campo.",
+    "en": "The tools she trains and measures with, on the course and off it."
+   },
+   "itens": [
+    {
+     "nome": "UpGame",
+     "url": "https://www.upgame.app/"
+    },
+    {
+     "nome": "WellPutt",
+     "url": "https://wellputt.com/"
+    },
+    {
+     "nome": "GolfVertex",
+     "url": "https://golfvertex.com/"
+    },
+    {
+     "nome": "Hole19",
+     "url": "https://www.hole19golf.com/"
+    },
+    {
+     "nome": "HackMotion",
+     "url": "https://hackmotion.com/"
+    }
+   ]
+  },
+  {
+   "id": "campos",
+   "t": {
+    "pt": "Campos onde joga",
+    "en": "Courses she plays"
+   },
+   "x": {
+    "pt": "Os campos de casa, no Oeste.",
+    "en": "Her home courses, on Portugal's west coast."
+   },
+   "itens": [
+    {
+     "nome": "Praia D'El Rey",
+     "url": "https://clubedegolfe.praia-del-rey.com/",
+     "x": {
+      "pt": "Vale de Janelas · Óbidos",
+      "en": "Vale de Janelas · Óbidos"
+     },
+     "foto": "praia-del-rey.webp",
+     "alt": {
+      "pt": "O campo de Praia D'El Rey, sobre as dunas e o mar, em Óbidos",
+      "en": "The Praia D'El Rey course, above the dunes and the sea, in Óbidos"
+     }
+    },
+    {
+     "nome": "West Cliffs",
+     "url": "",
+     "x": {
+      "pt": "Vale de Janelas · Óbidos",
+      "en": "Vale de Janelas · Óbidos"
+     },
+     "foto": "west-cliffs.webp",
+     "alt": {
+      "pt": "O campo de West Cliffs ao entardecer, entre dunas, com o mar ao fundo",
+      "en": "The West Cliffs course at dusk, among the dunes, with the sea beyond"
+     }
+    },
+    {
+     "nome": "Quinta do Peru",
+     "url": "",
+     "x": {
+      "pt": "Sesimbra",
+      "en": "Sesimbra"
+     },
+     "foto": "quinta-do-peru.webp",
+     "alt": {
+      "pt": "Um green da Quinta do Peru, entre pinheiros, na serra da Arrábida",
+      "en": "A green at Quinta do Peru, among the pines, in the Arrábida hills"
+     }
+    },
+    {
+     "nome": "Jamor",
+     "url": "",
+     "x": {
+      "pt": "Centro de Alto Rendimento · Oeiras",
+      "en": "National high-performance centre · Oeiras"
+     },
+     "foto": "jamor.webp",
+     "alt": {
+      "pt": "O campo do Jamor, na encosta arborizada do vale, em Oeiras",
+      "en": "The Jamor course, on the wooded slope of the valley, in Oeiras"
+     }
+    }
+   ]
+  }
+ ]
 }

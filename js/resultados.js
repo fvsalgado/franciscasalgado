@@ -343,7 +343,10 @@ export async function porEpoca(cx, filtrosCx, lingua = 'pt') {
           ${historia}
           ${inteira ? `<div class="dests">${destaques}</div>
           <details class="epoca__im epoca__todas">
-            <summary><span>${en ? `all ${doAno.length} events of ${ano}` : `as ${doAno.length} provas de ${ano}`}</span></summary>
+            <summary><span>${en
+              ? (doAno.length === 1 ? `the one event of ${ano}` : `all ${doAno.length} events of ${ano}`)
+              : (doAno.length === 1 ? `a prova de ${ano}` : `as ${doAno.length} provas de ${ano}`)
+            }</span></summary>
             ${lista}
           </details>` : lista}
           ${imprensa}
