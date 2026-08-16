@@ -84,8 +84,29 @@ jobs:
           git commit -m "Vigia: novidades de $(date -u +%Y-%m-%d)
 
           $(sed -n '/^- /p' VIGIA.md | head -20)"
-          git push
-          echo "mudou=sim" >> "$GITHUB_OUTPUT"
+
+          # Empurrar sem deitar fora o trabalho se a branch tiver andado.
+          #
+          # A ronda faz o checkout, trabalha dois minutos e só depois empurra.
+          # Se entretanto alguém empurrar — uma pessoa a trabalhar, ou um
+          # relançamento desta mesma ação sobre um commit antigo —, o push é
+          # recusado e a ronda inteira falha depois de já ter feito tudo. Foi
+          # o que aconteceu a 16 de agosto: a leitura estava certa e perdeu-se
+          # à porta.
+          #
+          # Rebase antes de tentar outra vez. Os ficheiros que a ronda escreve
+          # não são tocados por mais ninguém, por isso não há conflito a sério
+          # a esperar — o que há é ordem de chegada.
+          for tentativa in 1 2 3; do
+            if git push; then
+              echo "mudou=sim" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "push recusado (tentativa $tentativa) — a rebasear sobre o que chegou entretanto"
+            git pull --rebase --autostash origin "$(git rev-parse --abbrev-ref HEAD)" || exit 1
+          done
+          echo "não consegui empurrar ao fim de três tentativas"
+          exit 1
 
       - name: Abrir issue com o que precisa de olhos
         if: always()
