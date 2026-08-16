@@ -28,7 +28,7 @@ export const EN = {
   rc_ev_txt: 'The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category. The lower the number the better the position — the axis here is inverted, so good news goes up.',
   rc_hc_rot: 'Handicap',
   rc_hc_tit: 'The index, from the start',
-  rc_hc_txt: 'The WHS index on every day it changed, as recorded by the Portuguese Golf Federation. The lower the better — the axis here is inverted, so good news goes up.',
+  rc_hc_txt: 'Every day the WHS index changed, from her first counting round, as recorded by the Portuguese Golf Federation. The axis is inverted, so good news goes up, and it is logarithmic: in golf, going from 5 to 2 is far harder than from 54 to 50, so each halving gets the same slice of height.',
   rc_pa_rot: 'Record',
   rc_pa_tit: 'Twelve wins, four national titles',
   rc_pa_txt: 'She plays for <strong>Vale de Janelas</strong> — Praia D\'El Rey and West Cliffs, in Óbidos — and for the <strong>Portuguese women\'s amateur national team</strong>. Every event, with its rounds, total, score to par and a link to the source, is in <a class="lig" href="resultados.html">season by season</a>, year by year since 2018.',
