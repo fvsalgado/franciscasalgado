@@ -24,7 +24,7 @@ export const EN = {
   wb_ma_rot: 'More',
   wb_ma_tit: 'The rest is one link away',
   wb_ma_txt: 'Handicap, rankings, schedule and every result, season by season, with the source of each.',
-  wb_ma_b1: 'Recruiting profile',
+  wb_ma_b1: 'Her player page',
   wb_ma_b2: 'Season by season',
   rc_eq_rot: 'Coaching team',
   rc_eq_tit: 'Who she works with',
@@ -68,6 +68,7 @@ export const EN = {
   prox_carregar: 'Loading…',
 
   qu_rot: 'Who she is',
+  qu_ver: 'Season by season <i aria-hidden="true">\u2192</i>',
 
   qu_bio: 'She started at the <strong>Jamor</strong>, and it was for <strong>Paço do Lumiar</strong> that she won '
     + 'her first national title, at ten. By way of <strong>Quinta do Peru</strong>, she plays today for '

@@ -1495,7 +1495,36 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 @media (min-width:900px){.manif{max-width:24ch}}
 /* A frase grande dá o tom; este parágrafo é o que a sustenta em factos, e
    vinha da página de percurso quando ela deixou de existir. */
-.qu__x{max-width:58ch;margin:calc(clamp(2.4rem,5vw,3.6rem) * -.45) 0 clamp(2.2rem,4.5vw,3.2rem)}
+/* «Quem é» e o último resultado, lado a lado.
+ *
+ * Estavam os dois mal postos, e por razões diferentes. O último resultado era
+ * uma pastilha branca a flutuar por cima da fotografia do hero — competia com
+ * o nome dela, que é a única coisa que ali deve ganhar, e num telemóvel caía
+ * sobre a parte da imagem onde está o swing. E o «quem é» era um parágrafo
+ * sozinho numa secção só dele, com margem negativa a puxá-lo para cima: lia-se
+ * como texto que sobrou de outro sítio.
+ *
+ * Juntos resolvem-se um ao outro. O parágrafo ganha companhia e deixa de ser
+ * órfão; o resultado sai de cima da fotografia e passa a cartão, com data,
+ * prova e lugar em tamanho de se ler — e com para onde ir a seguir. */
+.quem{display:grid;gap:clamp(1.6rem,4vw,3rem);align-items:start}
+@media (min-width:860px){.quem{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}}
+.qu__x{max-width:58ch;margin:.9rem 0 0}
+
+.ult{display:flex;flex-direction:column;gap:.55rem;padding:clamp(1.2rem,2.6vw,1.6rem);
+     background:var(--papel);border-radius:6px;box-shadow:0 0 0 1px var(--linha);
+     transition:box-shadow .4s var(--curva),background-color .4s var(--curva)}
+@media (hover:hover){.ult:hover{box-shadow:0 0 0 1px var(--relva)}}
+.ult__r{display:inline-flex;align-items:center;gap:.5rem;
+        font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;
+        color:var(--tinta-fraca)}
+.ult__q{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 40;
+        font-size:clamp(1.15rem,2.4vw,1.5rem);line-height:1.2;letter-spacing:-.01em;
+        color:var(--tinta)}
+.ult__s{margin-top:.35rem;font-size:.68rem;font-weight:800;text-transform:uppercase;
+        letter-spacing:.14em;color:var(--relva);display:inline-flex;align-items:center;gap:.45rem}
+.ult__s i{font-style:normal;transition:transform .35s var(--curva)}
+@media (hover:hover){.ult:hover .ult__s i{transform:translateX(3px)}}
 
 /* «Saiu em» numa fila só, por baixo da citação, em vez de numa coluna ao lado */
 .saiu--fila{margin-top:clamp(2.4rem,5vw,3.6rem);display:flex;flex-direction:column;
