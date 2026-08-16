@@ -278,13 +278,34 @@ dificuldade do campo, e é por isso que ela tem 0,3 e a média sobe ao mesmo
 tempo. As duas coisas são verdade, e uma média publicada sozinha só conta a
 pior.
 
-## O que ainda falta
+## A equipa técnica
 
-Uma coisa só, e não é sobre golfe: **os nomes da equipa técnica.** A resposta
-foi «já indiquei», mas o que chegou até hoje foram as cinco marcas
-tecnológicas, que são outra coisa — e o grupo `equipa` de `data/apoios.json`
-continua vazio. Um grupo vazio não desenha nada, portanto ninguém vê um espaço
-por preencher; mas também não há equipa técnica no sítio.
+Chegou a 16 de agosto, e o grupo `equipa` de `data/apoios.json` deixou de
+estar vazio:
+
+| | |
+|---|---|
+| Tiago Osório | Treinador principal |
+| Ana Monteiro | Preparação física |
+| Luis Almeida | Treino mental |
+| Nelson Ribeiro | Selecionador nacional |
+
+Os nomes vieram dela e é essa a fonte — não se inventou nem se corrigiu
+nenhum. Duas notas para quem vier a mexer:
+
+- **Nelson Ribeiro é da Federação, não dela.** É o director técnico nacional,
+  e já orientava a selecção nas provas de 2023 que estão no percurso. Fica no
+  grupo com o rótulo «Selecionador nacional» precisamente para não se ler como
+  treinador pessoal.
+- **A acentuação está por confirmar.** Ela escreveu «Luis» e «Nelson»; em
+  português seria «Luís», e a FPG escreve «Nélson» numa notícia e «Nelson»
+  noutras — o Record e o Golftattoo escrevem sem acento. Um nome é de quem o
+  tem, por isso ficou como ela o deu. Se vier correcção, é uma linha.
+
+Não se puseram contactos. Uma ficha de recruiting costuma levar o contacto do
+treinador principal, porque é a quem o treinador universitário liga a seguir —
+mas isso é um dado de outra pessoa, e publica-se com autorização dela e não por
+iniciativa de quem faz o sítio.
 
 ## Como refazer isto
 
