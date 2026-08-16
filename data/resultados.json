@@ -4,39 +4,7 @@
     "pt": "Voltas e classificações da Federação Portuguesa de Golfe, do European Golf Rankings, das federações organizadoras e da imprensa desportiva. Cada prova indica a sua fonte.",
     "en": "Rounds and placings from the Portuguese Golf Federation, the European Golf Rankings, the organising federations and the sports press. Every event names its source."
   },
-  "proximas": [
-    {
-      "id": "italia-2026",
-      "ano": 2026,
-      "data": "2026-09-03",
-      "dataTexto": {
-        "pt": "3–5 setembro 2026",
-        "en": "3–5 September 2026"
-      },
-      "torneio": {
-        "pt": "Italian International Girls U18",
-        "en": "Italian International Girls U18"
-      },
-      "campo": "",
-      "local": {
-        "pt": "Itália",
-        "en": "Italy"
-      },
-      "pais": "IT",
-      "escalao": {
-        "pt": "Sub-18",
-        "en": "U18"
-      },
-      "nota": {
-        "pt": "Anunciada pela FPG no balanço do English Girls’ Open. As datas são as do calendário da European Golf Association.",
-        "en": "Announced by the federation in its English Girls’ Open round-up. The dates come from the European Golf Association calendar."
-      },
-      "fonte": {
-        "nome": "FPG",
-        "url": "https://portal.fpg.pt/noticias/francisca-salgado-termina-english-girls-open-em-28-o-lugar/"
-      }
-    }
-  ],
+  "proximas": [],
   "provas": [
     {
       "id": "andalucia-2026",
