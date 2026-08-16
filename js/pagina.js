@@ -7,7 +7,7 @@ import { iniciarCampo } from './campo.js';
 import { reduzido } from './movimento.js';
 import { porEpoca, contagens, carregar, proximas } from './resultados.js';
 import { factos, citacoes, escadas, ligacoes, numeros } from './conteudo.js';
-import { fichaRecruiting, curvaRankings, witb, swing } from './recruiting.js';
+import { fichaRecruiting, curvaRankings, curvaHandicap, witb, swing } from './recruiting.js';
 import { galeria, videos, apoios } from './media.js';
 import { reels } from './instagram.js';
 import { rankings } from './rankings.js';
@@ -45,7 +45,7 @@ const PINTAR = {
 
   async recruiting(l) {
     await Promise.all([fichaRecruiting($('recNums'), l), curvaRankings($('curva'), l),
-                       witb($('witbL'), l), swing($('swingV'), l)]);
+                       curvaHandicap($('curvaH'), l), witb($('witbL'), l), swing($('swingV'), l)]);
   },
 
   async legal() { /* as páginas legais são só texto */ },

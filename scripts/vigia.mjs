@@ -30,6 +30,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { buscarEgr } from '../api/_egr.js';
 import { buscarHandicap } from '../api/_handicap.js';
+import { buscarRegisto } from './myfpg.mjs';
 
 const RAIZ = new URL('../', import.meta.url);
 const SECO = process.argv.includes('--seco');
@@ -362,6 +363,44 @@ await passo('WAGR', wagr);
 await passo('histórico', historico);
 await passo('handicap', handicap);
 await passo('FPG', fpg);
+
+/* ── 5. área reservada da federação ────────────────────────────────────── */
+/* Só corre onde houver credenciais. Sem elas não é falha nenhuma: é uma fonte
+   que este sítio não tem, como o Instagram sem token. Em GitHub Actions vêm
+   dos segredos do repositório e nunca passam por lado nenhum senão por aqui.
+ *
+ * Daqui sai o histórico do índice de handicap, e mais nada. As provas que a
+ * área reservada conhece e o data/resultados.json não vão para o VIGIA-ATENCAO
+ * — como tudo o resto que precisa de nome em português e de contexto. */
+if (process.env.FPG_USER && process.env.FPG_PASS) {
+  await passo('myFPG', async () => {
+    const d = await buscarRegisto(process.env.FPG_USER, process.env.FPG_PASS);
+    const antes = await ler('data/handicap-historico.json').catch(() => ({ pontos: [] }));
+
+    if (d.pontos.length > (antes.pontos || []).length) {
+      const novos = d.pontos.length - (antes.pontos || []).length;
+      novidades.push(`histórico de handicap: +${novos} degrau(s), ${d.pontos.length} no total`);
+    }
+    await gravar('data/handicap-historico.json', { atualizado: hoje, pontos: d.pontos });
+
+    const res = await ler('data/resultados.json');
+    const conhecidas = res.provas.filter((p) => p.data);
+    const faltam = d.provas.filter((p) => !conhecidas.some((q) => q.data === p.data
+      || (q.torneio?.pt || '').toLowerCase().slice(0, 18) === p.torneio.toLowerCase().slice(0, 18)));
+
+    if (faltam.length) {
+      /* Uma volta contada para handicap não é uma prova para o sítio: o
+         campeonato do clube e a volta de sábado entram na mesma tabela. Por
+         isso listam-se, e é uma pessoa que escolhe. */
+      const porNome = new Map();
+      for (const p of faltam) if (!porNome.has(p.torneio)) porNome.set(p.torneio, p);
+      atencao.push(`**${porNome.size} prova(s) no myFPG que não estão no sítio** — a tabela da federação junta provas a sério e voltas de clube, por isso não entram sozinhas:\n${
+        [...porNome.values()].sort((a, b) => b.data.localeCompare(a.data)).slice(0, 30)
+          .map((p) => `  - ${p.data} · ${p.torneio}${p.campo ? ` · ${p.campo}` : ''}${p.bruto ? ` · ${p.bruto}${p.aoPar ? ` (${p.aoPar})` : ''}` : ''}`).join('\n')}${
+        porNome.size > 30 ? `\n  - …e mais ${porNome.size - 30}.` : ''}`);
+    }
+  });
+}
 
 /* Contagens que se derivam dos dados e estavam escritas à mão. */
 await passo('contagens', async () => {
