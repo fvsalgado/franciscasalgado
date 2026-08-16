@@ -130,7 +130,9 @@ export async function entrar(utilizador, senha) {
   if (!a.ok) throw new Error(`aterragem: HTTP ${a.status}`);
   if (jar.vazio()) throw new Error('a FPG não abriu sessão — mudou a aterragem?');
 
-  return jar;
+  /* Onde a aterragem acabou, e o que lá estava. É daqui que se descobre o
+     caminho dos resultados, em vez de o adivinhar. */
+  return { jar, url: a.url || ATERRAR, html: await a.text() };
 }
 
 /* ── ler as tabelas ────────────────────────────────────────────────────── */
@@ -218,11 +220,34 @@ export function degraus(pontos) {
   return fora;
 }
 
+/** Ligações da página onde se aterrou que cheirem a resultados ou a handicap. */
+export function caminhosNaPagina(html, base) {
+  const fora = new Set();
+  for (const [, href] of html.matchAll(/(?:href|action|data-url)="([^"]+)"/gi)) {
+    if (/^(#|mailto:|tel:|javascript:)/i.test(href)) continue;
+    if (!/result|handicap|whs|score|hist|registo|card/i.test(href)) continue;
+    try { fora.add(new URL(href, base).toString()); } catch { /* href torto */ }
+  }
+  return [...fora].filter((u) => /my\.fpg\.pt/i.test(u));
+}
+
 export async function buscarRegisto(utilizador, senha) {
-  const jar = await entrar(utilizador, senha);
+  const { jar, url: aterrou, html: aterragem } = await entrar(utilizador, senha);
+
+  /* Primeiro o que a própria página oferece, depois os palpites. Adivinhar deu
+     cinco 404 seguidos; a aterragem sabe o caminho e basta lê-lo.
+     A própria aterragem entra na lista: pode já ser a página dos resultados. */
+  const candidatos = [aterrou, ...caminhosNaPagina(aterragem, aterrou), ...RESULTADOS]
+    .filter((u, i, a) => a.indexOf(u) === i);
+
+  /* Se a aterragem já trouxer a tabela, não se vai a lado nenhum. */
+  const jaLa = lerRegisto(aterragem);
+  if (jaLa.pontos.length || jaLa.provas.length) {
+    return { pontos: degraus(jaLa.pontos), provas: jaLa.provas, brutos: jaLa.pontos.length, de: aterrou };
+  }
 
   const tentados = [];
-  for (const url of RESULTADOS) {
+  for (const url of candidatos) {
     let r;
     try { r = await ir(url, jar, { headers: { Referer: 'https://my.fpg.pt/' } }); }
     catch (e) { tentados.push(`${url.split('/').pop()}: ${e.message}`); continue; }
@@ -232,7 +257,10 @@ export async function buscarRegisto(utilizador, senha) {
     if (!pontos.length && !provas.length) { tentados.push(`${url.split('/').pop()}: sem tabela`); continue; }
     return { pontos: degraus(pontos), provas, brutos: pontos.length, de: url };
   }
-  throw new Error(`nenhuma página de resultados deu tabela — ${tentados.join(' · ')}`);
+  const ligacoes = caminhosNaPagina(aterragem, aterrou);
+  throw new Error(`nenhuma página de resultados deu tabela. Aterrou em ${aterrou}. `
+    + `Ligações candidatas na página: ${ligacoes.length ? ligacoes.slice(0, 8).join(', ') : 'nenhuma'}. `
+    + `Tentativas: ${tentados.join(' · ')}`);
 }
 
 /* ── correr à mão ──────────────────────────────────────────────────────── */
