@@ -1,6 +1,6 @@
 /* Página inicial. */
 
-import { iniciar, carga } from './base.js';
+import { iniciar } from './base.js';
 import { iniciarCampo } from './campo.js';
 import { reduzido } from './movimento.js';
 import { ultimas, ultimo, proxima } from './resultados.js';
@@ -52,9 +52,13 @@ const { i18n } = iniciar(async (l) => {
 const campo = iniciarCampo($('campo'), { reduzido, escuro: true });
 document.addEventListener('fs:tema', () => campo.tema?.());
 
-carga().then(() => {
-  // o Instagram entra depois da cortina: são iframes de terceiros, e nada
-  // disto deve atrasar o primeiro desenho da página
-  const pintarIg = (l) => { perfilIg($('igPerfil'), l); instagram($('ig'), l, 3, false); };
-  pintarIg(i18n.lingua());
-});
+/* O Instagram entra por último e fora do caminho crítico: são imagens e ligações
+   de terceiros, e nada disto deve atrasar o primeiro desenho. Antes esperava
+   pela cortina; agora espera pelo fim do carregamento, que é a mesma ideia sem
+   os dois segundos. */
+const igDepois = () => {
+  perfilIg($('igPerfil'), i18n.lingua());
+  instagram($('ig'), i18n.lingua(), 3, false);
+};
+if (document.readyState === 'complete') igDepois();
+else addEventListener('load', igDepois, { once: true });

@@ -147,23 +147,6 @@ body.tem-cur .cur{opacity:1}
 body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color-mix(in srgb,var(--relva) 12%,transparent)}
 @media (hover:none),(pointer:coarse){.cur{display:none}}
 
-/* ── pré-carregamento ───────────────────────────────────── */
-.carga{position:fixed;inset:0;z-index:400;background:var(--papel);display:grid;place-items:center;
-       transition:opacity .7s var(--curva),visibility .7s}
-.carga.fora{opacity:0;visibility:hidden}
-/* Só quem a sabe tirar é que a vê. Sem JavaScript a cortina ficava para
-   sempre por cima da página inteira, e quem chegasse via um ecrã com o nome
-   dela e mais nada. */
-html:not(.js) .carga{display:none}
-.carga__in{display:flex;flex-direction:column;align-items:center;gap:.9rem}
-.carga__n{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 120;
-          font-size:clamp(1.9rem,6.4vw,4.2rem);letter-spacing:-.02em;line-height:1;overflow:hidden}
-.carga__n i{display:inline-block;transform:translateY(105%);animation:sobe .9s var(--curva) forwards;font-style:normal}
-@keyframes sobe{to{transform:translateY(0)}}
-.carga__c{font-size:.7rem;font-weight:800;letter-spacing:.3em;color:var(--tinta-fraca)}
-.carga__barra{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--linha)}
-.carga__barra i{display:block;height:100%;width:0;background:var(--relva);transition:width .25s linear}
-
 /* ── nav ────────────────────────────────────────────────── */
 .nav{position:fixed;top:0;left:0;right:0;z-index:120;transition:transform .5s var(--curva)}
 /* O cabeçalho não se esconde. Escondê-lo ao rolar poupava uns pixels e tirava
@@ -278,7 +261,7 @@ html:not(.js) .carga{display:none}
 .nome__p{display:inline-flex}
 .nome__l{display:inline-block;transform:translateY(110%);opacity:0;will-change:transform}
 /* O nome só se esconde para entrar se houver quem o faça entrar: quem revela é
-   a classe `pronto`, posta pelo JavaScript no fim do ecrã de carga. */
+   a classe `pronto`, posta pelo JavaScript no arranque. */
 html:not(.js) .nome__l{transform:none;opacity:1}
 .nome__e{width:.22em}
 body.pronto .nome__l{transform:translateY(0);opacity:1;

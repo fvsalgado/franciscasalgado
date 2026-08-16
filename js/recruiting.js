@@ -397,12 +397,18 @@ export async function witb(cx, lingua = 'pt') {
  *
  * `preso` é o que ficou escolhido por clique ou toque. Sem ele, num telemóvel o
  * taco acendia-se com o dedo em cima e apagava-se no instante em que o dedo
- * saía, que é o mesmo que não acender. */
+ * saía, que é o mesmo que não acender.
+ *
+ * E `preso` guarda o índice, não o elemento. Cada taco tem duas caras — o botão
+ * na fila e a linha na ficha — e guardar uma delas fazia a outra apagar o que a
+ * primeira tinha escolhido: escolher um taco, passar o rato pela linha dele e
+ * sair apagava-o na mesma, embora continuasse marcado como escolhido; o clique
+ * seguinte era gasto a desescolher uma coisa que já estava apagada, e lia-se
+ * como um clique que não fez nada. */
 function ligarSaco(cx) {
   let preso = null;
 
-  const marcar = (el, sim) => {
-    const i = el?.dataset.i;
+  const marcar = (i, sim) => {
     if (i == null) return;
     cx.querySelectorAll(`[data-i="${i}"]`).forEach((n) => {
       n.classList.toggle(n.matches('.witb__t') ? 'witb__t--on' : 'witb__f--on', sim);
@@ -410,20 +416,21 @@ function ligarSaco(cx) {
   };
 
   cx.querySelectorAll('.witb__t, .witb__f > div').forEach((el) => {
-    el.addEventListener('pointerenter', () => { if (el !== preso) marcar(el, true); });
-    el.addEventListener('pointerleave', () => { if (el !== preso) marcar(el, false); });
+    const i = el.dataset.i;
+    el.addEventListener('pointerenter', () => { if (i !== preso) marcar(i, true); });
+    el.addEventListener('pointerleave', () => { if (i !== preso) marcar(i, false); });
     if (!el.matches('.witb__t')) return;
 
-    el.addEventListener('focus', () => marcar(el, true));
-    el.addEventListener('blur', () => { if (el !== preso) marcar(el, false); });
+    el.addEventListener('focus', () => marcar(i, true));
+    el.addEventListener('blur', () => { if (i !== preso) marcar(i, false); });
     el.addEventListener('click', () => {
-      if (preso && preso !== el) {
+      if (preso != null && preso !== i) {
         marcar(preso, false);
-        preso.setAttribute('aria-pressed', 'false');
+        cx.querySelector(`.witb__t[data-i="${preso}"]`)?.setAttribute('aria-pressed', 'false');
       }
-      const liga = preso !== el;
-      preso = liga ? el : null;
-      marcar(el, liga);
+      const liga = preso !== i;
+      preso = liga ? i : null;
+      marcar(i, liga);
       el.setAttribute('aria-pressed', String(liga));
     });
   });
