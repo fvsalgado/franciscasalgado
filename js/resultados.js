@@ -423,7 +423,11 @@ export async function proximas(cx, lingua = 'pt') {
   const hoje = new Date().toISOString().slice(0, 10);
   const lista = ps.filter((p) => p.data && p.data >= hoje)
     .sort((a, b) => a.data.localeCompare(b.data));
-  if (!lista.length) { cx.innerHTML = ''; return; }
+  /* Sem provas marcadas, a secção inteira sai da página — e não fica uma faixa
+     em branco onde estava. É o mesmo critério do resto do sítio: o que não
+     existe não aparece. */
+  if (!lista.length) { cx.innerHTML = ''; cx.closest('section[data-se-vazio]')?.toggleAttribute('hidden', true); return; }
+  cx.closest('section[data-se-vazio]')?.toggleAttribute('hidden', false);
   const en = lingua === 'en';
 
   cx.className = 'aseguir';
