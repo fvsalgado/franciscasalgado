@@ -1145,7 +1145,12 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 /* O gráfico é SVG escrito à mão: são duas linhas, e uma biblioteca pesaria
    mais do que a página. O eixo está invertido de propósito — no golfe descer
    no número é subir na carreira. */
-.curva{margin:0}
+.curva{margin:0;position:relative}
+/* Os números da escala vivem fora do SVG: lá dentro seriam esticados com ele.
+   Posicionados em percentagem, acompanham as linhas em qualquer largura. */
+.curva__m{position:absolute;left:0;transform:translateY(-100%);padding-left:.15rem;
+          font-size:.62rem;font-weight:700;letter-spacing:.06em;
+          color:var(--tinta-fraca);opacity:.75;pointer-events:none}
 .curva svg{width:100%;height:clamp(140px,26vw,220px);display:block;overflow:visible}
 .curva__l{display:flex;flex-wrap:wrap;align-items:center;gap:1.4rem;margin-top:1rem;
           font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;

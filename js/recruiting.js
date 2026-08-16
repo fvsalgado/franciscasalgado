@@ -221,7 +221,25 @@ export async function curvaHandicap(cx, lingua = 'pt') {
   const vs = pontos.map((p) => p.hcp);
   const min = Math.min(...vs);
   const max = Math.max(...vs);
-  const faixa = max - min || 1;
+
+  /* Escala logarítmica, e não linear.
+   *
+   * O registo vai de 54 — o handicap de quem começa — até 0,3. Numa escala
+   * linear, a queda dos primeiros meses come 82% da altura e os últimos três
+   * anos ficam esmagados numa linha rente ao fundo: 9% do gráfico para o
+   * período que interessa a quem recruta.
+   *
+   * E linear também mente sobre o esforço. No golfe, descer de 5 para 2 é
+   * incomparavelmente mais difícil do que de 54 para 50; em escala linear as
+   * duas descidas ocupam quase o mesmo. Em log, cada divisão por dois vale o
+   * mesmo pedaço de altura — que é muito mais perto da verdade. Os últimos três
+   * anos passam a valer 43% do desenho.
+   *
+   * `hcp + 1` e não `hcp`: um índice pode chegar a zero, e um dia a negativo —
+   * um handicap «plus» — e o logaritmo de zero não existe. */
+  const esc = (h) => Math.log10(Math.max(h, -0.9) + 1);
+  const escMin = esc(min);
+  const faixa = esc(max) - escMin || 1;
 
   /* O eixo do tempo é o tempo, e não a ordem dos pontos: um índice parado dois
      anos e depois a cair em três meses tem de se ver como isso mesmo. Espaçar
@@ -232,21 +250,40 @@ export async function curvaHandicap(cx, lingua = 'pt') {
 
   const xy = pontos.map((p) => {
     const x = pad.e + ((Date.parse(p.data) - t0) / vao) * (L - pad.e - pad.d);
-    const y = pad.c + ((p.hcp - min) / faixa) * (A - pad.c - pad.b);
+    const y = pad.c + ((esc(p.hcp) - escMin) / faixa) * (A - pad.c - pad.b);
     return `${x.toFixed(1)},${y.toFixed(1)}`;
   });
 
   const fim = xy[xy.length - 1].split(',');
   const num = (n) => (lingua === 'en' ? n.toFixed(1) : n.toFixed(1).replace('.', ','));
 
+  /* Sem marcas, uma escala logarítmica é um desenho bonito e ilegível: não se
+     sabe onde fica o 9 nem o 1. Entram as que caem dentro do que aconteceu.
+   *
+   * As linhas vão no SVG e os números vão em HTML por cima. O SVG estica-se
+   * com `preserveAspectRatio="none"` para a curva ocupar a largura toda, e num
+   * ecrã largo isso multiplica a horizontal por uma vez e meia — uma linha não
+   * dá por isso, um algarismo sai deformado. Posicionados em percentagem, os
+   * números ficam onde devem sem serem esticados. */
+  const refs = [36, 18, 9, 3, 1]
+    .filter((v) => v < max && v > min)
+    .map((v) => ({ v, y: pad.c + ((esc(v) - escMin) / faixa) * (A - pad.c - pad.b) }));
+
+  const linhasRef = refs.map(({ y }) => `<line x1="0" x2="${L}" y1="${y.toFixed(1)}"
+      y2="${y.toFixed(1)}" stroke="var(--linha)" stroke-width="1" />`).join('');
+  const rotulosRef = refs.map(({ v, y }) => `<span class="curva__m"
+      style="top:${((y / A) * 100).toFixed(2)}%">${lingua === 'en' ? v : String(v).replace('.', ',')}</span>`).join('');
+
   cx.innerHTML = `
     <figure class="curva">
       <svg viewBox="0 0 ${L} ${A}" role="img" preserveAspectRatio="none"
            aria-label="${t.hcp2}: ${t.hcpEixo}">
+        ${linhasRef}
         <polyline points="${xy.join(' ')}" fill="none" stroke="var(--relva)"
                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         <circle cx="${fim[0]}" cy="${fim[1]}" r="3.5" fill="var(--relva)" />
       </svg>
+      ${rotulosRef}
       <figcaption class="curva__l">
         <span><i style="background:var(--relva)"></i>${t.hcp2}</span>
         <span class="curva__d num">${num(max)} → ${num(min)}</span>
