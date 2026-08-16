@@ -334,12 +334,26 @@ export async function porEpoca(cx, filtrosCx, lingua = 'pt') {
 
       const lista = `<div class="provas">${doAno.map((p) => linhaProva(p, lingua, { comNota: true })).join('')}</div>`;
 
+      /* Cada época abre e fecha, e só a primeira nasce aberta.
+       *
+       * Nove épocas seguidas eram 6800 pixéis de rolagem antes de se chegar ao
+       * fim — doze ecrãs de telemóvel para uma página que é para se percorrer,
+       * não para se ler de uma ponta à outra. E o que se procura numa página
+       * destas é quase sempre um ano em concreto.
+       *
+       * Fechada, a época continua a dizer o que interessa: o ano, quantas
+       * provas, quantos pódios, quantas vitórias. Isso é o resumo de uma época
+       * inteira numa linha, e é a linha que faz decidir se vale a pena abrir.
+       *
+       * `<details>` e não JavaScript: o conteúdo continua no HTML — quem indexa
+       * lê-o na mesma —, funciona sem uma linha de script, e o browser trata do
+       * teclado e do leitor de ecrã sem ninguém lhe pedir. */
       return `
-        <section class="epoca" id="e${ano}">
-          <div class="epoca__cab">
+        <details class="epoca" id="e${ano}"${ano === anos[0] ? ' open' : ''}>
+          <summary class="epoca__cab">
             <h2 class="epoca__ano num">${ano}</h2>
             <p class="epoca__r">${resumo}</p>
-          </div>
+          </summary>
           ${historia}
           ${inteira ? `<div class="dests">${destaques}</div>
           <details class="epoca__im epoca__todas">
@@ -350,7 +364,7 @@ export async function porEpoca(cx, filtrosCx, lingua = 'pt') {
             ${lista}
           </details>` : lista}
           ${imprensa}
-        </section>`;
+        </details>`;
     }).join('');
 
     cx.querySelectorAll('.provas').forEach(realce);

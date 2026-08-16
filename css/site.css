@@ -403,7 +403,11 @@ body.pronto .nome__l{transform:translateY(0);opacity:1;
    fundo do contentor. Com o fundo no contentor, uma última fila incompleta
    deixava lá um retângulo de cor sólida onde não há cartão nenhum — e o
    número de cartões vem dos JSON, por isso a fila incompleta acontece. */
-.nums{display:grid;gap:1px}
+/* Dois a dois num telemóvel: quatro cartões empilhados eram seiscentos pixéis
+   para quatro números, e quatro números lêem-se melhor lado a lado — é assim
+   que se comparam. */
+.nums{display:grid;gap:1px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:760px){.nums{grid-template-columns:none}}
 @media (min-width:620px){.nums{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:980px){.nums{grid-template-columns:repeat(4,1fr)}}
 .numo{background:var(--papel);padding:clamp(1.4rem,3vw,2.2rem);display:flex;flex-direction:column;gap:.35rem;
@@ -508,10 +512,43 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 .filtro__n{font-variant-numeric:tabular-nums;opacity:.7;font-weight:600}
 
 /* épocas */
+/* Cada época abre e fecha, e o cabeçalho é o puxador.
+ *
+ * Fechada, continua a dizer o ano, quantas provas, quantos pódios e quantas
+ * vitórias — o resumo de um ano inteiro numa linha. Nove épocas abertas eram
+ * doze ecrãs de telemóvel para chegar ao fim de uma página que é para se
+ * percorrer, e o que se procura numa página destas é quase sempre um ano em
+ * concreto. */
 .epoca{margin-top:clamp(2.6rem,6vw,4.6rem)}
 .epoca:first-child{margin-top:0}
-.epoca__cab{display:flex;align-items:baseline;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
-            padding-bottom:.9rem;border-bottom:2px solid var(--linha-forte)}
+.epoca__cab{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem 1.5rem;flex-wrap:wrap;
+            padding-bottom:.9rem;border-bottom:2px solid var(--linha-forte);
+            cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent;
+            transition:border-color .3s var(--curva)}
+.epoca__cab::-webkit-details-marker{display:none}
+/* A seta é o último item da linha e empurra-se para a direita — o resumo fica
+   à esquerda dela, e não a saltar de sítio conforme o comprimento do texto. */
+.epoca__cab::after{content:"";width:.62rem;height:.62rem;flex:none;margin-left:auto;
+                   align-self:center;
+                   border-right:2px solid var(--tinta-fraca);border-bottom:2px solid var(--tinta-fraca);
+                   transform:rotate(45deg) translate(-2px,-2px);
+                   transition:transform .35s var(--curva),border-color .3s var(--curva)}
+.epoca[open] > .epoca__cab::after{transform:rotate(225deg) translate(-1px,-1px)}
+@media (hover:hover){
+  .epoca__cab:hover{border-color:var(--relva)}
+  .epoca__cab:hover::after{border-color:var(--relva)}
+}
+.epoca__cab:focus-visible{outline:2px solid var(--relva);outline-offset:4px}
+/* Num telemóvel o resumo não cabe ao lado do ano: parte-se em duas linhas e a
+   seta cai sozinha para uma terceira, longe de tudo. Passa a duas linhas
+   deliberadas — o ano em cima, o resumo e a seta em baixo, nas duas pontas. */
+@media (max-width:640px){
+  .epoca__cab{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;
+              gap:.3rem .8rem}
+  .epoca__ano{grid-column:1/-1}
+  .epoca__r{font-size:.62rem;letter-spacing:.12em}
+  .epoca__cab::after{margin-left:0;width:.55rem;height:.55rem}
+}
 .epoca__ano{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 100;
             font-size:clamp(2.4rem,6vw,4.4rem);line-height:.9;letter-spacing:-.03em;margin:0;
             font-variant-numeric:tabular-nums}
@@ -881,6 +918,36 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 .sobre__f{display:flex;flex-direction:column;gap:1.4rem}
 @media (min-width:900px){.sobre__f{position:sticky;top:clamp(6rem,12vh,8.5rem)}}
 
+/* ── faixa que se passa com o polegar ───────────────────── */
+/* O mesmo gesto do saco, para as grelhas que num telemóvel só sabem empilhar.
+ *
+ * Uma grelha de fotografias quadradas empilhada são quatrocentos pixéis por
+ * fotografia: quatro publicações do Instagram davam mais de mil e setecentos, e
+ * ninguém rola dois ecrãs para ver a terceira. De lado passam-se com o polegar
+ * em dois gestos, e a que vem a seguir espreita pela direita a dizer que há
+ * mais — que é o que dispensa escrever «há mais».
+ *
+ * As margens negativas levam a faixa às bordas do ecrã e o `padding` devolve o
+ * alinhamento ao primeiro item: rola de borda a borda mas começa alinhada com
+ * o texto por cima dela. Acima dos 720 desliga-se e a grelha volta ao que era —
+ * num ecrã largo cabem todas de uma vez, e esconder o que cabe é esconder por
+ * nada. */
+@media (max-width:719px){
+  .faixa{--gut:clamp(1.1rem,5vw,2rem);
+         display:flex;gap:.9rem;margin-inline:calc(var(--gut) * -1);
+         padding:0 var(--gut) .4rem;
+         overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gut);
+         overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+         scrollbar-width:none;grid-template-columns:none}
+  .faixa::-webkit-scrollbar{display:none}
+  .faixa > *{flex:0 0 min(76vw,300px);scroll-snap-align:center;margin:0}
+  /* Um cartão de apoio é um nome ou um logótipo — não precisa da largura de uma
+     fotografia, e mais estreito vêem-se dois de cada vez, que é o que faz uma
+     parede de apoios ler-se como parede. Os campos ficam largos: esses têm
+     fotografia. */
+  .apoios__l.faixa:not(.apoios__l--campos) > *{flex-basis:min(52vw,210px)}
+}
+
 /* ── instagram ──────────────────────────────────────────── */
 .ig__g{display:grid;gap:clamp(.8rem,2vw,1.4rem)}
 @media (min-width:760px){.ig__g{grid-template-columns:repeat(3,1fr)}}
@@ -939,6 +1006,23 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 @media (min-width:560px) and (max-width:899px){.ig{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .ig__pubs{min-width:0;display:contents}
 .ig__pubs .ig__g{display:contents}
+/* Num telemóvel a mesma grelha empilha, e cada publicação é um quadrado de
+   quatrocentos pixéis: quatro davam mil e setecentos, metade da página inicial
+   para o Instagram. Passa a faixa, como o saco e a galeria.
+ *
+ * A classe `.faixa` não serve aqui: o `display:contents` de cima desmancha os
+ * invólucros, e por isso quem tem de virar faixa é o `.ig` — os itens reais
+ * são o cartão de perfil e cada publicação, que é o que se nomeia a seguir. */
+@media (max-width:719px){
+  .ig{--gut:clamp(1.1rem,5vw,2rem);
+      display:flex;grid-template-columns:none;
+      margin-inline:calc(var(--gut) * -1);padding:0 var(--gut) .4rem;
+      overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gut);
+      overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .ig::-webkit-scrollbar{display:none}
+  .ig .igp,.ig .ig__c{flex:0 0 min(78vw,310px);scroll-snap-align:center;margin:0}
+  .ig .ig__p{min-height:0;aspect-ratio:4/5}
+}
 
 /* ── reels de parceria ──────────────────────────────────── */
 /* Carril em vez de grelha: os reels são verticais e são cinco — numa grelha

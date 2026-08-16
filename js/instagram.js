@@ -200,7 +200,7 @@ export async function instagram(cx, lingua = 'pt', quantas = 3, comConvite = tru
   // a legenda por baixo credita a conta que publicou — nem todas são dela — e
   // deixa uma ligação que continua a servir se o Instagram não desenhar o iframe
   cx.innerHTML = `
-    <div class="ig__g">${posts.slice(0, quantas).map((p) => {
+    <div class="ig__g faixa">${posts.slice(0, quantas).map((p) => {
       const url = `https://www.instagram.com/${p.conta}/${p.tipo}/${p.codigo}/`;
       return `
       <figure class="ig__c">

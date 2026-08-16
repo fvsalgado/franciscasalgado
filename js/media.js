@@ -24,7 +24,7 @@ export async function galeria(cx, lingua = 'pt', quantas = 99) {
   const { fotos = [] } = await ler('galeria');
   if (!fotos.length) { cx.innerHTML = ''; return; }
 
-  cx.className = 'galeria';
+  cx.className = 'galeria faixa';
   cx.innerHTML = fotos.slice(0, quantas).map((p) => `
     <figure class="gal ${p.formato === 'largo' ? 'gal--largo' : 'gal--alto'} sobe-i">
       <img src="/img/${p.f}" alt="${tx(p.alt, lingua).replace(/"/g, '&quot;')}"
@@ -135,7 +135,7 @@ export async function apoios(cx, lingua = 'pt') {
         <p class="rot rot--so">${tx(g.t, lingua)}</p>
         <p class="apoios__x">${tx(g.x, lingua)}</p>
       </div>
-      <div class="apoios__l${comFoto}">${g.itens.map(cartao).join('')}</div>
+      <div class="apoios__l faixa${comFoto}">${g.itens.map(cartao).join('')}</div>
     </section>`;
   }).join('');
 
