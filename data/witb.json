@@ -11,7 +11,13 @@
         "pt": "9° · Fujikura Ventus TR 5-R",
         "en": "9° · Fujikura Ventus TR 5-R"
       },
-      "img": "driver.webp"
+      "img": "driver.webp",
+      "u": [
+        {
+          "n": "Driver",
+          "loft": 9
+        }
+      ]
     },
     {
       "t": {
@@ -23,7 +29,17 @@
         "pt": "3W 15,5° e 5W 18,5° · Fujikura Ventus TR 5-R",
         "en": "3W 15.5° and 5W 18.5° · Fujikura Ventus TR 5-R"
       },
-      "img": "madeira.webp"
+      "img": "madeira.webp",
+      "u": [
+        {
+          "n": "3W",
+          "loft": 15.5
+        },
+        {
+          "n": "5W",
+          "loft": 18.5
+        }
+      ]
     },
     {
       "t": {
@@ -35,7 +51,13 @@
         "pt": "3H 18° · Graphite Design Tour AD DI-75 R",
         "en": "3H 18° · Graphite Design Tour AD DI-75 R"
       },
-      "img": "hibrido.webp"
+      "img": "hibrido.webp",
+      "u": [
+        {
+          "n": "3H",
+          "loft": 18
+        }
+      ]
     },
     {
       "t": {
@@ -47,7 +69,27 @@
         "pt": "Ferro 5 ao PW · KBS TGI 70",
         "en": "5-iron to PW · KBS TGI 70"
       },
-      "img": "ferros.webp"
+      "img": "ferros.webp",
+      "u": [
+        {
+          "n": "5"
+        },
+        {
+          "n": "6"
+        },
+        {
+          "n": "7"
+        },
+        {
+          "n": "8"
+        },
+        {
+          "n": "9"
+        },
+        {
+          "n": "PW"
+        }
+      ]
     },
     {
       "t": {
@@ -59,7 +101,21 @@
         "pt": "50°, 54° e 58° · KBS TGI 80",
         "en": "50°, 54° and 58° · KBS TGI 80"
       },
-      "img": "wedge.webp"
+      "img": "wedge.webp",
+      "u": [
+        {
+          "n": "50°",
+          "loft": 50
+        },
+        {
+          "n": "54°",
+          "loft": 54
+        },
+        {
+          "n": "58°",
+          "loft": 58
+        }
+      ]
     },
     {
       "t": {
@@ -67,7 +123,12 @@
         "en": "Putter"
       },
       "m": "Scotty Cameron Phantom 5",
-      "img": "putter.webp"
+      "img": "putter.webp",
+      "u": [
+        {
+          "n": "Putter"
+        }
+      ]
     }
   ],
   "bola": {
@@ -90,5 +151,12 @@
       },
       "m": "Golf Pride"
     }
-  ]
+  ],
+  "frase": {
+    "taco": "",
+    "t": {
+      "pt": "",
+      "en": ""
+    }
+  }
 }
