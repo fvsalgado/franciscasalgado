@@ -62,16 +62,17 @@ export const EN = {
   /* ── página inicial ─────────────────────────────────────── */
   hero_rot: 'Amateur golfer · Portuguese national team · U18',
   hero_frase: 'From Lisbon to the courses of Europe. At seventeen, four national titles — the latest the U18 — '
-    + 'and five national runner-up finishes. She plays for the national team and has competed in nine countries.',
+    + 'and five national runner-up finishes. She plays for the national team and has competed in eight countries.',
   prox_r: 'Next event',
   prox_carregar: 'Loading…',
 
   qu_rot: 'Who she is',
 
   qu_bio: 'She started at the <strong>Jamor</strong>, and it was for <strong>Paço do Lumiar</strong> that she won '
-    + 'her first national title, at ten. Today she plays for <strong>Vale de Janelas</strong> — Praia D\'El Rey and '
-    + 'West Cliffs — trains at the national <strong>High-Performance Centre</strong> and has represented the '
-    + '<strong>Portuguese women\'s amateur national team</strong> since 2023.',
+    + 'her first national title, at ten. By way of <strong>Quinta do Peru</strong>, she plays today for '
+    + '<strong>Vale de Janelas</strong> — Praia D\'El Rey and West Cliffs — trains at the national '
+    + '<strong>High-Performance Centre</strong> and has represented the '
+    + '<strong>Portuguese women\'s amateur national team</strong> since 2021.',
 
   in_rot: 'Instagram',
   in_tit: 'Day to day',
@@ -86,7 +87,7 @@ export const EN = {
   im_txt: 'Short biography, checkable facts, sourced quotes and the official profiles. For high-resolution photographs, just ask.',
   im_bt: 'Request photographs',
   im_bio_rot: 'Short biography',
-  im_bio: 'Francisca Salgado is an amateur golfer from Vale de Janelas, in Óbidos, and a member of the Portuguese women\'s amateur national team. She has four national titles: U10 in 2019, U12 in 2021 and, in 2026, the Amateur Pairs — alongside Rodrigo Constantino — and the U18. She won the first Drive Tour of 2024, at Penina, with the lowest round on her record — 70, three under par — and the GJG Algarve Juniors International later that year, was runner-up in the FPG Cup in 2025 and third at the Memorial Celia Barquín, in Asturias. In 2026 she finished the English Girls\' Open in 28th. She is supported by the Fundação do Desporto.',
+  im_bio: 'Francisca Salgado is an amateur golfer from Vale de Janelas, in Óbidos, and a member of the Portuguese women\'s amateur national team. She has four national titles: U10 in 2019, U12 in 2021 and, in 2026, the Amateur Pairs — alongside Rodrigo Constantino — and the U18. She won the first Drive Tour of 2024, at Penina, with the lowest round on her record — 70, three under par — and the GJG Algarve Juniors International later that year, was runner-up in the FPG Cup in 2025 and third at the Memorial Celia Barquín, in Asturias. She has played for the national team since 2021, in eight countries — Spain, France, Belgium, Slovakia, Finland, Ireland and England as well as Portugal — including two European Young Masters, two Amundi Evian Juniors Cups and two European Ladies\' Team Championships. In 2026 she finished the English Girls\' Open in 28th. She is supported by the Fundação do Desporto.',
   im_factos: 'Facts',
   im_cit_rot: 'In her own words',
   im_cit_tit: 'Quotes',
