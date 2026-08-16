@@ -6,8 +6,8 @@ import { iniciar } from './base.js';
 import { iniciarCampo } from './campo.js';
 import { reduzido } from './movimento.js';
 import { porEpoca, contagens, carregar } from './resultados.js';
-import { factos, citacoes, escadas, ligacoes, numeros } from './conteudo.js';
-import { fichaRecruiting, curvaRankings, curvaHandicap, witb, swing } from './recruiting.js';
+import { factos, citacoes, escadas, ligacoes, numeros, equipa } from './conteudo.js';
+import { fichaRecruiting, curvaRankings, witb, swing } from './recruiting.js';
 import { galeria, videos, apoios } from './media.js';
 import { reels } from './instagram.js';
 
@@ -43,7 +43,7 @@ const PINTAR = {
 
   async recruiting(l) {
     await Promise.all([fichaRecruiting($('recNums'), l), curvaRankings($('curva'), l),
-                       curvaHandicap($('curvaH'), l), witb($('witbL'), l), swing($('swingV'), l)]);
+                       witb($('witbL'), l), equipa($('equipaL'), l), swing($('swingV'), l)]);
   },
 
   /* A mesma secção do recruiting, sozinha numa página. Existe para ser

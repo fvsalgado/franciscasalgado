@@ -26,6 +26,10 @@ export const EN = {
   wb_ma_txt: 'Handicap, rankings, schedule and every result, season by season, with the source of each.',
   wb_ma_b1: 'Recruiting profile',
   wb_ma_b2: 'Season by season',
+  rc_eq_rot: 'Coaching team',
+  rc_eq_tit: 'Who she works with',
+  rc_eq_txt: 'At the club, at the national High-Performance Centre, and on what never shows on the course.',
+
   rc_sw_rot: "Coach's corner",
   rc_sw_tit: 'The swing, face-on and down the line',
   rc_sw_txt: 'For anyone assessing technique. Nothing loads from YouTube until you press play.',
@@ -37,9 +41,6 @@ export const EN = {
   rc_ev_rot: 'Progression',
   rc_ev_tit: 'How it has moved',
   rc_ev_txt: 'The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category. The lower the number the better the position — the axis here is inverted, so good news goes up.',
-  rc_hc_rot: 'Handicap',
-  rc_hc_tit: 'The index, from the start',
-  rc_hc_txt: 'Every time the WHS index changed, from her first counting round, exactly as recorded by the Portuguese Golf Federation. The line rises as the index falls.',
   rc_pa_rot: 'Record',
   rc_pa_tit: 'Eighteen wins, five national titles',
   rc_pa_txt: 'She plays for <strong>Vale de Janelas</strong> — Praia D\'El Rey and West Cliffs, in Óbidos — and '

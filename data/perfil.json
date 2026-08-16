@@ -442,5 +442,35 @@
     "en": "By email to birdie@franciscasalgado.golf, or by direct message on Instagram, at @francisca_salgado_. Both are at the end of the partnerships page and in the footer of every page."
    }
   }
+ ],
+ "equipa": [
+  {
+   "nome": "Tiago Osório",
+   "x": {
+    "pt": "Treinador principal",
+    "en": "Head coach"
+   }
+  },
+  {
+   "nome": "Ana Monteiro",
+   "x": {
+    "pt": "Preparação física",
+    "en": "Strength & conditioning"
+   }
+  },
+  {
+   "nome": "Luis Almeida",
+   "x": {
+    "pt": "Treino mental",
+    "en": "Mental coach"
+   }
+  },
+  {
+   "nome": "Nelson Ribeiro",
+   "x": {
+    "pt": "Selecionador nacional",
+    "en": "National coach"
+   }
+  }
  ]
 }

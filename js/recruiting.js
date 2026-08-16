@@ -382,9 +382,9 @@ export async function witb(cx, lingua = 'pt') {
   cx.innerHTML = `${contador(d, lingua)}
     <ul class="saco__g" role="list">${linhas.map(cartao).join('')}</ul>
     <p class="witb__c" id="witbCred" data-credito-base="${en ? 'Images:' : 'Imagens:'}"></p>
-    ${escada(linhas, lingua)}${citacao(d, linhas, lingua)}${retrato}`;
+    ${citacao(d, linhas, lingua)}${retrato}`;
 
-  ligarSaco(cx);
+  contar(cx);
 }
 
 /* ── catorze ──────────────────────────────────────────────────
@@ -408,113 +408,6 @@ function contador(d, lingua) {
     </p>`;
 }
 
-/* ── a escada de lofts ────────────────────────────────────────
- *
- * Os catorze tacos numa régua, do driver ao wedge de 58°, cada um no seu grau.
- * Não é enfeite: é o que mostra que o saco é pensado — que não há um buraco
- * entre o híbrido e o primeiro ferro, e que os wedges estão espaçados de quatro
- * em quatro graus. Um treinador lê isto em dois segundos e sabe mais do que a
- * ficha lhe diz em dez linhas.
- *
- * Os ferros dela não têm loft neste ficheiro, porque não sei os dela e um loft
- * de catálogo não é um loft dela. Entram como uma faixa entre o último loft
- * conhecido antes e o primeiro depois — que é verdade, e que se desdobra em
- * marcas no dia em que os números existirem.
- *
- * O putter fica de fora: tem loft, mas três graus ao lado de um wedge de 58
- * esmagavam a régua inteira num canto. */
-function escada(linhas, lingua) {
-  const unidades = [];
-  for (const l of linhas) {
-    for (const u of l.u || []) unidades.push({ ...u, i: l.i, grupo: l.r });
-  }
-  const comLoft = unidades.filter((u) => typeof u.loft === 'number');
-  if (comLoft.length < 3) return '';
-
-  const min = Math.min(...comLoft.map((u) => u.loft));
-  const max = Math.max(...comLoft.map((u) => u.loft));
-  const vao = max - min || 1;
-  const pc = (v) => ((v - min) / vao) * 100;
-
-  /* Uma corrida de tacos sem loft, entre dois que têm, é uma faixa. A corrida
-     que fica no fim sem nada a fechá-la — o putter — cai fora, que é o que se
-     quer: um putter tem loft, mas três graus ao lado de um wedge de 58
-     esmagavam a régua inteira num canto. */
-  const bandas = [];
-  let corrida = [];
-  let anterior = null;
-  for (const u of unidades) {
-    if (typeof u.loft === 'number') {
-      if (corrida.length && anterior != null) bandas.push({ de: anterior, ate: u.loft, itens: corrida });
-      corrida = [];
-      anterior = u.loft;
-    } else {
-      corrida.push(u);
-    }
-  }
-
-  const en = lingua === 'en';
-  const grau = (v) => (en ? `${v}°` : `${String(v).replace('.', ',')}°`);
-
-  /* Por loft e não por ordem do saco: um 5W de 18,5° vem depois de um híbrido
-     de 18°, mesmo estando antes dele na fila. Uma régua fora de ordem não é uma
-     régua.
-   *
-   * E dois lofts colados — 18° e 18,5° são um por cento da régua — dão dois
-   * rótulos por cima um do outro. O segundo desce uma linha. É contado aqui e
-   * não em `nth-child`, porque quem colide não é o par nem o ímpar: é quem
-   * calhou ficar perto do anterior. */
-  const ordenadas = [...comLoft].sort((a, b) => a.loft - b.loft);
-
-  /* Dois tacos a meio grau um do outro — o híbrido de 18° e a madeira 5 de
-     18,5° — são o mesmo ponto da régua, e desenhados como duas marcas ficam
-     duas etiquetas por cima uma da outra em qualquer largura. Juntam-se numa:
-     «18–18,5°», com os dois nomes. Não é uma simplificação, é o que os números
-     dizem — ela leva ali dois tacos ao mesmo loft, e isso é informação. */
-  const marcas = [];
-  for (const u of ordenadas) {
-    const ant = marcas[marcas.length - 1];
-    if (ant && pc(u.loft) - pc(ant.ate) < 1.5) {
-      ant.ate = u.loft;
-      ant.nomes.push(u.n);
-      ant.is.add(u.i);
-    } else {
-      marcas.push({ de: u.loft, ate: u.loft, nomes: [u.n], is: new Set([u.i]) });
-    }
-  }
-
-  let ultimo = -Infinity;
-  for (const m of marcas) {
-    const x = pc(m.de);
-    m.linha = x - ultimo < 5 && ultimo > -Infinity ? 1 : 0;
-    if (!m.linha) ultimo = x;
-  }
-  const nLinhas = Math.max(...marcas.map((m) => m.linha)) + 1;
-
-  return `
-    <figure class="esc">
-      <figcaption class="esc__t">${en ? 'The ladder, degree by degree' : 'A escada, grau a grau'}</figcaption>
-      <div class="esc__r" style="--linhas:${nLinhas}">
-        <div class="esc__eixo"></div>
-        ${bandas.map((b) => `
-          <div class="esc__f" style="left:${pc(b.de).toFixed(2)}%;width:${(pc(b.ate) - pc(b.de)).toFixed(2)}%">
-            <span>${b.itens.length} ${b.itens[0].grupo.toLowerCase()}</span>
-          </div>`).join('')}
-        ${marcas.map((m, k) => {
-    const rotulo = m.de === m.ate ? grau(m.de) : `${grau(m.de)}–${grau(m.ate)}`;
-    /* O nome só entra quando acrescenta: um wedge de 50° chama-se «50°», e
-       escrevê-lo por baixo do grau é dizer a mesma coisa duas vezes. */
-    const nomes = m.nomes.filter((n) => n.replace(',', '.').replace('°', '') !== String(m.de)).join(' · ');
-    return `
-          <button class="esc__m" type="button" data-i="${[...m.is].join(' ')}"
-                  style="left:${pc(m.de).toFixed(2)}%;--i:${k};--linha:${m.linha}"
-                  aria-label="${[rotulo, ...m.nomes].join(' · ')}">
-            <i></i><b>${rotulo}</b>${nomes ? `<span>${nomes}</span>` : ''}
-          </button>`;
-  }).join('')}
-      </div>
-    </figure>`;
-}
 
 
 /* ── a frase dela ─────────────────────────────────────────────
@@ -549,84 +442,7 @@ function citacao(d, linhas, lingua) {
  * sair apagava-o na mesma, embora continuasse marcado como escolhido; o clique
  * seguinte era gasto a desescolher uma coisa que já estava apagada, e lia-se
  * como um clique que não fez nada. */
-function ligarSaco(cx) {
-  /* A escada é o índice dos cartões.
-   *
-   * Ela existe para se ver de relance como os lofts se distribuem — nove graus
-   * no driver, cinquenta e oito na wedge mais aberta, e o vão entre eles. Cada
-   * marca sabe de que taco é, por isso serve também de atalho: toca-se no 54°
-   * e o cartão dessa wedge vem ao meio do ecrã.
-   *
-   * É a única ligação que sobra na secção, e é numa direcção só. As outras
-   * três — fila, ficha e painel — deixaram de existir quando a fotografia e o
-   * loft passaram a viver no mesmo cartão. */
-  const grelha = cx.querySelector('.saco__g');
-  const marcas = [...cx.querySelectorAll('.esc__m')];
 
-  const acender = (cartao) => {
-    cx.querySelectorAll('.saco__k--on').forEach((n) => n.classList.remove('saco__k--on'));
-    cartao.classList.add('saco__k--on');
-    /* Fica aceso e apaga-se sozinho. Não é uma selecção — não há nada que se
-       faça a seguir com um taco escolhido —, é só dizer «é este», e uma marca
-       que fica acesa para sempre passa a ser ruído na próxima leitura. */
-    clearTimeout(acender.t);
-    acender.t = setTimeout(() => cartao.classList.remove('saco__k--on'), 2200);
-  };
-
-  marcas.forEach((m) => {
-    m.addEventListener('click', () => {
-      /* Uma marca pode valer por dois tacos — o híbrido e a madeira 5 partilham
-         o grau, e por isso o `data-i` guarda uma lista. Vai-se ao primeiro. */
-      const i = String(m.dataset.i || '').split(' ')[0];
-      const cartao = cx.querySelector(`.saco__k[data-i="${i}"]`);
-      if (!cartao || !grelha) return;
-
-      /* `scrollIntoView` na horizontal rola também a página inteira na
-         vertical, e a secção salta debaixo do dedo de quem acabou de tocar numa
-         marca que estava à vista. Move-se a caixa do carrossel à mão, que é o
-         único eixo que interessa. */
-      const alvo = cartao.offsetLeft - (grelha.clientWidth - cartao.offsetWidth) / 2;
-      grelha.scrollTo({ left: Math.max(0, alvo), behavior: 'smooth' });
-      acender(cartao);
-    });
-  });
-
-  contar(cx);
-  arrumarEscada(cx);
-}
-
-/* ── arrumar a escada ─────────────────────────────────────────
- *
- * Quantos graus cabem lado a lado depende da largura do ecrã e da largura de
- * cada número, e nenhuma das duas se sabe na altura de escrever o HTML: num
- * telemóvel, o 15,5° e o 18° ficam a dezassete pixéis um do outro e leem-se
- * como um número só.
- *
- * Por isso a arrumação de origem é uma aproximação — boa num ecrã largo, que é
- * onde o HTML é gravado — e aqui é refeita com as caixas já medidas, e outra
- * vez sempre que a janela muda de tamanho. Sem JavaScript fica a aproximação,
- * que é melhor do que nada. */
-function arrumarEscada(cx) {
-  const regua = cx.querySelector('.esc__r');
-  const marcas = [...cx.querySelectorAll('.esc__m')];
-  if (!regua || !marcas.length) return;
-
-  const arrumar = () => {
-    /* A posição horizontal não depende da linha, por isso mede-se uma vez. */
-    const caixas = marcas.map((m) => m.querySelector('b').getBoundingClientRect());
-    const ocupado = [];
-    marcas.forEach((m, k) => {
-      let linha = 0;
-      while (ocupado[linha] != null && caixas[k].left < ocupado[linha] + 8) linha += 1;
-      ocupado[linha] = caixas[k].right;
-      m.style.setProperty('--linha', linha);
-    });
-    regua.style.setProperty('--linhas', String(Math.max(1, ocupado.length)));
-  };
-
-  arrumar();
-  addEventListener('resize', arrumar, { passive: true });
-}
 
 /* ── o contador a subir ───────────────────────────────────────
  *
