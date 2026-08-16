@@ -61,7 +61,7 @@ const GUARDAR = [
   'proximas', 'contagens', 'filtros', 'epocas', 'videos', 'notaFonte', // épocas
   'factos', 'plats', 'gal',                           // imprensa
   'numsApoio', 'apoios', 'escadas',                   // parcerias
-  'recNums', 'curva', 'curvaH', 'witbL', 'swingV',              // recruiting
+  'recNums', 'curva', 'witbL', 'equipaL', 'swingV',             // recruiting
 ];
 
 /* Um servidor estático mínimo. O sítio não tem passo de compilação, por isso

@@ -129,6 +129,37 @@ export async function apoios(cx, lingua = 'pt') {
     /* Um grupo de fotografias respira de outra maneira: cartões maiores, menos
        por linha. Basta um item com fotografia para o grupo mudar de forma. */
     const comFoto = g.itens.some((i) => i.foto) ? ' apoios__l--campos' : '';
+
+    /* Um grupo pode pedir a forma de lista em vez da parede de placas.
+     *
+     * Uma placa existe para segurar um logótipo — é isso que ela é. Sem
+     * logótipo, uma placa é uma caixa creme com um nome ao meio, e cinco delas
+     * seguidas são cinco caixas a fingir que são marcas. Em lista, o nome é o
+     * nome, a seta diz que se pode ir lá ver, e cinco cabem no espaço de uma.
+     * `forma: "linhas"` no data/apoios.json escolhe. */
+    if (g.forma === 'linhas') {
+      const linha = (i) => {
+        const dentro = i.logo
+          ? `<img src="/img/logos/${i.logo}" alt="${i.nome}" loading="lazy" decoding="async" data-credito-feito="1" />`
+          : '';
+        const corpo = `${dentro ? `<span class="marcas__i">${dentro}</span>` : ''}
+          <span class="marcas__n">${i.nome}</span>
+          ${tx(i.x, lingua) ? `<span class="marcas__x">${tx(i.x, lingua)}</span>` : ''}
+          ${i.url ? '<span class="marcas__s" aria-hidden="true">↗</span>' : ''}`;
+        return i.url
+          ? `<li><a class="marca-l" href="${i.url}" target="_blank" rel="noopener" data-sem-seta data-mag>${corpo}</a></li>`
+          : `<li><span class="marca-l">${corpo}</span></li>`;
+      };
+      return `
+    <section class="apoios__g">
+      <div class="apoios__cab">
+        <p class="rot rot--so">${tx(g.t, lingua)}</p>
+        <p class="apoios__x">${tx(g.x, lingua)}</p>
+      </div>
+      <ul class="marcas">${g.itens.map(linha).join('')}</ul>
+    </section>`;
+    }
+
     return `
     <section class="apoios__g${g.destaque ? ' apoios__g--destaque' : ''}">
       <div class="apoios__cab">

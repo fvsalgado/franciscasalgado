@@ -19,6 +19,10 @@ async function ler(nome) {
 
 const tx = (v, lingua) => (typeof v === 'string' ? v : v?.[lingua] || v?.pt || '');
 
+/* Uma secção sem conteúdo esconde-se em vez de ficar com um cabeçalho a
+   apontar para nada. É a mesma regra do js/recruiting.js. */
+const mostrar = (cx, sim) => cx.closest('section[data-se-vazio]')?.toggleAttribute('hidden', !sim);
+
 /* ── números ──────────────────────────────────────────────── */
 /* Um número que tenha `ir` deixa de ser só um número: se as 42 peças de
    imprensa estão a uma página de distância, o cartão é o caminho mais curto
@@ -202,3 +206,27 @@ export async function saiuEm(cx, lingua = 'pt') {
   }).join('');
 }
 
+
+/* ── a equipa técnica ─────────────────────────────────────────
+ *
+ * Vivia nas parcerias, ao lado dos patrocinadores, em placas do tamanho das
+ * dos logótipos. Duas coisas estavam mal nisso: uma pessoa não é um
+ * patrocinador, e uma placa creme com um nome ao meio é uma placa a fingir que
+ * é uma marca. Passa para a página dos treinadores, que é onde faz falta — é
+ * a quem um treinador universitário liga a seguir —, e passa a lista: nome,
+ * função, e mais nada. */
+export async function equipa(cx, lingua = 'pt') {
+  if (!cx) return;
+  const { equipa: pessoas = [] } = await ler('perfil');
+  if (!pessoas.length) { cx.innerHTML = ''; mostrar(cx, false); return; }
+  mostrar(cx, true);
+
+  cx.innerHTML = `<ul class="marcas">${pessoas.map((p) => `
+    <li>${p.url
+    ? `<a class="marca-l" href="${p.url}" target="_blank" rel="noopener" data-sem-seta data-mag>`
+    : '<span class="marca-l">'}
+      <span class="marcas__n">${p.nome}</span>
+      <span class="marcas__x">${tx(p.x, lingua)}</span>
+      ${p.url ? '<span class="marcas__s" aria-hidden="true">↗</span>' : ''}
+    ${p.url ? '</a>' : '</span>'}</li>`).join('')}</ul>`;
+}

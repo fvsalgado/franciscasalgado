@@ -899,6 +899,21 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
           color:var(--tinta-fraca)}
 
 /* ── ligações oficiais ──────────────────────────────────── */
+/* Uma lista de marcas, para os grupos que não têm logótipo que sustente uma
+   placa. Nome, o que é, e uma seta a dizer que se pode ir lá ver. */
+.marcas{list-style:none;margin:0;padding:0;display:grid;gap:1px;
+        grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.marca-l{display:flex;align-items:center;gap:.7rem;padding:.95rem 1.1rem;
+         background:var(--papel);box-shadow:0 0 0 1px var(--linha);
+         transition:background-color .35s var(--curva),color .35s var(--curva)}
+@media (hover:hover){.marca-l:hover{background:var(--relva-clara)}}
+.marcas__i{flex:none;display:grid;place-items:center;width:1.9rem;height:1.9rem}
+.marcas__i img{max-width:100%;max-height:100%;display:block}
+.marcas__n{font-size:.98rem;font-weight:700;color:var(--tinta);min-width:0}
+.marcas__x{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+           color:var(--tinta-fraca);min-width:0}
+.marcas__s{margin-left:auto;color:var(--relva);font-size:.85rem;flex:none}
+
 .plats{display:grid;gap:.5rem}
 .plat{display:flex;align-items:center;gap:.95rem;padding:1rem 1.15rem;
       border:1px solid var(--linha);border-radius:14px;background:var(--papel);
@@ -1198,55 +1213,6 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 /* Uma régua do driver ao wedge mais aberto, cada taco no seu grau. É o que
    mostra que o saco é pensado: sem buracos entre o híbrido e os ferros, e os
    wedges de quatro em quatro graus.
-
-   Os ferros entram como faixa e não como marcas — o loft deles não está no
-   ficheiro, porque não é conhecido, e um loft de catálogo não é um loft dela.
-   No dia em que os números existirem, a faixa desdobra-se em marcas sem se
-   mexer aqui uma linha. */
-.esc{margin:clamp(1.4rem,3.5vw,2.6rem) 0 clamp(1.6rem,3.5vw,2.6rem)}
-.esc__t{font-size:.62rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
-        color:var(--tinta-fraca);margin:0 0 2.6rem}
-/* A altura segue o número de linhas de rótulos, que o js/recruiting.js conta
-   depois de medir — não cabem sempre as mesmas num telemóvel e num portátil. */
-.esc__r{position:relative;margin:0 clamp(.8rem,3vw,2rem);
-        height:calc(3.2rem + (var(--linhas,1) - 1) * 2.4rem)}
-.esc__eixo{position:absolute;left:0;right:0;top:0;height:1px;background:var(--linha-forte)}
-.esc__f{position:absolute;top:0;height:1px;background:var(--relva);opacity:.35}
-.esc__f span{position:absolute;left:50%;top:.6rem;transform:translateX(-50%);white-space:nowrap;
-             font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-             color:var(--tinta-fraca)}
-
-.esc__m{position:absolute;top:0;transform:translateX(-50%);
-        border:0;background:none;padding:0 .3rem;cursor:pointer;color:inherit;font:inherit;
-        display:flex;flex-direction:column;align-items:center;
-        -webkit-tap-highlight-color:transparent}
-/* `--linha` vem do js/recruiting.js: é 1 quando esta marca ficou colada à
-   anterior e o rótulo teve de descer para não se sobrepor. O pé cresce para a
-   acompanhar, senão o número descia e ficava a pairar longe da régua. */
-/* O pé desce para o rótulo que teve de baixar. Nas linhas de baixo é um traço
-   fino e apagado — a essa altura já não é uma marca da régua, é um fio a dizer
-   de onde vem o número, e um traço grosso a passar ao lado das etiquetas de
-   cima só fazia barulho. */
-.esc__m i{display:block;background:var(--relva);border-radius:2px;
-          width:calc(2px - var(--linha,0) * 1px);
-          opacity:calc(1 - var(--linha,0) * .5);
-          height:calc(.85rem + var(--linha,0) * 2.1rem);
-          transform-origin:top center;transition:transform .3s var(--curva),background .3s}
-.esc__m b{font-size:.68rem;font-weight:800;color:var(--tinta);margin-top:.3rem;
-          font-variant-numeric:tabular-nums;transition:color .3s}
-.esc__m span{font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-             color:var(--tinta-fraca);margin-top:.1rem}
-.esc__m--on i,.esc__m:focus-visible i{transform:scaleY(1.5);background:var(--relva-viva)}
-.esc__m--on b,.esc__m:focus-visible b{color:var(--relva)}
-@media (hover:hover){
-  .esc__m:hover i{transform:scaleY(1.5);background:var(--relva-viva)}
-  .esc__m:hover b{color:var(--relva)}
-}
-/* Entram uma a uma, da esquerda para a direita, como a fila. */
-.js .esc__m{opacity:0;transform:translate(-50%,-8px)}
-.js .vis .esc__m{opacity:1;transform:translateX(-50%);
-  transition:opacity .4s var(--curva) calc(var(--i) * 60ms + 400ms),
-             transform .4s var(--curva) calc(var(--i) * 60ms + 400ms)}
 
 /* ── o taco escolhido, em grande ────────────────────────── */
 

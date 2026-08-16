@@ -203,8 +203,17 @@ export async function contagens(cx, lingua = 'pt') {
       r: en ? 'National titles' : 'Títulos nacionais' },
     { n: provas.filter((p) => p.nacional === 'vice').length,
       r: en ? 'National runner-up' : 'Vice-campeã nacional' },
+    /* Duas contagens e não uma, porque são duas coisas.
+     *
+     * «Chamadas à Seleção» é quantas vezes foi convocada — inclui as provas
+     * disputadas em Portugal, que também são convocatórias. «Provas fora» é
+     * quantas vezes saiu do país, convocada ou por iniciativa própria. Postas
+     * lado a lado dizem o que nenhuma diz sozinha: com que frequência é
+     * chamada, e quanto do calendário dela é feito na estrada. */
     { n: provas.filter((p) => p.selos?.includes('selecao')).length,
-      r: en ? 'Caps for Portugal' : 'Internacionalizações' },
+      r: en ? 'Caps for Portugal' : 'Chamadas à Seleção' },
+    { n: provas.filter((p) => p.pais && p.pais !== 'PT').length,
+      r: en ? 'Events abroad' : 'Provas fora' },
     { n: provas.filter((p) => p.pos === 1).length,
       r: en ? 'Wins' : 'Vitórias' },
   ].filter((l) => l.n);
