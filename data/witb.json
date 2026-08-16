@@ -66,10 +66,14 @@
         "pt": "Putter",
         "en": "Putter"
       },
-      "m": "Scotty Cameron Phantom 5"
+      "m": "Scotty Cameron Phantom 5",
+      "img": "putter.webp"
     }
   ],
-  "bola": "Titleist Pro V1",
+  "bola": {
+    "m": "Titleist Pro V1",
+    "img": "bola.webp"
+  },
   "luva": null,
   "saco": null,
   "extras": [

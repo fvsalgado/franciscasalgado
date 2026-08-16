@@ -298,37 +298,47 @@ export async function witb(cx, lingua = 'pt') {
   try { d = await (await fetch('/data/witb.json', { cache: 'no-cache' })).json(); } catch { return; }
 
   const en = lingua === 'en';
+  /* A bola, a luva e o saco tanto podem ser uma linha de texto como um objecto
+     com fotografia. Quem escreve o data/witb.json não tem de saber qual das
+     duas formas o desenho precisa — escreve o nome, e acrescenta a imagem se e
+     quando ela existir. */
+  const nome = (v) => (typeof v === 'string' ? v : v?.m || '');
   const linhas = [
     ...(d.tacos || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua) })),
-    ...(d.bola ? [{ r: en ? 'Ball' : 'Bola', m: d.bola }] : []),
-    ...(d.luva ? [{ r: en ? 'Glove' : 'Luva', m: d.luva }] : []),
-    ...(d.saco ? [{ r: en ? 'Bag' : 'Saco', m: d.saco }] : []),
+    ...(d.bola ? [{ r: en ? 'Ball' : 'Bola', m: nome(d.bola) }] : []),
+    ...(d.luva ? [{ r: en ? 'Glove' : 'Luva', m: nome(d.luva) }] : []),
+    ...(d.saco ? [{ r: en ? 'Bag' : 'Saco', m: nome(d.saco) }] : []),
     ...(d.extras || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua) })),
   ].filter((l) => l.m);
 
   if (!linhas.length) { cx.innerHTML = ''; mostrar(cx, false); return; }
   mostrar(cx, true);
 
-  /* Uma fila com os tacos que têm fotografia, e por baixo a ficha inteira.
+  /* Uma fila com o que tem fotografia, e por baixo a ficha inteira.
    *
-   * E não uma grelha de cartões, um por taco: cinco dos oito têm imagem — do
-   * putter e da bola não há —, e cartões meio vazios pelo meio fariam parecer
-   * que falta o taco quando o que falta é a fotografia. Assim a fila é o
-   * retrato do saco e a lista é a ficha; nenhuma promete o que a outra tem.
+   * E não uma grelha de cartões, um por taco: nem tudo o que está no saco tem
+   * imagem, e cartões meio vazios pelo meio fariam parecer que falta o taco
+   * quando o que falta é a fotografia. Assim a fila é o retrato do saco e a
+   * lista é a ficha; nenhuma promete o que a outra tem.
    *
-   * Alinhados pela base, com a mesma altura: é como estão encostados a um
-   * saco, e é o que faz a fila ler-se como um conjunto e não como cinco
-   * recortes. */
-  const comFoto = (d.tacos || []).filter((t) => t.img);
-  /* O crédito entra uma vez só, na última. As outras vão marcadas como já
-     creditadas — são todas da mesma origem, e cinco vezes «Cobra Golf» seguidas
-     é ruído a ler com os olhos e pior ainda a ouvir num leitor de ecrã. */
-  const fila = comFoto.length ? `
-    <div class="witb__fila">${comFoto.map((t, i) => `
+   * Alinhados pela base, com a mesma altura de imagem: é como estão encostados
+   * a um saco, e é o que faz a fila ler-se como um conjunto e não como sete
+   * recortes soltos. A bola entra ao fim, e entra pequena — a escala de cada
+   * uma vem da tela em que foi montada, não do CSS. */
+  const naFila = [
+    ...(d.tacos || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, img: t.img })),
+    { r: en ? 'Ball' : 'Bola', m: nome(d.bola), img: d.bola?.img },
+  ].filter((x) => x.img && x.m);
+
+  /* Os créditos vão todos para a mesma linha, por baixo da fila — ver o
+     js/creditos.js, que é quem sabe de que marca é cada ficheiro. */
+  const fila = naFila.length ? `
+    <div class="witb__fila">${naFila.map((x) => `
       <figure class="witb__t">
-        <img src="/img/witb/${t.img}" alt="${tx(t.t, lingua)}: ${t.m}"
-             loading="lazy" decoding="async"${i < comFoto.length - 1 ? ' data-credito-feito="1"' : ''} />
-      </figure>`).join('')}</div>` : '';
+        <img src="/img/witb/${x.img}" alt="${x.r}: ${x.m}"
+             loading="lazy" decoding="async" data-credito-em="witbCred" />
+      </figure>`).join('')}</div>
+    <p class="witb__c" id="witbCred" data-credito-base="${en ? 'Images:' : 'Imagens:'}"></p>` : '';
 
   cx.className = 'witb';
   cx.innerHTML = `${fila}
