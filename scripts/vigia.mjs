@@ -391,11 +391,26 @@ if (temUtilizador && temSenha) {
     const d = await buscarRegisto(process.env.FPG_USER, process.env.FPG_PASS);
     const antes = await ler('data/handicap-historico.json').catch(() => ({ pontos: [] }));
 
-    if (d.pontos.length > (antes.pontos || []).length) {
-      const novos = d.pontos.length - (antes.pontos || []).length;
-      novidades.push(`histórico de handicap: +${novos} degrau(s), ${d.pontos.length} no total`);
+    /* Juntar, nunca substituir.
+     *
+     * A área reservada mostra as últimas cem voltas, e só essas. Substituir o
+     * ficheiro por cada leitura apagava tudo o que ficou para trás dessa
+     * janela: o histórico encolheria sozinho com o tempo, e a curva perderia
+     * o princípio — que é justamente a parte que mostra a evolução. A data é
+     * chave; quando a mesma data vier outra vez, vale a leitura de hoje. */
+    const porData = new Map((antes.pontos || []).map((p) => [p.data, p]));
+    for (const p of d.pontos) porData.set(p.data, p);
+    const juntos = [...porData.values()].sort((a, b) => a.data.localeCompare(b.data));
+
+    /* Os degraus contam-se outra vez sobre o conjunto: duas janelas coladas
+       podem ter o mesmo valor de um lado e do outro da emenda. */
+    const pontos = juntos.filter((p, i) => i === 0 || juntos[i - 1].hcp !== p.hcp);
+
+    if (pontos.length > (antes.pontos || []).length) {
+      const novos = pontos.length - (antes.pontos || []).length;
+      novidades.push(`histórico de handicap: +${novos} degrau(s), ${pontos.length} no total`);
     }
-    await gravar('data/handicap-historico.json', { atualizado: hoje, pontos: d.pontos });
+    await gravar('data/handicap-historico.json', { atualizado: hoje, pontos });
 
     const res = await ler('data/resultados.json');
     const conhecidas = res.provas.filter((p) => p.data);
