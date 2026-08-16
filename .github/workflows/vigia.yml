@@ -101,6 +101,16 @@ jobs:
           echo "não consegui empurrar ao fim de três tentativas"
           exit 1
 
+      # Avisar os motores só quando há mesmo coisa nova, e só depois de a Vercel
+      # ter tido tempo de publicar — avisar de um endereço que ainda serve a
+      # versão antiga é pior do que não avisar. O Google não participa neste
+      # protocolo; para esse é o sitemap e a Search Console.
+      - name: Avisar os motores de busca
+        if: steps.commit.outputs.mudou == 'sim'
+        run: |
+          sleep 90
+          node scripts/indexnow.mjs || echo "IndexNow falhou — não é motivo para falhar a ronda"
+
       - name: Abrir issue com o que precisa de olhos
         if: always()
         env:

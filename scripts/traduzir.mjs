@@ -90,10 +90,13 @@ function traduzirCorpo(html, ficheiro) {
 function arrumarCabeca(html, ficheiro, { en }) {
   const nome = ficheiro === 'index.html' ? '' : ficheiro;
   const pt = `${SITIO}/${nome}`;
-  /* Com barra no fim: é o endereço onde a página vive. As ligações internas já
-     não dependem disso — ver ligacoesInglesas() —, mas o canonical deve apontar
-     ao endereço canónico e não a um que o servidor tenha de resolver. */
-  const ing = nome ? `${SITIO}/en/${nome}` : `${SITIO}/en/`;
+  /* Sem barra no fim, e isto é preciso: o `trailingSlash: false` do vercel.json
+     faz `/en/` responder 308 para `/en`. Um canonical — ou um hreflang — que
+     aponte a um endereço que redirecciona é um sinal a contradizer-se, e era o
+     que a casa inglesa toda estava a declarar. O endereço que responde 200 é
+     `/en`. As ligações internas continuam a construir-se com barra, que é o que
+     faz `/en/resultados.html` funcionar; só a raiz é que muda. */
+  const ing = nome ? `${SITIO}/en/${nome}` : `${SITIO}/en`;
   const meu = en ? ing : pt;
   const cab = CABECALHOS[ficheiro];
 

@@ -44,12 +44,19 @@ const aqui = () => {
  * sítio inglês abaixo. A correção que não depende de configuração nenhuma é
  * esta: escrever o caminho inteiro. */
 const RAIZ_LINGUA = (lingua) => (lingua === 'en' ? '/en/' : '/');
-const caminho = (ficheiro, lingua) => `${RAIZ_LINGUA(lingua)}${ficheiro === 'index.html' ? '' : ficheiro}`;
+/* A raiz inglesa escreve-se sem barra: `/en/` responde 308 para `/en`, e uma
+   ligação interna a um redireccionamento é um salto que não é preciso dar —
+   além de ser o endereço que o canonical declara. As páginas com nome mantêm a
+   barra, que é o que faz `/en/resultados.html` existir. */
+const INICIO = (lingua) => (lingua === 'en' ? '/en' : '/');
+const caminho = (ficheiro, lingua) => (ficheiro === 'index.html'
+  ? INICIO(lingua)
+  : `${RAIZ_LINGUA(lingua)}${ficheiro}`);
 
 /* A marca: o nome ao lado da bandeira do buraco. Uma coisa e outra, e não um
    logótipo por desenhar — a bandeira já diz de que desporto se trata. */
 const marca = (lingua = 'pt') => `
-  <a class="marca" href="${RAIZ_LINGUA(lingua)}" data-mag aria-label="Francisca Salgado">
+  <a class="marca" href="${INICIO(lingua)}" data-mag aria-label="Francisca Salgado">
     ${icone('bandeira', 'marca__b')}
     <span class="marca__t">Francisca&nbsp;Salgado</span>
   </a>`;
