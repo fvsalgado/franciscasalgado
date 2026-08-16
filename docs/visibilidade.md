@@ -63,6 +63,12 @@ passavam dos 180 caracteres e apareciam truncadas.
   é a razão de existirem, e o `llms.txt` aponta para lá —, mas deixam de poder
   aparecer como resultados de pesquisa. Ficheiros JSON no índice não servem
   ninguém e diluem o domínio.
+- `X-Robots-Tag: noindex` **em todo o pedido cujo Host não seja
+  `franciscasalgado.golf`**. O `franciscasalgado.vercel.app` servia o sítio
+  inteiro com 200 e sem cabeçalho nenhum: o canonical de cada página apontava
+  ao domínio certo, mas o canonical é uma pista e não uma regra. A regra apanha
+  também os endereços de pré-visualização de cada deploy e qualquer domínio que
+  venha a ser apontado para aqui sem ninguém se lembrar disto.
 - **IndexNow** (`scripts/indexnow.mjs`). Avisa o Bing, o Yandex, o Seznam e o
   Naver de que há coisa nova, em vez de esperar que passem por cá. A chave está
   em `/e8c639310874a6a21c0f35e534c16313.txt` — não é segredo, é a prova de que
@@ -90,10 +96,28 @@ Por ordem de efeito. Nenhuma destas se faz a partir do repositório.
    É isto que tira o sítio da fila. Sem Search Console, esperam-se semanas;
    com, costumam ser dias.
 
+   **Feito a 16 de agosto de 2026.** O TXT está no apex do `.golf`
+   (`google-site-verification=xLmbUb58gO54…`), o que faz uma propriedade de
+   domínio — cobre `www`, subdomínios, http e https de uma vez.
+
 2. **O domínio `.com`.** Serve hoje um sítio antigo — «Francisca — Golfe
    Performance» —, responde 200 e não tem `noindex`. Compete pelo mesmo nome e
    confunde quem procura. Redireccionar tudo para `franciscasalgado.golf` com
    301 é o melhor: passa a autoridade que tiver, em vez de a deitar fora.
+
+   **Não é preciso mexer no DNS.** O `.com` já aponta para a Vercel — o apex
+   no `76.76.21.21` e o `www` em `cname.vercel-dns.com`, com os nameservers na
+   Porkbun. O sítio antigo é outro projeto Vercel, que vive em
+   `francisca-salgado.vercel.app`. Portanto:
+
+   1. no projeto antigo, Settings → Domains, remover `franciscasalgado.com` e
+      `www.franciscasalgado.com` (o projeto não desaparece; continua no
+      endereço `.vercel.app`);
+   2. no projeto deste sítio, Settings → Domains, acrescentar os dois e, em
+      cada um, escolher **Redirect to** → `franciscasalgado.golf`, permanente.
+
+   A ordem importa: um domínio só pode estar num projeto de cada vez, e o
+   segundo passo falha enquanto o primeiro não estiver feito.
 
 3. **Ligações de fora.** É o factor que mais pesa e o único que não se resolve
    com código. Por ordem de credibilidade: a ficha dela no portal da FPG,
