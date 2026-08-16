@@ -309,9 +309,31 @@ export async function witb(cx, lingua = 'pt') {
   if (!linhas.length) { cx.innerHTML = ''; mostrar(cx, false); return; }
   mostrar(cx, true);
 
-  cx.className = 'factos';
-  cx.innerHTML = linhas.map((l) => `
-    <div><dt>${l.r}</dt><dd>${l.m}${l.n ? ` <span class="dest__o">${l.n}</span>` : ''}</dd></div>`).join('');
+  /* Uma fila com os tacos que têm fotografia, e por baixo a ficha inteira.
+   *
+   * E não uma grelha de cartões, um por taco: cinco dos oito têm imagem — do
+   * putter e da bola não há —, e cartões meio vazios pelo meio fariam parecer
+   * que falta o taco quando o que falta é a fotografia. Assim a fila é o
+   * retrato do saco e a lista é a ficha; nenhuma promete o que a outra tem.
+   *
+   * Alinhados pela base, com a mesma altura: é como estão encostados a um
+   * saco, e é o que faz a fila ler-se como um conjunto e não como cinco
+   * recortes. */
+  const comFoto = (d.tacos || []).filter((t) => t.img);
+  /* O crédito entra uma vez só, na última. As outras vão marcadas como já
+     creditadas — são todas da mesma origem, e cinco vezes «Cobra Golf» seguidas
+     é ruído a ler com os olhos e pior ainda a ouvir num leitor de ecrã. */
+  const fila = comFoto.length ? `
+    <div class="witb__fila">${comFoto.map((t, i) => `
+      <figure class="witb__t">
+        <img src="/img/witb/${t.img}" alt="${tx(t.t, lingua)}: ${t.m}"
+             loading="lazy" decoding="async"${i < comFoto.length - 1 ? ' data-credito-feito="1"' : ''} />
+      </figure>`).join('')}</div>` : '';
+
+  cx.className = 'witb';
+  cx.innerHTML = `${fila}
+    <dl class="factos">${linhas.map((l) => `
+      <div><dt>${l.r}</dt><dd>${l.m}${l.n ? ` <span class="dest__o">${l.n}</span>` : ''}</dd></div>`).join('')}</dl>`;
 }
 
 /* ── o swing, para quem avalia ────────────────────────────────

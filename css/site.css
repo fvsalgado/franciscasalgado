@@ -1016,6 +1016,24 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 .apoio-abre__f img{width:100%;height:auto;display:block;border:1px solid var(--linha);
                    background:var(--superficie)}
 
+/* ── o que leva no saco ─────────────────────────────────── */
+/* Os tacos alinhados pela base e todos com a mesma altura de imagem: é como
+   estão encostados a um saco. Alinhados pelo centro, o driver e a wedge
+   flutuavam a alturas diferentes e a fila lia-se como cinco recortes soltos.
+
+   A largura de cada um segue a proporção da fotografia, por isso o driver
+   ocupa mais do que a wedge — que é exactamente o que se quer: a diferença de
+   tamanho entre um driver e uma wedge é informação. */
+.witb__fila{display:flex;align-items:flex-end;justify-content:center;
+            gap:clamp(.6rem,2.5vw,2.4rem);margin:0 0 clamp(1.6rem,3.5vw,2.6rem);
+            flex-wrap:wrap}
+.witb__t{margin:0;flex:0 1 auto}
+.witb__t img{display:block;height:clamp(96px,15vw,190px);width:auto;max-width:100%}
+/* O crédito entra uma vez só, na última — as outras vão marcadas como já
+   creditadas no js/recruiting.js, que é o mecanismo próprio para isso. */
+.witb__t figcaption{font-size:.62rem;letter-spacing:.02em;color:var(--tinta-fraca);
+                    opacity:.75;text-align:right;padding-top:.4rem}
+
 /* ── perguntas frequentes ───────────────────────────────── */
 /* Rebatíveis. Eram seis perguntas abertas em duas colunas, e isso é um muro de
    texto a meio da página inicial: quem tem a pergunta lê seis respostas para
