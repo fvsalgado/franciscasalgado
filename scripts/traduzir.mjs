@@ -44,16 +44,18 @@ const CABECALHOS = {
   },
   'resultados.html': {
     titulo: 'Results — Francisca Salgado',
-    desc: 'Every result Francisca Salgado has on record, season by season — rounds, totals and score to par — plus her WAGR and European Golf Rankings positions.',
+    desc: 'Francisca Salgado year by year: five national titles, twenty-two national-team appearances '
+      + 'and the highlights of every season, each one sourced.',
   },
   'recruiting.html': {
     titulo: 'College recruiting — Francisca Salgado',
-    desc: 'Francisca Salgado, Portuguese amateur golfer, class of 2027: handicap, WAGR world ranking, European U18 ranking, schedule and results — for college coaches.',
+    desc: 'Francisca Salgado, Portuguese amateur golfer, class of 2027: handicap, WAGR world ranking '
+      + 'and European ranking — for college coaches.',
   },
   'witb.html': {
     titulo: "What's in the bag — Francisca Salgado",
-    desc: "Every one of Francisca Salgado's fourteen clubs: Cobra OPTM X driver, 3DP Tour irons, King wedges, "
-      + 'Scotty Cameron Phantom 5 putter, Titleist Pro V1 ball — with lofts, shafts and the bag.',
+    desc: "Every one of Francisca Salgado's fourteen clubs: Cobra driver and irons, King wedges, "
+      + 'Scotty Cameron Phantom 5 putter and Titleist Pro V1 ball.',
   },
   'imprensa.html': {
     titulo: 'Press — Francisca Salgado',
