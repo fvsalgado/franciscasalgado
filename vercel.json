@@ -92,6 +92,21 @@
       ]
     },
     {
+      "source": "/(.*)",
+      "missing": [
+        {
+          "type": "host",
+          "value": "franciscasalgado.golf"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
       "source": "/data/(.*)",
       "headers": [
         {
