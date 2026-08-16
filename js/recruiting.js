@@ -73,9 +73,14 @@ export async function fichaRecruiting(cx, lingua = 'pt') {
     .then((d) => (d.desde && d.desde !== d.atualizado ? d.desde : null))
     .catch(() => null);
 
-  const cartao = ({ v, sup, r, s, nota }) => `
+  /* Os quatro primeiros cartões são números curtos — 0,3 · 1944.ª · 198.ª ·
+     2027 — e por isso o valor é tipografia de display, grande. O quinto é uma
+     data por extenso, e à mesma medida «3–5 SETEMBRO 2026» saía do cartão e do
+     ecrã: ficava cortado a meio da palavra, escondido pelo overflow do corpo.
+     Uma data não é um algarismo e não se lê à altura de um. */
+  const cartao = ({ v, sup, r, s, nota, texto }) => `
     <article class="rec">
-      <span class="rec__v num">${v}${sup ? `<sup>${sup}</sup>` : ''}</span>
+      <span class="rec__v num${texto ? ' rec__v--t' : ''}">${v}${sup ? `<sup>${sup}</sup>` : ''}</span>
       <span class="rec__r">${r}</span>
       <p class="rec__s">${s}</p>
       ${nota ? `<p class="rec__n">${nota}</p>` : ''}
@@ -111,7 +116,7 @@ export async function fichaRecruiting(cx, lingua = 'pt') {
   const prox = await proxima(lingua);
   if (prox) {
     const [quando, nome] = prox.texto.split(' · ');
-    cartoes.push(cartao({ v: quando, r: t.prox, s: nome || '' }));
+    cartoes.push(cartao({ v: quando, r: t.prox, s: nome || '', texto: true }));
   }
 
   cx.className = 'recs';

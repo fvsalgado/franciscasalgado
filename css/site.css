@@ -1086,14 +1086,32 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
    a seguir à fila — que é onde interessa vê-la, e não depois de dez linhas de
    loft e de shaft. Numa coluna, ganha a esquerda pela mesma razão. */
 .witb__b{display:grid;gap:clamp(1.4rem,3.5vw,3rem);align-items:start}
-@media (min-width:820px){
+/* As duas colunas entram cedo, aos 720. Mais tarde, a coluna única chegava aos
+   700 pixéis de largura, e um retrato alto encaixado à força numa faixa dessas
+   é um recorte tão apertado que corta o nome no saco — que é a única razão para
+   a fotografia estar ali. Estreita, ao lado da ficha, a fotografia cabe
+   inteira. */
+@media (min-width:720px){
   .witb__b{grid-template-columns:clamp(170px,21%,260px) minmax(0,1fr)}
 }
-/* Num telemóvel ocupa a largura toda da coluna, e um retrato à largura toda são
-   setecentos pixéis de altura antes de se chegar à ficha. Sessenta por cento
-   chega para se ver o nome no saco. */
-.witb__s{margin:0;max-width:min(20rem,62%)}
+.witb__s{margin:0}
 .witb__s img{display:block;width:100%;height:auto;border-radius:3px}
+/* Num telemóvel a fotografia ocupa a coluna toda, para o lado direito dela
+   assentar na mesma linha que os traços da ficha e que tudo o resto.
+ *
+ * Foi tentado o contrário — deixá-la estreita, a 62% —, e ficava alinhada à
+ * esquerda e a acabar a meio do nada à direita, que é o que se lê como
+ * desalinhado. À largura toda e na proporção do original, um retrato alto, eram
+ * setecentos pixéis de fotografia antes de se chegar ao primeiro taco. Em
+ * quadrado, alinha dos dois lados e cabe; e o corte é ao alto, na parte que
+ * interessa — o nome dela impresso no saco. */
+@media (max-width:719px){
+  /* A altura em `clamp` e não uma proporção fixa: num telemóvel dá um quadrado,
+     e num tablet, onde a coluna é o dobro da largura, um quadrado seriam
+     setecentos pixéis de altura outra vez. Assim aperta-se numa faixa à medida
+     que a coluna alarga, e alinha nas duas pontas em qualquer largura. */
+  .witb__s img{height:clamp(240px,88vw,400px);object-fit:cover;object-position:50% 57%}
+}
 
 /* A linha da ficha que corresponde ao taco escolhido. */
 /* Sem sombra a alargá-la. A linha acesa levava `box-shadow: 0 0 0 .55rem`, que
@@ -1230,6 +1248,12 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
         font-size:clamp(2.6rem,6vw,4rem);line-height:.92;letter-spacing:-.03em;
         color:var(--relva);font-variant-numeric:tabular-nums}
 .rec__v sup{font-size:.36em;vertical-align:super;margin-left:.06em}
+/* O cartão cujo valor é texto e não algarismo — a data da próxima prova. Ao
+   tamanho dos outros, «3–5 SETEMBRO 2026» era mais largo do que o cartão e do
+   que o ecrã: saía cortado a meio da palavra, e só não se via a rolagem porque
+   o corpo a esconde. Mais pequeno, e a partir palavra a palavra, cabe. */
+.rec__v--t{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.06;
+           overflow-wrap:break-word;hyphens:auto}
 .rec__r{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;
         color:var(--tinta);margin-top:.35rem}
 .rec__s{margin:0;font-size:.84rem;line-height:1.55;color:var(--tinta-fraca)}
