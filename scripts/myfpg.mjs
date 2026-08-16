@@ -31,7 +31,18 @@
 
 const AJAX = 'https://area.my.fpg.pt/wp-admin/admin-ajax.php';
 const ATERRAR = 'https://my.fpg.pt/ExternalLandingPage.aspx';
-const RESULTADOS = 'https://my.fpg.pt/Home/Results';
+/* O endereço da página de resultados foi lido de uma barra de endereço cortada
+   a meio — «my.fpg.pt/Home/Resul…». Em vez de apostar num, tentam-se os
+   plausíveis por ordem e fica o primeiro que traga tabela. Assim, se eles
+   mudarem o nome ou se o palpite estiver errado, isto encontra o caminho em vez
+   de falhar com um 404 que ninguém sabe interpretar. */
+const RESULTADOS = [
+  'https://my.fpg.pt/Home/Results',
+  'https://my.fpg.pt/Home/ResultsWHS',
+  'https://my.fpg.pt/Home/Resultados',
+  'https://my.fpg.pt/Home/Result',
+  'https://my.fpg.pt/Home/Index',
+];
 
 const COMO_BROWSER = {
   'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
@@ -209,14 +220,19 @@ export function degraus(pontos) {
 
 export async function buscarRegisto(utilizador, senha) {
   const jar = await entrar(utilizador, senha);
-  const r = await ir(RESULTADOS, jar, { headers: { Referer: 'https://my.fpg.pt/' } });
-  if (!r.ok) throw new Error(`resultados: HTTP ${r.status}`);
-  const html = await r.text();
-  const { pontos, provas } = lerRegisto(html);
-  if (!pontos.length && !provas.length) {
-    throw new Error('página lida mas sem tabela — o myFPG mudou de formato?');
+
+  const tentados = [];
+  for (const url of RESULTADOS) {
+    let r;
+    try { r = await ir(url, jar, { headers: { Referer: 'https://my.fpg.pt/' } }); }
+    catch (e) { tentados.push(`${url.split('/').pop()}: ${e.message}`); continue; }
+    if (!r.ok) { tentados.push(`${url.split('/').pop()}: HTTP ${r.status}`); continue; }
+
+    const { pontos, provas } = lerRegisto(await r.text());
+    if (!pontos.length && !provas.length) { tentados.push(`${url.split('/').pop()}: sem tabela`); continue; }
+    return { pontos: degraus(pontos), provas, brutos: pontos.length, de: url };
   }
-  return { pontos: degraus(pontos), provas, brutos: pontos.length };
+  throw new Error(`nenhuma página de resultados deu tabela — ${tentados.join(' · ')}`);
 }
 
 /* ── correr à mão ──────────────────────────────────────────────────────── */
