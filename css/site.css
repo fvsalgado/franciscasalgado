@@ -1045,18 +1045,28 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 
 /* Tirar um taco do saco: sobe, inclina-se um bocado e ganha sombra. O nome
    entra por baixo, no espaço que já estava reservado — assim nada se mexe de
-   lugar e a fila não salta quando o rato passa. */
-.witb__t:hover img,.witb__t:focus-visible img,.witb__t--on img{
+   lugar e a fila não salta quando o rato passa.
+ *
+ * O `:hover` fica fechado atrás de `(hover:hover)`. Num telemóvel o browser
+ * aplica-o ao tocar e deixa-o pegado até se tocar noutro sítio, e um taco que
+ * fica levantado sem ninguém o ter escolhido lê-se como avaria. */
+.witb__t:focus-visible img,.witb__t--on img{
   transform:translateY(-18px) rotate(-2.5deg);
   filter:drop-shadow(0 14px 16px rgba(0,0,0,.24))}
+@media (hover:hover){
+  .witb__t:hover img{transform:translateY(-18px) rotate(-2.5deg);
+    filter:drop-shadow(0 14px 16px rgba(0,0,0,.24))}
+}
 
 .witb__n{position:absolute;left:50%;bottom:.45rem;transform:translate(-50%,.35rem);
          white-space:nowrap;opacity:0;pointer-events:none;
          transition:opacity .3s var(--curva),transform .3s var(--curva);
          font-size:.58rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
          color:var(--tinta)}
-.witb__t:hover .witb__n,.witb__t:focus-visible .witb__n,.witb__t--on .witb__n{
-  opacity:1;transform:translate(-50%,0)}
+.witb__t:focus-visible .witb__n,.witb__t--on .witb__n{opacity:1;transform:translate(-50%,0)}
+@media (hover:hover){
+  .witb__t:hover .witb__n{opacity:1;transform:translate(-50%,0)}
+}
 
 /* Entrada: os tacos assentam um a seguir ao outro, da esquerda para a direita,
    como quem arruma o saco. Corre uma vez, quando a secção aparece.
@@ -1086,9 +1096,13 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 .witb__s img{display:block;width:100%;height:auto;border-radius:3px}
 
 /* A linha da ficha que corresponde ao taco escolhido. */
+/* Sem sombra a alargá-la. A linha acesa levava `box-shadow: 0 0 0 .55rem`, que
+   é meio centímetro para cada lado — num ecrã largo cabia na margem, num
+   telemóvel não: a linha acesa saía da coluna e ficava mais larga do que os
+   traços de cima e de baixo, do retrato do saco e de tudo o resto. Preenchida
+   até à borda da própria linha, fica alinhada por construção. */
 .witb__f > div{transition:background .3s var(--curva)}
-.witb__f > div.witb__f--on{background:var(--papel);
-  box-shadow:0 0 0 .55rem var(--papel);border-radius:2px}
+.witb__f > div.witb__f--on{background:var(--papel);border-radius:3px}
 
 /* Uma linha de créditos para as sete imagens, e não uma legenda debaixo de
    cada uma: as legendas ocupavam altura dentro de uma fila alinhada pela base

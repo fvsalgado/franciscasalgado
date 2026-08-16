@@ -415,10 +415,22 @@ function ligarSaco(cx) {
     });
   };
 
+  /* Passar por cima só se liga onde há por onde passar.
+   *
+   * Num ecrã de toque não há: o `pointerenter` dispara com o dedo a rolar, e as
+   * linhas da ficha acendiam-se e apagavam-se sozinhas por baixo do dedo
+   * durante a rolagem — vê-se como a página a piscar, e não como uma escolha.
+   * Com dedo, quem escolhe é o toque no taco, que é deliberado e é o que lá
+   * está para isso. É a mesma pergunta que o cursor desenhado faz antes de
+   * existir, no js/movimento.js. */
+  const passaRato = matchMedia('(hover:hover) and (pointer:fine)').matches;
+
   cx.querySelectorAll('.witb__t, .witb__f > div').forEach((el) => {
     const i = el.dataset.i;
-    el.addEventListener('pointerenter', () => { if (i !== preso) marcar(i, true); });
-    el.addEventListener('pointerleave', () => { if (i !== preso) marcar(i, false); });
+    if (passaRato) {
+      el.addEventListener('pointerenter', () => { if (i !== preso) marcar(i, true); });
+      el.addEventListener('pointerleave', () => { if (i !== preso) marcar(i, false); });
+    }
     if (!el.matches('.witb__t')) return;
 
     el.addEventListener('focus', () => marcar(i, true));
