@@ -27,13 +27,42 @@ function comLicenca(alvo, texto, c) {
   alvo.append(a);
 }
 
-function colocar(img, texto, c) {
+/* Várias imagens a creditar no mesmo sítio, uma linha só, uma vez por origem.
+ *
+ * A fila do what's in the bag tem sete fotografias de três marcas. Uma legenda
+ * por fotografia desalinhava a fila — a legenda ocupa altura, as imagens estão
+ * alinhadas pela base e a base deixa de ser uma base — e escrevia «Cobra Golf»
+ * cinco vezes seguidas, que é ruído a ler com os olhos e pior num leitor de
+ * ecrã. Numa linha só, cada marca aparece uma vez.
+ *
+ * `data-credito-base` é o rótulo que já lá está («Imagens:»), escrito por quem
+ * desenhou a linha; sem ele, a linha começa vazia — que é o caso do hero. */
+function juntar(alvo, texto, c, juntos) {
+  let vistos = juntos.get(alvo);
+  if (!vistos) {
+    /* Primeira desta passagem: a linha recomeça. Sem isto, mudar de língua
+       acrescentava a versão inglesa a seguir à portuguesa. */
+    vistos = new Set();
+    juntos.set(alvo, vistos);
+    alvo.textContent = alvo.dataset.creditoBase ? `${alvo.dataset.creditoBase} ` : '';
+  }
+  if (vistos.has(texto)) return;
+  if (vistos.size) alvo.append(' · ');
+  vistos.add(texto);
+
+  const span = document.createElement('span');
+  alvo.append(span);
+  comLicenca(span, texto, c);
+}
+
+function colocar(img, texto, c, juntos) {
   /* `data-credito-em` aponta um elemento onde o crédito deve ir. Serve o hero
      da página inicial, onde a fotografia sangra por trás de tudo e o crédito
-     tem de viver na fila de baixo, longe do resto. */
+     tem de viver na fila de baixo, longe do resto — e a fila do WITB, onde
+     sete imagens partilham a mesma linha. */
   if (img.dataset.creditoEm) {
     const alvo = document.getElementById(img.dataset.creditoEm);
-    if (alvo) { comLicenca(alvo, texto, c); return; }
+    if (alvo) { juntar(alvo, texto, c, juntos); return; }
   }
   const fig = img.closest('figure');
   if (fig) {
@@ -71,6 +100,10 @@ export async function creditos(idioma = 'pt') {
     }
   }
 
+  /* Vive uma passagem e morre. É o que faz a linha do WITB recomeçar do zero a
+     cada mudança de língua em vez de ir crescendo. */
+  const juntos = new Map();
+
   document.querySelectorAll('img').forEach((img) => {
     const src = img.getAttribute('src') || '';
     if (!src) return;
@@ -83,6 +116,6 @@ export async function creditos(idioma = 'pt') {
       console.warn('imagem sem crédito:', src, '— acrescenta em data/creditos.json');
       return;
     }
-    colocar(img, c[idioma] || c.pt, c);
+    colocar(img, c[idioma] || c.pt, c, juntos);
   });
 }

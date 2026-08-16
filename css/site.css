@@ -1019,20 +1019,23 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 /* ── o que leva no saco ─────────────────────────────────── */
 /* Os tacos alinhados pela base e todos com a mesma altura de imagem: é como
    estão encostados a um saco. Alinhados pelo centro, o driver e a wedge
-   flutuavam a alturas diferentes e a fila lia-se como cinco recortes soltos.
+   flutuavam a alturas diferentes e a fila lia-se como sete recortes soltos.
 
    A largura de cada um segue a proporção da fotografia, por isso o driver
    ocupa mais do que a wedge — que é exactamente o que se quer: a diferença de
-   tamanho entre um driver e uma wedge é informação. */
+   tamanho entre um driver e uma wedge é informação. Pela mesma razão a bola
+   foi montada numa tela alta, com a bola só na base: à altura dos outros
+   ficava do tamanho de uma cabeça de driver, que é informação errada. */
 .witb__fila{display:flex;align-items:flex-end;justify-content:center;
-            gap:clamp(.6rem,2.5vw,2.4rem);margin:0 0 clamp(1.6rem,3.5vw,2.6rem);
+            gap:clamp(.6rem,2.5vw,2.4rem);margin:0 0 .55rem;
             flex-wrap:wrap}
 .witb__t{margin:0;flex:0 1 auto}
 .witb__t img{display:block;height:clamp(96px,15vw,190px);width:auto;max-width:100%}
-/* O crédito entra uma vez só, na última — as outras vão marcadas como já
-   creditadas no js/recruiting.js, que é o mecanismo próprio para isso. */
-.witb__t figcaption{font-size:.62rem;letter-spacing:.02em;color:var(--tinta-fraca);
-                    opacity:.75;text-align:right;padding-top:.4rem}
+/* Uma linha de créditos para as sete imagens, e não uma legenda debaixo de
+   cada uma: as legendas ocupavam altura dentro de uma fila alinhada pela base
+   e a base deixava de ser uma base. Quem a preenche é o js/creditos.js. */
+.witb__c{font-size:.62rem;letter-spacing:.02em;color:var(--tinta-fraca);
+         opacity:.75;text-align:right;margin:0 0 clamp(1.6rem,3.5vw,2.6rem)}
 
 /* ── perguntas frequentes ───────────────────────────────── */
 /* Rebatíveis. Eram seis perguntas abertas em duas colunas, e isso é um muro de
