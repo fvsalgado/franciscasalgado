@@ -22,10 +22,25 @@ const aqui = () => {
   return f === '' ? 'index.html' : f;
 };
 
+/* As ligações internas são absolutas, e não relativas.
+ *
+ * Relativas, o inglês depende de o endereço acabar em barra: em `/en/` o
+ * `resultados.html` resolve para `/en/resultados.html`, mas em `/en` — sem
+ * barra — resolve para a raiz e devolve a página portuguesa. Quem estivesse a
+ * ler em inglês caía no português ao mudar de página, e a culpa era de um
+ * carácter.
+ *
+ * Tentou-se corrigir redirecionando `/en` para `/en/`; o Vercel trata os dois
+ * como a mesma origem e o resultado foi um ciclo de redireções que deitou o
+ * sítio inglês abaixo. A correção que não depende de configuração nenhuma é
+ * esta: escrever o caminho inteiro. */
+const RAIZ_LINGUA = (lingua) => (lingua === 'en' ? '/en/' : '/');
+const caminho = (ficheiro, lingua) => `${RAIZ_LINGUA(lingua)}${ficheiro === 'index.html' ? '' : ficheiro}`;
+
 /* A marca: o nome ao lado da bandeira do buraco. Uma coisa e outra, e não um
    logótipo por desenhar — a bandeira já diz de que desporto se trata. */
-const marca = () => `
-  <a class="marca" href="index.html" data-mag aria-label="Francisca Salgado">
+const marca = (lingua = 'pt') => `
+  <a class="marca" href="${RAIZ_LINGUA(lingua)}" data-mag aria-label="Francisca Salgado">
     ${icone('bandeira', 'marca__b')}
     <span class="marca__t">Francisca&nbsp;Salgado</span>
   </a>`;
@@ -85,13 +100,13 @@ export function nav(lingua = 'pt') {
 
   const links = (classe) => PAGINAS.map((p) => {
     const ativa = p.href === atual;
-    return `<a href="${p.href}"${ativa ? ' aria-current="page"' : ''}${classe ? ' data-mag' : ''}>${p[lingua]}</a>`;
+    return `<a href="${caminho(p.href, lingua)}"${ativa ? ' aria-current="page"' : ''}${classe ? ' data-mag' : ''}>${p[lingua]}</a>`;
   }).join('');
 
   alvo.className = 'nav';
   alvo.innerHTML = `
     <div class="nav__in">
-      ${marca()}
+      ${marca(lingua)}
       <nav class="nav__links" aria-label="${en ? 'Main' : 'Principal'}">${links(true)}</nav>
       <div class="nav__fer">
         <button class="cap cap--ico" id="btTema" type="button"
@@ -154,14 +169,14 @@ export function rodape(lingua = 'pt', canais = []) {
         </div>
         <div>
           <p class="rot">${t.ver}</p>
-          <ul class="pe__l">${PAGINAS.map((p) => `<li><a href="${p.href}" data-mag>${p[lingua]}</a></li>`).join('')}</ul>
+          <ul class="pe__l">${PAGINAS.map((p) => `<li><a href="${caminho(p.href, lingua)}" data-mag>${p[lingua]}</a></li>`).join('')}</ul>
         </div>
       </div>
       <div class="pe__f">
         <span>${t.cred}</span>
         <nav class="pe__legal" aria-label="${t.legal}">
-          <a href="privacidade.html" data-mag>${t.legal}</a>
-          <a href="termos.html" data-mag>${t.termos}</a>
+          <a href="${caminho('privacidade.html', lingua)}" data-mag>${t.legal}</a>
+          <a href="${caminho('termos.html', lingua)}" data-mag>${t.termos}</a>
           <button class="pe__ck" type="button" id="abrirCookies">${t.cookies}</button>
         </nav>
         <span class="num">Óbidos · 39°22′N 9°09′W</span>

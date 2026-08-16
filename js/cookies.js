@@ -86,7 +86,7 @@ function banner(lingua) {
   cx.setAttribute('role', 'region');
   cx.setAttribute('aria-label', t.titulo);
   cx.innerHTML = `
-    <p class="ck__t">${t.texto} <a href="privacidade.html">${t.politica}</a>.</p>
+    <p class="ck__t">${t.texto} <a href="${lingua === 'en' ? '/en/' : '/'}privacidade.html">${t.politica}</a>.</p>
     <div class="ck__b">
       <button class="cap" type="button" id="ckNao">${t.recusar}</button>
       <button class="cap cap--cheio" type="button" id="ckSim">${t.aceitar}</button>

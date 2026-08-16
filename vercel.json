@@ -32,14 +32,14 @@
       "source": "/en/contacto.html",
       "destination": "/en/parcerias.html#contacto",
       "permanent": true
-    },
-    {
-      "source": "/en",
-      "destination": "/en/",
-      "permanent": true
     }
   ],
-  "rewrites": [],
+  "rewrites": [
+    {
+      "source": "/en",
+      "destination": "/en/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/fonts/(.*)",

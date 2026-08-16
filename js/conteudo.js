@@ -117,7 +117,7 @@ export async function escadas(cx, lingua = 'pt') {
       <p class="degrau__x">${tx(e.x, lingua)}</p>
       ${e.inclui?.length ? `<ul class="degrau__u">${e.inclui
         .map((u) => `<li>${tx(u, lingua)}</li>`).join('')}</ul>` : ''}
-      <a class="degrau__b" href="parcerias.html#contacto" data-mag>${en ? 'Ask for a proposal' : 'Pedir uma proposta'}</a>
+      <a class="degrau__b" href="${en ? '/en/' : '/'}parcerias.html#contacto" data-mag>${en ? 'Ask for a proposal' : 'Pedir uma proposta'}</a>
     </article>`).join('');
 }
 
