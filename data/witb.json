@@ -74,8 +74,14 @@
     "m": "Titleist Pro V1",
     "img": "bola.webp"
   },
-  "luva": null,
-  "saco": null,
+  "luva": {
+    "m": "FootJoy StaSof",
+    "img": "luva.webp"
+  },
+  "saco": {
+    "m": "Cobra Tour",
+    "foto": "saco.webp"
+  },
   "extras": [
     {
       "t": {
