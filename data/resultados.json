@@ -533,8 +533,7 @@
    "fonte": {
     "nome": "FPG",
     "url": "https://portal.fpg.pt/noticias/francisca-rocha-e-gabriel-sardo-conquistam-taca-da-fpg-bpi/"
-   },
-   "nacional": "vice"
+   }
   },
   {
    "id": "andalucia-2025",
@@ -1261,6 +1260,47 @@
    "pais": "PT"
   },
   {
+   "id": "madrid-2024",
+   "ano": 2024,
+   "data": "2024-05-18",
+   "dataTexto": {
+    "pt": "17–18 maio 2024",
+    "en": "17–18 May 2024"
+   },
+   "torneio": {
+    "pt": "Campeonato Aberto de Madrid Feminino",
+    "en": "Madrid Ladies' Open Championship"
+   },
+   "campo": "",
+   "local": {
+    "pt": "Madrid, Espanha",
+    "en": "Madrid, Spain"
+   },
+   "pais": "ES",
+   "pos": null,
+   "voltas": [
+    85,
+    78
+   ],
+   "total": 163,
+   "par": 19,
+   "escalao": {
+    "pt": "Absoluto",
+    "en": "Open"
+   },
+   "selos": [
+    "selecao"
+   ],
+   "nota": {
+    "pt": "Sete pancadas a menos no segundo dia, depois de um primeiro difícil.",
+    "en": "Seven strokes better on the second day, after a hard first one."
+   },
+   "fonte": {
+    "nome": "FPG",
+    "url": "https://portal.fpg.pt/noticias/ines-belchior-subiu-ao-podio-em-madrid/"
+   }
+  },
+  {
    "id": "aquapor-2-2024",
    "ano": 2024,
    "data": "2024-04-07",
@@ -1302,6 +1342,128 @@
    }
   },
   {
+   "id": "espanha-2024",
+   "ano": 2024,
+   "data": "2024-03-23",
+   "dataTexto": {
+    "pt": "21–23 março 2024",
+    "en": "21–23 March 2024"
+   },
+   "torneio": {
+    "pt": "Campeonato de Espanha Feminino · Stroke Play",
+    "en": "Spanish Ladies' Stroke Play Championship"
+   },
+   "campo": "",
+   "local": {
+    "pt": "Espanha",
+    "en": "Spain"
+   },
+   "pais": "ES",
+   "pos": null,
+   "voltas": [
+    77,
+    78,
+    82
+   ],
+   "total": 237,
+   "par": 21,
+   "escalao": {
+    "pt": "Absoluto",
+    "en": "Open"
+   },
+   "selos": [
+    "selecao"
+   ],
+   "nota": {
+    "pt": "O campeonato absoluto espanhol, ao serviço da Seleção.",
+    "en": "The Spanish senior championship, for the national team."
+   }
+  },
+  {
+   "id": "pt-tour-peru-2024",
+   "ano": 2024,
+   "data": "2024-03-01",
+   "dataTexto": {
+    "pt": "28 fevereiro – 1 março 2024",
+    "en": "28 February – 1 March 2024"
+   },
+   "torneio": {
+    "pt": "PT Tour · Quinta do Peru Open",
+    "en": "PT Tour · Quinta do Peru Open"
+   },
+   "campo": "Quinta do Peru Golfe & Country Club",
+   "local": {
+    "pt": "Sesimbra, Portugal",
+    "en": "Sesimbra, Portugal"
+   },
+   "pais": "PT",
+   "pos": null,
+   "voltas": [
+    84,
+    79,
+    79
+   ],
+   "total": 242,
+   "par": 26,
+   "escalao": {
+    "pt": "Absoluto",
+    "en": "Open"
+   },
+   "selos": [
+    "selecao"
+   ],
+   "nota": {
+    "pt": "Segunda prova do circuito profissional em duas semanas, no campo onde jogou até 2022. Cinco pancadas a menos no segundo dia, e o mesmo cartão no terceiro.",
+    "en": "A second professional-tour start in a fortnight, on the course she played until 2022. Five strokes better on day two, and the same card again on day three."
+   },
+   "fonte": {
+    "nome": "FPG",
+    "url": "https://portal.fpg.pt/noticias/ricardo-santos-finaliza-no-podio-do-quinta-do-peru-open/"
+   }
+  },
+  {
+   "id": "pt-tour-penina-2024",
+   "ano": 2024,
+   "data": "2024-02-16",
+   "dataTexto": {
+    "pt": "14–16 fevereiro 2024",
+    "en": "14–16 February 2024"
+   },
+   "torneio": {
+    "pt": "PT Tour · Penina Open",
+    "en": "PT Tour · Penina Open"
+   },
+   "campo": "Penina Hotel & Golf Resort",
+   "local": {
+    "pt": "Portimão, Portugal",
+    "en": "Portimão, Portugal"
+   },
+   "pais": "PT",
+   "pos": null,
+   "voltas": [
+    75,
+    80,
+    78
+   ],
+   "total": 233,
+   "par": 14,
+   "escalao": {
+    "pt": "Absoluto",
+    "en": "Open"
+   },
+   "selos": [
+    "selecao"
+   ],
+   "nota": {
+    "pt": "Convidada para o circuito profissional português, ainda com catorze anos. Abriu com 75.",
+    "en": "Invited into the Portuguese professional tour, still fourteen. She opened with a 75."
+   },
+   "fonte": {
+    "nome": "FPG",
+    "url": "https://portal.fpg.pt/noticias/daniel-smith-venceu-pt-tour-da-penina/"
+   }
+  },
+  {
    "id": "aquapor-1-2024",
    "ano": 2024,
    "data": "2024-02-04",
@@ -1340,6 +1502,49 @@
    "fonte": {
     "nome": "FPG",
     "url": "https://portal.fpg.pt/noticias/alexandre-abreu-francisca-salgado-e-alexander-amey-vencem-no-1o-torneio-do-circuito-aquapor/"
+   }
+  },
+  {
+   "id": "penina-2024",
+   "ano": 2024,
+   "data": "2024-01-26",
+   "dataTexto": {
+    "pt": "24–26 janeiro 2024",
+    "en": "24–26 January 2024"
+   },
+   "torneio": {
+    "pt": "94.º Campeonato Internacional Amador de Portugal Feminino",
+    "en": "94th Portuguese International Ladies Amateur Championship"
+   },
+   "campo": "Penina Hotel & Golf Resort",
+   "local": {
+    "pt": "Portimão, Portugal",
+    "en": "Portimão, Portugal"
+   },
+   "pais": "PT",
+   "pos": null,
+   "voltas": [
+    79,
+    78,
+    78
+   ],
+   "total": 235,
+   "par": 16,
+   "escalao": {
+    "pt": "Absoluto",
+    "en": "Open"
+   },
+   "selos": [
+    "selecao",
+    "wagr"
+   ],
+   "nota": {
+    "pt": "O quadro internacional em Portugal, com jogadoras de toda a Europa. Três voltas quase iguais — 79, 78, 78 — aos catorze anos.",
+    "en": "The international field at home, with players from across Europe. Three near-identical rounds — 79, 78, 78 — at fourteen."
+   },
+   "fonte": {
+    "nome": "FPG",
+    "url": "https://portal.fpg.pt/noticias/favoritas-puxam-dos-galoes-no-primeiro-dia-do-internacional-de-portugal-de-senhoras/"
    }
   },
   {
@@ -1853,6 +2058,52 @@
    "fonte": {
     "nome": "FPG",
     "url": "https://portal.fpg.pt/noticias/saldo-muito-positivo-da-selecao-nacional-sub12-e-sub14-no-torneio-semana-de-oro-joven/"
+   }
+  },
+  {
+   "id": "nacional-3cat-2021",
+   "ano": 2021,
+   "data": "2021-06-27",
+   "dataTexto": {
+    "pt": "26–27 junho 2021",
+    "en": "26–27 June 2021"
+   },
+   "torneio": {
+    "pt": "Campeonato Nacional de 3.ª Categoria",
+    "en": "National 3rd Category Championship"
+   },
+   "campo": "Aroeira Challenge",
+   "local": {
+    "pt": "Charneca de Caparica, Portugal",
+    "en": "Charneca de Caparica, Portugal"
+   },
+   "pais": "PT",
+   "pos": 1,
+   "posTexto": {
+    "pt": "Campeã Nacional",
+    "en": "National Champion"
+   },
+   "voltas": [
+    82,
+    85
+   ],
+   "total": 167,
+   "par": 23,
+   "escalao": {
+    "pt": "3.ª Categoria",
+    "en": "3rd Category"
+   },
+   "selos": [
+    "titulo"
+   ],
+   "nacional": "campea",
+   "nota": {
+    "pt": "Aos doze anos, e ainda pela Quinta do Peru: ganhou por sete pancadas e assinou o melhor resultado de todo o campeonato, categorias masculinas incluídas.",
+    "en": "At twelve, and still for Quinta do Peru: she won by seven strokes and posted the best score of the entire championship, the men's categories included."
+   },
+   "fonte": {
+    "nome": "FPG",
+    "url": "https://portal.fpg.pt/noticias/aroeira-challenge-recebeu-o-campeonato-nacional-de-3as-e-4os-categorias/"
    }
   },
   {

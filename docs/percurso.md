@@ -54,19 +54,16 @@ Duas destas mudam a leitura do percurso:
 - **O 72 do European Young Masters de 2024** é a melhor volta dela em prova de
   seleção. Está na nota de `eym-2024` e no percurso de 2024.
 
-### O quinto vice-campeonato nacional
+### Um vice-campeonato que faltava
 
-Faltava um à conta que a frase de abertura promete. Está em 2023: vice-campeã
-nacional de Sub-14 pelo segundo ano seguido. A notícia
-`campeoes-nacionais-de-jovens-consagrados-no-montado`, de 5 de novembro de
-2023, di-lo por palavras — «repetiu a posição de 2022» — e acrescenta que foi
+Está em 2023: vice-campeã nacional de Sub-14 pelo segundo ano seguido. A
+notícia `campeoes-nacionais-de-jovens-consagrados-no-montado`, de 5 de novembro
+de 2023, di-lo por palavras — «repetiu a posição de 2022» — e acrescenta que foi
 segunda também na Final Nacional, com o prémio Medal Net.
 
-Os cinco: Sub-10 2018, Sub-14 2022, Sub-14 2023, Sub-16 2024, Taça FPG–BPI 2025
-(perdeu a final com Francisca Rocha por 4&3).
-
-Os quatro títulos, para comparar: Sub-10 2019, Sub-12 2021, Pares Amador 2026,
-Sub-18 2026.
+Isto foi apurado antes de a atleta entregar o palmarés dela, que o confirma. A
+lista completa e definitiva está mais abaixo, em «O palmarés, dado pela
+própria» — é essa que manda, e é a que a página de épocas conta.
 
 ### Duas datas erradas
 
@@ -105,19 +102,19 @@ Contados um a um, do registo e das notícias:
 
 A frase de abertura dizia nove e passou a dizer oito, nas duas línguas. Um nono
 país, a existir, não está em nenhuma das duas fontes — o candidato mais provável
-é uma prova por equipas em match play, que o registo nunca vê. Fica na pergunta
-8 do documento de dúvidas.
+é uma prova por equipas em match play, que o registo nunca vê. Continua no
+documento de dúvidas.
 
 ### 2020 não foi um ano parado
 
 O registo tem, em 2020: Drive Challenge Sub-12, campeonato do clube do Paço do
 Lumiar, Circuito Drive Tour em Amarante e no Montado, e o Campeonato Nacional de
-Jovens a 29 e 30 de agosto, entre a Estela e Miramar. Aí ficou em nono na
-classificação geral mista de Sub-12
-(`campeonato-nacional-de-jovens-vento-sopra-e-concorrencia-aperta-na-estela-e-em-miramar`).
+Jovens a 29 e 30 de agosto, entre a Estela e Miramar.
 
-Como não houve pódio, 2020 continua sem prova em `data/resultados.json`. É uma
-decisão, não um esquecimento: a página de épocas é de destaques.
+A atleta conta um título nacional de Sub-12 nesse campeonato. A FPG não. É a
+única divergência entre a lista dela e as fontes, e está tratada à parte, em
+«O caso de 2020, por resolver». Até se esclarecer, 2020 fica sem prova em
+`data/resultados.json`.
 
 ### Uma prova trocada
 
@@ -127,21 +124,101 @@ campeonato nacional amador dela é o **Absoluto**, no Oporto, a 4–7 de junho:
 80·80·77·79, entre 22 jogadoras quase todas mais velhas. Ficou este, com o id
 `nacional-absoluto-2026`.
 
+## O palmarés, dado pela própria (agosto de 2026)
+
+A atleta entregou a lista dela. Onde ela e as fontes divergem, manda ela —
+excepto num ponto, assinalado a seguir, em que a FPG a contradiz por escrito.
+
+**Campeonatos nacionais** — seis títulos e quatro vice-campeonatos, segundo ela:
+
+| Ano | | Prova | Confirmado? |
+|---|---|---|---|
+| 2018 | vice | Sub-10 | sim |
+| 2019 | campeã | Sub-10 | sim |
+| 2020 | campeã | Sub-12 | **não — ver abaixo** |
+| 2021 | campeã | Sub-12 | sim |
+| 2021 | campeã | 3.ª Categoria | sim |
+| 2022 | vice | Sub-14 | sim |
+| 2023 | vice | Sub-14 | sim |
+| 2024 | vice | Sub-16 | sim |
+| 2026 | campeã | Pares, com Rodrigo Constantino | sim |
+| 2026 | campeã | Sub-18 | sim |
+
+Duas coisas a reter daqui:
+
+- **A Taça da FPG–BPI não é um campeonato nacional.** Ela não a conta como
+  vice-campeonato, e tinha razão: é uma taça em match play. Saiu do campo
+  `nacional` em `data/resultados.json`; o segundo lugar de 2025 continua lá
+  como resultado.
+- **O Campeonato Nacional de 3.ª Categoria de 2021 faltava por completo.**
+  26–27 de junho, Aroeira Challenge, 167 (+23), sete pancadas à frente de
+  Rafaela Pinto — e o melhor resultado de todo o campeonato, categorias
+  masculinas incluídas. Está na notícia
+  `aroeira-challenge-recebeu-o-campeonato-nacional-de-3as-e-4os-categorias`.
+
+### O caso de 2020, por resolver
+
+Ela conta um título nacional de Sub-12 em 2020. A notícia de resultados da FPG
+(`campeonato-nacional-de-jovens-estela-e-miramar-consagram-nove-novos-campeoes`,
+30 de agosto de 2020) diz o contrário, e diz por escrito:
+
+- abre a contar **nove** campeões — «seis no Estela Golf Club, nos escalões de
+  sub-18, sub-16 e sub-14, e três no Club de Golf de Miramar, onde jogaram os
+  sub-12 e sub-10»;
+- lista nove nomes, e não há Sub-12 feminino entre eles;
+- e explica porquê: **o Sub-12 foi disputado em prova mista**, com pódio único
+  — Bernardo Ferreira da Costa, Gabriel Sardo, Luís António Silva.
+
+O registo de federada tem as duas voltas dela nesse campeonato (Miramar, 29 e
+30 de agosto, 106 e 101).
+
+Enquanto isto não se esclarecer, o título **não está no site**: a página de
+épocas conta cinco títulos nacionais e quatro vice-campeonatos. Se houver um
+comunicado, um diploma ou uma classificação feminina separada, entra e passam
+a seis.
+
+## As internacionalizações, pela lista dela
+
+Vinte e duas provas ao serviço da Seleção. As que a lista dela acrescentou ao
+que já se tinha apurado nas fontes:
+
+| Ano | Prova | Onde |
+|---|---|---|
+| 2024 | 94.º Internacional Amador de Portugal | Penina |
+| 2024 | PT Tour · Penina Open | Penina |
+| 2024 | PT Tour · Quinta do Peru Open | Sesimbra |
+| 2024 | Campeonato de Espanha Feminino · Stroke Play | Espanha |
+| 2024 | Campeonato Aberto de Madrid Feminino | Madrid |
+
+As duas do PT Tour são provas do circuito profissional português em que ela
+entrou como amadora, aos catorze anos.
+
+Notar o que a lista dela **não** tem: o 93.º Internacional Amador de Portugal
+(2023). Estava na pergunta 10 do documento de dúvidas como candidato a
+convocatória; fica respondido que não.
+
+A lista dela pára, em 2026, no Europeu por equipas da Irlanda. As outras três
+de 2026 que o site conta como Seleção — o 96.º Internacional de Portugal, os
+Internacionais Juniores de França e o Campeonato da Andaluzia — estão
+confirmadas por notícias da FPG que a dão como convocada, e ficam.
+
 ## O que continua por saber
 
 Está tudo no documento de dúvidas (`perguntas-em-aberto.docx`), mas em resumo,
 e só o que toca ao percurso:
 
-- **O nono país.**
+- **O título de Sub-12 de 2020** — a única coisa em que a lista dela e a FPG se
+  contradizem. Ver «O caso de 2020».
+- **O nono país.** A lista de internacionalizações dela não acrescenta nenhum:
+  Madrid e o campeonato de Espanha são Espanha, que já lá estava.
 - **«European Lady Team Sub-16» e «Campeonato de Espanha Sub-12»** — duas provas
-  que ela referiu e que não existem no registo nem em nenhuma notícia. Se forem
-  match play, a explicação é a do Hexagonal.
-- **O 93.º e o 94.º Internacional Amador de Portugal** (2023 e 2024) estão no
-  registo e não no sítio. O 95.º e o 96.º entraram como convocatórias; se
-  aqueles dois também o foram, as internacionalizações passam a dezanove.
+  que ela referiu numa lista anterior e que não aparecem nem no registo, nem nas
+  notícias, nem na lista de internacionalizações que entregou agora. Podem ter
+  sido as mesmas provas com outro nome.
 - **Cinco campeonatos nacionais espanhóis** que estão no registo e não no sítio
   — Infantil 2023, FF.AA. Sub-16 2023, Sub-16 2024, Copa Andalucía 2025,
-  Nacional Juvenil 2025. Decisão de conteúdo, não de facto.
+  Nacional Juvenil 2025. Não estão na lista de convocatórias dela, portanto foram
+  por iniciativa própria; entram ou não por decisão de conteúdo.
 - **As datas dos campeonatos do clube** saíram do registo (agosto de 2022, 2023,
   2024 e 2026, Praia D'El Rey no primeiro dia e West Cliffs no segundo), mas o
   registo distingue «net» de «gross» nalguns anos e o título que temos é
