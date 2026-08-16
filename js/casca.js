@@ -18,7 +18,7 @@ import { outraLingua } from './i18n.js';
  * a que só se chega pelo sitemap é uma página que o Google encontra e não
  * percebe onde encaixa. */
 export const PAGINAS = [
-  { href: 'index.html', pt: 'Início', en: 'Home' },
+  { href: 'index.html', pt: 'Francisca', en: 'Francisca' },
   { href: 'resultados.html', pt: 'Época a época', en: 'Season by season' },
   { href: 'recruiting.html', pt: 'Recruiting', en: 'Recruiting' },
   { href: 'parcerias.html', pt: 'Parcerias', en: 'Partnerships' },

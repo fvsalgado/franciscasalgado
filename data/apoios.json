@@ -64,6 +64,62 @@
       ]
     },
     {
+      "id": "equipa",
+      "t": {
+        "pt": "Equipa técnica",
+        "en": "Coaching team"
+      },
+      "x": {
+        "pt": "Quem a treina, no clube e no Centro de Alto Rendimento.",
+        "en": "Who coaches her, at the club and at the national High-Performance Centre."
+      },
+      "itens": []
+    },
+    {
+      "id": "tecnologia",
+      "t": {
+        "pt": "Apoios tecnológicos",
+        "en": "Technology partners"
+      },
+      "x": {
+        "pt": "As ferramentas com que treina e mede o que faz — dentro e fora do campo.",
+        "en": "The tools she trains and measures with, on the course and off it."
+      },
+      "itens": [
+        {
+          "nome": "UpGame",
+          "x": {
+            "pt": "Estatísticas de jogo",
+            "en": "Game statistics"
+          }
+        },
+        {
+          "nome": "WellPutt",
+          "x": {
+            "pt": "Treino de putting",
+            "en": "Putting training"
+          }
+        },
+        {
+          "nome": "GolfVertex"
+        },
+        {
+          "nome": "Hole19",
+          "x": {
+            "pt": "GPS e voltas",
+            "en": "GPS and scoring"
+          }
+        },
+        {
+          "nome": "HackMotion",
+          "x": {
+            "pt": "Sensor de pulso",
+            "en": "Wrist sensor"
+          }
+        }
+      ]
+    },
+    {
       "id": "campos",
       "t": {
         "pt": "Campos onde joga",

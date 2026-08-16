@@ -358,5 +358,67 @@
       "2025": 6,
       "2026": 2
     }
-  }
+  },
+  "perguntas": [
+    {
+      "p": {
+        "pt": "Quem é a Francisca Salgado?",
+        "en": "Who is Francisca Salgado?"
+      },
+      "r": {
+        "pt": "É uma golfista amadora portuguesa do Vale de Janelas, em Óbidos. Aos dezassete anos tem quatro títulos nacionais e representa a Seleção Nacional Amadora Feminina, com que joga o calendário europeu.",
+        "en": "She is a Portuguese amateur golfer from Vale de Janelas, in Óbidos. At seventeen she has four national titles and plays for the Portuguese women's amateur national team, with which she plays the European calendar."
+      }
+    },
+    {
+      "p": {
+        "pt": "Quantos títulos nacionais tem?",
+        "en": "How many national titles does she have?"
+      },
+      "r": {
+        "pt": "Quatro. Sub-10 em 2019, Sub-12 em 2021, e em 2026 os Pares Amador — com Rodrigo Constantino — e o Sub-18, que ganhou na Aroeira liderando do princípio ao fim.",
+        "en": "Four. U10 in 2019, U12 in 2021, and in 2026 both the Amateur Pairs — with Rodrigo Constantino — and the U18, which she won at Aroeira leading from start to finish."
+      }
+    },
+    {
+      "p": {
+        "pt": "Em que clube joga?",
+        "en": "What club does she play for?"
+      },
+      "r": {
+        "pt": "No Vale de Janelas, em Óbidos — o clube dos campos Praia D'El Rey e West Cliffs. Começou no Jamor e ganhou o primeiro título nacional pelo Paço do Lumiar, em 2019.",
+        "en": "At Vale de Janelas, in Óbidos — the club behind the Praia D'El Rey and West Cliffs courses. She started at the Jamor and won her first national title with Paço do Lumiar, in 2019."
+      }
+    },
+    {
+      "p": {
+        "pt": "Que posição ocupa nos rankings?",
+        "en": "Where does she stand in the rankings?"
+      },
+      "r": {
+        "pt": "Está no World Amateur Golf Ranking, o ranking mundial do golfe amador, e no European Golf Rankings. As duas posições estão aqui em cima, e a ficha de cada um na página de imprensa.",
+        "en": "She is on the World Amateur Golf Ranking, the world ranking of amateur golf, and on the European Golf Rankings. Both positions are just above, and each official profile is on the press page."
+      }
+    },
+    {
+      "p": {
+        "pt": "Quais são os melhores resultados internacionais?",
+        "en": "What are her best international results?"
+      },
+      "r": {
+        "pt": "Sexta classificada e melhor portuguesa no Campeonato Internacional da Bélgica de Sub-14, em 2023; terceira no Memorial Celia Barquín, nas Astúrias, em 2025; e 28.ª no English Girls' Open de 2026, um dos torneios Sub-18 mais fortes da Europa, onde chegou a ser quinta.",
+        "en": "Sixth, and the best Portuguese player, at the Belgian International U14 Championship in 2023; third at the Memorial Celia Barquín, in Asturias, in 2025; and 28th at the 2026 English Girls' Open, one of the strongest girls' U18 events in Europe, where she stood fifth at one point."
+      }
+    },
+    {
+      "p": {
+        "pt": "Como se fala com ela sobre patrocínios ou imprensa?",
+        "en": "How do you reach her about sponsorship or press?"
+      },
+      "r": {
+        "pt": "Por email para birdie@franciscasalgado.golf, ou por mensagem direta no Instagram, em @francisca_salgado_. As duas vias estão no fim da página de parcerias e no rodapé de todas.",
+        "en": "By email to birdie@franciscasalgado.golf, or by direct message on Instagram, at @francisca_salgado_. Both are at the end of the partnerships page and in the footer of every page."
+      }
+    }
+  ]
 }

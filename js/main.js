@@ -4,7 +4,7 @@ import { iniciar } from './base.js';
 import { iniciarCampo } from './campo.js';
 import { reduzido } from './movimento.js';
 import { ultimas, ultimo, proxima } from './resultados.js';
-import { numeros, citacoes, saiuEm, rankingsNaPergunta } from './conteudo.js';
+
 import { instagram, perfilIg } from './instagram.js';
 import { rankings } from './rankings.js';
 
@@ -35,12 +35,8 @@ async function proximo(lingua) {
 
 const { i18n } = iniciar(async (l) => {
   await Promise.all([
-    numeros($('nums'), l),
     ultimas($('ultimas'), l, 4),
-    citacoes($('citacoes'), l, 1, { grande: true }),
-    saiuEm($('saiuEm'), l),
     rankings($('rankings'), l, { curto: true }),
-    rankingsNaPergunta(l),
     proximo(l),
   ]);
 });
