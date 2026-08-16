@@ -67,18 +67,15 @@ function caixaPos(p, lingua) {
   return `<span class="pos${cls}" aria-label="${lido}"><span>${t}${p.pos}<sup>${ordinal(p.pos, lingua)}</sup></span></span>`;
 }
 
-function marcador(p) {
-  if (p.total == null && !p.voltas?.length) return '';
-  const voltas = (p.voltas || []).map((v) => `<i>${v}</i>`).join('');
-  const total = p.total != null ? `<b class="num">${p.total}</b>` : '';
-  let par = '';
-  if (p.par != null) {
-    const cls = p.par < 0 ? 'par--sob' : p.par === 0 ? 'par--par' : 'par--acima';
-    const txt = p.par < 0 ? `−${Math.abs(p.par)}` : p.par === 0 ? 'PAR' : `+${p.par}`;
-    par = `<span class="par ${cls}">${txt}</span>`;
-  }
-  return `<span class="marcador num">${voltas}${total}${par}</span>`;
-}
+/* ── os marcadores saíram da página ──────────────────────────
+ *
+ * Cada prova mostrava as voltas, o total e o resultado face ao par. Numa lista
+ * de quarenta provas isso são cento e tal números, e a página deixava de se ler
+ * — a classificação, que é o que interessa, ficava afogada em algarismos.
+ *
+ * Os números não se perderam: continuam todos no data/resultados.json, que é
+ * público e está anunciado no llms.txt, e é de lá que sai a média por época.
+ * O que saiu foi mostrá-los todos ao mesmo tempo. */
 
 const SELOS = {
   wagr: { pt: 'WAGR', en: 'WAGR', cls: 'selo--wagr' },
@@ -99,14 +96,18 @@ const tx = (v, lingua) => (typeof v === 'string' ? v : v?.[lingua] || v?.pt || '
 
 /* ── uma prova ────────────────────────────────────────────── */
 
+/* Uma prova é a data, o nome, onde foi e em que lugar ficou. Mais nada.
+ *
+ * Levava também as voltas, o total, o resultado face ao par e um comentário
+ * escrito à mão. Quarenta provas assim são uma parede: quem chega para saber o
+ * que ela fez em 2025 lê duzentos números e três parágrafos por ano, e desiste
+ * antes de chegar ao que interessa. */
 function linhaProva(p, lingua, { comNota = false } = {}) {
   const local = [p.campo, tx(p.local, lingua)].filter(Boolean).join(' · ');
   const especial = p.posTexto ? `<span class="selo selo--titulo">${tx(p.posTexto, lingua)}</span>` : '';
-  const nota = comNota && p.nota
-    ? `<p class="prova__l" style="margin-top:.45rem">${tx(p.nota, lingua)}</p>` : '';
-  /* De onde veio este resultado. Está no ficheiro desde o princípio; faltava
-     mostrá-lo, e é ele que faz a diferença entre um número e um número que
-     alguém pode ir verificar. */
+  /* De onde veio este resultado. É a única linha que fica além do essencial, e
+     fica porque é ela que faz a diferença entre uma afirmação e uma afirmação
+     que alguém pode ir verificar — que é a razão de ser deste sítio. */
   const fonte = comNota && p.fonte?.url
     ? `<p class="prova__f"><a href="${p.fonte.url}" target="_blank" rel="noopener" data-mag>${
         lingua === 'en' ? 'Source' : 'Fonte'}: ${p.fonte.nome}</a></p>` : '';
@@ -118,11 +119,9 @@ function linhaProva(p, lingua, { comNota = false } = {}) {
         <span class="prova__data num">${dataCurta(p, lingua)}${p.escalao ? ` · ${tx(p.escalao, lingua)}` : ''}</span>
         <h3 class="prova__t">${tx(p.torneio, lingua)}</h3>
         ${local ? `<p class="prova__l">${local}</p>` : ''}
-        ${nota}
         ${fonte}
       </div>
       <div class="prova__a">
-        ${marcador(p)}
         ${especial}
         ${selos(p, lingua)}
       </div>

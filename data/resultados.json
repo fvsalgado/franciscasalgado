@@ -7,6 +7,30 @@
   "proximas": [],
   "provas": [
     {
+      "id": "clube-2026",
+      "ano": 2026,
+      "data": "2026-12-30",
+      "dataTexto": {
+        "pt": "2026",
+        "en": "2026"
+      },
+      "torneio": {
+        "pt": "Campeonato do Clube · Vale de Janelas",
+        "en": "Club Championship · Vale de Janelas"
+      },
+      "campo": "Praia D'El Rey e West Cliffs",
+      "local": {
+        "pt": "Óbidos, Portugal",
+        "en": "Óbidos, Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Overall"
+      }
+    },
+    {
       "id": "andalucia-2026",
       "ano": 2026,
       "data": "2026-08-02",
@@ -819,6 +843,30 @@
       }
     },
     {
+      "id": "clube-2024",
+      "ano": 2024,
+      "data": "2024-12-30",
+      "dataTexto": {
+        "pt": "2024",
+        "en": "2024"
+      },
+      "torneio": {
+        "pt": "Campeonato do Clube · Vale de Janelas",
+        "en": "Club Championship · Vale de Janelas"
+      },
+      "campo": "Praia D'El Rey e West Cliffs",
+      "local": {
+        "pt": "Óbidos, Portugal",
+        "en": "Óbidos, Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Overall"
+      }
+    },
+    {
       "id": "nacional-jovens-2024",
       "ano": 2024,
       "data": "2024-11-24",
@@ -1235,6 +1283,30 @@
       }
     },
     {
+      "id": "clube-2023",
+      "ano": 2023,
+      "data": "2023-12-30",
+      "dataTexto": {
+        "pt": "2023",
+        "en": "2023"
+      },
+      "torneio": {
+        "pt": "Campeonato do Clube · Vale de Janelas",
+        "en": "Club Championship · Vale de Janelas"
+      },
+      "campo": "Praia D'El Rey e West Cliffs",
+      "local": {
+        "pt": "Óbidos, Portugal",
+        "en": "Óbidos, Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Overall"
+      }
+    },
+    {
       "id": "belgica-2023",
       "ano": 2023,
       "data": "2023-07-07",
@@ -1270,6 +1342,30 @@
       "fonte": {
         "nome": "FPG",
         "url": "https://portal.fpg.pt/noticias/francisca-salgado-no-sexto-lugar-e-portugal-1-em-oitavo-nos-internacionais-da-belgica-sub-14/"
+      }
+    },
+    {
+      "id": "clube-2022",
+      "ano": 2022,
+      "data": "2022-12-30",
+      "dataTexto": {
+        "pt": "2022",
+        "en": "2022"
+      },
+      "torneio": {
+        "pt": "Campeonato do Clube · Vale de Janelas",
+        "en": "Club Championship · Vale de Janelas"
+      },
+      "campo": "Praia D'El Rey e West Cliffs",
+      "local": {
+        "pt": "Óbidos, Portugal",
+        "en": "Óbidos, Portugal"
+      },
+      "pais": "PT",
+      "pos": 1,
+      "escalao": {
+        "pt": "Absoluto",
+        "en": "Overall"
       }
     },
     {

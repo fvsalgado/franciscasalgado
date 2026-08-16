@@ -47,8 +47,12 @@ const provas = resultados.provas || [];
 /* ── a pessoa ──────────────────────────────────────────────────────────── */
 /* Os prémios saem dos resultados: prova ganha é prémio, e não há outra lista
    a manter. Assim, no dia em que ganhar outra vez, isto sabe. */
+/* Os campeonatos do clube ficam de fora: são vitórias, e contam como tal na
+   lista de provas, mas não são prémios do mesmo tamanho de um título nacional
+   — e uma lista de prémios que mistura os dois faz o Google e um assistente
+   lerem quatro títulos de clube como quatro títulos. */
 const titulos = provas
-  .filter((p) => p.pos === 1)
+  .filter((p) => p.pos === 1 && !String(p.id).startsWith('clube-'))
   .map((p) => `${tx(p.torneio)}${p.ano ? `, ${p.ano}` : ''}`);
 
 /* O clube é o clube, e vem de data/perfil.json. Já foi lido do primeiro item da
@@ -100,14 +104,14 @@ const pessoa = {
    por ele que um motor percebe que /resultados.html e /en/resultados.html
    falam da mesma jogadora e não de duas. */
 const NOMES = {
-  pt: { inicio: 'Início', resultados: 'Época a época', recruiting: 'College recruiting',
+  pt: { inicio: 'Francisca', resultados: 'Época a época', recruiting: 'College recruiting',
         witb: 'O que leva no saco',
         listaS: 'O que Francisca Salgado leva no saco',
         imprensa: 'Imprensa', parcerias: 'Parcerias',
         listaR: 'Resultados de Francisca Salgado',
         listaI: 'Imprensa sobre Francisca Salgado',
         cargo: 'Golfista amadora', desporto: 'Golfe', lugar: 'lugar' },
-  en: { inicio: 'Home', resultados: 'Season by season', recruiting: 'College recruiting',
+  en: { inicio: 'Francisca', resultados: 'Season by season', recruiting: 'College recruiting',
         witb: "What's in the bag",
         listaS: "What's in Francisca Salgado's bag",
         imprensa: 'Press', parcerias: 'Partnerships',
@@ -490,6 +494,10 @@ hreflang. O português é o original; o inglês é tradução dele.
 - ${SITIO}/witb.html — o equipamento, taco a taco: marca, modelo, loft e shaft de cada, mais bola, luva e saco
 - ${SITIO}/imprensa.html — biografia curta, ficha, citações com fonte, fotografias e fichas oficiais
 - ${SITIO}/parcerias.html — quem apoia, o que um apoio pode cobrir, e como falar com ela
+
+## Perguntas e respostas
+
+${(perfil.perguntas || []).map((q) => `### ${tx(q.p)}\n\n${tx(q.r)}`).join('\n\n')}
 
 ## Respostas curtas
 

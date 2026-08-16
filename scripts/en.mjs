@@ -41,71 +41,46 @@ export const EN = {
   rc_hc_tit: 'The index, from the start',
   rc_hc_txt: 'Every time the WHS index changed, from her first counting round, exactly as recorded by the Portuguese Golf Federation. The line rises as the index falls.',
   rc_pa_rot: 'Record',
-  rc_pa_tit: 'Twelve wins, four national titles',
-  rc_pa_txt: 'She plays for <strong>Vale de Janelas</strong> — Praia D\'El Rey and West Cliffs, in Óbidos — and for the <strong>Portuguese women\'s amateur national team</strong>. Every event, with its rounds, total, score to par and a link to the source, is in <a class="lig" href="resultados.html">season by season</a>, year by year since 2018.',
+  rc_pa_tit: 'Sixteen wins, four national titles',
+  rc_pa_txt: 'She plays for <strong>Vale de Janelas</strong> — Praia D\'El Rey and West Cliffs, in Óbidos — and '
+    + 'for the <strong>Portuguese women\'s amateur national team</strong>. Every event she has played, with the '
+    + 'source of each, is in <a class="lig" href="resultados.html">season by season</a>, year by year since 2018.',
   rc_ct_rot: 'Contact',
   rc_ct_tit: 'Getting in touch',
   rc_ct_txt: 'Write to <a class="lig" href="mailto:birdie@franciscasalgado.golf?subject=College%20recruiting">birdie@franciscasalgado.golf</a>. Swing videos, transcripts and whatever else an evaluation needs — just ask.',
   saltar: 'Skip to content',
   ig_ns: '@francisca_salgado_ on Instagram',
   /* ── partilhado ─────────────────────────────────────────── */
-  dz_onde: 'Published in',
-
 
   vi_rot: 'On video',
   vi_tit: 'From nine years old to now',
   vi_txt: 'From the interview at the Super Bock Ladies Open to the oldest footage there is of her on a course — the 2018 Open World Kids Golf, in the Algarve, where she plays alongside Amélia Gabin, today a national-team colleague.',
 
-
   rk_rot: 'Rankings',
   rk_tit: 'Where she stands today',
-  rk_txt2: 'The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category, and it decides access to much of the international calendar.',
 
   /* ── página inicial ─────────────────────────────────────── */
   hero_rot: 'Amateur golfer · Portuguese national team · U18',
-  hero_frase: 'From Lisbon to the courses of Europe. Four national titles and five countries in a single season.',
+  hero_frase: 'From Lisbon to the courses of Europe. At seventeen, four national titles — the latest the U18 — '
+    + 'and five national runner-up finishes. She plays for the national team and has competed in nine countries.',
   prox_r: 'Next event',
   prox_carregar: 'Loading…',
 
-
   qu_rot: 'Who she is',
-  qu_manif: 'She won her first national championship at ten. Seven years on she has four, plays the European calendar, and has not yet outgrown the U18 category.',
 
-
-
+  qu_bio: 'She started at the <strong>Jamor</strong>, and it was for <strong>Paço do Lumiar</strong> that she won '
+    + 'her first national title, at ten. Today she plays for <strong>Vale de Janelas</strong> — Praia D\'El Rey and '
+    + 'West Cliffs — trains at the national <strong>High-Performance Centre</strong> and has represented the '
+    + '<strong>Portuguese women\'s amateur national team</strong> since 2023.',
 
   in_rot: 'Instagram',
   in_tit: 'Day to day',
   in_txt: 'Practice, travel, and whatever happens between tournaments. The posts are loaded from Instagram.',
 
-
   /* ── resultados ─────────────────────────────────────────── */
   rs_rot: 'Season by season',
   rs_tit: 'Nine seasons, event by event',
-  rs_txt: 'Each year with what happened, the events she played — rounds, total and score against par — and what was written about her. Where the final placing was never published, the scorecard stays and the position is left unknown.',
-  rs_egr: 'Profile on the European Golf Rankings',
-  rs_fpg: 'Profile at the Portuguese Golf Federation',
-
-  /* ── percurso ───────────────────────────────────────────── */
-  qu_bio: 'She started at the <strong>Jamor</strong>. It was with <strong>Paço do Lumiar</strong> that she won her first national title, at ten, and it is to the Jamor that she went back afterwards, to the <strong>national high-performance centre</strong>. In 2023 she made her debut for the <strong>Portuguese women\'s amateur national team</strong>, and in 2026 she played in five countries: Portugal, Spain, France, Ireland and England.',
-  fq_rot: 'Questions',
-  fq_tit: 'The essentials, in six answers',
-  fq_txt: 'What you need to know without reading the whole site. Every answer has its source on the other pages.',
-  fq_1p: 'Who is Francisca Salgado?',
-  fq_1r: 'She is a Portuguese amateur golfer from Vale de Janelas, in Óbidos. At seventeen she has four national titles and plays for the Portuguese women\'s amateur national team, with which she plays the European calendar.',
-  fq_2p: 'How many national titles does she have?',
-  fq_2r: 'Four. U10 in 2019, U12 in 2021, and in 2026 both the Amateur Pairs — with Rodrigo Constantino — and the U18, which she won at Aroeira leading from start to finish.',
-  fq_3p: 'What club does she play for?',
-  fq_3r: 'At Vale de Janelas, in Óbidos — the club behind the <strong>Praia D\'El Rey</strong> and <strong>West Cliffs</strong> courses. She started at the Jamor and won her first national title with Paço do Lumiar, in 2019.',
-  fq_4p: 'Where does she stand in the rankings?',
-  fq_4r: 'She is on the World Amateur Golf Ranking, the world ranking of amateur golf, and on the European Golf Rankings. Both positions are just above, and each official profile is on the <a class="lig" href="imprensa.html#ligacoes">press page</a>.',
-  fq_5p: 'What are her best international results?',
-  fq_5r: 'Sixth, and the best Portuguese player, at the Belgian International U14 Championship in 2023; third at the Memorial Celia Barquín, in Asturias, in 2025; and 28th at the 2026 English Girls\' Open, one of the strongest girls\' U18 events in Europe, where she stood fifth at one point.',
-  fq_6p: 'How do you reach her about sponsorship or press?',
-  fq_6r: 'By email to <a class="lig" href="mailto:birdie@franciscasalgado.golf">birdie@franciscasalgado.golf</a>, or by direct message on Instagram, at <a class="lig" href="https://www.instagram.com/francisca_salgado_/" target="_blank" rel="noopener">@francisca_salgado_</a>. Both are at the end of the <a class="lig" href="parcerias.html#contacto">partnerships page</a> and in the footer of every page.',
-
-
-  /* ── imprensa ───────────────────────────────────────────── */
+  rs_txt: 'Each year, what happened and the events she played.',
   im_rot: 'Press',
   im_tit: 'For people who write about golf',
   im_txt: 'Short biography, checkable facts, sourced quotes and the official profiles. For high-resolution photographs, just ask.',
@@ -157,7 +132,6 @@ export const EN = {
   ct_x2t: 'Short biography, fact sheet and sourced quotes, also on the <a class="lig" href="imprensa.html">press page</a>.',
   ct_x3d: 'Results',
   ct_x3t: 'Event by event and year by year, in <a class="lig" href="resultados.html">season by season</a>.',
-
 
   /* ── páginas legais ─────────────────────────────────────── */
   pv_rot: 'Privacy',
