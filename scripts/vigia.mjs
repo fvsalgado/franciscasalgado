@@ -364,31 +364,15 @@ await passo('histórico', historico);
 await passo('handicap', handicap);
 await passo('FPG', fpg);
 
-/* ── 5. área reservada da federação ────────────────────────────────────── */
-/* Só corre onde houver credenciais. Sem elas não é falha nenhuma: é uma fonte
-   que este sítio não tem, como o Instagram sem token. Em GitHub Actions vêm
-   dos segredos do repositório e nunca passam por lado nenhum senão por aqui.
+/* ── 5. registo de federada na FPG ─────────────────────────────────────── */
+/* Sem credenciais: os métodos que a tabela deles usa respondem a quem
+   perguntar. Ver scripts/myfpg.mjs.
  *
- * Daqui sai o histórico do índice de handicap, e mais nada. As provas que a
- * área reservada conhece e o data/resultados.json não vão para o VIGIA-ATENCAO
- * — como tudo o resto que precisa de nome em português e de contexto. */
-/* Meio configurado tem de gritar, não calar-se.
- *
- * Da primeira vez que isto correu a sério, o FPG_USER estava vazio e o
- * FPG_PASS tinha valor. A condição pedia os dois, o passo foi saltado sem uma
- * palavra, e a ronda deu «sem novidades» — indistinguível de um dia em que
- * nada acontece. Um segredo por criar parecia um dia calmo.
- *
- * Nenhum dos dois é uma escolha: esta fonte não está ligada, e cala-se. Um só
- * é um engano, e um engano tem de aparecer no relatório. */
-const temUtilizador = Boolean(process.env.FPG_USER);
-const temSenha = Boolean(process.env.FPG_PASS);
-if (temUtilizador !== temSenha) {
-  falhas.push(`myFPG: falta o segredo ${temUtilizador ? 'FPG_PASS' : 'FPG_USER'} — o outro está definido`);
-}
-if (temUtilizador && temSenha) {
-  await passo('myFPG', async () => {
-    const d = await buscarRegisto(process.env.FPG_USER, process.env.FPG_PASS);
+ * Daqui sai o histórico do índice de handicap. As provas que a federação
+ * conhece e o data/resultados.json não vão para o VIGIA-ATENCAO — como tudo o
+ * resto que precisa de nome em português e de contexto. */
+await passo('myFPG', async () => {
+    const d = await buscarRegisto();
     const antes = await ler('data/handicap-historico.json').catch(() => ({ pontos: [] }));
 
     /* Juntar, nunca substituir.
@@ -421,15 +405,34 @@ if (temUtilizador && temSenha) {
       /* Uma volta contada para handicap não é uma prova para o sítio: o
          campeonato do clube e a volta de sábado entram na mesma tabela. Por
          isso listam-se, e é uma pessoa que escolhe. */
+      /* Uma vez cada, e nunca mais — a mesma regra das peças de imprensa.
+         São quase trezentas: sem memória, a issue de amanhã seria igual à de
+         hoje, e uma issue que se repete todos os dias deixa de se ler. O que
+         já foi mostrado fica no caderno do vigia, fora do que é publicado. */
+      const vistas = await ler('data/vigia-vistas.json').catch(() => ({}));
+      const jaVistas = new Set(vistas.provas || []);
       const porNome = new Map();
-      for (const p of faltam) if (!porNome.has(p.torneio)) porNome.set(p.torneio, p);
-      atencao.push(`**${porNome.size} prova(s) no myFPG que não estão no sítio** — a tabela da federação junta provas a sério e voltas de clube, por isso não entram sozinhas:\n${
-        [...porNome.values()].sort((a, b) => b.data.localeCompare(a.data)).slice(0, 30)
-          .map((p) => `  - ${p.data} · ${p.torneio}${p.campo ? ` · ${p.campo}` : ''}${p.bruto ? ` · ${p.bruto}${p.aoPar ? ` (${p.aoPar})` : ''}` : ''}`).join('\n')}${
-        porNome.size > 30 ? `\n  - …e mais ${porNome.size - 30}.` : ''}`);
+      for (const p of faltam) {
+        const chave = `${p.data}|${p.torneio}`;
+        if (jaVistas.has(chave) || porNome.has(p.torneio)) continue;
+        porNome.set(p.torneio, { ...p, chave });
+      }
+
+      if (porNome.size) {
+        const lista = [...porNome.values()].sort((a, b) => b.data.localeCompare(a.data));
+        atencao.push(`**${lista.length} prova(s) no registo da FPG que não estão no sítio** — a tabela da federação junta provas a sério e voltas de campeonato do clube, por isso não entram sozinhas. Cada uma é listada uma vez só:\n${
+          lista.slice(0, 40).map((p) => `  - ${p.data} · ${p.torneio}${p.campo ? ` · ${p.campo}` : ''}${p.bruto ? ` · ${p.bruto}${p.par ? ` (par ${p.par})` : ''}` : ''}`).join('\n')}${
+          lista.length > 40 ? `\n  - …e mais ${lista.length - 40}, no próximo aviso.` : ''}`);
+
+        /* Só as que foram mesmo mostradas entram no caderno; as que ficaram de
+           fora do corte voltam amanhã, que é o que se quer. */
+        await gravar('data/vigia-vistas.json', {
+          ...vistas,
+          provas: [...jaVistas, ...lista.slice(0, 40).map((p) => p.chave)].sort(),
+        });
+      }
     }
-  });
-}
+});
 
 /* Contagens que se derivam dos dados e estavam escritas à mão. */
 await passo('contagens', async () => {
