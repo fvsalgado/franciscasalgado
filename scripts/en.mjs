@@ -41,7 +41,7 @@ export const EN = {
   rc_hc_tit: 'The index, from the start',
   rc_hc_txt: 'Every time the WHS index changed, from her first counting round, exactly as recorded by the Portuguese Golf Federation. The line rises as the index falls.',
   rc_pa_rot: 'Record',
-  rc_pa_tit: 'Seventeen wins, five national titles',
+  rc_pa_tit: 'Eighteen wins, five national titles',
   rc_pa_txt: 'She plays for <strong>Vale de Janelas</strong> — Praia D\'El Rey and West Cliffs, in Óbidos — and '
     + 'for the <strong>Portuguese women\'s amateur national team</strong>. Every event she has played, with the '
     + 'source of each, is in <a class="lig" href="resultados.html">season by season</a>, year by year since 2018.',

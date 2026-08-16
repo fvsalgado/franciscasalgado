@@ -202,27 +202,89 @@ de 2026 que o site conta como Seleção — o 96.º Internacional de Portugal, o
 Internacionais Juniores de França e o Campeonato da Andaluzia — estão
 confirmadas por notícias da FPG que a dão como convocada, e ficam.
 
-## O que continua por saber
+## As respostas dela (16 de agosto de 2026)
 
-Está tudo no documento de dúvidas (`perguntas-em-aberto.docx`), mas em resumo,
-e só o que toca ao percurso:
+O documento de dúvidas voltou respondido. Ficou tudo fechado menos uma coisa,
+que está no fim.
 
-- **O título de Sub-12 de 2020** — a única coisa em que a lista dela e a FPG se
-  contradizem. Ver «O caso de 2020».
-- **O nono país.** A lista de internacionalizações dela não acrescenta nenhum:
-  Madrid e o campeonato de Espanha são Espanha, que já lá estava.
-- **«European Lady Team Sub-16» e «Campeonato de Espanha Sub-12»** — duas provas
-  que ela referiu numa lista anterior e que não aparecem nem no registo, nem nas
-  notícias, nem na lista de internacionalizações que entregou agora. Podem ter
-  sido as mesmas provas com outro nome.
-- **Cinco campeonatos nacionais espanhóis** que estão no registo e não no sítio
-  — Infantil 2023, FF.AA. Sub-16 2023, Sub-16 2024, Copa Andalucía 2025,
-  Nacional Juvenil 2025. Não estão na lista de convocatórias dela, portanto foram
-  por iniciativa própria; entram ou não por decisão de conteúdo.
-- **As datas dos campeonatos do clube** saíram do registo (agosto de 2022, 2023,
-  2024 e 2026, Praia D'El Rey no primeiro dia e West Cliffs no segundo), mas o
-  registo distingue «net» de «gross» nalguns anos e o título que temos é
-  «campeã do clube» sem mais. Ficam só com o ano até haver confirmação.
+**O Sub-12 de 2020 — resolvido, e não era o que nenhum dos dois lados pensava.**
+Ela ganhou o escalão. O título não chegou a ser atribuído porque **não havia
+inscritas que chegassem para o mínimo do regulamento** — e é por isso que a
+notícia da FPG conta nove campeões e não dez, sem contradizer ninguém.
+
+O ano entrou como `nacional-jovens-2020`, com `pos: 1` e `posTexto:
+"Vencedora"`, mas **sem** `nacional: "campea"` e com um campo novo,
+`semTitulo: true`. Esse campo tira a prova da lista `award` dos dados
+estruturados: com o nome do campeonato nacional ao lado do ano, ali lia-se como
+um título que não existe. São **cinco** títulos nacionais e quatro
+vice-campeonatos, e as vitórias passam a dezoito.
+
+**Oito países, confirmado.** O nono não existia.
+
+**As duas provas fantasma.** A «European Lady Team Sub-16» é o European Ladies
+Team Championship de 2025, que já estava no sítio — em Chantilly, e não num
+escalão Sub-16. O «Campeonato de Espanha Sub-12» foi jogado a título
+particular e não entra.
+
+**Os cinco campeonatos espanhóis** foram por iniciativa própria, não por
+convocatória. Ficam fora da página de épocas, que é de destaques, e nenhum
+deles leva selo de Seleção. Se um dia se quiser a lista completa de provas, ela
+está no registo de federada e sai com um comando.
+
+**As provas sem classificação ficam sem classificação.** «Resultados pouco
+relevantes porque o resultado foi mau» — palavras dela. Não se vai atrás dos
+lugares que faltam.
+
+**Os estudos saem da lista.** Foi decisão dela, depois de eu insistir uma vez
+que é o primeiro filtro de um treinador americano. Está registado que insisti e
+que a resposta foi «esquece isso»; não se volta ao assunto.
+
+**Do saco não entra mais nada** — nem distâncias, nem lofts dos ferros, nem
+modelo do punho, nem taco preferido. A escada continua com a faixa dos «6
+ferros» e é assim que fica.
+
+**As datas dos campeonatos do clube, confirmadas.** 6–7 de agosto de 2022,
+5–6 de 2023, 3–4 de 2024, 8–9 de 2026 — Praia D'El Rey no primeiro dia e West
+Cliffs no segundo. Substituíram o `YYYY-12-30` que só servia para ordenar.
+
+**Os apoios tecnológicos ficam a marca e a ligação, e mais nada.** As
+descrições que eu tinha escrito — «estatísticas de jogo», «treino de putting» —
+saíram todas. As cinco ligações, verificadas uma a uma:
+
+    UpGame      https://www.upgame.app/      (Upgame Golf, by Trackman)
+    WellPutt    https://wellputt.com/
+    GolfVertex  https://golfvertex.com/
+    Hole19      https://www.hole19golf.com/
+    HackMotion  https://hackmotion.com/
+
+## A média de voltas — para memória, não para publicar
+
+Decidido não publicar. Fica aqui porque a pergunta há-de voltar, e para não se
+recalcular do zero. Sai das voltas que estão em `data/resultados.json`:
+
+| Época | Voltas | Média | Melhor | Que calendário |
+|---|---|---|---|---|
+| 2021 | 4 | 83,8 | 82 | Estreia pela Seleção, em Espanha |
+| 2022 | 5 | 83,4 | 76 | França pela primeira vez |
+| 2023 | 14 | 80,3 | 73 | Cinco convocatórias, quatro países |
+| 2024 | 39 | 77,6 | 70 | Nacional, o circuito profissional, Finlândia e Eslováquia |
+| 2025 | 13 | 78,0 | 72 | Primeiras provas europeias absolutas |
+| 2026 | 28 | 78,8 | 71 | Europeus, English Girls' Open, Andaluzia |
+
+A leitura, que é o que importa e não os números: **não é uma regressão**. É o
+calendário a endurecer — campos e adversárias de outro nível a partir de 2025.
+O índice de handicap já faz esta correcção sozinho, porque o WHS pesa a
+dificuldade do campo, e é por isso que ela tem 0,3 e a média sobe ao mesmo
+tempo. As duas coisas são verdade, e uma média publicada sozinha só conta a
+pior.
+
+## O que ainda falta
+
+Uma coisa só, e não é sobre golfe: **os nomes da equipa técnica.** A resposta
+foi «já indiquei», mas o que chegou até hoje foram as cinco marcas
+tecnológicas, que são outra coisa — e o grupo `equipa` de `data/apoios.json`
+continua vazio. Um grupo vazio não desenha nada, portanto ninguém vê um espaço
+por preencher; mas também não há equipa técnica no sítio.
 
 ## Como refazer isto
 
