@@ -1017,6 +1017,13 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
                    background:var(--superficie)}
 
 /* ── o que leva no saco ─────────────────────────────────── */
+/* A secção tem fundo próprio. É a única página do sítio onde alguém vem ver
+   objectos em vez de números, e a meio de quatro secções de tabelas e gráficos
+   merece ler-se como uma paragem. O verde claro serve as duas luzes: os três
+   tacos pretos precisam de fundo claro para se verem, e no modo escuro esta
+   mesma variável já é um verde suficientemente aberto para eles. */
+.sec--saco{background:var(--relva-clara)}
+
 /* Os tacos alinhados pela base e todos com a mesma altura de imagem: é como
    estão encostados a um saco. Alinhados pelo centro, o driver e a wedge
    flutuavam a alturas diferentes e a fila lia-se como sete recortes soltos.
@@ -1027,10 +1034,62 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
    foi montada numa tela alta, com a bola só na base: à altura dos outros
    ficava do tamanho de uma cabeça de driver, que é informação errada. */
 .witb__fila{display:flex;align-items:flex-end;justify-content:center;
-            gap:clamp(.6rem,2.5vw,2.4rem);margin:0 0 .55rem;
-            flex-wrap:wrap}
-.witb__t{margin:0;flex:0 1 auto}
-.witb__t img{display:block;height:clamp(96px,15vw,190px);width:auto;max-width:100%}
+            gap:var(--vao);margin:0 0 .55rem;
+            flex-wrap:wrap;--pe:2.3rem;--vao:clamp(.5rem,2.2vw,2.1rem)}
+
+.witb__t{margin:0;flex:0 1 auto;position:relative;padding:0 0 var(--pe);
+         border:0;background:none;color:inherit;font:inherit;cursor:pointer;
+         -webkit-tap-highlight-color:transparent}
+/* O chão onde encostam. Sem ele, levantar um taco não se lê como levantar:
+   lê-se como o taco a abanar.
+ *
+ * Um pedaço por taco, e não uma linha só na fila: cada pedaço avança meio vão
+ * para cada lado e encontra o do vizinho, o que dá uma linha contínua numa fila
+ * e duas linhas quando a fila parte em duas. Com uma linha só, num telemóvel a
+ * primeira fila de tacos ficava a pairar e o chão era da segunda. */
+.witb__t::after{content:"";position:absolute;bottom:var(--pe);height:1px;
+                left:calc(var(--vao) / -2);right:calc(var(--vao) / -2);
+                background:var(--linha-forte)}
+/* O eixo é o chão, e não o meio da imagem: um taco encostado inclina-se a
+   partir do sítio onde assenta. Pelo meio, rodava como um ponteiro. */
+.witb__t img{display:block;height:clamp(96px,15vw,190px);width:auto;max-width:100%;
+             transform-origin:bottom center;
+             transition:transform .5s var(--curva),filter .5s var(--curva)}
+
+/* Tirar um taco do saco: sobe, inclina-se um bocado e ganha sombra. O nome
+   entra por baixo, no espaço que já estava reservado — assim nada se mexe de
+   lugar e a fila não salta quando o rato passa. */
+.witb__t:hover img,.witb__t:focus-visible img,.witb__t--on img{
+  transform:translateY(-18px) rotate(-2.5deg);
+  filter:drop-shadow(0 14px 16px rgba(0,0,0,.24))}
+
+.witb__n{position:absolute;left:50%;bottom:.45rem;transform:translate(-50%,.35rem);
+         white-space:nowrap;opacity:0;pointer-events:none;
+         transition:opacity .3s var(--curva),transform .3s var(--curva);
+         font-size:.58rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+         color:var(--tinta)}
+.witb__t:hover .witb__n,.witb__t:focus-visible .witb__n,.witb__t--on .witb__n{
+  opacity:1;transform:translate(-50%,0)}
+
+/* Entrada: os tacos assentam um a seguir ao outro, da esquerda para a direita,
+   como quem arruma o saco. Corre uma vez, quando a secção aparece.
+ *
+ * Três camadas, cada uma com uma transformação e uma só: o botão fica quieto e
+ * segura o chão, o invólucro faz a entrada, a imagem levanta-se. Postas no
+ * mesmo elemento, a regra da entrada («transform:none», com três classes)
+ * ganhava por especificidade à do rato («:hover», com duas) e o taco não se
+ * levantava de todo. */
+.witb__e{display:block}
+.js .witb__e{opacity:0;transform:translateY(-22px)}
+.js .vis .witb__e{opacity:1;transform:none;
+  transition:opacity .5s var(--curva) calc(var(--i) * 70ms),
+             transform .6s var(--curva) calc(var(--i) * 70ms)}
+
+/* A linha da ficha que corresponde ao taco escolhido. */
+.witb__f > div{transition:background .3s var(--curva)}
+.witb__f > div.witb__f--on{background:var(--papel);
+  box-shadow:0 0 0 .55rem var(--papel);border-radius:2px}
+
 /* Uma linha de créditos para as sete imagens, e não uma legenda debaixo de
    cada uma: as legendas ocupavam altura dentro de uma fila alinhada pela base
    e a base deixava de ser uma base. Quem a preenche é o js/creditos.js. */
@@ -1166,13 +1225,20 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 /* O gráfico é SVG escrito à mão: são duas linhas, e uma biblioteca pesaria
    mais do que a página. O eixo está invertido de propósito — no golfe descer
    no número é subir na carreira. */
-.curva{margin:0;position:relative}
+.curva{--curva-a:clamp(140px,26vw,220px);margin:0;position:relative}
+.curva svg{width:100%;height:var(--curva-a);display:block;overflow:visible}
 /* Os números da escala vivem fora do SVG: lá dentro seriam esticados com ele.
-   Posicionados em percentagem, acompanham as linhas em qualquer largura. */
+   Posicionados em percentagem, acompanham as linhas em qualquer largura.
+ *
+ * Em percentagem de quê é que é a questão. Media-se contra o <figure>, que
+ * também leva a legenda por baixo — e a legenda cresce ao mudar de largura.
+ * Num telemóvel isso empurrava o «36», que está a 80% da altura do desenho,
+ * para 30 pixéis abaixo do desenho: em cima da legenda. Agora a escala tem uma
+ * caixa própria, com a altura exacta do SVG e nada mais. */
+.curva__e{position:absolute;left:0;right:0;top:0;height:var(--curva-a);pointer-events:none}
 .curva__m{position:absolute;left:0;transform:translateY(-100%);padding-left:.15rem;
           font-size:.62rem;font-weight:700;letter-spacing:.06em;
-          color:var(--tinta-fraca);opacity:.75;pointer-events:none}
-.curva svg{width:100%;height:clamp(140px,26vw,220px);display:block;overflow:visible}
+          color:var(--tinta-fraca);opacity:.75}
 .curva__l{display:flex;flex-wrap:wrap;align-items:center;gap:1.4rem;margin-top:1rem;
           font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
           color:var(--tinta-fraca)}
@@ -1224,6 +1290,9 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
                        transition-duration:.001ms !important}
   .nome__l,.ani > .ani__l{transform:none !important;opacity:1 !important}
   .sobe-i{opacity:1 !important;transform:none !important}
+  /* Sem a entrada escalonada, os tacos ficavam invisíveis à espera de uma
+     transição que nunca corre. */
+  .js .witb__e{opacity:1 !important;transform:none !important}
   .grao{animation:none}
 }
 
