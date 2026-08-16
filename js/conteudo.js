@@ -108,7 +108,7 @@ export async function escadas(cx, lingua = 'pt') {
   if (!cx) return;
   const { escadas: es = [] } = await ler('perfil');
   const en = lingua === 'en';
-  cx.className = 'escadas';
+  cx.className = 'escadas faixa';
   cx.innerHTML = es.map((e, i) => `
     <article class="degrau">
       <span class="degrau__i num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
