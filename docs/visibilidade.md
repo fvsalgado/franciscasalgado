@@ -36,6 +36,13 @@ redireccionamento. O `canonical` salvava a situação, mas mal. Passou a 308
 para o domínio sem `www`, por regra em `vercel.json` — e não pelo painel da
 Vercel, para a regra viver no repositório com o resto.
 
+Uma armadilha aqui, apanhada só porque se foi verificar depois de publicar:
+**o `/:caminho*` do Vercel não apanha o caminho vazio.** A primeira versão da
+regra redireccionava `/resultados.html` e `/en` e deixava a raiz do `www` a
+responder 200 — que é precisamente o endereço que um motor de busca escolhe
+primeiro. São precisas duas regras: uma para `/` e outra, com `+` em vez de
+`*`, para o que tem pelo menos um segmento.
+
 **O `lastmod` do sitemap mentia por atraso.** Saía do campo `atualizado` dos
 dados, que é um mês, e um mês vira sempre dia 1: dizia 1 de agosto no dia 16,
 com metade do percurso reescrito pelo meio. Passou a vir do `git log -1` dos
