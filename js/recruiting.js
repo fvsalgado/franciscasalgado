@@ -12,7 +12,7 @@
  */
 
 import { buscar } from './rankings.js';
-import { proxima } from './resultados.js';
+import { proxima, mesAno } from './resultados.js';
 
 const tx = (v, l) => (typeof v === 'string' ? v : v?.[l] || v?.pt || '');
 
@@ -169,8 +169,8 @@ export async function curvaRankings(cx, lingua = 'pt') {
             <circle cx="${d[d.length - 1].split(',')[0]}" cy="${d[d.length - 1].split(',')[1]}" r="3.5" fill="${cor}" />`;
   };
 
-  const de = pontos[0].data;
-  const a = pontos[pontos.length - 1].data;
+  const de = mesAno(pontos[0].data, lingua);
+  const a = mesAno(pontos[pontos.length - 1].data, lingua);
 
   cx.innerHTML = `
     <figure class="curva">
@@ -274,6 +274,16 @@ export async function curvaHandicap(cx, lingua = 'pt') {
   const rotulosRef = refs.map(({ v, y }) => `<span class="curva__m"
       style="top:${((y / A) * 100).toFixed(2)}%">${lingua === 'en' ? v : String(v).replace('.', ',')}</span>`).join('');
 
+  /* O primeiro e o último ponto, e não o pior e o melhor.
+   *
+   * Estavam aqui o máximo e o mínimo, e isso dava «54,0 → 0,1»: o 0,1 foi
+   * tocado em dezembro de 2024 e depois perdido. Lido como o fim de um
+   * percurso, anunciava um índice que ela não tem — e a ficha no topo da mesma
+   * página dizia outro número. A linha mostra o melhor de sempre; a legenda diz
+   * onde começou e onde está. */
+  const p0 = pontos[0];
+  const pf = pontos[pontos.length - 1];
+
   cx.innerHTML = `
     <figure class="curva">
       <svg viewBox="0 0 ${L} ${A}" role="img" preserveAspectRatio="none"
@@ -283,11 +293,11 @@ export async function curvaHandicap(cx, lingua = 'pt') {
                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         <circle cx="${fim[0]}" cy="${fim[1]}" r="3.5" fill="var(--relva)" />
       </svg>
-      ${rotulosRef}
+      <div class="curva__e">${rotulosRef}</div>
       <figcaption class="curva__l">
         <span><i style="background:var(--relva)"></i>${t.hcp2}</span>
-        <span class="curva__d num">${num(max)} → ${num(min)}</span>
-        <span class="curva__d num">${pontos[0].data} → ${pontos[pontos.length - 1].data}</span>
+        <span class="curva__d num">${num(p0.hcp)} · ${mesAno(p0.data, lingua)}
+          → ${num(pf.hcp)} · ${mesAno(pf.data, lingua)}</span>
       </figcaption>
     </figure>`;
 }
@@ -303,13 +313,18 @@ export async function witb(cx, lingua = 'pt') {
      duas formas o desenho precisa — escreve o nome, e acrescenta a imagem se e
      quando ela existir. */
   const nome = (v) => (typeof v === 'string' ? v : v?.m || '');
+  const foto = (v) => (typeof v === 'string' ? undefined : v?.img);
+  /* Uma lista só, e duas vistas dela. A fila e a ficha têm de saber uma da
+     outra — passar o rato por um taco acende a linha dele — e para isso a
+     ligação tem de ser um número que as duas partilhem, não a ordem em que
+     calharam ficar. */
   const linhas = [
-    ...(d.tacos || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua) })),
-    ...(d.bola ? [{ r: en ? 'Ball' : 'Bola', m: nome(d.bola) }] : []),
-    ...(d.luva ? [{ r: en ? 'Glove' : 'Luva', m: nome(d.luva) }] : []),
-    ...(d.saco ? [{ r: en ? 'Bag' : 'Saco', m: nome(d.saco) }] : []),
+    ...(d.tacos || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua), img: t.img })),
+    ...(d.bola ? [{ r: en ? 'Ball' : 'Bola', m: nome(d.bola), img: foto(d.bola) }] : []),
+    ...(d.luva ? [{ r: en ? 'Glove' : 'Luva', m: nome(d.luva), img: foto(d.luva) }] : []),
+    ...(d.saco ? [{ r: en ? 'Bag' : 'Saco', m: nome(d.saco), img: foto(d.saco) }] : []),
     ...(d.extras || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua) })),
-  ].filter((l) => l.m);
+  ].filter((l) => l.m).map((l, i) => ({ ...l, i }));
 
   if (!linhas.length) { cx.innerHTML = ''; mostrar(cx, false); return; }
   mostrar(cx, true);
@@ -325,25 +340,76 @@ export async function witb(cx, lingua = 'pt') {
    * a um saco, e é o que faz a fila ler-se como um conjunto e não como sete
    * recortes soltos. A bola entra ao fim, e entra pequena — a escala de cada
    * uma vem da tela em que foi montada, não do CSS. */
-  const naFila = [
-    ...(d.tacos || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, img: t.img })),
-    { r: en ? 'Ball' : 'Bola', m: nome(d.bola), img: d.bola?.img },
-  ].filter((x) => x.img && x.m);
+  const naFila = linhas.filter((x) => x.img);
 
-  /* Os créditos vão todos para a mesma linha, por baixo da fila — ver o
-     js/creditos.js, que é quem sabe de que marca é cada ficheiro. */
+  /* Cada taco é um botão, e não só uma fotografia. Serve para ser escolhido:
+   * ao ser escolhido acende a linha dele na ficha, que é onde estão o loft e o
+   * shaft. Num rato isso acontece ao passar por cima, num teclado ao chegar
+   * com o tabulador, e num telemóvel ao tocar — e é por causa do telemóvel que
+   * tem de ser um botão, porque num ecrã de toque não existe passar por cima.
+   *
+   * O nome vive no botão, e a fotografia fica com alt vazio: quem lê com os
+   * ouvidos ouviria «Driver: Cobra OPTM X» duas vezes seguidas.
+   *
+   * Os créditos vão todos para a mesma linha, por baixo da fila — ver o
+   * js/creditos.js, que é quem sabe de que marca é cada ficheiro. */
   const fila = naFila.length ? `
-    <div class="witb__fila">${naFila.map((x) => `
-      <figure class="witb__t">
-        <img src="/img/witb/${x.img}" alt="${x.r}: ${x.m}"
-             loading="lazy" decoding="async" data-credito-em="witbCred" />
-      </figure>`).join('')}</div>
+    <div class="witb__fila">${naFila.map((x, k) => `
+      <button class="witb__t" type="button" data-i="${x.i}" style="--i:${k}"
+              aria-pressed="false" aria-label="${x.r}: ${x.m}">
+        <span class="witb__e"><img src="/img/witb/${x.img}" alt="" loading="lazy"
+              decoding="async" data-credito-em="witbCred" /></span>
+        <span class="witb__n" aria-hidden="true">${x.r}</span>
+      </button>`).join('')}</div>
     <p class="witb__c" id="witbCred" data-credito-base="${en ? 'Images:' : 'Imagens:'}"></p>` : '';
 
   cx.className = 'witb';
   cx.innerHTML = `${fila}
-    <dl class="factos">${linhas.map((l) => `
-      <div><dt>${l.r}</dt><dd>${l.m}${l.n ? ` <span class="dest__o">${l.n}</span>` : ''}</dd></div>`).join('')}</dl>`;
+    <dl class="factos witb__f">${linhas.map((l) => `
+      <div data-i="${l.i}"><dt>${l.r}</dt><dd>${l.m}${l.n ? ` <span class="dest__o">${l.n}</span>` : ''}</dd></div>`).join('')}</dl>`;
+
+  ligarSaco(cx);
+}
+
+/* A fila e a ficha, ligadas nos dois sentidos.
+ *
+ * Escolher um taco acende a linha dele; passar por uma linha levanta o taco. É
+ * a mesma informação vista de dois lados, e é o que permite manter a fila
+ * limpa — sem uma legenda debaixo de cada fotografia a repetir o que a ficha já
+ * diz melhor.
+ *
+ * `preso` é o que ficou escolhido por clique ou toque. Sem ele, num telemóvel o
+ * taco acendia-se com o dedo em cima e apagava-se no instante em que o dedo
+ * saía, que é o mesmo que não acender. */
+function ligarSaco(cx) {
+  let preso = null;
+
+  const marcar = (el, sim) => {
+    const i = el?.dataset.i;
+    if (i == null) return;
+    cx.querySelectorAll(`[data-i="${i}"]`).forEach((n) => {
+      n.classList.toggle(n.matches('.witb__t') ? 'witb__t--on' : 'witb__f--on', sim);
+    });
+  };
+
+  cx.querySelectorAll('.witb__t, .witb__f > div').forEach((el) => {
+    el.addEventListener('pointerenter', () => { if (el !== preso) marcar(el, true); });
+    el.addEventListener('pointerleave', () => { if (el !== preso) marcar(el, false); });
+    if (!el.matches('.witb__t')) return;
+
+    el.addEventListener('focus', () => marcar(el, true));
+    el.addEventListener('blur', () => { if (el !== preso) marcar(el, false); });
+    el.addEventListener('click', () => {
+      if (preso && preso !== el) {
+        marcar(preso, false);
+        preso.setAttribute('aria-pressed', 'false');
+      }
+      const liga = preso !== el;
+      preso = liga ? el : null;
+      marcar(el, liga);
+      el.setAttribute('aria-pressed', String(liga));
+    });
+  });
 }
 
 /* ── o swing, para quem avalia ────────────────────────────────

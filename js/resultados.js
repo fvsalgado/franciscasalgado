@@ -34,6 +34,14 @@ export function dataCurta(p, lingua) {
   return `${d.getDate()} ${MESES[lingua === 'en' ? 'en' : 'pt'][d.getMonth()]} ${d.getFullYear()}`;
 }
 
+/* Mês e ano — «DEZ 2017». Para legendas de gráficos, onde o dia não acrescenta
+   nada a uma linha que atravessa nove anos. */
+export function mesAno(iso, lingua) {
+  const d = new Date(`${iso}T12:00:00`);
+  if (Number.isNaN(d.getTime())) return String(iso).slice(0, 4);
+  return `${MESES[lingua === 'en' ? 'en' : 'pt'][d.getMonth()]} ${d.getFullYear()}`;
+}
+
 /* Ordinal da posição. Ela é uma jogadora — em português o ordinal é feminino,
    e escrever «1.º» num sítio que é dela seria descuido, não economia. */
 function ordinal(n, lingua) {
