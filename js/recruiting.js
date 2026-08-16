@@ -13,6 +13,7 @@
 
 import { buscar } from './rankings.js';
 import { proxima, mesAno } from './resultados.js';
+import { reduzido } from './movimento.js';
 
 const tx = (v, l) => (typeof v === 'string' ? v : v?.[l] || v?.pt || '');
 
@@ -324,7 +325,7 @@ export async function witb(cx, lingua = 'pt') {
      ligação tem de ser um número que as duas partilhem, não a ordem em que
      calharam ficar. */
   const linhas = [
-    ...(d.tacos || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua), img: t.img })),
+    ...(d.tacos || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua), img: t.img, u: t.u })),
     ...(d.bola ? [{ r: en ? 'Ball' : 'Bola', m: nome(d.bola), img: foto(d.bola) }] : []),
     ...(d.luva ? [{ r: en ? 'Glove' : 'Luva', m: nome(d.luva), img: foto(d.luva) }] : []),
     ...(d.saco ? [{ r: en ? 'Bag' : 'Saco', m: nome(d.saco), img: foto(d.saco) }] : []),
@@ -384,13 +385,165 @@ export async function witb(cx, lingua = 'pt') {
     </figure>` : '';
 
   cx.className = 'witb';
-  cx.innerHTML = `${fila}
+  cx.innerHTML = `${contador(d, lingua)}${fila}${escada(linhas, lingua)}${detalhe()}${citacao(d, linhas, lingua)}
     <div class="witb__b">${retrato}
       <dl class="factos witb__f">${linhas.map((l) => `
         <div data-i="${l.i}"><dt>${l.r}</dt><dd>${l.m}${l.n ? ` <span class="dest__o">${l.n}</span>` : ''}</dd></div>`).join('')}</dl>
     </div>`;
 
-  ligarSaco(cx);
+  ligarSaco(cx, linhas, lingua);
+}
+
+/* ── catorze ──────────────────────────────────────────────────
+ *
+ * O número de tacos, contado das unidades e não escrito à mão — um driver, duas
+ * madeiras, um híbrido, seis ferros, três wedges e o putter.
+ *
+ * Catorze é o máximo que a Regra 4.1b deixa levar, e é o facto mais partilhável
+ * que esta secção tem: qualquer golfista percebe-o num segundo e ninguém repara
+ * nele sozinho. Se um dia ela trocar um híbrido por um ferro, isto diz treze —
+ * e a frase ao lado deixa de aparecer, porque deixa de ser verdade. */
+function contador(d, lingua) {
+  const n = (d.tacos || []).reduce((s, t) => s + (t.u?.length || 0), 0);
+  if (!n) return '';
+  const en = lingua === 'en';
+  return `
+    <p class="witb__14">
+      <span class="witb__14n num" data-ate="${n}">${n}</span>
+      <span class="witb__14r">${en ? 'clubs' : 'tacos'}${
+        n === 14 ? ` · ${en ? 'the most the rules allow' : 'o máximo que as regras deixam levar'}` : ''}</span>
+    </p>`;
+}
+
+/* ── a escada de lofts ────────────────────────────────────────
+ *
+ * Os catorze tacos numa régua, do driver ao wedge de 58°, cada um no seu grau.
+ * Não é enfeite: é o que mostra que o saco é pensado — que não há um buraco
+ * entre o híbrido e o primeiro ferro, e que os wedges estão espaçados de quatro
+ * em quatro graus. Um treinador lê isto em dois segundos e sabe mais do que a
+ * ficha lhe diz em dez linhas.
+ *
+ * Os ferros dela não têm loft neste ficheiro, porque não sei os dela e um loft
+ * de catálogo não é um loft dela. Entram como uma faixa entre o último loft
+ * conhecido antes e o primeiro depois — que é verdade, e que se desdobra em
+ * marcas no dia em que os números existirem.
+ *
+ * O putter fica de fora: tem loft, mas três graus ao lado de um wedge de 58
+ * esmagavam a régua inteira num canto. */
+function escada(linhas, lingua) {
+  const unidades = [];
+  for (const l of linhas) {
+    for (const u of l.u || []) unidades.push({ ...u, i: l.i, grupo: l.r });
+  }
+  const comLoft = unidades.filter((u) => typeof u.loft === 'number');
+  if (comLoft.length < 3) return '';
+
+  const min = Math.min(...comLoft.map((u) => u.loft));
+  const max = Math.max(...comLoft.map((u) => u.loft));
+  const vao = max - min || 1;
+  const pc = (v) => ((v - min) / vao) * 100;
+
+  /* Uma corrida de tacos sem loft, entre dois que têm, é uma faixa. A corrida
+     que fica no fim sem nada a fechá-la — o putter — cai fora, que é o que se
+     quer: um putter tem loft, mas três graus ao lado de um wedge de 58
+     esmagavam a régua inteira num canto. */
+  const bandas = [];
+  let corrida = [];
+  let anterior = null;
+  for (const u of unidades) {
+    if (typeof u.loft === 'number') {
+      if (corrida.length && anterior != null) bandas.push({ de: anterior, ate: u.loft, itens: corrida });
+      corrida = [];
+      anterior = u.loft;
+    } else {
+      corrida.push(u);
+    }
+  }
+
+  const en = lingua === 'en';
+  const grau = (v) => (en ? `${v}°` : `${String(v).replace('.', ',')}°`);
+
+  /* Por loft e não por ordem do saco: um 5W de 18,5° vem depois de um híbrido
+     de 18°, mesmo estando antes dele na fila. Uma régua fora de ordem não é uma
+     régua.
+   *
+   * E dois lofts colados — 18° e 18,5° são um por cento da régua — dão dois
+   * rótulos por cima um do outro. O segundo desce uma linha. É contado aqui e
+   * não em `nth-child`, porque quem colide não é o par nem o ímpar: é quem
+   * calhou ficar perto do anterior. */
+  const ordenadas = [...comLoft].sort((a, b) => a.loft - b.loft);
+
+  /* Dois tacos a meio grau um do outro — o híbrido de 18° e a madeira 5 de
+     18,5° — são o mesmo ponto da régua, e desenhados como duas marcas ficam
+     duas etiquetas por cima uma da outra em qualquer largura. Juntam-se numa:
+     «18–18,5°», com os dois nomes. Não é uma simplificação, é o que os números
+     dizem — ela leva ali dois tacos ao mesmo loft, e isso é informação. */
+  const marcas = [];
+  for (const u of ordenadas) {
+    const ant = marcas[marcas.length - 1];
+    if (ant && pc(u.loft) - pc(ant.ate) < 1.5) {
+      ant.ate = u.loft;
+      ant.nomes.push(u.n);
+      ant.is.add(u.i);
+    } else {
+      marcas.push({ de: u.loft, ate: u.loft, nomes: [u.n], is: new Set([u.i]) });
+    }
+  }
+
+  let ultimo = -Infinity;
+  for (const m of marcas) {
+    const x = pc(m.de);
+    m.linha = x - ultimo < 5 && ultimo > -Infinity ? 1 : 0;
+    if (!m.linha) ultimo = x;
+  }
+  const nLinhas = Math.max(...marcas.map((m) => m.linha)) + 1;
+
+  return `
+    <figure class="esc">
+      <figcaption class="esc__t">${en ? 'The ladder, degree by degree' : 'A escada, grau a grau'}</figcaption>
+      <div class="esc__r" style="--linhas:${nLinhas}">
+        <div class="esc__eixo"></div>
+        ${bandas.map((b) => `
+          <div class="esc__f" style="left:${pc(b.de).toFixed(2)}%;width:${(pc(b.ate) - pc(b.de)).toFixed(2)}%">
+            <span>${b.itens.length} ${b.itens[0].grupo.toLowerCase()}</span>
+          </div>`).join('')}
+        ${marcas.map((m, k) => {
+    const rotulo = m.de === m.ate ? grau(m.de) : `${grau(m.de)}–${grau(m.ate)}`;
+    /* O nome só entra quando acrescenta: um wedge de 50° chama-se «50°», e
+       escrevê-lo por baixo do grau é dizer a mesma coisa duas vezes. */
+    const nomes = m.nomes.filter((n) => n.replace(',', '.').replace('°', '') !== String(m.de)).join(' · ');
+    return `
+          <button class="esc__m" type="button" data-i="${[...m.is].join(' ')}"
+                  style="left:${pc(m.de).toFixed(2)}%;--i:${k};--linha:${m.linha}"
+                  aria-label="${[rotulo, ...m.nomes].join(' · ')}">
+            <i></i><b>${rotulo}</b>${nomes ? `<span>${nomes}</span>` : ''}
+          </button>`;
+  }).join('')}
+      </div>
+    </figure>`;
+}
+
+/* ── o detalhe ────────────────────────────────────────────────
+ *
+ * Escolher um taco abre-o aqui, grande, com a ficha dele por extenso. Fechado,
+ * não ocupa nada; aberto, cresce. É o único sítio da secção onde a fotografia e
+ * o texto do mesmo taco estão juntos — na fila há fotografias sem texto, na
+ * ficha há texto sem fotografias. */
+const detalhe = () => '<div class="witb__d" id="witbDet" hidden></div>';
+
+/* ── a frase dela ─────────────────────────────────────────────
+ *
+ * Uma linha dela sobre um taco. Enquanto não existir, não desenha nada — e é
+ * essa a diferença entre uma secção que é um catálogo e uma que é dela. */
+function citacao(d, linhas, lingua) {
+  const t = tx(d.frase?.t, lingua);
+  if (!t) return '';
+  const dono = linhas.find((l) => l.r === d.frase.taco || l.m === d.frase.taco);
+  return `
+    <figure class="witb__q"${dono ? ` data-i="${dono.i}"` : ''}>
+      <blockquote>${t}</blockquote>
+      ${d.frase.taco ? `<figcaption>${d.frase.taco}</figcaption>` : ''}
+    </figure>`;
 }
 
 /* A fila e a ficha, ligadas nos dois sentidos.
@@ -410,15 +563,50 @@ export async function witb(cx, lingua = 'pt') {
  * sair apagava-o na mesma, embora continuasse marcado como escolhido; o clique
  * seguinte era gasto a desescolher uma coisa que já estava apagada, e lia-se
  * como um clique que não fez nada. */
-function ligarSaco(cx) {
+function ligarSaco(cx, linhas, lingua) {
   let preso = null;
 
-  const marcar = (i, sim) => {
-    if (i == null) return;
-    cx.querySelectorAll(`[data-i="${i}"]`).forEach((n) => {
-      n.classList.toggle(n.matches('.witb__t') ? 'witb__t--on' : 'witb__f--on', sim);
-    });
+  /* Uma classe por família, e não uma só: o botão da fila levanta-se, a marca
+     da escada acende, a linha da ficha ilumina-se. É o mesmo taco visto de três
+     sítios, e cada sítio mostra-o à sua maneira. */
+  const CLASSE = (n) => (n.matches('.witb__t') ? 'witb__t--on'
+    : n.matches('.esc__m') ? 'esc__m--on' : 'witb__f--on');
+
+  /* Uma marca da escada pode valer por dois tacos — o híbrido e a madeira 5
+     partilham o mesmo grau e a mesma marca —, e por isso o `data-i` guarda uma
+     lista. O selector `~=` é o que casa uma palavra dentro de uma lista
+     separada por espaços, e é exactamente para isto que existe. */
+  const marcar = (chave, sim) => {
+    if (chave == null) return;
+    for (const i of String(chave).split(' ')) {
+      cx.querySelectorAll(`[data-i~="${i}"]`).forEach((n) => n.classList.toggle(CLASSE(n), sim));
+    }
   };
+
+  /* ── o detalhe ─────────────────────────────────────────────
+     Escolher um taco abre-o em grande, com a ficha dele por extenso. */
+  const det = cx.querySelector('#witbDet');
+  const en = lingua === 'en';
+  const abrir = (chave) => {
+    const i = String(chave).split(' ')[0];
+    const l = linhas.find((x) => String(x.i) === i);
+    if (!det || !l) return;
+    const lofts = (l.u || []).filter((u) => typeof u.loft === 'number')
+      .map((u) => `${u.n} ${en ? u.loft : String(u.loft).replace('.', ',')}°`).join(' · ');
+    const dist = (l.u || []).filter((u) => u.d).map((u) => `${u.n} ${u.d} m`).join(' · ');
+    det.innerHTML = `
+      ${l.img ? `<span class="witb__di"><img src="/img/witb/${l.img}" alt="" decoding="async"
+                       data-credito-feito="1" /></span>` : ''}
+      <div class="witb__dq">
+        <p class="witb__dr">${l.r}</p>
+        <p class="witb__dm">${l.m}</p>
+        ${l.n ? `<p class="witb__dn">${l.n}</p>` : ''}
+        ${lofts ? `<p class="witb__dl"><b>${en ? 'Lofts' : 'Lofts'}</b> ${lofts}</p>` : ''}
+        ${dist ? `<p class="witb__dl"><b>${en ? 'Carry' : 'Distância'}</b> ${dist}</p>` : ''}
+      </div>`;
+    det.hidden = false;
+  };
+  const fechar = () => { if (det) { det.hidden = true; det.innerHTML = ''; } };
 
   /* Passar por cima só se liga onde há por onde passar.
    *
@@ -430,27 +618,115 @@ function ligarSaco(cx) {
    * existir, no js/movimento.js. */
   const passaRato = matchMedia('(hover:hover) and (pointer:fine)').matches;
 
-  cx.querySelectorAll('.witb__t, .witb__f > div').forEach((el) => {
+  const premido = (chave, sim) => {
+    for (const i of String(chave).split(' ')) {
+      cx.querySelectorAll(`[data-i~="${i}"][aria-pressed]`).forEach((n) => n.setAttribute('aria-pressed', String(sim)));
+    }
+  };
+
+  const escolher = (i) => {
+    if (preso != null && preso !== i) { marcar(preso, false); premido(preso, false); }
+    const liga = preso !== i;
+    preso = liga ? i : null;
+    marcar(i, liga);
+    premido(i, liga);
+    if (liga) abrir(i); else fechar();
+  };
+
+  cx.querySelectorAll('.witb__t, .esc__m, .witb__f > div').forEach((el) => {
     const i = el.dataset.i;
     if (passaRato) {
       el.addEventListener('pointerenter', () => { if (i !== preso) marcar(i, true); });
       el.addEventListener('pointerleave', () => { if (i !== preso) marcar(i, false); });
     }
-    if (!el.matches('.witb__t')) return;
+    if (el.matches('.witb__f > div')) return;
 
     el.addEventListener('focus', () => marcar(i, true));
     el.addEventListener('blur', () => { if (i !== preso) marcar(i, false); });
-    el.addEventListener('click', () => {
-      if (preso != null && preso !== i) {
-        marcar(preso, false);
-        cx.querySelector(`.witb__t[data-i="${preso}"]`)?.setAttribute('aria-pressed', 'false');
-      }
-      const liga = preso !== i;
-      preso = liga ? i : null;
-      marcar(i, liga);
-      el.setAttribute('aria-pressed', String(liga));
-    });
+    el.addEventListener('click', () => escolher(i));
   });
+
+  contar(cx);
+  arrumarEscada(cx);
+}
+
+/* ── arrumar a escada ─────────────────────────────────────────
+ *
+ * Quantos graus cabem lado a lado depende da largura do ecrã e da largura de
+ * cada número, e nenhuma das duas se sabe na altura de escrever o HTML: num
+ * telemóvel, o 15,5° e o 18° ficam a dezassete pixéis um do outro e leem-se
+ * como um número só.
+ *
+ * Por isso a arrumação de origem é uma aproximação — boa num ecrã largo, que é
+ * onde o HTML é gravado — e aqui é refeita com as caixas já medidas, e outra
+ * vez sempre que a janela muda de tamanho. Sem JavaScript fica a aproximação,
+ * que é melhor do que nada. */
+function arrumarEscada(cx) {
+  const regua = cx.querySelector('.esc__r');
+  const marcas = [...cx.querySelectorAll('.esc__m')];
+  if (!regua || !marcas.length) return;
+
+  const arrumar = () => {
+    /* A posição horizontal não depende da linha, por isso mede-se uma vez. */
+    const caixas = marcas.map((m) => m.querySelector('b').getBoundingClientRect());
+    const ocupado = [];
+    marcas.forEach((m, k) => {
+      let linha = 0;
+      while (ocupado[linha] != null && caixas[k].left < ocupado[linha] + 8) linha += 1;
+      ocupado[linha] = caixas[k].right;
+      m.style.setProperty('--linha', linha);
+    });
+    regua.style.setProperty('--linhas', String(Math.max(1, ocupado.length)));
+  };
+
+  arrumar();
+  addEventListener('resize', arrumar, { passive: true });
+}
+
+/* ── o contador a subir ───────────────────────────────────────
+ *
+ * Vai de zero ao número quando a secção aparece, e uma vez só. Corre em rAF e
+ * não em setInterval: um número a saltar de duas em duas décimas lê-se como um
+ * relógio avariado, e ligado ao quadro do ecrã sobe liso.
+ *
+ * Com movimento reduzido não sobe nada — escreve-se logo o número, que é o que
+ * interessa a quem pediu ao sistema para as coisas não se mexerem. */
+function contar(cx) {
+  const el = cx.querySelector('.witb__14n');
+  if (!el) return;
+  const ate = Number(el.dataset.ate) || 0;
+  if (!ate) return;
+  if (reduzido) { el.textContent = String(ate); return; }
+
+  /* O número certo está escrito na marcação, e não um zero à espera de
+     JavaScript: assim o ficheiro que o scripts/estatico.mjs grava diz catorze,
+     e diz catorze também a quem chegar sem JavaScript.
+   *
+   * Zera-se só quando há mesmo para onde subir. Se a secção já estiver à vista
+   * quando isto corre — alguém que chegou por uma âncora, ou um ecrã alto —,
+   * fica quieta: catorze a piscar para zero e a voltar não é uma animação, é um
+   * salto. */
+  /* O pré-renderizador grava o estado em repouso, e um contador a meio do
+     caminho ficaria gravado a meio do caminho. */
+  if (window.__estatico) return;
+  const r = el.getBoundingClientRect();
+  if (r.top < innerHeight && r.bottom > 0) return;
+  el.textContent = '0';
+
+  const obs = new IntersectionObserver((entradas) => {
+    if (!entradas.some((e) => e.isIntersecting)) return;
+    obs.disconnect();
+    const t0 = performance.now();
+    const DUR = 900;
+    const passo = (t) => {
+      const k = Math.min(1, (t - t0) / DUR);
+      /* Trava no fim em vez de parar de repente. */
+      el.textContent = String(Math.round(ate * (1 - (1 - k) ** 3)));
+      if (k < 1) requestAnimationFrame(passo);
+    };
+    requestAnimationFrame(passo);
+  }, { rootMargin: '0px 0px -20% 0px' });
+  obs.observe(el);
 }
 
 /* ── o swing, para quem avalia ────────────────────────────────

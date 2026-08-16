@@ -157,6 +157,14 @@ for (const arv of ['', 'en/']) {
   for (const p of PAGINAS) {
     const caminho = `${arv}${p}`;
     const ctx = await b.newContext({ viewport: { width: 1440, height: 1000 }, locale: 'pt-PT' });
+    /* Diz à página que quem a está a ver é este script.
+     *
+     * O que se grava tem de ser o estado em repouso, e há coisas que só chegam
+     * lá depois de uma animação acabar — o contador dos tacos sobe de zero a
+     * catorze em quase um segundo, e a fotografia saía a meio, com treze
+     * gravados no ficheiro para sempre. Quem lê isto salta a animação e escreve
+     * o número final; quem chega ao sítio de browser vê-a a subir. */
+    await ctx.addInitScript(() => { window.__estatico = true; });
     const pag = await ctx.newPage();
 
     const erros = [];

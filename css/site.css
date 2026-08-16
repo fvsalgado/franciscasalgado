@@ -1122,6 +1122,96 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 .witb__f > div{transition:background .3s var(--curva)}
 .witb__f > div.witb__f--on{background:var(--papel);border-radius:3px}
 
+/* ── catorze ────────────────────────────────────────────── */
+/* O número acima da fila, a subir de zero quando a secção aparece. Catorze é o
+   máximo que as regras deixam levar, e é a coisa desta secção que um golfista
+   percebe mais depressa. */
+.witb__14{display:flex;align-items:baseline;gap:.7rem;margin:0 0 clamp(1rem,2.5vw,1.8rem)}
+.witb__14n{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 96;
+           font-size:clamp(2.6rem,6vw,4rem);line-height:.9;letter-spacing:-.03em;
+           color:var(--relva);font-variant-numeric:tabular-nums}
+.witb__14r{font-size:.66rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+           color:var(--tinta-fraca)}
+
+/* ── a escada de lofts ──────────────────────────────────── */
+/* Uma régua do driver ao wedge mais aberto, cada taco no seu grau. É o que
+   mostra que o saco é pensado: sem buracos entre o híbrido e os ferros, e os
+   wedges de quatro em quatro graus.
+
+   Os ferros entram como faixa e não como marcas — o loft deles não está no
+   ficheiro, porque não é conhecido, e um loft de catálogo não é um loft dela.
+   No dia em que os números existirem, a faixa desdobra-se em marcas sem se
+   mexer aqui uma linha. */
+.esc{margin:clamp(1.4rem,3.5vw,2.6rem) 0 clamp(1.6rem,3.5vw,2.6rem)}
+.esc__t{font-size:.62rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+        color:var(--tinta-fraca);margin:0 0 2.6rem}
+/* A altura segue o número de linhas de rótulos, que o js/recruiting.js conta
+   depois de medir — não cabem sempre as mesmas num telemóvel e num portátil. */
+.esc__r{position:relative;margin:0 clamp(.8rem,3vw,2rem);
+        height:calc(3.2rem + (var(--linhas,1) - 1) * 2.4rem)}
+.esc__eixo{position:absolute;left:0;right:0;top:0;height:1px;background:var(--linha-forte)}
+.esc__f{position:absolute;top:0;height:1px;background:var(--relva);opacity:.35}
+.esc__f span{position:absolute;left:50%;top:.6rem;transform:translateX(-50%);white-space:nowrap;
+             font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+             color:var(--tinta-fraca)}
+
+.esc__m{position:absolute;top:0;transform:translateX(-50%);
+        border:0;background:none;padding:0 .3rem;cursor:pointer;color:inherit;font:inherit;
+        display:flex;flex-direction:column;align-items:center;
+        -webkit-tap-highlight-color:transparent}
+/* `--linha` vem do js/recruiting.js: é 1 quando esta marca ficou colada à
+   anterior e o rótulo teve de descer para não se sobrepor. O pé cresce para a
+   acompanhar, senão o número descia e ficava a pairar longe da régua. */
+/* O pé desce para o rótulo que teve de baixar. Nas linhas de baixo é um traço
+   fino e apagado — a essa altura já não é uma marca da régua, é um fio a dizer
+   de onde vem o número, e um traço grosso a passar ao lado das etiquetas de
+   cima só fazia barulho. */
+.esc__m i{display:block;background:var(--relva);border-radius:2px;
+          width:calc(2px - var(--linha,0) * 1px);
+          opacity:calc(1 - var(--linha,0) * .5);
+          height:calc(.85rem + var(--linha,0) * 2.1rem);
+          transform-origin:top center;transition:transform .3s var(--curva),background .3s}
+.esc__m b{font-size:.68rem;font-weight:800;color:var(--tinta);margin-top:.3rem;
+          font-variant-numeric:tabular-nums;transition:color .3s}
+.esc__m span{font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+             color:var(--tinta-fraca);margin-top:.1rem}
+.esc__m--on i,.esc__m:focus-visible i{transform:scaleY(1.5);background:var(--relva-viva)}
+.esc__m--on b,.esc__m:focus-visible b{color:var(--relva)}
+@media (hover:hover){
+  .esc__m:hover i{transform:scaleY(1.5);background:var(--relva-viva)}
+  .esc__m:hover b{color:var(--relva)}
+}
+/* Entram uma a uma, da esquerda para a direita, como a fila. */
+.js .esc__m{opacity:0;transform:translate(-50%,-8px)}
+.js .vis .esc__m{opacity:1;transform:translateX(-50%);
+  transition:opacity .4s var(--curva) calc(var(--i) * 60ms + 400ms),
+             transform .4s var(--curva) calc(var(--i) * 60ms + 400ms)}
+
+/* ── o taco escolhido, em grande ────────────────────────── */
+/* Uma faixa larga com o texto encostado à esquerda são dois palmos de nada à
+   direita. Limitada, lê-se como um cartão. */
+.witb__d{display:flex;align-items:center;gap:clamp(1rem,3vw,2.2rem);max-width:46rem;
+         margin:clamp(1.6rem,3.5vw,2.6rem) 0 0;padding:clamp(1rem,2.5vw,1.6rem);
+         background:var(--papel);border-radius:6px}
+.witb__d[hidden]{display:none}
+.witb__di img{display:block;height:clamp(110px,18vw,190px);width:auto}
+.witb__dq{min-width:0}
+.witb__dr{margin:0;font-size:.62rem;font-weight:800;letter-spacing:.16em;
+          text-transform:uppercase;color:var(--relva)}
+.witb__dm{margin:.35rem 0 0;font-family:var(--display);font-weight:400;
+          font-size:clamp(1.4rem,3.4vw,2.1rem);line-height:1.05;letter-spacing:-.02em;color:var(--tinta)}
+.witb__dn{margin:.5rem 0 0;font-size:.88rem;color:var(--tinta-fraca)}
+.witb__dl{margin:.5rem 0 0;font-size:.78rem;color:var(--tinta-fraca)}
+.witb__dl b{font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+            font-size:.6rem;color:var(--tinta);margin-right:.45rem}
+
+/* ── a frase dela ───────────────────────────────────────── */
+.witb__q{margin:clamp(1.6rem,3.5vw,2.6rem) 0 0;max-width:44ch}
+.witb__q blockquote{margin:0;font-family:var(--display);font-weight:300;font-style:italic;
+                    font-size:clamp(1.1rem,2.4vw,1.5rem);line-height:1.35;color:var(--tinta)}
+.witb__q figcaption{margin-top:.5rem;font-size:.6rem;font-weight:800;letter-spacing:.15em;
+                    text-transform:uppercase;color:var(--tinta-fraca)}
+
 /* Uma linha de créditos para as sete imagens, e não uma legenda debaixo de
    cada uma: as legendas ocupavam altura dentro de uma fila alinhada pela base
    e a base deixava de ser uma base. Quem a preenche é o js/creditos.js. */
