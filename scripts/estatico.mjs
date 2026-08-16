@@ -50,7 +50,8 @@ const { chromium } = await (async () => {
 const RAIZ = new URL('../', import.meta.url);
 const SECO = process.argv.includes('--seco');
 
-const PAGINAS = ['index.html', 'resultados.html', 'recruiting.html', 'imprensa.html', 'parcerias.html'];
+const PAGINAS = ['index.html', 'resultados.html', 'recruiting.html', 'witb.html',
+                 'imprensa.html', 'parcerias.html'];
 
 /* Os contentores que valem a pena guardar, por ordem de nada. Um id que não
    exista numa página é ignorado sem barulho — cada página tem os seus. */

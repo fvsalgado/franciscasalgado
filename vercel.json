@@ -32,6 +32,16 @@
       "source": "/en/contacto.html",
       "destination": "/en/parcerias.html#contacto",
       "permanent": true
+    },
+    {
+      "source": "/witb",
+      "destination": "/witb.html",
+      "permanent": true
+    },
+    {
+      "source": "/en/witb",
+      "destination": "/en/witb.html",
+      "permanent": true
     }
   ],
   "rewrites": [

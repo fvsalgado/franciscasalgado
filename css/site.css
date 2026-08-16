@@ -1006,6 +1006,10 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
    tacos pretos precisam de fundo claro para se verem, e no modo escuro esta
    mesma variável já é um verde suficientemente aberto para eles. */
 .sec--saco{background:var(--relva-clara)}
+/* Uma secção que abre a página tem de nascer abaixo do cabeçalho, que é fixo.
+   Nas outras páginas quem trata disso é o `.topo-p`; na do saco a primeira
+   secção é a do saco, e sem isto o rótulo nascia por baixo do menu. */
+.sec--abre{padding-top:clamp(6.5rem,13vh,9.5rem)}
 
 /* Os tacos alinhados pela base e todos com a mesma altura de imagem: é como
    estão encostados a um saco. Alinhados pelo centro, o driver e a wedge

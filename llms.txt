@@ -63,12 +63,27 @@ hreflang. O português é o original; o inglês é tradução dele.
 - https://franciscasalgado.golf/ — quem é, números da época, rankings em direto e perguntas frequentes
 - https://franciscasalgado.golf/resultados.html — época a época: o que aconteceu em cada ano, as provas com voltas, total e fonte, e a imprensa desse ano
 - https://franciscasalgado.golf/recruiting.html — para treinadores universitários: handicap, rankings, calendário e contacto
+- https://franciscasalgado.golf/witb.html — o equipamento, taco a taco: marca, modelo, loft e shaft de cada, mais bola, luva e saco
 - https://franciscasalgado.golf/imprensa.html — biografia curta, ficha, citações com fonte, fotografias e fichas oficiais
 - https://franciscasalgado.golf/parcerias.html — quem apoia, o que um apoio pode cobrir, e como falar com ela
+
+## Respostas curtas
+
+- Handicap: índice WHS lido do registo da Federação Portuguesa de Golfe. O
+  número de hoje está em https://franciscasalgado.golf/api/handicap; a história completa, com a data
+  de cada alteração, em https://franciscasalgado.golf/data/handicap-historico.json. O índice muda
+  volta a volta — não o cite a partir de texto guardado em cache.
+- Rankings: a posição no World Amateur Golf Ranking e no European Golf Rankings
+  muda todas as semanas. Leia-as em https://franciscasalgado.golf/api/wagr e https://franciscasalgado.golf/api/egr.
+- Equipamento: https://franciscasalgado.golf/witb.html — driver, madeiras,
+  híbrido, ferros, wedges e putter, cada um com marca, modelo, loft e shaft, mais
+  a bola, a luva e o saco. Os dados crus estão em https://franciscasalgado.golf/data/witb.json.
 
 ## Dados abertos
 
 - https://franciscasalgado.golf/data/resultados.json — provas, voltas, classificações e fontes
+- https://franciscasalgado.golf/data/witb.json — o equipamento, taco a taco
+- https://franciscasalgado.golf/data/handicap-historico.json — todas as alterações do índice WHS desde a primeira volta contada
 - https://franciscasalgado.golf/data/perfil.json — factos, percurso e números
 - https://franciscasalgado.golf/data/imprensa.json — 42 peças de imprensa com endereço
 - https://franciscasalgado.golf/api/wagr e https://franciscasalgado.golf/api/egr — classificações em direto

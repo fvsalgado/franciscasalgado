@@ -48,6 +48,11 @@ const PINTAR = {
                        curvaHandicap($('curvaH'), l), witb($('witbL'), l), swing($('swingV'), l)]);
   },
 
+  /* A mesma secção do recruiting, sozinha numa página. Existe para ser
+     partilhada: um endereço curto, uma imagem de partilha própria, e um
+     assunto que se explica sem o resto do sítio à volta. */
+  async witb(l) { await witb($('witbL'), l); },
+
   async legal() { /* as páginas legais são só texto */ },
 };
 

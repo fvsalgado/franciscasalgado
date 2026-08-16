@@ -15,6 +15,17 @@ export const EN = {
   rc_wi_rot: "What's in the bag",
   rc_wi_tit: 'What she carries',
   rc_wi_txt: 'The clubs, the ball and the rest of the kit she plays.',
+
+  /* A página do saco, que é a mesma secção sozinha — para ser partilhada. */
+  wb_rot: "What's in the bag",
+  wb_tit: 'What she carries',
+  wb_txt: 'Fourteen clubs — the most the rules allow. Here they are one by one, with the loft '
+    + 'and shaft of each, plus the ball, the glove and the bag.',
+  wb_ma_rot: 'More',
+  wb_ma_tit: 'The rest is one link away',
+  wb_ma_txt: 'Handicap, rankings, schedule and every result, season by season, with the source of each.',
+  wb_ma_b1: 'Recruiting profile',
+  wb_ma_b2: 'Season by season',
   rc_sw_rot: "Coach's corner",
   rc_sw_tit: 'The swing, face-on and down the line',
   rc_sw_txt: 'For anyone assessing technique. Nothing loads from YouTube until you press play.',

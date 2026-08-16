@@ -32,8 +32,8 @@ const RAIZ = new URL('../', import.meta.url);
 const SECO = process.argv.includes('--seco');
 const SITIO = 'https://franciscasalgado.golf';
 
-const PAGINAS = ['index.html', 'resultados.html', 'recruiting.html', 'imprensa.html',
-                 'parcerias.html', 'privacidade.html', 'termos.html'];
+const PAGINAS = ['index.html', 'resultados.html', 'recruiting.html', 'witb.html',
+                 'imprensa.html', 'parcerias.html', 'privacidade.html', 'termos.html'];
 
 /* Os títulos e as descrições não têm `data-t` — vivem no <head>, onde não há
    elementos para marcar. Ficam aqui, ao lado do resto do inglês. */
@@ -49,6 +49,11 @@ const CABECALHOS = {
   'recruiting.html': {
     titulo: 'College recruiting — Francisca Salgado',
     desc: 'Francisca Salgado, Portuguese amateur golfer, class of 2027: handicap, WAGR world ranking, European U18 ranking, schedule and results — for college coaches.',
+  },
+  'witb.html': {
+    titulo: "What's in the bag — Francisca Salgado",
+    desc: "Every one of Francisca Salgado's fourteen clubs: Cobra OPTM X driver, 3DP Tour irons, King wedges, "
+      + 'Scotty Cameron Phantom 5 putter, Titleist Pro V1 ball — with lofts, shafts and the bag.',
   },
   'imprensa.html': {
     titulo: 'Press — Francisca Salgado',

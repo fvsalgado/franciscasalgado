@@ -9,12 +9,21 @@ import { outraLingua } from './i18n.js';
    registos cronológicos da mesma carreira, e liam-se melhor juntos, época a
    época; o contacto era uma página inteira para um formulário, e voltou para
    onde é preciso — o fim das parcerias, e o rodapé de todas as páginas. */
+/* `pe: true` mete a página no rodapé mas deixa-a fora do menu de cima.
+ *
+ * Serve a página do saco. Ela existe para ser partilhada por fora — um endereço
+ * curto num WhatsApp —, não para ser a sexta escolha de quem chega ao sítio; no
+ * menu, ao lado de «Época a época» e «Recruiting», prometia um assunto do
+ * tamanho dos outros e não é. Mas tem de estar ligada de algum lado: uma página
+ * a que só se chega pelo sitemap é uma página que o Google encontra e não
+ * percebe onde encaixa. */
 export const PAGINAS = [
   { href: 'index.html', pt: 'Início', en: 'Home' },
   { href: 'resultados.html', pt: 'Época a época', en: 'Season by season' },
   { href: 'recruiting.html', pt: 'Recruiting', en: 'Recruiting' },
   { href: 'parcerias.html', pt: 'Parcerias', en: 'Partnerships' },
   { href: 'imprensa.html', pt: 'Imprensa', en: 'Press' },
+  { href: 'witb.html', pt: 'O que leva no saco', en: "What's in the bag", pe: true },
 ];
 
 const aqui = () => {
@@ -98,7 +107,7 @@ export function nav(lingua = 'pt') {
   const atual = aqui();
   const en = lingua === 'en';
 
-  const links = (classe) => PAGINAS.map((p) => {
+  const links = (classe) => PAGINAS.filter((p) => !p.pe || p.href === atual).map((p) => {
     const ativa = p.href === atual;
     return `<a href="${caminho(p.href, lingua)}"${ativa ? ' aria-current="page"' : ''}${classe ? ' data-mag' : ''}>${p[lingua]}</a>`;
   }).join('');

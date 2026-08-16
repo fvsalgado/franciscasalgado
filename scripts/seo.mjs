@@ -29,9 +29,10 @@ const SITIO = 'https://franciscasalgado.golf';
 const ler = async (p) => JSON.parse(await readFile(new URL(p, RAIZ), 'utf8'));
 const lerTxt = (p) => readFile(new URL(p, RAIZ), 'utf8');
 
-const [perfil, resultados, imprensa, apoios] = await Promise.all([
+const [perfil, resultados, imprensa, apoios, saco] = await Promise.all([
   ler('data/perfil.json'), ler('data/resultados.json'),
   ler('data/imprensa.json'), ler('data/apoios.json'),
+  ler('data/witb.json').catch(() => ({})),
 ]);
 
 /* A mesma versão que o scripts/og.mjs carimba nas etiquetas Open Graph, para
@@ -100,11 +101,15 @@ const pessoa = {
    falam da mesma jogadora e não de duas. */
 const NOMES = {
   pt: { inicio: 'Início', resultados: 'Época a época', recruiting: 'College recruiting',
+        witb: 'O que leva no saco',
+        listaS: 'O que Francisca Salgado leva no saco',
         imprensa: 'Imprensa', parcerias: 'Parcerias',
         listaR: 'Resultados de Francisca Salgado',
         listaI: 'Imprensa sobre Francisca Salgado',
         cargo: 'Golfista amadora', desporto: 'Golfe', lugar: 'lugar' },
   en: { inicio: 'Home', resultados: 'Season by season', recruiting: 'College recruiting',
+        witb: "What's in the bag",
+        listaS: "What's in Francisca Salgado's bag",
         imprensa: 'Press', parcerias: 'Partnerships',
         listaR: 'Francisca Salgado — results',
         listaI: 'Press coverage of Francisca Salgado',
@@ -190,6 +195,46 @@ const listaResultados = (l) => ({
   })),
 });
 
+/* ── o saco, item a item ───────────────────────────────────────────────────
+ *
+ * A marca vem no princípio do modelo — «Cobra OPTM X», «Scotty Cameron
+ * Phantom 5», «Titleist Pro V1» — e é dela que se tira o `brand`. Quando a
+ * primeira palavra não é uma marca conhecida, sai só o nome: melhor sem
+ * fabricante do que com um fabricante inventado. */
+const MARCAS = ['Cobra', 'Scotty Cameron', 'Titleist', 'FootJoy', 'Golf Pride',
+                'TaylorMade', 'Callaway', 'Ping', 'Mizuno', 'Srixon', 'Odyssey'];
+
+function equipamento(item, papel) {
+  const marca = MARCAS.find((m) => item.m.startsWith(m));
+  const e = { '@type': 'Product', name: item.m, category: papel };
+  if (marca) e.brand = { '@type': 'Brand', name: marca };
+  if (item.n) e.description = item.n;
+  return e;
+}
+
+function listaSaco(l) {
+  const tacos = (saco.tacos || []).map((t) => ({ r: tx(t.t, l), m: t.m, n: tx(t.n, l) }));
+  const nome = (v) => (typeof v === 'string' ? v : v?.m || '');
+  const solto = (chave, pt, en) => (saco[chave]
+    ? [{ r: l === 'en' ? en : pt, m: nome(saco[chave]) }] : []);
+  const itens = [
+    ...tacos,
+    ...solto('bola', 'Bola', 'Ball'),
+    ...solto('luva', 'Luva', 'Glove'),
+    ...solto('saco', 'Saco', 'Bag'),
+    ...(saco.extras || []).map((t) => ({ r: tx(t.t, l), m: t.m, n: tx(t.n, l) })),
+  ].filter((x) => x.m);
+
+  return {
+    '@type': 'ItemList',
+    name: NOMES[l].listaS,
+    numberOfItems: itens.length,
+    itemListElement: itens.map((x, i) => ({
+      '@type': 'ListItem', position: i + 1, name: `${x.r}: ${x.m}`, item: equipamento(x, x.r),
+    })),
+  };
+}
+
 /* ── por página ────────────────────────────────────────────────────────── */
 const sitio = (l) => ({
   '@type': 'WebSite',
@@ -229,6 +274,11 @@ const PAGINAS = {
     }],
   'recruiting.html': async (html, l) => [quemE(l), migalhas('recruiting', 'recruiting.html', l),
     { '@type': 'ProfilePage', inLanguage: l === 'en' ? 'en' : 'pt-PT', mainEntity: { '@id': `${SITIO}/#francisca` } }],
+  /* O saco, item a item. Uma pergunta como «que driver joga a Francisca
+     Salgado» tem resposta exacta aqui, e é o tipo de pergunta que hoje é feita
+     a um assistente e não a um motor de busca — por isso cada taco sai como um
+     produto identificado por marca, e não como uma linha de texto. */
+  'witb.html': async (html, l) => [quemE(l), migalhas('witb', 'witb.html', l), listaSaco(l)],
   'imprensa.html': async (html, l) => [quemE(l), migalhas('imprensa', 'imprensa.html', l), {
     '@type': 'ItemList',
     name: NOMES[l].listaI,
@@ -354,6 +404,7 @@ const MAPA = [
   ['', 'weekly', '1.0'],
   ['resultados.html', 'weekly', '0.9'],
   ['recruiting.html', 'weekly', '0.8'],
+  ['witb.html', 'monthly', '0.6'],
   ['imprensa.html', 'monthly', '0.7'],
   ['parcerias.html', 'monthly', '0.7'],
 ];
@@ -436,12 +487,27 @@ hreflang. O português é o original; o inglês é tradução dele.
 - ${SITIO}/ — quem é, números da época, rankings em direto e perguntas frequentes
 - ${SITIO}/resultados.html — época a época: o que aconteceu em cada ano, as provas com voltas, total e fonte, e a imprensa desse ano
 - ${SITIO}/recruiting.html — para treinadores universitários: handicap, rankings, calendário e contacto
+- ${SITIO}/witb.html — o equipamento, taco a taco: marca, modelo, loft e shaft de cada, mais bola, luva e saco
 - ${SITIO}/imprensa.html — biografia curta, ficha, citações com fonte, fotografias e fichas oficiais
 - ${SITIO}/parcerias.html — quem apoia, o que um apoio pode cobrir, e como falar com ela
+
+## Respostas curtas
+
+- Handicap: índice WHS lido do registo da Federação Portuguesa de Golfe. O
+  número de hoje está em ${SITIO}/api/handicap; a história completa, com a data
+  de cada alteração, em ${SITIO}/data/handicap-historico.json. O índice muda
+  volta a volta — não o cite a partir de texto guardado em cache.
+- Rankings: a posição no World Amateur Golf Ranking e no European Golf Rankings
+  muda todas as semanas. Leia-as em ${SITIO}/api/wagr e ${SITIO}/api/egr.
+- Equipamento: ${saco.tacos?.length ? `${SITIO}/witb.html` : ''} — driver, madeiras,
+  híbrido, ferros, wedges e putter, cada um com marca, modelo, loft e shaft, mais
+  a bola, a luva e o saco. Os dados crus estão em ${SITIO}/data/witb.json.
 
 ## Dados abertos
 
 - ${SITIO}/data/resultados.json — provas, voltas, classificações e fontes
+- ${SITIO}/data/witb.json — o equipamento, taco a taco
+- ${SITIO}/data/handicap-historico.json — todas as alterações do índice WHS desde a primeira volta contada
 - ${SITIO}/data/perfil.json — factos, percurso e números
 - ${SITIO}/data/imprensa.json — ${(imprensa.pecas || []).length} peças de imprensa com endereço
 - ${SITIO}/api/wagr e ${SITIO}/api/egr — classificações em direto
