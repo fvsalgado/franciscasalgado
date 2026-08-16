@@ -136,6 +136,16 @@
       "pt": "Titleist",
       "en": "Titleist",
       "_origem": "imagem de produto da Titleist, fornecida pela atleta — recortada do branco de estúdio para o fundo do sítio e montada em tela alta para entrar na fila à escala certa. Publicada com autorização."
+    },
+    "luva.webp": {
+      "pt": "FootJoy",
+      "en": "FootJoy",
+      "_origem": "imagem de produto da FootJoy, fornecida pela atleta. Publicada com autorização."
+    },
+    "saco.webp": {
+      "pt": "Foto: arquivo da atleta",
+      "en": "Photo: athlete's archive",
+      "_origem": "fotografia pessoal do saco de competição, fornecida pela atleta"
     }
   },
   "porDominio": {

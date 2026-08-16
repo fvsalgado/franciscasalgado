@@ -1085,6 +1085,19 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
   transition:opacity .5s var(--curva) calc(var(--i) * 70ms),
              transform .6s var(--curva) calc(var(--i) * 70ms)}
 
+/* A fotografia do saco ao lado da ficha. Num ecrã estreito vem primeiro, logo
+   a seguir à fila — que é onde interessa vê-la, e não depois de dez linhas de
+   loft e de shaft. Numa coluna, ganha a esquerda pela mesma razão. */
+.witb__b{display:grid;gap:clamp(1.4rem,3.5vw,3rem);align-items:start}
+@media (min-width:820px){
+  .witb__b{grid-template-columns:clamp(170px,21%,260px) minmax(0,1fr)}
+}
+/* Num telemóvel ocupa a largura toda da coluna, e um retrato à largura toda são
+   setecentos pixéis de altura antes de se chegar à ficha. Sessenta por cento
+   chega para se ver o nome no saco. */
+.witb__s{margin:0;max-width:min(20rem,62%)}
+.witb__s img{display:block;width:100%;height:auto;border-radius:3px}
+
 /* A linha da ficha que corresponde ao taco escolhido. */
 .witb__f > div{transition:background .3s var(--curva)}
 .witb__f > div.witb__f--on{background:var(--papel);

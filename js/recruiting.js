@@ -363,10 +363,27 @@ export async function witb(cx, lingua = 'pt') {
       </button>`).join('')}</div>
     <p class="witb__c" id="witbCred" data-credito-base="${en ? 'Images:' : 'Imagens:'}"></p>` : '';
 
+  /* O saco tem `foto` e não `img`, e é por isso que não entra na fila.
+   *
+   * A fila põe tudo à mesma altura, e à altura de uma cabeça de driver um saco
+   * de golfe seria escala a mentir — o mesmo problema da bola, mas ao contrário
+   * e grande demais para se resolver com uma tela. E não é sequer da mesma
+   * família de imagens: os outros são recortes de estúdio, este é uma
+   * fotografia dele no campo, com o nome dela. Fica ao lado da ficha, que é o
+   * sítio onde uma fotografia de saco explica melhor uma lista do que uma
+   * lista se explica a si própria. */
+  const retrato = d.saco?.foto ? `
+    <figure class="witb__s">
+      <img src="/img/witb/${d.saco.foto}" alt="${en ? 'Bag' : 'Saco'}: ${nome(d.saco)}"
+           width="760" height="1644" loading="lazy" decoding="async" />
+    </figure>` : '';
+
   cx.className = 'witb';
   cx.innerHTML = `${fila}
-    <dl class="factos witb__f">${linhas.map((l) => `
-      <div data-i="${l.i}"><dt>${l.r}</dt><dd>${l.m}${l.n ? ` <span class="dest__o">${l.n}</span>` : ''}</dd></div>`).join('')}</dl>`;
+    <div class="witb__b">${retrato}
+      <dl class="factos witb__f">${linhas.map((l) => `
+        <div data-i="${l.i}"><dt>${l.r}</dt><dd>${l.m}${l.n ? ` <span class="dest__o">${l.n}</span>` : ''}</dd></div>`).join('')}</dl>
+    </div>`;
 
   ligarSaco(cx);
 }
