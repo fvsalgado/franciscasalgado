@@ -328,70 +328,63 @@ export async function witb(cx, lingua = 'pt') {
     ...(d.tacos || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua), img: t.img, u: t.u })),
     ...(d.bola ? [{ r: en ? 'Ball' : 'Bola', m: nome(d.bola), img: foto(d.bola) }] : []),
     ...(d.luva ? [{ r: en ? 'Glove' : 'Luva', m: nome(d.luva), img: foto(d.luva) }] : []),
-    ...(d.saco ? [{ r: en ? 'Bag' : 'Saco', m: nome(d.saco), img: foto(d.saco) }] : []),
     ...(d.extras || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua) })),
   ].filter((l) => l.m).map((l, i) => ({ ...l, i }));
 
   if (!linhas.length) { cx.innerHTML = ''; mostrar(cx, false); return; }
   mostrar(cx, true);
 
-  /* Uma fila com o que tem fotografia, e por baixo a ficha inteira.
+  /* Um cartão por coisa que ela leva, e tudo o que se sabe dessa coisa dentro
+   * do mesmo cartão.
    *
-   * E não uma grelha de cartões, um por taco: nem tudo o que está no saco tem
-   * imagem, e cartões meio vazios pelo meio fariam parecer que falta o taco
-   * quando o que falta é a fotografia. Assim a fila é o retrato do saco e a
-   * lista é a ficha; nenhuma promete o que a outra tem.
+   * Antes eram duas vistas da mesma lista: uma fila de fotografias em cima e
+   * uma ficha de texto em baixo, ligadas por um realce. Num ecrã largo lê-se
+   * bem — a fila e a ficha cabem as duas no mesmo olhar. Num telemóvel não:
+   * a fila ocupava um ecrã, a ficha outro, e tocar num taco acendia uma linha
+   * que estava a oitocentos pixéis de distância. O gesto acontecia e não se
+   * via nada acontecer, que é a pior coisa que uma interface pode fazer.
    *
-   * Alinhados pela base, com a mesma altura de imagem: é como estão encostados
-   * a um saco, e é o que faz a fila ler-se como um conjunto e não como sete
-   * recortes soltos. A bola entra ao fim, e entra pequena — a escala de cada
-   * uma vem da tela em que foi montada, não do CSS. */
-  const naFila = linhas.filter((x) => x.img);
+   * Juntos num cartão, a fotografia e o loft deixam de precisar de ligação
+   * nenhuma: já estão no mesmo sítio. Deixa de haver realce a manter, deixa de
+   * haver painel de detalhe a abrir, e deixa de haver a mesma informação
+   * escrita duas vezes no HTML.
+   *
+   * No telemóvel os cartões são um carrossel que encaixa — passa-se com o
+   * polegar, que é o gesto que ali é natural, e vê-se um taco de cada vez em
+   * tamanho a sério em vez de oito do tamanho de uma unha. Em ecrã largo são
+   * uma grelha, e as fotografias continuam pousadas na mesma linha de chão. */
+  const cartao = (l) => `
+    <li class="saco__k${l.img ? '' : ' saco__k--so'}" data-i="${l.i}" style="--i:${l.i}">
+      ${l.img ? `<span class="saco__ki"><img src="/img/witb/${l.img}" alt="" loading="lazy"
+            decoding="async" data-credito-em="witbCred" /></span>` : ''}
+      <p class="saco__kr">${l.r}</p>
+      <p class="saco__km">${l.m}</p>
+      ${l.n ? `<p class="saco__kn">${l.n}</p>` : ''}
+    </li>`;
 
-  /* Cada taco é um botão, e não só uma fotografia. Serve para ser escolhido:
-   * ao ser escolhido acende a linha dele na ficha, que é onde estão o loft e o
-   * shaft. Num rato isso acontece ao passar por cima, num teclado ao chegar
-   * com o tabulador, e num telemóvel ao tocar — e é por causa do telemóvel que
-   * tem de ser um botão, porque num ecrã de toque não existe passar por cima.
+  /* O saco tem `foto` e não `img`, e continua fora dos cartões.
    *
-   * O nome vive no botão, e a fotografia fica com alt vazio: quem lê com os
-   * ouvidos ouviria «Driver: Cobra OPTM X» duas vezes seguidas.
-   *
-   * Os créditos vão todos para a mesma linha, por baixo da fila — ver o
-   * js/creditos.js, que é quem sabe de que marca é cada ficheiro. */
-  const fila = naFila.length ? `
-    <div class="witb__fila">${naFila.map((x, k) => `
-      <button class="witb__t" type="button" data-i="${x.i}" style="--i:${k}"
-              aria-pressed="false" aria-label="${x.r}: ${x.m}">
-        <span class="witb__e"><img src="/img/witb/${x.img}" alt="" loading="lazy"
-              decoding="async" data-credito-em="witbCred" /></span>
-        <span class="witb__n" aria-hidden="true">${x.r}</span>
-      </button>`).join('')}</div>
-    <p class="witb__c" id="witbCred" data-credito-base="${en ? 'Images:' : 'Imagens:'}"></p>` : '';
-
-  /* O saco tem `foto` e não `img`, e é por isso que não entra na fila.
-   *
-   * A fila põe tudo à mesma altura, e à altura de uma cabeça de driver um saco
-   * de golfe seria escala a mentir — o mesmo problema da bola, mas ao contrário
-   * e grande demais para se resolver com uma tela. E não é sequer da mesma
-   * família de imagens: os outros são recortes de estúdio, este é uma
-   * fotografia dele no campo, com o nome dela. Fica ao lado da ficha, que é o
-   * sítio onde uma fotografia de saco explica melhor uma lista do que uma
-   * lista se explica a si própria. */
+   * Os outros são recortes de estúdio à mesma altura; este é uma fotografia
+   * dele no campo, com o nome dela nas costas. Metido num cartão ao lado de uma
+   * cabeça de driver, a escala mentia — e é a única imagem da secção que quer
+   * ser vista grande. Fica no fim, à largura toda. */
   const retrato = d.saco?.foto ? `
-    <figure class="witb__s">
+    <figure class="saco__s">
       <img src="/img/witb/${d.saco.foto}" alt="${en ? 'Bag' : 'Saco'}: ${nome(d.saco)}"
            width="760" height="1644" loading="lazy" decoding="async" />
+      <figcaption class="saco__sl">
+        <span class="saco__kr">${en ? 'Bag' : 'Saco'}</span>
+        <span class="saco__km">${nome(d.saco)}</span>
+      </figcaption>
     </figure>` : '';
 
   cx.className = 'witb';
-  cx.innerHTML = `${contador(d, lingua)}${fila}${escada(linhas, lingua)}${detalhe()}${citacao(d, linhas, lingua)}
-    <div class="witb__b">${retrato}
-      <dl class="factos witb__f">${linhas.map((l) => `
-        <div data-i="${l.i}"><dt>${l.r}</dt><dd>${l.m}${l.n ? ` <span class="dest__o">${l.n}</span>` : ''}</dd></div>`).join('')}</dl>
-    </div>`;
+  cx.innerHTML = `${contador(d, lingua)}
+    <ul class="saco__g" role="list">${linhas.map(cartao).join('')}</ul>
+    <p class="witb__c" id="witbCred" data-credito-base="${en ? 'Images:' : 'Imagens:'}"></p>
+    ${escada(linhas, lingua)}${citacao(d, linhas, lingua)}${retrato}`;
 
-  ligarSaco(cx, linhas, lingua);
+  ligarSaco(cx);
 }
 
 /* ── catorze ──────────────────────────────────────────────────
@@ -523,13 +516,6 @@ function escada(linhas, lingua) {
     </figure>`;
 }
 
-/* ── o detalhe ────────────────────────────────────────────────
- *
- * Escolher um taco abre-o aqui, grande, com a ficha dele por extenso. Fechado,
- * não ocupa nada; aberto, cresce. É o único sítio da secção onde a fotografia e
- * o texto do mesmo taco estão juntos — na fila há fotografias sem texto, na
- * ficha há texto sem fotografias. */
-const detalhe = () => '<div class="witb__d" id="witbDet" hidden></div>';
 
 /* ── a frase dela ─────────────────────────────────────────────
  *
@@ -563,87 +549,46 @@ function citacao(d, linhas, lingua) {
  * sair apagava-o na mesma, embora continuasse marcado como escolhido; o clique
  * seguinte era gasto a desescolher uma coisa que já estava apagada, e lia-se
  * como um clique que não fez nada. */
-function ligarSaco(cx, linhas, lingua) {
-  let preso = null;
-
-  /* Uma classe por família, e não uma só: o botão da fila levanta-se, a marca
-     da escada acende, a linha da ficha ilumina-se. É o mesmo taco visto de três
-     sítios, e cada sítio mostra-o à sua maneira. */
-  const CLASSE = (n) => (n.matches('.witb__t') ? 'witb__t--on'
-    : n.matches('.esc__m') ? 'esc__m--on' : 'witb__f--on');
-
-  /* Uma marca da escada pode valer por dois tacos — o híbrido e a madeira 5
-     partilham o mesmo grau e a mesma marca —, e por isso o `data-i` guarda uma
-     lista. O selector `~=` é o que casa uma palavra dentro de uma lista
-     separada por espaços, e é exactamente para isto que existe. */
-  const marcar = (chave, sim) => {
-    if (chave == null) return;
-    for (const i of String(chave).split(' ')) {
-      cx.querySelectorAll(`[data-i~="${i}"]`).forEach((n) => n.classList.toggle(CLASSE(n), sim));
-    }
-  };
-
-  /* ── o detalhe ─────────────────────────────────────────────
-     Escolher um taco abre-o em grande, com a ficha dele por extenso. */
-  const det = cx.querySelector('#witbDet');
-  const en = lingua === 'en';
-  const abrir = (chave) => {
-    const i = String(chave).split(' ')[0];
-    const l = linhas.find((x) => String(x.i) === i);
-    if (!det || !l) return;
-    const lofts = (l.u || []).filter((u) => typeof u.loft === 'number')
-      .map((u) => `${u.n} ${en ? u.loft : String(u.loft).replace('.', ',')}°`).join(' · ');
-    const dist = (l.u || []).filter((u) => u.d).map((u) => `${u.n} ${u.d} m`).join(' · ');
-    det.innerHTML = `
-      ${l.img ? `<span class="witb__di"><img src="/img/witb/${l.img}" alt="" decoding="async"
-                       data-credito-feito="1" /></span>` : ''}
-      <div class="witb__dq">
-        <p class="witb__dr">${l.r}</p>
-        <p class="witb__dm">${l.m}</p>
-        ${l.n ? `<p class="witb__dn">${l.n}</p>` : ''}
-        ${lofts ? `<p class="witb__dl"><b>${en ? 'Lofts' : 'Lofts'}</b> ${lofts}</p>` : ''}
-        ${dist ? `<p class="witb__dl"><b>${en ? 'Carry' : 'Distância'}</b> ${dist}</p>` : ''}
-      </div>`;
-    det.hidden = false;
-  };
-  const fechar = () => { if (det) { det.hidden = true; det.innerHTML = ''; } };
-
-  /* Passar por cima só se liga onde há por onde passar.
+function ligarSaco(cx) {
+  /* A escada é o índice dos cartões.
    *
-   * Num ecrã de toque não há: o `pointerenter` dispara com o dedo a rolar, e as
-   * linhas da ficha acendiam-se e apagavam-se sozinhas por baixo do dedo
-   * durante a rolagem — vê-se como a página a piscar, e não como uma escolha.
-   * Com dedo, quem escolhe é o toque no taco, que é deliberado e é o que lá
-   * está para isso. É a mesma pergunta que o cursor desenhado faz antes de
-   * existir, no js/movimento.js. */
-  const passaRato = matchMedia('(hover:hover) and (pointer:fine)').matches;
+   * Ela existe para se ver de relance como os lofts se distribuem — nove graus
+   * no driver, cinquenta e oito na wedge mais aberta, e o vão entre eles. Cada
+   * marca sabe de que taco é, por isso serve também de atalho: toca-se no 54°
+   * e o cartão dessa wedge vem ao meio do ecrã.
+   *
+   * É a única ligação que sobra na secção, e é numa direcção só. As outras
+   * três — fila, ficha e painel — deixaram de existir quando a fotografia e o
+   * loft passaram a viver no mesmo cartão. */
+  const grelha = cx.querySelector('.saco__g');
+  const marcas = [...cx.querySelectorAll('.esc__m')];
 
-  const premido = (chave, sim) => {
-    for (const i of String(chave).split(' ')) {
-      cx.querySelectorAll(`[data-i~="${i}"][aria-pressed]`).forEach((n) => n.setAttribute('aria-pressed', String(sim)));
-    }
+  const acender = (cartao) => {
+    cx.querySelectorAll('.saco__k--on').forEach((n) => n.classList.remove('saco__k--on'));
+    cartao.classList.add('saco__k--on');
+    /* Fica aceso e apaga-se sozinho. Não é uma selecção — não há nada que se
+       faça a seguir com um taco escolhido —, é só dizer «é este», e uma marca
+       que fica acesa para sempre passa a ser ruído na próxima leitura. */
+    clearTimeout(acender.t);
+    acender.t = setTimeout(() => cartao.classList.remove('saco__k--on'), 2200);
   };
 
-  const escolher = (i) => {
-    if (preso != null && preso !== i) { marcar(preso, false); premido(preso, false); }
-    const liga = preso !== i;
-    preso = liga ? i : null;
-    marcar(i, liga);
-    premido(i, liga);
-    if (liga) abrir(i); else fechar();
-  };
+  marcas.forEach((m) => {
+    m.addEventListener('click', () => {
+      /* Uma marca pode valer por dois tacos — o híbrido e a madeira 5 partilham
+         o grau, e por isso o `data-i` guarda uma lista. Vai-se ao primeiro. */
+      const i = String(m.dataset.i || '').split(' ')[0];
+      const cartao = cx.querySelector(`.saco__k[data-i="${i}"]`);
+      if (!cartao || !grelha) return;
 
-  cx.querySelectorAll('.witb__t, .esc__m, .witb__f > div').forEach((el) => {
-    const i = el.dataset.i;
-    if (passaRato) {
-      el.addEventListener('pointerenter', () => { if (i !== preso) marcar(i, true); });
-      el.addEventListener('pointerleave', () => { if (i !== preso) marcar(i, false); });
-    }
-    if (el.matches('.witb__f > div')) return;
-
-    el.addEventListener('focus', () => marcar(i, true));
-    el.addEventListener('blur', () => { if (i !== preso) marcar(i, false); });
-    el.addEventListener('click', () => escolher(i));
+      /* `scrollIntoView` na horizontal rola também a página inteira na
+         vertical, e a secção salta debaixo do dedo de quem acabou de tocar numa
+         marca que estava à vista. Move-se a caixa do carrossel à mão, que é o
+         único eixo que interessa. */
+      const alvo = cartao.offsetLeft - (grelha.clientWidth - cartao.offsetWidth) / 2;
+      grelha.scrollTo({ left: Math.max(0, alvo), behavior: 'smooth' });
+      acender(cartao);
+    });
   });
 
   contar(cx);
