@@ -60,7 +60,7 @@ const GUARDAR = [
   'proximas', 'contagens', 'filtros', 'epocas', 'videos', 'notaFonte', // épocas
   'factos', 'plats', 'gal',                           // imprensa
   'numsApoio', 'apoios', 'escadas',                   // parcerias
-  'recNums', 'curva', 'witbL', 'swingV',              // recruiting
+  'recNums', 'curva', 'curvaH', 'witbL', 'swingV',              // recruiting
 ];
 
 /* Um servidor estático mínimo. O sítio não tem passo de compilação, por isso
@@ -200,13 +200,27 @@ for (const arv of ['', 'en/']) {
        contentor não trouxe nada. Serve a curva dos rankings, que só existe com
        histórico suficiente: sem isto, quem lê sem JavaScript ficava com um
        cabeçalho e nada por baixo — que se lê como uma coisa partida. */
-    for (const [, id] of [...html.matchAll(/data-se-vazio="([\w-]+)"/g)]) {
+    const seVazio = new Set([...html.matchAll(/data-se-vazio="([\w-]+)"/g)].map((m) => m[1]));
+    for (const id of seVazio) {
       const novo = esconderSeccao(html, id, !pedacos[id]?.html);
       if (novo && novo !== html) { html = novo; mudou = true; }
     }
 
     for (const [id, { html: dentro, classe }] of Object.entries(pedacos)) {
-      if (!dentro) continue;
+      /* Um contentor que hoje não trouxe nada e que declara `data-se-vazio` é
+         esvaziado, e não saltado.
+       *
+       * Saltar parecia o seguro — não se apaga o que não se sabe repor. Mas o
+       * que lá está foi escrito por uma corrida anterior deste mesmo script, e
+       * no dia em que os dados desaparecem o desenho antigo fica preso no
+       * ficheiro: a secção esconde-se, o gráfico de ontem continua lá dentro, e
+       * volta a ser capturado amanhã porque o navegador o encontra no sítio. Um
+       * número que já não é verdade não pode sobreviver à fonte que o
+       * sustentava.
+       *
+       * Só para estes contentores. Os outros podem trazer marcação escrita à
+       * mão que o JavaScript nunca repinta, e essa não se toca. */
+      if (!dentro && !seVazio.has(id)) continue;
       const trocado = trocarDentro(html, id, dentro, classe);
       if (!trocado) { console.error(`${caminho}: não encontrei #${id} no ficheiro`); avisos += 1; continue; }
       if (trocado === html) continue;

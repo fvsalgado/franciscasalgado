@@ -35,6 +35,13 @@ jobs:
 
       - name: Procurar novidades
         id: correr
+        # A área reservada da federação só é lida se houver credenciais. Vêm dos
+        # segredos do repositório e existem apenas dentro deste passo — não são
+        # escritas em ficheiro nenhum, nem aparecem no registo da ação. Sem elas
+        # o vigia corre na mesma e salta essa fonte.
+        env:
+          FPG_USER: ${{ secrets.FPG_USER }}
+          FPG_PASS: ${{ secrets.FPG_PASS }}
         run: node scripts/vigia.mjs
 
       # A ordem importa: as páginas inglesas nascem das portuguesas, e os dados

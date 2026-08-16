@@ -24,6 +24,7 @@ const T = {
     ano: 'Conclusão do secundário', anoS: 'Turma de',
     vivo: 'Em direto', guardado: 'Confirmado a', desde: 'Última alteração a',
     curva: 'Evolução', curvaS: 'Quanto mais alto, melhor a posição',
+    hcp2: 'Índice de handicap', hcpEixo: 'Quanto mais alto, mais baixo o índice',
     prox: 'Próxima prova',
   },
   en: {
@@ -33,6 +34,7 @@ const T = {
     ano: 'High school graduation', anoS: 'Class of',
     vivo: 'Live', guardado: 'Confirmed on', desde: 'Last changed',
     curva: 'Progression', curvaS: 'Higher is a better position',
+    hcp2: 'Handicap index', hcpEixo: 'Higher means a lower index',
     prox: 'Next event',
   },
 };
@@ -129,9 +131,16 @@ export async function curvaRankings(cx, lingua = 'pt') {
   if (!cx) return;
   const t = T[lingua] || T.pt;
 
+  /* Limpar antes de desistir, e não só ao desenhar.
+   *
+   * O que está no ficheiro foi lá escrito pelo scripts/estatico.mjs a partir de
+   * uma corrida anterior. Se hoje não há dados e isto sair sem limpar, o
+   * desenho de ontem continua no DOM — e o pré-renderizador volta a guardá-lo,
+   * para sempre. Uma curva que já não tem dados nenhuns ficaria eternamente na
+   * página, sem ninguém dar por isso. */
   let pontos = [];
   try { ({ pontos = [] } = await (await fetch('/data/rankings-historico.json', { cache: 'no-cache' })).json()); }
-  catch { return; }
+  catch { cx.innerHTML = ''; mostrar(cx, false); return; }
   /* Sem linha para desenhar, a secção fica escondida — um cabeçalho com nada
      por baixo lê-se como uma coisa que se partiu. Escondida, e não removida:
      é a mesma secção que volta sozinha no dia em que houver terceiro ponto. */
@@ -186,6 +195,66 @@ export async function curvaRankings(cx, lingua = 'pt') {
  *
  * Enquanto o data/witb.json estiver vazio, isto não desenha nada e a secção
  * sai da página. Meio WITB diz menos do que nenhum. */
+/* ── a curva do handicap ──────────────────────────────────────
+ *
+ * A mesma ideia da curva dos rankings, e por isso o mesmo eixo invertido: no
+ * handicap, como na classificação, descer no número é subir na carreira.
+ *
+ * A diferença é a quantidade. O registo da federação tem centenas de voltas,
+ * mas só algumas dezenas mudaram o índice — e são essas que o scripts/myfpg.mjs
+ * guarda. Entre duas voltas que não mexeram no número não houve evolução
+ * nenhuma para desenhar. */
+export async function curvaHandicap(cx, lingua = 'pt') {
+  if (!cx) return;
+  const t = T[lingua] || T.pt;
+
+  let pontos = [];
+  try { ({ pontos = [] } = await (await fetch('/data/handicap-historico.json', { cache: 'no-cache' })).json()); }
+  catch { cx.innerHTML = ''; mostrar(cx, false); return; }
+  if (pontos.length < 3) { cx.innerHTML = ''; mostrar(cx, false); return; }
+  mostrar(cx, true);
+
+  const L = 720;
+  const A = 220;
+  const pad = { e: 6, d: 6, c: 18, b: 26 };
+
+  const vs = pontos.map((p) => p.hcp);
+  const min = Math.min(...vs);
+  const max = Math.max(...vs);
+  const faixa = max - min || 1;
+
+  /* O eixo do tempo é o tempo, e não a ordem dos pontos: um índice parado dois
+     anos e depois a cair em três meses tem de se ver como isso mesmo. Espaçar
+     por índice esticava a pausa e encolhia a queda. */
+  const t0 = Date.parse(pontos[0].data);
+  const t1 = Date.parse(pontos[pontos.length - 1].data);
+  const vao = t1 - t0 || 1;
+
+  const xy = pontos.map((p) => {
+    const x = pad.e + ((Date.parse(p.data) - t0) / vao) * (L - pad.e - pad.d);
+    const y = pad.c + ((p.hcp - min) / faixa) * (A - pad.c - pad.b);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  });
+
+  const fim = xy[xy.length - 1].split(',');
+  const num = (n) => (lingua === 'en' ? n.toFixed(1) : n.toFixed(1).replace('.', ','));
+
+  cx.innerHTML = `
+    <figure class="curva">
+      <svg viewBox="0 0 ${L} ${A}" role="img" preserveAspectRatio="none"
+           aria-label="${t.hcp2}: ${t.hcpEixo}">
+        <polyline points="${xy.join(' ')}" fill="none" stroke="var(--relva)"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="${fim[0]}" cy="${fim[1]}" r="3.5" fill="var(--relva)" />
+      </svg>
+      <figcaption class="curva__l">
+        <span><i style="background:var(--relva)"></i>${t.hcp2}</span>
+        <span class="curva__d num">${num(max)} → ${num(min)}</span>
+        <span class="curva__d num">${pontos[0].data} → ${pontos[pontos.length - 1].data}</span>
+      </figcaption>
+    </figure>`;
+}
+
 export async function witb(cx, lingua = 'pt') {
   if (!cx) return;
   let d = {};
