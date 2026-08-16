@@ -93,6 +93,11 @@
           "x": {
             "pt": "Vale de Janelas · Óbidos",
             "en": "Vale de Janelas · Óbidos"
+          },
+          "foto": "west-cliffs.webp",
+          "alt": {
+            "pt": "O campo de West Cliffs ao entardecer, entre dunas, com o mar ao fundo",
+            "en": "The West Cliffs course at dusk, among the dunes, with the sea beyond"
           }
         },
         {
@@ -101,6 +106,11 @@
           "x": {
             "pt": "Sesimbra",
             "en": "Sesimbra"
+          },
+          "foto": "quinta-do-peru.webp",
+          "alt": {
+            "pt": "Um green da Quinta do Peru, entre pinheiros, na serra da Arrábida",
+            "en": "A green at Quinta do Peru, among the pines, in the Arrábida hills"
           }
         },
         {
@@ -109,6 +119,11 @@
           "x": {
             "pt": "Centro de Alto Rendimento · Oeiras",
             "en": "National high-performance centre · Oeiras"
+          },
+          "foto": "jamor.webp",
+          "alt": {
+            "pt": "O campo do Jamor, na encosta arborizada do vale, em Oeiras",
+            "en": "The Jamor course, on the wooded slope of the valley, in Oeiras"
           }
         }
       ]
