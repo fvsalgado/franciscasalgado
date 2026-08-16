@@ -4,14 +4,25 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/:caminho*",
+      "source": "/",
       "has": [
         {
           "type": "host",
           "value": "www.franciscasalgado.golf"
         }
       ],
-      "destination": "https://franciscasalgado.golf/:caminho*",
+      "destination": "https://franciscasalgado.golf/",
+      "permanent": true
+    },
+    {
+      "source": "/:caminho+",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.franciscasalgado.golf"
+        }
+      ],
+      "destination": "https://franciscasalgado.golf/:caminho+",
       "permanent": true
     },
     {
