@@ -20,7 +20,7 @@ import { outraLingua } from './i18n.js';
 export const PAGINAS = [
   { href: 'index.html', pt: 'Francisca', en: 'Francisca' },
   { href: 'resultados.html', pt: 'Época a época', en: 'Season by season' },
-  { href: 'recruiting.html', pt: 'Recruiting', en: 'Recruiting' },
+  { href: 'jogadora.html', pt: 'A jogadora', en: 'The player' },
   { href: 'parcerias.html', pt: 'Parcerias', en: 'Partnerships' },
   { href: 'imprensa.html', pt: 'Imprensa', en: 'Press' },
   { href: 'witb.html', pt: 'O que leva no saco', en: "What's in the bag", pe: true },

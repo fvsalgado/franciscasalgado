@@ -112,14 +112,14 @@ const pessoa = {
    por ele que um motor percebe que /resultados.html e /en/resultados.html
    falam da mesma jogadora e não de duas. */
 const NOMES = {
-  pt: { inicio: 'Francisca', resultados: 'Época a época', recruiting: 'College recruiting',
+  pt: { inicio: 'Francisca', resultados: 'Época a época', jogadora: 'A jogadora',
         witb: 'O que leva no saco',
         listaS: 'O que Francisca Salgado leva no saco',
         imprensa: 'Imprensa', parcerias: 'Parcerias',
         listaR: 'Resultados de Francisca Salgado',
         listaI: 'Imprensa sobre Francisca Salgado',
         cargo: 'Golfista amadora', desporto: 'Golfe', lugar: 'lugar' },
-  en: { inicio: 'Francisca', resultados: 'Season by season', recruiting: 'College recruiting',
+  en: { inicio: 'Francisca', resultados: 'Season by season', jogadora: 'The player',
         witb: "What's in the bag",
         listaS: "What's in Francisca Salgado's bag",
         imprensa: 'Press', parcerias: 'Partnerships',
@@ -284,7 +284,7 @@ const PAGINAS = {
         },
       })),
     }],
-  'recruiting.html': async (html, l) => [quemE(l), migalhas('recruiting', 'recruiting.html', l),
+  'jogadora.html': async (html, l) => [quemE(l), migalhas('jogadora', 'jogadora.html', l),
     { '@type': 'ProfilePage', inLanguage: l === 'en' ? 'en' : 'pt-PT', mainEntity: { '@id': `${SITIO}/#francisca` } }],
   /* O saco, item a item. Uma pergunta como «que driver joga a Francisca
      Salgado» tem resposta exacta aqui, e é o tipo de pergunta que hoje é feita
@@ -415,7 +415,7 @@ for (const l of ['pt', 'en']) {
 const MAPA = [
   ['', 'weekly', '1.0', ['index.html', 'data/perfil.json']],
   ['resultados.html', 'weekly', '0.9', ['resultados.html', 'data/resultados.json', 'data/perfil.json']],
-  ['recruiting.html', 'weekly', '0.8', ['recruiting.html', 'data/perfil.json', 'data/swing.json']],
+  ['jogadora.html', 'weekly', '0.8', ['jogadora.html', 'data/perfil.json', 'data/swing.json']],
   ['witb.html', 'monthly', '0.6', ['witb.html', 'data/witb.json']],
   ['imprensa.html', 'monthly', '0.7', ['imprensa.html', 'data/imprensa.json']],
   ['parcerias.html', 'monthly', '0.7', ['parcerias.html', 'data/apoios.json', 'data/canais.json']],
@@ -518,7 +518,7 @@ hreflang. O português é o original; o inglês é tradução dele.
 
 - ${SITIO}/ — quem é, números da época, rankings em direto e perguntas frequentes
 - ${SITIO}/resultados.html — época a época: o que aconteceu em cada ano, as provas com voltas, total e fonte, e a imprensa desse ano
-- ${SITIO}/recruiting.html — para treinadores universitários: handicap, rankings, calendário e contacto
+- ${SITIO}/jogadora.html — a ficha dela para quem treina: rankings, o saco, a equipa técnica e contacto
 - ${SITIO}/witb.html — o equipamento, taco a taco: marca, modelo, loft e shaft de cada, mais bola, luva e saco
 - ${SITIO}/imprensa.html — biografia curta, ficha, citações com fonte, fotografias e fichas oficiais
 - ${SITIO}/parcerias.html — quem apoia, o que um apoio pode cobrir, e como falar com ela
