@@ -36,6 +36,23 @@ não há leitura anterior com que comparar — a página não mostra `desde`, po
 
 Ir buscá-lo exige três passos e uma sessão; está explicado em `api/_handicap.js`.
 
+## `data/resultados.json`
+
+As provas. Não se escreve nada aqui sem fonte: cada item leva `fonte`, com nome
+e endereço, e é isso que a página mostra por baixo de cada linha.
+
+De onde vêm os factos, como se confirmam, e o que já foi verificado e o que
+não — em `docs/percurso.md`. Antes de acrescentar ou corrigir uma prova, leia-o:
+poupa o trabalho de reler as 403 voltas do registo da FPG e as 176 notícias do
+portal.
+
+Duas armadilhas que já morderam:
+
+- **A data da notícia não é a data da prova.** A FPG publica dias depois. O
+  English Girls' Open esteve cinco dias fora do sítio por causa disto.
+- **O registo da FPG não vê match play.** Provas por equipas em match play não
+  contam para handicap e por isso não aparecem lá. Só as notícias as apanham.
+
 ## `data/perfil.json` — `espanha`
 
 Idas a Espanha para competir, contadas por ano. A maioria foi por iniciativa
