@@ -81,17 +81,13 @@ function traduzirCorpo(html, ficheiro) {
   );
 }
 
-/* As ligações entre páginas são relativas e continuam a funcionar dentro de
-   /en/. As dos recursos são absolutas à raiz e apontam ao mesmo sítio. O que
-   tem de mudar é o cabeçalho: canonical, og:url e as alternativas. */
+/* O cabeçalho: canonical, og:url e as alternativas. */
 function arrumarCabeca(html, ficheiro, { en }) {
   const nome = ficheiro === 'index.html' ? '' : ficheiro;
   const pt = `${SITIO}/${nome}`;
-  /* Com barra no fim, e isto não é cosmética. Em `/en` — sem barra — o
-     endereço-base da página é a raiz do sítio, e uma ligação relativa como
-     `resultados.html` resolve para `/resultados.html`: quem estava a ler em
-     inglês caía no português ao mudar de página. O `/en` passou a redirecionar
-     para `/en/` no vercel.json, e o canonical aponta ao endereço final. */
+  /* Com barra no fim: é o endereço onde a página vive. As ligações internas já
+     não dependem disso — ver ligacoesInglesas() —, mas o canonical deve apontar
+     ao endereço canónico e não a um que o servidor tenha de resolver. */
   const ing = nome ? `${SITIO}/en/${nome}` : `${SITIO}/en/`;
   const meu = en ? ing : pt;
   const cab = CABECALHOS[ficheiro];
@@ -125,6 +121,23 @@ function arrumarCabeca(html, ficheiro, { en }) {
   return s;
 }
 
+/* As ligações internas escritas no HTML são relativas — «resultados.html» —, e
+   dentro de /en/ isso só funciona enquanto o endereço acabar em barra. Em
+   «/en» sem barra resolvem contra a raiz e devolvem a página portuguesa, que
+   foi exactamente o defeito que alguém apanhou a navegar. Na cópia inglesa
+   passam a levar o caminho inteiro; assim não dependem de um carácter no fim
+   do endereço nem de nenhuma regra do servidor.
+
+   Só as das páginas do sítio. O que aponta para /data/, /img/, /api/ ou para
+   fora fica como está — é comum às duas línguas. */
+const PAGINA = /^(index|resultados|recruiting|imprensa|parcerias|privacidade|termos)\.html(#[\w-]+)?$/;
+
+function ligacoesInglesas(html) {
+  return html.replace(/(<a\b[^>]*\bhref=")([^"]+)(")/g, (todo, antes, alvo, depois) => (
+    PAGINA.test(alvo) ? `${antes}/en/${alvo}${depois}` : todo
+  ));
+}
+
 /* As páginas legais não devem ser indexadas em nenhuma das línguas — já estão
    fora do robots.txt, e a etiqueta fecha a porta pelo lado de dentro. */
 const LEGAIS = new Set(['privacidade.html', 'termos.html']);
@@ -141,6 +154,7 @@ for (const f of PAGINAS) {
 
   // a inglesa nasce da portuguesa já arrumada
   let ing = traduzirCorpo(pt, f);
+  ing = ligacoesInglesas(ing);
   ing = arrumarCabeca(ing, f, { en: true });
   if (LEGAIS.has(f) && !ing.includes('name="robots"')) {
     ing = ing.replace('</title>', '</title>\n<meta name="robots" content="noindex,follow" />');
