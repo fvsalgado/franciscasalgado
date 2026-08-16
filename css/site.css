@@ -1011,116 +1011,93 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
    secção é a do saco, e sem isto o rótulo nascia por baixo do menu. */
 .sec--abre{padding-top:clamp(6.5rem,13vh,9.5rem)}
 
-/* Os tacos alinhados pela base e todos com a mesma altura de imagem: é como
-   estão encostados a um saco. Alinhados pelo centro, o driver e a wedge
-   flutuavam a alturas diferentes e a fila lia-se como sete recortes soltos.
+/* ── o saco, cartão a cartão ─────────────────────────────── */
+/* Uma coisa por cartão, e tudo o que se sabe dessa coisa lá dentro: a
+   fotografia, o tipo, o modelo e o loft. Já foram duas vistas — uma fila de
+   fotografias e uma ficha de texto, ligadas por um realce —, e num telemóvel
+   isso quer dizer que se via uma ou outra, nunca as duas, e que tocar num taco
+   acendia uma linha a oitocentos pixéis dali. */
 
-   A largura de cada um segue a proporção da fotografia, por isso o driver
-   ocupa mais do que a wedge — que é exactamente o que se quer: a diferença de
-   tamanho entre um driver e uma wedge é informação. Pela mesma razão a bola
-   foi montada numa tela alta, com a bola só na base: à altura dos outros
-   ficava do tamanho de uma cabeça de driver, que é informação errada. */
-.witb__fila{display:flex;align-items:flex-end;justify-content:center;
-            gap:var(--vao);margin:0 0 .55rem;
-            flex-wrap:wrap;--pe:2.3rem;--vao:clamp(.5rem,2.2vw,2.1rem)}
-
-.witb__t{margin:0;flex:0 1 auto;position:relative;padding:0 0 var(--pe);
-         border:0;background:none;color:inherit;font:inherit;cursor:pointer;
-         -webkit-tap-highlight-color:transparent}
-/* O chão onde encostam. Sem ele, levantar um taco não se lê como levantar:
-   lê-se como o taco a abanar.
+/* Telemóvel: um carrossel que encaixa.
  *
- * Um pedaço por taco, e não uma linha só na fila: cada pedaço avança meio vão
- * para cada lado e encontra o do vizinho, o que dá uma linha contínua numa fila
- * e duas linhas quando a fila parte em duas. Com uma linha só, num telemóvel a
- * primeira fila de tacos ficava a pairar e o chão era da segunda. */
-.witb__t::after{content:"";position:absolute;bottom:var(--pe);height:1px;
-                left:calc(var(--vao) / -2);right:calc(var(--vao) / -2);
-                background:var(--linha-forte)}
-/* O eixo é o chão, e não o meio da imagem: um taco encostado inclina-se a
-   partir do sítio onde assenta. Pelo meio, rodava como um ponteiro. */
-.witb__t img{display:block;height:clamp(96px,15vw,190px);width:auto;max-width:100%;
-             transform-origin:bottom center;
-             transition:transform .5s var(--curva),filter .5s var(--curva)}
-
-/* Tirar um taco do saco: sobe, inclina-se um bocado e ganha sombra. O nome
-   entra por baixo, no espaço que já estava reservado — assim nada se mexe de
-   lugar e a fila não salta quando o rato passa.
+ * Passa-se com o polegar, que ali é o gesto natural, e vê-se um taco de cada
+ * vez em tamanho a sério. O `scroll-padding` e o `scroll-snap-align:center`
+ * fazem o cartão parar ao meio; a largura em `min()` deixa o vizinho espreitar
+ * pela direita, que é o que diz «há mais» sem ser preciso escrever «há mais».
  *
- * O `:hover` fica fechado atrás de `(hover:hover)`. Num telemóvel o browser
- * aplica-o ao tocar e deixa-o pegado até se tocar noutro sítio, e um taco que
- * fica levantado sem ninguém o ter escolhido lê-se como avaria. */
-.witb__t:focus-visible img,.witb__t--on img{
-  transform:translateY(-18px) rotate(-2.5deg);
-  filter:drop-shadow(0 14px 16px rgba(0,0,0,.24))}
-@media (hover:hover){
-  .witb__t:hover img{transform:translateY(-18px) rotate(-2.5deg);
-    filter:drop-shadow(0 14px 16px rgba(0,0,0,.24))}
-}
+ * As margens negativas levam a faixa até às bordas do ecrã, e o `padding`
+ * devolve o alinhamento ao primeiro cartão: assim o carrossel rola de borda a
+ * borda mas começa alinhado com o texto por cima dele. */
+.saco__g{list-style:none;margin:0 calc(var(--gut) * -1);padding:0 var(--gut) .4rem;
+         display:flex;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;
+         scroll-padding-inline:var(--gut);overscroll-behavior-x:contain;
+         -webkit-overflow-scrolling:touch;scrollbar-width:none;
+         --gut:clamp(1.1rem,5vw,2rem)}
+.saco__g::-webkit-scrollbar{display:none}
+.saco__k{flex:0 0 min(70vw,270px);scroll-snap-align:center;
+         display:flex;flex-direction:column;
+         background:var(--papel);border-radius:14px;padding:1rem 1.1rem 1.15rem;
+         transition:background .4s var(--curva)}
 
-.witb__n{position:absolute;left:50%;bottom:.45rem;transform:translate(-50%,.35rem);
-         white-space:nowrap;opacity:0;pointer-events:none;
-         transition:opacity .3s var(--curva),transform .3s var(--curva);
-         font-size:.58rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-         color:var(--tinta)}
-.witb__t:focus-visible .witb__n,.witb__t--on .witb__n{opacity:1;transform:translate(-50%,0)}
-@media (hover:hover){
-  .witb__t:hover .witb__n{opacity:1;transform:translate(-50%,0)}
-}
+/* A caixa da fotografia tem altura fixa e o taco assenta no fundo dela: é como
+   estão encostados a um saco, e é o que faz oito cartões lerem-se como um
+   conjunto e não como oito recortes soltos. A escala de cada imagem vem da tela
+   em que foi montada — a bola foi montada numa tela alta, com a bola só na
+   base, senão à altura das outras ficava do tamanho de uma cabeça de driver. */
+.saco__ki{display:flex;align-items:flex-end;justify-content:center;
+          height:clamp(150px,34vw,190px);margin-bottom:.9rem;
+          border-bottom:1px solid var(--linha-forte)}
+.saco__ki img{display:block;max-height:100%;width:auto;max-width:100%;
+              transform-origin:bottom center;transition:transform .5s var(--curva)}
+/* Um cartão sem fotografia — os punhos — não finge que tem. Já reservou a
+   altura da caixa de imagem para o traço lhe ficar à mesma altura que o dos
+   vizinhos, e o resultado era uma caixa creme vazia do tamanho de um driver.
+   Encolhe ao seu conteúdo e assenta no fundo da linha. */
+.saco__k--so{align-self:end}
 
-/* Entrada: os tacos assentam um a seguir ao outro, da esquerda para a direita,
-   como quem arruma o saco. Corre uma vez, quando a secção aparece.
- *
- * Três camadas, cada uma com uma transformação e uma só: o botão fica quieto e
- * segura o chão, o invólucro faz a entrada, a imagem levanta-se. Postas no
- * mesmo elemento, a regra da entrada («transform:none», com três classes)
- * ganhava por especificidade à do rato («:hover», com duas) e o taco não se
- * levantava de todo. */
-.witb__e{display:block}
-.js .witb__e{opacity:0;transform:translateY(-22px)}
-.js .vis .witb__e{opacity:1;transform:none;
-  transition:opacity .5s var(--curva) calc(var(--i) * 70ms),
-             transform .6s var(--curva) calc(var(--i) * 70ms)}
+.saco__kr{margin:0;font-size:.58rem;font-weight:800;letter-spacing:.14em;
+          text-transform:uppercase;color:var(--relva)}
+.saco__km{margin:.3rem 0 0;font-family:var(--display);font-weight:400;
+          font-variation-settings:'opsz' 48;font-size:1.12rem;line-height:1.15;
+          letter-spacing:-.01em;color:var(--tinta)}
+.saco__kn{margin:.4rem 0 0;font-size:.8rem;line-height:1.4;color:var(--tinta-fraca)}
 
-/* A fotografia do saco ao lado da ficha. Num ecrã estreito vem primeiro, logo
-   a seguir à fila — que é onde interessa vê-la, e não depois de dez linhas de
-   loft e de shaft. Numa coluna, ganha a esquerda pela mesma razão. */
-.witb__b{display:grid;gap:clamp(1.4rem,3.5vw,3rem);align-items:start}
-/* As duas colunas entram cedo, aos 720. Mais tarde, a coluna única chegava aos
-   700 pixéis de largura, e um retrato alto encaixado à força numa faixa dessas
-   é um recorte tão apertado que corta o nome no saco — que é a única razão para
-   a fotografia estar ali. Estreita, ao lado da ficha, a fotografia cabe
-   inteira. */
+/* Aceso pela escada. Dura dois segundos e apaga-se — não é uma selecção, é só
+   dizer «é este», e uma marca que fica acesa para sempre passa a ruído. */
+.saco__k--on{background:var(--relva-clara);outline:1px solid var(--relva);outline-offset:-1px}
+.saco__k--on .saco__ki img{transform:translateY(-10px) rotate(-2.5deg)}
+
+/* Entrada: os cartões assentam um a seguir ao outro, como quem arruma o saco.
+   Só os primeiros — os outros ainda estão fora do ecrã e entrariam a horas
+   nenhumas, quando o dedo lá chegasse. */
+.js .saco__k{opacity:0;transform:translateY(-16px)}
+.js .vis .saco__k{opacity:1;transform:none;
+  transition:opacity .5s var(--curva) calc(min(var(--i,0),5) * 70ms),
+             transform .6s var(--curva) calc(min(var(--i,0),5) * 70ms)}
+
+/* Ecrã largo: deixa de haver gesto de polegar, e um carrossel onde cabem seis
+   cartões é um carrossel a esconder informação por nada. Passa a grelha. */
 @media (min-width:720px){
-  .witb__b{grid-template-columns:clamp(170px,21%,260px) minmax(0,1fr)}
-}
-.witb__s{margin:0}
-.witb__s img{display:block;width:100%;height:auto;border-radius:3px}
-/* Num telemóvel a fotografia ocupa a coluna toda, para o lado direito dela
-   assentar na mesma linha que os traços da ficha e que tudo o resto.
- *
- * Foi tentado o contrário — deixá-la estreita, a 62% —, e ficava alinhada à
- * esquerda e a acabar a meio do nada à direita, que é o que se lê como
- * desalinhado. À largura toda e na proporção do original, um retrato alto, eram
- * setecentos pixéis de fotografia antes de se chegar ao primeiro taco. Em
- * quadrado, alinha dos dois lados e cabe; e o corte é ao alto, na parte que
- * interessa — o nome dela impresso no saco. */
-@media (max-width:719px){
-  /* A altura em `clamp` e não uma proporção fixa: num telemóvel dá um quadrado,
-     e num tablet, onde a coluna é o dobro da largura, um quadrado seriam
-     setecentos pixéis de altura outra vez. Assim aperta-se numa faixa à medida
-     que a coluna alarga, e alinha nas duas pontas em qualquer largura. */
-  .witb__s img{height:clamp(240px,88vw,400px);object-fit:cover;object-position:50% 57%}
+  .saco__g{margin:0;padding:0;display:grid;gap:clamp(.9rem,1.6vw,1.4rem);
+           grid-template-columns:repeat(auto-fit,minmax(min(100%,168px),1fr));
+           overflow:visible}
+  .saco__k{flex:none}
 }
 
-/* A linha da ficha que corresponde ao taco escolhido. */
-/* Sem sombra a alargá-la. A linha acesa levava `box-shadow: 0 0 0 .55rem`, que
-   é meio centímetro para cada lado — num ecrã largo cabia na margem, num
-   telemóvel não: a linha acesa saía da coluna e ficava mais larga do que os
-   traços de cima e de baixo, do retrato do saco e de tudo o resto. Preenchida
-   até à borda da própria linha, fica alinhada por construção. */
-.witb__f > div{transition:background .3s var(--curva)}
-.witb__f > div.witb__f--on{background:var(--papel);border-radius:3px}
+/* A fotografia do saco, no fim e à largura toda.
+ *
+ * É a única imagem da secção que não é recorte de estúdio: é ele no campo, com
+ * o nome dela nas costas. Metida num cartão ao lado de uma cabeça de driver, a
+ * escala mentia — e é a única que quer ser vista grande. */
+.saco__s{margin:clamp(1.6rem,4vw,2.8rem) 0 0}
+.saco__s img{display:block;width:100%;height:clamp(260px,42vw,520px);
+             object-fit:cover;object-position:50% 57%;border-radius:6px}
+/* O nome do saco vive aqui, e não num cartão: um cartão sem fotografia a dizer
+   «Saco · Cobra Tour» por cima de uma fotografia do saco era a mesma coisa
+   escrita duas vezes, e a segunda em caixa vazia. */
+.saco__sl{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem .7rem;
+          margin-top:.7rem}
+.saco__sl .saco__km{margin:0;font-size:1rem}
 
 /* ── catorze ────────────────────────────────────────────── */
 /* O número acima da fila, a subir de zero quando a secção aparece. Catorze é o
@@ -1188,22 +1165,6 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
              transform .4s var(--curva) calc(var(--i) * 60ms + 400ms)}
 
 /* ── o taco escolhido, em grande ────────────────────────── */
-/* Uma faixa larga com o texto encostado à esquerda são dois palmos de nada à
-   direita. Limitada, lê-se como um cartão. */
-.witb__d{display:flex;align-items:center;gap:clamp(1rem,3vw,2.2rem);max-width:46rem;
-         margin:clamp(1.6rem,3.5vw,2.6rem) 0 0;padding:clamp(1rem,2.5vw,1.6rem);
-         background:var(--papel);border-radius:6px}
-.witb__d[hidden]{display:none}
-.witb__di img{display:block;height:clamp(110px,18vw,190px);width:auto}
-.witb__dq{min-width:0}
-.witb__dr{margin:0;font-size:.62rem;font-weight:800;letter-spacing:.16em;
-          text-transform:uppercase;color:var(--relva)}
-.witb__dm{margin:.35rem 0 0;font-family:var(--display);font-weight:400;
-          font-size:clamp(1.4rem,3.4vw,2.1rem);line-height:1.05;letter-spacing:-.02em;color:var(--tinta)}
-.witb__dn{margin:.5rem 0 0;font-size:.88rem;color:var(--tinta-fraca)}
-.witb__dl{margin:.5rem 0 0;font-size:.78rem;color:var(--tinta-fraca)}
-.witb__dl b{font-weight:800;text-transform:uppercase;letter-spacing:.12em;
-            font-size:.6rem;color:var(--tinta);margin-right:.45rem}
 
 /* ── a frase dela ───────────────────────────────────────── */
 .witb__q{margin:clamp(1.6rem,3.5vw,2.6rem) 0 0;max-width:44ch}
@@ -1444,7 +1405,7 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
   .sobe-i{opacity:1 !important;transform:none !important}
   /* Sem a entrada escalonada, os tacos ficavam invisíveis à espera de uma
      transição que nunca corre. */
-  .js .witb__e{opacity:1 !important;transform:none !important}
+  .js .saco__k{opacity:1 !important;transform:none !important}
   .grao{animation:none}
 }
 
