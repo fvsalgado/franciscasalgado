@@ -372,7 +372,21 @@ await passo('FPG', fpg);
  * Daqui sai o histórico do índice de handicap, e mais nada. As provas que a
  * área reservada conhece e o data/resultados.json não vão para o VIGIA-ATENCAO
  * — como tudo o resto que precisa de nome em português e de contexto. */
-if (process.env.FPG_USER && process.env.FPG_PASS) {
+/* Meio configurado tem de gritar, não calar-se.
+ *
+ * Da primeira vez que isto correu a sério, o FPG_USER estava vazio e o
+ * FPG_PASS tinha valor. A condição pedia os dois, o passo foi saltado sem uma
+ * palavra, e a ronda deu «sem novidades» — indistinguível de um dia em que
+ * nada acontece. Um segredo por criar parecia um dia calmo.
+ *
+ * Nenhum dos dois é uma escolha: esta fonte não está ligada, e cala-se. Um só
+ * é um engano, e um engano tem de aparecer no relatório. */
+const temUtilizador = Boolean(process.env.FPG_USER);
+const temSenha = Boolean(process.env.FPG_PASS);
+if (temUtilizador !== temSenha) {
+  falhas.push(`myFPG: falta o segredo ${temUtilizador ? 'FPG_PASS' : 'FPG_USER'} — o outro está definido`);
+}
+if (temUtilizador && temSenha) {
   await passo('myFPG', async () => {
     const d = await buscarRegisto(process.env.FPG_USER, process.env.FPG_PASS);
     const antes = await ler('data/handicap-historico.json').catch(() => ({ pontos: [] }));
