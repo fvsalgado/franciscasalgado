@@ -87,10 +87,12 @@ function traduzirCorpo(html, ficheiro) {
 function arrumarCabeca(html, ficheiro, { en }) {
   const nome = ficheiro === 'index.html' ? '' : ficheiro;
   const pt = `${SITIO}/${nome}`;
-  /* Sem barra no fim: o vercel.json corre com `trailingSlash: false`, e um
-     canonical que aponte a um endereço que redireciona é um canonical
-     deitado fora. */
-  const ing = nome ? `${SITIO}/en/${nome}` : `${SITIO}/en`;
+  /* Com barra no fim, e isto não é cosmética. Em `/en` — sem barra — o
+     endereço-base da página é a raiz do sítio, e uma ligação relativa como
+     `resultados.html` resolve para `/resultados.html`: quem estava a ler em
+     inglês caía no português ao mudar de página. O `/en` passou a redirecionar
+     para `/en/` no vercel.json, e o canonical aponta ao endereço final. */
+  const ing = nome ? `${SITIO}/en/${nome}` : `${SITIO}/en/`;
   const meu = en ? ing : pt;
   const cab = CABECALHOS[ficheiro];
 

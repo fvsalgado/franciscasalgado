@@ -11,13 +11,29 @@ const dominio = (src) => { try { return new URL(src, location.href).hostname; } 
 /** Onde é que o crédito entra: dentro de <figure>, ou logo a seguir à imagem.
     Vive sempre num <span> próprio, para poder ser reescrito ao mudar de
     língua sem apagar a legenda que veio na marcação. */
-function colocar(img, texto) {
+/* Uma licença que se nomeia mas não se aponta é meia atribuição. Quando o
+   crédito traz `licenca` e `licencaUrl` — o caso das fotografias em Creative
+   Commons —, a licença sai como ligação, que é o que a própria licença pede.
+   Sem eles, o crédito continua a ser uma linha de texto como sempre foi. */
+function comLicenca(alvo, texto, c) {
+  alvo.textContent = texto;
+  if (!c?.licenca || !c?.licencaUrl) return;
+  alvo.append(' · ');
+  const a = document.createElement('a');
+  a.href = c.licencaUrl;
+  a.target = '_blank';
+  a.rel = 'noopener license';
+  a.textContent = c.licenca;
+  alvo.append(a);
+}
+
+function colocar(img, texto, c) {
   /* `data-credito-em` aponta um elemento onde o crédito deve ir. Serve o hero
      da página inicial, onde a fotografia sangra por trás de tudo e o crédito
      tem de viver na fila de baixo, longe do resto. */
   if (img.dataset.creditoEm) {
     const alvo = document.getElementById(img.dataset.creditoEm);
-    if (alvo) { alvo.textContent = texto; return; }
+    if (alvo) { comLicenca(alvo, texto, c); return; }
   }
   const fig = img.closest('figure');
   if (fig) {
@@ -32,7 +48,7 @@ function colocar(img, texto) {
     }
     // havia legenda escrita à mão? então o crédito vem a seguir, com separador
     const proprio = [...leg.childNodes].some((n) => n !== cred && n.textContent.trim());
-    cred.textContent = proprio ? ` · ${texto}` : texto;
+    comLicenca(cred, proprio ? ` · ${texto}` : texto, c);
     return;
   }
 
@@ -42,7 +58,7 @@ function colocar(img, texto) {
     p.className = 'credito';
     img.after(p);
   }
-  p.textContent = texto;
+  comLicenca(p, texto, c);
 }
 
 export async function creditos(idioma = 'pt') {
@@ -67,6 +83,6 @@ export async function creditos(idioma = 'pt') {
       console.warn('imagem sem crédito:', src, '— acrescenta em data/creditos.json');
       return;
     }
-    colocar(img, c[idioma] || c.pt);
+    colocar(img, c[idioma] || c.pt, c);
   });
 }

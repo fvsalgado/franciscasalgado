@@ -83,18 +83,37 @@ export async function apoios(cx, lingua = 'pt') {
   const { grupos = [] } = await ler('apoios');
   if (!grupos.length) { cx.innerHTML = ''; return; }
 
-  /* Cada item é um cartão branco do mesmo tamanho. Os que têm logótipo
+  /* Um campo de golfe não é uma marca: o logótipo do clube não diz nada a quem
+     nunca lá jogou, e a fotografia diz tudo. Um item com `foto` troca a placa
+     do logótipo por uma imagem do sítio, com o nome por baixo. O `alt` é
+     descritivo e não decorativo — é a única forma de quem não vê a imagem
+     ficar a saber que campo é. */
+  const cartaoFoto = (i) => {
+    const corpo = `
+      <figure class="campo__f">
+        <img src="/img/campos/${i.foto}" alt="${tx(i.alt, lingua) || `${lingua === 'en' ? 'Golf course' : 'Campo de golfe'} ${i.nome}`}"
+             loading="lazy" decoding="async" />
+      </figure>
+      <span class="campo__n">${i.nome}</span>
+      <span class="apoio__x">${tx(i.x, lingua)}</span>`;
+    return i.url
+      ? `<a class="campo" href="${i.url}" target="_blank" rel="noopener" data-sem-seta data-mag>${corpo}</a>`
+      : `<div class="campo">${corpo}</div>`;
+  };
+
+  /* Os restantes são cartões brancos do mesmo tamanho. Os que têm logótipo
      mostram-no; os que não têm mostram o nome na tipografia da casa. Como o
-     cartão é igual nos dois casos, a parede lê-se como uma só coisa em vez
-     de uma manta de retalhos — e um logótipo que chegue amanhã entra sem
-     mexer em mais nada. */
+     cartão é igual nos dois casos, a parede lê-se como uma só coisa em vez de
+     uma manta de retalhos — e um logótipo que chegue amanhã entra sem mexer
+     em mais nada. */
   const cartao = (i) => {
+    if (i.foto) return cartaoFoto(i);
     const dentro = i.logo
       ? `<img src="/img/logos/${i.logo}" alt="${i.nome}" loading="lazy" decoding="async" data-credito-feito="1" />`
       : `<span class="apoio__n">${i.nome}</span>`;
     /* A placa adapta-se ao logótipo, e não o contrário. `fundo` pode ser
-       «escuro», para marcas desenhadas a branco, ou uma cor — a Lusíadas traz
-       o azul da casa por trás, e com a placa da mesma cor não se vê emenda. */
+       «escuro», para marcas desenhadas a branco, ou uma cor da casa — assim não
+       se vê emenda entre a placa e o logótipo. */
     const cor = i.fundo && i.fundo !== 'escuro' ? ` style="background:${i.fundo};border-color:${i.fundo}"` : '';
     const placa = i.fundo === 'escuro' ? ' apoio__cx--escuro' : '';
     const corpo = `
@@ -106,12 +125,28 @@ export async function apoios(cx, lingua = 'pt') {
   };
 
   cx.className = 'apoios';
-  cx.innerHTML = grupos.map((g) => `
+  cx.innerHTML = grupos.map((g) => {
+    /* Um grupo de fotografias respira de outra maneira: cartões maiores, menos
+       por linha. Basta um item com fotografia para o grupo mudar de forma. */
+    const comFoto = g.itens.some((i) => i.foto) ? ' apoios__l--campos' : '';
+    return `
     <section class="apoios__g${g.destaque ? ' apoios__g--destaque' : ''}">
       <div class="apoios__cab">
         <p class="rot rot--so">${tx(g.t, lingua)}</p>
         <p class="apoios__x">${tx(g.x, lingua)}</p>
       </div>
-      <div class="apoios__l">${g.itens.map(cartao).join('')}</div>
-    </section>`).join('');
+      <div class="apoios__l${comFoto}">${g.itens.map(cartao).join('')}</div>
+    </section>`;
+  }).join('');
+
+  /* Uma fotografia que ainda não existe não deixa um ícone partido no lugar: o
+     cartão fica com o nome e a localidade, que é o que já lá estava antes de
+     haver fotografias. Assim o `foto` pode ser escrito no data/apoios.json
+     antes de o ficheiro chegar, e no dia em que chegar aparece sozinho — sem
+     ninguém ter de se lembrar de voltar aqui. */
+  cx.querySelectorAll('.campo__f img').forEach((img) => {
+    const falhou = () => img.closest('.campo')?.querySelector('.campo__f')?.remove();
+    img.addEventListener('error', falhou, { once: true });
+    if (img.complete && !img.naturalWidth) falhou();
+  });
 }

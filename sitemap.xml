@@ -4,7 +4,7 @@
   <url>
     <loc>https://franciscasalgado.golf/</loc>
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://franciscasalgado.golf/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://franciscasalgado.golf/en" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://franciscasalgado.golf/en/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://franciscasalgado.golf/" />
     <lastmod>2026-08-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -47,9 +47,9 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://franciscasalgado.golf/en</loc>
+    <loc>https://franciscasalgado.golf/en/</loc>
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://franciscasalgado.golf/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://franciscasalgado.golf/en" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://franciscasalgado.golf/en/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://franciscasalgado.golf/" />
     <lastmod>2026-08-01</lastmod>
     <changefreq>weekly</changefreq>
