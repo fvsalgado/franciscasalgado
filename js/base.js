@@ -15,48 +15,26 @@ import { canais } from './conteudo.js';
    linha nunca chegam a aplicar-se. Sem JavaScript, o texto fica visível. */
 document.documentElement.classList.add('js');
 
-/* ── ecrã de carga ────────────────────────────────────────── */
-/* Só a página inicial o usa. Nas interiores seria um imposto cobrado a quem
-   já está dentro do sítio. */
-export function carga() {
-  const cx = document.getElementById('carga');
-  if (!cx) return Promise.resolve();
-
-  const cont = document.getElementById('cargaCont');
-  const barra = document.getElementById('cargaBarra');
-  const nome = document.getElementById('cargaNome');
-
-  if (nome && !reduzido) {
-    nome.innerHTML = [...nome.textContent]
-      .map((c, i) => `<i style="animation-delay:${i * 38}ms">${c === ' ' ? '&nbsp;' : c}</i>`)
-      .join('');
-  }
-
-  return new Promise((resolve) => {
-    let n = 0;
-    const fim = () => {
-      cx.classList.add('fora');
-      document.documentElement.classList.remove('sem-rolar');
-      document.body.classList.add('pronto');
-      setTimeout(() => cx.remove(), 800);
-      resolve();
-    };
-
-    document.documentElement.classList.add('sem-rolar');
-    const passo = setInterval(() => {
-      n = Math.min(100, n + Math.random() * 9 + 3);
-      if (cont) cont.textContent = String(Math.round(n)).padStart(3, '0');
-      if (barra) barra.style.width = `${n}%`;
-      if (n >= 100) {
-        clearInterval(passo);
-        setTimeout(fim, reduzido ? 0 : 380);
-      }
-    }, reduzido ? 10 : 90);
-
-    // rede de segurança: nunca deixar o ecrã de carga preso
-    setTimeout(() => { clearInterval(passo); if (!cx.classList.contains('fora')) fim(); }, 4500);
-  });
-}
+/* ── o ecrã de carga foi-se, e a razão fica escrita ─────────
+ *
+ * Havia uma cortina na página inicial: o nome dela a subir letra a letra e uma
+ * contagem de 000 a 100. Era honesta enquanto a página nascia vazia e o
+ * JavaScript a enchia.
+ *
+ * Deixou de ser quando o scripts/estatico.mjs passou a gravar o conteúdo já
+ * desenhado no HTML. A partir daí a página aparecia inteira no primeiro
+ * desenho, e só depois — quando o módulo corria e punha a classe `js`, que era
+ * o que deixava a cortina aparecer — é que a cortina caía por cima de uma
+ * página que já se via, contava até cem e saía. Abria, tapava, abria outra vez.
+ *
+ * Não era corrigível sem ser ao contrário: para não haver o primeiro
+ * relâmpago, a cortina teria de estar lá desde o princípio, e isso é esconder
+ * de propósito, durante quase dois segundos, uma página que já está pronta. Num
+ * sítio que existe para um treinador abrir uma ligação e ver, é caro.
+ *
+ * A contagem também não media nada — subia por saltos aleatórios até cem. E o
+ * momento de marca não se perdeu: o nome no hero já sobe letra a letra
+ * sozinho, e agora sobe à chegada, em vez de depois de uma cortina. */
 
 /**
  * Liga a casca e desenha a página.
@@ -90,6 +68,9 @@ export function iniciar(pintar) {
 
   partirTitulos();
   document.querySelectorAll('.nome__l').forEach((el, i) => el.style.setProperty('--i', i));
+  /* Era o ecrã de carga que punha esta classe, e é ela que solta a animação do
+     nome no hero. Agora entra à chegada. */
+  document.body.classList.add('pronto');
 
   // a casca entra já, para a página não nascer sem cabeçalho
   nav(l);
