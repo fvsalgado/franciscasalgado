@@ -1379,21 +1379,45 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
                     letter-spacing:.14em;color:var(--tinta-fraca)}
 
 /* ── rodapé ─────────────────────────────────────────────── */
-.pe{padding:clamp(3rem,7vw,6rem) 0 2rem;border-top:1px solid var(--linha);overflow:hidden}
+.pe{padding:clamp(2.2rem,7vw,6rem) 0 1.4rem;border-top:1px solid var(--linha);overflow:hidden}
 .pe__nome{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 144;
           font-size:clamp(2.6rem,13vw,12rem);line-height:.84;letter-spacing:-.045em;
-          color:var(--tinta);opacity:.12;margin:0 0 clamp(2rem,5vw,4rem);white-space:nowrap}
-.pe__g{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}
-.pe__l{list-style:none;margin:1rem 0 0;padding:0;display:flex;flex-direction:column;gap:.55rem}
-.pe__l a{font-size:.88rem;color:var(--tinta-fraca);transition:color .3s var(--curva);
+          color:var(--tinta);opacity:.12;margin:0 0 clamp(1.6rem,5vw,4rem);white-space:nowrap}
+
+/* Três blocos: quem é ela, onde se fala com ela, e as páginas. Num telemóvel
+   as três colunas nunca coubem — o auto-fit empilhava-as, e onze linhas de
+   lista faziam um rodapé mais alto do que a secção que o antecede.
+   O que encurta isto não é apertar as colunas: é a lista das páginas, que tem
+   seis nomes curtos e cabe em duas colunas, passando de seis linhas a três.
+   As colunas vão a `minmax(0,1fr)` e não a `1fr` porque o mínimo implícito de
+   uma coluna de grelha é o conteúdo mais largo que lá esteja — e o endereço
+   de correio não parte. Com `1fr`, a coluna do contacto recusava-se a descer
+   dos 200px, a grelha ficava mais larga do que o `.env`, e o `overflow:hidden`
+   do rodapé cortava as páginas fora do ecrã em tudo abaixo dos 390px. */
+.pe__g{display:grid;gap:1.35rem;grid-template-columns:minmax(0,1fr)}
+.pe__g>:last-child .pe__l{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+                          gap:.45rem 1rem}
+@media (min-width:720px){
+  .pe__g{gap:2rem;grid-template-columns:1.5fr minmax(0,1fr) minmax(0,1fr)}
+  .pe__g>:last-child .pe__l{display:flex}
+}
+.pe__l{list-style:none;margin:.7rem 0 0;padding:0;display:flex;flex-direction:column;gap:.45rem}
+.pe__l a{font-size:.85rem;color:var(--tinta-fraca);transition:color .3s var(--curva);
          display:inline-flex;align-items:center;gap:.5rem}
 .pe__l a:hover{color:var(--relva)}
 .ic{width:1.15rem;height:1.15rem;fill:currentColor;display:block}
 .ic--pe{width:.95rem;height:.95rem;flex:none}
-.pe__f{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;border-top:1px solid var(--linha);
-       display:flex;flex-wrap:wrap;gap:.8rem 2rem;justify-content:space-between;
-       font-size:.72rem;color:var(--tinta-fraca)}
+.pe__f{margin-top:clamp(1.6rem,5vw,4rem);padding-top:1.1rem;border-top:1px solid var(--linha);
+       display:flex;flex-wrap:wrap;gap:.7rem 2rem;justify-content:space-between;
+       align-items:baseline;font-size:.72rem;color:var(--tinta-fraca)}
 .pe__legal{display:flex;gap:1.2rem}
+@media (max-width:640px){
+  /* Os três davam três linhas, porque nenhum par cabia junto com o
+     space-between. A navegação sobe para uma linha só dela e os outros dois
+     — o crédito e as coordenadas — passam a partilhar a de baixo. */
+  .pe__f{justify-content:flex-start;gap:.65rem 1.1rem;font-size:.68rem}
+  .pe__legal{order:-1;width:100%}
+}
 .pe__ck{font-size:inherit;color:inherit;padding:0;border-bottom:1px solid var(--linha)}
 
 /* ── cookies ────────────────────────────────────────────── */
