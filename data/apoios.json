@@ -70,10 +70,39 @@
     "en": "Coaching team"
    },
    "x": {
-    "pt": "Quem a treina, no clube e no Centro de Alto Rendimento.",
-    "en": "Who coaches her, at the club and at the national High-Performance Centre."
+    "pt": "Quem a treina — no clube, no Centro de Alto Rendimento, e no que não se vê no campo.",
+    "en": "Who coaches her — at the club, at the national High-Performance Centre, and on what never shows on the course."
    },
-   "itens": []
+   "itens": [
+    {
+     "nome": "Tiago Osório",
+     "x": {
+      "pt": "Treinador principal",
+      "en": "Head coach"
+     }
+    },
+    {
+     "nome": "Ana Monteiro",
+     "x": {
+      "pt": "Preparação física",
+      "en": "Strength & conditioning"
+     }
+    },
+    {
+     "nome": "Luis Almeida",
+     "x": {
+      "pt": "Treino mental",
+      "en": "Mental coach"
+     }
+    },
+    {
+     "nome": "Nelson Ribeiro",
+     "x": {
+      "pt": "Selecionador nacional",
+      "en": "National coach"
+     }
+    }
+   ]
   },
   {
    "id": "tecnologia",
