@@ -26,6 +26,21 @@
       "permanent": true
     },
     {
+      "source": "/recruiting.html",
+      "destination": "/jogadora.html",
+      "permanent": true
+    },
+    {
+      "source": "/recruiting",
+      "destination": "/jogadora.html",
+      "permanent": true
+    },
+    {
+      "source": "/en/recruiting.html",
+      "destination": "/en/jogadora.html",
+      "permanent": true
+    },
+    {
       "source": "/apoiar.html",
       "destination": "/parcerias.html",
       "permanent": true

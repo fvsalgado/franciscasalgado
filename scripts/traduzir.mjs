@@ -32,7 +32,7 @@ const RAIZ = new URL('../', import.meta.url);
 const SECO = process.argv.includes('--seco');
 const SITIO = 'https://franciscasalgado.golf';
 
-const PAGINAS = ['index.html', 'resultados.html', 'recruiting.html', 'witb.html',
+const PAGINAS = ['index.html', 'resultados.html', 'jogadora.html', 'witb.html',
                  'imprensa.html', 'parcerias.html', 'privacidade.html', 'termos.html'];
 
 /* Os títulos e as descrições não têm `data-t` — vivem no <head>, onde não há
@@ -47,8 +47,8 @@ const CABECALHOS = {
     desc: 'Francisca Salgado year by year: five national titles, twenty-two national-team appearances '
       + 'and the highlights of every season, each one sourced.',
   },
-  'recruiting.html': {
-    titulo: 'College recruiting — Francisca Salgado',
+  'jogadora.html': {
+    titulo: 'Francisca Salgado — the player',
     desc: 'Francisca Salgado, Portuguese amateur golfer, class of 2027: handicap, WAGR world ranking '
       + 'and European ranking — for college coaches.',
   },
@@ -140,7 +140,7 @@ function arrumarCabeca(html, ficheiro, { en }) {
 
    Só as das páginas do sítio. O que aponta para /data/, /img/, /api/ ou para
    fora fica como está — é comum às duas línguas. */
-const PAGINA = /^(index|resultados|recruiting|imprensa|parcerias|privacidade|termos)\.html(#[\w-]+)?$/;
+const PAGINA = /^(index|resultados|jogadora|imprensa|parcerias|privacidade|termos)\.html(#[\w-]+)?$/;
 
 function ligacoesInglesas(html) {
   return html.replace(/(<a\b[^>]*\bhref=")([^"]+)(")/g, (todo, antes, alvo, depois) => (

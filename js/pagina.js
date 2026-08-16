@@ -41,7 +41,7 @@ const PINTAR = {
                        reels($('reels'), l)]);
   },
 
-  async recruiting(l) {
+  async jogadora(l) {
     await Promise.all([fichaRecruiting($('recNums'), l), curvaRankings($('curva'), l),
                        witb($('witbL'), l), equipa($('equipaL'), l), swing($('swingV'), l)]);
   },

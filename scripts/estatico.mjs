@@ -50,7 +50,7 @@ const { chromium } = await (async () => {
 const RAIZ = new URL('../', import.meta.url);
 const SECO = process.argv.includes('--seco');
 
-const PAGINAS = ['index.html', 'resultados.html', 'recruiting.html', 'witb.html',
+const PAGINAS = ['index.html', 'resultados.html', 'jogadora.html', 'witb.html',
                  'imprensa.html', 'parcerias.html'];
 
 /* Os contentores que valem a pena guardar, por ordem de nada. Um id que não
@@ -61,7 +61,7 @@ const GUARDAR = [
   'proximas', 'contagens', 'filtros', 'epocas', 'videos', 'notaFonte', // épocas
   'factos', 'plats', 'gal',                           // imprensa
   'numsApoio', 'apoios', 'escadas',                   // parcerias
-  'recNums', 'curva', 'witbL', 'equipaL', 'swingV',             // recruiting
+  'recNums', 'curva', 'witbL', 'equipaL', 'swingV',             // a jogadora
 ];
 
 /* Um servidor estático mínimo. O sítio não tem passo de compilação, por isso
@@ -130,7 +130,7 @@ function trocarDentro(html, id, dentro, classe) {
    contentor.
  *
  * Escondia-se apagando, e isso apagava-a do ficheiro de origem: a curva dos
- * rankings, o WITB e o coach's corner desapareceram do recruiting.html e não
+ * rankings, o WITB e o coach's corner desapareceram do jogadora.html e não
  * voltariam no dia em que houvesse dados para eles. Um passo de geração não
  * pode destruir aquilo que gera. Agora mexe-se num atributo, e o ficheiro
  * guarda sempre a secção inteira. */

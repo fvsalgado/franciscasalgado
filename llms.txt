@@ -65,7 +65,7 @@ hreflang. O português é o original; o inglês é tradução dele.
 
 - https://franciscasalgado.golf/ — quem é, números da época, rankings em direto e perguntas frequentes
 - https://franciscasalgado.golf/resultados.html — época a época: o que aconteceu em cada ano, as provas com voltas, total e fonte, e a imprensa desse ano
-- https://franciscasalgado.golf/recruiting.html — para treinadores universitários: handicap, rankings, calendário e contacto
+- https://franciscasalgado.golf/jogadora.html — a ficha dela para quem treina: rankings, o saco, a equipa técnica e contacto
 - https://franciscasalgado.golf/witb.html — o equipamento, taco a taco: marca, modelo, loft e shaft de cada, mais bola, luva e saco
 - https://franciscasalgado.golf/imprensa.html — biografia curta, ficha, citações com fonte, fotografias e fichas oficiais
 - https://franciscasalgado.golf/parcerias.html — quem apoia, o que um apoio pode cobrir, e como falar com ela
