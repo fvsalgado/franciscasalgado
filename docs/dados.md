@@ -55,31 +55,35 @@ A galeria. Cada entrada aponta para um ficheiro em img/; o crédito não se escr
 
 O nome do ficheiro tem de coincidir com o campo `foto` do item, no grupo
 `campos` de `data/apoios.json`. Um item sem `foto` mostra só o nome e a
-localidade — que é como estão hoje o West Cliffs, a Quinta do Peru e o Jamor.
+localidade, e o cartão degrada-se sozinho se o ficheiro faltar — não fica
+imagem partida.
 
-| ficheiro | estado |
+| ficheiro | de onde vem |
 |---|---|
-| `praia-del-rey.webp` | já cá está |
-| `west-cliffs.webp` | falta |
-| `quinta-do-peru.webp` | falta |
-| `jamor.webp` | falta |
+| `praia-del-rey.webp` | Vitor Oliveira, CC BY-SA 2.0, via Wikimedia Commons |
+| `west-cliffs.webp` | sítio do próprio clube |
+| `quinta-do-peru.webp` | material do clube, obtido no Golftattoo |
+| `jamor.webp` | Federação Portuguesa de Golfe |
 
-Formato: `.webp`, recorte 3:2 na horizontal (1400×933 serve bem). O cartão
-recorta ao centro, por isso o assunto deve estar centrado. Para acrescentar
-uma, guarde o ficheiro e ponha `foto` e `alt` no item respetivo — o `alt`
-descreve o campo para quem não vê a imagem, não é decorativo.
+Formato: `.webp`, recorte 3:2 na horizontal (1400×933). O cartão recorta ao
+centro, por isso o assunto deve estar centrado. O `alt` descreve o campo para
+quem não vê a imagem — é bilingue, e não é decorativo.
 
 **Créditos, e isto não é opcional.** Cada fotografia precisa de entrada em
 `data/creditos.json`, em `porFicheiro`; sem ela o `js/creditos.js` avisa na
-consola e a imagem fica sem autoria. Uma fotografia com licença Creative
-Commons leva também `licenca` e `licencaUrl`, e o crédito passa a mostrar a
-licença como ligação — que é o que a própria licença exige. Ver
-`praia-del-rey.webp` como exemplo.
+consola. Uma fotografia com licença Creative Commons leva também `licenca` e
+`licencaUrl`, e o crédito mostra a licença como ligação — que é o que a
+licença exige. Ver `praia-del-rey.webp`.
 
-E o aviso que interessa: **crédito não é licença**. Nomear o autor de uma
-fotografia que não se pode republicar não dá o direito de a republicar. As
-fotografias dos sítios dos clubes são material protegido — para as usar é
-preciso autorização de quem as detém, e é isso que se deve pedir aos clubes.
+O `_origem` de cada uma diz de onde saiu e em que condições foi publicada.
+Três destas estão aqui por autorização dos clubes e dos campos, dada em agosto
+de 2026; a de Praia D'El Rey está por licença aberta e não depende disso. Se
+uma autorização for retirada, tira-se o `foto` do item e o cartão volta ao
+nome sem mais nada partir.
+
+**Crédito não é licença.** Nomear o autor de uma fotografia não dá o direito de
+a publicar: é a autorização que dá. Para uma fotografia nova sem autorização
+declarada, pede-se primeiro.
 
 ## `data/instagram.json`
 
