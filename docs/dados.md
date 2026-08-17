@@ -9,6 +9,18 @@ para aqui, e `docs/` não é publicado (ver `.vercelignore`).
 
 Quem acompanha o percurso, por natureza da relação. Para acrescentar um logótipo: guarde o ficheiro em img/logos/ e ponha o nome em 'logo'; sem 'logo', entra o nome composto na tipografia do sítio, dentro do mesmo cartão, e a parede continua a ler-se como uma só. Um item com "fundo": "escuro" ganha placa escura — é para logótipos desenhados a branco, que numa placa branca desapareciam. Os créditos e a proveniência de cada logótipo vivem em data/creditos.json.
 
+Num grupo com `forma: "linhas"` (os apoios tecnológicos), o `logo` entra **em
+vez do nome**, à altura de uma linha de texto — o nome verdadeiro fica no
+`alt`. Esses ficheiros são monocromáticos: o logótipo original é aparado e
+pintado na tinta da casa (`#12281E`), e no tema escuro o CSS inverte-o. Cinco
+identidades gráficas em cinco linhas seguidas eram um mercado; na mesma cor,
+são uma lista. O `_origem` em creditos.json diz de onde veio cada original.
+
+Atenção ao **Vertex Golf**: o tutor escreveu «GolfVertex», mas `golfvertex.com`
+é um sítio de artigos sem relação nenhuma com golfe. A marca — sensor de
+putting — chama-se Vertex Golf e vive em `vertex-golf.com`; o próprio logótipo
+escreve «VERTEX GOLF».
+
 ## `data/creditos.json`
 
 Créditos obrigatórios de imagem. A chave de porFicheiro é o nome do ficheiro tal como está em img/. Sempre que entrar uma fotografia nova, acrescenta-se aqui a linha correspondente — o js/creditos.js avisa na consola quando encontra uma imagem sem crédito. O campo _origem não é mostrado no site: fica só para se saber de onde veio cada ficheiro e se poder confirmar a autoria com quem a detém.

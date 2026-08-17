@@ -138,12 +138,16 @@ export async function apoios(cx, lingua = 'pt') {
      * nome, a seta diz que se pode ir lá ver, e cinco cabem no espaço de uma.
      * `forma: "linhas"` no data/apoios.json escolhe. */
     if (g.forma === 'linhas') {
+      /* Com logótipo, o logótipo É o nome: as cinco marcas escrevem o próprio
+         nome no logótipo, e pô-lo ao lado do nome em texto era ler «WellPutt
+         WellPutt». O nome verdadeiro fica no `alt`, que é onde um leitor de
+         ecrã o procura. Os ficheiros são monocromáticos, pintados na tinta da
+         casa — cinco identidades gráficas em cinco linhas seguidas eram um
+         mercado; na mesma cor, são uma lista. */
       const linha = (i) => {
-        const dentro = i.logo
-          ? `<img src="/img/logos/${i.logo}" alt="${i.nome}" loading="lazy" decoding="async" data-credito-feito="1" />`
-          : '';
-        const corpo = `${dentro ? `<span class="marcas__i">${dentro}</span>` : ''}
-          <span class="marcas__n">${i.nome}</span>
+        const corpo = `${i.logo
+          ? `<img class="marcas__m" src="/img/logos/${i.logo}" alt="${i.nome}" loading="lazy" decoding="async" data-credito-feito="1" />`
+          : `<span class="marcas__n">${i.nome}</span>`}
           ${tx(i.x, lingua) ? `<span class="marcas__x">${tx(i.x, lingua)}</span>` : ''}
           ${i.url ? '<span class="marcas__s" aria-hidden="true">↗</span>' : ''}`;
         return i.url

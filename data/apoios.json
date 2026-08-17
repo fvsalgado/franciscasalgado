@@ -76,23 +76,28 @@
    "itens": [
     {
      "nome": "UpGame",
-     "url": "https://www.upgame.app/"
+     "url": "https://www.upgame.app/",
+     "logo": "upgame.webp"
     },
     {
      "nome": "WellPutt",
-     "url": "https://wellputt.com/"
+     "url": "https://wellputt.com/",
+     "logo": "wellputt.webp"
     },
     {
-     "nome": "GolfVertex",
-     "url": "https://golfvertex.com/"
+     "nome": "Vertex Golf",
+     "url": "https://vertex-golf.com/",
+     "logo": "vertex-golf.webp"
     },
     {
      "nome": "Hole19",
-     "url": "https://www.hole19golf.com/"
+     "url": "https://www.hole19golf.com/",
+     "logo": "hole19.webp"
     },
     {
      "nome": "HackMotion",
-     "url": "https://hackmotion.com/"
+     "url": "https://hackmotion.com/",
+     "logo": "hackmotion.webp"
     }
    ],
    "forma": "linhas"

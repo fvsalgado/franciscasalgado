@@ -915,8 +915,13 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
          background:var(--papel);box-shadow:0 0 0 1px var(--linha);
          transition:background-color .35s var(--curva),color .35s var(--curva)}
 @media (hover:hover){.marca-l:hover{background:var(--relva-clara)}}
-.marcas__i{flex:none;display:grid;place-items:center;width:1.9rem;height:1.9rem}
-.marcas__i img{max-width:100%;max-height:100%;display:block}
+/* O logótipo em vez do nome, à altura de uma linha de texto. Os ficheiros
+   estão pintados na tinta clara (#12281E); no tema escuro inverte-se e
+   dessatura-se — a inversão de um verde-escuro dava um rosa-claro, e o
+   grayscale a seguir devolve-o a um cinza-claro que lê como o texto lê. */
+.marcas__m{height:1.35rem;width:auto;max-width:min(52vw,12rem);object-fit:contain;
+           object-position:left center;display:block}
+html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 .marcas__n{font-size:.98rem;font-weight:700;color:var(--tinta);min-width:0}
 .marcas__x{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
            color:var(--tinta-fraca);min-width:0}
@@ -969,6 +974,13 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
      parede de apoios ler-se como parede. Os campos ficam largos: esses têm
      fotografia. */
   .apoios__l.faixa:not(.apoios__l--campos) > *{flex-basis:min(52vw,210px)}
+  /* As grelhas declaradas DEPOIS deste bloco — .escadas na secção das formas
+     de apoio, .ig__g no Instagram — ganhavam-lhe ao `.faixa` por virem mais
+     abaixo no ficheiro, com a mesma especificidade. O resultado era o pior
+     dos dois mundos: os degraus empilhados em coluna corrida, colados por
+     1px, com as margens negativas da faixa à mesma. Duas classes ganham a
+     uma, venha a outra de onde vier. */
+  .escadas.faixa,.ig__g.faixa{display:flex;gap:.9rem;grid-template-columns:none}
 }
 
 /* ── instagram ──────────────────────────────────────────── */
@@ -1398,16 +1410,15 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
                     letter-spacing:.14em;color:var(--tinta-fraca)}
 
 /* ── rodapé ─────────────────────────────────────────────── */
+/* Já cá viveu uma marca de água gigante com o nome dela e uma coluna de
+   apresentação por baixo. Saíram as duas: o nome já está no cabeçalho de
+   todas as páginas, e o rodapé ficava com «Francisca Salgado» escrito três
+   vezes no mesmo ecrã de telemóvel. */
 .pe{padding:clamp(2.2rem,7vw,6rem) 0 1.4rem;border-top:1px solid var(--linha);overflow:hidden}
-.pe__nome{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 144;
-          font-size:clamp(2.6rem,13vw,12rem);line-height:.84;letter-spacing:-.045em;
-          color:var(--tinta);opacity:.12;margin:0 0 clamp(1.6rem,5vw,4rem);white-space:nowrap}
 
-/* Três blocos: quem é ela, onde se fala com ela, e as páginas. Num telemóvel
-   as três colunas nunca coubem — o auto-fit empilhava-as, e onze linhas de
-   lista faziam um rodapé mais alto do que a secção que o antecede.
-   O que encurta isto não é apertar as colunas: é a lista das páginas, que tem
-   seis nomes curtos e cabe em duas colunas, passando de seis linhas a três.
+/* Dois blocos: onde se fala com ela, e as páginas. Num telemóvel empilham.
+   A lista das páginas tem seis nomes curtos e cabe em duas colunas — seis
+   linhas passam a três.
    As colunas vão a `minmax(0,1fr)` e não a `1fr` porque o mínimo implícito de
    uma coluna de grelha é o conteúdo mais largo que lá esteja — e o endereço
    de correio não parte. Com `1fr`, a coluna do contacto recusava-se a descer
@@ -1417,8 +1428,7 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 .pe__g>:last-child .pe__l{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
                           gap:.45rem 1rem}
 @media (min-width:720px){
-  .pe__g{gap:2rem;grid-template-columns:1.5fr minmax(0,1fr) minmax(0,1fr)}
-  .pe__g>:last-child .pe__l{display:flex}
+  .pe__g{gap:2rem;grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 .pe__l{list-style:none;margin:.7rem 0 0;padding:0;display:flex;flex-direction:column;gap:.45rem}
 .pe__l a{font-size:.85rem;color:var(--tinta-fraca);transition:color .3s var(--curva);
