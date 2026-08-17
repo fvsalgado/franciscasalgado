@@ -4,12 +4,8 @@
    "id": "patrocinadores",
    "destaque": true,
    "t": {
-    "pt": "Quem a apoia",
-    "en": "Who backs her"
-   },
-   "x": {
-    "pt": "As marcas com que joga e se veste em prova, em contrato.",
-    "en": "The brands she plays and wears in competition, under contract."
+    "pt": "Patrocinadores principais",
+    "en": "Principal partners"
    },
    "itens": [
     {
@@ -47,10 +43,6 @@
     "pt": "Seleção Nacional",
     "en": "National team"
    },
-   "x": {
-    "pt": "Quem a selecciona e a forma.",
-    "en": "Who selects and develops her."
-   },
    "itens": [
     {
      "nome": "Federação Portuguesa de Golfe",
@@ -68,10 +60,6 @@
    "t": {
     "pt": "Apoios tecnológicos",
     "en": "Technology partners"
-   },
-   "x": {
-    "pt": "As ferramentas com que treina e mede o que faz — dentro e fora do campo.",
-    "en": "The tools she trains and measures with, on the course and off it."
    },
    "itens": [
     {
@@ -112,10 +100,6 @@
    "t": {
     "pt": "Campos onde joga",
     "en": "Courses she plays"
-   },
-   "x": {
-    "pt": "Os campos de casa, no Oeste.",
-    "en": "Her home courses, on Portugal's west coast."
    },
    "itens": [
     {

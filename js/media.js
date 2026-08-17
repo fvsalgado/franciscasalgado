@@ -158,7 +158,7 @@ export async function apoios(cx, lingua = 'pt') {
     <section class="apoios__g">
       <div class="apoios__cab">
         <p class="rot rot--so">${tx(g.t, lingua)}</p>
-        <p class="apoios__x">${tx(g.x, lingua)}</p>
+        ${tx(g.x, lingua) ? `<p class="apoios__x">${tx(g.x, lingua)}</p>` : ''}
       </div>
       <ul class="marcas">${g.itens.map(linha).join('')}</ul>
     </section>`;
@@ -168,7 +168,7 @@ export async function apoios(cx, lingua = 'pt') {
     <section class="apoios__g${g.destaque ? ' apoios__g--destaque' : ''}">
       <div class="apoios__cab">
         <p class="rot rot--so">${tx(g.t, lingua)}</p>
-        <p class="apoios__x">${tx(g.x, lingua)}</p>
+        ${tx(g.x, lingua) ? `<p class="apoios__x">${tx(g.x, lingua)}</p>` : ''}
       </div>
       <div class="apoios__l faixa${comFoto}">${g.itens.map(cartao).join('')}</div>
     </section>`;

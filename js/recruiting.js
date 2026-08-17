@@ -376,10 +376,23 @@ export async function witb(cx, lingua = 'pt') {
    * polegar, que é o gesto que ali é natural, e vê-se um taco de cada vez em
    * tamanho a sério em vez de oito do tamanho de uma unha. Em ecrã largo são
    * uma grelha, e as fotografias continuam pousadas na mesma linha de chão. */
+  /* A fotografia leva ao mesmo sítio que o nome — o alvo de toque óbvio de um
+     cartão é a imagem, e era o único pedaço dele que não ia a lado nenhum.
+     `tabindex="-1"` e `aria-hidden`: para o teclado e para quem ouve a página,
+     a ligação continua a ser uma só, a do nome, com o modelo escrito por
+     extenso. Duas paragens seguidas para o mesmo endereço é ruído. */
+  const retratoTaco = (l) => {
+    const img = `<img src="/img/witb/${l.img}" alt="" loading="lazy"
+            decoding="async" data-credito-em="witbCred" />`;
+    return `<span class="saco__ki">${l.url
+      ? `<a class="saco__kf" href="${l.url}" target="_blank" rel="noopener"
+             tabindex="-1" aria-hidden="true" data-sem-seta>${img}</a>`
+      : img}</span>`;
+  };
+
   const cartao = (l) => `
     <li class="saco__k${l.img ? '' : ' saco__k--so'}" data-i="${l.i}" style="--i:${l.i}">
-      ${l.img ? `<span class="saco__ki"><img src="/img/witb/${l.img}" alt="" loading="lazy"
-            decoding="async" data-credito-em="witbCred" /></span>` : ''}
+      ${l.img ? retratoTaco(l) : ''}
       <p class="saco__kr">${l.r}</p>
       <p class="saco__km">${l.url
     ? `<a class="saco__kl" href="${l.url}" target="_blank" rel="noopener" data-sem-seta>${l.m}<span aria-hidden="true"> ↗</span></a>`

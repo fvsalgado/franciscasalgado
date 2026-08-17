@@ -912,9 +912,32 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 .apoios__cab{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.2rem}
 .apoios__x{margin:0;font-size:.86rem;color:var(--tinta-fraca);max-width:56ch}
 .apoios__l{display:grid;gap:1px;grid-template-columns:repeat(auto-fit,minmax(min(100%,168px),1fr))}
-.apoios__g--destaque .apoios__l{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
-.apoios__g--destaque .apoio__cx{width:min(100%,250px);height:6.2rem}
+
+/* ── os principais ──────────────────────────────────────── */
+/* Três marcas em contrato — os tacos, a roupa, a bolsa — e depois tudo o
+   resto. Na mesma parede das ferramentas de treino e dos campos, liam-se como
+   mais três placas iguais às outras doze: a página tratava por igual o que não
+   é igual.
+   O grupo passa a ter chão próprio, e o resto da parede fica a nu por baixo.
+   A hierarquia é dita pelo tamanho e pelo enquadramento, que é como uma página
+   diz «isto primeiro» sem ter de o escrever. */
+.apoios__g--destaque{padding:clamp(1.5rem,3.2vw,2.6rem);border-radius:18px;
+                     border:1px solid var(--linha-forte);background:var(--superficie)}
+.apoios__g--destaque .apoios__cab{align-items:center;text-align:center;
+                                  margin-bottom:clamp(1.3rem,3vw,2rem)}
+.apoios__g--destaque .rot{color:var(--relva)}
+.apoios__g--destaque .apoios__l{gap:clamp(.9rem,2vw,1.6rem);
+                                grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+/* Dentro do painel os cartões deixam de ter caixa: a placa branca do logótipo
+   já é a peça, e uma moldura dentro de outra moldura era ruído. */
+.apoios__g--destaque .apoio,
+.sec--fundo .apoios__g--destaque .apoio{background:transparent;box-shadow:none;
+                                        padding:.4rem .4rem .2rem;gap:.75rem}
+.apoios__g--destaque .apoio:hover{background:transparent}
+.apoios__g--destaque .apoio__cx{width:min(100%,300px);height:clamp(6.4rem,16vw,8.6rem);
+                                padding:1rem 1.15rem}
 .apoios__g--destaque .apoio__n{font-size:1.25rem}
+.apoios__g--destaque .apoio__x{font-size:.72rem;color:var(--tinta)}
 .apoio{background:var(--papel);box-shadow:0 0 0 1px var(--linha);
        padding:clamp(1.2rem,2.4vw,1.7rem);display:flex;flex-direction:column;
        align-items:center;gap:.9rem;text-align:center;
@@ -994,7 +1017,14 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 /* A cara na linha da equipa: redonda, pequena, com as iniciais quando não há
    retrato autorizado. */
-.marca-l__cara{flex:none;width:2.3rem;height:2.3rem;border-radius:50%;overflow:hidden;
+/* Uma lista de pessoas não cabe onde cabe uma de logótipos: com a cara maior,
+   quatro por linha punham «Teresa São Marcos» a três palavras em três linhas e
+   a seta por cima do cargo. Colunas mais largas, e o cargo desce para debaixo
+   do nome em vez de disputar a mesma linha. */
+.marcas--caras{grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr))}
+.marcas--caras .marca-l{gap:.85rem;padding:.85rem 1.1rem}
+.marcas--caras .marcas__n{flex:1 1 auto}
+.marca-l__cara{flex:none;width:3.45rem;height:3.45rem;border-radius:50%;overflow:hidden;
                display:grid;place-items:center;background:var(--relva-clara);
                font-size:.72rem;font-weight:800;letter-spacing:.04em;color:var(--relva)}
 .marca-l__cara img{width:100%;height:100%;object-fit:cover;display:block}
@@ -1291,9 +1321,12 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
  * É a única imagem da secção que não é recorte de estúdio: é ele no campo, com
  * o nome dela nas costas. Metida num cartão ao lado de uma cabeça de driver, a
  * escala mentia — e é a única que quer ser vista grande. */
-.saco__s{margin:clamp(1.6rem,4vw,2.8rem) 0 0}
-.saco__s img{display:block;width:100%;height:clamp(260px,42vw,520px);
-             object-fit:cover;object-position:50% 57%;border-radius:6px}
+/* Inteira, e não recortada a uma altura fixa. Esteve com `object-fit:cover` e
+   uma altura em `clamp`, que num saco a pé — alto e estreito — cortava-lhe o
+   topo e a base: via-se o meio de um saco e não um saco. O limite passa a ser
+   a largura, que é o que uma imagem vertical pede. */
+.saco__s{margin:clamp(1.6rem,4vw,2.8rem) auto 0;max-width:420px}
+.saco__s img{display:block;width:100%;height:auto;border-radius:6px}
 /* O nome do saco vive aqui, e não num cartão: um cartão sem fotografia a dizer
    «Saco · Cobra Tour» por cima de uma fotografia do saco era a mesma coisa
    escrita duas vezes, e a segunda em caixa vazia. */
@@ -1593,10 +1626,9 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 .sec--saco-pagina .saco__k{flex:auto;padding:.85rem .85rem .95rem}
 .sec--saco-pagina .saco__ki{height:clamp(110px,24vw,190px)}
 .sec--saco-pagina .saco__k--so{align-self:auto}
-/* No inventário o saco aparece inteiro, da cabeça dos tacos à base — na
-   secção da jogadora é uma faixa recortada; aqui é a peça, completa. */
-.sec--saco-pagina .saco__s{max-width:560px;margin-inline:auto}
-.sec--saco-pagina .saco__s img{height:auto;object-fit:contain;object-position:center}
+/* No inventário o saco é a peça de fecho e pode crescer mais do que na
+   secção da jogadora — inteiro nos dois sítios, só que aqui maior. */
+.sec--saco-pagina .saco__s{max-width:560px}
 
 /* ── menos movimento ────────────────────────────────────── */
 @media (prefers-reduced-motion:reduce){

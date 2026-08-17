@@ -20,6 +20,31 @@ export async function carregar() {
   return CACHE;
 }
 
+/* ── quantas provas, a sério ──────────────────────────────────
+ *
+ * O data/resultados.json é uma lista escolhida: as provas que têm classificação
+ * conhecida, fonte e alguma coisa para dizer. São cinquenta e sete em nove
+ * épocas — e dava a impressão errada de quem joga meia dúzia de torneios por
+ * ano. O registo federado dela tem duzentas e sessenta e uma provas.
+ *
+ * As duas coisas são verdade e são diferentes: o volume é o registo da
+ * federação, os resultados são os que estão apurados. Cada número vem de onde
+ * o sabe — o volume da FPG, os pódios e as vitórias da lista.
+ *
+ * O ficheiro é escrito por scripts/myfpg.mjs. Se faltar, tudo continua a
+ * funcionar com as contagens da lista: um número a menos, e nunca um errado. */
+let FPG = null;
+
+export async function registoFederado() {
+  if (FPG) return FPG;
+  try {
+    FPG = await (await fetch('/data/provas-fpg.json', { cache: 'no-cache' })).json();
+  } catch {
+    FPG = { total: 0, anos: {} };
+  }
+  return FPG;
+}
+
 /* ── peças pequenas ───────────────────────────────────────── */
 
 const MESES = {
@@ -196,9 +221,14 @@ async function extras(lingua) {
 export async function contagens(cx, lingua = 'pt') {
   if (!cx) return;
   const { provas = [] } = await carregar();
+  const fpg = await registoFederado();
   const en = lingua === 'en';
 
   const linhas = [
+    /* Primeiro o volume, e só depois o que dele saiu: sem esta contagem, as
+       outras cinco liam-se contra cinquenta e sete provas em nove anos. */
+    { n: Math.max(fpg.total || 0, provas.length),
+      r: en ? 'Tournaments played' : 'Provas disputadas' },
     { n: provas.filter((p) => p.nacional === 'campea').length,
       r: en ? 'National titles' : 'Títulos nacionais' },
     { n: provas.filter((p) => p.nacional === 'vice').length,
@@ -233,6 +263,7 @@ export async function contagens(cx, lingua = 'pt') {
 export async function porEpoca(cx, filtrosCx, lingua = 'pt') {
   if (!cx) return;
   const { provas = [] } = await carregar();
+  const fpg = await registoFederado();
   if (!provas.length) {
     cx.innerHTML = `<p class="provas__vazio">${lingua === 'en' ? 'No results yet.' : 'Ainda sem resultados.'}</p>`;
     return;
@@ -274,18 +305,25 @@ export async function porEpoca(cx, filtrosCx, lingua = 'pt') {
       const vitorias = doAno.filter((p) => p.pos === 1).length;
       const podios = doAno.filter((p) => p.pos != null && p.pos <= 3).length;
 
-      const resumo = lingua === 'en'
-        ? `${doAno.length} event${doAno.length === 1 ? '' : 's'}` +
-          (podios ? ` · <b>${podios}</b> podium${podios === 1 ? '' : 's'}` : '') +
-          (vitorias ? ` · <b>${vitorias}</b> win${vitorias === 1 ? '' : 's'}` : '')
-        : `${doAno.length} prova${doAno.length === 1 ? '' : 's'}` +
-          (podios ? ` · <b>${podios}</b> pódio${podios === 1 ? '' : 's'}` : '') +
-          (vitorias ? ` · <b>${vitorias}</b> vitória${vitorias === 1 ? '' : 's'}` : '');
-
       /* O relato, os destaques e a imprensa do ano só aparecem sem filtro
          posto. Com «Vitórias» escolhido, a lista mostra três provas e seria
          estranho trazer atrás o relato de uma época inteira. */
       const inteira = ativo === 'tudo';
+
+      /* Quantas provas fez naquele ano é coisa do registo federado; quantas
+         estão contadas aqui em baixo é outra. Com um filtro posto — «Vitórias»,
+         «Seleção» — o número do ano deixaria de bater certo com o que se vê,
+         e aí conta-se o que está à frente dos olhos. */
+      const todas = inteira ? Math.max(fpg.anos?.[ano] || 0, doAno.length) : doAno.length;
+
+      const resumo = lingua === 'en'
+        ? `${todas} event${todas === 1 ? '' : 's'}` +
+          (podios ? ` · <b>${podios}</b> podium${podios === 1 ? '' : 's'}` : '') +
+          (vitorias ? ` · <b>${vitorias}</b> win${vitorias === 1 ? '' : 's'}` : '')
+        : `${todas} prova${todas === 1 ? '' : 's'}` +
+          (podios ? ` · <b>${podios}</b> pódio${podios === 1 ? '' : 's'}` : '') +
+          (vitorias ? ` · <b>${vitorias}</b> vitória${vitorias === 1 ? '' : 's'}` : '');
+
       const conta = mais.texto.get(String(ano));
       const ps = mais.pecas.get(String(ano)) || [];
 
@@ -370,9 +408,13 @@ export async function porEpoca(cx, filtrosCx, lingua = 'pt') {
           ${historia}
           ${inteira ? `<div class="dests">${destaques}</div>
           <details class="epoca__im epoca__todas">
+            <!-- «as 11 provas de 2026» debaixo de «33 provas» era uma
+                 contradição a duas linhas de distância. O que a lista tem são
+                 as provas com classificação apurada — e é isso que passa a
+                 dizer. -->
             <summary><span>${en
-              ? (doAno.length === 1 ? `the one event of ${ano}` : `all ${doAno.length} events of ${ano}`)
-              : (doAno.length === 1 ? `a prova de ${ano}` : `as ${doAno.length} provas de ${ano}`)
+              ? (doAno.length === 1 ? `the one confirmed result of ${ano}` : `${doAno.length} confirmed results of ${ano}`)
+              : (doAno.length === 1 ? `o resultado apurado de ${ano}` : `${doAno.length} resultados apurados de ${ano}`)
             }</span></summary>
             ${lista}
           </details>` : lista}
