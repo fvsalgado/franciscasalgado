@@ -48,40 +48,27 @@ export function outraLingua() {
   return outroCaminho() + location.search + location.hash;
 }
 
-/* Quem chega com o browser em inglês era, antes, atirado para o inglês sem
-   dar por isso. Deixou de ser, e de propósito: reencaminhar por idioma do
-   browser esconde metade do sítio a quem o vem indexar, que chega quase sempre
-   sem preferência nenhuma declarada — e prende quem quer mesmo ler o original.
-   Fica um convite, que se fecha e não volta. É o que a documentação do Google
-   pede em vez do reencaminhamento.
+/* O inglês é a língua por omissão para quem não lê português — decisão do
+   tutor: o público que interessa (treinadores, marcas, federações) chega de
+   fora. Já foi um convite discreto; passou a reencaminhamento na primeira
+   visita, com duas rédeas que o mantêm honesto:
 
-   E vem **antes** do banner dos cookies, não depois. Era ao contrário, e o
-   resultado era um visitante inglês a apanhar primeiro um muro de
-   consentimento em português — a decisão mais séria da página, escrita numa
-   língua que ele não pediu. Primeiro escolhe-se a língua; depois pergunta-se
-   o resto nela. */
+   - só dispara sem escolha guardada, e qualquer toque no botão da língua
+     grava uma (`fs-lingua`, escrito pela casca) — quem voltar ao português
+     fica no português;
+   - o `hreflang` das páginas continua a declarar o par completo, e as
+     ligações internas de cada versão apontam à própria versão — um motor que
+     execute o JavaScript continua a ver as duas casas inteiras.
+
+   `location.replace`, e não `href`: a página portuguesa não entra no
+   histórico, e o botão de voltar não devolve o visitante ao sítio de onde o
+   tirámos. O pré-renderizador (`__estatico`) fica de fora, senão gravava as
+   páginas portuguesas já a fugir para as inglesas. */
 export function convidarLingua() {
+  if (window.__estatico) return;
   if (lingua() !== 'pt') return;
   if (lePortugues()) return;
-  try { if (localStorage.getItem('fs-lingua-convite') === 'nao') return; } catch { /* modo privado */ }
-
-  const cx = document.createElement('div');
-  cx.className = 'convite-l';
-  cx.innerHTML = `
-    <p>This page is also available in English.</p>
-    <a class="cap cap--cheio" href="${outraLingua()}" hreflang="en" data-sem-seta>Read in English</a>
-    <button class="convite-l__x" type="button" aria-label="Dismiss">&times;</button>`;
-  cx.querySelector('.convite-l__x').addEventListener('click', () => {
-    cx.remove();
-    try { localStorage.setItem('fs-lingua-convite', 'nao'); } catch { /* modo privado */ }
-    document.dispatchEvent(new CustomEvent('fs:convite-fechado'));
-  });
-  document.body.append(cx);
-  document.body.classList.add('tem-convite');
-  const sai = new MutationObserver(() => {
-    if (document.body.contains(cx)) return;
-    document.body.classList.remove('tem-convite');
-    sai.disconnect();
-  });
-  sai.observe(document.body, { childList: true });
+  try { if (localStorage.getItem('fs-lingua')) return; } catch { /* modo privado */ }
+  try { localStorage.setItem('fs-lingua', 'en'); } catch { /* modo privado */ }
+  location.replace(outraLingua());
 }

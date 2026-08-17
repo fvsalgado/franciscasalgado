@@ -120,7 +120,7 @@ imagem partida.
 
 | ficheiro | de onde vem |
 |---|---|
-| `praia-del-rey-lago.webp` | sítio do próprio clube (substituiu uma CC BY-SA — ver abaixo) |
+| `praia-del-rey-9.webp` | buraco 9, escolhida pelo tutor (autoria por confirmar) |
 | `west-cliffs.webp` | sítio do próprio clube |
 | `quinta-do-peru.webp` | fornecida pelo tutor — autoria por confirmar, ver abaixo |
 | `jamor.webp` | Federação Portuguesa de Golfe |

@@ -50,11 +50,6 @@
    "en": "Cobra Golf",
    "_origem": "logótipo vetorial fornecido pela atleta"
   },
-  "praia-del-rey-lago.webp": {
-   "pt": "Foto: Praia D’El Rey Golf & Beach Resort",
-   "en": "Photo: Praia D’El Rey Golf & Beach Resort",
-   "_origem": "https://clubedegolfe.praia-del-rey.com/ (wp-content/uploads/2020/07/banner-courses-praia-del-rey.jpg) — recortada para 3:2 e reduzida. Substituiu uma fotografia de Vitor Oliveira (CC BY-SA 2.0, via Wikimedia Commons): era um instantâneo de turista, com estrada e candeeiro, ao lado de fotografia profissional do West Cliffs — e foi por isso que o tutor a recusou. Esta é do próprio clube, e está aqui pela mesma autorização que cobre as outras."
-  },
   "west-cliffs.webp": {
    "pt": "Foto: West Cliffs Golf Links",
    "en": "Photo: West Cliffs Golf Links",
@@ -125,11 +120,6 @@
    "en": "Scotty Cameron",
    "_origem": "imagem de produto da Scotty Cameron (Titleist), fornecida pela atleta — recortada do branco de estúdio para o fundo do sítio. Publicada com autorização."
   },
-  "bola.webp": {
-   "pt": "Titleist",
-   "en": "Titleist",
-   "_origem": "imagem de produto da Titleist, fornecida pela atleta — recortada do branco de estúdio para o fundo do sítio e montada em tela alta para entrar na fila à escala certa. Publicada com autorização."
-  },
   "luva.webp": {
    "pt": "FootJoy",
    "en": "FootJoy",
@@ -144,6 +134,41 @@
    "pt": "Foto: Federação Portuguesa de Golfe",
    "en": "Photo: Portuguese Golf Federation",
    "_origem": "recorte de retrato-quadrado.webp (identidade confirmada). Substituiu avatar.webp, recortado de jogo.webp — uma foto de peça da FPG em que não era possível garantir que a atleta retratada fosse a Francisca; com a regra «sem fotos de/with outras pessoas» e a dúvida, saíram os dois ficheiros."
+  },
+  "bola-prov1.webp": {
+   "pt": "Titleist",
+   "en": "Titleist",
+   "_origem": "imagem de produto Pro V1 (geração atual), obtida de listagem de retalho — a Titleist bloqueia acessos automáticos ao próprio sítio. Recortada do branco para alfa; substituiu bola.webp (nome novo por causa da cache)."
+  },
+  "punho-tourvelvet.webp": {
+   "pt": "Golf Pride",
+   "en": "Golf Pride",
+   "_origem": "imagem de produto Tour Velvet, via CDN da PGA Tour Superstore — o sítio da Golf Pride (indicado pelo tutor) bloqueia acessos automáticos. Recortada do branco para alfa."
+  },
+  "nelson-ribeiro.webp": {
+   "pt": "Foto: Federação Portuguesa de Golfe",
+   "en": "Photo: Portuguese Golf Federation",
+   "_origem": "retrato do perfil oficial na FPG (portal.fpg.pt, Nelson-Ribeiro.jpeg), recortado ao quadrado"
+  },
+  "luis-almeida.webp": {
+   "pt": "Foto: Federação Portuguesa de Golfe",
+   "en": "Photo: Portuguese Golf Federation",
+   "_origem": "retrato do perfil oficial na FPG (portal.fpg.pt, Luis-Almeida.jpeg), recortado ao quadrado"
+  },
+  "teresa-sao-marcos.webp": {
+   "pt": "Foto: Federação Portuguesa de Golfe",
+   "en": "Photo: Portuguese Golf Federation",
+   "_origem": "retrato do perfil oficial na FPG (portal.fpg.pt, Teresa-Sao-Marcos.jpeg), recortado ao quadrado"
+  },
+  "the-stack.webp": {
+   "pt": "The Stack",
+   "en": "The Stack",
+   "_origem": "logótipo oficial do próprio sítio (thestacksystem.com, stack-classic-logo-black.png) — pintado na tinta da casa como os restantes apoios tecnológicos"
+  },
+  "praia-del-rey-9.webp": {
+   "pt": "",
+   "en": "",
+   "_origem": "Escolhida pelo tutor a 17-08-2026: golf-escapes.com/wp-content/uploads/2024/06/KM-Praia-D_el-Rey-9.jpg — o «KM» do nome do ficheiro sugere um fotógrafo profissional, mas o operador não credita ninguém, e por isso o crédito fica em branco (proveniência registada, autoria por confirmar — a regra da Quinta do Peru). Publicada ao abrigo da autorização do clube dada em agosto de 2026; recortada para 3:2. Substituiu praia-del-rey-lago.webp."
   }
  },
  "porDominio": {

@@ -44,7 +44,7 @@ const CABECALHOS = {
   },
   'resultados.html': {
     titulo: 'Results — Francisca Salgado',
-    desc: 'Francisca Salgado year by year: five national titles, twenty-two national-team appearances '
+    desc: 'Francisca Salgado year by year: five national titles, twenty national-team appearances '
       + 'and the highlights of every season, each one sourced.',
   },
   'jogadora.html': {

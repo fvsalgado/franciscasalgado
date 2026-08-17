@@ -98,6 +98,11 @@
      "nome": "HackMotion",
      "url": "https://hackmotion.com/",
      "logo": "hackmotion.webp"
+    },
+    {
+     "nome": "The Stack",
+     "url": "https://thestacksystem.com/",
+     "logo": "the-stack.webp"
     }
    ],
    "forma": "linhas"
@@ -120,10 +125,10 @@
       "pt": "Vale de Janelas · Óbidos",
       "en": "Vale de Janelas · Óbidos"
      },
-     "foto": "praia-del-rey-lago.webp",
+     "foto": "praia-del-rey-9.webp",
      "alt": {
-      "pt": "Um green de Praia D’El Rey ao fim da tarde, com a casa-clube reflectida no lago",
-      "en": "A green at Praia D’El Rey in the late afternoon, the clubhouse mirrored in the lake"
+      "pt": "O buraco 9 de Praia D'El Rey, com o green junto às dunas",
+      "en": "The 9th hole at Praia D'El Rey, its green set against the dunes"
      }
     },
     {

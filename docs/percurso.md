@@ -323,3 +323,13 @@ Depois agrupar as linhas de `provas` por `torneio` e comparar com os `id` de
 torneio a dizer **`International Away`** e o campo a dizer o nome verdadeiro —
 é aí que estão a Bélgica, a França de 2023, a Finlândia e o English Girls'
 Open. Foi essa linha que escondeu metade das internacionalizações.
+
+## Correção de 17-08-2026 — selos da Seleção
+
+A família confirmou que **Madrid 2024** e o **Campeonato de Espanha 2024**
+foram por iniciativa própria, não ao serviço da Seleção — os selos `selecao`
+saíram (as notas idem). Chamadas à Seleção: 22 → 20.
+
+E entrou o **Campeonato da Extremadura 2022** (campeã Sub-14 **e** Absoluta,
+por iniciativa própria) — dado direto da família, sem peça de imprensa
+conhecida; a fonte no registo diz «Dados da família». Vitórias: 18 → 19.

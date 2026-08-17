@@ -992,6 +992,12 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 .marcas__m{height:1.35rem;width:auto;max-width:min(52vw,12rem);object-fit:contain;
            object-position:left center;display:block}
 html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
+/* A cara na linha da equipa: redonda, pequena, com as iniciais quando não há
+   retrato autorizado. */
+.marca-l__cara{flex:none;width:2.3rem;height:2.3rem;border-radius:50%;overflow:hidden;
+               display:grid;place-items:center;background:var(--relva-clara);
+               font-size:.72rem;font-weight:800;letter-spacing:.04em;color:var(--relva)}
+.marca-l__cara img{width:100%;height:100%;object-fit:cover;display:block}
 .marcas__n{font-size:.98rem;font-weight:700;color:var(--tinta);min-width:0}
 .marcas__x{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
            color:var(--tinta-fraca);min-width:0}
@@ -1044,6 +1050,13 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
      parede de apoios ler-se como parede. Os campos ficam largos: esses têm
      fotografia. */
   .apoios__l.faixa:not(.apoios__l--campos) > *{flex-basis:min(52vw,210px)}
+  /* Os patrocinadores principais não deslizam: a Fundação do Desporto ficava
+     escondida à direita, atrás de um gesto que nada pedia. Cobra e Puma a
+     par, a Fundação por baixo, à largura das duas — tudo à vista. */
+  .apoios__g--destaque .apoios__l.faixa{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.6rem;margin:0;padding:0;overflow:visible}
+  .apoios__g--destaque .apoios__l.faixa > *{flex:none}
+  .apoios__g--destaque .apoios__l.faixa > :nth-child(3){grid-column:1/-1}
   /* As grelhas declaradas DEPOIS deste bloco — .escadas na secção das formas
      de apoio, .ig__g no Instagram — ganhavam-lhe ao `.faixa` por virem mais
      abaixo no ficheiro, com a mesma especificidade. O resultado era o pior
@@ -1561,11 +1574,14 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 .topo-p--stats .conta__r{color:rgba(255,255,255,.72)}
 
 /* «A jogadora» abre como uma ficha: retrato de um lado, os números vitais do
-   outro, dentro do próprio cabeçalho — um dossier, não um artigo. */
+   outro, dentro do próprio cabeçalho — um dossier, não um artigo. O retrato
+   entra inteiro — a faixa 21:9 decapitava-o, e o tutor reparou. */
 .topo-p__f--retrato img{object-position:center 18%}
+.topo-p--ficha .topo-p__f{max-width:min(74vw,380px);margin-inline:auto}
+.topo-p--ficha .topo-p__f img{aspect-ratio:auto;height:auto}
 @media (min-width:860px){
   .topo-p--ficha .topo-p__in{grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr)}
-  .topo-p--ficha .topo-p__f img{aspect-ratio:4/5}
+  .topo-p--ficha .topo-p__f{max-width:none;margin-inline:0}
 }
 .recs--ficha{margin-top:1.15rem}
 .recs--ficha{grid-template-columns:repeat(auto-fit,minmax(min(100%,148px),1fr))}

@@ -1,162 +1,173 @@
 {
-  "atualizado": "2026-08",
-  "tacos": [
+ "atualizado": "2026-08",
+ "tacos": [
+  {
+   "t": {
+    "pt": "Driver",
+    "en": "Driver"
+   },
+   "m": "Cobra OPTM X",
+   "n": {
+    "pt": "9° · Fujikura Ventus TR 5-R",
+    "en": "9° · Fujikura Ventus TR 5-R"
+   },
+   "img": "driver-hero.webp",
+   "u": [
     {
-      "t": {
-        "pt": "Driver",
-        "en": "Driver"
-      },
-      "m": "Cobra OPTM X",
-      "n": {
-        "pt": "9° · Fujikura Ventus TR 5-R",
-        "en": "9° · Fujikura Ventus TR 5-R"
-      },
-      "img": "driver-hero.webp",
-      "u": [
-        {
-          "n": "Driver",
-          "loft": 9
-        }
-      ]
-    },
-    {
-      "t": {
-        "pt": "Madeiras",
-        "en": "Fairway woods"
-      },
-      "m": "Cobra OPTM X",
-      "n": {
-        "pt": "3W 15,5° e 5W 18,5° · Fujikura Ventus TR 5-R",
-        "en": "3W 15.5° and 5W 18.5° · Fujikura Ventus TR 5-R"
-      },
-      "img": "madeira-hero.webp",
-      "u": [
-        {
-          "n": "3W",
-          "loft": 15.5
-        },
-        {
-          "n": "5W",
-          "loft": 18.5
-        }
-      ]
-    },
-    {
-      "t": {
-        "pt": "Híbrido",
-        "en": "Hybrid"
-      },
-      "m": "Cobra OPTM",
-      "n": {
-        "pt": "3H 18° · Graphite Design Tour AD DI-75 R",
-        "en": "3H 18° · Graphite Design Tour AD DI-75 R"
-      },
-      "img": "hibrido-hero.webp",
-      "u": [
-        {
-          "n": "3H",
-          "loft": 18
-        }
-      ]
-    },
-    {
-      "t": {
-        "pt": "Ferros",
-        "en": "Irons"
-      },
-      "m": "Cobra 3DP Tour",
-      "n": {
-        "pt": "Ferro 5 ao PW · KBS TGI 70",
-        "en": "5-iron to PW · KBS TGI 70"
-      },
-      "img": "ferros-hero.webp",
-      "u": [
-        {
-          "n": "5"
-        },
-        {
-          "n": "6"
-        },
-        {
-          "n": "7"
-        },
-        {
-          "n": "8"
-        },
-        {
-          "n": "9"
-        },
-        {
-          "n": "PW"
-        }
-      ]
-    },
-    {
-      "t": {
-        "pt": "Wedges",
-        "en": "Wedges"
-      },
-      "m": "Cobra King",
-      "n": {
-        "pt": "50°, 54° e 58° · KBS TGI 80",
-        "en": "50°, 54° and 58° · KBS TGI 80"
-      },
-      "img": "wedge-hero.webp",
-      "u": [
-        {
-          "n": "50°",
-          "loft": 50
-        },
-        {
-          "n": "54°",
-          "loft": 54
-        },
-        {
-          "n": "58°",
-          "loft": 58
-        }
-      ]
-    },
-    {
-      "t": {
-        "pt": "Putter",
-        "en": "Putter"
-      },
-      "m": "Scotty Cameron Phantom 5",
-      "img": "putter.webp",
-      "u": [
-        {
-          "n": "Putter"
-        }
-      ]
+     "n": "Driver",
+     "loft": 9
     }
-  ],
-  "bola": {
-    "m": "Titleist Pro V1",
-    "img": "bola.webp"
+   ],
+   "url": "https://www.cobragolf.com/products/optm-x-driver"
   },
-  "luva": {
-    "m": "FootJoy StaSof",
-    "img": "luva.webp"
-  },
-  "saco": {
-    "m": "Cobra Tour",
-    "foto": "saco.webp"
-  },
-  "extras": [
+  {
+   "t": {
+    "pt": "Madeiras",
+    "en": "Fairway woods"
+   },
+   "m": "Cobra OPTM X",
+   "n": {
+    "pt": "3W 15,5° e 5W 18,5° · Fujikura Ventus TR 5-R",
+    "en": "3W 15.5° and 5W 18.5° · Fujikura Ventus TR 5-R"
+   },
+   "img": "madeira-hero.webp",
+   "u": [
     {
-      "t": {
-        "pt": "Punhos",
-        "en": "Grips"
-      },
-      "m": "Golf Pride"
+     "n": "3W",
+     "loft": 15.5
+    },
+    {
+     "n": "5W",
+     "loft": 18.5
     }
-  ],
-  "frase": {
-    "taco": "",
-    "t": {
-      "pt": "",
-      "en": ""
+   ],
+   "url": "https://www.cobragolf.com/products/optm-x-fairway"
+  },
+  {
+   "t": {
+    "pt": "Híbrido",
+    "en": "Hybrid"
+   },
+   "m": "Cobra OPTM",
+   "n": {
+    "pt": "3H 18° · Graphite Design Tour AD DI-75 R",
+    "en": "3H 18° · Graphite Design Tour AD DI-75 R"
+   },
+   "img": "hibrido-hero.webp",
+   "u": [
+    {
+     "n": "3H",
+     "loft": 18
     }
+   ],
+   "url": "https://www.cobragolf.com/products/optm-hybrid"
+  },
+  {
+   "t": {
+    "pt": "Ferros",
+    "en": "Irons"
+   },
+   "m": "Cobra 3DP Tour",
+   "n": {
+    "pt": "Ferro 5 ao PW · KBS TGI 70",
+    "en": "5-iron to PW · KBS TGI 70"
+   },
+   "img": "ferros-hero.webp",
+   "u": [
+    {
+     "n": "5"
+    },
+    {
+     "n": "6"
+    },
+    {
+     "n": "7"
+    },
+    {
+     "n": "8"
+    },
+    {
+     "n": "9"
+    },
+    {
+     "n": "PW"
+    }
+   ],
+   "url": "https://www.cobragolf.com/products/cobra-3dp-tour-irons"
+  },
+  {
+   "t": {
+    "pt": "Wedges",
+    "en": "Wedges"
+   },
+   "m": "Cobra King",
+   "n": {
+    "pt": "50°, 54° e 58° · KBS TGI 80",
+    "en": "50°, 54° and 58° · KBS TGI 80"
+   },
+   "img": "wedge-hero.webp",
+   "u": [
+    {
+     "n": "50°",
+     "loft": 50
+    },
+    {
+     "n": "54°",
+     "loft": 54
+    },
+    {
+     "n": "58°",
+     "loft": 58
+    }
+   ],
+   "url": "https://www.cobragolf.com/products/king-wedge-2025"
+  },
+  {
+   "t": {
+    "pt": "Putter",
+    "en": "Putter"
+   },
+   "m": "Scotty Cameron Phantom 5",
+   "img": "putter.webp",
+   "u": [
+    {
+     "n": "Putter"
+    }
+   ],
+   "url": "https://www.scottycameron.com/putters/phantom/phantom-5/"
   }
+ ],
+ "bola": {
+  "m": "Titleist Pro V1",
+  "img": "bola-prov1.webp",
+  "url": "https://www.titleist.com/golf-balls/pro-v1"
+ },
+ "luva": {
+  "m": "FootJoy StaSof",
+  "img": "luva.webp",
+  "url": "https://www.footjoy.com/men/golf-gloves/stasof/006STA.html"
+ },
+ "saco": {
+  "m": "Cobra Tour",
+  "foto": "saco.webp",
+  "url": "https://www.cobragolf.com/collections/bags"
+ },
+ "extras": [
+  {
+   "t": {
+    "pt": "Punhos",
+    "en": "Grips"
+   },
+   "m": "Golf Pride Tour Velvet",
+   "img": "punho-tourvelvet.webp",
+   "url": "https://www.golfpride.com/gb/en-gb/swing-grips/tour-velvet-collection.html"
+  }
+ ],
+ "frase": {
+  "taco": "",
+  "t": {
+   "pt": "",
+   "en": ""
+  }
+ }
 }

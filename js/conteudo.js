@@ -221,10 +221,16 @@ export async function equipa(cx, lingua = 'pt') {
   if (!pessoas.length) { cx.innerHTML = ''; mostrar(cx, false); return; }
   mostrar(cx, true);
 
+  /* A cara ao lado do nome, quando há retrato com autorização (os da FPG);
+     sem retrato, as iniciais — nunca uma silhueta genérica. */
+  const iniciais = (nome) => nome.split(/\s+/).map((x) => x[0]).filter(Boolean).slice(0, 2).join('');
   cx.innerHTML = `<ul class="marcas">${pessoas.map((p) => `
     <li>${p.url
     ? `<a class="marca-l" href="${p.url}" target="_blank" rel="noopener" data-sem-seta data-mag>`
     : '<span class="marca-l">'}
+      <span class="marca-l__cara">${p.foto
+    ? `<img src="/img/equipa/${p.foto}" alt="" loading="lazy" decoding="async" data-credito-feito="1" />`
+    : `<span aria-hidden="true">${iniciais(p.nome)}</span>`}</span>
       <span class="marcas__n">${p.nome}</span>
       <span class="marcas__x">${tx(p.x, lingua)}</span>
       ${p.url ? '<span class="marcas__s" aria-hidden="true">↗</span>' : ''}

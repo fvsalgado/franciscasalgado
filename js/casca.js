@@ -128,9 +128,9 @@ export function nav(lingua = 'pt') {
       <nav class="nav__links" aria-label="${en ? 'Main' : 'Principal'}">${links(true)}</nav>
       <div class="nav__fer">
         <div class="fer" role="group" aria-label="${en ? 'Site tools' : 'Ferramentas'}">
-          <a class="fer__b${atual === 'witb.html' ? ' fer__b--on' : ''}" href="${caminho('witb.html', lingua)}"
+          <a class="fer__b fer__b--txt${atual === 'witb.html' ? ' fer__b--on' : ''}" href="${caminho('witb.html', lingua)}"
              data-sem-seta aria-label="${en ? "What's in the bag" : 'O que leva no saco'}"
-             ${atual === 'witb.html' ? 'aria-current="page"' : ''}>${icone('saco', 'ic')}</a>
+             ${atual === 'witb.html' ? 'aria-current="page"' : ''}>WITB</a>
           <button class="fer__b" id="btTema" type="button"
                   aria-label="${en ? 'Switch theme' : 'Alternar tema'}" aria-pressed="false">
             <span class="ico" id="btTemaI">${icone('lua', 'ic')}</span>
@@ -161,6 +161,12 @@ export function nav(lingua = 'pt') {
      JavaScript, e não com :has() em CSS, porque isto é um facto da página e
      não uma consequência do que lá está. */
   alvo.classList.toggle('nav--sobre-foto', !!document.querySelector('.hero, .topo-p--escuro'));
+
+  /* Trocar de língua à mão é uma escolha: fica guardada, e o
+     reencaminhamento da primeira visita passa a respeitá-la. */
+  alvo.querySelector('#btLang')?.addEventListener('click', () => {
+    try { localStorage.setItem('fs-lingua', en ? 'pt' : 'en'); } catch { /* modo privado */ }
+  });
 
   menuMovel(alvo);
   document.dispatchEvent(new CustomEvent('fs:nav'));
@@ -214,7 +220,10 @@ export function tema() {
   const raiz = document.documentElement;
   let guardado = null;
   try { guardado = localStorage.getItem('fs-tema'); } catch { /* modo privado */ }
-  raiz.dataset.tema = guardado || (matchMedia('(prefers-color-scheme: dark)').matches ? 'escuro' : 'claro');
+  /* Escuro por omissão — decisão do tutor. A preferência do sistema deixa de
+     mandar no primeiro contacto; quem preferir claro carrega uma vez e fica
+     guardado. */
+  raiz.dataset.tema = guardado || 'escuro';
 
   const pintar = () => {
     const escuro = raiz.dataset.tema === 'escuro';

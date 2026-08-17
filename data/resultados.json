@@ -1288,9 +1288,7 @@
     "pt": "Absoluto",
     "en": "Open"
    },
-   "selos": [
-    "selecao"
-   ],
+   "selos": [],
    "nota": {
     "pt": "Sete pancadas a menos no segundo dia, depois de um primeiro difícil.",
     "en": "Seven strokes better on the second day, after a hard first one."
@@ -1371,12 +1369,10 @@
     "pt": "Absoluto",
     "en": "Open"
    },
-   "selos": [
-    "selecao"
-   ],
+   "selos": [],
    "nota": {
-    "pt": "O campeonato absoluto espanhol, ao serviço da Seleção.",
-    "en": "The Spanish senior championship, for the national team."
+    "pt": "No campeonato absoluto espanhol, por iniciativa própria.",
+    "en": "The Spanish senior championship, entered on her own initiative."
    }
   },
   {
@@ -1861,6 +1857,43 @@
    "fonte": {
     "nome": "FPG",
     "url": "https://portal.fpg.pt/noticias/portugal-com-duas-vitorias-e-um-empate-no-primeiro-dia-do-match-hexagonal-feminino/"
+   }
+  },
+  {
+   "id": "extremadura-2022",
+   "ano": 2022,
+   "data": "2022-12-30",
+   "dataTexto": {
+    "pt": "2022",
+    "en": "2022"
+   },
+   "torneio": {
+    "pt": "Campeonato da Extremadura",
+    "en": "Extremadura Championship"
+   },
+   "campo": "",
+   "local": {
+    "pt": "Espanha",
+    "en": "Spain"
+   },
+   "pais": "ES",
+   "pos": 1,
+   "posTexto": {
+    "pt": "Campeã Sub-14 e Absoluta",
+    "en": "U14 and overall champion"
+   },
+   "escalao": {
+    "pt": "Sub-14 · Absoluto",
+    "en": "U14 · Overall"
+   },
+   "selos": [],
+   "nota": {
+    "pt": "Venceu o escalão Sub-14 e a classificação absoluta, por iniciativa própria.",
+    "en": "Won both the U14 category and the overall title, entered on her own initiative."
+   },
+   "fonte": {
+    "nome": "Dados da família",
+    "url": ""
    }
   },
   {
