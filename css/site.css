@@ -213,12 +213,14 @@ body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color
         transition:background-color .3s var(--curva),color .3s var(--curva)}
 .fer__b + .fer__b{border-left:1px solid var(--linha)}
 .fer__b--txt{width:auto;padding:0 .85rem}
-.fer__b--on{color:var(--relva);background:var(--relva-clara)}
+/* «Estás aqui» sem parecer um botão preso: sublinhado interior, não
+   preenchimento — um tinte contínuo lia-se como um toque que ficou colado. */
+.fer__b--on{color:var(--relva);box-shadow:inset 0 -2px 0 currentColor}
 @media (hover:hover){.fer__b:hover{background:var(--relva-clara);color:var(--relva)}}
 .fer__b:focus-visible{outline:2px solid var(--relva);outline-offset:-2px}
 .nav--sobre-foto:not(.colada) .fer{border-color:rgba(255,255,255,.42)}
 .nav--sobre-foto:not(.colada) .fer__b{color:#FFF}
-.nav--sobre-foto:not(.colada) .fer__b--on{background:rgba(255,255,255,.16);color:#FFF}
+.nav--sobre-foto:not(.colada) .fer__b--on{color:#FFF;box-shadow:inset 0 -2px 0 #8FD9AE}
 .nav--sobre-foto:not(.colada) .fer__b + .fer__b{border-left-color:rgba(255,255,255,.28)}
 
 .ham{display:none;width:2.6rem;height:2.6rem;border:1px solid var(--linha-forte);border-radius:999px;
@@ -1587,6 +1589,10 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 .sec--saco-pagina .saco__k{flex:auto;padding:.85rem .85rem .95rem}
 .sec--saco-pagina .saco__ki{height:clamp(110px,24vw,190px)}
 .sec--saco-pagina .saco__k--so{align-self:auto}
+/* No inventário o saco aparece inteiro, da cabeça dos tacos à base — na
+   secção da jogadora é uma faixa recortada; aqui é a peça, completa. */
+.sec--saco-pagina .saco__s{max-width:560px;margin-inline:auto}
+.sec--saco-pagina .saco__s img{height:auto;object-fit:contain;object-position:center}
 
 /* ── menos movimento ────────────────────────────────────── */
 @media (prefers-reduced-motion:reduce){
@@ -1775,9 +1781,22 @@ body.tem-convite .fala{opacity:0;pointer-events:none;transform:translateY(6px)}
 /* «Ver versão para computador» num telemóvel: o browser finge uma janela de
    ~980px num ecrã de bolso e o texto encolhe até doer. Ponteiro grosso com
    largura de secretária estreita só acontece aí — sobe-se a base do tipo e
-   lê-se como um tablet, não como uma miniatura. */
+   desfazem-se as colunas dos topos, para se ler como um telemóvel grande e
+   não como uma secretária em miniatura. */
 @media (pointer:coarse) and (min-width:861px) and (max-width:1020px){
-  html{font-size:19px}
+  html{font-size:22px}
+  .topo-p--foto .topo-p__in,
+  .topo-p--ficha .topo-p__in,
+  .apoio-abre__in{grid-template-columns:minmax(0,1fr)}
+  .topo-p__f img{aspect-ratio:21/9}
+}
+
+/* Onde a barra de páginas existe, a coluna «Páginas» do rodapé é a mesma
+   lista outra vez, três centímetros acima dela. Sai; fica o contacto, o
+   legal e as coordenadas — o que a barra não diz. */
+@media (max-width:1020px) and (pointer:coarse){
+  .pe__g > div:last-child{display:none}
+  .fer__b{width:2.75rem;height:2.35rem}
 }
 
 /* O que vivia colado ao fundo do ecrã sobe para cima da barra de páginas.
