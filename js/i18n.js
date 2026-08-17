@@ -48,17 +48,20 @@ export function outraLingua() {
   return outroCaminho() + location.search + location.hash;
 }
 
-/* O inglês é a língua por omissão para quem não lê português — decisão do
-   tutor: o público que interessa (treinadores, marcas, federações) chega de
-   fora. Já foi um convite discreto; passou a reencaminhamento na primeira
-   visita, com duas rédeas que o mantêm honesto:
+/* A língua do utilizador — a prática corrente da web, e o que o tutor pediu:
+   quem lê português fica no português; quem não lê é levado ao inglês, que é
+   a outra língua da casa.
 
-   - só dispara sem escolha guardada, e qualquer toque no botão da língua
-     grava uma (`fs-lingua`, escrito pela casca) — quem voltar ao português
-     fica no português;
-   - o `hreflang` das páginas continua a declarar o par completo, e as
-     ligações internas de cada versão apontam à própria versão — um motor que
-     execute o JavaScript continua a ver as duas casas inteiras.
+   Três rédeas que mantêm isto honesto:
+
+   - o reencaminhamento **não grava nada**: segue o browser de cada visita.
+     Se o visitante mudar a língua do telemóvel, o sítio acompanha — prender
+     uma pessoa à língua de uma primeira visita não é servi-la;
+   - só a escolha *manual* fica guardada (`fs-lingua`, escrita pela casca ao
+     tocar no botão), e a partir daí é ela que manda;
+   - o `hreflang` continua a declarar o par completo e cada versão liga só a
+     si própria — um motor que execute JavaScript continua a ver as duas
+     casas inteiras.
 
    `location.replace`, e não `href`: a página portuguesa não entra no
    histórico, e o botão de voltar não devolve o visitante ao sítio de onde o
@@ -68,7 +71,6 @@ export function convidarLingua() {
   if (window.__estatico) return;
   if (lingua() !== 'pt') return;
   if (lePortugues()) return;
-  try { if (localStorage.getItem('fs-lingua')) return; } catch { /* modo privado */ }
-  try { localStorage.setItem('fs-lingua', 'en'); } catch { /* modo privado */ }
+  try { if (localStorage.getItem('fs-lingua') === 'pt') return; } catch { /* modo privado */ }
   location.replace(outraLingua());
 }
