@@ -65,6 +65,18 @@ Duas armadilhas que já morderam:
 - **O registo da FPG não vê match play.** Provas por equipas em match play não
   contam para handicap e por isso não aparecem lá. Só as notícias as apanham.
 
+## `data/perfil.json` — `terra`
+
+Onde ela vive: **Algés** — nasceu e vive lá. O `concelho` («Óbidos») é o do
+clube e fica nas descrições, ao lado do clube; a `terra` alimenta o
+`homeLocation` dos dados estruturados e o rodapé.
+
+As coordenadas do rodapé — **38°42′N 9°14′W** — não são o centro de Algés:
+são a Marcolândia, a creche da Avenida dos Bombeiros Voluntários de Algés
+(nó 1590594034 do OpenStreetMap). Escolha do tutor: perto de casa sem ser a
+casa, e uma piscadela que só a família lê. **O nome não aparece no sítio** —
+público é só «Algés» e os números.
+
 ## `data/perfil.json` — `espanha`
 
 Idas a Espanha para competir, contadas por ano. A maioria foi por iniciativa
