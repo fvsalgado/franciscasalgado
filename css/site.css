@@ -1487,6 +1487,37 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
   .topo-p__f img{aspect-ratio:4/3}
 }
 
+/* Cada página interior abre à sua maneira, porque servem coisas diferentes —
+   e a abertura deve dizer o que a página é sem uma frase a explicá-lo. */
+
+/* «Época a época» abre com os números em fundo escuro: é a página do registo,
+   e o registo são números antes de ser prosa. A faixa escura é a mesma da
+   inicial — o par lê-se como casa. */
+.topo-p--stats{border-bottom:0}
+.topo-p--stats .conta{margin:clamp(1.3rem,3vw,2rem) 0 0}
+.topo-p--stats .conta__i{background:rgba(255,255,255,.05);box-shadow:0 0 0 1px rgba(255,255,255,.16)}
+.topo-p--stats .conta__n{color:#8FD9AE}
+.topo-p--stats .conta__r{color:rgba(255,255,255,.72)}
+
+/* «A jogadora» abre como uma ficha: retrato de um lado, os números vitais do
+   outro, dentro do próprio cabeçalho — um dossier, não um artigo. */
+.topo-p__f--retrato img{object-position:center 18%}
+@media (min-width:860px){
+  .topo-p--ficha .topo-p__in{grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr)}
+  .topo-p--ficha .topo-p__f img{aspect-ratio:4/5}
+}
+.recs--ficha{margin-top:1.15rem}
+.recs--ficha{grid-template-columns:repeat(auto-fit,minmax(min(100%,148px),1fr))}
+.recs--ficha .rec{padding:.8rem .95rem;gap:.2rem}
+.recs--ficha .rec__v{font-size:clamp(1.45rem,2.6vw,1.9rem)}
+.recs--ficha .rec__v--t{font-size:clamp(.98rem,1.8vw,1.18rem)}
+.recs--ficha .rec__s{font-size:.6rem}
+.recs--ficha .rec__n{font-size:.58rem}
+
+/* A imprensa abre como um kit: o índice é a própria abertura. Quem chega vê
+   as cinco peças e vai direto à que precisa — sem ninguém lhe explicar. */
+.kit-nav{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem}
+
 /* ── menos movimento ────────────────────────────────────── */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}

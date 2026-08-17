@@ -97,7 +97,7 @@ export async function perfilIg(cx, lingua = 'pt') {
   cx.className = 'igp';
   cx.innerHTML = `
     <div class="igp__cab">
-      <img class="igp__f" src="/img/avatar.webp" alt="${p.nome || 'Francisca Salgado'}"
+      <img class="igp__f" src="/img/cara.webp" alt="${p.nome || 'Francisca Salgado'}"
            width="280" height="280" loading="lazy" decoding="async" data-credito-feito="1" />
       <div class="igp__id">
         <p class="igp__a">@${p.arroba || CONTA}</p>

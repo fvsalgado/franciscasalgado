@@ -97,7 +97,19 @@ aconteceu e o total acerta-se sozinho — nunca se escreve o total à mão.
 
 ## `data/galeria.json`
 
-A galeria. Cada entrada aponta para um ficheiro em img/; o crédito não se escreve aqui — vem de data/creditos.json, para haver um sítio só onde a autoria vive. 'formato' escolhe a proporção do recorte: 'alto' (4:5) ou 'largo' (3:2). ATENÇÃO: só entram aqui fotografias em que a Francisca esteja identificada sem margem para dúvida. As peças da FPG cobrem muitas vezes vários atletas, e a fotografia de abertura pode ser de outra pessoa — foi o que aconteceu com duas que tiveram de sair.
+A galeria. Cada entrada aponta para um ficheiro em img/; o crédito não se escreve aqui — vem de data/creditos.json, para haver um sítio só onde a autoria vive. 'formato' escolhe a proporção do recorte: 'alto' (4:5) ou 'largo' (3:2).
+
+Duas regras, e as duas são do tutor:
+
+1. **Só fotografias em que a Francisca esteja identificada sem margem para
+   dúvida.** As peças da FPG cobrem vários atletas e a foto de abertura pode
+   ser de outra pessoa — já saíram duas por isso, mais o antigo avatar do
+   Instagram (recortado de uma foto que não se conseguia confirmar; o atual,
+   `cara.webp`, vem do retrato confirmado).
+2. **Nenhuma fotografia com outras pessoas** (17-08-2026). Saíram `pares`,
+   `aquapor`, `podio-2024` e `sub10` — ficheiros apagados, não só
+   desreferenciados, porque um ficheiro em img/ continua servido mesmo sem
+   ligação nenhuma. Antes de acrescentar uma foto nova, é ela, e é só ela.
 
 ## `img/campos/` — fotografias dos campos
 

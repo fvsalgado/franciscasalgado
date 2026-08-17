@@ -1,95 +1,43 @@
 {
-  "fotos": [
-    {
-      "f": "english.webp",
-      "formato": "alto",
-      "ano": "2026",
-      "alt": {
-        "pt": "Francisca Salgado a bater do tee do buraco 7 no English Girls' Open",
-        "en": "Francisca Salgado teeing off at the 7th at the English Girls' Open"
-      },
-      "l": {
-        "pt": "English Girls' Open, Prestbury",
-        "en": "English Girls' Open, Prestbury"
-      }
-    },
-    {
-      "f": "pares.webp",
-      "formato": "largo",
-      "ano": "2026",
-      "alt": {
-        "pt": "Francisca Salgado e Rodrigo Constantino com os troféus de campeões nacionais de pares",
-        "en": "Francisca Salgado and Rodrigo Constantino with the national pairs trophies"
-      },
-      "l": {
-        "pt": "Campeões nacionais de pares, no Montado",
-        "en": "National pairs champions, at Montado"
-      }
-    },
-    {
-      "f": "aquapor.webp",
-      "formato": "largo",
-      "ano": "2026",
-      "alt": {
-        "pt": "Francisca Salgado e João Miguel Pereira com os troféus do Circuito Aquapor",
-        "en": "Francisca Salgado and João Miguel Pereira with the Aquapor Circuit trophies"
-      },
-      "l": {
-        "pt": "Vitória na Quinta do Peru, Circuito Aquapor",
-        "en": "Winning at Quinta do Peru, Aquapor Circuit"
-      }
-    },
-    {
-      "f": "swing.webp",
-      "formato": "alto",
-      "ano": "2025",
-      "alt": {
-        "pt": "Francisca Salgado a bater com um taco de madeira",
-        "en": "Francisca Salgado hitting a wood"
-      },
-      "l": {
-        "pt": "Drive Tour – Tejo, Ribagolfe Oaks",
-        "en": "Drive Tour – Tejo, Ribagolfe Oaks"
-      }
-    },
-    {
-      "f": "trofeu.webp",
-      "formato": "alto",
-      "ano": "2025",
-      "alt": {
-        "pt": "Francisca Salgado com o troféu de vice-campeã da Taça da FPG",
-        "en": "Francisca Salgado with the FPG Cup runner-up trophy"
-      },
-      "l": {
-        "pt": "Vice-campeã da Taça da FPG, Santo Estêvão",
-        "en": "FPG Cup runner-up, Santo Estêvão"
-      }
-    },
-    {
-      "f": "podio-2024.webp",
-      "formato": "largo",
-      "ano": "2024",
-      "alt": {
-        "pt": "Francisca Salgado no pódio do 1.º Torneio do Circuito Aquapor de 2024",
-        "en": "Francisca Salgado on the podium at the 2024 Aquapor Circuit opener"
-      },
-      "l": {
-        "pt": "Primeira vitória do ano no Circuito Aquapor",
-        "en": "First win of the year on the Aquapor Circuit"
-      }
-    },
-    {
-      "f": "sub10.webp",
-      "formato": "largo",
-      "ano": "2019",
-      "alt": {
-        "pt": "Os campeões e vice-campeões nacionais de Sub-10 de 2019, com os troféus",
-        "en": "The 2019 national U10 champions and runners-up, with their trophies"
-      },
-      "l": {
-        "pt": "Campeã nacional de Sub-10, em Miramar — segunda a contar da esquerda",
-        "en": "National U10 champion, at Miramar — second from the left"
-      }
-    }
-  ]
+ "fotos": [
+  {
+   "f": "english.webp",
+   "formato": "alto",
+   "ano": "2026",
+   "alt": {
+    "pt": "Francisca Salgado a bater do tee do buraco 7 no English Girls' Open",
+    "en": "Francisca Salgado teeing off at the 7th at the English Girls' Open"
+   },
+   "l": {
+    "pt": "English Girls' Open, Prestbury",
+    "en": "English Girls' Open, Prestbury"
+   }
+  },
+  {
+   "f": "swing.webp",
+   "formato": "alto",
+   "ano": "2025",
+   "alt": {
+    "pt": "Francisca Salgado a bater com um taco de madeira",
+    "en": "Francisca Salgado hitting a wood"
+   },
+   "l": {
+    "pt": "Drive Tour – Tejo, Ribagolfe Oaks",
+    "en": "Drive Tour – Tejo, Ribagolfe Oaks"
+   }
+  },
+  {
+   "f": "trofeu.webp",
+   "formato": "alto",
+   "ano": "2025",
+   "alt": {
+    "pt": "Francisca Salgado com o troféu de vice-campeã da Taça da FPG",
+    "en": "Francisca Salgado with the FPG Cup runner-up trophy"
+   },
+   "l": {
+    "pt": "Vice-campeã da Taça da FPG, Santo Estêvão",
+    "en": "FPG Cup runner-up, Santo Estêvão"
+   }
+  }
+ ]
 }

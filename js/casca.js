@@ -142,11 +142,12 @@ export function nav(lingua = 'pt') {
         <nav class="menu__l" aria-label="${en ? 'Main' : 'Principal'}">${links(false)}</nav>
       </div>
     </div>`;
-  /* Numa página que abre com fotografia a sangrar, o cabeçalho está por cima
-     dela enquanto não se rola: tem de ser branco, ou não se lê. Marca-se aqui,
-     em JavaScript, e não com :has() em CSS, porque isto é um facto da página e
+  /* Numa página que abre com fotografia a sangrar — ou com a faixa escura dos
+     números, como a «Época a época» —, o cabeçalho está por cima dela enquanto
+     não se rola: tem de ser branco, ou não se lê. Marca-se aqui, em
+     JavaScript, e não com :has() em CSS, porque isto é um facto da página e
      não uma consequência do que lá está. */
-  alvo.classList.toggle('nav--sobre-foto', !!document.querySelector('.hero'));
+  alvo.classList.toggle('nav--sobre-foto', !!document.querySelector('.hero, .topo-p--stats'));
 
   menuMovel(alvo);
   document.dispatchEvent(new CustomEvent('fs:nav'));

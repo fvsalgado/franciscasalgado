@@ -59,6 +59,7 @@ iniciar(async (l) => { await PINTAR[qual]?.(l); });
 /* O mapa de curvas, onde a página o tiver. Fica fora do ciclo da língua: não
    tem texto nenhum, e recriá-lo seria deitar fora o contexto de WebGL por
    nada. */
-const campos = [$('campo'), $('campo2')].filter(Boolean).map((c) => iniciarCampo(c, { reduzido }));
+const campos = [$('campo'), $('campo2')].filter(Boolean)
+  .map((c) => iniciarCampo(c, { reduzido, escuro: c.dataset.escuro === '1' }));
 document.addEventListener('fs:tema', () => campos.forEach((c) => c?.tema?.()));
 
