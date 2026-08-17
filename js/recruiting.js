@@ -23,7 +23,7 @@ const T = {
     wagr: 'WAGR', wagrS: 'Ranking mundial amador',
     egr: 'EGR Sub-18', egrS: 'Ranking europeu feminino, escalão',
     ano: 'Conclusão do secundário', anoS: 'Turma de',
-    vivo: 'Em direto', guardado: 'Confirmado a', desde: 'Última alteração a',
+    vivo: 'Em direto', guardado: 'Confirmado a', desde: 'Desde',
     curva: 'Evolução', curvaS: 'Quanto mais alto, melhor a posição',
     hcp2: 'Índice de handicap', hcpEixo: 'Quanto mais alto, mais baixo o índice',
     prox: 'Próxima prova',
@@ -33,7 +33,7 @@ const T = {
     wagr: 'WAGR', wagrS: 'World amateur ranking',
     egr: 'EGR U18', egrS: 'European women\'s ranking, age category',
     ano: 'High school graduation', anoS: 'Class of',
-    vivo: 'Live', guardado: 'Confirmed on', desde: 'Last changed',
+    vivo: 'Live', guardado: 'Confirmed', desde: 'Since',
     curva: 'Progression', curvaS: 'Higher is a better position',
     hcp2: 'Handicap index', hcpEixo: 'Higher means a lower index',
     prox: 'Next event',
@@ -47,6 +47,22 @@ const mostrar = (cx, sim) => cx.closest('section[data-se-vazio]')?.toggleAttribu
 const ord = (n, l) => (l === 'en'
   ? `${n}${['th', 'st', 'nd', 'rd'][n % 100 >= 11 && n % 100 <= 13 ? 0 : n % 10] || 'th'}`
   : `${n}.ª`);
+
+/* «2026-08-15» é como a máquina guarda a data, não como uma pessoa a lê — e
+   estava escrito assim, ao alto, num cartão virado para fora. Curta porque o
+   cartão é pequeno e a nota é a linha mais discreta dele. */
+const MESES_C = {
+  pt: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
+  en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+};
+const dataCurta = (iso, l) => {
+  const d = new Date(`${iso}T12:00:00`);
+  if (Number.isNaN(d.getTime())) return String(iso);
+  const m = MESES_C[l === 'en' ? 'en' : 'pt'][d.getMonth()];
+  return l === 'en'
+    ? `${m} ${d.getDate()}, ${d.getFullYear()}`
+    : `${d.getDate()} ${m} ${d.getFullYear()}`;
+};
 
 /* ── os quatro números da cabeça ──────────────────────────── */
 export async function fichaRecruiting(cx, lingua = 'pt') {
@@ -98,7 +114,9 @@ export async function fichaRecruiting(cx, lingua = 'pt') {
          ver renova-se sozinha. A que informa é aquela em que o número mexeu
          pela última vez. Enquanto não houver duas leituras diferentes para a
          saber, fica a antiga. */
-      nota: desde ? `${t.desde} ${desde}` : (h.vivo ? t.vivo : `${t.guardado} ${h.d.atualizado}`),
+      nota: desde
+        ? `${t.desde} ${dataCurta(desde, lingua)}`
+        : (h.vivo ? t.vivo : `${t.guardado} ${dataCurta(h.d.atualizado, lingua)}`),
     }));
   }
   if (m) cartoes.push(cartao({ v: m.d.posicao, sup: ord(m.d.posicao, lingua).replace(String(m.d.posicao), ''), r: t.wagr, s: t.wagrS }));
