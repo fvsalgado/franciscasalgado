@@ -17,12 +17,14 @@ import { outraLingua } from './i18n.js';
  * tamanho dos outros e não é. Mas tem de estar ligada de algum lado: uma página
  * a que só se chega pelo sitemap é uma página que o Google encontra e não
  * percebe onde encaixa. */
+/* `ico` e `tab` servem a barra de separadores do telemóvel: o ícone, e um
+   nome curto quando o inteiro não cabe num quinto de ecrã. */
 export const PAGINAS = [
-  { href: 'index.html', pt: 'Francisca', en: 'Francisca' },
-  { href: 'resultados.html', pt: 'Época a época', en: 'Season by season' },
-  { href: 'jogadora.html', pt: 'A jogadora', en: 'The player' },
-  { href: 'parcerias.html', pt: 'Parcerias', en: 'Partnerships' },
-  { href: 'imprensa.html', pt: 'Imprensa', en: 'Press' },
+  { href: 'index.html', pt: 'Francisca', en: 'Francisca', ico: 'bandeira' },
+  { href: 'resultados.html', pt: 'Época a época', en: 'Season by season', ico: 'calendario', tab: { pt: 'Épocas', en: 'Seasons' } },
+  { href: 'jogadora.html', pt: 'A jogadora', en: 'The player', ico: 'pessoa', tab: { pt: 'Jogadora', en: 'Player' } },
+  { href: 'parcerias.html', pt: 'Parcerias', en: 'Partnerships', ico: 'aperto' },
+  { href: 'imprensa.html', pt: 'Imprensa', en: 'Press', ico: 'jornal' },
   { href: 'witb.html', pt: 'O que leva no saco', en: "What's in the bag", pe: true },
 ];
 
@@ -141,7 +143,13 @@ export function nav(lingua = 'pt') {
       <div class="menu__in">
         <nav class="menu__l" aria-label="${en ? 'Main' : 'Principal'}">${links(false)}</nav>
       </div>
-    </div>`;
+    </div>
+
+    <nav class="tabs" aria-label="${en ? 'Pages' : 'Páginas'}">${PAGINAS.filter((p) => !p.pe).map((p) => {
+    const ativa = p.href === atual;
+    return `<a class="tab${ativa ? ' tab--on' : ''}" href="${caminho(p.href, lingua)}"${ativa ? ' aria-current="page"' : ''}>
+        ${icone(p.ico, 'tab__i')}<span>${p.tab?.[lingua] || p[lingua]}</span></a>`;
+  }).join('')}</nav>`;
   /* Numa página que abre com fotografia a sangrar — ou com a faixa escura dos
      números, como a «Época a época» —, o cabeçalho está por cima dela enquanto
      não se rola: tem de ser branco, ou não se lê. Marca-se aqui, em

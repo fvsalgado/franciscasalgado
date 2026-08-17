@@ -123,8 +123,14 @@ a[target="_blank"]:not([data-sem-seta]):hover::after{transform:translate(.1em,-.
      transition:color .35s var(--curva),border-color .35s var(--curva)}
 .cap::before{content:"";position:absolute;inset:0;background:var(--relva);border-radius:inherit;
              transform:translateY(101%);transition:transform .45s var(--curva)}
-.cap:hover{color:var(--papel);border-color:var(--relva)}
-.cap:hover::before{transform:translateY(0)}
+/* Hover só onde há hover. Num ecrã de toque, o Android deixa o :hover colado
+   ao botão depois do toque — a lavagem verde entrava e ficava, e o rótulo
+   desaparecia dentro dela até se tocar noutro sítio. Um dedo não paira. */
+@media (hover:hover){
+  .cap:hover{color:var(--papel);border-color:var(--relva)}
+  .cap:hover::before{transform:translateY(0)}
+}
+.cap:focus-visible{border-color:var(--relva)}
 .cap > *{position:relative;z-index:1}
 .cap--cheio{background:var(--relva);border-color:var(--relva);color:var(--papel)}
 .cap--cheio::before{background:var(--tinta)}
@@ -174,7 +180,9 @@ body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color
 .nav--sobre-foto:not(.colada) .nav__links a[aria-current="page"]{opacity:1}
 .nav--sobre-foto:not(.colada) .nav__links a::after{background:#FFF}
 .nav--sobre-foto:not(.colada) .cap:not(.cap--cheio){color:#FFF;border-color:rgba(255,255,255,.42)}
-.nav--sobre-foto:not(.colada) .cap:not(.cap--cheio):hover{background:rgba(255,255,255,.16)}
+@media (hover:hover){
+  .nav--sobre-foto:not(.colada) .cap:not(.cap--cheio):hover{background:rgba(255,255,255,.16)}
+}
 .nav--sobre-foto:not(.colada) .ham{border-color:rgba(255,255,255,.42)}
 .nav--sobre-foto:not(.colada) .ham i{background:#FFF}
 
@@ -212,7 +220,6 @@ body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color
 
 @media (max-width:1020px){
   .nav__links{display:none}
-  .ham{display:flex}
   .nav__cta{display:none}
   .nav--aberto .nav__in{position:relative;z-index:2}
   .menu{display:block;position:fixed;inset:0;z-index:1;
@@ -220,6 +227,32 @@ body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color
         background:var(--papel);overflow-y:auto;overscroll-behavior:contain}
   .menu__in{width:var(--larg);margin-inline:auto;display:flex;flex-direction:column;align-items:flex-start}
   .menu[hidden]{display:none}
+}
+
+/* ── a barra de páginas, no telemóvel ───────────────────── */
+/* O hambúrguer escondia o mapa do sítio atrás de um toque: cinco páginas não
+   precisam de gaveta. A barra fica fixa em baixo, à distância do polegar,
+   com os cinco nomes sempre à vista e a página atual acesa — sabe-se sempre
+   onde se está e para onde se pode ir. O hambúrguer sai; num ecrã largo o
+   cabeçalho já mostra tudo, e a barra não existe. */
+.tabs{display:none}
+@media (max-width:1020px){
+  .ham{display:none}
+  .tabs{position:fixed;left:0;right:0;bottom:0;z-index:120;
+        display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.15rem;
+        background:var(--papel);border-top:1px solid var(--linha);
+        box-shadow:0 -10px 30px -24px rgba(0,0,0,.5);
+        padding:.4rem max(.5rem,env(safe-area-inset-right))
+                calc(.45rem + env(safe-area-inset-bottom)) max(.5rem,env(safe-area-inset-left))}
+  .tab{display:flex;flex-direction:column;align-items:center;gap:.22rem;
+       padding:.34rem .1rem .3rem;border-radius:.75rem;
+       font-size:.55rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;
+       color:var(--tinta-fraca);min-width:0}
+  .tab span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tab__i{width:1.2rem;height:1.2rem;fill:none}
+  .tab--on{color:var(--relva);background:var(--relva-clara)}
+
+  body{padding-bottom:calc(3.9rem + env(safe-area-inset-bottom))}
 }
 
 /* ── HERO ───────────────────────────────────────────────── */
@@ -1701,3 +1734,13 @@ body.tem-convite .fala{opacity:0;pointer-events:none;transform:translateY(6px)}
 .sec--fundo .sec__campo{opacity:.45;
   -webkit-mask-image:linear-gradient(102deg,transparent 6%,rgba(0,0,0,.3) 38%,#000 82%);
           mask-image:linear-gradient(102deg,transparent 6%,rgba(0,0,0,.3) 38%,#000 82%)}
+
+/* O que vivia colado ao fundo do ecrã sobe para cima da barra de páginas.
+   Estas linhas moram no fim do ficheiro de propósito: as posições originais
+   do botão de contacto, do aviso dos cookies e do convite da língua são
+   declaradas lá atrás, e à mesma especificidade ganha quem fala por último. */
+@media (max-width:1020px){
+  .fala{bottom:calc(4.6rem + env(safe-area-inset-bottom))}
+  .ck{bottom:calc(4.3rem + env(safe-area-inset-bottom))}
+  .convite-l{bottom:calc(4.9rem + env(safe-area-inset-bottom))}
+}

@@ -26,6 +26,9 @@ const P = {
   /* Dois apertos de mão, para as parcerias. */
   aperto:
     '<path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m8.6 12.6 2.4-2.4a1.8 1.8 0 0 1 2.5 0l4.1 4.1M3.4 8.6 7 5h3.2M20.6 8.6 17 5h-3.2"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m10.4 17.6 1.6 1.6a1.7 1.7 0 0 0 2.4-2.4M13.4 15.2l1.9 1.9a1.7 1.7 0 0 0 2.4-2.4M6.6 10.6l-3 3a1.7 1.7 0 0 0 2.4 2.4l1.4-1.4a1.7 1.7 0 0 1 2.4 2.4"/>',
+  /* Cabeça e ombros, para a ficha da jogadora. */
+  pessoa:
+    '<circle cx="12" cy="8.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M4.8 20.2a7.2 7.2 0 0 1 14.4 0"/>',
   mapa:
     '<path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M9 4.2 3.6 6.4v13.4L9 17.6l6 2.2 5.4-2.2V4.2L15 6.4 9 4.2Z"/><path fill="none" stroke="currentColor" stroke-width="1.7" d="M9 4.2v13.4M15 6.4v13.4"/>',
   seta:
