@@ -273,7 +273,7 @@
 <div class="cur" id="cur" aria-hidden="true"><span class="cur__p"></span><span class="cur__a" id="curA"></span></div>
 <a class="saltar" href="#conteudo" data-t="saltar">Saltar para o conteúdo</a>
 
-<header class="nav" id="nav"><div class="nav__in">
+<header class="nav nav--sobre-foto" id="nav"><div class="nav__in">
       
   <a class="marca" href="/" data-mag="" aria-label="Francisca Salgado">
     <svg class="marca__b" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M8 20.2V3.6l9.2 3.3L8 10.2"></path><ellipse cx="12" cy="20.4" rx="6.8" ry="1.7" fill="none" stroke="currentColor" stroke-width="1.5"></ellipse></svg>
@@ -308,17 +308,16 @@
 <main id="conteudo">
 
 <!-- ═══ WHAT'S IN THE BAG ══════════════════════════════ -->
-<section class="sec sec--saco sec--abre" id="witb" data-se-vazio="witbL">
+<section class="topo-p topo-p--escuro sec--escura">
+  <canvas class="sec__campo" id="campo" data-escuro="1" aria-hidden="true"></canvas>
   <div class="env">
-    <div class="cab">
-      <div class="cab__t">
-        <p class="rot" data-t="wb_rot">What's in the bag</p>
-        <h1 class="d d--l ani" data-t="wb_tit">O que leva no saco</h1>
-      </div>
-      <div class="cab__x">
-        
-      </div>
-    </div>
+    <p class="rot" data-t="wb_rot">What's in the bag</p>
+    <h1 class="d d--l ani" data-t="wb_tit">O que leva no saco</h1>
+  </div>
+</section>
+
+<section class="sec sec--saco sec--saco-pagina" id="witb" data-se-vazio="witbL">
+  <div class="env">
     <div class="witb" id="witbL"><ul class="saco__g" role="list">
     <li class="saco__k" data-i="0" style="--i:0">
       <span class="saco__ki"><img src="/img/witb/driver-hero.webp" alt="" loading="lazy" decoding="async" data-credito-em="witbCred"></span>
@@ -386,24 +385,7 @@
   </div>
 </section>
 
-<!-- ═══ O RESTO ════════════════════════════════════════ -->
-<section class="sec sec--curta sec--fundo">
-  <div class="env">
-    <div class="cab">
-      <div class="cab__t">
-        <p class="rot" data-t="wb_ma_rot">Mais</p>
-        <h2 class="d d--l ani" data-t="wb_ma_tit">O resto está a uma ligação</h2>
-      </div>
-      <div class="cab__x">
-        <p class="txt" data-t="wb_ma_txt">Handicap, rankings, calendário e todos os resultados, época a época, com a fonte de cada um.</p>
-        <div class="topo-p__bt">
-          <a class="cap cap--cheio" href="/jogadora.html" data-mag data-t="wb_ma_b1">A ficha dela</a>
-          <a class="cap" href="/resultados.html" data-mag data-t="wb_ma_b2">Época a época</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 </main>
 

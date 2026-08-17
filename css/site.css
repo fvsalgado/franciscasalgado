@@ -1577,6 +1577,17 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
    as cinco peças e vai direto à que precisa — sem ninguém lhe explicar. */
 .kit-nav{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem}
 
+/* A página do saco, sozinha, mostra tudo. Na secção da jogadora os tacos
+   deslizam num carrossel — é uma amostra. Aqui é o inventário: grelha, os
+   catorze à vista, do driver ao saco, sem nada escondido para o lado. */
+.sec--saco-pagina .saco__g{margin:0;padding:0;display:grid;overflow:visible;
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
+@media (min-width:640px){.sec--saco-pagina .saco__g{grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem}}
+@media (min-width:980px){.sec--saco-pagina .saco__g{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.sec--saco-pagina .saco__k{flex:auto;padding:.85rem .85rem .95rem}
+.sec--saco-pagina .saco__ki{height:clamp(110px,24vw,190px)}
+.sec--saco-pagina .saco__k--so{align-self:auto}
+
 /* ── menos movimento ────────────────────────────────────── */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -1760,6 +1771,14 @@ body.tem-convite .fala{opacity:0;pointer-events:none;transform:translateY(6px)}
 .sec--fundo .sec__campo{opacity:.45;
   -webkit-mask-image:linear-gradient(102deg,transparent 6%,rgba(0,0,0,.3) 38%,#000 82%);
           mask-image:linear-gradient(102deg,transparent 6%,rgba(0,0,0,.3) 38%,#000 82%)}
+
+/* «Ver versão para computador» num telemóvel: o browser finge uma janela de
+   ~980px num ecrã de bolso e o texto encolhe até doer. Ponteiro grosso com
+   largura de secretária estreita só acontece aí — sobe-se a base do tipo e
+   lê-se como um tablet, não como uma miniatura. */
+@media (pointer:coarse) and (min-width:861px) and (max-width:1020px){
+  html{font-size:19px}
+}
 
 /* O que vivia colado ao fundo do ecrã sobe para cima da barra de páginas.
    Estas linhas moram no fim do ficheiro de propósito: as posições originais
