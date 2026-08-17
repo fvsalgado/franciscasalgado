@@ -157,27 +157,22 @@ export function rodape(lingua = 'pt', canais = []) {
   if (!alvo) return;
   const en = lingua === 'en';
 
-  /* Havia aqui uma quarta coluna, «Falar com», com «Ser parceiro» e «Kit de
-     imprensa» — que são as duas páginas já listadas na coluna do lado. Saiu:
-     um rodapé que repete a mesma ligação em duas colunas lê-se pior do que um
-     com três. */
+  /* Já teve quatro colunas, depois três. Agora duas: contacto e páginas.
+     A coluna de abertura — o nome outra vez, e uma frase de apresentação —
+     saiu com a marca de água gigante por cima dela: o nome já está no
+     cabeçalho de todas as páginas, e quem chegou ao fundo já sabe onde está.
+     Um rodapé não é sítio para apresentar ninguém; é sítio para ir embora
+     com elegância. */
   const t = en
-    ? { frase: 'Amateur golfer. Vale de Janelas — Praia D\'El Rey and West Cliffs, Óbidos. Portuguese national team.',
-        onde: 'Contact', ver: 'Pages',
+    ? { onde: 'Contact', ver: 'Pages',
         cred: '© 2026 Francisca Salgado', legal: 'Privacy', termos: 'Terms', cookies: 'Cookies' }
-    : { frase: 'Golfista amadora. Vale de Janelas — Praia D\'El Rey e West Cliffs, Óbidos. Seleção Nacional.',
-        onde: 'Contacto', ver: 'Páginas',
+    : { onde: 'Contacto', ver: 'Páginas',
         cred: '© 2026 Francisca Salgado', legal: 'Privacidade', termos: 'Termos', cookies: 'Cookies' };
 
   alvo.className = 'pe';
   alvo.innerHTML = `
     <div class="env">
-      <p class="pe__nome" aria-hidden="true">Francisca Salgado</p>
       <div class="pe__g">
-        <div>
-          <p class="rot">Francisca Salgado</p>
-          <p class="txt" style="font-size:.85rem;margin-top:1rem">${t.frase}</p>
-        </div>
         <div>
           <p class="rot">${t.onde}</p>
           <ul class="pe__l">${canais.map((c) => `

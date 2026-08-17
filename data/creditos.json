@@ -90,6 +90,31 @@
    "en": "Photo: West Cliffs Golf Links",
    "_origem": "https://westcliffs.com/ (wp-content/uploads/2021/01/homepage-collective3.jpg) — recortada para 3:2 e reduzida. Publicada com autorização do clube."
   },
+  "upgame.webp": {
+   "pt": "UpGame",
+   "en": "UpGame",
+   "_origem": "logótipo oficial, do próprio sítio (upgame-cdn.s3.ap-south-1.amazonaws.com/upgame-main-website/logos/upgame-logo.webp) — recortado e pintado na tinta da casa, como os restantes apoios tecnológicos"
+  },
+  "wellputt.webp": {
+   "pt": "WellPutt",
+   "en": "WellPutt",
+   "_origem": "logótipo oficial, do próprio sítio (wellputt.com/us/img/wellputt-europe-logo-1629289765.jpg, branco sobre transparente) — pintado na tinta da casa"
+  },
+  "vertex-golf.webp": {
+   "pt": "Vertex Golf",
+   "en": "Vertex Golf",
+   "_origem": "logótipo oficial, do próprio sítio (vertex-golf.com/wp-content/uploads/2021/05/VTLOGO-e1620568521402.png, branco sobre transparente) — pintado na tinta da casa. Atenção: o tutor escreveu «GolfVertex», mas golfvertex.com é um sítio de artigos sem relação com golfe; a marca do sensor de putting chama-se Vertex Golf e vive em vertex-golf.com — o logótipo escreve «VERTEX GOLF»"
+  },
+  "hole19.webp": {
+   "pt": "Hole19",
+   "en": "Hole19",
+   "_origem": "logótipo oficial, do próprio sítio (hole19golf.com/packs/static/components/stories/assets/logo-*.svg) — rasterizado e pintado na tinta da casa"
+  },
+  "hackmotion.webp": {
+   "pt": "HackMotion",
+   "en": "HackMotion",
+   "_origem": "logótipo oficial, SVG do cabeçalho do próprio sítio (hackmotion.com) — rasterizado e pintado na tinta da casa"
+  },
   "quinta-do-peru.webp": {
    "pt": "",
    "en": "",
