@@ -2,7 +2,7 @@
    Pela ordem que importa: tema (para não piscar), consentimento, língua,
    casca, movimento — e só depois o que cada página tem de seu. */
 
-import { nav, rodape, tema, flutuante } from './casca.js';
+import { nav, rodape, tema } from './casca.js';
 import { creditos } from './creditos.js';
 import { cursor, partirTitulos, rolagem, observar, reduzido } from './movimento.js';
 import { lingua, convidarLingua } from './i18n.js';
@@ -84,7 +84,6 @@ export function iniciar(pintar) {
   rolagem();
 
   repintar(l);
-  flutuante(l);
 
   /* Devolve-se `i18n` com a mesma forma de antes — quem chama só lhe pergunta
      a língua, e não tem de saber que ela deixou de mudar sem recarregar. */

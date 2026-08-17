@@ -20,8 +20,8 @@
  *
  *   · fica de fora o que é de terceiros (Instagram, YouTube), que só carrega
  *     depois de consentimento e não deve ficar congelado no ficheiro;
- *   · fica de fora o que tem estado (banner dos cookies, cursor, botão
- *     flutuante, convite de língua), que o JavaScript volta a montar sempre;
+ *   · fica de fora o que tem estado (banner dos cookies, cursor, convite de
+ *     língua), que o JavaScript volta a montar sempre;
  *   · fica dentro tudo o que é conteúdo, e o menu e o rodapé, que são as
  *     ligações internas do sítio.
  *

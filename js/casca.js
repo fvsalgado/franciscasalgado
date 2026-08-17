@@ -177,32 +177,22 @@ export function rodape(lingua = 'pt', canais = []) {
   if (!alvo) return;
   const en = lingua === 'en';
 
-  /* Já teve quatro colunas, depois três. Agora duas: contacto e páginas.
-     A coluna de abertura — o nome outra vez, e uma frase de apresentação —
-     saiu com a marca de água gigante por cima dela: o nome já está no
-     cabeçalho de todas as páginas, e quem chegou ao fundo já sabe onde está.
-     Um rodapé não é sítio para apresentar ninguém; é sítio para ir embora
-     com elegância. */
+  /* Já teve quatro colunas, depois três, depois duas — contacto e páginas —
+     e um botão flutuante de contacto por cima de tudo. No telemóvel o fim de
+     cada página dizia «contacto» duas vezes com o menu no meio. Ficou uma
+     faixa só: os dois canais em linha, e por baixo o legal e as coordenadas.
+     A coluna das páginas saiu de vez — no ecrã largo o cabeçalho já mostra
+     os nomes todos, e no telemóvel a barra de baixo também. Um rodapé não é
+     sítio para apresentar ninguém; é sítio para ir embora com elegância. */
   const t = en
-    ? { onde: 'Contact', ver: 'Pages',
-        cred: '© 2026 Francisca Salgado', legal: 'Privacy', termos: 'Terms', cookies: 'Cookies' }
-    : { onde: 'Contacto', ver: 'Páginas',
-        cred: '© 2026 Francisca Salgado', legal: 'Privacidade', termos: 'Termos', cookies: 'Cookies' };
+    ? { cred: '© 2026 Francisca Salgado', legal: 'Privacy', termos: 'Terms', cookies: 'Cookies' }
+    : { cred: '© 2026 Francisca Salgado', legal: 'Privacidade', termos: 'Termos', cookies: 'Cookies' };
 
   alvo.className = 'pe';
   alvo.innerHTML = `
     <div class="env">
-      <div class="pe__g">
-        <div>
-          <p class="rot">${t.onde}</p>
-          <ul class="pe__l">${canais.map((c) => `
-            <li><a href="${c.url}" target="_blank" rel="noopener" data-sem-seta data-mag>${icone(c.chave, 'ic ic--pe')}<span>${c.nome}</span></a></li>`).join('')}</ul>
-        </div>
-        <div>
-          <p class="rot">${t.ver}</p>
-          <ul class="pe__l">${PAGINAS.map((p) => `<li><a href="${caminho(p.href, lingua)}" data-mag>${p[lingua]}</a></li>`).join('')}</ul>
-        </div>
-      </div>
+      <div class="pe__c">${canais.map((c) => `
+        <a href="${c.url}"${c.url.startsWith('mailto:') ? '' : ' target="_blank" rel="noopener"'} data-sem-seta data-mag>${icone(c.chave, 'ic ic--pe')}<span>${c.nome}</span></a>`).join('')}</div>
       <div class="pe__f">
         <span>${t.cred}</span>
         <nav class="pe__legal" aria-label="${t.legal}">
@@ -244,44 +234,7 @@ export function tema() {
   pintar();
 }
 
-/* ── botão flutuante de contacto ──────────────────────────── */
-/* Duas maneiras de falar com ela, sempre à mão, em qualquer página e em
-   qualquer ponto da página. O sítio tem o contacto no fim de uma página só, e
-   quem chega a meio de outra teria de o ir procurar — que é precisamente
-   quando desiste.
-
-   Fechado é um botão; aberto mostra o email e o Instagram. Não abre sozinho e
-   não tapa nada: fica no canto de baixo, do lado oposto ao banner dos cookies
-   e ao convite da língua. */
-export function flutuante(lingua = 'pt') {
-  if (document.getElementById('fala')) return;
-  const en = lingua === 'en';
-  const cx = document.createElement('div');
-  cx.className = 'fala';
-  cx.id = 'fala';
-  cx.innerHTML = `
-    <div class="fala__l" id="falaL" hidden>
-      <a class="fala__a" href="mailto:birdie@franciscasalgado.golf" data-sem-seta>
-        ${icone('email', 'ic')}<span>birdie@franciscasalgado.golf</span>
-      </a>
-      <a class="fala__a" href="https://www.instagram.com/francisca_salgado_/"
-         target="_blank" rel="noopener" data-sem-seta>
-        ${icone('instagram', 'ic')}<span>@francisca_salgado_</span>
-      </a>
-    </div>
-    <button class="fala__b" id="falaB" type="button" aria-expanded="false" aria-controls="falaL">
-      ${icone('email', 'ic')}<span>${en ? 'Contact' : 'Contacto'}</span>
-    </button>`;
-  document.body.append(cx);
-
-  const bt = cx.querySelector('#falaB');
-  const lista = cx.querySelector('#falaL');
-  const abrir = (sim) => {
-    lista.hidden = !sim;
-    bt.setAttribute('aria-expanded', String(sim));
-    cx.classList.toggle('fala--aberto', sim);
-  };
-  bt.addEventListener('click', () => abrir(lista.hidden));
-  document.addEventListener('click', (e) => { if (!cx.contains(e.target)) abrir(false); });
-  addEventListener('keydown', (e) => { if (e.key === 'Escape') abrir(false); });
-}
+/* O botão flutuante de contacto viveu aqui. Saiu: com o contacto no rodapé de
+   todas as páginas, era o mesmo email pela segunda vez, a flutuar ao lado da
+   barra de páginas. Um sítio destes tem um pedido por visita, não precisa de
+   perseguir ninguém pelo ecrã. */

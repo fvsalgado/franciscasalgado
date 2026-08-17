@@ -1490,29 +1490,17 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
    apresentação por baixo. Saíram as duas: o nome já está no cabeçalho de
    todas as páginas, e o rodapé ficava com «Francisca Salgado» escrito três
    vezes no mesmo ecrã de telemóvel. */
-.pe{padding:clamp(2.2rem,7vw,6rem) 0 1.4rem;border-top:1px solid var(--linha);overflow:hidden}
+.pe{padding:clamp(1.8rem,4vw,3rem) 0 1.4rem;border-top:1px solid var(--linha);overflow:hidden}
 
-/* Dois blocos: onde se fala com ela, e as páginas. Num telemóvel empilham.
-   A lista das páginas tem seis nomes curtos e cabe em duas colunas — seis
-   linhas passam a três.
-   As colunas vão a `minmax(0,1fr)` e não a `1fr` porque o mínimo implícito de
-   uma coluna de grelha é o conteúdo mais largo que lá esteja — e o endereço
-   de correio não parte. Com `1fr`, a coluna do contacto recusava-se a descer
-   dos 200px, a grelha ficava mais larga do que o `.env`, e o `overflow:hidden`
-   do rodapé cortava as páginas fora do ecrã em tudo abaixo dos 390px. */
-.pe__g{display:grid;gap:1.35rem;grid-template-columns:minmax(0,1fr)}
-.pe__g>:last-child .pe__l{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-                          gap:.45rem 1rem}
-@media (min-width:720px){
-  .pe__g{gap:2rem;grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-.pe__l{list-style:none;margin:.7rem 0 0;padding:0;display:flex;flex-direction:column;gap:.45rem}
-.pe__l a{font-size:.85rem;color:var(--tinta-fraca);transition:color .3s var(--curva);
+/* Uma faixa só: os dois canais de contacto em linha, e por baixo o legal e as
+   coordenadas. As colunas — «Contacto» e «Páginas» — saíram; ver js/casca.js. */
+.pe__c{display:flex;flex-wrap:wrap;gap:.6rem 2rem}
+.pe__c a{font-size:.85rem;color:var(--tinta-fraca);transition:color .3s var(--curva);
          display:inline-flex;align-items:center;gap:.5rem}
-.pe__l a:hover{color:var(--relva)}
+.pe__c a:hover{color:var(--relva)}
 .ic{width:1.15rem;height:1.15rem;fill:currentColor;display:block}
 .ic--pe{width:.95rem;height:.95rem;flex:none}
-.pe__f{margin-top:clamp(1.6rem,5vw,4rem);padding-top:1.1rem;border-top:1px solid var(--linha);
+.pe__f{margin-top:clamp(1.2rem,3vw,2rem);padding-top:1.1rem;border-top:1px solid var(--linha);
        display:flex;flex-wrap:wrap;gap:.7rem 2rem;justify-content:space-between;
        align-items:baseline;font-size:.72rem;color:var(--tinta-fraca)}
 .pe__legal{display:flex;gap:1.2rem}
@@ -1648,15 +1636,6 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 }
 @media (prefers-reduced-motion:reduce){.convite-l{animation:none}}
 
-/* O botão flutuante de contacto sai de cena enquanto houver uma caixa em baixo.
-   Vivem os dois no mesmo canto do ecrã, e num telemóvel o botão ficava por
-   baixo do banner — meio visível, sem se poder carregar nele, que é a pior das
-   duas hipóteses. Volta assim que a caixa se resolve. */
-body:has(.ck) .fala,
-body:has(.convite-l) .fala,
-body.tem-convite .fala{opacity:0;pointer-events:none;transform:translateY(6px)}
-.fala{transition:opacity .3s var(--curva),transform .3s var(--curva)}
-
 /* ── manifesto da página inicial ────────────────────────── */
 /* A frase que diz quem ela é, em tamanho de cartaz. Substituiu uma secção
    inteira com retrato e três parágrafos — que era o segundo retrato da página
@@ -1719,43 +1698,11 @@ body.tem-convite .fala{opacity:0;pointer-events:none;transform:translateY(6px)}
 .saiu__l img{width:1.35rem;height:1.35rem;border-radius:50%;object-fit:contain;
              background:#FFF;padding:1px;flex:none}
 
-/* ── botão flutuante de contacto ────────────────────────── */
-/* Sempre à mão, em qualquer página. O contacto vivia no fim de uma página só;
-   quem chegava a meio de outra tinha de o ir procurar, que é quando desiste.
-   Fica no canto direito de baixo — o dos cookies fica à esquerda, e o convite
-   da língua mudou-se para lá também, para os três nunca disputarem o mesmo
-   canto. */
-.fala{position:fixed;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:110;
-      display:flex;flex-direction:column;align-items:flex-end;gap:.6rem}
-.fala__b{display:inline-flex;align-items:center;gap:.55rem;padding:.8rem 1.15rem;
-         border-radius:999px;border:0;cursor:pointer;background:var(--relva);color:#FFF;
-         font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;
-         box-shadow:0 12px 30px -12px rgba(18,40,30,.7);
-         transition:transform .4s var(--curva),background-color .4s var(--curva)}
-.fala__b:hover{transform:translateY(-2px)}
-.fala__b .ic{width:1rem;height:1rem}
-.fala--aberto .fala__b{background:var(--tinta)}
-.fala__l{display:flex;flex-direction:column;gap:.4rem;align-items:flex-end;
-         animation:fala-entra .32s var(--curva) both}
-@keyframes fala-entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.fala__l[hidden]{display:none}
-.fala__a{display:inline-flex;align-items:center;gap:.6rem;padding:.62rem .95rem;
-         border-radius:999px;background:var(--papel);border:1px solid var(--linha);
-         font-size:.78rem;color:var(--tinta);white-space:nowrap;
-         box-shadow:0 10px 26px -16px rgba(18,40,30,.5);
-         transition:border-color .35s var(--curva),background-color .35s var(--curva)}
-.fala__a:hover{border-color:var(--relva);background:var(--relva-clara)}
-.fala__a .ic{width:1rem;height:1rem;color:var(--relva);flex:none}
-@media (max-width:520px){
-  .fala__b span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-  .fala__b{padding:.95rem;border-radius:50%}
-  .fala__b .ic{width:1.15rem;height:1.15rem}
-  .fala__a span{font-size:.72rem}
-}
-@media (prefers-reduced-motion:reduce){.fala__l{animation:none}}
+/* O botão flutuante de contacto viveu aqui e saiu — ver js/casca.js: o
+   contacto está no rodapé de todas as páginas, e o botão era a mesma coisa
+   outra vez, a flutuar ao lado da barra de páginas.
 
-/* O convite da língua muda-se para o canto esquerdo: o botão de contacto
-   ocupa agora o direito, e o dos cookies já saiu quando este aparece. */
+   O convite da língua fica no canto esquerdo, longe do dos cookies. */
 .convite-l{right:auto;left:clamp(1rem,3vw,2rem)}
 @media (max-width:560px){.convite-l{right:clamp(1rem,3vw,2rem);bottom:5.5rem}}
 
@@ -1807,21 +1754,13 @@ body.tem-convite .fala{opacity:0;pointer-events:none;transform:translateY(6px)}
   .topo-p__f img{aspect-ratio:21/9}
 }
 
-/* Onde a barra de páginas existe, a coluna «Páginas» do rodapé é a mesma
-   lista outra vez, três centímetros acima dela. Sai; fica o contacto, o
-   legal e as coordenadas — o que a barra não diz. */
-@media (max-width:1020px) and (pointer:coarse){
-  .pe__g > div:last-child{display:none}
-  .fer__b{width:2.75rem;height:2.35rem}
-}
-
 /* O que vivia colado ao fundo do ecrã sobe para cima da barra de páginas.
    Estas linhas moram no fim do ficheiro de propósito: as posições originais
-   do botão de contacto, do aviso dos cookies e do convite da língua são
-   declaradas lá atrás, e à mesma especificidade ganha quem fala por último.
-   Só onde a barra existe — ponteiro grosso. */
+   do aviso dos cookies e do convite da língua são declaradas lá atrás, e à
+   mesma especificidade ganha quem fala por último. Só onde a barra existe —
+   ponteiro grosso. */
 @media (max-width:1020px) and (pointer:coarse){
-  .fala{bottom:calc(4.6rem + env(safe-area-inset-bottom))}
+  .fer__b{width:2.75rem;height:2.35rem}
   .ck{bottom:calc(4.3rem + env(safe-area-inset-bottom))}
   .convite-l{bottom:calc(4.9rem + env(safe-area-inset-bottom))}
 }
