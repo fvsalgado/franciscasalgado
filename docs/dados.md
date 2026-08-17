@@ -79,7 +79,7 @@ imagem partida.
 |---|---|
 | `praia-del-rey.webp` | sítio do próprio clube (substituiu uma CC BY-SA — ver abaixo) |
 | `west-cliffs.webp` | sítio do próprio clube |
-| `quinta-do-peru.webp` | material do clube, obtido no Golftattoo |
+| `quinta-do-peru.webp` | **não existe** — nenhuma fonte utilizável; ver abaixo |
 | `jamor.webp` | Federação Portuguesa de Golfe |
 
 Formato: `.webp`, recorte 3:2 na horizontal (1400×933). O cartão recorta ao
@@ -90,13 +90,13 @@ quem não vê a imagem — é bilingue, e não é decorativo.
 `data/creditos.json`, em `porFicheiro`; sem ela o `js/creditos.js` avisa na
 consola. Uma fotografia com licença Creative Commons leva também `licenca` e
 `licencaUrl`, e o crédito mostra a licença como ligação — que é o que a
-licença exige. Ver `praia-del-rey.webp`.
+licença exige. Neste momento nenhuma das que cá estão é Creative Commons; a de
+Praia D'El Rey era, e saiu.
 
 O `_origem` de cada uma diz de onde saiu e em que condições foi publicada.
-Três destas estão aqui por autorização dos clubes e dos campos, dada em agosto
-de 2026; a de Praia D'El Rey está por licença aberta e não depende disso. Se
-uma autorização for retirada, tira-se o `foto` do item e o cartão volta ao
-nome sem mais nada partir.
+As três estão aqui por autorização dos clubes e dos campos, dada em agosto de
+2026. Se uma autorização for retirada, tira-se o `foto` do item e o cartão
+volta ao nome sem mais nada partir.
 
 **Crédito não é licença.** Nomear o autor de uma fotografia não dá o direito de
 a publicar: é a autorização que dá. Para uma fotografia nova sem autorização
