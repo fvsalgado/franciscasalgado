@@ -160,7 +160,7 @@ export function nav(lingua = 'pt') {
      não se rola: tem de ser branco, ou não se lê. Marca-se aqui, em
      JavaScript, e não com :has() em CSS, porque isto é um facto da página e
      não uma consequência do que lá está. */
-  alvo.classList.toggle('nav--sobre-foto', !!document.querySelector('.hero, .topo-p--stats'));
+  alvo.classList.toggle('nav--sobre-foto', !!document.querySelector('.hero, .topo-p--escuro'));
 
   menuMovel(alvo);
   document.dispatchEvent(new CustomEvent('fs:nav'));

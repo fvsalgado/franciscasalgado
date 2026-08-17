@@ -19,11 +19,6 @@ export const EN = {
   /* A página do saco, que é a mesma secção sozinha — para ser partilhada. */
   wb_rot: "What's in the bag",
   wb_tit: 'What she carries',
-  wb_ma_rot: 'More',
-  wb_ma_tit: 'The rest is one link away',
-  wb_ma_txt: 'Handicap, rankings, schedule and every result, season by season, with the source of each.',
-  wb_ma_b1: 'Her player page',
-  wb_ma_b2: 'Season by season',
   rc_eq_rot: 'Coaching team',
   rc_eq_tit: 'Who she works with',
   rc_eq_txt: 'At the club, at the national High-Performance Centre, and on what never shows on the course.',
