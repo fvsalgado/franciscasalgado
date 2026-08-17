@@ -89,9 +89,11 @@ const pessoa = {
   jobTitle: 'Golfista amadora',
   knowsAbout: 'Golfe',
   email: 'birdie@franciscasalgado.golf',
+  /* Onde vive, não onde joga: nasceu e vive em Algés (perfil.terra); o
+     concelho de Óbidos é o do clube e fica nas descrições, junto ao clube. */
   homeLocation: {
     '@type': 'Place',
-    address: { '@type': 'PostalAddress', addressLocality: perfil.concelho, addressCountry: 'PT' },
+    address: { '@type': 'PostalAddress', addressLocality: perfil.terra || perfil.concelho, addressCountry: 'PT' },
   },
   memberOf: [
     { '@type': 'SportsTeam', name: 'Seleção Nacional Amadora Feminina', sport: 'Golf' },

@@ -190,7 +190,7 @@ export function rodape(lingua = 'pt', canais = []) {
           <a href="${caminho('termos.html', lingua)}" data-mag>${t.termos}</a>
           <button class="pe__ck" type="button" id="abrirCookies">${t.cookies}</button>
         </nav>
-        <span class="num">Óbidos · 39°22′N 9°09′W</span>
+        <span class="num">Algés · 38°42′N 9°14′W</span>
       </div>
     </div>`;
 }

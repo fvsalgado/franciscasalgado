@@ -1474,6 +1474,19 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 .topo-p__t{margin-top:1.1rem;max-width:54ch}
 .topo-p__bt{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.3rem}
 
+/* O topo com fotografia. A inicial é bonita porque abre com ela; as
+   interiores abriam com um memorando. No telemóvel a fotografia entra por
+   baixo do texto, em faixa larga e baixa — presença sem alongar a página;
+   num ecrã largo divide o topo com o texto, como nas parcerias. O recorte
+   puxa para o terço de cima, que é onde estão as caras. */
+.topo-p__in{display:grid;gap:clamp(1.3rem,3.5vw,3rem);align-items:center}
+.topo-p__f{margin:0;overflow:hidden}
+.topo-p__f img{display:block;width:100%;aspect-ratio:21/9;object-fit:cover;object-position:center 22%}
+@media (min-width:860px){
+  .topo-p--foto .topo-p__in{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+  .topo-p__f img{aspect-ratio:4/3}
+}
+
 /* ── menos movimento ────────────────────────────────────── */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
