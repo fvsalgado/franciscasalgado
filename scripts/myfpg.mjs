@@ -136,7 +136,13 @@ export function provasDoRegisto(registos) {
  * ano seguinte, uma etapa que se repete — são provas diferentes e têm de ficar
  * separadas. */
 export function porProva(voltas) {
-  const chave = (t) => t
+  /* O campo do nome da prova é cortado aos 50 caracteres do lado deles. Numa
+     mão-cheia de casos o corte cai em cima do sufixo do dia e sobra «Senhoras
+     D» ou «BPI  S Dia» — que sem esta terceira regra ficavam a contar como
+     provas à parte. Só se apara o que está encostado ao limite: num nome curto,
+     um «D» final é o nome. */
+  const LIMITE = 50;
+  const chave = (t) => (t.length >= LIMITE ? t.replace(/\s+(d|dia|day)$/i, '') : t)
     .replace(/\s*[-–]?\s*(dia|day)\s*\d+\s*$/i, '')
     .replace(/\s*[-–]?\s*d\d\s*$/i, '')
     .trim().toLowerCase();
