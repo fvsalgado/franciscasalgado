@@ -1437,6 +1437,11 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
     padding:1.3rem 1.4rem;box-shadow:var(--sombra);display:flex;flex-direction:column;gap:.9rem}
 .ck[hidden]{display:none}
 .ck__t{margin:0;font-size:.88rem;color:var(--tinta-fraca)}
+@media (max-width:560px){
+  .ck{padding:1.05rem 1.1rem;gap:.75rem}
+  .ck__t{font-size:.82rem;line-height:1.45}
+  .ck__b .cap{flex:1 1 auto;justify-content:center}
+}
 .ck__t a{color:var(--relva);border-bottom:1px solid var(--linha)}
 .ck__b{display:flex;flex-wrap:wrap;gap:.6rem}
 
@@ -1483,6 +1488,15 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
   .convite-l p{flex:1 1 100%}
 }
 @media (prefers-reduced-motion:reduce){.convite-l{animation:none}}
+
+/* O botão flutuante de contacto sai de cena enquanto houver uma caixa em baixo.
+   Vivem os dois no mesmo canto do ecrã, e num telemóvel o botão ficava por
+   baixo do banner — meio visível, sem se poder carregar nele, que é a pior das
+   duas hipóteses. Volta assim que a caixa se resolve. */
+body:has(.ck) .fala,
+body:has(.convite-l) .fala,
+body.tem-convite .fala{opacity:0;pointer-events:none;transform:translateY(6px)}
+.fala{transition:opacity .3s var(--curva),transform .3s var(--curva)}
 
 /* ── manifesto da página inicial ────────────────────────── */
 /* A frase que diz quem ela é, em tamanho de cartaz. Substituiu uma secção
