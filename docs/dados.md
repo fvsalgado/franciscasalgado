@@ -96,10 +96,21 @@ imagem partida.
 
 | ficheiro | de onde vem |
 |---|---|
-| `praia-del-rey.webp` | sítio do próprio clube (substituiu uma CC BY-SA — ver abaixo) |
+| `praia-del-rey-lago.webp` | sítio do próprio clube (substituiu uma CC BY-SA — ver abaixo) |
 | `west-cliffs.webp` | sítio do próprio clube |
 | `quinta-do-peru.webp` | fornecida pelo tutor — autoria por confirmar, ver abaixo |
 | `jamor.webp` | Federação Portuguesa de Golfe |
+
+**Trocar uma imagem é trocar o nome do ficheiro.** Aprendeu-se à custa: as
+fotografias dos tacos foram substituídas mantendo os nomes, e quem já tinha
+visitado o sítio ficou uma semana a ver as antigas — o `vercel.json` mandava
+guardar `/img/` por sete dias sem perguntar, e uma cache não revalida antes do
+prazo só porque o servidor mudou de ideias. Duas defesas, e as duas ficaram:
+o `/img/` passou a `max-age=0, must-revalidate` (o browser pergunta sempre e o
+servidor responde 304 quando nada mudou — barato); e mesmo assim, quando o
+conteúdo muda, muda-se o nome (`praia-del-rey.webp` → `praia-del-rey-lago.webp`,
+`driver.webp` → `driver-hero.webp`), porque as caches que já existem por esse
+mundo fora obedecem aos cabeçalhos com que guardaram, não aos novos.
 
 Formato: `.webp`, recorte 3:2 na horizontal (1400×933). O cartão recorta ao
 centro, por isso o assunto deve estar centrado. O `alt` descreve o campo para
