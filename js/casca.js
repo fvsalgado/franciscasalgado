@@ -127,13 +127,18 @@ export function nav(lingua = 'pt') {
       ${marca(lingua)}
       <nav class="nav__links" aria-label="${en ? 'Main' : 'Principal'}">${links(true)}</nav>
       <div class="nav__fer">
-        <button class="cap cap--ico" id="btTema" type="button"
-                aria-label="${en ? 'Switch theme' : 'Alternar tema'}" aria-pressed="false">
-          <span class="ico" id="btTemaI">${icone('lua', 'ic')}</span>
-        </button>
-        <a class="cap" id="btLang" href="${outraLingua()}" hreflang="${en ? 'pt-PT' : 'en'}"
-           data-sem-seta aria-label="${en ? 'Ver em portugu\u00eas' : 'Read this page in English'}"
-           >${en ? 'PT' : 'EN'}</a>
+        <div class="fer" role="group" aria-label="${en ? 'Site tools' : 'Ferramentas'}">
+          <a class="fer__b${atual === 'witb.html' ? ' fer__b--on' : ''}" href="${caminho('witb.html', lingua)}"
+             data-sem-seta aria-label="${en ? "What's in the bag" : 'O que leva no saco'}"
+             ${atual === 'witb.html' ? 'aria-current="page"' : ''}>${icone('saco', 'ic')}</a>
+          <button class="fer__b" id="btTema" type="button"
+                  aria-label="${en ? 'Switch theme' : 'Alternar tema'}" aria-pressed="false">
+            <span class="ico" id="btTemaI">${icone('lua', 'ic')}</span>
+          </button>
+          <a class="fer__b fer__b--txt" id="btLang" href="${outraLingua()}" hreflang="${en ? 'pt-PT' : 'en'}"
+             data-sem-seta aria-label="${en ? 'Ver em portugu\u00eas' : 'Read this page in English'}"
+             >${en ? 'PT' : 'EN'}</a>
+        </div>
         <button class="ham" id="btMenu" type="button" aria-expanded="false" aria-controls="menu"
                 aria-label="Menu"><i></i><i></i></button>
       </div>

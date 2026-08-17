@@ -201,6 +201,26 @@ body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color
 .nav__links + .nav__fer{margin-left:0}
 .nav__fer .cap{padding:.48rem .82rem;font-size:.65rem}
 
+/* As ferramentas do cabeçalho numa cápsula só — o saco, o tema e a língua.
+   Eram dois círculos soltos pendurados no canto; agrupados lêem-se como um
+   instrumento. O saco entra aqui de propósito: a página existe para ser
+   partilhada e não merece peso de menu — um ícone à porta chega. */
+.fer{display:inline-flex;align-items:stretch;border:1px solid var(--linha-forte);
+     border-radius:999px;overflow:hidden}
+.fer__b{display:inline-flex;align-items:center;justify-content:center;
+        width:2.6rem;height:2.2rem;color:var(--tinta);
+        font-size:.65rem;font-weight:800;letter-spacing:.1em;
+        transition:background-color .3s var(--curva),color .3s var(--curva)}
+.fer__b + .fer__b{border-left:1px solid var(--linha)}
+.fer__b--txt{width:auto;padding:0 .85rem}
+.fer__b--on{color:var(--relva);background:var(--relva-clara)}
+@media (hover:hover){.fer__b:hover{background:var(--relva-clara);color:var(--relva)}}
+.fer__b:focus-visible{outline:2px solid var(--relva);outline-offset:-2px}
+.nav--sobre-foto:not(.colada) .fer{border-color:rgba(255,255,255,.42)}
+.nav--sobre-foto:not(.colada) .fer__b{color:#FFF}
+.nav--sobre-foto:not(.colada) .fer__b--on{background:rgba(255,255,255,.16);color:#FFF}
+.nav--sobre-foto:not(.colada) .fer__b + .fer__b{border-left-color:rgba(255,255,255,.28)}
+
 .ham{display:none;width:2.6rem;height:2.6rem;border:1px solid var(--linha-forte);border-radius:999px;
      background:none;cursor:pointer;padding:0;align-items:center;justify-content:center;gap:.32rem;
      flex-direction:column;transition:border-color .3s var(--curva)}
@@ -220,6 +240,7 @@ body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color
 
 @media (max-width:1020px){
   .nav__links{display:none}
+  .ham{display:flex}
   .nav__cta{display:none}
   .nav--aberto .nav__in{position:relative;z-index:2}
   .menu{display:block;position:fixed;inset:0;z-index:1;
@@ -234,9 +255,14 @@ body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color
    precisam de gaveta. A barra fica fixa em baixo, à distância do polegar,
    com os cinco nomes sempre à vista e a página atual acesa — sabe-se sempre
    onde se está e para onde se pode ir. O hambúrguer sai; num ecrã largo o
-   cabeçalho já mostra tudo, e a barra não existe. */
+   cabeçalho já mostra tudo, e a barra não existe.
+
+   `pointer:coarse` e não só largura: uma barra no fundo é ergonomia de
+   polegar, e numa janela estreita de computador — ou no «ver versão para
+   computador» com rato — é um corpo estranho. Onde o ponteiro é fino e o
+   ecrã é estreito, volta o hambúrguer. */
 .tabs{display:none}
-@media (max-width:1020px){
+@media (max-width:1020px) and (pointer:coarse){
   .ham{display:none}
   .tabs{position:fixed;left:0;right:0;bottom:0;z-index:120;
         display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.15rem;
@@ -1738,8 +1764,9 @@ body.tem-convite .fala{opacity:0;pointer-events:none;transform:translateY(6px)}
 /* O que vivia colado ao fundo do ecrã sobe para cima da barra de páginas.
    Estas linhas moram no fim do ficheiro de propósito: as posições originais
    do botão de contacto, do aviso dos cookies e do convite da língua são
-   declaradas lá atrás, e à mesma especificidade ganha quem fala por último. */
-@media (max-width:1020px){
+   declaradas lá atrás, e à mesma especificidade ganha quem fala por último.
+   Só onde a barra existe — ponteiro grosso. */
+@media (max-width:1020px) and (pointer:coarse){
   .fala{bottom:calc(4.6rem + env(safe-area-inset-bottom))}
   .ck{bottom:calc(4.3rem + env(safe-area-inset-bottom))}
   .convite-l{bottom:calc(4.9rem + env(safe-area-inset-bottom))}
