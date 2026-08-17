@@ -224,7 +224,7 @@ export async function equipa(cx, lingua = 'pt') {
   /* A cara ao lado do nome, quando há retrato com autorização (os da FPG);
      sem retrato, as iniciais — nunca uma silhueta genérica. */
   const iniciais = (nome) => nome.split(/\s+/).map((x) => x[0]).filter(Boolean).slice(0, 2).join('');
-  cx.innerHTML = `<ul class="marcas">${pessoas.map((p) => `
+  cx.innerHTML = `<ul class="marcas marcas--caras">${pessoas.map((p) => `
     <li>${p.url
     ? `<a class="marca-l" href="${p.url}" target="_blank" rel="noopener" data-sem-seta data-mag>`
     : '<span class="marca-l">'}

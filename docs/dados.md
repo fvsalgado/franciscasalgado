@@ -239,3 +239,31 @@ secção não aparece.
 
 Vistas úteis para uma avaliação: `face-on`, `down-the-line`, `short-game`,
 `putting`. O `id` é o que vem depois de `watch?v=`.
+
+## Quantas provas ela jogou (agosto de 2026)
+
+O `data/resultados.json` é uma lista escolhida — as provas com classificação
+apurada, fonte e alguma coisa para dizer. São 57 em nove épocas, e a página
+das épocas contava-as como se fossem a carreira toda: «7 provas» em 2023 dava
+a impressão de quem joga meia dúzia de torneios por ano.
+
+O registo federado dela na FPG tem **425 voltas em 261 provas**. O
+`scripts/myfpg.mjs` passou a escrever também o `data/provas-fpg.json` — só
+contagens, por ano, nunca a lista: publicar as 425 voltas com campo, par e
+resultado bruto era o extrato de conta que já ficou decidido não publicar.
+
+Quem manda em quê:
+
+- **volume** (provas disputadas, provas de cada época) — registo federado;
+- **resultados** (pódios, vitórias, títulos, chamadas) — a lista curada.
+
+Se o `provas-fpg.json` faltar, as contagens da lista voltam a servir: um
+número a menos, nunca um número errado. A nota de fonte da página diz de onde
+vem cada coisa.
+
+## Subtítulos das secções (agosto de 2026)
+
+Os grupos de apoios tinham uma frase debaixo do rótulo — «Os campos de casa,
+no Oeste» debaixo de CAMPOS ONDE JOGA. Saíram todas, a pedido do tutor. O
+`x` de um grupo em `data/apoios.json` continua a funcionar se algum dia fizer
+falta; sem ele, não se escreve linha nenhuma.

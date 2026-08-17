@@ -123,6 +123,43 @@ export function provasDoRegisto(registos) {
     .filter((p) => p.torneio);
 }
 
+/* Uma prova, e não uma volta.
+ *
+ * O registo da federação conta **voltas**: um campeonato de quatro dias entra
+ * quatro vezes, e entra com o dia no nome — «Campeonato Nacional Absoluto - S»,
+ * «... Dia 2», «... D2». Contar linhas dava um número inflacionado que não é
+ * o número de provas que ela jogou.
+ *
+ * Duas voltas são a mesma prova quando lhes tiramos o sufixo do dia e sobra o
+ * mesmo nome, e quando estão a menos de uma semana uma da outra. A janela é
+ * generosa de propósito: nomes iguais em meses diferentes — o mesmo torneio no
+ * ano seguinte, uma etapa que se repete — são provas diferentes e têm de ficar
+ * separadas. */
+export function porProva(voltas) {
+  const chave = (t) => t
+    .replace(/\s*[-–]?\s*(dia|day)\s*\d+\s*$/i, '')
+    .replace(/\s*[-–]?\s*d\d\s*$/i, '')
+    .trim().toLowerCase();
+
+  const ordem = [...voltas].sort((a, b) => a.data.localeCompare(b.data));
+  const provas = [];
+  for (const v of ordem) {
+    const k = chave(v.torneio);
+    const aberta = provas.find((p) => p.k === k
+      && (new Date(v.data) - new Date(p.fim)) / 864e5 <= 7);
+    if (aberta) { aberta.fim = v.data; aberta.voltas += 1; }
+    else provas.push({ k, torneio: v.torneio, data: v.data, fim: v.data, voltas: 1 });
+  }
+  return provas;
+}
+
+/** Quantas provas por ano, para o resumo de cada época. */
+export function porAno(provas) {
+  const conta = {};
+  for (const p of provas) conta[p.data.slice(0, 4)] = (conta[p.data.slice(0, 4)] || 0) + 1;
+  return conta;
+}
+
 export async function buscarRegisto(numero = NUMERO, fetchImpl = fetch) {
   const [whs, res] = await Promise.all([
     todosOsRegistos('PlayerWHS.aspx/HCPWhsFederLST', numero, fetchImpl),
@@ -146,10 +183,26 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   console.log(`${d.voltas} voltas · ${d.pontos.length} mudanças de índice · ${d.provas.length} provas`);
   console.log(`handicap: ${a.hcp} em ${a.data} → ${z.hcp} em ${z.data}`);
 
+  const provas = porProva(d.provas);
+  const anos = porAno(provas);
+  console.log(`${provas.length} provas · ${Object.entries(anos).map(([a, n]) => `${a}:${n}`).join(' ')}`);
+
   if (SECO) console.log(d.pontos.slice(-6).map((p) => `  ${p.data}  ${p.hcp}`).join('\n'));
   else {
+    const hoje = new Date().toISOString().slice(0, 10);
     await writeFile(new URL('../data/handicap-historico.json', import.meta.url),
-      `${JSON.stringify({ atualizado: new Date().toISOString().slice(0, 10), pontos: d.pontos }, null, 2)}\n`);
+      `${JSON.stringify({ atualizado: hoje, pontos: d.pontos }, null, 2)}\n`);
     console.log('data/handicap-historico.json escrito');
+
+    /* Contagens, e não a lista. As 425 voltas com campo, par e resultado bruto
+       continuam a não sair daqui — publicar isso era o extrato de conta que já
+       ficou decidido não publicar. O que sai é quantas provas, e em que ano:
+       o número que faltava à página das épocas para não parecer que ela joga
+       meia dúzia de torneios por época. */
+    await writeFile(new URL('../data/provas-fpg.json', import.meta.url),
+      `${JSON.stringify({
+        atualizado: hoje, fonte: 'my.fpg.pt', total: provas.length, voltas: d.provas.length, anos,
+      }, null, 2)}\n`);
+    console.log('data/provas-fpg.json escrito');
   }
 }
