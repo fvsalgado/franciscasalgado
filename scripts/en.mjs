@@ -35,7 +35,7 @@ export const EN = {
   rc_sw_txt: 'For anyone assessing technique. Nothing loads from YouTube until you press play.',
   rc_rot: 'The player',
   rc_tit: 'Class of 2027',
-  rc_txt: 'Portuguese amateur golfer, Portugal U18 national team. Here is what a coach needs to see first — and everything on this page is sourced, either elsewhere on this site or at the federation.',
+  rc_txt: 'Portuguese amateur golfer, Portugal U18 national team. The player\'s technical profile in one place — rankings, results, team and swing, all of it sourced elsewhere on this site or at the federation.',
   rc_bt1: 'birdie@franciscasalgado.golf',
   rc_bt2: 'See the results',
   rc_ev_rot: 'Progression',
@@ -70,11 +70,10 @@ export const EN = {
   qu_rot: 'Who she is',
   qu_ver: 'Season by season <i aria-hidden="true">\u2192</i>',
 
-  qu_bio: 'She started at the <strong>Jamor</strong>, and it was for <strong>Paço do Lumiar</strong> that she won '
-    + 'her first national title, at ten. By way of <strong>Quinta do Peru</strong>, she plays today for '
-    + '<strong>Vale de Janelas</strong> — Praia D\'El Rey and West Cliffs — trains at the national '
-    + '<strong>High-Performance Centre</strong> and has represented the '
-    + '<strong>Portuguese women\'s amateur national team</strong> since 2021.',
+  qu_bio: 'She took up golf at seven, at the <strong>Jamor</strong>, and won her first national title at ten. '
+    + 'She is currently part of the <strong>Portuguese women\'s amateur national team</strong> and trains at the '
+    + '<strong>National Golf Training Centre</strong>, at the Jamor, and at the <strong>Academia de Lisboa</strong>, '
+    + 'where she builds her preparation for elite competition.',
 
   in_rot: 'Instagram',
   in_tit: 'Day to day',

@@ -570,8 +570,13 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
           padding:clamp(1.1rem,2.4vw,1.6rem);display:flex;flex-direction:column;gap:.3rem}
 .conta__n{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 72;
           font-size:clamp(2rem,4.6vw,3rem);line-height:1;color:var(--relva)}
+/* «Internacionalizações» tem vinte letras, e em versaletes com .16em de
+   tracking não cabe num cartão de meio ecrã de telemóvel — transbordava por
+   cima da moldura. O rótulo pode hifenizar: é uma palavra de dicionário, não
+   uma sigla. */
 .conta__r{font-size:.62rem;font-weight:800;letter-spacing:.16em;
-          text-transform:uppercase;color:var(--tinta-fraca)}
+          text-transform:uppercase;color:var(--tinta-fraca);
+          overflow-wrap:break-word;hyphens:auto}
 
 /* Os destaques do ano: o que ficou, e não o que se jogou. */
 .dests{display:grid;gap:1px;margin:clamp(1.2rem,2.4vw,1.8rem) 0 0;
