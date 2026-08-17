@@ -116,6 +116,14 @@ export async function creditos(idioma = 'pt') {
       console.warn('imagem sem crédito:', src, '— acrescenta em data/creditos.json');
       return;
     }
-    colocar(img, c[idioma] || c.pt, c, juntos);
+    /* Entrada com texto em branco: é uma decisão, não um esquecimento. Diz que
+       a proveniência está registada no `_origem` mas a autoria ainda não se
+       sabe — e enquanto não se souber, mais vale linha nenhuma do que um nome
+       adivinhado. Nomear mal quem tirou uma fotografia é pior do que não a
+       creditar; e um crédito vazio desenhado à mesma deixava uma legenda oca
+       por baixo da imagem. */
+    const texto = c[idioma] ?? c.pt;
+    if (!String(texto || '').trim()) return;
+    colocar(img, texto, c, juntos);
   });
 }

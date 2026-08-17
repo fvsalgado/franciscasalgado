@@ -90,6 +90,11 @@
    "en": "Photo: West Cliffs Golf Links",
    "_origem": "https://westcliffs.com/ (wp-content/uploads/2021/01/homepage-collective3.jpg) — recortada para 3:2 e reduzida. Publicada com autorização do clube."
   },
+  "quinta-do-peru.webp": {
+   "pt": "",
+   "en": "",
+   "_origem": "Fornecida pelo tutor a 17-08-2026, já sem metadados de autoria (o ficheiro chegou com o EXIF limpo). Vista aérea da casa-clube e do campo. Não se sabe a quem creditar — pode ser do próprio clube, pode ser de quem a tirou —, e por isso o crédito fica em branco de propósito: um crédito vazio quer dizer «proveniência registada, autoria por confirmar», e o js/creditos.js não desenha linha nenhuma. Assim que se souber, preenche-se aqui e a linha aparece sozinha."
+  },
   "jamor.webp": {
    "pt": "Foto: Federação Portuguesa de Golfe",
    "en": "Photo: Portuguese Golf Federation",
