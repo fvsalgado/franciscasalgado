@@ -95,6 +95,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .rot--claro{color:inherit;opacity:.82}
 
 .txt{max-width:58ch;color:var(--tinta-fraca);margin:0 0 1rem}
+/* Um .txt pode ser um <div> com parágrafos dentro — a biografia da imprensa
+   era uma parede de quinze linhas num parágrafo só, e partiu-se em três. */
+.txt p{margin:0 0 .8em}
+.txt p:last-child{margin-bottom:0}
 .txt:last-child{margin-bottom:0}
 .txt strong{color:var(--tinta);font-weight:700}
 .lig{color:var(--relva);border-bottom:1px solid var(--linha-forte);transition:border-color .3s var(--curva)}
@@ -567,9 +571,9 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 .conta{display:grid;gap:1px;margin-bottom:clamp(2rem,4vw,3rem);
        grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr))}
 .conta__i{background:var(--papel);box-shadow:0 0 0 1px var(--linha);
-          padding:clamp(1.1rem,2.4vw,1.6rem);display:flex;flex-direction:column;gap:.3rem}
+          padding:clamp(.85rem,2vw,1.35rem);display:flex;flex-direction:column;gap:.3rem}
 .conta__n{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 72;
-          font-size:clamp(2rem,4.6vw,3rem);line-height:1;color:var(--relva)}
+          font-size:clamp(1.7rem,4vw,2.6rem);line-height:1;color:var(--relva)}
 /* «Internacionalizações» tem vinte letras, e em versaletes com .16em de
    tracking não cabe num cartão de meio ecrã de telemóvel — transbordava por
    cima da moldura. O rótulo pode hifenizar: é uma palavra de dicionário, não
@@ -1114,7 +1118,7 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 /* A página abre com a fotografia ao lado do argumento, e não com um título
    sozinho: quem chega aqui está a decidir se investe, e a primeira coisa que
    tem de ver é a atleta. */
-.apoio-abre{padding:clamp(6.5rem,13vh,9.5rem) 0 clamp(2rem,5vw,4rem);border-bottom:1px solid var(--linha)}
+.apoio-abre{padding:clamp(4.8rem,9.5vh,7.5rem) 0 clamp(1.8rem,4vw,3.2rem);border-bottom:1px solid var(--linha)}
 .apoio-abre__in{display:grid;gap:clamp(1.8rem,4vw,3.5rem);align-items:center}
 @media (min-width:860px){.apoio-abre__in{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}}
 .apoio-abre__q{display:flex;flex-direction:column;align-items:flex-start;gap:1.2rem;min-width:0}
@@ -1362,9 +1366,9 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 /* ── recruiting ─────────────────────────────────────────── */
 .recs{display:grid;gap:1px;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
 .rec{background:var(--papel);box-shadow:0 0 0 1px var(--linha);
-     padding:clamp(1.4rem,3vw,2rem);display:flex;flex-direction:column;gap:.35rem}
+     padding:clamp(1.1rem,2.4vw,1.7rem);display:flex;flex-direction:column;gap:.35rem}
 .rec__v{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 96;
-        font-size:clamp(2.6rem,6vw,4rem);line-height:.92;letter-spacing:-.03em;
+        font-size:clamp(2.2rem,5vw,3.4rem);line-height:.92;letter-spacing:-.03em;
         color:var(--relva);font-variant-numeric:tabular-nums}
 .rec__v sup{font-size:.36em;vertical-align:super;margin-left:.06em}
 /* O cartão cujo valor é texto e não algarismo — a data da próxima prova. Ao
@@ -1462,10 +1466,13 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 .ck__b{display:flex;flex-wrap:wrap;gap:.6rem}
 
 /* ── páginas interiores ─────────────────────────────────── */
-.topo-p{padding:clamp(6.5rem,13vh,9.5rem) 0 clamp(2rem,4vw,3.5rem);border-bottom:1px solid var(--linha)}
-.topo-p .d--l{margin:1.2rem 0 0}
-.topo-p__t{margin-top:1.4rem;max-width:54ch}
-.topo-p__bt{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.6rem}
+/* O topo já foi mais alto — um ecrã de telemóvel inteiro de rótulo, título e
+   parágrafo antes do primeiro conteúdo. Encolheu de propósito: a abertura
+   apresenta, não é a página. O primeiro cartão deve espreitar sem rolar. */
+.topo-p{padding:clamp(4.8rem,9.5vh,7.5rem) 0 clamp(1.6rem,3vw,2.8rem);border-bottom:1px solid var(--linha)}
+.topo-p .d--l{margin:.9rem 0 0}
+.topo-p__t{margin-top:1.1rem;max-width:54ch}
+.topo-p__bt{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.3rem}
 
 /* ── menos movimento ────────────────────────────────────── */
 @media (prefers-reduced-motion:reduce){

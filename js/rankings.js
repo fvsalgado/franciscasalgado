@@ -217,7 +217,7 @@ async function breves(cx, lingua, t) {
         <span class="rkb__r">${v.rot}</span>
         <span class="rkb__n num">${milhares(v.pos(d), lingua)}<sup>${ord(lingua)}</sup></span>
         <span class="rkb__x">${v.sub(d)}</span>
-        <span class="rkb__e">${vivo ? t.aovivo : t.guardado} · ${d.atualizado}</span>
+        <span class="rkb__e">${vivo ? t.aovivo : t.guardado} · ${dataLonga(d.atualizado, lingua)}</span>
         <span class="rkb__s" aria-hidden="true">↗</span>
       </a>`;
   };
