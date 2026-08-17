@@ -203,17 +203,21 @@ export async function contagens(cx, lingua = 'pt') {
       r: en ? 'National titles' : 'Títulos nacionais' },
     { n: provas.filter((p) => p.nacional === 'vice').length,
       r: en ? 'National runner-up' : 'Vice-campeã nacional' },
-    /* Duas contagens e não uma, porque são duas coisas.
+    /* Duas contagens e não uma, porque são duas coisas — e com os nomes que o
+     * tutor pediu, que são os que a casa usa.
      *
-     * «Chamadas à Seleção» é quantas vezes foi convocada — inclui as provas
-     * disputadas em Portugal, que também são convocatórias. «Provas fora» é
-     * quantas vezes saiu do país, convocada ou por iniciativa própria. Postas
-     * lado a lado dizem o que nenhuma diz sozinha: com que frequência é
-     * chamada, e quanto do calendário dela é feito na estrada. */
+     * «Chamadas à Seleção Nacional» é quantas vezes foi convocada — inclui as
+     * provas disputadas em Portugal, que também são convocatórias.
+     * «Internacionalizações» é quantas vezes competiu fora do país, convocada
+     * ou por iniciativa própria. Postas lado a lado dizem o que nenhuma diz
+     * sozinha: com que frequência é chamada, e quanto do calendário dela é
+     * feito na estrada. */
     { n: provas.filter((p) => p.selos?.includes('selecao')).length,
-      r: en ? 'Caps for Portugal' : 'Chamadas à Seleção' },
+      r: en ? 'National team call-ups' : 'Chamadas à Seleção Nacional' },
+    /* O hífen suave é o ponto de quebra: num cartão de meio ecrã de telemóvel
+       a palavra não cabe inteira, e sem ele o browser partia-a onde calhava. */
     { n: provas.filter((p) => p.pais && p.pais !== 'PT').length,
-      r: en ? 'Events abroad' : 'Provas fora' },
+      r: en ? 'International events' : 'Internacionali­zações' },
     { n: provas.filter((p) => p.pos === 1).length,
       r: en ? 'Wins' : 'Vitórias' },
   ].filter((l) => l.n);

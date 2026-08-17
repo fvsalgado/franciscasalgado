@@ -68,9 +68,16 @@ Duas armadilhas que já morderam:
 ## `data/perfil.json` — `espanha`
 
 Idas a Espanha para competir, contadas por ano. A maioria foi por iniciativa
-própria e não ao serviço da Seleção, e é por isso que **não** entram na contagem
-de internacionalizações — essa sai do selo `selecao` em `data/resultados.json` e
-conta convocatórias, esteja a prova onde estiver, incluindo em Portugal.
+própria e não ao serviço da Seleção.
+
+Os dois contadores da página «Época a época» — com os nomes que o tutor pediu —
+não saem daqui, saem de `data/resultados.json`: **«Chamadas à Seleção
+Nacional»** conta o selo `selecao` (convocatórias, esteja a prova onde estiver,
+incluindo em Portugal) e **«Internacionalizações»** conta as provas com `pais`
+diferente de `PT` (competições fora, convocada ou por iniciativa própria). Uma
+ida a Espanha só entra nesse segundo contador se estiver registada como prova
+em `resultados.json`; este ficheiro alimenta apenas o cartão «Idas a Espanha»
+das parcerias.
 
 O cartão «Idas a Espanha» na página de parcerias mostra a soma. O vigia
 mantém-na certa a partir daqui, por isso acrescenta-se a viagem ao ano em que
