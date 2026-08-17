@@ -79,7 +79,7 @@ imagem partida.
 |---|---|
 | `praia-del-rey.webp` | sítio do próprio clube (substituiu uma CC BY-SA — ver abaixo) |
 | `west-cliffs.webp` | sítio do próprio clube |
-| `quinta-do-peru.webp` | **não existe** — nenhuma fonte utilizável; ver abaixo |
+| `quinta-do-peru.webp` | fornecida pelo tutor — autoria por confirmar, ver abaixo |
 | `jamor.webp` | Federação Portuguesa de Golfe |
 
 Formato: `.webp`, recorte 3:2 na horizontal (1400×933). O cartão recorta ao
@@ -94,9 +94,10 @@ licença exige. Neste momento nenhuma das que cá estão é Creative Commons; a 
 Praia D'El Rey era, e saiu.
 
 O `_origem` de cada uma diz de onde saiu e em que condições foi publicada.
-As três estão aqui por autorização dos clubes e dos campos, dada em agosto de
-2026. Se uma autorização for retirada, tira-se o `foto` do item e o cartão
-volta ao nome sem mais nada partir.
+As de Praia D'El Rey, West Cliffs e Jamor estão aqui por autorização dos clubes
+e dos campos, dada em agosto de 2026; a da Quinta do Peru veio do tutor. Se uma
+autorização for retirada, tira-se o `foto` do item e o cartão volta ao nome sem
+mais nada partir.
 
 **Crédito não é licença.** Nomear o autor de uma fotografia não dá o direito de
 a publicar: é a autorização que dá. Para uma fotografia nova sem autorização
@@ -111,16 +112,23 @@ Trocada pela do próprio clube. A lição é que a licença resolve o direito de
 publicar e não resolve o nível — numa parede onde as outras são fotografia de
 marca, uma fotografia de amador destoa mais do que ajuda.
 
-**A Quinta do Peru não tem fotografia, e não é por falta de procura.** O sítio
-oficial (`quintadoperugolf.com`) responde com captcha a qualquer pedido
-automático; o `clubgolfquintadoperu.com` não serve fotografias do campo; não há
-nada em Wikimedia Commons nem no Openverse; e as fotografias da FPG desse campo
-são de jogadores em prova, não do campo. As que existem em directórios de golfe
-são fotografias de imprensa do clube republicadas por terceiros — crédito ao
-clube não é autorização do clube.
+**A Quinta do Peru veio de fora da internet, e a busca automática explica
+porquê.** O sítio oficial (`quintadoperugolf.com`) responde com captcha a
+qualquer pedido automático; o `clubgolfquintadoperu.com` não serve fotografias
+do campo; não há nada em Wikimedia Commons nem no Openverse; e as fotografias da
+FPG desse campo são de jogadores em prova, não do campo. As que existem em
+directórios de golfe são fotografias de imprensa do clube republicadas por
+terceiros — crédito ao clube não é autorização do clube. Nenhuma servia, e o
+cartão esteve alguns dias só com nome e localidade.
 
-Fica sem fotografia até alguém pedir uma ao clube. O cartão degrada-se sozinho
-para nome e localidade, que é o comportamento que já existia.
+A que lá está agora foi mandada pelo tutor a 17 de agosto de 2026: uma vista
+aérea da casa-clube entre os pinheiros, com o campo atrás. Chegou sem metadados
+de autoria, e por isso **a entrada em `creditos.json` tem o crédito em branco de
+propósito** — o `_origem` guarda o que se sabe, e o `js/creditos.js` aprendeu a
+tratar texto vazio como decisão e não como esquecimento: não desenha linha
+nenhuma nem avisa na consola. Falta só saber a quem creditar. Assim que se
+souber, escreve-se o nome nos dois idiomas e o crédito aparece sozinho por baixo
+da fotografia, sem mexer em mais nada.
 
 ## `data/instagram.json`
 

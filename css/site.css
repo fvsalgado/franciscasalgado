@@ -888,7 +888,15 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
                      font-size:.7rem;letter-spacing:.02em;color:var(--tinta-fraca);opacity:.85}
 .campo__f figcaption a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .campo__n,.campo .apoio__x{padding-inline:clamp(1.1rem,2.2vw,1.5rem)}
-.campo__n{font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 28;
+/* O nome cola-se ao fundo do cartão, e é de propósito. O crédito que vem por
+   cima tem comprimento imprevisível — uma linha no West Cliffs, duas no Praia
+   D'El Rey, nenhuma na Quinta do Peru enquanto a autoria estiver por
+   confirmar — e com o nome logo a seguir à legenda os quatro nomes ficavam
+   cada um a sua altura. Empurrado para baixo, alinham todos: os cartões têm a
+   mesma altura, portanto o fundo é o mesmo. A folga que sobra fica onde não
+   se lê, entre a legenda e o nome, em vez de ficar onde se lê. */
+.campo__n{margin-top:auto;
+          font-family:var(--display);font-weight:500;font-variation-settings:'opsz' 28;
           font-size:1.12rem;line-height:1.2;letter-spacing:-.012em;color:var(--tinta)}
 @media (prefers-reduced-motion:reduce){
   .campo__f img,.campo:hover .campo__f img{transition:none;transform:none}
