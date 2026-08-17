@@ -77,7 +77,7 @@ imagem partida.
 
 | ficheiro | de onde vem |
 |---|---|
-| `praia-del-rey.webp` | Vitor Oliveira, CC BY-SA 2.0, via Wikimedia Commons |
+| `praia-del-rey.webp` | sítio do próprio clube (substituiu uma CC BY-SA — ver abaixo) |
 | `west-cliffs.webp` | sítio do próprio clube |
 | `quinta-do-peru.webp` | material do clube, obtido no Golftattoo |
 | `jamor.webp` | Federação Portuguesa de Golfe |
@@ -101,6 +101,26 @@ nome sem mais nada partir.
 **Crédito não é licença.** Nomear o autor de uma fotografia não dá o direito de
 a publicar: é a autorização que dá. Para uma fotografia nova sem autorização
 declarada, pede-se primeiro.
+
+**O caso de Praia D'El Rey, e o que ele ensina.** A primeira fotografia era uma
+CC BY-SA do Vitor Oliveira, via Wikimedia Commons — legalmente a mais segura
+das quatro, e a única que não dependia de autorização nenhuma. Foi recusada
+pelo tutor, e com razão: é um instantâneo de turista, com estrada e candeeiro
+em primeiro plano, ao lado de fotografia profissional de golfe do West Cliffs.
+Trocada pela do próprio clube. A lição é que a licença resolve o direito de
+publicar e não resolve o nível — numa parede onde as outras são fotografia de
+marca, uma fotografia de amador destoa mais do que ajuda.
+
+**A Quinta do Peru não tem fotografia, e não é por falta de procura.** O sítio
+oficial (`quintadoperugolf.com`) responde com captcha a qualquer pedido
+automático; o `clubgolfquintadoperu.com` não serve fotografias do campo; não há
+nada em Wikimedia Commons nem no Openverse; e as fotografias da FPG desse campo
+são de jogadores em prova, não do campo. As que existem em directórios de golfe
+são fotografias de imprensa do clube republicadas por terceiros — crédito ao
+clube não é autorização do clube.
+
+Fica sem fotografia até alguém pedir uma ao clube. O cartão degrada-se sozinho
+para nome e localidade, que é o comportamento que já existia.
 
 ## `data/instagram.json`
 

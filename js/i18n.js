@@ -32,6 +32,17 @@ export function outroCaminho(caminho = location.pathname) {
   return `/en${c}`;
 }
 
+/* Se quem chega lê português, segundo o browser.
+ *
+ * Serve duas coisas que pareciam separadas e não são: a quem oferecer o
+ * inglês, e em que língua pedir o consentimento dos cookies. Um aviso de
+ * privacidade que a pessoa não percebe não é consentimento informado — é um
+ * botão que ela carrega para o muro desaparecer. */
+export function lePortugues() {
+  return (navigator.languages || [navigator.language || 'pt'])
+    .some((l) => String(l).toLowerCase().startsWith('pt'));
+}
+
 /** Endereço da mesma página na outra língua, com âncora e parâmetros. */
 export function outraLingua() {
   return outroCaminho() + location.search + location.hash;
@@ -42,37 +53,35 @@ export function outraLingua() {
    browser esconde metade do sítio a quem o vem indexar, que chega quase sempre
    sem preferência nenhuma declarada — e prende quem quer mesmo ler o original.
    Fica um convite, que se fecha e não volta. É o que a documentação do Google
-   pede em vez do reencaminhamento. */
+   pede em vez do reencaminhamento.
+
+   E vem **antes** do banner dos cookies, não depois. Era ao contrário, e o
+   resultado era um visitante inglês a apanhar primeiro um muro de
+   consentimento em português — a decisão mais séria da página, escrita numa
+   língua que ele não pediu. Primeiro escolhe-se a língua; depois pergunta-se
+   o resto nela. */
 export function convidarLingua() {
   if (lingua() !== 'pt') return;
-  const querIngles = !(navigator.languages || [navigator.language || 'pt'])
-    .some((l) => String(l).toLowerCase().startsWith('pt'));
-  if (!querIngles) return;
+  if (lePortugues()) return;
   try { if (localStorage.getItem('fs-lingua-convite') === 'nao') return; } catch { /* modo privado */ }
 
-  const mostrar = () => {
-    const cx = document.createElement('div');
-    cx.className = 'convite-l';
-    cx.innerHTML = `
-      <p>This page is also available in English.</p>
-      <a class="cap cap--cheio" href="${outraLingua()}" hreflang="en" data-sem-seta>Read in English</a>
-      <button class="convite-l__x" type="button" aria-label="Dismiss">&times;</button>`;
-    cx.querySelector('.convite-l__x').addEventListener('click', () => {
-      cx.remove();
-      try { localStorage.setItem('fs-lingua-convite', 'nao'); } catch { /* modo privado */ }
-    });
-    document.body.append(cx);
-  };
-
-  /* Espera pelo banner dos cookies. Os dois vivem no rodapé do ecrã e, num
-     telemóvel, ocupariam a mesma faixa; e há uma ordem entre eles — primeiro
-     decide-se o que se autoriza, e só depois se oferece outra coisa. */
-  const banner = document.getElementById('ck');
-  if (!banner) { mostrar(); return; }
-  const olho = new MutationObserver(() => {
-    if (document.getElementById('ck')) return;
-    olho.disconnect();
-    mostrar();
+  const cx = document.createElement('div');
+  cx.className = 'convite-l';
+  cx.innerHTML = `
+    <p>This page is also available in English.</p>
+    <a class="cap cap--cheio" href="${outraLingua()}" hreflang="en" data-sem-seta>Read in English</a>
+    <button class="convite-l__x" type="button" aria-label="Dismiss">&times;</button>`;
+  cx.querySelector('.convite-l__x').addEventListener('click', () => {
+    cx.remove();
+    try { localStorage.setItem('fs-lingua-convite', 'nao'); } catch { /* modo privado */ }
+    document.dispatchEvent(new CustomEvent('fs:convite-fechado'));
   });
-  olho.observe(document.body, { childList: true });
+  document.body.append(cx);
+  document.body.classList.add('tem-convite');
+  const sai = new MutationObserver(() => {
+    if (document.body.contains(cx)) return;
+    document.body.classList.remove('tem-convite');
+    sai.disconnect();
+  });
+  sai.observe(document.body, { childList: true });
 }

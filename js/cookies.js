@@ -15,6 +15,8 @@
  * aqui o identificador «G-…» no dia em que existir.
  */
 
+import { lePortugues } from './i18n.js';
+
 const CHAVE = 'fs-consentimento-v1';
 const MEDICAO = '';
 
@@ -107,14 +109,36 @@ export function cookies(lingua = 'pt') {
   arrancarConsentMode();
 
   const guardado = ler();
-  if (guardado) aplicar(guardado);
-  else banner(lingua);
+  if (guardado) { aplicar(guardado); ligarBotao(); return; }
 
-  // o botão do rodapé deixa mudar de ideias a qualquer momento
+  /* Em que língua se pergunta.
+   *
+   * Não é a da página: é a de quem lê. Um visitante inglês que caia na versão
+   * portuguesa via o aviso de privacidade em português — a decisão mais séria
+   * que a página lhe pede, escrita numa língua que ele não pediu. Isso não é
+   * consentimento informado, é um botão que se carrega para o muro sair. */
+  const falo = lingua === 'pt' && !lePortugues() ? 'en' : lingua;
+
+  /* E espera pelo convite de língua, se houver um.
+   *
+   * Os dois vivem na mesma faixa do fundo do ecrã, e há uma ordem entre eles
+   * que estava invertida: primeiro escolhe-se a língua, depois pergunta-se o
+   * resto nela. Quem aceita o convite muda de página e o banner nasce já em
+   * inglês do outro lado; quem o fecha fica com o banner na língua dele. */
+  if (document.querySelector('.convite-l')) {
+    document.addEventListener('fs:convite-fechado', () => banner(falo), { once: true });
+  } else {
+    banner(falo);
+  }
+  ligarBotao();
+}
+
+/* O botão do rodapé deixa mudar de ideias a qualquer momento. */
+function ligarBotao() {
+
   document.addEventListener('click', (e) => {
     if (!e.target.closest('#abrirCookies')) return;
     document.getElementById('ck')?.remove();
     banner(document.documentElement.lang.startsWith('en') ? 'en' : 'pt');
   });
-
 }

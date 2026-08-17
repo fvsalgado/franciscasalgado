@@ -49,6 +49,11 @@ document.documentElement.classList.add('js');
 export function iniciar(pintar) {
   tema();
   const l = lingua();
+  /* A ordem destes dois importa e já esteve trocada: o convite de língua
+     primeiro, o pedido de consentimento a seguir. Ver o comentário em
+     js/i18n.js — quem chega em inglês escolhia a língua depois de já lhe
+     terem pedido a decisão mais séria da página em português. */
+  convidarLingua();
   cookies(l);
 
   const repintar = async (l) => {
@@ -80,7 +85,6 @@ export function iniciar(pintar) {
 
   repintar(l);
   flutuante(l);
-  convidarLingua();
 
   /* Devolve-se `i18n` com a mesma forma de antes — quem chama só lhe pergunta
      a língua, e não tem de saber que ela deixou de mudar sem recarregar. */

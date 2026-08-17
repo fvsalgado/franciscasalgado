@@ -1,166 +1,164 @@
 {
-  "porFicheiro": {
-    "retrato.webp": {
-      "pt": "Foto: Federação Portuguesa de Golfe",
-      "en": "Photo: Portuguese Golf Federation",
-      "_origem": "https://portal.fpg.pt/perfil/francisca-salgado/"
-    },
-    "retrato-quadrado.webp": {
-      "pt": "Foto: Federação Portuguesa de Golfe",
-      "en": "Photo: Portuguese Golf Federation",
-      "_origem": "https://www.cdp.pt/2025/12/12/francisca-salgado-no-podio/ — a peça credita a fotografia à FPG"
-    },
-    "jogo.webp": {
-      "pt": "Foto: Praia D'El Rey Golf Course",
-      "en": "Photo: Praia D'El Rey Golf Course",
-      "_origem": "https://clubedegolfe.praia-del-rey.com/vice-champion-francisca-salgado/"
-    },
-    "trofeu.webp": {
-      "pt": "Foto: Federação Portuguesa de Golfe",
-      "en": "Photo: Portuguese Golf Federation",
-      "_origem": "Taça FPG 2025, publicada em https://clubedegolfe.praia-del-rey.com/vice-champion-francisca-salgado/"
-    },
-    "og.jpg": {
-      "pt": "Foto: Federação Portuguesa de Golfe",
-      "en": "Photo: Portuguese Golf Federation",
-      "_origem": "https://portal.fpg.pt/perfil/francisca-salgado/"
-    },
-    "swing.webp": {
-      "pt": "Foto: Federação Portuguesa de Golfe",
-      "en": "Photo: Portuguese Golf Federation",
-      "_origem": "3.º Torneio Drive Tour – Tejo, 2025 — https://portal.fpg.pt/noticias/francisca-salgado-vence-3-o-torneio-drive-tour-tejo/"
-    },
-    "english.webp": {
-      "pt": "Foto: Pedro Salgado / Federação Portuguesa de Golfe",
-      "en": "Photo: Pedro Salgado / Portuguese Golf Federation",
-      "_origem": "English Girls' Open, 2026 — a peça da FPG credita «Texto e Fotografia © Pedro Salgado»"
-    },
-    "pares.webp": {
-      "pt": "Foto: Federação Portuguesa de Golfe",
-      "en": "Photo: Portuguese Golf Federation",
-      "_origem": "Campeonato Nacional de Pares, 2026 — https://portal.fpg.pt/noticias/francisca-salgado-e-rodrigo-constantino-campeoes-nacionais-de-pares/"
-    },
-    "aquapor.webp": {
-      "pt": "Foto: Federação Portuguesa de Golfe",
-      "en": "Photo: Portuguese Golf Federation",
-      "_origem": "2.º Torneio do Circuito Aquapor, 2026 — https://portal.fpg.pt/noticias/francisca-salgado-e-joao-miguel-pereira-vencem-2o-torneio-do-circuito-aquapor/"
-    },
-    "sub10.webp": {
-      "pt": "Foto: Filipe Guerra / GolfTattoo / Federação Portuguesa de Golfe",
-      "en": "Photo: Filipe Guerra / GolfTattoo / Portuguese Golf Federation",
-      "_origem": "Campeonato Nacional Sub-10, 2019 — a peça da FPG credita «© Filipe Guerra/GolfTattoo/FPG»"
-    },
-    "podio-2024.webp": {
-      "pt": "Foto: Federação Portuguesa de Golfe",
-      "en": "Photo: Portuguese Golf Federation",
-      "_origem": "1.º Torneio do Circuito Aquapor, 2024 — https://portal.fpg.pt/noticias/alexandre-abreu-francisca-salgado-e-alexander-amey-vencem-no-1o-torneio-do-circuito-aquapor/"
-    },
-    "fpg.webp": {
-      "pt": "Federação Portuguesa de Golfe",
-      "en": "Portuguese Golf Federation",
-      "_origem": "logótipo oficial"
-    },
-    "fundacao-desporto.webp": {
-      "pt": "Fundação do Desporto",
-      "en": "Fundação do Desporto",
-      "_origem": "logótipo oficial"
-    },
-    "puma-golf.webp": {
-      "pt": "Puma Golf",
-      "en": "Puma Golf",
-      "_origem": "logótipo da marca"
-    },
-    "avatar.webp": {
-      "pt": "Foto: Praia D'El Rey Golf Course",
-      "en": "Photo: Praia D'El Rey Golf Course",
-      "_origem": "mesmo original de jogo.webp — https://clubedegolfe.praia-del-rey.com/vice-champion-francisca-salgado/"
-    },
-    "cobra-golf.svg": {
-      "pt": "Cobra Golf",
-      "en": "Cobra Golf",
-      "_origem": "logótipo vetorial fornecido pela atleta"
-    },
-    "praia-del-rey.webp": {
-      "pt": "Foto: Vitor Oliveira",
-      "en": "Photo: Vitor Oliveira",
-      "licenca": "CC BY-SA 2.0",
-      "licencaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-      "_origem": "https://commons.wikimedia.org/wiki/File:Praia_D%27El_Rey_Golf_%26_Country_Club_-_Portugal_(4131743574).jpg — recortada para 3:2 e reduzida; a obra derivada segue a mesma licença"
-    },
-    "west-cliffs.webp": {
-      "pt": "Foto: West Cliffs Golf Links",
-      "en": "Photo: West Cliffs Golf Links",
-      "_origem": "https://westcliffs.com/ (wp-content/uploads/2021/01/homepage-collective3.jpg) — recortada para 3:2 e reduzida. Publicada com autorização do clube."
-    },
-    "quinta-do-peru.webp": {
-      "pt": "Foto: Quinta do Peru Golf & Country Club",
-      "en": "Photo: Quinta do Peru Golf & Country Club",
-      "_origem": "Material do clube, obtido em https://www.golftattoo.com/images/campos/QTA_DO_PERU/GOLF_PERU_001.jpg — recortada para 3:2 e reduzida. Publicada com autorização do clube. Trocar por um ficheiro entregue pelo próprio clube quando houver."
-    },
-    "jamor.webp": {
-      "pt": "Foto: Federação Portuguesa de Golfe",
-      "en": "Photo: Portuguese Golf Federation",
-      "_origem": "Centro Nacional de Formação de Golfe do Jamor, em https://portal.fpg.pt/cnfg-jamor/sobre-o-cnfg-jamor/ (Campo-Jamor_01_1920x1080.jpg) — recortada para 3:2 e reduzida. O campo é do IPDJ e a gestão é da FPG."
-    },
-    "driver.webp": {
-      "pt": "Cobra Golf",
-      "en": "Cobra Golf",
-      "_origem": "cobragolf.com, série «address» de cada ficha de produto — recortada do branco de estúdio para o fundo do sítio. Publicada com autorização."
-    },
-    "madeira.webp": {
-      "pt": "Cobra Golf",
-      "en": "Cobra Golf",
-      "_origem": "cobragolf.com, série «address» de cada ficha de produto — recortada do branco de estúdio para o fundo do sítio. Publicada com autorização."
-    },
-    "hibrido.webp": {
-      "pt": "Cobra Golf",
-      "en": "Cobra Golf",
-      "_origem": "cobragolf.com, série «address» de cada ficha de produto — recortada do branco de estúdio para o fundo do sítio. Publicada com autorização."
-    },
-    "ferros.webp": {
-      "pt": "Cobra Golf",
-      "en": "Cobra Golf",
-      "_origem": "cobragolf.com, série «address» de cada ficha de produto — recortada do branco de estúdio para o fundo do sítio. Publicada com autorização."
-    },
-    "wedge.webp": {
-      "pt": "Cobra Golf",
-      "en": "Cobra Golf",
-      "_origem": "cobragolf.com, série «address» de cada ficha de produto — recortada do branco de estúdio para o fundo do sítio. Publicada com autorização."
-    },
-    "putter.webp": {
-      "pt": "Scotty Cameron",
-      "en": "Scotty Cameron",
-      "_origem": "imagem de produto da Scotty Cameron (Titleist), fornecida pela atleta — recortada do branco de estúdio para o fundo do sítio. Publicada com autorização."
-    },
-    "bola.webp": {
-      "pt": "Titleist",
-      "en": "Titleist",
-      "_origem": "imagem de produto da Titleist, fornecida pela atleta — recortada do branco de estúdio para o fundo do sítio e montada em tela alta para entrar na fila à escala certa. Publicada com autorização."
-    },
-    "luva.webp": {
-      "pt": "FootJoy",
-      "en": "FootJoy",
-      "_origem": "imagem de produto da FootJoy, fornecida pela atleta. Publicada com autorização."
-    },
-    "saco.webp": {
-      "pt": "Foto: Francisca Salgado",
-      "en": "Photo: Francisca Salgado",
-      "_origem": "fotografia pessoal do saco de competição, fornecida pela atleta"
-    }
+ "porFicheiro": {
+  "retrato.webp": {
+   "pt": "Foto: Federação Portuguesa de Golfe",
+   "en": "Photo: Portuguese Golf Federation",
+   "_origem": "https://portal.fpg.pt/perfil/francisca-salgado/"
   },
-  "porDominio": {
-    "assets-us-01.kc-usercontent.com": {
-      "pt": "Foto: World Amateur Golf Ranking",
-      "en": "Photo: World Amateur Golf Ranking",
-      "_origem": "imagem do perfil oficial da jogadora no wagr.com"
-    },
-    "scontent.cdninstagram.com": {
-      "pt": "Instagram · @francisca_salgado_",
-      "en": "Instagram · @francisca_salgado_"
-    },
-    "instagram.com": {
-      "pt": "Instagram · @francisca_salgado_",
-      "en": "Instagram · @francisca_salgado_"
-    }
+  "retrato-quadrado.webp": {
+   "pt": "Foto: Federação Portuguesa de Golfe",
+   "en": "Photo: Portuguese Golf Federation",
+   "_origem": "https://www.cdp.pt/2025/12/12/francisca-salgado-no-podio/ — a peça credita a fotografia à FPG"
+  },
+  "jogo.webp": {
+   "pt": "Foto: Praia D'El Rey Golf Course",
+   "en": "Photo: Praia D'El Rey Golf Course",
+   "_origem": "https://clubedegolfe.praia-del-rey.com/vice-champion-francisca-salgado/"
+  },
+  "trofeu.webp": {
+   "pt": "Foto: Federação Portuguesa de Golfe",
+   "en": "Photo: Portuguese Golf Federation",
+   "_origem": "Taça FPG 2025, publicada em https://clubedegolfe.praia-del-rey.com/vice-champion-francisca-salgado/"
+  },
+  "og.jpg": {
+   "pt": "Foto: Federação Portuguesa de Golfe",
+   "en": "Photo: Portuguese Golf Federation",
+   "_origem": "https://portal.fpg.pt/perfil/francisca-salgado/"
+  },
+  "swing.webp": {
+   "pt": "Foto: Federação Portuguesa de Golfe",
+   "en": "Photo: Portuguese Golf Federation",
+   "_origem": "3.º Torneio Drive Tour – Tejo, 2025 — https://portal.fpg.pt/noticias/francisca-salgado-vence-3-o-torneio-drive-tour-tejo/"
+  },
+  "english.webp": {
+   "pt": "Foto: Pedro Salgado / Federação Portuguesa de Golfe",
+   "en": "Photo: Pedro Salgado / Portuguese Golf Federation",
+   "_origem": "English Girls' Open, 2026 — a peça da FPG credita «Texto e Fotografia © Pedro Salgado»"
+  },
+  "pares.webp": {
+   "pt": "Foto: Federação Portuguesa de Golfe",
+   "en": "Photo: Portuguese Golf Federation",
+   "_origem": "Campeonato Nacional de Pares, 2026 — https://portal.fpg.pt/noticias/francisca-salgado-e-rodrigo-constantino-campeoes-nacionais-de-pares/"
+  },
+  "aquapor.webp": {
+   "pt": "Foto: Federação Portuguesa de Golfe",
+   "en": "Photo: Portuguese Golf Federation",
+   "_origem": "2.º Torneio do Circuito Aquapor, 2026 — https://portal.fpg.pt/noticias/francisca-salgado-e-joao-miguel-pereira-vencem-2o-torneio-do-circuito-aquapor/"
+  },
+  "sub10.webp": {
+   "pt": "Foto: Filipe Guerra / GolfTattoo / Federação Portuguesa de Golfe",
+   "en": "Photo: Filipe Guerra / GolfTattoo / Portuguese Golf Federation",
+   "_origem": "Campeonato Nacional Sub-10, 2019 — a peça da FPG credita «© Filipe Guerra/GolfTattoo/FPG»"
+  },
+  "podio-2024.webp": {
+   "pt": "Foto: Federação Portuguesa de Golfe",
+   "en": "Photo: Portuguese Golf Federation",
+   "_origem": "1.º Torneio do Circuito Aquapor, 2024 — https://portal.fpg.pt/noticias/alexandre-abreu-francisca-salgado-e-alexander-amey-vencem-no-1o-torneio-do-circuito-aquapor/"
+  },
+  "fpg.webp": {
+   "pt": "Federação Portuguesa de Golfe",
+   "en": "Portuguese Golf Federation",
+   "_origem": "logótipo oficial"
+  },
+  "fundacao-desporto.webp": {
+   "pt": "Fundação do Desporto",
+   "en": "Fundação do Desporto",
+   "_origem": "logótipo oficial"
+  },
+  "puma-golf.webp": {
+   "pt": "Puma Golf",
+   "en": "Puma Golf",
+   "_origem": "logótipo da marca"
+  },
+  "avatar.webp": {
+   "pt": "Foto: Praia D'El Rey Golf Course",
+   "en": "Photo: Praia D'El Rey Golf Course",
+   "_origem": "mesmo original de jogo.webp — https://clubedegolfe.praia-del-rey.com/vice-champion-francisca-salgado/"
+  },
+  "cobra-golf.svg": {
+   "pt": "Cobra Golf",
+   "en": "Cobra Golf",
+   "_origem": "logótipo vetorial fornecido pela atleta"
+  },
+  "praia-del-rey.webp": {
+   "pt": "Foto: Praia D’El Rey Golf & Beach Resort",
+   "en": "Photo: Praia D’El Rey Golf & Beach Resort",
+   "_origem": "https://clubedegolfe.praia-del-rey.com/ (wp-content/uploads/2020/07/banner-courses-praia-del-rey.jpg) — recortada para 3:2 e reduzida. Substituiu uma fotografia de Vitor Oliveira (CC BY-SA 2.0, via Wikimedia Commons): era um instantâneo de turista, com estrada e candeeiro, ao lado de fotografia profissional do West Cliffs — e foi por isso que o tutor a recusou. Esta é do próprio clube, e está aqui pela mesma autorização que cobre as outras."
+  },
+  "west-cliffs.webp": {
+   "pt": "Foto: West Cliffs Golf Links",
+   "en": "Photo: West Cliffs Golf Links",
+   "_origem": "https://westcliffs.com/ (wp-content/uploads/2021/01/homepage-collective3.jpg) — recortada para 3:2 e reduzida. Publicada com autorização do clube."
+  },
+  "quinta-do-peru.webp": {
+   "pt": "Foto: Quinta do Peru Golf & Country Club",
+   "en": "Photo: Quinta do Peru Golf & Country Club",
+   "_origem": "Material do clube, obtido em https://www.golftattoo.com/images/campos/QTA_DO_PERU/GOLF_PERU_001.jpg — recortada para 3:2 e reduzida. Publicada com autorização do clube. Trocar por um ficheiro entregue pelo próprio clube quando houver."
+  },
+  "jamor.webp": {
+   "pt": "Foto: Federação Portuguesa de Golfe",
+   "en": "Photo: Portuguese Golf Federation",
+   "_origem": "Centro Nacional de Formação de Golfe do Jamor, em https://portal.fpg.pt/cnfg-jamor/sobre-o-cnfg-jamor/ (Campo-Jamor_01_1920x1080.jpg) — recortada para 3:2 e reduzida. O campo é do IPDJ e a gestão é da FPG."
+  },
+  "driver.webp": {
+   "pt": "Cobra Golf",
+   "en": "Cobra Golf",
+   "_origem": "cobragolf.com, série «address» de cada ficha de produto — recortada do branco de estúdio para o fundo do sítio. Publicada com autorização."
+  },
+  "madeira.webp": {
+   "pt": "Cobra Golf",
+   "en": "Cobra Golf",
+   "_origem": "cobragolf.com, série «address» de cada ficha de produto — recortada do branco de estúdio para o fundo do sítio. Publicada com autorização."
+  },
+  "hibrido.webp": {
+   "pt": "Cobra Golf",
+   "en": "Cobra Golf",
+   "_origem": "cobragolf.com, série «address» de cada ficha de produto — recortada do branco de estúdio para o fundo do sítio. Publicada com autorização."
+  },
+  "ferros.webp": {
+   "pt": "Cobra Golf",
+   "en": "Cobra Golf",
+   "_origem": "cobragolf.com, série «address» de cada ficha de produto — recortada do branco de estúdio para o fundo do sítio. Publicada com autorização."
+  },
+  "wedge.webp": {
+   "pt": "Cobra Golf",
+   "en": "Cobra Golf",
+   "_origem": "cobragolf.com, série «address» de cada ficha de produto — recortada do branco de estúdio para o fundo do sítio. Publicada com autorização."
+  },
+  "putter.webp": {
+   "pt": "Scotty Cameron",
+   "en": "Scotty Cameron",
+   "_origem": "imagem de produto da Scotty Cameron (Titleist), fornecida pela atleta — recortada do branco de estúdio para o fundo do sítio. Publicada com autorização."
+  },
+  "bola.webp": {
+   "pt": "Titleist",
+   "en": "Titleist",
+   "_origem": "imagem de produto da Titleist, fornecida pela atleta — recortada do branco de estúdio para o fundo do sítio e montada em tela alta para entrar na fila à escala certa. Publicada com autorização."
+  },
+  "luva.webp": {
+   "pt": "FootJoy",
+   "en": "FootJoy",
+   "_origem": "imagem de produto da FootJoy, fornecida pela atleta. Publicada com autorização."
+  },
+  "saco.webp": {
+   "pt": "Foto: Francisca Salgado",
+   "en": "Photo: Francisca Salgado",
+   "_origem": "fotografia pessoal do saco de competição, fornecida pela atleta"
   }
+ },
+ "porDominio": {
+  "assets-us-01.kc-usercontent.com": {
+   "pt": "Foto: World Amateur Golf Ranking",
+   "en": "Photo: World Amateur Golf Ranking",
+   "_origem": "imagem do perfil oficial da jogadora no wagr.com"
+  },
+  "scontent.cdninstagram.com": {
+   "pt": "Instagram · @francisca_salgado_",
+   "en": "Instagram · @francisca_salgado_"
+  },
+  "instagram.com": {
+   "pt": "Instagram · @francisca_salgado_",
+   "en": "Instagram · @francisca_salgado_"
+  }
+ }
 }
