@@ -348,10 +348,10 @@ export async function witb(cx, lingua = 'pt') {
      ligação tem de ser um número que as duas partilhem, não a ordem em que
      calharam ficar. */
   const linhas = [
-    ...(d.tacos || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua), img: t.img, u: t.u })),
-    ...(d.bola ? [{ r: en ? 'Ball' : 'Bola', m: nome(d.bola), img: foto(d.bola) }] : []),
-    ...(d.luva ? [{ r: en ? 'Glove' : 'Luva', m: nome(d.luva), img: foto(d.luva) }] : []),
-    ...(d.extras || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua) })),
+    ...(d.tacos || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua), img: t.img, u: t.u, url: t.url })),
+    ...(d.bola ? [{ r: en ? 'Ball' : 'Bola', m: nome(d.bola), img: foto(d.bola), url: d.bola?.url }] : []),
+    ...(d.luva ? [{ r: en ? 'Glove' : 'Luva', m: nome(d.luva), img: foto(d.luva), url: d.luva?.url }] : []),
+    ...(d.extras || []).map((t) => ({ r: tx(t.t, lingua), m: t.m, n: tx(t.n, lingua), img: t.img, url: t.url })),
   ].filter((l) => l.m).map((l, i) => ({ ...l, i }));
 
   if (!linhas.length) { cx.innerHTML = ''; mostrar(cx, false); return; }
@@ -381,7 +381,9 @@ export async function witb(cx, lingua = 'pt') {
       ${l.img ? `<span class="saco__ki"><img src="/img/witb/${l.img}" alt="" loading="lazy"
             decoding="async" data-credito-em="witbCred" /></span>` : ''}
       <p class="saco__kr">${l.r}</p>
-      <p class="saco__km">${l.m}</p>
+      <p class="saco__km">${l.url
+    ? `<a class="saco__kl" href="${l.url}" target="_blank" rel="noopener" data-sem-seta>${l.m}<span aria-hidden="true"> ↗</span></a>`
+    : l.m}</p>
       ${l.n ? `<p class="saco__kn">${l.n}</p>` : ''}
     </li>`;
 

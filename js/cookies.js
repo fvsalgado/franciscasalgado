@@ -119,17 +119,10 @@ export function cookies(lingua = 'pt') {
    * consentimento informado, é um botão que se carrega para o muro sair. */
   const falo = lingua === 'pt' && !lePortugues() ? 'en' : lingua;
 
-  /* E espera pelo convite de língua, se houver um.
-   *
-   * Os dois vivem na mesma faixa do fundo do ecrã, e há uma ordem entre eles
-   * que estava invertida: primeiro escolhe-se a língua, depois pergunta-se o
-   * resto nela. Quem aceita o convite muda de página e o banner nasce já em
-   * inglês do outro lado; quem o fecha fica com o banner na língua dele. */
-  if (document.querySelector('.convite-l')) {
-    document.addEventListener('fs:convite-fechado', () => banner(falo), { once: true });
-  } else {
-    banner(falo);
-  }
+  /* O convite de língua deixou de existir — quem não lê português é
+     reencaminhado para /en antes de isto correr — por isso o banner nasce
+     logo, na língua de quem ficou. */
+  banner(falo);
   ligarBotao();
 }
 

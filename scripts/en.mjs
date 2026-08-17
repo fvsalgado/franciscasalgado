@@ -35,7 +35,7 @@ export const EN = {
   rc_ev_tit: 'How it has moved',
   rc_ev_txt: 'The <strong>WAGR</strong> is the world ranking of amateur golf, run by The R&amp;A and the USGA; the <strong>EGR</strong> is the European one, by age category. The lower the number the better the position — the axis here is inverted, so good news goes up.',
   rc_pa_rot: 'Record',
-  rc_pa_tit: 'Eighteen wins, five national titles',
+  rc_pa_tit: 'Nineteen wins, five national titles',
   rc_pa_txt: 'She plays for <strong>Vale de Janelas</strong> — Praia D\'El Rey and West Cliffs, in Óbidos — and '
     + 'for the <strong>Portuguese women\'s amateur national team</strong>. Every event she has played, with the '
     + 'source of each, is in <a class="lig" href="resultados.html">season by season</a>, year by year since 2018.',

@@ -27,7 +27,7 @@
    }
   },
   {
-   "v": "18",
+   "v": "19",
    "r": {
     "pt": "Vitórias",
     "en": "Wins"
@@ -450,28 +450,43 @@
    "x": {
     "pt": "Treinador principal",
     "en": "Head coach"
-   }
+   },
+   "url": "https://www.instagram.com/togolf_coach"
   },
   {
    "nome": "Ana Monteiro",
    "x": {
     "pt": "Preparação física",
     "en": "Strength & conditioning"
-   }
+   },
+   "url": "https://www.instagram.com/anamonteiro_osteo"
   },
   {
    "nome": "Luis Almeida",
    "x": {
     "pt": "Treino mental",
     "en": "Mental coach"
-   }
+   },
+   "url": "https://portal.fpg.pt/perfil/luis-almeida/",
+   "foto": "luis-almeida.webp"
+  },
+  {
+   "nome": "Teresa São Marcos",
+   "x": {
+    "pt": "Nutrição",
+    "en": "Nutrition"
+   },
+   "url": "https://portal.fpg.pt/perfil/teresa-sao-marcos/",
+   "foto": "teresa-sao-marcos.webp"
   },
   {
    "nome": "Nelson Ribeiro",
    "x": {
     "pt": "Selecionador nacional",
     "en": "National coach"
-   }
+   },
+   "url": "https://portal.fpg.pt/perfil/nelson-ribeiro-2/",
+   "foto": "nelson-ribeiro.webp"
   }
  ]
 }
