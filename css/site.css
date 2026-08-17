@@ -1224,15 +1224,6 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 .saco__sl .saco__km{margin:0;font-size:1rem}
 
 /* ── catorze ────────────────────────────────────────────── */
-/* O número acima da fila, a subir de zero quando a secção aparece. Catorze é o
-   máximo que as regras deixam levar, e é a coisa desta secção que um golfista
-   percebe mais depressa. */
-.witb__14{display:flex;align-items:baseline;gap:.7rem;margin:0 0 clamp(1rem,2.5vw,1.8rem)}
-.witb__14n{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 96;
-           font-size:clamp(2.6rem,6vw,4rem);line-height:.9;letter-spacing:-.03em;
-           color:var(--relva);font-variant-numeric:tabular-nums}
-.witb__14r{font-size:.66rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
-           color:var(--tinta-fraca)}
 
 /* ── a escada de lofts ──────────────────────────────────── */
 /* Uma régua do driver ao wedge mais aberto, cada taco no seu grau. É o que
@@ -1309,9 +1300,6 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 .cita__f a:hover{opacity:.65}
 
 /* ── apoiar / patrocínios ───────────────────────────────── */
-/* o formulário à esquerda, as ligações à direita */
-.contacto{display:grid;gap:clamp(2rem,5vw,5rem)}
-@media (min-width:900px){.contacto{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}}
 /* Três cartões a par, e não três barras empilhadas. Empilhadas liam-se como
    degraus de preço por ordem crescente, que é o contrário do que são: são
    três maneiras diferentes de entrar, e nenhuma é maior do que a outra. */
@@ -1343,28 +1331,33 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 .degrau:hover .degrau__b::after{transform:translateX(.28rem)}
 
 /* ── as duas vias de contacto ───────────────────────────── */
-/* No lugar do formulário. Dois cartões grandes e nada mais: o endereço lê-se
-   e copia-se sem carregar em nada, e quem carrega vai direito ao seu próprio
-   email ou ao Instagram. */
-/* Empilhados e não lado a lado: a par, cada cartão ficava com uns 260px e o
-   endereço partia-se a meio da palavra — «birdie@franciscasalgado.g / olf». */
+/* Duas linhas, e não dois cartões. Já foram cartões grandes com ícone em
+   pedestal e uma frase de explicação cada um — um ecrã inteiro de telemóvel
+   para dizer duas moradas. A explicação já está na frase de abertura da
+   secção; a linha diz o que é, onde é, e que se pode ir. O endereço continua
+   a ler-se e a copiar-se sem carregar em nada.
+   Num ecrã largo ficam lado a lado; estreito, empilham — e a linha inteira
+   nunca parte o endereço a meio, porque a fonte de display encolhe antes
+   disso. */
 .ct-vias{display:grid;gap:1px;align-content:start}
-.via{position:relative;display:grid;gap:.35rem;align-content:start;
-     padding:clamp(1.5rem,3vw,2.1rem);background:var(--papel);
+@media (min-width:720px){.ct-vias{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.via{display:flex;align-items:center;gap:.85rem;min-width:0;
+     padding:1rem 1.15rem;background:var(--papel);
      box-shadow:0 0 0 1px var(--linha);
-     transition:background-color .4s var(--curva),box-shadow .4s var(--curva),transform .4s var(--curva)}
-.via:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--cor),0 14px 34px -22px rgba(0,0,0,.5)}
+     transition:background-color .35s var(--curva)}
+.via:hover{background:var(--relva-clara)}
 .via--email{--cor:#1B6B47}
 .via--ig{--cor:#8A3A52}
-.via__i{display:grid;place-items:center;width:2.6rem;height:2.6rem;margin-bottom:.5rem;
+.via__i{flex:none;display:grid;place-items:center;width:2.2rem;height:2.2rem;
         border-radius:50%;border:1px solid var(--linha);color:var(--cor);
-        transition:background-color .4s var(--curva),color .4s var(--curva),border-color .4s var(--curva)}
+        transition:background-color .35s var(--curva),color .35s var(--curva),border-color .35s var(--curva)}
 .via:hover .via__i{background:var(--cor);border-color:var(--cor);color:#fff}
-.via__r{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:var(--cor)}
+.via__t{display:grid;gap:.12rem;min-width:0}
+.via__r{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:var(--cor)}
 .via__n{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 32;
-        font-size:clamp(.98rem,1.7vw,1.24rem);line-height:1.2;letter-spacing:-.015em;
+        font-size:clamp(.94rem,2.6vw,1.14rem);line-height:1.2;letter-spacing:-.015em;
         overflow-wrap:anywhere}
-.via__x{font-size:.85rem;line-height:1.6;color:var(--tinta-fraca);margin-top:.3rem;max-width:34ch}
+.via__s{margin-left:auto;flex:none;color:var(--relva);font-size:.85rem}
 
 /* ── recruiting ─────────────────────────────────────────── */
 .recs{display:grid;gap:1px;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}

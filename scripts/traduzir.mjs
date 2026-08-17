@@ -54,7 +54,7 @@ const CABECALHOS = {
   },
   'witb.html': {
     titulo: "What's in the bag — Francisca Salgado",
-    desc: "Every one of Francisca Salgado's fourteen clubs: Cobra driver and irons, King wedges, "
+    desc: "Francisca Salgado's clubs, one by one: Cobra driver and irons, King wedges, "
       + 'Scotty Cameron Phantom 5 putter and Titleist Pro V1 ball.',
   },
   'imprensa.html': {

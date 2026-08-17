@@ -19,8 +19,7 @@ export const EN = {
   /* A página do saco, que é a mesma secção sozinha — para ser partilhada. */
   wb_rot: "What's in the bag",
   wb_tit: 'What she carries',
-  wb_txt: 'Fourteen clubs — the most the rules allow. Here they are one by one, with the loft '
-    + 'and shaft of each, plus the ball, the glove and the bag.',
+  wb_txt: 'Her clubs one by one, with the loft and shaft of each — plus the ball, the glove and the bag.',
   wb_ma_rot: 'More',
   wb_ma_tit: 'The rest is one link away',
   wb_ma_txt: 'Handicap, rankings, schedule and every result, season by season, with the source of each.',
@@ -124,16 +123,7 @@ export const EN = {
   ct_tit: 'Write to Francisca',
   ct_txt: 'Partnerships, press, invitations to events and photograph requests.',
   ct_v1r: 'Email',
-  ct_v1x: 'For partnership proposals, press and invitations. It is the most direct route.',
   ct_v2r: 'Instagram',
-  ct_v2x: 'Direct message, for anything short.',
-  ct_lig: 'Before you write',
-  ct_x1d: 'Photographs',
-  ct_x1t: 'The high-resolution ones are on the <a class="lig" href="imprensa.html">press page</a>, free to publish with the credit given.',
-  ct_x2d: 'Facts and quotes',
-  ct_x2t: 'Short biography, fact sheet and sourced quotes, also on the <a class="lig" href="imprensa.html">press page</a>.',
-  ct_x3d: 'Results',
-  ct_x3t: 'Event by event and year by year, in <a class="lig" href="resultados.html">season by season</a>.',
 
   /* ── páginas legais ─────────────────────────────────────── */
   pv_rot: 'Privacy',
