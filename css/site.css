@@ -1281,6 +1281,13 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
           border-bottom:1px solid var(--linha-forte)}
 .saco__ki img{display:block;max-height:100%;width:auto;max-width:100%;
               transform-origin:bottom center;transition:transform .5s var(--curva)}
+/* A ligação para o site do fabricante é uma caixa a mais entre a caixa da
+   imagem e a imagem — e uma caixa sem altura própria. O `max-height:100%` do
+   taco passou a resolver contra ela, que não media nada, e os tacos saíam pela
+   borda do cartão. A ligação passa a ser a caixa: estica-se à altura toda e
+   continua a encostar o taco ao fundo, como se não estivesse lá. */
+.saco__kf{display:flex;align-items:flex-end;justify-content:center;
+          align-self:stretch;min-width:0;max-width:100%}
 /* Um cartão sem fotografia — os punhos — não finge que tem. Já reservou a
    altura da caixa de imagem para o traço lhe ficar à mesma altura que o dos
    vizinhos, e o resultado era uma caixa creme vazia do tamanho de um driver.
@@ -1582,6 +1589,16 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
   .topo-p__f img{aspect-ratio:4/3}
 }
 
+/* O retrato do kit de imprensa é vertical — 1080 por 1350 — e estava a entrar
+   numa faixa 21/9 no telemóvel e 4/3 no ecrã largo: das duas vezes sobrava uma
+   tira do meio da cara. É o retrato oficial dela, a fotografia que um jornal
+   vai buscar; aparece inteiro, e é a largura que manda. */
+.topo-p--foto .topo-p__f{max-width:min(64vw,320px);margin-inline:auto}
+.topo-p--foto .topo-p__f img{aspect-ratio:auto;height:auto;object-fit:contain}
+@media (min-width:860px){
+  .topo-p--foto .topo-p__f{max-width:min(100%,360px);margin-inline:0 auto}
+}
+
 /* Cada página interior abre à sua maneira, porque servem coisas diferentes —
    e a abertura deve dizer o que a página é sem uma frase a explicá-lo. */
 
@@ -1783,7 +1800,11 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
   .topo-p--foto .topo-p__in,
   .topo-p--ficha .topo-p__in,
   .apoio-abre__in{grid-template-columns:minmax(0,1fr)}
+  /* Os retratos — o do kit de imprensa e o da ficha — ficam de fora: são
+     verticais, e uma faixa 21/9 devolvia-lhes o corte que se acabou de tirar. */
   .topo-p__f img{aspect-ratio:21/9}
+  .topo-p--foto .topo-p__f{max-width:min(64vw,320px);margin-inline:auto}
+  .topo-p--foto .topo-p__f img{aspect-ratio:auto;height:auto}
 }
 
 /* O que vivia colado ao fundo do ecrã sobe para cima da barra de páginas.
