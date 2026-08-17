@@ -379,36 +379,11 @@ export async function witb(cx, lingua = 'pt') {
     </figure>` : '';
 
   cx.className = 'witb';
-  cx.innerHTML = `${contador(d, lingua)}
+  cx.innerHTML = `
     <ul class="saco__g" role="list">${linhas.map(cartao).join('')}</ul>
     <p class="witb__c" id="witbCred" data-credito-base="${en ? 'Images:' : 'Imagens:'}"></p>
     ${citacao(d, linhas, lingua)}${retrato}`;
-
-  contar(cx);
 }
-
-/* ── catorze ──────────────────────────────────────────────────
- *
- * O número de tacos, contado das unidades e não escrito à mão — um driver, duas
- * madeiras, um híbrido, seis ferros, três wedges e o putter.
- *
- * Catorze é o máximo que a Regra 4.1b deixa levar, e é o facto mais partilhável
- * que esta secção tem: qualquer golfista percebe-o num segundo e ninguém repara
- * nele sozinho. Se um dia ela trocar um híbrido por um ferro, isto diz treze —
- * e a frase ao lado deixa de aparecer, porque deixa de ser verdade. */
-function contador(d, lingua) {
-  const n = (d.tacos || []).reduce((s, t) => s + (t.u?.length || 0), 0);
-  if (!n) return '';
-  const en = lingua === 'en';
-  return `
-    <p class="witb__14">
-      <span class="witb__14n num" data-ate="${n}">${n}</span>
-      <span class="witb__14r">${en ? 'clubs' : 'tacos'}${
-        n === 14 ? ` · ${en ? 'the most the rules allow' : 'o máximo que as regras deixam levar'}` : ''}</span>
-    </p>`;
-}
-
-
 
 /* ── a frase dela ─────────────────────────────────────────────
  *
@@ -443,52 +418,6 @@ function citacao(d, linhas, lingua) {
  * seguinte era gasto a desescolher uma coisa que já estava apagada, e lia-se
  * como um clique que não fez nada. */
 
-
-/* ── o contador a subir ───────────────────────────────────────
- *
- * Vai de zero ao número quando a secção aparece, e uma vez só. Corre em rAF e
- * não em setInterval: um número a saltar de duas em duas décimas lê-se como um
- * relógio avariado, e ligado ao quadro do ecrã sobe liso.
- *
- * Com movimento reduzido não sobe nada — escreve-se logo o número, que é o que
- * interessa a quem pediu ao sistema para as coisas não se mexerem. */
-function contar(cx) {
-  const el = cx.querySelector('.witb__14n');
-  if (!el) return;
-  const ate = Number(el.dataset.ate) || 0;
-  if (!ate) return;
-  if (reduzido) { el.textContent = String(ate); return; }
-
-  /* O número certo está escrito na marcação, e não um zero à espera de
-     JavaScript: assim o ficheiro que o scripts/estatico.mjs grava diz catorze,
-     e diz catorze também a quem chegar sem JavaScript.
-   *
-   * Zera-se só quando há mesmo para onde subir. Se a secção já estiver à vista
-   * quando isto corre — alguém que chegou por uma âncora, ou um ecrã alto —,
-   * fica quieta: catorze a piscar para zero e a voltar não é uma animação, é um
-   * salto. */
-  /* O pré-renderizador grava o estado em repouso, e um contador a meio do
-     caminho ficaria gravado a meio do caminho. */
-  if (window.__estatico) return;
-  const r = el.getBoundingClientRect();
-  if (r.top < innerHeight && r.bottom > 0) return;
-  el.textContent = '0';
-
-  const obs = new IntersectionObserver((entradas) => {
-    if (!entradas.some((e) => e.isIntersecting)) return;
-    obs.disconnect();
-    const t0 = performance.now();
-    const DUR = 900;
-    const passo = (t) => {
-      const k = Math.min(1, (t - t0) / DUR);
-      /* Trava no fim em vez de parar de repente. */
-      el.textContent = String(Math.round(ate * (1 - (1 - k) ** 3)));
-      if (k < 1) requestAnimationFrame(passo);
-    };
-    requestAnimationFrame(passo);
-  }, { rootMargin: '0px 0px -20% 0px' });
-  obs.observe(el);
-}
 
 /* ── o swing, para quem avalia ────────────────────────────────
  *
