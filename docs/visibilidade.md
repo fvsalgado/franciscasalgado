@@ -159,12 +159,14 @@ O canonical de `/en` tem de dizer `/en`, sem barra. O `www` tem de dar 308. E
 o `--seco` do IndexNow tem de listar doze endereços, todos a responder 200 —
 se um deles der 404, o protocolo desconfia de todos.
 
-## 17-08-2026 — inglês por omissão para quem não lê português
+## 17-08-2026 — a língua do utilizador
 
-Decisão do tutor: quem chega com o browser noutra língua é reencaminhado para
-`/en` na primeira visita (JavaScript, `location.replace`), e qualquer toque no
-botão da língua grava a escolha (`fs-lingua`), que passa a mandar. O risco de
-SEO conhecido: um motor que execute JavaScript pode seguir o salto. As rédeas:
-os pares `hreflang` continuam declarados nas duas versões, os `canonical`
+Decisão do tutor (afinada no próprio dia): o sítio segue a língua do browser —
+quem lê português fica no português, os restantes vão para `/en`
+(`location.replace`, em JavaScript). O reencaminhamento **não grava escolha
+nenhuma**: acompanha o browser de cada visita. Só a escolha manual, no botão
+da língua, fica guardada (`fs-lingua`) e passa a mandar. O risco de SEO
+conhecido: um motor que execute JavaScript pode seguir o salto. As rédeas: os
+pares `hreflang` continuam declarados nas duas versões, os `canonical`
 apontam cada casa a si própria, e as ligações internas de cada versão ficam
 dentro dela. O tema passou a escuro por omissão na mesma data.
