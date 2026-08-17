@@ -99,7 +99,7 @@ export async function fichaRecruiting(cx, lingua = 'pt') {
     <article class="rec">
       <span class="rec__v num${texto ? ' rec__v--t' : ''}">${v}${sup ? `<sup>${sup}</sup>` : ''}</span>
       <span class="rec__r">${r}</span>
-      <p class="rec__s">${s}</p>
+      ${s ? `<p class="rec__s">${s}</p>` : ''}
       ${nota ? `<p class="rec__n">${nota}</p>` : ''}
     </article>`;
 
@@ -127,7 +127,9 @@ export async function fichaRecruiting(cx, lingua = 'pt') {
     }));
   }
   if (perfil.secundario?.ano) {
-    cartoes.push(cartao({ v: perfil.secundario.ano, r: t.ano, s: `${t.anoS} ${perfil.secundario.ano}` }));
+    /* Sem subtítulo: «Turma de 2027» por baixo de «2027» era dizer o ano duas
+       vezes — e o próprio título da página já o diz. */
+    cartoes.push(cartao({ v: perfil.secundario.ano, r: t.ano, s: '' }));
   }
 
   /* A próxima prova em cartão, e não o calendário inteiro: esse está na página
@@ -138,7 +140,10 @@ export async function fichaRecruiting(cx, lingua = 'pt') {
     cartoes.push(cartao({ v: quando, r: t.prox, s: nome || '', texto: true }));
   }
 
-  cx.className = 'recs';
+  /* add, e não `className =`: no cabeçalho-ficha o contentor traz
+     `recs--ficha` escrito na marcação, e reescrever a classe apagava-o no
+     primeiro render ao vivo. */
+  cx.classList.add('recs');
   cx.innerHTML = cartoes.join('');
 }
 

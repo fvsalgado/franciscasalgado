@@ -19,7 +19,6 @@ export const EN = {
   /* A página do saco, que é a mesma secção sozinha — para ser partilhada. */
   wb_rot: "What's in the bag",
   wb_tit: 'What she carries',
-  wb_txt: 'Her clubs one by one, with the loft and shaft of each — plus the ball, the glove and the bag.',
   wb_ma_rot: 'More',
   wb_ma_tit: 'The rest is one link away',
   wb_ma_txt: 'Handicap, rankings, schedule and every result, season by season, with the source of each.',
@@ -79,13 +78,14 @@ export const EN = {
   in_txt: 'Practice, travel, and whatever happens between events.',
 
   /* ── resultados ─────────────────────────────────────────── */
-  rs_rot: 'Season by season',
-  rs_tit: 'Nine seasons, event by event',
-  rs_txt: 'From her first federated event, in 2018, to the national U18 title.',
+  rs_tit: 'Season by season',
   im_rot: 'Press',
-  im_tit: 'For people who write about golf',
-  im_txt: 'Biography, facts and quotes, all sourced. High-resolution photographs on request.',
-  im_bt: 'Request photographs',
+  im_tit: 'Press kit',
+  im_k1: 'Biography',
+  im_k2: 'Facts',
+  im_k3: 'Quotes',
+  im_k4: 'Photographs',
+  im_k5: 'Links',
   im_bio_rot: 'Short biography',
   im_bio: '<p>Francisca Salgado is an amateur golfer from Vale de Janelas, in Óbidos, and a member of the Portuguese women\'s amateur national team. She has five national titles: U10 in 2019, U12 and the 3rd Category in 2021 and, in 2026, the Amateur Pairs — alongside Rodrigo Constantino — and the U18.</p><p>She won the first Drive Tour of 2024, at Penina, with the lowest round on her record — 70, three under par — and the GJG Algarve Juniors International later that year, was runner-up in the FPG Cup in 2025 and third at the Memorial Celia Barquín, in Asturias.</p><p>She has played for the national team since 2021, in eight countries — Spain, France, Belgium, Slovakia, Finland, Ireland and England as well as Portugal — including two European Young Masters, two Amundi Evian Juniors Cups and two European Ladies\' Team Championships. In 2026 she finished the English Girls\' Open in 28th. She is supported by the Fundação do Desporto.</p>',
   im_factos: 'Facts',

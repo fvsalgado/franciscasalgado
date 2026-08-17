@@ -1468,7 +1468,7 @@
 <div class="cur" id="cur" aria-hidden="true"><span class="cur__p"></span><span class="cur__a"></span></div>
 <a class="saltar" href="#conteudo" data-t="saltar">Saltar para o conteúdo</a>
 
-<header class="nav" id="nav"><div class="nav__in">
+<header class="nav nav--sobre-foto" id="nav"><div class="nav__in">
       
   <a class="marca" href="/" data-mag="" aria-label="Francisca Salgado">
     <svg class="marca__b" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M8 20.2V3.6l9.2 3.3L8 10.2"></path><ellipse cx="12" cy="20.4" rx="6.8" ry="1.7" fill="none" stroke="currentColor" stroke-width="1.5"></ellipse></svg>
@@ -1492,24 +1492,10 @@
 
 <main id="conteudo">
 
-<section class="topo-p topo-p--foto">
-  <canvas class="sec__campo" id="campo" aria-hidden="true"></canvas>
-  <div class="env topo-p__in">
-    <div class="topo-p__q">
-      <p class="rot" data-t="rs_rot">Época a época</p>
-      <h1 class="d d--l ani" data-t="rs_tit">Nove épocas, prova a prova</h1>
-      <p class="txt topo-p__t" data-t="rs_txt">Da primeira prova federada, em 2018, ao título nacional de Sub-18.</p>
-    </div>
-    <figure class="topo-p__f">
-      <img src="/img/aquapor.webp" alt="Francisca Salgado e João Miguel Pereira premiados no 2.º Torneio do Circuito Aquapor, em 2026" width="1400" height="933" decoding="async" fetchpriority="high" />
-    </figure>
-  </div>
-</section>
-
-<!-- ═══ A SEGUIR ═══════════════════════════════════════ -->
-
-<section class="sec">
+<section class="topo-p topo-p--stats sec--escura">
+  <canvas class="sec__campo" id="campo" data-escuro="1" aria-hidden="true"></canvas>
   <div class="env">
+    <h1 class="d d--l ani" data-t="rs_tit">Época a época</h1>
     <div class="conta" id="contagens"><div class="conta__i">
       <span class="conta__n num">5</span>
       <span class="conta__r">Títulos nacionais</span>
@@ -1530,6 +1516,13 @@
       <span class="conta__n num">18</span>
       <span class="conta__r">Vitórias</span>
     </div></div>
+  </div>
+</section>
+
+<!-- ═══ A SEGUIR ═══════════════════════════════════════ -->
+
+<section class="sec">
+  <div class="env">
     <div class="filtros" id="filtros"><button class="filtro filtro--on" type="button" data-f="tudo" aria-pressed="true">
                 Tudo<span class="filtro__n">56</span></button><button class="filtro" type="button" data-f="titulo" aria-pressed="false">
                 Vitórias<span class="filtro__n">18</span></button><button class="filtro" type="button" data-f="podio" aria-pressed="false">
