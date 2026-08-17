@@ -247,7 +247,7 @@ apurada, fonte e alguma coisa para dizer. São 57 em nove épocas, e a página
 das épocas contava-as como se fossem a carreira toda: «7 provas» em 2023 dava
 a impressão de quem joga meia dúzia de torneios por ano.
 
-O registo federado dela na FPG tem **425 voltas em 261 provas**. O
+O registo federado dela na FPG tem **425 voltas em 257 provas**. O
 `scripts/myfpg.mjs` passou a escrever também o `data/provas-fpg.json` — só
 contagens, por ano, nunca a lista: publicar as 425 voltas com campo, par e
 resultado bruto era o extrato de conta que já ficou decidido não publicar.
@@ -256,6 +256,11 @@ Quem manda em quê:
 
 - **volume** (provas disputadas, provas de cada época) — registo federado;
 - **resultados** (pódios, vitórias, títulos, chamadas) — a lista curada.
+
+O agrupamento de voltas em provas é feito por nome e proximidade de datas.
+A FPG corta o nome da prova aos 50 caracteres, e nalguns casos o corte cai em
+cima do «Dia 2» — daí a terceira regra de aparo no `porProva`, que só actua
+em nomes encostados ao limite. Sem ela contavam-se 261 em vez de 257.
 
 Se o `provas-fpg.json` faltar, as contagens da lista voltam a servir: um
 número a menos, nunca um número errado. A nota de fonte da página diz de onde
