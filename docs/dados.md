@@ -286,3 +286,24 @@ de perguntar à API — e confere com a ordem dos códigos, que é cronológica.
 
 Regra: uma marca que aparece nos reels e não está nos apoios da página é
 passado, e a legenda tem de o dizer. Sem data, tudo se lê como agora.
+
+## O aviso das provas em falta (agosto de 2026)
+
+O vigia abria uma issue por dia com «246 provas no registo da FPG que não
+estão no sítio». Estava errado de duas maneiras:
+
+- comparava **voltas** com **provas** — um campeonato de quatro dias contava
+  quatro vezes;
+- casava por data exacta e pelos primeiros 18 caracteres do nome. A FPG
+  escreve «96th Portuguese International Ladies Amateur Champ» e nós «96.º
+  Campeonato Internacional Amador de Portugal Feminino»; a FPG data a primeira
+  volta e nós às vezes o último dia. Resultado: dava como em falta provas que
+  estavam no sítio há meses, incluindo o Europeu por Equipas de 2026.
+
+Agora agrupa por prova, casa pelo arco da prova com cinco dias de folga de
+cada lado, e só levanta a mão para o que tem nome de campeonato ou de prova
+internacional. De 246 passou a 25 — e essas 25 são reais.
+
+E o mais importante: desde que a contagem de provas passou a vir do registo
+federado, uma prova sem cartão **não é um buraco nos números**. É só uma prova
+de que não se sabe a classificação. O texto do aviso diz isso.
