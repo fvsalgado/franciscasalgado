@@ -272,3 +272,17 @@ Os grupos de apoios tinham uma frase debaixo do rótulo — «Os campos de casa,
 no Oeste» debaixo de CAMPOS ONDE JOGA. Saíram todas, a pedido do tutor. O
 `x` de um grupo em `data/apoios.json` continua a funcionar se algum dia fizer
 falta; sem ele, não se escreve linha nenhuma.
+
+## ECCO (agosto de 2026)
+
+O reel do calçado ECCO é de abril de 2023 e a colaboração foi pontual — ela
+não usa ECCO. A legenda dizia «Calçado de jogo», no presente, e lia-se como
+patrocínio em vigor. Passou a «Calçado · parceria pontual, 2023».
+
+A data saiu do próprio código do post: o `shortcode` do Instagram é o
+identificador da publicação em base64 (alfabeto `A-Za-z0-9-_`), e os bits
+acima do 23.º são o instante da publicação. Serve para datar um reel sem ter
+de perguntar à API — e confere com a ordem dos códigos, que é cronológica.
+
+Regra: uma marca que aparece nos reels e não está nos apoios da página é
+passado, e a legenda tem de o dizer. Sem data, tudo se lê como agora.
