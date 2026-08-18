@@ -98,6 +98,15 @@
       ]
     },
     {
+      "source": "/(favicon.ico|favicon.svg|apple-touch-icon.png|icon-96.png|icon-192.png)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
       "source": "/img/(.*)",
       "headers": [
         {
