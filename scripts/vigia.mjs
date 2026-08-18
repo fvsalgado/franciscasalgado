@@ -30,7 +30,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { buscarEgr } from '../api/_egr.js';
 import { buscarHandicap } from '../api/_handicap.js';
-import { buscarRegisto } from './myfpg.mjs';
+import { buscarRegisto, porProva } from './myfpg.mjs';
 
 const RAIZ = new URL('../', import.meta.url);
 const SECO = process.argv.includes('--seco');
@@ -396,10 +396,46 @@ await passo('myFPG', async () => {
     }
     await gravar('data/handicap-historico.json', { atualizado: hoje, pontos });
 
+    /* Que provas do registo federado ainda não têm cartão no sítio.
+     *
+     * Este aviso já foi outra coisa, e enganava-se de duas maneiras.
+     *
+     * A primeira: comparava voltas com provas. Agora agrupa-se primeiro — um
+     * campeonato de quatro dias é uma prova, não quatro (`porProva`).
+     *
+     * A segunda, pior: comparava datas exactas e os primeiros dezoito
+     * caracteres do nome. A FPG escreve «96th Portuguese International Ladies
+     * Amateur Champ» e nós escrevemos «96.º Campeonato Internacional Amador de
+     * Portugal Feminino»; a FPG data a primeira volta e nós às vezes o último
+     * dia. Nenhuma das duas coisas casava, e o aviso dava como «em falta»
+     * provas que estavam no sítio há meses — incluindo o Europeu por Equipas.
+     * Casa-se pelo arco da prova, com cinco dias de folga de cada lado, que é
+     * o sinal fiável quando os nomes estão em línguas diferentes.
+     *
+     * E o que sobra passa por um crivo. O registo federado tem duzentas e
+     * tal provas, e a maior parte são voltas de clube — roll-ups, ordens de
+     * mérito, taças da casa. Não são cartão de nenhum sítio, e listá-las todas
+     * os dias era garantir que ninguém lia o aviso. Fica o que tem nome de
+     * campeonato ou de prova internacional: uma lista que uma pessoa consegue
+     * mesmo percorrer.
+     *
+     * Nota importante desde agosto de 2026: **o número de provas do sítio já
+     * vem daqui**. Uma prova sem cartão não é um buraco na contagem — é só uma
+     * prova de que não se sabe a classificação. Ver docs/dados.md. */
+    const CLUBE_OU_SOCIAL = /nacional|national|internacional|international|european|europe|masters|espa[ñn]a|espanha|andaluc|galicia|madrid|world|juvenil|absoluto|infantil|interterritorial|fexgolf/i;
+    const dia = 86400000;
+    const mesmoArco = (nossa, dela) => {
+      const ini = new Date(dela.data).getTime() - 5 * dia;
+      const fim = new Date(dela.fim || dela.data).getTime() + 5 * dia;
+      const q = new Date(nossa.data).getTime();
+      return q >= ini && q <= fim;
+    };
+
     const res = await ler('data/resultados.json');
     const conhecidas = res.provas.filter((p) => p.data);
-    const faltam = d.provas.filter((p) => !conhecidas.some((q) => q.data === p.data
-      || (q.torneio?.pt || '').toLowerCase().slice(0, 18) === p.torneio.toLowerCase().slice(0, 18)));
+    const faltam = porProva(d.provas)
+      .filter((p) => !conhecidas.some((q) => mesmoArco(q, p)))
+      .filter((p) => CLUBE_OU_SOCIAL.test(p.torneio));
 
     if (faltam.length) {
       /* Uma volta contada para handicap não é uma prova para o sítio: o
@@ -420,7 +456,7 @@ await passo('myFPG', async () => {
 
       if (porNome.size) {
         const lista = [...porNome.values()].sort((a, b) => b.data.localeCompare(a.data));
-        atencao.push(`**${lista.length} prova(s) no registo da FPG que não estão no sítio** — a tabela da federação junta provas a sério e voltas de campeonato do clube, por isso não entram sozinhas. Cada uma é listada uma vez só:\n${
+        atencao.push(`**${lista.length} campeonato(s) do registo da FPG sem cartão no sítio** — a contagem de provas da página das épocas já vem do registo federado, por isso isto não é um buraco nos números: são provas de que não se sabe a classificação. Entram se alguém a apurar e escrever. Cada uma é listada uma vez só:\n${
           lista.slice(0, 40).map((p) => `  - ${p.data} · ${p.torneio}${p.campo ? ` · ${p.campo}` : ''}${p.bruto ? ` · ${p.bruto}${p.par ? ` (par ${p.par})` : ''}` : ''}`).join('\n')}${
           lista.length > 40 ? `\n  - …e mais ${lista.length - 40}, no próximo aviso.` : ''}`);
 
