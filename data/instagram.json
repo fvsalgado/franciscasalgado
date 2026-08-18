@@ -1,79 +1,79 @@
 {
-  "perfil": {
-    "arroba": "francisca_salgado_",
-    "nome": "Francisca Salgado",
-    "bio": {
-      "pt": "Golfista amadora · Seleção Nacional · Campeã nacional Sub-18",
-      "en": "Amateur golfer · Portuguese national team · National U18 champion"
-    },
-    "seguidores": null,
-    "aSeguir": null,
-    "publicacoes": null,
-    "atualizado": ""
+ "perfil": {
+  "arroba": "francisca_salgado_",
+  "nome": "Francisca Salgado",
+  "bio": {
+   "pt": "Golfista amadora · Seleção Nacional · Campeã nacional Sub-18",
+   "en": "Amateur golfer · Portuguese national team · National U18 champion"
   },
-  "publicacoes": [
-    {
-      "codigo": "Db1E8VDACIn",
-      "tipo": "p"
-    },
-    {
-      "codigo": "Dblt0EVgLDT",
-      "tipo": "p"
-    },
-    {
-      "codigo": "DbQZXc4AEzK",
-      "tipo": "p"
-    },
-    {
-      "codigo": "DYSS6TYCmUC",
-      "tipo": "p"
-    }
-  ],
-  "parcerias": [
-    {
-      "codigo": "DZXButZk32u",
-      "tipo": "reel",
-      "marca": "Lusíadas Saúde",
-      "x": {
-        "pt": "Parceira das Seleções Nacionais",
-        "en": "Partner of the national teams"
-      }
-    },
-    {
-      "codigo": "DWqeTFXAFGV",
-      "tipo": "reel",
-      "marca": "Skip Portugal",
-      "x": {
-        "pt": "Parceira das Seleções Nacionais",
-        "en": "Partner of the national teams"
-      }
-    },
-    {
-      "codigo": "DVT_LlLALMj",
-      "tipo": "reel",
-      "marca": "Cobra Golf",
-      "x": {
-        "pt": "Tacos em prova",
-        "en": "Clubs in play"
-      }
-    },
-    {
-      "codigo": "DUv6OVuAEUp",
-      "tipo": "reel",
-      "marca": "Puma Golf · Cobra Golf",
-      "x": {
-        "pt": "Vestuário e tacos",
-        "en": "Apparel and clubs"
-      }
-    },
-    {
-      "codigo": "CqqrICircDQ",
-      "tipo": "reel",
-      "marca": "ECCO Golf",
-      "x": {
-        "pt": "Calçado de jogo",
-        "en": "Playing shoes"
-      }
-    }
-  ]
+  "seguidores": null,
+  "aSeguir": null,
+  "publicacoes": null,
+  "atualizado": ""
+ },
+ "publicacoes": [
+  {
+   "codigo": "Db1E8VDACIn",
+   "tipo": "p"
+  },
+  {
+   "codigo": "Dblt0EVgLDT",
+   "tipo": "p"
+  },
+  {
+   "codigo": "DbQZXc4AEzK",
+   "tipo": "p"
+  },
+  {
+   "codigo": "DYSS6TYCmUC",
+   "tipo": "p"
+  }
+ ],
+ "parcerias": [
+  {
+   "codigo": "DZXButZk32u",
+   "tipo": "reel",
+   "marca": "Lusíadas Saúde",
+   "x": {
+    "pt": "Parceira das Seleções Nacionais",
+    "en": "Partner of the national teams"
+   }
+  },
+  {
+   "codigo": "DWqeTFXAFGV",
+   "tipo": "reel",
+   "marca": "Skip Portugal",
+   "x": {
+    "pt": "Parceira das Seleções Nacionais",
+    "en": "Partner of the national teams"
+   }
+  },
+  {
+   "codigo": "DVT_LlLALMj",
+   "tipo": "reel",
+   "marca": "Cobra Golf",
+   "x": {
+    "pt": "Tacos em prova",
+    "en": "Clubs in play"
+   }
+  },
+  {
+   "codigo": "DUv6OVuAEUp",
+   "tipo": "reel",
+   "marca": "Puma Golf · Cobra Golf",
+   "x": {
+    "pt": "Vestuário e tacos",
+    "en": "Apparel and clubs"
+   }
+  },
+  {
+   "codigo": "CqqrICircDQ",
+   "tipo": "reel",
+   "marca": "ECCO Golf",
+   "x": {
+    "pt": "Calçado · parceria pontual, 2023",
+    "en": "Shoes · one-off partnership, 2023"
+   }
+  }
+ ]
 }
