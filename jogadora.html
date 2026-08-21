@@ -182,7 +182,7 @@
       <p class="rec__n">Desde 15 ago 2026</p>
     </article>
     <article class="rec">
-      <span class="rec__v num">1944<sup>.ª</sup></span>
+      <span class="rec__v num">1956<sup>.ª</sup></span>
       <span class="rec__r">WAGR</span>
       <p class="rec__s">Ranking mundial amador</p>
       
@@ -225,7 +225,7 @@
 </section>
 
 <!-- ═══ A CURVA ════════════════════════════════════════ -->
-<section class="sec sec--curta sec--fundo" id="evolucao" data-se-vazio="curva" hidden>
+<section class="sec sec--curta sec--fundo" id="evolucao" data-se-vazio="curva">
   <div class="env">
     <div class="cab">
       <div class="cab__t">
@@ -236,7 +236,19 @@
         <p class="txt" data-t="rc_ev_txt">O <strong>WAGR</strong> é o ranking mundial do golfe amador, gerido pelo R&amp;A e pela USGA; o <strong>EGR</strong> é o europeu, por escalão. Quanto mais baixo o número, melhor a posição — aqui o eixo está invertido, para uma boa notícia subir.</p>
       </div>
     </div>
-    <div id="curva"></div>
+    <div id="curva"><figure class="curva">
+      <svg viewBox="0 0 720 220" role="img" preserveAspectRatio="none" aria-label="Evolução: Quanto mais alto, melhor a posição">
+        <polyline points="6.0,18.0 360.0,18.0 714.0,194.0" fill="none" stroke="var(--relva)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline>
+            <circle cx="714.0" cy="194.0" r="3.5" fill="var(--relva)"></circle>
+        <polyline points="6.0,18.0 360.0,194.0 714.0,194.0" fill="none" stroke="var(--ouro)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline>
+            <circle cx="714.0" cy="194.0" r="3.5" fill="var(--ouro)"></circle>
+      </svg>
+      <figcaption class="curva__l">
+        <span><i style="background:var(--relva)"></i>WAGR</span>
+        <span><i style="background:var(--ouro)"></i>EGR Sub-18</span>
+        <span class="curva__d num">AGO 2026 → AGO 2026</span>
+      </figcaption>
+    </figure></div>
   </div>
 </section>
 
