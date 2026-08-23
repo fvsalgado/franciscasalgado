@@ -1,0 +1,799 @@
+{
+ "atualizado": "2026-08-23",
+ "fonte": "scoring.datagolf.pt (plataforma do scoring da FPG)",
+ "nota": "Só a linha dela e o tamanho do campo; a classificação inteira não é nossa para guardar.",
+ "provas": {
+  "2026-08-08|Campeonato do Clube/Club Championship 2026": {
+   "data": "2026-08-08",
+   "torneio": "Campeonato do Clube/Club Championship 2026",
+   "torneioScoring": "Campeonato do Clube/Club Championship 2026",
+   "tcode": "11205",
+   "clube": "177",
+   "clubeNome": "Vale de Janelas",
+   "campo": "Praia d'El-Rey Golf",
+   "dataTorneio": "2026-08-08",
+   "vistas": [
+    {
+     "classificacao": "Classification Individual Aggregate Stroke Play",
+     "pos": 1,
+     "de": 88,
+     "total": "151",
+     "gross": "151",
+     "voltas": [
+      "76",
+      "75"
+     ]
+    }
+   ]
+  },
+  "2026-07-31|Campeonato Andalucia Sub 16 e Sub 18": {
+   "data": "2026-07-31",
+   "torneio": "Campeonato Andalucia Sub 16 e Sub 18",
+   "tcodeTentado": "10606",
+   "erro": "sem linha dela na classificação"
+  },
+  "2026-07-21|International Away": {
+   "data": "2026-07-21",
+   "torneio": "International Away",
+   "erro": "sem correspondência"
+  },
+  "2026-07-15|Circuito Semana ACP Golfe #7": {
+   "data": "2026-07-15",
+   "torneio": "Circuito Semana ACP Golfe #7",
+   "torneioScoring": "Circuito Semana ACP Golfe #7",
+   "tcode": "10380",
+   "clube": "103",
+   "clubeNome": "ACP Golfe",
+   "campo": "Montado",
+   "dataTorneio": "2026-07-15",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 11,
+     "de": 65,
+     "total": "36",
+     "gross": "72",
+     "voltas": [
+      "36"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 1,
+     "de": 65,
+     "total": "36",
+     "gross": "72",
+     "voltas": [
+      "36"
+     ]
+    }
+   ]
+  },
+  "2026-07-08|2026 European Ladies Team Championship": {
+   "data": "2026-07-08",
+   "torneio": "2026 European Ladies Team Championship",
+   "tcodeTentado": "12473",
+   "erro": "sem linha dela na classificação"
+  },
+  "2026-07-01|ACP Ultra Sunset Golf Tour - 4ªprova": {
+   "data": "2026-07-01",
+   "torneio": "ACP Ultra Sunset Golf Tour - 4ªprova",
+   "tcodeTentado": "10396",
+   "erro": "sem linha dela na classificação"
+  },
+  "2026-07-01|Roll Up Stableford - 01/07/2026": {
+   "data": "2026-07-01",
+   "torneio": "Roll Up Stableford - 01/07/2026",
+   "torneioScoring": "Roll Up Stableford - 01/07/2026",
+   "tcode": "11191",
+   "clube": "177",
+   "clubeNome": "Vale de Janelas",
+   "campo": "Praia d'El-Rey Golf",
+   "dataTorneio": "2026-07-01",
+   "vistas": [
+    {
+     "classificacao": "Classification Individual Daily Stableford Net",
+     "pos": "NS",
+     "de": 47,
+     "total": "NS",
+     "gross": "NS",
+     "voltas": [
+      "NS"
+     ]
+    }
+   ]
+  },
+  "2026-06-28|IV Torneio SNQTB/Ópticas - Qta do Peru": {
+   "data": "2026-06-28",
+   "torneio": "IV Torneio SNQTB/Ópticas - Qta do Peru",
+   "torneioScoring": "IV Torneio SNQTB/Ópticas - Qta do Peru",
+   "tcode": "10071",
+   "clube": "115",
+   "clubeNome": "SNQT Bancários",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2026-06-28",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Geral",
+     "pos": 8,
+     "de": 28,
+     "total": "34",
+     "gross": "75",
+     "voltas": [
+      "34"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Geral",
+     "pos": 1,
+     "de": 28,
+     "total": "33",
+     "gross": "75",
+     "voltas": [
+      "33"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Equipas",
+     "pos": 8,
+     "de": 28,
+     "total": "34",
+     "gross": "75",
+     "voltas": [
+      "34"
+     ]
+    }
+   ]
+  },
+  "2026-06-27|5ª Ordem de Mérito Cat B": {
+   "data": "2026-06-27",
+   "torneio": "5ª Ordem de Mérito Cat B",
+   "torneioScoring": "5ª Ordem de Mérito Cat B",
+   "tcode": "10747",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2026-06-27",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 8,
+     "de": 35,
+     "total": "36",
+     "gross": "72",
+     "voltas": [
+      "36"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 1,
+     "de": 35,
+     "total": "36",
+     "gross": "72",
+     "voltas": [
+      "36"
+     ]
+    }
+   ]
+  },
+  "2026-06-25|Xira às Quintas Série 2-6": {
+   "data": "2026-06-25",
+   "torneio": "Xira às Quintas Série 2-6",
+   "torneioScoring": "Xira às Quintas Série 2-6",
+   "tcode": "10442",
+   "clube": "130",
+   "clubeNome": "Xira Golfe",
+   "campo": "PGA  Aroeira No.2",
+   "dataTorneio": "2026-06-25",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 2,
+     "de": 16,
+     "total": "36",
+     "gross": "72",
+     "voltas": [
+      "36"
+     ]
+    }
+   ]
+  },
+  "2026-06-21|Taça Valle Pradinhos": {
+   "data": "2026-06-21",
+   "torneio": "Taça Valle Pradinhos",
+   "torneioScoring": "Taça Valle Pradinhos",
+   "tcode": "10299",
+   "clube": "158",
+   "clubeNome": "Vidago Palace C",
+   "campo": "Vidago Palace",
+   "dataTorneio": "2026-06-21",
+   "vistas": [
+    {
+     "classificacao": "Classifica&#231;&#227;o Individual Di&#225;ria Stableford Net",
+     "pos": 6,
+     "de": 28,
+     "total": "37",
+     "gross": "74",
+     "voltas": [
+      "37"
+     ]
+    }
+   ]
+  },
+  "2026-06-20|5.º Torneio da Ordem de Mérito 2026": {
+   "data": "2026-06-20",
+   "torneio": "5.º Torneio da Ordem de Mérito 2026",
+   "torneioScoring": "5.º Torneio da Ordem de Mérito 2026",
+   "tcode": "10102",
+   "clube": "006",
+   "clubeNome": "Clube TAP",
+   "campo": "Ribagolfe Oaks",
+   "dataTorneio": "2026-06-20",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 7,
+     "de": 31,
+     "total": "33",
+     "gross": "78",
+     "voltas": [
+      "33"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 1,
+     "de": 31,
+     "total": "30",
+     "gross": "78",
+     "voltas": [
+      "30"
+     ]
+    },
+    {
+     "classificacao": "Members Clube 2025",
+     "pos": 3,
+     "de": 18,
+     "total": "33",
+     "gross": "78",
+     "voltas": [
+      "33"
+     ]
+    }
+   ]
+  },
+  "2026-06-14|Taça António Dantas 2026": {
+   "data": "2026-06-14",
+   "torneio": "Taça António Dantas 2026",
+   "torneioScoring": "Taça António Dantas 2026",
+   "tcode": "10739",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2026-06-14",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 6,
+     "de": 89,
+     "total": "38",
+     "gross": "71",
+     "voltas": [
+      "38"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 1,
+     "de": 89,
+     "total": "37",
+     "gross": "71",
+     "voltas": [
+      "37"
+     ]
+    }
+   ]
+  },
+  "2026-06-12|Nacional de Profissionais. - Seniores e Senhoras": {
+   "data": "2026-06-12",
+   "torneio": "Nacional de Profissionais. - Seniores e Senhoras",
+   "torneioScoring": "Nacional de Profissionais. - Seniores e Senhoras",
+   "tcode": "10226",
+   "clube": "912",
+   "clubeNome": "PGA - Portugal",
+   "campo": "PGA  Aroeira No.2",
+   "dataTorneio": "2026-06-12",
+   "vistas": [
+    {
+     "classificacao": "Classifica&#231;&#227;o Individual Agregada Stroke Play",
+     "pos": 8,
+     "de": 12,
+     "total": "159",
+     "gross": "159",
+     "voltas": [
+      "78",
+      "81"
+     ]
+    }
+   ]
+  },
+  "2026-06-04|Campeonato Nacional Absoluto - S": {
+   "data": "2026-06-04",
+   "torneio": "Campeonato Nacional Absoluto - S",
+   "torneioScoring": "Campeonato Nacional Absoluto - S",
+   "tcode": "10911",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Oporto",
+   "dataTorneio": "2026-06-04",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 6,
+     "de": 22,
+     "total": "316",
+     "gross": "316",
+     "voltas": [
+      "80",
+      "80",
+      "77",
+      "79"
+     ]
+    }
+   ]
+  },
+  "2026-05-17|3º Torneio do Circuito Aquapor D2": {
+   "data": "2026-05-17",
+   "torneio": "3º Torneio do Circuito Aquapor D2",
+   "torneioScoring": "3º Torneio do Circuito Aquapor - Vidago Palace",
+   "tcode": "10877",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Vidago Palace",
+   "dataTorneio": "2026-05-16",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 31,
+     "de": 73,
+     "total": "161",
+     "gross": "161",
+     "voltas": [
+      "80",
+      "81"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 6,
+     "de": 14,
+     "total": "161",
+     "gross": "161",
+     "voltas": [
+      "80",
+      "81"
+     ]
+    }
+   ]
+  },
+  "2026-05-16|3º Torneio do Circuito Aquapor - Vidago Palace": {
+   "data": "2026-05-16",
+   "torneio": "3º Torneio do Circuito Aquapor - Vidago Palace",
+   "torneioScoring": "3º Torneio do Circuito Aquapor - Vidago Palace",
+   "tcode": "10877",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Vidago Palace",
+   "dataTorneio": "2026-05-16",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 31,
+     "de": 73,
+     "total": "161",
+     "gross": "161",
+     "voltas": [
+      "80",
+      "81"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 6,
+     "de": 14,
+     "total": "161",
+     "gross": "161",
+     "voltas": [
+      "80",
+      "81"
+     ]
+    }
+   ]
+  },
+  "2026-05-09|109ª Lisbon Cup": {
+   "data": "2026-05-09",
+   "torneio": "109ª Lisbon Cup",
+   "torneioScoring": "109ª Lisbon Cup",
+   "tcode": "11297",
+   "clube": "002",
+   "clubeNome": "Lisbon SC",
+   "campo": "Lisbon Sports Club",
+   "dataTorneio": "2026-05-09",
+   "vistas": [
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": "-",
+     "de": 89,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": "-",
+     "de": 89,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada - Senhoras",
+     "pos": "-",
+     "de": 12,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2026-05-01|Campeonato Nacional de Jovens Sub 18 S": {
+   "data": "2026-05-01",
+   "torneio": "Campeonato Nacional de Jovens Sub 18 S",
+   "torneioScoring": "Campeonato Nacional de Jovens Sub 18 S",
+   "tcode": "10936",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "PGA  Aroeira No.2 - CNJ FPG",
+   "dataTorneio": "2026-05-01",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 1,
+     "de": 5,
+     "total": "235",
+     "gross": "235",
+     "voltas": [
+      "78",
+      "80",
+      "77"
+     ]
+    }
+   ]
+  },
+  "2026-04-01|Internationaux de France U21": {
+   "data": "2026-04-01",
+   "torneio": "Internationaux de France U21",
+   "erro": "sem correspondência"
+  },
+  "2026-03-19|Cto Espana Femenino Sub18": {
+   "data": "2026-03-19",
+   "torneio": "Cto Espana Femenino Sub18",
+   "erro": "sem correspondência"
+  },
+  "2026-03-15|2º Torneio do Circuito Aquapor D2": {
+   "data": "2026-03-15",
+   "torneio": "2º Torneio do Circuito Aquapor D2",
+   "torneioScoring": "2º Torneio do Circuito Aquapor - Qtª do Peru",
+   "tcode": "10875",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2026-03-14",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 15,
+     "de": 85,
+     "total": "156",
+     "gross": "156",
+     "voltas": [
+      "76",
+      "80"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 1,
+     "de": 18,
+     "total": "156",
+     "gross": "156",
+     "voltas": [
+      "76",
+      "80"
+     ]
+    }
+   ]
+  },
+  "2026-03-14|2º Torneio do Circuito Aquapor - Qtª do Peru": {
+   "data": "2026-03-14",
+   "torneio": "2º Torneio do Circuito Aquapor - Qtª do Peru",
+   "torneioScoring": "2º Torneio do Circuito Aquapor - Qtª do Peru",
+   "tcode": "10875",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2026-03-14",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 15,
+     "de": 85,
+     "total": "156",
+     "gross": "156",
+     "voltas": [
+      "76",
+      "80"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 1,
+     "de": 18,
+     "total": "156",
+     "gross": "156",
+     "voltas": [
+      "76",
+      "80"
+     ]
+    }
+   ]
+  },
+  "2026-03-07|Campeonato Nacional de Pares&Pares Seniores": {
+   "data": "2026-03-07",
+   "torneio": "Campeonato Nacional de Pares&Pares Seniores",
+   "tcodeTentado": "10897",
+   "erro": "sem linha dela na classificação"
+  },
+  "2026-02-25|Circuito Semana ACP Golfe #2": {
+   "data": "2026-02-25",
+   "torneio": "Circuito Semana ACP Golfe #2",
+   "tcodeTentado": "10369",
+   "erro": "sem linha dela na classificação"
+  },
+  "2026-02-22|2ª Ordem de Mérito Cat A": {
+   "data": "2026-02-22",
+   "torneio": "2ª Ordem de Mérito Cat A",
+   "torneioScoring": "2ª Ordem de Mérito Cat A",
+   "tcode": "10704",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2026-02-22",
+   "vistas": [
+    {
+     "classificacao": "Medal Net Individual",
+     "pos": 15,
+     "de": 21,
+     "total": "79",
+     "gross": "83",
+     "voltas": [
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual",
+     "pos": 7,
+     "de": 21,
+     "total": "83",
+     "gross": "83",
+     "voltas": [
+      "83"
+     ]
+    }
+   ]
+  },
+  "2026-02-21|2º Torneio OM Geral 2026": {
+   "data": "2026-02-21",
+   "torneio": "2º Torneio OM Geral 2026",
+   "torneioScoring": "2º Torneio OM Geral 2026",
+   "tcode": "10238",
+   "clube": "018",
+   "clubeNome": "CGD",
+   "campo": "PGA  Aroeira No.2",
+   "dataTorneio": "2026-02-21",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 10,
+     "de": 24,
+     "total": "27",
+     "gross": "80",
+     "voltas": [
+      "27"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 1,
+     "de": 24,
+     "total": "28",
+     "gross": "80",
+     "voltas": [
+      "28"
+     ]
+    }
+   ]
+  },
+  "2026-02-19|Taça Joaquim Oliveira": {
+   "data": "2026-02-19",
+   "torneio": "Taça Joaquim Oliveira",
+   "torneioScoring": "Taça Joaquim Oliveira",
+   "tcode": "10220",
+   "clube": "912",
+   "clubeNome": "PGA - Portugal",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2026-02-19",
+   "vistas": [
+    {
+     "classificacao": "Classifica&#231;&#227;o Individual Agregada Stroke Play",
+     "pos": "-",
+     "de": 30,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2026-01-28|96th Portuguese International Ladies Amateur Champ": {
+   "data": "2026-01-28",
+   "torneio": "96th Portuguese International Ladies Amateur Champ",
+   "torneioScoring": "96th Portuguese International Ladies Amateur Champ",
+   "tcode": "10920",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Penina Golf Course",
+   "dataTorneio": "2026-01-28",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": "-",
+     "de": 90,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "80",
+      "75",
+      "79",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Nations Cup",
+     "pos": "-",
+     "de": 90,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "80",
+      "75",
+      "79",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2026-01-18|1º Torneio do Circuito Aquapor D2": {
+   "data": "2026-01-18",
+   "torneio": "1º Torneio do Circuito Aquapor D2",
+   "torneioScoring": "1º Torneio do Circuito Aquapor-Morgado Golf",
+   "tcode": "10873",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Morgado Golf",
+   "dataTorneio": "2026-01-17",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 18,
+     "de": 79,
+     "total": "158",
+     "gross": "158",
+     "voltas": [
+      "82",
+      "76"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 3,
+     "de": 17,
+     "total": "158",
+     "gross": "158",
+     "voltas": [
+      "82",
+      "76"
+     ]
+    }
+   ]
+  },
+  "2026-01-17|1º Torneio do Circuito Aquapor-Morgado Golf": {
+   "data": "2026-01-17",
+   "torneio": "1º Torneio do Circuito Aquapor-Morgado Golf",
+   "torneioScoring": "1º Torneio do Circuito Aquapor-Morgado Golf",
+   "tcode": "10873",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Morgado Golf",
+   "dataTorneio": "2026-01-17",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 18,
+     "de": 79,
+     "total": "158",
+     "gross": "158",
+     "voltas": [
+      "82",
+      "76"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 3,
+     "de": 17,
+     "total": "158",
+     "gross": "158",
+     "voltas": [
+      "82",
+      "76"
+     ]
+    }
+   ]
+  },
+  "2026-01-04|1º Torneio Drive Tour Tejo – Montado": {
+   "data": "2026-01-04",
+   "torneio": "1º Torneio Drive Tour Tejo – Montado",
+   "torneioScoring": "1º Torneio Drive Tour Tejo – Montado",
+   "tcode": "10202",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Montado",
+   "dataTorneio": "2026-01-04",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual",
+     "pos": 4,
+     "de": 28,
+     "total": "78",
+     "gross": "78",
+     "voltas": [
+      "78"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Raparigas",
+     "pos": 2,
+     "de": 8,
+     "total": "78",
+     "gross": "78",
+     "voltas": [
+      "78"
+     ]
+    }
+   ]
+  }
+ }
+}
