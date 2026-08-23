@@ -26,6 +26,8 @@ const T = {
     vivo: 'Em direto', guardado: 'Confirmado a', desde: 'Desde',
     curva: 'Evolução', curvaS: 'Quanto mais alto, melhor a posição',
     hcp2: 'Índice de handicap', hcpEixo: 'Quanto mais alto, mais baixo o índice',
+    hcpX: 'O índice de handicap mede o nível de um jogador: quanto mais baixo, melhor. A federação recalcula-o a cada volta contada, e a escala aqui é logarítmica — descer de 5 para 2 custa muito mais do que de 54 para 50, e ocupa muito mais gráfico.',
+    rkX: 'O WAGR é o ranking mundial do golfe amador, gerido pelo R&A e pela USGA; o EGR é o europeu, por escalão. Quanto mais baixo o número, melhor a posição.',
     prox: 'Próxima prova',
   },
   en: {
@@ -36,6 +38,8 @@ const T = {
     vivo: 'Live', guardado: 'Confirmed', desde: 'Since',
     curva: 'Progression', curvaS: 'Higher is a better position',
     hcp2: 'Handicap index', hcpEixo: 'Higher means a lower index',
+    hcpX: 'The handicap index measures a player\'s standard: the lower the better. The federation recalculates it after every counting round, and the scale here is logarithmic — going from 5 to 2 is far harder than from 54 to 50, and takes up far more of the chart.',
+    rkX: 'The WAGR is the world amateur golf ranking, run by The R&A and the USGA; the EGR is the European one, by age category. The lower the number the better the position.',
     prox: 'Next event',
   },
 };
@@ -156,25 +160,30 @@ export async function fichaRecruiting(cx, lingua = 'pt') {
  * na carreira, e uma linha que descesse a cada boa notícia lia-se ao contrário
  * do que diz. Com menos de três pontos não se desenha nada: uma linha entre
  * dois pontos não é uma tendência, é um traço. */
-export async function curvaRankings(cx, lingua = 'pt') {
-  if (!cx) return;
+async function figuraRankings(lingua = 'pt') {
   const t = T[lingua] || T.pt;
 
-  /* Limpar antes de desistir, e não só ao desenhar.
-   *
-   * O que está no ficheiro foi lá escrito pelo scripts/estatico.mjs a partir de
-   * uma corrida anterior. Se hoje não há dados e isto sair sem limpar, o
-   * desenho de ontem continua no DOM — e o pré-renderizador volta a guardá-lo,
-   * para sempre. Uma curva que já não tem dados nenhuns ficaria eternamente na
-   * página, sem ninguém dar por isso. */
   let pontos = [];
   try { ({ pontos = [] } = await (await fetch('/data/rankings-historico.json', { cache: 'no-cache' })).json()); }
-  catch { cx.innerHTML = ''; mostrar(cx, false); return; }
-  /* Sem linha para desenhar, a secção fica escondida — um cabeçalho com nada
-     por baixo lê-se como uma coisa que se partiu. Escondida, e não removida:
-     é a mesma secção que volta sozinha no dia em que houver terceiro ponto. */
-  if (pontos.length < 3) { cx.innerHTML = ''; mostrar(cx, false); return; }
-  mostrar(cx, true);
+  catch { return ''; }
+  if (pontos.length < 3) return '';
+
+  /* Três pontos não chegam se forem os três da mesma semana.
+   *
+   * O histórico dos rankings começou a ser guardado a 16 de agosto de 2026 —
+   * ninguém o guardava antes. Sete dias depois havia três pontos, o mínimo
+   * que esta função exigia, e a página desenhou-os: duas linhas a atravessar o
+   * ecrã com «AGO 2026 → AGO 2026» por baixo. Não se percebia nada, e não era
+   * por falha do desenho: um gráfico de evolução com uma semana de dados não
+   * tem evolução nenhuma para mostrar.
+   *
+   * Quatro meses é o mínimo para a linha dizer alguma coisa — é mais ou menos
+   * o tempo de meia época de provas contadas. Até lá não se desenha, e não é
+   * preciso mexer em nada no dia em que houver: isto passa a ser verdade
+   * sozinho. */
+  const MESES_MINIMOS = 4;
+  const vao = Date.parse(pontos[pontos.length - 1].data) - Date.parse(pontos[0].data);
+  if (vao < MESES_MINIMOS * 30 * 86400000) return '';
 
   const L = 720;
   const A = 220;
@@ -201,7 +210,12 @@ export async function curvaRankings(cx, lingua = 'pt') {
   const de = mesAno(pontos[0].data, lingua);
   const a = mesAno(pontos[pontos.length - 1].data, lingua);
 
-  cx.innerHTML = `
+  /* A explicação das siglas vive aqui dentro, e não no cabeçalho da secção.
+     Enquanto esta curva não existir, dizer «o WAGR é o ranking mundial» era
+     explicar uma coisa que não está na página. */
+  return `
+    <div class="curva-b">
+    <p class="curva__x">${t.rkX}</p>
     <figure class="curva">
       <svg viewBox="0 0 ${L} ${A}" role="img" preserveAspectRatio="none"
            aria-label="${t.curva}: ${t.curvaS}">
@@ -213,7 +227,7 @@ export async function curvaRankings(cx, lingua = 'pt') {
         <span><i style="background:var(--ouro)"></i>${t.egr}</span>
         <span class="curva__d num">${de} → ${a}</span>
       </figcaption>
-    </figure>`;
+    </figure></div>`;
 }
 
 /* ── what's in the bag ────────────────────────────────────────
@@ -233,15 +247,13 @@ export async function curvaRankings(cx, lingua = 'pt') {
  * mas só algumas dezenas mudaram o índice — e são essas que o scripts/myfpg.mjs
  * guarda. Entre duas voltas que não mexeram no número não houve evolução
  * nenhuma para desenhar. */
-export async function curvaHandicap(cx, lingua = 'pt') {
-  if (!cx) return;
+async function figuraHandicap(lingua = 'pt') {
   const t = T[lingua] || T.pt;
 
   let pontos = [];
   try { ({ pontos = [] } = await (await fetch('/data/handicap-historico.json', { cache: 'no-cache' })).json()); }
-  catch { cx.innerHTML = ''; mostrar(cx, false); return; }
-  if (pontos.length < 3) { cx.innerHTML = ''; mostrar(cx, false); return; }
-  mostrar(cx, true);
+  catch { return ''; }
+  if (pontos.length < 3) return '';
 
   const L = 720;
   const A = 220;
@@ -313,7 +325,9 @@ export async function curvaHandicap(cx, lingua = 'pt') {
   const p0 = pontos[0];
   const pf = pontos[pontos.length - 1];
 
-  cx.innerHTML = `
+  return `
+    <div class="curva-b">
+    <p class="curva__x">${t.hcpX}</p>
     <figure class="curva">
       <svg viewBox="0 0 ${L} ${A}" role="img" preserveAspectRatio="none"
            aria-label="${t.hcp2}: ${t.hcpEixo}">
@@ -328,7 +342,29 @@ export async function curvaHandicap(cx, lingua = 'pt') {
         <span class="curva__d num">${num(p0.hcp)} · ${mesAno(p0.data, lingua)}
           → ${num(pf.hcp)} · ${mesAno(pf.data, lingua)}</span>
       </figcaption>
-    </figure>`;
+    </figure></div>`;
+}
+
+/* ── as curvas da evolução, no mesmo sítio ────────────────────
+ *
+ * Duas medidas com nove anos de diferença entre elas. O índice de handicap é
+ * lido desde dezembro de 2017 — duzentos e oito degraus, de 54 a 0,3 — porque
+ * a federação guarda esse registo desde sempre. Os rankings mundiais e
+ * europeus só começaram a ser guardados em agosto de 2026, quando o vigia
+ * passou a apontá-los: ninguém tinha a série antes disso, e não há maneira de
+ * a recuperar.
+ *
+ * Por isso a secção mostra o que tem: a curva do handicap, sempre; a dos
+ * rankings, quando tiver estrada que chegue. Escalas separadas e figuras
+ * separadas — um índice de handicap e um lugar no ranking não partilham eixo.
+ *
+ * Se nenhuma tiver dados, a secção esconde-se: um cabeçalho com nada por baixo
+ * lê-se como uma coisa que se partiu. */
+export async function curvas(cx, lingua = 'pt') {
+  if (!cx) return;
+  const [hcp, rk] = await Promise.all([figuraHandicap(lingua), figuraRankings(lingua)]);
+  cx.innerHTML = hcp + rk;
+  mostrar(cx, Boolean(hcp || rk));
 }
 
 export async function witb(cx, lingua = 'pt') {

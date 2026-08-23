@@ -1500,7 +1500,14 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 /* O gráfico é SVG escrito à mão: são duas linhas, e uma biblioteca pesaria
    mais do que a página. O eixo está invertido de propósito — no golfe descer
    no número é subir na carreira. */
+/* Duas curvas na mesma secção — o handicap e, quando tiver estrada, os
+   rankings. A segunda respira antes de começar. */
 .curva{--curva-a:clamp(140px,26vw,220px);margin:0;position:relative}
+.curva-b + .curva-b{margin-top:clamp(2.4rem,6vw,4rem)}
+/* Cada curva explica-se a si própria, em vez de o cabeçalho da secção explicar
+   siglas que podem não estar desenhadas por baixo. Fora do `position:relative`
+   das marcas do eixo: é texto, e não parte do gráfico. */
+.curva__x{margin:0 0 1rem;font-size:.86rem;line-height:1.5;color:var(--tinta-fraca);max-width:62ch}
 .curva svg{width:100%;height:var(--curva-a);display:block;overflow:visible}
 /* Os números da escala vivem fora do SVG: lá dentro seriam esticados com ele.
    Posicionados em percentagem, acompanham as linhas em qualquer largura.
