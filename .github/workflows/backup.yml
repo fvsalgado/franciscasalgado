@@ -1,0 +1,90 @@
+# Cópia de segurança, de quinze em quinze dias.
+#
+# O repositório já é um histórico — mas é um histórico que vive todo no mesmo
+# sítio. Isto guarda, em ficheiros que se descarregam de uma vez, duas coisas:
+# o sítio como está hoje, e o repositório inteiro com todo o passado.
+#
+# Sai como «release» e não como «artifact» de propósito: os artifacts expiram
+# ao fim de noventa dias e desaparecem sem avisar. Uma release fica.
+#
+# O que isto protege: apagar um ficheiro por engano, uma alteração má, uma
+# ronda automática que corra torta. O que **não** protege: perder a conta do
+# GitHub. Para isso é preciso levar o `.bundle` para fora daqui — está escrito
+# no manifesto que vai dentro de cada cópia.
+
+name: Cópia de segurança
+
+on:
+  schedule:
+    # Dias 1 e 16, às 04:20 UTC. O cron não sabe dizer «de quinze em quinze
+    # dias»; dois dias fixos por mês dão o mesmo e são previsíveis — se faltar
+    # uma cópia, sabe-se logo qual.
+    - cron: '20 4 1,16 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: backup
+  cancel-in-progress: false
+
+jobs:
+  copiar:
+    runs-on: ubuntu-latest
+    steps:
+      # O histórico todo, e não só o último commit: é ele que faz do bundle
+      # uma cópia a sério em vez de um instantâneo.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Preparar a cópia
+        id: copia
+        run: |
+          set -euo pipefail
+          DATA=$(date -u +%Y-%m-%d)
+          echo "data=$DATA" >> "$GITHUB_OUTPUT"
+          mkdir -p copia
+
+          node scripts/backup.mjs > copia/MANIFESTO.md
+
+          # Os ficheiros, sem o .git — para quem quiser espreitar sem ferramentas.
+          tar --exclude-vcs --exclude='./copia' --exclude='./node_modules' \
+              -czf "copia/sitio-$DATA.tar.gz" .
+
+          # O repositório inteiro num ficheiro. `--all` leva os ramos todos e
+          # as etiquetas; `git clone` sobre ele devolve tudo.
+          git bundle create "copia/repositorio-$DATA.bundle" --all
+
+          # Um bundle corrompido só se descobre no dia em que faz falta.
+          git bundle verify "copia/repositorio-$DATA.bundle"
+
+          ls -lh copia/
+
+      - name: Publicar a cópia
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DATA='${{ steps.copia.outputs.data }}'
+          TAG="copia-$DATA"
+
+          # Se o dia já tiver cópia — uma segunda corrida à mão, por exemplo —
+          # substitui-se, em vez de falhar com «tag já existe».
+          gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
+
+          gh release create "$TAG" \
+            --title "Cópia de segurança · $DATA" \
+            --notes-file copia/MANIFESTO.md \
+            "copia/sitio-$DATA.tar.gz" \
+            "copia/repositorio-$DATA.bundle" \
+            copia/MANIFESTO.md
+
+      - name: Pôr o manifesto no sumário da ação
+        if: always()
+        run: cat copia/MANIFESTO.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true

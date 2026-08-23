@@ -26,8 +26,8 @@ const T = {
     vivo: 'Em direto', guardado: 'Confirmado a', desde: 'Desde',
     curva: 'Evolução', curvaS: 'Quanto mais alto, melhor a posição',
     hcp2: 'Índice de handicap', hcpEixo: 'Quanto mais alto, mais baixo o índice',
-    hcpX: 'O índice de handicap mede o nível de um jogador: quanto mais baixo, melhor. A federação recalcula-o a cada volta contada, e a escala aqui é logarítmica — descer de 5 para 2 custa muito mais do que de 54 para 50, e ocupa muito mais gráfico.',
-    rkX: 'O WAGR é o ranking mundial do golfe amador, gerido pelo R&A e pela USGA; o EGR é o europeu, por escalão. Quanto mais baixo o número, melhor a posição.',
+    hcpX: 'No golfe, quanto mais baixo o índice, melhor o jogador. A linha sobe porque o número desceu.',
+    rkX: 'O WAGR é o ranking mundial amador; o EGR, o europeu por escalão. Como no handicap, a linha sobe quando o número desce.',
     prox: 'Próxima prova',
   },
   en: {
@@ -38,8 +38,8 @@ const T = {
     vivo: 'Live', guardado: 'Confirmed', desde: 'Since',
     curva: 'Progression', curvaS: 'Higher is a better position',
     hcp2: 'Handicap index', hcpEixo: 'Higher means a lower index',
-    hcpX: 'The handicap index measures a player\'s standard: the lower the better. The federation recalculates it after every counting round, and the scale here is logarithmic — going from 5 to 2 is far harder than from 54 to 50, and takes up far more of the chart.',
-    rkX: 'The WAGR is the world amateur golf ranking, run by The R&A and the USGA; the EGR is the European one, by age category. The lower the number the better the position.',
+    hcpX: 'In golf, the lower the index the better the player. The line rises because the number fell.',
+    rkX: 'The WAGR is the world amateur ranking; the EGR, the European one by age category. As with the handicap, the line rises when the number falls.',
     prox: 'Next event',
   },
 };
