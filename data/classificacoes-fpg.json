@@ -794,6 +794,6298 @@
      ]
     }
    ]
+  },
+  "2025-12-29|Quinta do Lago Junior Open 2025 - U21 & U16": {
+   "data": "2025-12-29",
+   "torneio": "Quinta do Lago Junior Open 2025 - U21 & U16",
+   "torneioScoring": "Quinta do Lago Junior Open 2025 - U21 & U16",
+   "tcode": "10078",
+   "clube": "962",
+   "clubeNome": "SGQL",
+   "campo": "Quinta do Lago Laranjal",
+   "dataTorneio": "2025-12-29",
+   "vistas": [
+    {
+     "classificacao": "Strokeplay U16",
+     "pos": 5,
+     "de": 23,
+     "total": "78",
+     "gross": "78",
+     "voltas": [
+      "78"
+     ]
+    },
+    {
+     "classificacao": "StrokePlay U16 Girls",
+     "pos": 4,
+     "de": 9,
+     "total": "78",
+     "gross": "78",
+     "voltas": [
+      "78"
+     ]
+    },
+    {
+     "classificacao": "Medal Net U16",
+     "pos": 3,
+     "de": 23,
+     "total": "72",
+     "gross": "78",
+     "voltas": [
+      "72"
+     ]
+    }
+   ]
+  },
+  "2025-12-05|VIII MEMORIAL CELIA BARQUIN COPA PRINCIPADO": {
+   "data": "2025-12-05",
+   "torneio": "VIII MEMORIAL CELIA BARQUIN COPA PRINCIPADO",
+   "erro": "sem correspondência"
+  },
+  "2025-11-22|PJA Masters by Details - PGA  Aroeira 2": {
+   "data": "2025-11-22",
+   "torneio": "PJA Masters by Details - PGA  Aroeira 2",
+   "torneioScoring": "PJA Masters by Details - PGA  Aroeira 2",
+   "tcode": "10523",
+   "clube": "029",
+   "clubeNome": "Aroeira",
+   "campo": "PGA  Aroeira No.2",
+   "dataTorneio": "2025-11-22",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Agregada Stroke Play",
+     "pos": 5,
+     "de": 18,
+     "total": "157",
+     "gross": "157",
+     "voltas": [
+      "78",
+      "79"
+     ]
+    }
+   ]
+  },
+  "2025-11-15|7º Torneio do Circuito Aquapor": {
+   "data": "2025-11-15",
+   "torneio": "7º Torneio do Circuito Aquapor",
+   "torneioScoring": "7º Torneio do Circuito Aquapor",
+   "tcode": "10816",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2025-11-15",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 32,
+     "de": 75,
+     "total": "162",
+     "gross": "162",
+     "voltas": [
+      "85",
+      "77"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 5,
+     "de": 18,
+     "total": "162",
+     "gross": "162",
+     "voltas": [
+      "85",
+      "77"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 6,
+     "de": 18,
+     "total": "154",
+     "gross": "162",
+     "voltas": [
+      "81",
+      "73"
+     ]
+    }
+   ]
+  },
+  "2025-10-18|6º Torneio do Circuito Aquapor": {
+   "data": "2025-10-18",
+   "torneio": "6º Torneio do Circuito Aquapor",
+   "torneioScoring": "6º Torneio do Circuito Aquapor",
+   "tcode": "10815",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Vidago Palace",
+   "dataTorneio": "2025-10-18",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 17,
+     "de": 55,
+     "total": "155",
+     "gross": "155",
+     "voltas": [
+      "80",
+      "75"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 4,
+     "de": 11,
+     "total": "155",
+     "gross": "155",
+     "voltas": [
+      "80",
+      "75"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 3,
+     "de": 11,
+     "total": "143",
+     "gross": "155",
+     "voltas": [
+      "74",
+      "69"
+     ]
+    }
+   ]
+  },
+  "2025-10-04|Taça da Federação Portuguesa de Golfe – BPI  S": {
+   "data": "2025-10-04",
+   "torneio": "Taça da Federação Portuguesa de Golfe – BPI  S",
+   "torneioScoring": "Taça da Federação Portuguesa de Golfe – BPI  S",
+   "tcode": "10852",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Santo Estevão Golf",
+   "dataTorneio": "2025-10-04",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 4,
+     "de": 17,
+     "total": "157",
+     "gross": "157",
+     "voltas": [
+      "80",
+      "77"
+     ]
+    }
+   ]
+  },
+  "2025-09-21|6ª OM Cat A - 2025": {
+   "data": "2025-09-21",
+   "torneio": "6ª OM Cat A - 2025",
+   "torneioScoring": "6ª OM Cat A - 2025",
+   "tcode": "10662",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2025-09-21",
+   "vistas": [
+    {
+     "classificacao": "Medal Net Individual",
+     "pos": 2,
+     "de": 7,
+     "total": "72",
+     "gross": "77",
+     "voltas": [
+      "72"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual",
+     "pos": 2,
+     "de": 7,
+     "total": "77",
+     "gross": "77",
+     "voltas": [
+      "77"
+     ]
+    }
+   ]
+  },
+  "2025-09-20|2º Torneio OM 2025 - Montado": {
+   "data": "2025-09-20",
+   "torneio": "2º Torneio OM 2025 - Montado",
+   "torneioScoring": "2º Torneio OM 2025 - Montado",
+   "tcode": "10175",
+   "clube": "142",
+   "clubeNome": "Engenheiros",
+   "campo": "Montado",
+   "dataTorneio": "2025-09-20",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 1,
+     "de": 77,
+     "total": "34",
+     "gross": "74",
+     "voltas": [
+      "34"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 13,
+     "de": 77,
+     "total": "34",
+     "gross": "74",
+     "voltas": [
+      "34"
+     ]
+    }
+   ]
+  },
+  "2025-09-14|Torneio 7ª Ordem de Mérito": {
+   "data": "2025-09-14",
+   "torneio": "Torneio 7ª Ordem de Mérito",
+   "torneioScoring": "Torneio 7ª Ordem de Mérito",
+   "tcode": "10083",
+   "clube": "055",
+   "clubeNome": "Évora",
+   "campo": "Montado",
+   "dataTorneio": "2025-09-14",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 1,
+     "de": 66,
+     "total": "41",
+     "gross": "68",
+     "voltas": [
+      "41"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 1,
+     "de": 66,
+     "total": "40",
+     "gross": "68",
+     "voltas": [
+      "40"
+     ]
+    }
+   ]
+  },
+  "2025-09-13|Torneio SKIP Montado 13 08 2025": {
+   "data": "2025-09-13",
+   "torneio": "Torneio SKIP Montado 13 08 2025",
+   "torneioScoring": "Torneio SKIP Montado 13 08 2025",
+   "tcode": "10081",
+   "clube": "028",
+   "clubeNome": "SKIP Golfe",
+   "campo": "Montado",
+   "dataTorneio": "2025-09-13",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 4,
+     "de": 39,
+     "total": "36",
+     "gross": "73",
+     "voltas": [
+      "36"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 1,
+     "de": 39,
+     "total": "35",
+     "gross": "73",
+     "voltas": [
+      "35"
+     ]
+    }
+   ]
+  },
+  "2025-09-04|Cº DE ESPAÑA DE FF.AA. SUB-16 FEM. 2025": {
+   "data": "2025-09-04",
+   "torneio": "Cº DE ESPAÑA DE FF.AA. SUB-16 FEM. 2025",
+   "tcodeTentado": "10409",
+   "erro": "sem linha dela na classificação"
+  },
+  "2025-08-01|Campeonato Andalucía Sub 18": {
+   "data": "2025-08-01",
+   "torneio": "Campeonato Andalucía Sub 18",
+   "erro": "sem correspondência"
+  },
+  "2025-07-16|Jogo": {
+   "data": "2025-07-16",
+   "torneio": "Jogo",
+   "erro": "sem correspondência"
+  },
+  "2025-07-15|Campeonato Nacional Absoluto - KIA S": {
+   "data": "2025-07-15",
+   "torneio": "Campeonato Nacional Absoluto - KIA S",
+   "torneioScoring": "Campeonato Nacional Absoluto - KIA S",
+   "tcode": "10847",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Montado",
+   "dataTorneio": "2025-07-15",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 8,
+     "de": 26,
+     "total": "321",
+     "gross": "321",
+     "voltas": [
+      "79",
+      "79",
+      "82",
+      "81"
+     ]
+    }
+   ]
+  },
+  "2025-07-08|2025 European Ladies Team Championship": {
+   "data": "2025-07-08",
+   "torneio": "2025 European Ladies Team Championship",
+   "tcodeTentado": "10959",
+   "erro": "sem linha dela na classificação"
+  },
+  "2025-06-14|Taça R.S. Yeatman": {
+   "data": "2025-06-14",
+   "torneio": "Taça R.S. Yeatman",
+   "torneioScoring": "Taça R.S. Yeatman",
+   "tcode": "10551",
+   "clube": "003",
+   "clubeNome": "Miramar",
+   "campo": "Miramar",
+   "dataTorneio": "2025-06-14",
+   "vistas": [
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 25,
+     "de": 85,
+     "total": "142",
+     "gross": "150",
+     "voltas": [
+      "72",
+      "70"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 23,
+     "de": 85,
+     "total": "150",
+     "gross": "150",
+     "voltas": [
+      "76",
+      "74"
+     ]
+    },
+    {
+     "classificacao": "Medal net agregada senhoras",
+     "pos": 8,
+     "de": 14,
+     "total": "142",
+     "gross": "150",
+     "voltas": [
+      "72",
+      "70"
+     ]
+    },
+    {
+     "classificacao": "Strokeplay agregada senhoras",
+     "pos": 4,
+     "de": 14,
+     "total": "150",
+     "gross": "150",
+     "voltas": [
+      "76",
+      "74"
+     ]
+    }
+   ]
+  },
+  "2025-06-08|Jogo": {
+   "data": "2025-06-08",
+   "torneio": "Jogo",
+   "erro": "sem correspondência"
+  },
+  "2025-06-07|O.M Strokeplay 07-06-2025 PDR": {
+   "data": "2025-06-07",
+   "torneio": "O.M Strokeplay 07-06-2025 PDR",
+   "torneioScoring": "O.M Strokeplay 07-06-2025 PDR",
+   "tcode": "11059",
+   "clube": "177",
+   "clubeNome": "Vale de Janelas",
+   "campo": "Praia d'El-Rey Golf",
+   "dataTorneio": "2025-06-07",
+   "vistas": [
+    {
+     "classificacao": "Classification Individual Daily Stroke Play",
+     "pos": 3,
+     "de": 28,
+     "total": "79",
+     "gross": "79",
+     "voltas": [
+      "79"
+     ]
+    }
+   ]
+  },
+  "2025-06-04|Major Roll Up Wednesday 04-06-2025": {
+   "data": "2025-06-04",
+   "torneio": "Major Roll Up Wednesday 04-06-2025",
+   "torneioScoring": "Major Roll Up Wednesday 04-06-2025",
+   "tcode": "11058",
+   "clube": "177",
+   "clubeNome": "Vale de Janelas",
+   "campo": "Praia d'El-Rey Golf",
+   "dataTorneio": "2025-06-04",
+   "vistas": [
+    {
+     "classificacao": "Classification Individual Daily Stableford Net",
+     "pos": 12,
+     "de": 46,
+     "total": "34",
+     "gross": "77",
+     "voltas": [
+      "34"
+     ]
+    }
+   ]
+  },
+  "2025-06-01|Torneio Skip/CGD 01 06 2025": {
+   "data": "2025-06-01",
+   "torneio": "Torneio Skip/CGD 01 06 2025",
+   "torneioScoring": "Torneio Skip/CGD 01 06 2025",
+   "tcode": "10079",
+   "clube": "028",
+   "clubeNome": "SKIP Golfe",
+   "campo": "Ribagolfe Oaks",
+   "dataTorneio": "2025-06-01",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 4,
+     "de": 40,
+     "total": "36",
+     "gross": "74",
+     "voltas": [
+      "36"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 1,
+     "de": 40,
+     "total": "34",
+     "gross": "74",
+     "voltas": [
+      "34"
+     ]
+    }
+   ]
+  },
+  "2025-05-31|3º Torneio Drive Tour Tejo – Ribagolfe Oaks": {
+   "data": "2025-05-31",
+   "torneio": "3º Torneio Drive Tour Tejo – Ribagolfe Oaks",
+   "torneioScoring": "3º Torneio Drive Tour Tejo – Ribagolfe Oaks",
+   "tcode": "10200",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Ribagolfe Oaks",
+   "dataTorneio": "2025-05-31",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual",
+     "pos": 1,
+     "de": 12,
+     "total": "80",
+     "gross": "80",
+     "voltas": [
+      "80"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Raparigas",
+     "pos": 1,
+     "de": 6,
+     "total": "80",
+     "gross": "80",
+     "voltas": [
+      "80"
+     ]
+    }
+   ]
+  },
+  "2025-05-24|108ª Lisbon Cup": {
+   "data": "2025-05-24",
+   "torneio": "108ª Lisbon Cup",
+   "torneioScoring": "108ª Lisbon Cup",
+   "tcode": "11185",
+   "clube": "002",
+   "clubeNome": "Lisbon SC",
+   "campo": "Lisbon Sports Club",
+   "dataTorneio": "2025-05-24",
+   "vistas": [
+    {
+     "classificacao": "Medal Net Individual",
+     "pos": 54,
+     "de": 84,
+     "total": "78",
+     "gross": "81",
+     "voltas": [
+      "78"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 34,
+     "de": 96,
+     "total": "148",
+     "gross": "154",
+     "voltas": [
+      "70",
+      "78"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual",
+     "pos": 30,
+     "de": 84,
+     "total": "81",
+     "gross": "81",
+     "voltas": [
+      "81"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 18,
+     "de": 96,
+     "total": "154",
+     "gross": "154",
+     "voltas": [
+      "73",
+      "81"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada - Senhoras",
+     "pos": 4,
+     "de": 15,
+     "total": "154",
+     "gross": "154",
+     "voltas": [
+      "73",
+      "81"
+     ]
+    }
+   ]
+  },
+  "2025-05-17|4º Torneio do Circuito Aquapor": {
+   "data": "2025-05-17",
+   "torneio": "4º Torneio do Circuito Aquapor",
+   "torneioScoring": "4º Torneio do Circuito Aquapor",
+   "tcode": "10813",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Ribagolfe Oaks",
+   "dataTorneio": "2025-05-17",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 6,
+     "de": 71,
+     "total": "146",
+     "gross": "146",
+     "voltas": [
+      "72",
+      "74"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 2,
+     "de": 15,
+     "total": "146",
+     "gross": "146",
+     "voltas": [
+      "72",
+      "74"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 2,
+     "de": 15,
+     "total": "140",
+     "gross": "146",
+     "voltas": [
+      "69",
+      "71"
+     ]
+    }
+   ]
+  },
+  "2025-05-06|Super Bock Ladies Open at Vidago Palace": {
+   "data": "2025-05-06",
+   "torneio": "Super Bock Ladies Open at Vidago Palace",
+   "erro": "sem correspondência"
+  },
+  "2025-04-25|Campeonato Nacional de Jovens Sub 16 S": {
+   "data": "2025-04-25",
+   "torneio": "Campeonato Nacional de Jovens Sub 16 S",
+   "torneioScoring": "Campeonato Nacional de Jovens Sub 16 S",
+   "tcode": "10868",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "PGA  Aroeira No.2",
+   "dataTorneio": "2025-04-25",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": "-",
+     "de": 8,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "84",
+      "79",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2025-04-05|3º Torneio do Circuito Aquapor": {
+   "data": "2025-04-05",
+   "torneio": "3º Torneio do Circuito Aquapor",
+   "torneioScoring": "3º Torneio do Circuito Aquapor",
+   "tcode": "10812",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Santo Estevão Golf",
+   "dataTorneio": "2025-04-05",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual",
+     "pos": 66,
+     "de": 88,
+     "total": "86",
+     "gross": "86",
+     "voltas": [
+      "86"
+     ]
+    },
+    {
+     "classificacao": "Senhoras Individual",
+     "pos": 8,
+     "de": 13,
+     "total": "86",
+     "gross": "86",
+     "voltas": [
+      "86"
+     ]
+    },
+    {
+     "classificacao": "Senhoras Individual Net",
+     "pos": 13,
+     "de": 13,
+     "total": "83",
+     "gross": "86",
+     "voltas": [
+      "83"
+     ]
+    }
+   ]
+  },
+  "2025-03-15|2º Torneio do Circuito Aquapor": {
+   "data": "2025-03-15",
+   "torneio": "2º Torneio do Circuito Aquapor",
+   "torneioScoring": "2º Torneio do Circuito Aquapor",
+   "tcode": "10811",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Oporto",
+   "dataTorneio": "2025-03-15",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 57,
+     "de": 90,
+     "total": "167",
+     "gross": "167",
+     "voltas": [
+      "88",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 6,
+     "de": 18,
+     "total": "167",
+     "gross": "167",
+     "voltas": [
+      "88",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 12,
+     "de": 18,
+     "total": "157",
+     "gross": "167",
+     "voltas": [
+      "83",
+      "74"
+     ]
+    }
+   ]
+  },
+  "2025-02-15|GJG Portuguese Juniors International Portugal 2025": {
+   "data": "2025-02-15",
+   "torneio": "GJG Portuguese Juniors International Portugal 2025",
+   "torneioScoring": "GJG Portuguese Juniors International Portugal 2025",
+   "tcode": "11017",
+   "clube": "177",
+   "clubeNome": "Vale de Janelas",
+   "campo": "Praia d'El-Rey Golf",
+   "dataTorneio": "2025-02-15",
+   "vistas": [
+    {
+     "classificacao": "Classification Individual Aggregate Stroke Play",
+     "pos": "-",
+     "de": 70,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "ND",
+      "-",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2025-02-07|Nacional Juvenil Feminino 2025": {
+   "data": "2025-02-07",
+   "torneio": "Nacional Juvenil Feminino 2025",
+   "tcodeTentado": "10910",
+   "erro": "sem linha dela na classificação"
+  },
+  "2025-01-29|95th Portuguese International Ladies Amateur Champ": {
+   "data": "2025-01-29",
+   "torneio": "95th Portuguese International Ladies Amateur Champ",
+   "torneioScoring": "95th Portuguese International Ladies Amateur Champ",
+   "tcode": "10853",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Penina Golf Course",
+   "dataTorneio": "2025-01-29",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": "-",
+     "de": 90,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "81",
+      "81",
+      "83",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Nations Cup",
+     "pos": "-",
+     "de": 90,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "81",
+      "81",
+      "83",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2025-01-18|1º Torneio do Circuito Aquapor": {
+   "data": "2025-01-18",
+   "torneio": "1º Torneio do Circuito Aquapor",
+   "torneioScoring": "1º Torneio do Circuito Aquapor",
+   "tcode": "10810",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Penina Golf Course",
+   "dataTorneio": "2025-01-18",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 37,
+     "de": 77,
+     "total": "165",
+     "gross": "165",
+     "voltas": [
+      "82",
+      "83"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 3,
+     "de": 16,
+     "total": "165",
+     "gross": "165",
+     "voltas": [
+      "82",
+      "83"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 14,
+     "de": 16,
+     "total": "161",
+     "gross": "165",
+     "voltas": [
+      "80",
+      "81"
+     ]
+    }
+   ]
+  },
+  "2025-01-09|Copa Andalucia Femenina": {
+   "data": "2025-01-09",
+   "torneio": "Copa Andalucia Femenina",
+   "erro": "sem correspondência"
+  },
+  "2025-01-04|Torneo Inf Teyes Traumadeport": {
+   "data": "2025-01-04",
+   "torneio": "Torneo Inf Teyes Traumadeport",
+   "erro": "sem correspondência"
+  },
+  "2024-12-28|GJG Algarve Junior International 2025": {
+   "data": "2024-12-28",
+   "torneio": "GJG Algarve Junior International 2025",
+   "torneioScoring": "GJG Algarve Junior International 2025",
+   "tcode": "10131",
+   "clube": "189",
+   "clubeNome": "Montado",
+   "campo": "Quinta do Vale",
+   "dataTorneio": "2024-12-28",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Agregada Stroke Play",
+     "pos": 7,
+     "de": 38,
+     "total": "223",
+     "gross": "223",
+     "voltas": [
+      "77",
+      "76",
+      "70"
+     ]
+    }
+   ]
+  },
+  "2024-11-23|Final Nacional Drive Tour Sub 16 S": {
+   "data": "2024-11-23",
+   "torneio": "Final Nacional Drive Tour Sub 16 S",
+   "torneioScoring": "Final Nacional Drive Tour Sub 16 S",
+   "tcode": "10805",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Troia Golf",
+   "dataTorneio": "2024-11-23",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 3,
+     "de": 4,
+     "total": "168",
+     "gross": "168",
+     "voltas": [
+      "87",
+      "81"
+     ]
+    }
+   ]
+  },
+  "2024-11-17|5º Torneio do Circuito FPG - Qta Peru Dia 2": {
+   "data": "2024-11-17",
+   "torneio": "5º Torneio do Circuito FPG - Qta Peru Dia 2",
+   "torneioScoring": "5º Torneio do Circuito Aquapor - Qta Peru",
+   "tcode": "10757",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2024-11-16",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 41,
+     "de": 77,
+     "total": "157",
+     "gross": "157",
+     "voltas": [
+      "74",
+      "83"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 3,
+     "de": 17,
+     "total": "157",
+     "gross": "157",
+     "voltas": [
+      "74",
+      "83"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 5,
+     "de": 17,
+     "total": "149",
+     "gross": "157",
+     "voltas": [
+      "70",
+      "79"
+     ]
+    }
+   ]
+  },
+  "2024-11-16|5º Torneio do Circuito Aquapor - Qta Peru": {
+   "data": "2024-11-16",
+   "torneio": "5º Torneio do Circuito Aquapor - Qta Peru",
+   "torneioScoring": "5º Torneio do Circuito Aquapor - Qta Peru",
+   "tcode": "10757",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2024-11-16",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 41,
+     "de": 77,
+     "total": "157",
+     "gross": "157",
+     "voltas": [
+      "74",
+      "83"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 3,
+     "de": 17,
+     "total": "157",
+     "gross": "157",
+     "voltas": [
+      "74",
+      "83"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 5,
+     "de": 17,
+     "total": "149",
+     "gross": "157",
+     "voltas": [
+      "70",
+      "79"
+     ]
+    }
+   ]
+  },
+  "2024-10-25|Campeonato Andalucia Sub16": {
+   "data": "2024-10-25",
+   "torneio": "Campeonato Andalucia Sub16",
+   "erro": "sem correspondência"
+  },
+  "2024-10-19|6º Torneio do Circuito Drive Tour Sub-16 S": {
+   "data": "2024-10-19",
+   "torneio": "6º Torneio do Circuito Drive Tour Sub-16 S",
+   "torneioScoring": "6º Torneio do Circuito Drive Tour Sub-16 S",
+   "tcode": "10740",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Aroeira Challenge",
+   "dataTorneio": "2024-10-19",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 1,
+     "de": 7,
+     "total": "148",
+     "gross": "148",
+     "voltas": [
+      "74",
+      "74"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Ranking",
+     "pos": 1,
+     "de": 7,
+     "total": "148",
+     "gross": "148",
+     "voltas": [
+      "74",
+      "74"
+     ]
+    }
+   ]
+  },
+  "2024-10-06|38Taça da Federação Portuguesa de Golfe – BPI S D2": {
+   "data": "2024-10-06",
+   "torneio": "38Taça da Federação Portuguesa de Golfe – BPI S D2",
+   "torneioScoring": "38 Taça da Federação Portuguesa de Golfe – BPI S",
+   "tcode": "10799",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Santo Estevão Golf",
+   "dataTorneio": "2024-10-05",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 5,
+     "de": 9,
+     "total": "156",
+     "gross": "156",
+     "voltas": [
+      "79",
+      "77"
+     ]
+    }
+   ]
+  },
+  "2024-10-05|38 Taça da Federação Portuguesa de Golfe – BPI S": {
+   "data": "2024-10-05",
+   "torneio": "38 Taça da Federação Portuguesa de Golfe – BPI S",
+   "torneioScoring": "38 Taça da Federação Portuguesa de Golfe – BPI S",
+   "tcode": "10799",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Santo Estevão Golf",
+   "dataTorneio": "2024-10-05",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 5,
+     "de": 9,
+     "total": "156",
+     "gross": "156",
+     "voltas": [
+      "79",
+      "77"
+     ]
+    }
+   ]
+  },
+  "2024-09-28|OMGDBP-TGT2024 - Prova 7": {
+   "data": "2024-09-28",
+   "torneio": "OMGDBP-TGT2024 - Prova 7",
+   "torneioScoring": "OMGDBP-TGT2024 - Prova 7",
+   "tcode": "10103",
+   "clube": "077",
+   "clubeNome": "Banco Portugal",
+   "campo": "Santo Estevão Golf",
+   "dataTorneio": "2024-09-28",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 6,
+     "de": 40,
+     "total": "34",
+     "gross": "75",
+     "voltas": [
+      "34"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 2,
+     "de": 40,
+     "total": "34",
+     "gross": "75",
+     "voltas": [
+      "34"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Categoria 1",
+     "pos": 3,
+     "de": 15,
+     "total": "34",
+     "gross": "75",
+     "voltas": [
+      "34"
+     ]
+    }
+   ]
+  },
+  "2024-09-22|6ºTorneio OM2024 Clube Millenniumbcp": {
+   "data": "2024-09-22",
+   "torneio": "6ºTorneio OM2024 Clube Millenniumbcp",
+   "torneioScoring": "6ºTorneio OM2024 Clube Millenniumbcp",
+   "tcode": "10110",
+   "clube": "085",
+   "clubeNome": "Millennium BCP",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2024-09-22",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 9,
+     "de": 93,
+     "total": "37",
+     "gross": "71",
+     "voltas": [
+      "37"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 1,
+     "de": 93,
+     "total": "37",
+     "gross": "71",
+     "voltas": [
+      "37"
+     ]
+    }
+   ]
+  },
+  "2024-09-21|6ª OM Cat A - 2024": {
+   "data": "2024-09-21",
+   "torneio": "6ª OM Cat A - 2024",
+   "tcodeTentado": "10576",
+   "erro": "sem linha dela na classificação"
+  },
+  "2024-09-15|Taça Skeffington & Taça Ellen Kendall (FINAL)": {
+   "data": "2024-09-15",
+   "torneio": "Taça Skeffington & Taça Ellen Kendall (FINAL)",
+   "torneioScoring": "Taça Skeffington & Taça Ellen Kendall (FINAL)",
+   "tcode": "10468",
+   "clube": "001",
+   "clubeNome": "Oporto",
+   "campo": "Oporto",
+   "dataTorneio": "2024-09-15",
+   "vistas": [
+    {
+     "classificacao": "Taça Ellen Kendall - Medal Net",
+     "pos": 3,
+     "de": 13,
+     "total": "72",
+     "gross": "75",
+     "voltas": [
+      "72"
+     ]
+    },
+    {
+     "classificacao": "Taça Ellen Kendall - Stroke Play",
+     "pos": 3,
+     "de": 13,
+     "total": "75",
+     "gross": "75",
+     "voltas": [
+      "75"
+     ]
+    }
+   ]
+  },
+  "2024-09-14|TAÇA SKEFFINGTON & ELLEN KENDALL (2D APURAMENTO)": {
+   "data": "2024-09-14",
+   "torneio": "TAÇA SKEFFINGTON & ELLEN KENDALL (2D APURAMENTO)",
+   "torneioScoring": "TAÇA SKEFFINGTON & ELLEN KENDALL (2D APURAMENTO)",
+   "tcode": "10465",
+   "clube": "001",
+   "clubeNome": "Oporto",
+   "campo": "Oporto",
+   "dataTorneio": "2024-09-14",
+   "vistas": [
+    {
+     "classificacao": "Taça Ellen Kendall - Medal Net",
+     "pos": 1,
+     "de": 21,
+     "total": "71",
+     "gross": "74",
+     "voltas": [
+      "71"
+     ]
+    },
+    {
+     "classificacao": "Taça Ellen Kendall - Stroke Play",
+     "pos": 1,
+     "de": 21,
+     "total": "74",
+     "gross": "74",
+     "voltas": [
+      "74"
+     ]
+    }
+   ]
+  },
+  "2024-09-05|Cº DE ESPAÑA DE FF.AA.\nSUB-16 FEME. 202": {
+   "data": "2024-09-05",
+   "torneio": "Cº DE ESPAÑA DE FF.AA.\nSUB-16 FEME. 202",
+   "erro": "sem correspondência"
+  },
+  "2024-08-31|4º Torneio do Circuito Aquapor- Oporto": {
+   "data": "2024-08-31",
+   "torneio": "4º Torneio do Circuito Aquapor- Oporto",
+   "torneioScoring": "4º Torneio do Circuito Aquapor- Oporto",
+   "tcode": "10754",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Oporto",
+   "dataTorneio": "2024-08-31",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 80,
+     "de": 89,
+     "total": "169",
+     "gross": "169",
+     "voltas": [
+      "87",
+      "82"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Amadores",
+     "pos": 63,
+     "de": 72,
+     "total": "169",
+     "gross": "169",
+     "voltas": [
+      "87",
+      "82"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 9,
+     "de": 14,
+     "total": "169",
+     "gross": "169",
+     "voltas": [
+      "87",
+      "82"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 13,
+     "de": 14,
+     "total": "157",
+     "gross": "169",
+     "voltas": [
+      "81",
+      "76"
+     ]
+    }
+   ]
+  },
+  "2024-08-21|5º Torneio do Circuito Drive Tour Sub-16 S": {
+   "data": "2024-08-21",
+   "torneio": "5º Torneio do Circuito Drive Tour Sub-16 S",
+   "torneioScoring": "5º Torneio do Circuito Drive Tour Sub-16 S",
+   "tcode": "10732",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Estela",
+   "dataTorneio": "2024-08-21",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 2,
+     "de": 5,
+     "total": "252",
+     "gross": "252",
+     "voltas": [
+      "88",
+      "82",
+      "82"
+     ]
+    }
+   ]
+  },
+  "2024-08-17|Taça Mendes D ´Almeida": {
+   "data": "2024-08-17",
+   "torneio": "Taça Mendes D ´Almeida",
+   "torneioScoring": "Taça Mendes D ´Almeida",
+   "tcode": "10250",
+   "clube": "158",
+   "clubeNome": "Vidago Palace C",
+   "campo": "Vidago Palace",
+   "dataTorneio": "2024-08-17",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 13,
+     "de": 39,
+     "total": "154",
+     "gross": "154",
+     "voltas": [
+      "73",
+      "81"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 23,
+     "de": 39,
+     "total": "150",
+     "gross": "154",
+     "voltas": [
+      "71",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Agregado - Senhoras",
+     "pos": 2,
+     "de": 7,
+     "total": "154",
+     "gross": "154",
+     "voltas": [
+      "73",
+      "81"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Agregado - Senhoras",
+     "pos": 4,
+     "de": 7,
+     "total": "150",
+     "gross": "154",
+     "voltas": [
+      "71",
+      "79"
+     ]
+    }
+   ]
+  },
+  "2024-08-03|Ladies Club Championship 2024": {
+   "data": "2024-08-03",
+   "torneio": "Ladies Club Championship 2024",
+   "torneioScoring": "Ladies Club Championship 2024",
+   "tcode": "10951",
+   "clube": "177",
+   "clubeNome": "Vale de Janelas",
+   "campo": "West Cliffs",
+   "dataTorneio": "2024-08-03",
+   "vistas": [
+    {
+     "classificacao": "Classification Individual Aggregate Stroke Play",
+     "pos": 1,
+     "de": 12,
+     "total": "161",
+     "gross": "161",
+     "voltas": [
+      "79",
+      "82"
+     ]
+    }
+   ]
+  },
+  "2024-07-25|2024 European Young Masters": {
+   "data": "2024-07-25",
+   "torneio": "2024 European Young Masters",
+   "tcodeTentado": "10160",
+   "erro": "sem linha dela na classificação"
+  },
+  "2024-07-17|Campeonato Nacional Absoluto - KIA S": {
+   "data": "2024-07-17",
+   "torneio": "Campeonato Nacional Absoluto - KIA S",
+   "tcodeTentado": "10794",
+   "erro": "sem linha dela na classificação"
+  },
+  "2024-06-26|International Away": {
+   "data": "2024-06-26",
+   "torneio": "International Away",
+   "tcodeTentado": "10579",
+   "erro": "sem linha dela na classificação"
+  },
+  "2024-06-15|Taça R.S.Yeatman": {
+   "data": "2024-06-15",
+   "torneio": "Taça R.S.Yeatman",
+   "torneioScoring": "Taça R.S.Yeatman",
+   "tcode": "10457",
+   "clube": "003",
+   "clubeNome": "Miramar",
+   "campo": "Miramar",
+   "dataTorneio": "2024-06-15",
+   "vistas": [
+    {
+     "classificacao": "Medal net agregada senhoras",
+     "pos": 8,
+     "de": 9,
+     "total": "158",
+     "gross": "170",
+     "voltas": [
+      "73",
+      "85"
+     ]
+    },
+    {
+     "classificacao": "Strokeplay agregada senhoras",
+     "pos": 3,
+     "de": 9,
+     "total": "170",
+     "gross": "170",
+     "voltas": [
+      "79",
+      "91"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 52,
+     "de": 72,
+     "total": "158",
+     "gross": "170",
+     "voltas": [
+      "73",
+      "85"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 28,
+     "de": 72,
+     "total": "170",
+     "gross": "170",
+     "voltas": [
+      "79",
+      "91"
+     ]
+    }
+   ]
+  },
+  "2024-06-01|3º Circuito Aquapor- Open Cidade de Amarante": {
+   "data": "2024-06-01",
+   "torneio": "3º Circuito Aquapor- Open Cidade de Amarante",
+   "torneioScoring": "3º Circuito Aquapor- Open Cidade de Amarante",
+   "tcode": "10751",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Amarante",
+   "dataTorneio": "2024-06-01",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 41,
+     "de": 61,
+     "total": "153",
+     "gross": "153",
+     "voltas": [
+      "77",
+      "76"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 2,
+     "de": 6,
+     "total": "153",
+     "gross": "153",
+     "voltas": [
+      "77",
+      "76"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 4,
+     "de": 6,
+     "total": "147",
+     "gross": "153",
+     "voltas": [
+      "74",
+      "73"
+     ]
+    }
+   ]
+  },
+  "2024-05-17|Campeonato de Madrid Feminino": {
+   "data": "2024-05-17",
+   "torneio": "Campeonato de Madrid Feminino",
+   "erro": "sem correspondência"
+  },
+  "2024-05-11|107ª Lisbon Cup": {
+   "data": "2024-05-11",
+   "torneio": "107ª Lisbon Cup",
+   "torneioScoring": "107ª Lisbon Cup",
+   "tcode": "11032",
+   "clube": "002",
+   "clubeNome": "Lisbon SC",
+   "campo": "Lisbon Sports Club",
+   "dataTorneio": "2024-05-11",
+   "vistas": [
+    {
+     "classificacao": "Medal Net Individual",
+     "pos": 14,
+     "de": 64,
+     "total": "75",
+     "gross": "78",
+     "voltas": [
+      "75"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 36,
+     "de": 80,
+     "total": "159",
+     "gross": "165",
+     "voltas": [
+      "84",
+      "75"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual",
+     "pos": 8,
+     "de": 64,
+     "total": "78",
+     "gross": "78",
+     "voltas": [
+      "78"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 18,
+     "de": 80,
+     "total": "165",
+     "gross": "165",
+     "voltas": [
+      "87",
+      "78"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada - Senhoras",
+     "pos": 2,
+     "de": 9,
+     "total": "165",
+     "gross": "165",
+     "voltas": [
+      "87",
+      "78"
+     ]
+    }
+   ]
+  },
+  "2024-04-26|cto de espana sub 16 femenino 2024": {
+   "data": "2024-04-26",
+   "torneio": "cto de espana sub 16 femenino 2024",
+   "erro": "sem correspondência"
+  },
+  "2024-04-20|Campeonato da Galicia Individual": {
+   "data": "2024-04-20",
+   "torneio": "Campeonato da Galicia Individual",
+   "tcodeTentado": "10476",
+   "erro": "sem linha dela na classificação"
+  },
+  "2024-04-19|Campeonato da Galicia": {
+   "data": "2024-04-19",
+   "torneio": "Campeonato da Galicia",
+   "tcodeTentado": "11036",
+   "erro": "sem linha dela na classificação"
+  },
+  "2024-04-07|2º Torneio do Circuito Aquap- Ribagolfe Oaks Dia 2": {
+   "data": "2024-04-07",
+   "torneio": "2º Torneio do Circuito Aquap- Ribagolfe Oaks Dia 2",
+   "torneioScoring": "2º Torneio do Circuito Aquapor- Ribagolfe Oaks",
+   "tcode": "10748",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Ribagolfe Oaks",
+   "dataTorneio": "2024-04-06",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 15,
+     "de": 81,
+     "total": "147",
+     "gross": "147",
+     "voltas": [
+      "75",
+      "72"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 1,
+     "de": 9,
+     "total": "147",
+     "gross": "147",
+     "voltas": [
+      "75",
+      "72"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 1,
+     "de": 9,
+     "total": "143",
+     "gross": "147",
+     "voltas": [
+      "73",
+      "70"
+     ]
+    }
+   ]
+  },
+  "2024-04-06|2º Torneio do Circuito Aquapor- Ribagolfe Oaks": {
+   "data": "2024-04-06",
+   "torneio": "2º Torneio do Circuito Aquapor- Ribagolfe Oaks",
+   "torneioScoring": "2º Torneio do Circuito Aquapor- Ribagolfe Oaks",
+   "tcode": "10748",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Ribagolfe Oaks",
+   "dataTorneio": "2024-04-06",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 15,
+     "de": 81,
+     "total": "147",
+     "gross": "147",
+     "voltas": [
+      "75",
+      "72"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 1,
+     "de": 9,
+     "total": "147",
+     "gross": "147",
+     "voltas": [
+      "75",
+      "72"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 1,
+     "de": 9,
+     "total": "143",
+     "gross": "147",
+     "voltas": [
+      "73",
+      "70"
+     ]
+    }
+   ]
+  },
+  "2024-04-02|Campeonato Nacional de Clubes Sub 18": {
+   "data": "2024-04-02",
+   "torneio": "Campeonato Nacional de Clubes Sub 18",
+   "torneioScoring": "Campeonato Nacional de Clubes Sub 18",
+   "tcode": "10769",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Santo Estevão Golf",
+   "dataTorneio": "2024-04-02",
+   "vistas": [
+    {
+     "classificacao": "Team Aggregate Classification",
+     "pos": 16,
+     "de": 46,
+     "total": "240",
+     "gross": "240",
+     "voltas": [
+      "82",
+      "79",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 3,
+     "de": 10,
+     "total": "240",
+     "gross": "240",
+     "voltas": [
+      "82",
+      "79",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 16,
+     "de": 46,
+     "total": "240",
+     "gross": "240",
+     "voltas": [
+      "82",
+      "79",
+      "79"
+     ]
+    }
+   ]
+  },
+  "2024-03-21|Campeonato de Espanha": {
+   "data": "2024-03-21",
+   "torneio": "Campeonato de Espanha",
+   "tcodeTentado": "10124",
+   "erro": "sem linha dela na classificação"
+  },
+  "2024-03-16|2º Torneio do Circuito Drive Tour Sub-16 S": {
+   "data": "2024-03-16",
+   "torneio": "2º Torneio do Circuito Drive Tour Sub-16 S",
+   "torneioScoring": "2º Torneio do Circuito Drive Tour Sub-16 S",
+   "tcode": "10708",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Oporto",
+   "dataTorneio": "2024-03-16",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 2,
+     "de": 7,
+     "total": "160",
+     "gross": "160",
+     "voltas": [
+      "85",
+      "75"
+     ]
+    }
+   ]
+  },
+  "2024-02-28|QUINTA DO PERU OPEN": {
+   "data": "2024-02-28",
+   "torneio": "QUINTA DO PERU OPEN",
+   "torneioScoring": "QUINTA DO PERU OPEN",
+   "tcode": "10037",
+   "clube": "966",
+   "clubeNome": "JC",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2024-02-28",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 33,
+     "de": 39,
+     "total": "242",
+     "gross": "242",
+     "voltas": [
+      "84",
+      "79",
+      "79"
+     ]
+    }
+   ]
+  },
+  "2024-02-14|PENINA OPEN": {
+   "data": "2024-02-14",
+   "torneio": "PENINA OPEN",
+   "torneioScoring": "PENINA OPEN",
+   "tcode": "10035",
+   "clube": "966",
+   "clubeNome": "JC",
+   "campo": "Penina Golf Course",
+   "dataTorneio": "2024-02-14",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 65,
+     "de": 92,
+     "total": "233",
+     "gross": "233",
+     "voltas": [
+      "75",
+      "80",
+      "78"
+     ]
+    }
+   ]
+  },
+  "2024-02-10|Punt nacional Feminino": {
+   "data": "2024-02-10",
+   "torneio": "Punt nacional Feminino",
+   "erro": "sem correspondência"
+  },
+  "2024-02-03|1º Torneio do Circuito AQUAPOR - Faldo": {
+   "data": "2024-02-03",
+   "torneio": "1º Torneio do Circuito AQUAPOR - Faldo",
+   "torneioScoring": "1º Torneio do Circuito AQUAPOR - Faldo",
+   "tcode": "10745",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Faldo Course",
+   "dataTorneio": "2024-02-03",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 17,
+     "de": 66,
+     "total": "153",
+     "gross": "153",
+     "voltas": [
+      "78",
+      "75"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 1,
+     "de": 6,
+     "total": "153",
+     "gross": "153",
+     "voltas": [
+      "78",
+      "75"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 1,
+     "de": 6,
+     "total": "147",
+     "gross": "153",
+     "voltas": [
+      "75",
+      "72"
+     ]
+    }
+   ]
+  },
+  "2024-01-24|94th Portuguese International Ladies Amateur Champ": {
+   "data": "2024-01-24",
+   "torneio": "94th Portuguese International Ladies Amateur Champ",
+   "torneioScoring": "94th Portuguese International Ladies Amateur Champ",
+   "tcode": "10785",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Penina Golf Course",
+   "dataTorneio": "2024-01-24",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": "-",
+     "de": 90,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "79",
+      "78",
+      "78",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2024-01-13|1º Torneio do Circuito Drive Tour Sub-16 S": {
+   "data": "2024-01-13",
+   "torneio": "1º Torneio do Circuito Drive Tour Sub-16 S",
+   "torneioScoring": "1º Torneio do Circuito Drive Tour Sub-16 S",
+   "tcode": "10700",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Penina Golf Course",
+   "dataTorneio": "2024-01-13",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 1,
+     "de": 8,
+     "total": "153",
+     "gross": "153",
+     "voltas": [
+      "83",
+      "70"
+     ]
+    }
+   ]
+  },
+  "2023-12-16|Torneio de Natal": {
+   "data": "2023-12-16",
+   "torneio": "Torneio de Natal",
+   "tcodeTentado": "10414",
+   "erro": "sem linha dela na classificação"
+  },
+  "2023-12-10|Torneio de Natal 2023": {
+   "data": "2023-12-10",
+   "torneio": "Torneio de Natal 2023",
+   "tcodeTentado": "10215",
+   "erro": "sem linha dela na classificação"
+  },
+  "2023-12-09|Torneio de Natal SEG": {
+   "data": "2023-12-09",
+   "torneio": "Torneio de Natal SEG",
+   "torneioScoring": "Torneio de Natal SEG",
+   "tcode": "10058",
+   "clube": "187",
+   "clubeNome": "SEG",
+   "campo": "Santo Estevão Golf",
+   "dataTorneio": "2023-12-09",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": "ND",
+     "de": 24,
+     "total": "ND",
+     "gross": "ND",
+     "voltas": [
+      "ND"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": "ND",
+     "de": 24,
+     "total": "ND",
+     "gross": "ND",
+     "voltas": [
+      "ND"
+     ]
+    }
+   ]
+  },
+  "2023-11-24|GJG PORTUGUESE JUNIOR CLASSICS": {
+   "data": "2023-11-24",
+   "torneio": "GJG PORTUGUESE JUNIOR CLASSICS",
+   "torneioScoring": "GJG PORTUGUESE JUNIOR CLASSICS",
+   "tcode": "10857",
+   "clube": "177",
+   "clubeNome": "Vale de Janelas",
+   "campo": "West Cliffs",
+   "dataTorneio": "2023-11-24",
+   "vistas": [
+    {
+     "classificacao": "Classification Individual Aggregate Stroke Play",
+     "pos": 21,
+     "de": 33,
+     "total": "243",
+     "gross": "243",
+     "voltas": [
+      "81",
+      "78",
+      "84"
+     ]
+    }
+   ]
+  },
+  "2023-11-19|GJG Junior Trophy 2023 Girls": {
+   "data": "2023-11-19",
+   "torneio": "GJG Junior Trophy 2023 Girls",
+   "torneioScoring": "GJG Junior Trophy 2023 Girls",
+   "tcode": "10855",
+   "clube": "177",
+   "clubeNome": "Vale de Janelas",
+   "campo": "Praia d'El-Rey Golf",
+   "dataTorneio": "2023-11-19",
+   "vistas": [
+    {
+     "classificacao": "Classification Individual Aggregate Stroke Play",
+     "pos": 2,
+     "de": 10,
+     "total": "230",
+     "gross": "230",
+     "voltas": [
+      "77",
+      "72",
+      "81"
+     ]
+    }
+   ]
+  },
+  "2023-11-04|Grande Final Drive Tour CN Jovens - Sub14 S": {
+   "data": "2023-11-04",
+   "torneio": "Grande Final Drive Tour CN Jovens - Sub14 S",
+   "torneioScoring": "Grande Final Drive Tour CN Jovens - Sub14 S",
+   "tcode": "10685",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Montado",
+   "dataTorneio": "2023-11-04",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 2,
+     "de": 4,
+     "total": "150",
+     "gross": "150",
+     "voltas": [
+      "75",
+      "75"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 2,
+     "de": 4,
+     "total": "150",
+     "gross": "150",
+     "voltas": [
+      "75",
+      "75"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Ranking",
+     "pos": 2,
+     "de": 4,
+     "total": "150",
+     "gross": "150",
+     "voltas": [
+      "75",
+      "75"
+     ]
+    }
+   ]
+  },
+  "2023-10-21|TGT 8 - Montado": {
+   "data": "2023-10-21",
+   "torneio": "TGT 8 - Montado",
+   "torneioScoring": "TGT 8 - Montado",
+   "tcode": "10088",
+   "clube": "024",
+   "clubeNome": "Santander Totta",
+   "campo": "Montado",
+   "dataTorneio": "2023-10-21",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 1,
+     "de": 16,
+     "total": "33",
+     "gross": "75",
+     "voltas": [
+      "33"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 5,
+     "de": 16,
+     "total": "33",
+     "gross": "75",
+     "voltas": [
+      "33"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net individual - 1ª categoria",
+     "pos": 2,
+     "de": 4,
+     "total": "33",
+     "gross": "75",
+     "voltas": [
+      "33"
+     ]
+    }
+   ]
+  },
+  "2023-10-14|6º Torneio do Circuito Drive Tour - Sub14 S": {
+   "data": "2023-10-14",
+   "torneio": "6º Torneio do Circuito Drive Tour - Sub14 S",
+   "torneioScoring": "6º Torneio do Circuito Drive Tour - Sub14 S",
+   "tcode": "10677",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Quinta do Vale",
+   "dataTorneio": "2023-10-14",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 1,
+     "de": 7,
+     "total": "146",
+     "gross": "146",
+     "voltas": [
+      "75",
+      "71"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 1,
+     "de": 7,
+     "total": "140",
+     "gross": "146",
+     "voltas": [
+      "72",
+      "68"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Ranking",
+     "pos": 1,
+     "de": 7,
+     "total": "146",
+     "gross": "146",
+     "voltas": [
+      "75",
+      "71"
+     ]
+    }
+   ]
+  },
+  "2023-10-05|37ª Taça da Federação Portuguesa de Golfe - BPI S": {
+   "data": "2023-10-05",
+   "torneio": "37ª Taça da Federação Portuguesa de Golfe - BPI S",
+   "torneioScoring": "37ª Taça da Federação Portuguesa de Golfe - BPI S",
+   "tcode": "10673",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Ribagolfe Oaks",
+   "dataTorneio": "2023-10-05",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 3,
+     "de": 13,
+     "total": "156",
+     "gross": "156",
+     "voltas": [
+      "77",
+      "79"
+     ]
+    }
+   ]
+  },
+  "2023-09-19|The Amundi Evian Juniors Cup": {
+   "data": "2023-09-19",
+   "torneio": "The Amundi Evian Juniors Cup",
+   "tcodeTentado": "10941",
+   "erro": "sem linha dela na classificação"
+  },
+  "2023-09-07|Campeonato Espana FFAA Sub 16 Femenino": {
+   "data": "2023-09-07",
+   "torneio": "Campeonato Espana FFAA Sub 16 Femenino",
+   "erro": "sem correspondência"
+  },
+  "2023-09-02|4ª Torneio do Circuito FPG - Oporto GC": {
+   "data": "2023-09-02",
+   "torneio": "4ª Torneio do Circuito FPG - Oporto GC",
+   "torneioScoring": "4ª Torneio do Circuito FPG - Oporto GC",
+   "tcode": "10665",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Oporto",
+   "dataTorneio": "2023-09-02",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 40,
+     "de": 93,
+     "total": "154",
+     "gross": "154",
+     "voltas": [
+      "77",
+      "77"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 3,
+     "de": 10,
+     "total": "154",
+     "gross": "154",
+     "voltas": [
+      "77",
+      "77"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 1,
+     "de": 10,
+     "total": "140",
+     "gross": "154",
+     "voltas": [
+      "70",
+      "70"
+     ]
+    }
+   ]
+  },
+  "2023-08-25|5º Torneio do Circuito Drive Tour - Sub14 S": {
+   "data": "2023-08-25",
+   "torneio": "5º Torneio do Circuito Drive Tour - Sub14 S",
+   "torneioScoring": "5º Torneio do Circuito Drive Tour - Sub14 S",
+   "tcode": "10659",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Estela",
+   "dataTorneio": "2023-08-25",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 2,
+     "de": 9,
+     "total": "169",
+     "gross": "169",
+     "voltas": [
+      "84",
+      "85"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 4,
+     "de": 9,
+     "total": "161",
+     "gross": "169",
+     "voltas": [
+      "80",
+      "81"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Ranking",
+     "pos": 2,
+     "de": 9,
+     "total": "169",
+     "gross": "169",
+     "voltas": [
+      "84",
+      "85"
+     ]
+    }
+   ]
+  },
+  "2023-08-05|Campeonato do Clube/Club Championship Net 2023": {
+   "data": "2023-08-05",
+   "torneio": "Campeonato do Clube/Club Championship Net 2023",
+   "torneioScoring": "Campeonato do Clube/Club Championship Net 2023",
+   "tcode": "10819",
+   "clube": "177",
+   "clubeNome": "Vale de Janelas",
+   "campo": "West Cliffs",
+   "dataTorneio": "2023-08-05",
+   "vistas": [
+    {
+     "classificacao": "Classification Individual Aggregate Stroke Play",
+     "pos": 1,
+     "de": 45,
+     "total": "160",
+     "gross": "160",
+     "voltas": [
+      "75",
+      "85"
+     ]
+    }
+   ]
+  },
+  "2023-07-27|European Young Masters": {
+   "data": "2023-07-27",
+   "torneio": "European Young Masters",
+   "erro": "sem correspondência"
+  },
+  "2023-07-19|Campeonato Nacional Absoluto KIA - S": {
+   "data": "2023-07-19",
+   "torneio": "Campeonato Nacional Absoluto KIA - S",
+   "torneioScoring": "Campeonato Nacional Absoluto KIA - S",
+   "tcode": "10654",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2023-07-19",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 7,
+     "de": 21,
+     "total": "321",
+     "gross": "321",
+     "voltas": [
+      "81",
+      "80",
+      "83",
+      "77"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Amadores",
+     "pos": 7,
+     "de": 21,
+     "total": "321",
+     "gross": "321",
+     "voltas": [
+      "81",
+      "80",
+      "83",
+      "77"
+     ]
+    }
+   ]
+  },
+  "2023-07-05|International Away": {
+   "data": "2023-07-05",
+   "torneio": "International Away",
+   "erro": "sem correspondência"
+  },
+  "2023-06-27|Campeonato de España Infantil Femenino": {
+   "data": "2023-06-27",
+   "torneio": "Campeonato de España Infantil Femenino",
+   "erro": "sem correspondência"
+  },
+  "2023-06-10|Dia de Portugal/Portugal Day 2023": {
+   "data": "2023-06-10",
+   "torneio": "Dia de Portugal/Portugal Day 2023",
+   "torneioScoring": "Dia de Portugal/Portugal Day 2023",
+   "tcode": "10796",
+   "clube": "177",
+   "clubeNome": "Vale de Janelas",
+   "campo": "West Cliffs",
+   "dataTorneio": "2023-06-10",
+   "vistas": [
+    {
+     "classificacao": "Classification Individual Daily Stableford Net",
+     "pos": 89,
+     "de": 120,
+     "total": "24",
+     "gross": "85",
+     "voltas": [
+      "24"
+     ]
+    }
+   ]
+  },
+  "2023-06-03|3º Torneio do Circuito FPG - Qta do Vale": {
+   "data": "2023-06-03",
+   "torneio": "3º Torneio do Circuito FPG - Qta do Vale",
+   "torneioScoring": "3º Torneio do Circuito FPG - Qta do Vale",
+   "tcode": "10633",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Quinta do Vale",
+   "dataTorneio": "2023-06-03",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 31,
+     "de": 88,
+     "total": "161",
+     "gross": "161",
+     "voltas": [
+      "76",
+      "85"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 2,
+     "de": 12,
+     "total": "161",
+     "gross": "161",
+     "voltas": [
+      "76",
+      "85"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 1,
+     "de": 12,
+     "total": "145",
+     "gross": "161",
+     "voltas": [
+      "68",
+      "77"
+     ]
+    }
+   ]
+  },
+  "2023-06-01|Torneo infantil junio": {
+   "data": "2023-06-01",
+   "torneio": "Torneo infantil junio",
+   "erro": "sem correspondência"
+  },
+  "2023-05-27|II PUNTUABLE ZONAL- EXTRAMADURA GOLF": {
+   "data": "2023-05-27",
+   "torneio": "II PUNTUABLE ZONAL- EXTRAMADURA GOLF",
+   "erro": "sem correspondência"
+  },
+  "2023-05-20|3º Torneio do Circuito Drive Tour - Sub14 S": {
+   "data": "2023-05-20",
+   "torneio": "3º Torneio do Circuito Drive Tour - Sub14 S",
+   "torneioScoring": "3º Torneio do Circuito Drive Tour - Sub14 S",
+   "tcode": "10625",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Ribagolfe Oaks",
+   "dataTorneio": "2023-05-20",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 1,
+     "de": 9,
+     "total": "154",
+     "gross": "154",
+     "voltas": [
+      "76",
+      "78"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 6,
+     "de": 9,
+     "total": "146",
+     "gross": "154",
+     "voltas": [
+      "72",
+      "74"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Ranking",
+     "pos": 1,
+     "de": 9,
+     "total": "154",
+     "gross": "154",
+     "voltas": [
+      "76",
+      "78"
+     ]
+    }
+   ]
+  },
+  "2023-05-13|106ª Lisbon Cup": {
+   "data": "2023-05-13",
+   "torneio": "106ª Lisbon Cup",
+   "torneioScoring": "106ª Lisbon Cup",
+   "tcode": "10898",
+   "clube": "002",
+   "clubeNome": "Lisbon SC",
+   "campo": "Lisbon Sports Club",
+   "dataTorneio": "2023-05-13",
+   "vistas": [
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": "-",
+     "de": 102,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": "-",
+     "de": 102,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada - Senhoras",
+     "pos": "-",
+     "de": 13,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2023-04-29|O.M Stableford- 29--04-2023": {
+   "data": "2023-04-29",
+   "torneio": "O.M Stableford- 29--04-2023",
+   "torneioScoring": "O.M Stableford- 29--04-2023",
+   "tcode": "10779",
+   "clube": "177",
+   "clubeNome": "Vale de Janelas",
+   "campo": "West Cliffs",
+   "dataTorneio": "2023-04-29",
+   "vistas": [
+    {
+     "classificacao": "Classification Individual Daily Stableford Net",
+     "pos": 5,
+     "de": 26,
+     "total": "33",
+     "gross": "78",
+     "voltas": [
+      "33"
+     ]
+    }
+   ]
+  },
+  "2023-04-20|International Away": {
+   "data": "2023-04-20",
+   "torneio": "International Away",
+   "erro": "sem correspondência"
+  },
+  "2023-04-01|2º Torneio do Circuito FPG - Ribagolfe Lakes": {
+   "data": "2023-04-01",
+   "torneio": "2º Torneio do Circuito FPG - Ribagolfe Lakes",
+   "torneioScoring": "2º Torneio do Circuito FPG - Ribagolfe Lakes",
+   "tcode": "10606",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Ribagolfe Lakes",
+   "dataTorneio": "2023-04-01",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 39,
+     "de": 123,
+     "total": "160",
+     "gross": "160",
+     "voltas": [
+      "79",
+      "81"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 5,
+     "de": 16,
+     "total": "160",
+     "gross": "160",
+     "voltas": [
+      "79",
+      "81"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 1,
+     "de": 16,
+     "total": "144",
+     "gross": "160",
+     "voltas": [
+      "71",
+      "73"
+     ]
+    }
+   ]
+  },
+  "2023-03-18|2º Torneio do Circuito Drive Tour - Sub14 S": {
+   "data": "2023-03-18",
+   "torneio": "2º Torneio do Circuito Drive Tour - Sub14 S",
+   "torneioScoring": "2º Torneio do Circuito Drive Tour - Sub14 S",
+   "tcode": "10600",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Oporto",
+   "dataTorneio": "2023-03-18",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 2,
+     "de": 8,
+     "total": "161",
+     "gross": "161",
+     "voltas": [
+      "83",
+      "78"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 4,
+     "de": 8,
+     "total": "149",
+     "gross": "161",
+     "voltas": [
+      "77",
+      "72"
+     ]
+    }
+   ]
+  },
+  "2023-03-11|Paço do Lumiar - dia 1": {
+   "data": "2023-03-11",
+   "torneio": "Paço do Lumiar - dia 1",
+   "erro": "sem correspondência"
+  },
+  "2023-03-04|PUNTUABLE ZONAL CASYLEON 2023- EXTRAMADURA GOLF": {
+   "data": "2023-03-04",
+   "torneio": "PUNTUABLE ZONAL CASYLEON 2023- EXTRAMADURA GOLF",
+   "tcodeTentado": "10299",
+   "erro": "sem linha dela na classificação"
+  },
+  "2023-02-26|II TORNEO JUVENIL FEXGOLF": {
+   "data": "2023-02-26",
+   "torneio": "II TORNEO JUVENIL FEXGOLF",
+   "erro": "sem correspondência"
+  },
+  "2023-02-12|Out of Bounds 23-1": {
+   "data": "2023-02-12",
+   "torneio": "Out of Bounds 23-1",
+   "torneioScoring": "Out of Bounds 23-1",
+   "tcode": "10295",
+   "clube": "130",
+   "clubeNome": "Xira Golfe",
+   "campo": "Montado",
+   "dataTorneio": "2023-02-12",
+   "vistas": [
+    {
+     "classificacao": "Medal Net Individual",
+     "pos": 9,
+     "de": 52,
+     "total": "80",
+     "gross": "85",
+     "voltas": [
+      "80"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual",
+     "pos": 8,
+     "de": 52,
+     "total": "85",
+     "gross": "85",
+     "voltas": [
+      "85"
+     ]
+    }
+   ]
+  },
+  "2023-02-05|1º Torneio do Circuito FPG - Montado H Dia 2": {
+   "data": "2023-02-05",
+   "torneio": "1º Torneio do Circuito FPG - Montado H Dia 2",
+   "torneioScoring": "1º Torneio do Circuito FPG - Montado",
+   "tcode": "10591",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Montado",
+   "dataTorneio": "2023-02-04",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 58,
+     "de": 96,
+     "total": "160",
+     "gross": "160",
+     "voltas": [
+      "81",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 6,
+     "de": 15,
+     "total": "160",
+     "gross": "160",
+     "voltas": [
+      "81",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 2,
+     "de": 15,
+     "total": "146",
+     "gross": "160",
+     "voltas": [
+      "74",
+      "72"
+     ]
+    }
+   ]
+  },
+  "2023-02-04|1º Torneio do Circuito FPG - Montado": {
+   "data": "2023-02-04",
+   "torneio": "1º Torneio do Circuito FPG - Montado",
+   "torneioScoring": "1º Torneio do Circuito FPG - Montado",
+   "tcode": "10591",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Montado",
+   "dataTorneio": "2023-02-04",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 58,
+     "de": 96,
+     "total": "160",
+     "gross": "160",
+     "voltas": [
+      "81",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 6,
+     "de": 15,
+     "total": "160",
+     "gross": "160",
+     "voltas": [
+      "81",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 2,
+     "de": 15,
+     "total": "146",
+     "gross": "160",
+     "voltas": [
+      "74",
+      "72"
+     ]
+    }
+   ]
+  },
+  "2023-01-25|93rd Portuguese International Ladies Amateur Champ": {
+   "data": "2023-01-25",
+   "torneio": "93rd Portuguese International Ladies Amateur Champ",
+   "torneioScoring": "93rd Portuguese International Ladies Amateur Champ",
+   "tcode": "10616",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Montado",
+   "dataTorneio": "2023-01-25",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": "-",
+     "de": 90,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "82",
+      "81",
+      "81",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Nations Cup",
+     "pos": "-",
+     "de": 90,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "82",
+      "81",
+      "81",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2023-01-14|1º Torneio do Circuito Drive Tour - Sub14 S": {
+   "data": "2023-01-14",
+   "torneio": "1º Torneio do Circuito Drive Tour - Sub14 S",
+   "torneioScoring": "1º Torneio do Circuito Drive Tour - Sub14 S",
+   "tcode": "10586",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Penina Resort Course",
+   "dataTorneio": "2023-01-14",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 2,
+     "de": 8,
+     "total": "165",
+     "gross": "165",
+     "voltas": [
+      "84",
+      "81"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 6,
+     "de": 8,
+     "total": "153",
+     "gross": "165",
+     "voltas": [
+      "78",
+      "75"
+     ]
+    }
+   ]
+  },
+  "2022-11-25|GJG Portuguese Junior Classics Girls": {
+   "data": "2022-11-25",
+   "torneio": "GJG Portuguese Junior Classics Girls",
+   "torneioScoring": "GJG Portuguese Junior Classics Girls",
+   "tcode": "10726",
+   "clube": "177",
+   "clubeNome": "Vale de Janelas",
+   "campo": "West Cliffs",
+   "dataTorneio": "2022-11-25",
+   "vistas": [
+    {
+     "classificacao": "Classification Individual Aggregate Stroke Play",
+     "pos": 5,
+     "de": 9,
+     "total": "252",
+     "gross": "252",
+     "voltas": [
+      "90",
+      "82",
+      "80"
+     ]
+    }
+   ]
+  },
+  "2022-11-19|5º Torneio do Circuito FPG - Quinta do Peru": {
+   "data": "2022-11-19",
+   "torneio": "5º Torneio do Circuito FPG - Quinta do Peru",
+   "torneioScoring": "5º Torneio do Circuito FPG - Quinta do Peru",
+   "tcode": "10580",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2022-11-19",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 53,
+     "de": 84,
+     "total": "164",
+     "gross": "164",
+     "voltas": [
+      "82",
+      "82"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 5,
+     "de": 11,
+     "total": "164",
+     "gross": "164",
+     "voltas": [
+      "82",
+      "82"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 3,
+     "de": 11,
+     "total": "150",
+     "gross": "164",
+     "voltas": [
+      "75",
+      "75"
+     ]
+    }
+   ]
+  },
+  "2022-11-12|Grande Final Drive Tour CN Jovens Sub14 S": {
+   "data": "2022-11-12",
+   "torneio": "Grande Final Drive Tour CN Jovens Sub14 S",
+   "torneioScoring": "Grande Final Drive Tour CN Jovens Sub14 S",
+   "tcode": "10575",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Montado",
+   "dataTorneio": "2022-11-12",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 2,
+     "de": 4,
+     "total": "153",
+     "gross": "153",
+     "voltas": [
+      "77",
+      "76"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 3,
+     "de": 4,
+     "total": "147",
+     "gross": "153",
+     "voltas": [
+      "74",
+      "73"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Ranking",
+     "pos": 2,
+     "de": 4,
+     "total": "153",
+     "gross": "153",
+     "voltas": [
+      "77",
+      "76"
+     ]
+    }
+   ]
+  },
+  "2022-10-09|INTERTERRITORIAL DE ESPAÑA SUB14 2022": {
+   "data": "2022-10-09",
+   "torneio": "INTERTERRITORIAL DE ESPAÑA SUB14 2022",
+   "tcodeTentado": "10273",
+   "erro": "sem linha dela na classificação"
+  },
+  "2022-10-01|Taça da Federação Portuguesa de Golf - BPI S": {
+   "data": "2022-10-01",
+   "torneio": "Taça da Federação Portuguesa de Golf - BPI S",
+   "torneioScoring": "Taça da Federação Portuguesa de Golf - BPI S",
+   "tcode": "10560",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2022-10-01",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 7,
+     "de": 11,
+     "total": "163",
+     "gross": "163",
+     "voltas": [
+      "80",
+      "83"
+     ]
+    }
+   ]
+  },
+  "2022-09-24|4º Torneio do Circuito FPG - Ribagolfe Oaks": {
+   "data": "2022-09-24",
+   "torneio": "4º Torneio do Circuito FPG - Ribagolfe Oaks",
+   "torneioScoring": "4º Torneio do Circuito FPG - Ribagolfe Oaks",
+   "tcode": "10556",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Ribagolfe Oaks",
+   "dataTorneio": "2022-09-24",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 65,
+     "de": 87,
+     "total": "167",
+     "gross": "167",
+     "voltas": [
+      "85",
+      "82"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 10,
+     "de": 10,
+     "total": "167",
+     "gross": "167",
+     "voltas": [
+      "85",
+      "82"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 8,
+     "de": 10,
+     "total": "153",
+     "gross": "167",
+     "voltas": [
+      "78",
+      "75"
+     ]
+    }
+   ]
+  },
+  "2022-09-20|THE AMUNDI EVIAN JUNIORS CUP": {
+   "data": "2022-09-20",
+   "torneio": "THE AMUNDI EVIAN JUNIORS CUP",
+   "tcodeTentado": "10213",
+   "erro": "sem linha dela na classificação"
+  },
+  "2022-09-03|Torneio Grp Novo Banco": {
+   "data": "2022-09-03",
+   "torneio": "Torneio Grp Novo Banco",
+   "torneioScoring": "Torneio Grp Novo Banco",
+   "tcode": "10346",
+   "clube": "029",
+   "clubeNome": "Aroeira",
+   "campo": "Aroeira Pines Classic",
+   "dataTorneio": "2022-09-03",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 16,
+     "de": 35,
+     "total": "32",
+     "gross": "86",
+     "voltas": [
+      "32"
+     ]
+    }
+   ]
+  },
+  "2022-08-27|5º Torneio do Circuito Drive Tour - Sub 14 S": {
+   "data": "2022-08-27",
+   "torneio": "5º Torneio do Circuito Drive Tour - Sub 14 S",
+   "torneioScoring": "5º Torneio do Circuito Drive Tour - Sub 14 S",
+   "tcode": "10549",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Estela",
+   "dataTorneio": "2022-08-27",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 2,
+     "de": 7,
+     "total": "123",
+     "gross": "123",
+     "voltas": [
+      "42",
+      "81"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 4,
+     "de": 7,
+     "total": "112",
+     "gross": "123",
+     "voltas": [
+      "38",
+      "74"
+     ]
+    }
+   ]
+  },
+  "2022-08-06|Campeonato do Clube/Club Championship 2022": {
+   "data": "2022-08-06",
+   "torneio": "Campeonato do Clube/Club Championship 2022",
+   "torneioScoring": "Campeonato do Clube/Club Championship 2022",
+   "tcode": "10681",
+   "clube": "177",
+   "clubeNome": "Vale de Janelas",
+   "campo": "Praia d'El-Rey Golf",
+   "dataTorneio": "2022-08-06",
+   "vistas": [
+    {
+     "classificacao": "Classification Individual Aggregate Stroke Play",
+     "pos": 3,
+     "de": 56,
+     "total": "160",
+     "gross": "160",
+     "voltas": [
+      "80",
+      "80"
+     ]
+    }
+   ]
+  },
+  "2022-07-27|Campeonato Nacional Absoluto - Hyundai - S": {
+   "data": "2022-07-27",
+   "torneio": "Campeonato Nacional Absoluto - Hyundai - S",
+   "torneioScoring": "Campeonato Nacional Absoluto - Hyundai - S",
+   "tcode": "10541",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Aroeira Pines Classic",
+   "dataTorneio": "2022-07-27",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": "-",
+     "de": 21,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "81",
+      "84",
+      "80",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Amadores",
+     "pos": "-",
+     "de": 18,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "81",
+      "84",
+      "80",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "2ª Cat.",
+     "pos": "-",
+     "de": 6,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "81",
+      "84",
+      "80",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2022-07-16|4º Torneio do Circuito Drive Tour - Sub14 S": {
+   "data": "2022-07-16",
+   "torneio": "4º Torneio do Circuito Drive Tour - Sub14 S",
+   "torneioScoring": "4º Torneio do Circuito Drive Tour - Sub14 S",
+   "tcode": "10530",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Santo Estevão Golf",
+   "dataTorneio": "2022-07-16",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 1,
+     "de": 5,
+     "total": "158",
+     "gross": "158",
+     "voltas": [
+      "79",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 2,
+     "de": 5,
+     "total": "148",
+     "gross": "158",
+     "voltas": [
+      "74",
+      "74"
+     ]
+    }
+   ]
+  },
+  "2022-07-10|OPEN-ClubeTAP": {
+   "data": "2022-07-10",
+   "torneio": "OPEN-ClubeTAP",
+   "torneioScoring": "OPEN-ClubeTAP",
+   "tcode": "10257",
+   "clube": "130",
+   "clubeNome": "Xira Golfe",
+   "campo": "Santo Estevão Golf",
+   "dataTorneio": "2022-07-10",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 37,
+     "de": 58,
+     "total": "26",
+     "gross": "87",
+     "voltas": [
+      "26"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 10,
+     "de": 58,
+     "total": "23",
+     "gross": "87",
+     "voltas": [
+      "23"
+     ]
+    }
+   ]
+  },
+  "2022-06-25|Torneio ABERTO do ESTORIL": {
+   "data": "2022-06-25",
+   "torneio": "Torneio ABERTO do ESTORIL",
+   "torneioScoring": "Torneio ABERTO do ESTORIL",
+   "tcode": "10341",
+   "clube": "004",
+   "clubeNome": "Estoril",
+   "campo": "Estoril",
+   "dataTorneio": "2022-06-25",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Agregada Net",
+     "pos": "-",
+     "de": 59,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Classificação Medal Net agregada - Senhoras",
+     "pos": "-",
+     "de": 8,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Classificação Individual Agregada Gross",
+     "pos": "-",
+     "de": 59,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Classificação Stroke Play agregada - Senhoras",
+     "pos": "-",
+     "de": 8,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2022-06-05|3º Torneio do Circuito FPG D2": {
+   "data": "2022-06-05",
+   "torneio": "3º Torneio do Circuito FPG D2",
+   "torneioScoring": "3º Torneio do Circuito FPG - Boavista",
+   "tcode": "10509",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Boavista",
+   "dataTorneio": "2022-06-04",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 68,
+     "de": 82,
+     "total": "163",
+     "gross": "163",
+     "voltas": [
+      "84",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 7,
+     "de": 8,
+     "total": "163",
+     "gross": "163",
+     "voltas": [
+      "84",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 4,
+     "de": 8,
+     "total": "139",
+     "gross": "163",
+     "voltas": [
+      "72",
+      "67"
+     ]
+    }
+   ]
+  },
+  "2022-06-04|3º Torneio do Circuito FPG - Boavista": {
+   "data": "2022-06-04",
+   "torneio": "3º Torneio do Circuito FPG - Boavista",
+   "torneioScoring": "3º Torneio do Circuito FPG - Boavista",
+   "tcode": "10509",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Boavista",
+   "dataTorneio": "2022-06-04",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 68,
+     "de": 82,
+     "total": "163",
+     "gross": "163",
+     "voltas": [
+      "84",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 7,
+     "de": 8,
+     "total": "163",
+     "gross": "163",
+     "voltas": [
+      "84",
+      "79"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 4,
+     "de": 8,
+     "total": "139",
+     "gross": "163",
+     "voltas": [
+      "72",
+      "67"
+     ]
+    }
+   ]
+  },
+  "2022-05-22|TORNEO INFANTIL FEXGOLF": {
+   "data": "2022-05-22",
+   "torneio": "TORNEO INFANTIL FEXGOLF",
+   "erro": "sem correspondência"
+  },
+  "2022-05-21|105ª Lisbon Cup": {
+   "data": "2022-05-21",
+   "torneio": "105ª Lisbon Cup",
+   "torneioScoring": "105ª Lisbon Cup",
+   "tcode": "10776",
+   "clube": "002",
+   "clubeNome": "Lisbon SC",
+   "campo": "Lisbon Sports Club",
+   "dataTorneio": "2022-05-21",
+   "vistas": [
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": "-",
+     "de": 81,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": "-",
+     "de": 81,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada - Senhoras",
+     "pos": "-",
+     "de": 10,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2022-05-14|3º Torneio Circuito Drive Tour - Sub14 S": {
+   "data": "2022-05-14",
+   "torneio": "3º Torneio Circuito Drive Tour - Sub14 S",
+   "torneioScoring": "3º Torneio Circuito Drive Tour - Sub14 S",
+   "tcode": "10502",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Ribagolfe Oaks",
+   "dataTorneio": "2022-05-14",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 1,
+     "de": 6,
+     "total": "157",
+     "gross": "157",
+     "voltas": [
+      "77",
+      "80"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 1,
+     "de": 6,
+     "total": "137",
+     "gross": "157",
+     "voltas": [
+      "67",
+      "70"
+     ]
+    }
+   ]
+  },
+  "2022-05-07|3ª Ordem de Mérito Ribagolfe": {
+   "data": "2022-05-07",
+   "torneio": "3ª Ordem de Mérito Ribagolfe",
+   "torneioScoring": "3ª Ordem de Mérito Ribagolfe",
+   "tcode": "10432",
+   "clube": "149",
+   "clubeNome": "Orizonte ",
+   "campo": "Ribagolfe Oaks",
+   "dataTorneio": "2022-05-07",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 4,
+     "de": 44,
+     "total": "37",
+     "gross": "81",
+     "voltas": [
+      "37"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 6,
+     "de": 44,
+     "total": "27",
+     "gross": "81",
+     "voltas": [
+      "27"
+     ]
+    }
+   ]
+  },
+  "2022-04-12|Campeonato Nacional de Clubes - Sub18": {
+   "data": "2022-04-12",
+   "torneio": "Campeonato Nacional de Clubes - Sub18",
+   "torneioScoring": "Campeonato Nacional de Clubes - Sub18",
+   "tcode": "10495",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Santo Estevão Golf",
+   "dataTorneio": "2022-04-12",
+   "vistas": [
+    {
+     "classificacao": "Classification Teams Aggregate Stroke Play",
+     "pos": 34,
+     "de": 58,
+     "total": "271",
+     "gross": "271",
+     "voltas": [
+      "90",
+      "94",
+      "87"
+     ]
+    }
+   ]
+  },
+  "2022-04-02|2º Torneio do Circuito FPG - Oporto": {
+   "data": "2022-04-02",
+   "torneio": "2º Torneio do Circuito FPG - Oporto",
+   "torneioScoring": "2º Torneio do Circuito FPG - Oporto",
+   "tcode": "10491",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Oporto",
+   "dataTorneio": "2022-04-02",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 109,
+     "de": 123,
+     "total": "182",
+     "gross": "182",
+     "voltas": [
+      "90",
+      "92"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 10,
+     "de": 13,
+     "total": "182",
+     "gross": "182",
+     "voltas": [
+      "90",
+      "92"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 5,
+     "de": 13,
+     "total": "154",
+     "gross": "182",
+     "voltas": [
+      "76",
+      "78"
+     ]
+    }
+   ]
+  },
+  "2022-03-27|3º Torneio OM Cat A - 2022": {
+   "data": "2022-03-27",
+   "torneio": "3º Torneio OM Cat A - 2022",
+   "torneioScoring": "3º Torneio OM Cat A - 2022",
+   "tcode": "10406",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2022-03-27",
+   "vistas": [
+    {
+     "classificacao": "Medal Net Individual",
+     "pos": 13,
+     "de": 18,
+     "total": "93",
+     "gross": "107",
+     "voltas": [
+      "93"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual",
+     "pos": 13,
+     "de": 18,
+     "total": "107",
+     "gross": "107",
+     "voltas": [
+      "107"
+     ]
+    }
+   ]
+  },
+  "2022-03-19|2º Torneio Drive Tour - Miramar - Sub14 S": {
+   "data": "2022-03-19",
+   "torneio": "2º Torneio Drive Tour - Miramar - Sub14 S",
+   "torneioScoring": "2º Torneio Drive Tour - Miramar - Sub14 S",
+   "tcode": "10170",
+   "clube": "999",
+   "clubeNome": "FPG Formação",
+   "campo": "Miramar",
+   "dataTorneio": "2022-03-19",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 2,
+     "de": 6,
+     "total": "176",
+     "gross": "176",
+     "voltas": [
+      "92",
+      "84"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 5,
+     "de": 6,
+     "total": "156",
+     "gross": "176",
+     "voltas": [
+      "82",
+      "74"
+     ]
+    }
+   ]
+  },
+  "2022-02-26|TORNEIO DE ABERTURA - 1º OM 2022": {
+   "data": "2022-02-26",
+   "torneio": "TORNEIO DE ABERTURA - 1º OM 2022",
+   "torneioScoring": "TORNEIO DE ABERTURA - 1º OM 2022",
+   "tcode": "10076",
+   "clube": "162",
+   "clubeNome": "Sporting Golfe",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2022-02-26",
+   "vistas": [
+    {
+     "classificacao": "Classificação Net (Convidados)",
+     "pos": "ND",
+     "de": 22,
+     "total": "ND",
+     "gross": "ND",
+     "voltas": [
+      "ND"
+     ]
+    }
+   ]
+  },
+  "2022-02-12|Extra Day Score": {
+   "data": "2022-02-12",
+   "torneio": "Extra Day Score",
+   "tcodeTentado": "11336",
+   "erro": "sem linha dela na classificação"
+  },
+  "2022-02-05|1º Torneio do Circuito FPG - Montado": {
+   "data": "2022-02-05",
+   "torneio": "1º Torneio do Circuito FPG - Montado",
+   "torneioScoring": "1º Torneio do Circuito FPG - Montado",
+   "tcode": "10475",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Montado",
+   "dataTorneio": "2022-02-05",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 81,
+     "de": 112,
+     "total": "168",
+     "gross": "168",
+     "voltas": [
+      "84",
+      "84"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 8,
+     "de": 16,
+     "total": "168",
+     "gross": "168",
+     "voltas": [
+      "84",
+      "84"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 2,
+     "de": 16,
+     "total": "142",
+     "gross": "168",
+     "voltas": [
+      "71",
+      "71"
+     ]
+    }
+   ]
+  },
+  "2022-01-23|1º Torneio OM 2022 - Cat A": {
+   "data": "2022-01-23",
+   "torneio": "1º Torneio OM 2022 - Cat A",
+   "torneioScoring": "1º Torneio OM 2022 - Cat A",
+   "tcode": "10394",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2022-01-23",
+   "vistas": [
+    {
+     "classificacao": "Medal Net Individual",
+     "pos": 5,
+     "de": 15,
+     "total": "76",
+     "gross": "91",
+     "voltas": [
+      "76"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual",
+     "pos": 11,
+     "de": 15,
+     "total": "91",
+     "gross": "91",
+     "voltas": [
+      "91"
+     ]
+    }
+   ]
+  },
+  "2022-01-15|1º Torneio Drive Tour 2022 - Sub14 S": {
+   "data": "2022-01-15",
+   "torneio": "1º Torneio Drive Tour 2022 - Sub14 S",
+   "torneioScoring": "1º Torneio Drive Tour 2022 - Sub14 S",
+   "tcode": "10468",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "O'Connor Jnr Course",
+   "dataTorneio": "2022-01-15",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 2,
+     "de": 5,
+     "total": "174",
+     "gross": "174",
+     "voltas": [
+      "87",
+      "87"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 4,
+     "de": 5,
+     "total": "152",
+     "gross": "174",
+     "voltas": [
+      "76",
+      "76"
+     ]
+    }
+   ]
+  },
+  "2021-12-18|Taça de Fim de Ano 2021": {
+   "data": "2021-12-18",
+   "torneio": "Taça de Fim de Ano 2021",
+   "tcodeTentado": "10390",
+   "erro": "sem linha dela na classificação"
+  },
+  "2021-12-01|8ª OM - Cat B": {
+   "data": "2021-12-01",
+   "torneio": "8ª OM - Cat B",
+   "torneioScoring": "8ª OM - Cat B",
+   "tcode": "10387",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2021-12-01",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 30,
+     "de": 39,
+     "total": "26",
+     "gross": "90",
+     "voltas": [
+      "26"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 11,
+     "de": 39,
+     "total": "20",
+     "gross": "90",
+     "voltas": [
+      "20"
+     ]
+    }
+   ]
+  },
+  "2021-11-28|7ª OM - Cat B": {
+   "data": "2021-11-28",
+   "torneio": "7ª OM - Cat B",
+   "torneioScoring": "8ª OM - Cat B",
+   "tcode": "10387",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2021-12-01",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 30,
+     "de": 39,
+     "total": "26",
+     "gross": "90",
+     "voltas": [
+      "26"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 11,
+     "de": 39,
+     "total": "20",
+     "gross": "90",
+     "voltas": [
+      "20"
+     ]
+    }
+   ]
+  },
+  "2021-11-20|Grande Final Drive Tour CN Jovens Sub 14 & 12 S": {
+   "data": "2021-11-20",
+   "torneio": "Grande Final Drive Tour CN Jovens Sub 14 & 12 S",
+   "torneioScoring": "Grande Final Drive Tour CN Jovens Sub 14 & 12 S",
+   "tcode": "10463",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Montado",
+   "dataTorneio": "2021-11-20",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 4,
+     "de": 6,
+     "total": "168",
+     "gross": "168",
+     "voltas": [
+      "84",
+      "84"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 4,
+     "de": 6,
+     "total": "152",
+     "gross": "168",
+     "voltas": [
+      "76",
+      "76"
+     ]
+    }
+   ]
+  },
+  "2021-11-06|6º OM - Cat B": {
+   "data": "2021-11-06",
+   "torneio": "6º OM - Cat B",
+   "torneioScoring": "6º OM - Cat B",
+   "tcode": "10380",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2021-11-06",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 14,
+     "de": 36,
+     "total": "30",
+     "gross": "86",
+     "voltas": [
+      "30"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 5,
+     "de": 36,
+     "total": "23",
+     "gross": "86",
+     "voltas": [
+      "23"
+     ]
+    }
+   ]
+  },
+  "2021-10-16|5º Torneio do Circuito Drive Tour - Sub 14 S": {
+   "data": "2021-10-16",
+   "torneio": "5º Torneio do Circuito Drive Tour - Sub 14 S",
+   "torneioScoring": "5º Torneio do Circuito Drive Tour - Sub 14 S",
+   "tcode": "10445",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Estela",
+   "dataTorneio": "2021-10-16",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 1,
+     "de": 8,
+     "total": "174",
+     "gross": "174",
+     "voltas": [
+      "84",
+      "90"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 3,
+     "de": 8,
+     "total": "150",
+     "gross": "174",
+     "voltas": [
+      "72",
+      "78"
+     ]
+    }
+   ]
+  },
+  "2021-10-09|5º Torneio OM - Cat B": {
+   "data": "2021-10-09",
+   "torneio": "5º Torneio OM - Cat B",
+   "torneioScoring": "5º Torneio OM - Cat B",
+   "tcode": "10371",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2021-10-09",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 16,
+     "de": 39,
+     "total": "34",
+     "gross": "82",
+     "voltas": [
+      "34"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 4,
+     "de": 39,
+     "total": "26",
+     "gross": "82",
+     "voltas": [
+      "26"
+     ]
+    }
+   ]
+  },
+  "2021-09-18|Taça Manuel e Isabel Espírito Santo": {
+   "data": "2021-09-18",
+   "torneio": "Taça Manuel e Isabel Espírito Santo",
+   "torneioScoring": "Taça Manuel e Isabel Espírito Santo",
+   "tcode": "10363",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2021-09-18",
+   "vistas": [
+    {
+     "classificacao": "Geral Medal Net Agregada",
+     "pos": 15,
+     "de": 36,
+     "total": "156",
+     "gross": "172",
+     "voltas": [
+      "79",
+      "77"
+     ]
+    },
+    {
+     "classificacao": "Geral Stroke Play Agregado",
+     "pos": 10,
+     "de": 36,
+     "total": "172",
+     "gross": "172",
+     "voltas": [
+      "87",
+      "85"
+     ]
+    }
+   ]
+  },
+  "2021-09-11|4º Torneio do Circuito FPG - Ribagolfe Oaks": {
+   "data": "2021-09-11",
+   "torneio": "4º Torneio do Circuito FPG - Ribagolfe Oaks",
+   "torneioScoring": "4º Torneio do Circuito FPG - Ribagolfe Oaks",
+   "tcode": "10435",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Ribagolfe Oaks",
+   "dataTorneio": "2021-09-11",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 66,
+     "de": 87,
+     "total": "167",
+     "gross": "167",
+     "voltas": [
+      "82",
+      "85"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play - Senhoras",
+     "pos": 8,
+     "de": 13,
+     "total": "167",
+     "gross": "167",
+     "voltas": [
+      "82",
+      "85"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Senhoras Amadoras",
+     "pos": 3,
+     "de": 13,
+     "total": "141",
+     "gross": "167",
+     "voltas": [
+      "69",
+      "72"
+     ]
+    }
+   ]
+  },
+  "2021-08-28|4º Torneio do Circuito Drive Tour - Sub 14 S": {
+   "data": "2021-08-28",
+   "torneio": "4º Torneio do Circuito Drive Tour - Sub 14 S",
+   "torneioScoring": "4º Torneio do Circuito Drive Tour - Sub 14 S",
+   "tcode": "10429",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Palmares Golf Lagos - Praia",
+   "dataTorneio": "2021-08-28",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 4,
+     "de": 8,
+     "total": "169",
+     "gross": "169",
+     "voltas": [
+      "83",
+      "86"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 7,
+     "de": 8,
+     "total": "151",
+     "gross": "169",
+     "voltas": [
+      "74",
+      "77"
+     ]
+    }
+   ]
+  },
+  "2021-08-24|Campeonato Nacional de Clubes Sub 14": {
+   "data": "2021-08-24",
+   "torneio": "Campeonato Nacional de Clubes Sub 14",
+   "torneioScoring": "Campeonato Nacional de Clubes Sub 14",
+   "tcode": "10423",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Ribagolfe Oaks",
+   "dataTorneio": "2021-08-24",
+   "vistas": [
+    {
+     "classificacao": "Classificação Equipas Agregada Stroke Play",
+     "pos": 18,
+     "de": 28,
+     "total": "269",
+     "gross": "269",
+     "voltas": [
+      "92",
+      "88",
+      "89"
+     ]
+    }
+   ]
+  },
+  "2021-07-24|3º Torneio do Circuito Drive Tour - Sub 14 & 12 S": {
+   "data": "2021-07-24",
+   "torneio": "3º Torneio do Circuito Drive Tour - Sub 14 & 12 S",
+   "torneioScoring": "3º Torneio do Circuito Drive Tour - Sub 14 & 12 S",
+   "tcode": "10414",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Aroeira Challenge",
+   "dataTorneio": "2021-07-24",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 4,
+     "de": 7,
+     "total": "171",
+     "gross": "171",
+     "voltas": [
+      "81",
+      "90"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 5,
+     "de": 7,
+     "total": "149",
+     "gross": "171",
+     "voltas": [
+      "70",
+      "79"
+     ]
+    }
+   ]
+  },
+  "2021-06-26|Campeonato Nacional de 3º Categorias S": {
+   "data": "2021-06-26",
+   "torneio": "Campeonato Nacional de 3º Categorias S",
+   "tcodeTentado": "10405",
+   "erro": "sem linha dela na classificação"
+  },
+  "2021-06-21|jogo": {
+   "data": "2021-06-21",
+   "torneio": "jogo",
+   "erro": "sem correspondência"
+  },
+  "2021-06-19|Taça R. S. Yeatman": {
+   "data": "2021-06-19",
+   "torneio": "Taça R. S. Yeatman",
+   "torneioScoring": "Taça R. S. Yeatman",
+   "tcode": "10270",
+   "clube": "003",
+   "clubeNome": "Miramar",
+   "campo": "Miramar",
+   "dataTorneio": "2021-06-19",
+   "vistas": [
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": "-",
+     "de": 85,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": "-",
+     "de": 85,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Medal net agregada senhoras",
+     "pos": "-",
+     "de": 8,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    },
+    {
+     "classificacao": "Strokeplay agregada senhoras",
+     "pos": "-",
+     "de": 8,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2021-06-19|Torneio da 3ª OM - Santo Estevão": {
+   "data": "2021-06-19",
+   "torneio": "Torneio da 3ª OM - Santo Estevão",
+   "torneioScoring": "Torneio da 3ª OM - Santo Estevão",
+   "tcode": "10046",
+   "clube": "055",
+   "clubeNome": "Évora",
+   "campo": "Santo Estevão Golf",
+   "dataTorneio": "2021-06-19",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 54,
+     "de": 77,
+     "total": "27",
+     "gross": "94",
+     "voltas": [
+      "27"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 28,
+     "de": 77,
+     "total": "16",
+     "gross": "94",
+     "voltas": [
+      "16"
+     ]
+    }
+   ]
+  },
+  "2021-06-12|Taça João Salazar de Sousa - Campeonato do Clube B": {
+   "data": "2021-06-12",
+   "torneio": "Taça João Salazar de Sousa - Campeonato do Clube B",
+   "torneioScoring": "Taça João Salazar de Sousa - Campeonato do Clube B",
+   "tcode": "10346",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2021-06-12",
+   "vistas": [
+    {
+     "classificacao": "Geral Stroke Play Agregado",
+     "pos": 3,
+     "de": 24,
+     "total": "168",
+     "gross": "168",
+     "voltas": [
+      "86",
+      "82"
+     ]
+    },
+    {
+     "classificacao": "Stroke Play Senhoras Agregado",
+     "pos": 2,
+     "de": 7,
+     "total": "168",
+     "gross": "168",
+     "voltas": [
+      "86",
+      "82"
+     ]
+    },
+    {
+     "classificacao": "Geral Medal Net Agregada",
+     "pos": 1,
+     "de": 24,
+     "total": "142",
+     "gross": "168",
+     "voltas": [
+      "73",
+      "69"
+     ]
+    }
+   ]
+  },
+  "2021-05-30|jogo": {
+   "data": "2021-05-30",
+   "torneio": "jogo",
+   "erro": "sem correspondência"
+  },
+  "2021-05-29|2º Torneio OM 2021 - Cat B": {
+   "data": "2021-05-29",
+   "torneio": "2º Torneio OM 2021 - Cat B",
+   "torneioScoring": "2º Torneio OM 2021 - Cat B",
+   "tcode": "10342",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2021-05-29",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 15,
+     "de": 31,
+     "total": "28",
+     "gross": "93",
+     "voltas": [
+      "28"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 11,
+     "de": 31,
+     "total": "15",
+     "gross": "93",
+     "voltas": [
+      "15"
+     ]
+    }
+   ]
+  },
+  "2021-05-22|II PUNTUABLE ZONA C Y L/ EXTREM 2021": {
+   "data": "2021-05-22",
+   "torneio": "II PUNTUABLE ZONA C Y L/ EXTREM 2021",
+   "erro": "sem correspondência"
+  },
+  "2021-05-08|2º Torneio Circuito Drive Tour-Miramar-Sub 14 S": {
+   "data": "2021-05-08",
+   "torneio": "2º Torneio Circuito Drive Tour-Miramar-Sub 14 S",
+   "torneioScoring": "2º Torneio Circuito Drive Tour-Miramar-Sub 14 S",
+   "tcode": "10166",
+   "clube": "999",
+   "clubeNome": "FPG Formação",
+   "campo": "Miramar",
+   "dataTorneio": "2021-05-08",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 4,
+     "de": 5,
+     "total": "183",
+     "gross": "183",
+     "voltas": [
+      "96",
+      "87"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 3,
+     "de": 5,
+     "total": "151",
+     "gross": "183",
+     "voltas": [
+      "80",
+      "71"
+     ]
+    }
+   ]
+  },
+  "2021-04-24|I PUNTUABLE EXTREMADURA-CYL": {
+   "data": "2021-04-24",
+   "torneio": "I PUNTUABLE EXTREMADURA-CYL",
+   "erro": "sem correspondência"
+  },
+  "2021-04-17|1º Torneio Circuito D. Tour-St Estevão-Sub 14_12 S": {
+   "data": "2021-04-17",
+   "torneio": "1º Torneio Circuito D. Tour-St Estevão-Sub 14_12 S",
+   "torneioScoring": "1º Torneio Circuito D. Tour-St Estevão-Sub 14_12 S",
+   "tcode": "10361",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Santo Estevão Golf",
+   "dataTorneio": "2021-04-17",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 2,
+     "de": 4,
+     "total": "174",
+     "gross": "174",
+     "voltas": [
+      "84",
+      "90"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 1,
+     "de": 4,
+     "total": "144",
+     "gross": "174",
+     "voltas": [
+      "69",
+      "75"
+     ]
+    }
+   ]
+  },
+  "2021-04-11|1º Torn. Drive Challenge Tejo – Lisbon-Sub 12": {
+   "data": "2021-04-11",
+   "torneio": "1º Torn. Drive Challenge Tejo – Lisbon-Sub 12",
+   "torneioScoring": "1º Torn. Drive Challenge Tejo – Lisbon-Sub 12",
+   "tcode": "10061",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Lisbon Sports Club",
+   "dataTorneio": "2021-04-11",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual",
+     "pos": 2,
+     "de": 12,
+     "total": "44",
+     "gross": "44",
+     "voltas": [
+      "44"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual",
+     "pos": 3,
+     "de": 12,
+     "total": "37",
+     "gross": "44",
+     "voltas": [
+      "37"
+     ]
+    }
+   ]
+  },
+  "2021-04-11|I OM SEG": {
+   "data": "2021-04-11",
+   "torneio": "I OM SEG",
+   "torneioScoring": "I OM SEG",
+   "tcode": "10001",
+   "clube": "187",
+   "clubeNome": "SEG",
+   "campo": "Santo Estevão Golf",
+   "dataTorneio": "2021-04-11",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 9,
+     "de": 50,
+     "total": "33",
+     "gross": "91",
+     "voltas": [
+      "33"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 15,
+     "de": 50,
+     "total": "19",
+     "gross": "91",
+     "voltas": [
+      "19"
+     ]
+    }
+   ]
+  },
+  "2020-12-21|Final Circuito Lisboa Jr. Aroeira II | Sub12": {
+   "data": "2020-12-21",
+   "torneio": "Final Circuito Lisboa Jr. Aroeira II | Sub12",
+   "torneioScoring": "Final Circuito Lisboa Jr. Aroeira II | Sub12",
+   "tcode": "10322",
+   "clube": "149",
+   "clubeNome": "Orizonte ",
+   "campo": "Aroeira II",
+   "dataTorneio": "2020-12-21",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 6,
+     "de": 9,
+     "total": "13",
+     "gross": "45",
+     "voltas": [
+      "13"
+     ]
+    }
+   ]
+  },
+  "2020-11-08|6º Torneio Circuito Drive Tour - Montado Sub 12 Da": {
+   "data": "2020-11-08",
+   "torneio": "6º Torneio Circuito Drive Tour - Montado Sub 12 Da",
+   "torneioScoring": "6º Torneio Circuito Drive Tour - Montado Sub 12",
+   "tcode": "10346",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Montado",
+   "dataTorneio": "2020-11-07",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play - Raparigas",
+     "pos": 1,
+     "de": 3,
+     "total": "178",
+     "gross": "178",
+     "voltas": [
+      "87",
+      "91"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Raparigas",
+     "pos": 1,
+     "de": 3,
+     "total": "144",
+     "gross": "178",
+     "voltas": [
+      "70",
+      "74"
+     ]
+    }
+   ]
+  },
+  "2020-11-07|6º Torneio Circuito Drive Tour - Montado Sub 12": {
+   "data": "2020-11-07",
+   "torneio": "6º Torneio Circuito Drive Tour - Montado Sub 12",
+   "torneioScoring": "6º Torneio Circuito Drive Tour - Montado Sub 12",
+   "tcode": "10346",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Montado",
+   "dataTorneio": "2020-11-07",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play - Raparigas",
+     "pos": 1,
+     "de": 3,
+     "total": "178",
+     "gross": "178",
+     "voltas": [
+      "87",
+      "91"
+     ]
+    },
+    {
+     "classificacao": "Medal Net - Raparigas",
+     "pos": 1,
+     "de": 3,
+     "total": "144",
+     "gross": "178",
+     "voltas": [
+      "70",
+      "74"
+     ]
+    }
+   ]
+  },
+  "2020-10-24|Campeonato do Clube": {
+   "data": "2020-10-24",
+   "torneio": "Campeonato do Clube",
+   "torneioScoring": "Campeonato do Clube",
+   "tcode": "10307",
+   "clube": "087",
+   "clubeNome": "Paço do Lumiar",
+   "campo": "Paço do Lumiar",
+   "dataTorneio": "2020-10-24",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stroke Play",
+     "pos": 20,
+     "de": 47,
+     "total": "78",
+     "gross": "78",
+     "voltas": [
+      "78"
+     ]
+    }
+   ]
+  },
+  "2020-10-17|5º Torneio Circuito Drive Tour - Amarante Sub 12": {
+   "data": "2020-10-17",
+   "torneio": "5º Torneio Circuito Drive Tour - Amarante Sub 12",
+   "torneioScoring": "5º Torneio Circuito Drive Tour - Amarante Sub 12",
+   "tcode": "10335",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Amarante",
+   "dataTorneio": "2020-10-17",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 15,
+     "de": 15,
+     "total": "191",
+     "gross": "191",
+     "voltas": [
+      "90",
+      "101"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 13,
+     "de": 15,
+     "total": "159",
+     "gross": "191",
+     "voltas": [
+      "74",
+      "85"
+     ]
+    }
+   ]
+  },
+  "2020-10-11|Juniores 2003/2020": {
+   "data": "2020-10-11",
+   "torneio": "Juniores 2003/2020",
+   "torneioScoring": "Juniores 2003/2020",
+   "tcode": "10321",
+   "clube": "087",
+   "clubeNome": "Paço do Lumiar",
+   "campo": "Paço do Lumiar",
+   "dataTorneio": "2020-10-11",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 2,
+     "de": 14,
+     "total": "20",
+     "gross": "35",
+     "voltas": [
+      "20"
+     ]
+    }
+   ]
+  },
+  "2020-10-10|5º Torneio Escalão A": {
+   "data": "2020-10-10",
+   "torneio": "5º Torneio Escalão A",
+   "torneioScoring": "5º Torneio Escalão A",
+   "tcode": "10292",
+   "clube": "087",
+   "clubeNome": "Paço do Lumiar",
+   "campo": "Paço do Lumiar",
+   "dataTorneio": "2020-10-10",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Medal Net",
+     "pos": 13,
+     "de": 28,
+     "total": "58",
+     "gross": "73",
+     "voltas": [
+      "58"
+     ]
+    }
+   ]
+  },
+  "2020-10-04|jogo": {
+   "data": "2020-10-04",
+   "torneio": "jogo",
+   "erro": "sem correspondência"
+  },
+  "2020-10-03|TGT 6": {
+   "data": "2020-10-03",
+   "torneio": "TGT 6",
+   "torneioScoring": "TGT 6",
+   "tcode": "10053",
+   "clube": "024",
+   "clubeNome": "Santander Totta",
+   "campo": "Ribagolfe II",
+   "dataTorneio": "2020-10-03",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 8,
+     "de": 18,
+     "total": "13",
+     "gross": "99",
+     "voltas": [
+      "13"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 13,
+     "de": 18,
+     "total": "27",
+     "gross": "99",
+     "voltas": [
+      "27"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net individual - 1ª categoria",
+     "pos": 5,
+     "de": 5,
+     "total": "27",
+     "gross": "99",
+     "voltas": [
+      "27"
+     ]
+    }
+   ]
+  },
+  "2020-09-27|Regional Drive Challenge Tejo - Oeiras - Sub 12": {
+   "data": "2020-09-27",
+   "torneio": "Regional Drive Challenge Tejo - Oeiras - Sub 12",
+   "torneioScoring": "Regional Drive Challenge Tejo - Oeiras - Sub 12",
+   "tcode": "10049",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Oeiras",
+   "dataTorneio": "2020-09-27",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 7,
+     "de": 13,
+     "total": "9",
+     "gross": "46",
+     "voltas": [
+      "9"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 10,
+     "de": 13,
+     "total": "13",
+     "gross": "46",
+     "voltas": [
+      "13"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Ranking",
+     "pos": 7,
+     "de": 13,
+     "total": "9",
+     "gross": "46",
+     "voltas": [
+      "9"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Ranking",
+     "pos": 10,
+     "de": 13,
+     "total": "13",
+     "gross": "46",
+     "voltas": [
+      "13"
+     ]
+    }
+   ]
+  },
+  "2020-09-20|3º Torneio Circuito Lisboa Jr - Escalão Sub 12": {
+   "data": "2020-09-20",
+   "torneio": "3º Torneio Circuito Lisboa Jr - Escalão Sub 12",
+   "torneioScoring": "3º Torneio Circuito Lisboa Jr - Escalão Sub 12",
+   "tcode": "10596",
+   "clube": "002",
+   "clubeNome": "Lisbon SC",
+   "campo": "Lisbon Sports Club",
+   "dataTorneio": "2020-09-20",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 6,
+     "de": 8,
+     "total": "15",
+     "gross": "45",
+     "voltas": [
+      "15"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 4,
+     "de": 8,
+     "total": "8",
+     "gross": "45",
+     "voltas": [
+      "8"
+     ]
+    }
+   ]
+  },
+  "2020-09-12|TGT 4": {
+   "data": "2020-09-12",
+   "torneio": "TGT 4",
+   "torneioScoring": "TGT 4",
+   "tcode": "10051",
+   "clube": "024",
+   "clubeNome": "Santander Totta",
+   "campo": "Ribagolfe I",
+   "dataTorneio": "2020-09-12",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 7,
+     "de": 12,
+     "total": "6",
+     "gross": "106",
+     "voltas": [
+      "6"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 10,
+     "de": 12,
+     "total": "23",
+     "gross": "106",
+     "voltas": [
+      "23"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net individual - 1ª categoria",
+     "pos": 3,
+     "de": 3,
+     "total": "23",
+     "gross": "106",
+     "voltas": [
+      "23"
+     ]
+    }
+   ]
+  },
+  "2020-09-05|Ronald Cup": {
+   "data": "2020-09-05",
+   "torneio": "Ronald Cup",
+   "tcodeTentado": "10585",
+   "erro": "sem linha dela na classificação"
+  },
+  "2020-08-29|Campeonato Nacional de Sub 12": {
+   "data": "2020-08-29",
+   "torneio": "Campeonato Nacional de Sub 12",
+   "torneioScoring": "Campeonato Nacional de Sub 12",
+   "tcode": "10371",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Miramar",
+   "dataTorneio": "2020-08-29",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 8,
+     "de": 10,
+     "total": "207",
+     "gross": "207",
+     "voltas": [
+      "106",
+      "101"
+     ]
+    }
+   ]
+  },
+  "2020-08-23|4º Torn. Drive Challenge Tejo Ald. Capuchos- Sub12": {
+   "data": "2020-08-23",
+   "torneio": "4º Torn. Drive Challenge Tejo Ald. Capuchos- Sub12",
+   "torneioScoring": "4º Torn. Drive Challenge Tejo Ald. Capuchos- Sub12",
+   "tcode": "10045",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Aldeia dos Capuchos",
+   "dataTorneio": "2020-08-23",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 1,
+     "de": 11,
+     "total": "14",
+     "gross": "33",
+     "voltas": [
+      "14"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 3,
+     "de": 11,
+     "total": "19",
+     "gross": "33",
+     "voltas": [
+      "19"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Ranking",
+     "pos": 1,
+     "de": 9,
+     "total": "14",
+     "gross": "33",
+     "voltas": [
+      "14"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Ranking",
+     "pos": 3,
+     "de": 9,
+     "total": "19",
+     "gross": "33",
+     "voltas": [
+      "19"
+     ]
+    }
+   ]
+  },
+  "2020-08-09|jogo": {
+   "data": "2020-08-09",
+   "torneio": "jogo",
+   "erro": "sem correspondência"
+  },
+  "2020-07-27|4º Torneio Circuito Drive Tour - Sub 12": {
+   "data": "2020-07-27",
+   "torneio": "4º Torneio Circuito Drive Tour - Sub 12",
+   "torneioScoring": "4º Torneio Circuito Drive Tour - Sub 12",
+   "tcode": "10368",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Jamor",
+   "dataTorneio": "2020-07-27",
+   "vistas": [
+    {
+     "classificacao": "Stroke Play Individual Agregada",
+     "pos": 14,
+     "de": 14,
+     "total": "178",
+     "gross": "178",
+     "voltas": [
+      "90",
+      "88"
+     ]
+    },
+    {
+     "classificacao": "Medal Net Individual Agregada",
+     "pos": 10,
+     "de": 14,
+     "total": "156",
+     "gross": "178",
+     "voltas": [
+      "79",
+      "77"
+     ]
+    }
+   ]
+  },
+  "2020-07-18|3º Torneio Drive Challenge Tejo - P.Lumiar - Sub12": {
+   "data": "2020-07-18",
+   "torneio": "3º Torneio Drive Challenge Tejo - P.Lumiar - Sub12",
+   "torneioScoring": "3º Torneio Drive Challenge Tejo - P.Lumiar - Sub12",
+   "tcode": "10041",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Paço do Lumiar",
+   "dataTorneio": "2020-07-18",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 4,
+     "de": 23,
+     "total": "12",
+     "gross": "35",
+     "voltas": [
+      "12"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 7,
+     "de": 23,
+     "total": "21",
+     "gross": "35",
+     "voltas": [
+      "21"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Ranking",
+     "pos": 4,
+     "de": 21,
+     "total": "12",
+     "gross": "35",
+     "voltas": [
+      "12"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Ranking",
+     "pos": 7,
+     "de": 21,
+     "total": "21",
+     "gross": "35",
+     "voltas": [
+      "21"
+     ]
+    }
+   ]
+  },
+  "2020-07-11|Campeonato do Clube Net": {
+   "data": "2020-07-11",
+   "torneio": "Campeonato do Clube Net",
+   "torneioScoring": "Campeonato do Clube Net",
+   "tcode": "10274",
+   "clube": "087",
+   "clubeNome": "Paço do Lumiar",
+   "campo": "Paço do Lumiar",
+   "dataTorneio": "2020-07-11",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Agregada Medal Net",
+     "pos": 4,
+     "de": 25,
+     "total": "114",
+     "gross": "154",
+     "voltas": [
+      "58",
+      "56"
+     ]
+    }
+   ]
+  },
+  "2020-07-08|Jogo": {
+   "data": "2020-07-08",
+   "torneio": "Jogo",
+   "tcodeTentado": "10299",
+   "erro": "sem linha dela na classificação"
+  },
+  "2020-07-05|TGT 3": {
+   "data": "2020-07-05",
+   "torneio": "TGT 3",
+   "torneioScoring": "TGT 3",
+   "tcode": "10050",
+   "clube": "024",
+   "clubeNome": "Santander Totta",
+   "campo": "Quinta da Beloura",
+   "dataTorneio": "2020-07-05",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 14,
+     "de": 23,
+     "total": "10",
+     "gross": "106",
+     "voltas": [
+      "10"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 13,
+     "de": 23,
+     "total": "27",
+     "gross": "106",
+     "voltas": [
+      "27"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual - 2ª categoria",
+     "pos": 10,
+     "de": 19,
+     "total": "27",
+     "gross": "106",
+     "voltas": [
+      "27"
+     ]
+    }
+   ]
+  },
+  "2020-06-27|3º Torneio Escalão C": {
+   "data": "2020-06-27",
+   "torneio": "3º Torneio Escalão C",
+   "torneioScoring": "3º Torneio Escalão C",
+   "tcode": "10276",
+   "clube": "087",
+   "clubeNome": "Paço do Lumiar",
+   "campo": "Paço do Lumiar",
+   "dataTorneio": "2020-06-27",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 3,
+     "de": 11,
+     "total": "43",
+     "gross": "74",
+     "voltas": [
+      "43"
+     ]
+    }
+   ]
+  },
+  "2020-02-26|2º Torn. Drive Challenge Tejo – Lisbon-Sub 12": {
+   "data": "2020-02-26",
+   "torneio": "2º Torn. Drive Challenge Tejo – Lisbon-Sub 12",
+   "torneioScoring": "2º Torn. Drive Challenge Tejo – Lisbon-Sub 12",
+   "tcode": "10037",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Lisbon Sports Club",
+   "dataTorneio": "2020-02-26",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": "ND",
+     "de": 16,
+     "total": "ND",
+     "gross": "ND",
+     "voltas": [
+      "ND"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": "ND",
+     "de": 16,
+     "total": "ND",
+     "gross": "ND",
+     "voltas": [
+      "ND"
+     ]
+    }
+   ]
+  },
+  "2020-02-16|1ºTorneio Circuito Lisboa Junior Sub12": {
+   "data": "2020-02-16",
+   "torneio": "1ºTorneio Circuito Lisboa Junior Sub12",
+   "torneioScoring": "1ºTorneio Circuito Lisboa Junior Sub12",
+   "tcode": "10316",
+   "clube": "087",
+   "clubeNome": "Paço do Lumiar",
+   "campo": "Paço do Lumiar",
+   "dataTorneio": "2020-02-16",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 10,
+     "de": 12,
+     "total": "12",
+     "gross": "47",
+     "voltas": [
+      "12"
+     ]
+    }
+   ]
+  },
+  "2020-01-26|1º Torneio Drive Challenge Tejo – Jamor – Sub 12": {
+   "data": "2020-01-26",
+   "torneio": "1º Torneio Drive Challenge Tejo – Jamor – Sub 12",
+   "torneioScoring": "1º Torneio Drive Challenge Tejo – Jamor – Sub 12",
+   "tcode": "10033",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Jamor",
+   "dataTorneio": "2020-01-26",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 12,
+     "de": 27,
+     "total": "5",
+     "gross": "51",
+     "voltas": [
+      "5"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 16,
+     "de": 27,
+     "total": "11",
+     "gross": "51",
+     "voltas": [
+      "11"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Ranking",
+     "pos": 11,
+     "de": 25,
+     "total": "5",
+     "gross": "51",
+     "voltas": [
+      "5"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Ranking",
+     "pos": 14,
+     "de": 25,
+     "total": "11",
+     "gross": "51",
+     "voltas": [
+      "11"
+     ]
+    }
+   ]
+  },
+  "2019-12-15|Torneio Pais E Filhos": {
+   "data": "2019-12-15",
+   "torneio": "Torneio Pais E Filhos",
+   "tcodeTentado": "10259",
+   "erro": "sem linha dela na classificação"
+  },
+  "2019-12-07|Torneio Texas Scramble de Natal": {
+   "data": "2019-12-07",
+   "torneio": "Torneio Texas Scramble de Natal",
+   "tcodeTentado": "10249",
+   "erro": "sem linha dela na classificação"
+  },
+  "2019-10-26|Final Regional Drive Challenge Tejo - Sub 10": {
+   "data": "2019-10-26",
+   "torneio": "Final Regional Drive Challenge Tejo - Sub 10",
+   "torneioScoring": "Final Regional Drive Challenge Tejo - Sub 10",
+   "tcode": "10025",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Lisbon Sports Club",
+   "dataTorneio": "2019-10-26",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 6,
+     "de": 17,
+     "total": "12",
+     "gross": "40",
+     "voltas": [
+      "12"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 2,
+     "de": 17,
+     "total": "21",
+     "gross": "40",
+     "voltas": [
+      "21"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Ranking",
+     "pos": 6,
+     "de": 17,
+     "total": "12",
+     "gross": "40",
+     "voltas": [
+      "12"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Ranking",
+     "pos": 2,
+     "de": 17,
+     "total": "21",
+     "gross": "40",
+     "voltas": [
+      "21"
+     ]
+    }
+   ]
+  },
+  "2019-09-29|7ºTorneio Circuito Lisboa Jr. Sub10A 2019": {
+   "data": "2019-09-29",
+   "torneio": "7ºTorneio Circuito Lisboa Jr. Sub10A 2019",
+   "torneioScoring": "7ºTorneio Circuito Lisboa Jr. Sub10A 2019",
+   "tcode": "10220",
+   "clube": "149",
+   "clubeNome": "Orizonte ",
+   "campo": "Ribagolfe II",
+   "dataTorneio": "2019-09-29",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 1,
+     "de": 6,
+     "total": "23",
+     "gross": "38",
+     "voltas": [
+      "23"
+     ]
+    }
+   ]
+  },
+  "2019-09-14|6º Torn. Drive Challenge Tejo - Belas - Sub 10": {
+   "data": "2019-09-14",
+   "torneio": "6º Torn. Drive Challenge Tejo - Belas - Sub 10",
+   "torneioScoring": "6º Torn. Drive Challenge Tejo - Belas - Sub 10",
+   "tcode": "10021",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Belas",
+   "dataTorneio": "2019-09-14",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 11,
+     "de": 17,
+     "total": "6",
+     "gross": "50",
+     "voltas": [
+      "6"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 13,
+     "de": 17,
+     "total": "12",
+     "gross": "50",
+     "voltas": [
+      "12"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Ranking",
+     "pos": 11,
+     "de": 17,
+     "total": "6",
+     "gross": "50",
+     "voltas": [
+      "6"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Ranking",
+     "pos": 13,
+     "de": 17,
+     "total": "12",
+     "gross": "50",
+     "voltas": [
+      "12"
+     ]
+    }
+   ]
+  },
+  "2019-09-12|7º Torneio Ordem de Mérito da Semana": {
+   "data": "2019-09-12",
+   "torneio": "7º Torneio Ordem de Mérito da Semana",
+   "torneioScoring": "7º Torneio Ordem de Mérito da Semana",
+   "tcode": "10238",
+   "clube": "087",
+   "clubeNome": "Paço do Lumiar",
+   "campo": "Paço do Lumiar",
+   "dataTorneio": "2019-09-12",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 20,
+     "de": 30,
+     "total": "15",
+     "gross": "45",
+     "voltas": [
+      "15"
+     ]
+    }
+   ]
+  },
+  "2019-09-08|6ª Prova Circuito Junior Lisboa - Sub10A": {
+   "data": "2019-09-08",
+   "torneio": "6ª Prova Circuito Junior Lisboa - Sub10A",
+   "torneioScoring": "6ª Prova Circuito Junior Lisboa - Sub10A",
+   "tcode": "10317",
+   "clube": "068",
+   "clubeNome": "Belas",
+   "campo": "Belas",
+   "dataTorneio": "2019-09-08",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": "NS",
+     "de": 8,
+     "total": "NS",
+     "gross": "NS",
+     "voltas": [
+      "NS"
+     ]
+    }
+   ]
+  },
+  "2019-08-31|Sunset 7º OM": {
+   "data": "2019-08-31",
+   "torneio": "Sunset 7º OM",
+   "torneioScoring": "Sunset 7º OM",
+   "tcode": "10371",
+   "clube": "165",
+   "clubeNome": "Beloura - ACGB",
+   "campo": "Quinta da Beloura",
+   "dataTorneio": "2019-08-31",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 16,
+     "de": 20,
+     "total": "10",
+     "gross": "60",
+     "voltas": [
+      "10"
+     ]
+    }
+   ]
+  },
+  "2019-08-27|Taça VISCONDE PEREIRA MACHADO - Benjamins": {
+   "data": "2019-08-27",
+   "torneio": "Taça VISCONDE PEREIRA MACHADO - Benjamins",
+   "torneioScoring": "Taça VISCONDE PEREIRA MACHADO - Benjamins",
+   "tcode": "10201",
+   "clube": "004",
+   "clubeNome": "Estoril",
+   "campo": "Estoril",
+   "dataTorneio": "2019-08-27",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual Agregada",
+     "pos": "-",
+     "de": 4,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2019-07-29|Campeonato Nacional Sub 10 - Miramar - S": {
+   "data": "2019-07-29",
+   "torneio": "Campeonato Nacional Sub 10 - Miramar - S",
+   "torneioScoring": "Campeonato Nacional Sub 10 - Miramar - S",
+   "tcode": "10158",
+   "clube": "999",
+   "clubeNome": "FPG Formação",
+   "campo": "Miramar",
+   "dataTorneio": "2019-07-29",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual Agregada",
+     "pos": 1,
+     "de": 7,
+     "total": "22",
+     "gross": "85",
+     "voltas": [
+      "12",
+      "10"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual Agregada",
+     "pos": 1,
+     "de": 7,
+     "total": "39",
+     "gross": "85",
+     "voltas": [
+      "21",
+      "18"
+     ]
+    }
+   ]
+  },
+  "2019-07-23|World Kids Golf - Boys / Girls U10": {
+   "data": "2019-07-23",
+   "torneio": "World Kids Golf - Boys / Girls U10",
+   "torneioScoring": "World Kids Golf - Boys / Girls U10",
+   "tcode": "10140",
+   "clube": "179",
+   "clubeNome": "Amendoeira",
+   "campo": "O'Connor Jnr Course",
+   "dataTorneio": "2019-07-23",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Aggregate  - Sub 10 Ladies",
+     "pos": 3,
+     "de": 3,
+     "total": "34",
+     "gross": "313",
+     "voltas": [
+      "13",
+      "12",
+      "9"
+     ]
+    },
+    {
+     "classificacao": "Sableford Net aggregate Sub 10 Ladies",
+     "pos": 3,
+     "de": 3,
+     "total": "86",
+     "gross": "313",
+     "voltas": [
+      "27",
+      "34",
+      "25"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual  - Sub 10 Ladies",
+     "pos": 3,
+     "de": 3,
+     "total": "9",
+     "gross": "108",
+     "voltas": [
+      "9"
+     ]
+    }
+   ]
+  },
+  "2019-07-05|Dom Pedro Junior Masters - U10": {
+   "data": "2019-07-05",
+   "torneio": "Dom Pedro Junior Masters - U10",
+   "torneioScoring": "Dom Pedro Junior Masters - U10",
+   "tcode": "10110",
+   "clube": "935",
+   "clubeNome": "Dom Pedro Golf",
+   "campo": "Vilamoura - Victoria",
+   "dataTorneio": "2019-07-05",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual Agregada",
+     "pos": 7,
+     "de": 12,
+     "total": "15",
+     "gross": "157",
+     "voltas": [
+      "6",
+      "4",
+      "5"
+     ]
+    }
+   ]
+  },
+  "2019-06-29|Campeonato do Clube Juniores": {
+   "data": "2019-06-29",
+   "torneio": "Campeonato do Clube Juniores",
+   "torneioScoring": "Campeonato do Clube Juniores",
+   "tcode": "10232",
+   "clube": "087",
+   "clubeNome": "Paço do Lumiar",
+   "campo": "Paço do Lumiar",
+   "dataTorneio": "2019-06-29",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 4,
+     "de": 10,
+     "total": "18",
+     "gross": "43",
+     "voltas": [
+      "18"
+     ]
+    }
+   ]
+  },
+  "2019-06-16|4º Torn. Drive Challenge Tejo - Montado - Sub 10": {
+   "data": "2019-06-16",
+   "torneio": "4º Torn. Drive Challenge Tejo - Montado - Sub 10",
+   "torneioScoring": "4º Torn. Drive Challenge Tejo - Montado - Sub 10",
+   "tcode": "10013",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Montado",
+   "dataTorneio": "2019-06-16",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 5,
+     "de": 16,
+     "total": "9",
+     "gross": "45",
+     "voltas": [
+      "9"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 8,
+     "de": 16,
+     "total": "16",
+     "gross": "45",
+     "voltas": [
+      "16"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Ranking",
+     "pos": 5,
+     "de": 15,
+     "total": "9",
+     "gross": "45",
+     "voltas": [
+      "9"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Ranking",
+     "pos": 8,
+     "de": 15,
+     "total": "16",
+     "gross": "45",
+     "voltas": [
+      "16"
+     ]
+    }
+   ]
+  },
+  "2019-06-02|4º T. Circuito Lisboa Junior - sub10A": {
+   "data": "2019-06-02",
+   "torneio": "4º T. Circuito Lisboa Junior - sub10A",
+   "torneioScoring": "4º T. Circuito Lisboa Junior - sub10A",
+   "tcode": "10088",
+   "clube": "106",
+   "clubeNome": "JuveGolfe",
+   "campo": "Montado",
+   "dataTorneio": "2019-06-02",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 3,
+     "de": 7,
+     "total": "16",
+     "gross": "45",
+     "voltas": [
+      "16"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 4,
+     "de": 7,
+     "total": "10",
+     "gross": "45",
+     "voltas": [
+      "10"
+     ]
+    }
+   ]
+  },
+  "2019-06-01|Torneio Miguel Angel Jimenez - Menos 10 anos": {
+   "data": "2019-06-01",
+   "torneio": "Torneio Miguel Angel Jimenez - Menos 10 anos",
+   "torneioScoring": "Torneio Miguel Angel Jimenez - Menos 10 anos",
+   "tcode": "10022",
+   "clube": "948",
+   "clubeNome": "Corfield",
+   "campo": "Quinta da Beloura",
+   "dataTorneio": "2019-06-01",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 3,
+     "de": 4,
+     "total": "10",
+     "gross": "61",
+     "voltas": [
+      "10"
+     ]
+    }
+   ]
+  },
+  "2019-05-04|3ºTorneio Circuito Lisboa Jr. Sub10A 2019": {
+   "data": "2019-05-04",
+   "torneio": "3ºTorneio Circuito Lisboa Jr. Sub10A 2019",
+   "torneioScoring": "3ºTorneio Circuito Lisboa Jr. Sub10A 2019",
+   "tcode": "10197",
+   "clube": "149",
+   "clubeNome": "Orizonte ",
+   "campo": "Oeiras",
+   "dataTorneio": "2019-05-04",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 2,
+     "de": 11,
+     "total": "15",
+     "gross": "47",
+     "voltas": [
+      "15"
+     ]
+    }
+   ]
+  },
+  "2019-04-13|3º Torn. Drive Challenge Tejo -Campo Real- Sub 10": {
+   "data": "2019-04-13",
+   "torneio": "3º Torn. Drive Challenge Tejo -Campo Real- Sub 10",
+   "torneioScoring": "3º Torn. Drive Challenge Tejo -Campo Real- Sub 10",
+   "tcode": "10009",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Campo Real",
+   "dataTorneio": "2019-04-13",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 6,
+     "de": 14,
+     "total": "6",
+     "gross": "48",
+     "voltas": [
+      "6"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 6,
+     "de": 14,
+     "total": "15",
+     "gross": "48",
+     "voltas": [
+      "15"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Ranking",
+     "pos": 6,
+     "de": 12,
+     "total": "6",
+     "gross": "48",
+     "voltas": [
+      "6"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Ranking",
+     "pos": 6,
+     "de": 12,
+     "total": "15",
+     "gross": "48",
+     "voltas": [
+      "15"
+     ]
+    }
+   ]
+  },
+  "2019-03-24|2º Torn. Drive Challenge Tejo -Qta do Peru- Sub 10": {
+   "data": "2019-03-24",
+   "torneio": "2º Torn. Drive Challenge Tejo -Qta do Peru- Sub 10",
+   "torneioScoring": "2º Torn. Drive Challenge Tejo -Qta do Peru- Sub 10",
+   "tcode": "10005",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2019-03-24",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 10,
+     "de": 13,
+     "total": "3",
+     "gross": "51",
+     "voltas": [
+      "3"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 8,
+     "de": 13,
+     "total": "11",
+     "gross": "51",
+     "voltas": [
+      "11"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Ranking",
+     "pos": 10,
+     "de": 12,
+     "total": "3",
+     "gross": "51",
+     "voltas": [
+      "3"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Ranking",
+     "pos": 8,
+     "de": 12,
+     "total": "11",
+     "gross": "51",
+     "voltas": [
+      "11"
+     ]
+    }
+   ]
+  },
+  "2019-03-10|2º Torneio Circuito Lisboa Junior Escalão sub-10A": {
+   "data": "2019-03-10",
+   "torneio": "2º Torneio Circuito Lisboa Junior Escalão sub-10A",
+   "torneioScoring": "2º Torneio Circuito Lisboa Junior Escalão sub-10A",
+   "tcode": "10221",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2019-03-10",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 5,
+     "de": 6,
+     "total": "8",
+     "gross": "54",
+     "voltas": [
+      "8"
+     ]
+    }
+   ]
+  },
+  "2019-03-06|2º Torn. Drive Challenge Norte - Miramar - Sub 10": {
+   "data": "2019-03-06",
+   "torneio": "2º Torn. Drive Challenge Norte - Miramar - Sub 10",
+   "torneioScoring": "2º Torn. Drive Challenge Norte - Miramar - Sub 10",
+   "tcode": "10005",
+   "clube": "987",
+   "clubeNome": "FPG_DNorte",
+   "campo": "Miramar",
+   "dataTorneio": "2019-03-06",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 4,
+     "de": 11,
+     "total": "4",
+     "gross": "51",
+     "voltas": [
+      "4"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 6,
+     "de": 11,
+     "total": "10",
+     "gross": "51",
+     "voltas": [
+      "10"
+     ]
+    }
+   ]
+  },
+  "2019-02-17|1º Torn. Drive Challenge Tejo -Paço Lumiar- Sub 10": {
+   "data": "2019-02-17",
+   "torneio": "1º Torn. Drive Challenge Tejo -Paço Lumiar- Sub 10",
+   "torneioScoring": "1º Torn. Drive Challenge Tejo -Paço Lumiar- Sub 10",
+   "tcode": "10001",
+   "clube": "985",
+   "clubeNome": "FPG_DTejo",
+   "campo": "Paço do Lumiar",
+   "dataTorneio": "2019-02-17",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": "ND",
+     "de": 14,
+     "total": "ND",
+     "gross": "ND",
+     "voltas": [
+      "ND"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": "ND",
+     "de": 14,
+     "total": "ND",
+     "gross": "ND",
+     "voltas": [
+      "ND"
+     ]
+    }
+   ]
+  },
+  "2019-02-03|1º Torneio Circuito Lisboa Junior Escalão sub-10A": {
+   "data": "2019-02-03",
+   "torneio": "1º Torneio Circuito Lisboa Junior Escalão sub-10A",
+   "torneioScoring": "1º Torneio Circuito Lisboa Junior Escalão sub-10A",
+   "tcode": "10255",
+   "clube": "087",
+   "clubeNome": "Paço do Lumiar",
+   "campo": "Paço do Lumiar",
+   "dataTorneio": "2019-02-03",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 6,
+     "de": 7,
+     "total": "13",
+     "gross": "47",
+     "voltas": [
+      "13"
+     ]
+    }
+   ]
+  },
+  "2019-01-19|1º Torneio Escalão C": {
+   "data": "2019-01-19",
+   "torneio": "1º Torneio Escalão C",
+   "torneioScoring": "1º Torneio Escalão C",
+   "tcode": "10202",
+   "clube": "087",
+   "clubeNome": "Paço do Lumiar",
+   "campo": "Paço do Lumiar",
+   "dataTorneio": "2019-01-19",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": "ND",
+     "de": 17,
+     "total": "ND",
+     "gross": "ND",
+     "voltas": [
+      "ND"
+     ]
+    }
+   ]
+  },
+  "2018-12-16|Torneio Pais e Filhos": {
+   "data": "2018-12-16",
+   "torneio": "Torneio Pais e Filhos",
+   "tcodeTentado": "10207",
+   "erro": "sem linha dela na classificação"
+  },
+  "2018-11-24|Grande Final - Drive Challenge Tejo - Sub 10": {
+   "data": "2018-11-24",
+   "torneio": "Grande Final - Drive Challenge Tejo - Sub 10",
+   "torneioScoring": "Grande Final - Drive Challenge Tejo - Sub 10",
+   "tcode": "10046",
+   "clube": "988",
+   "clubeNome": "FPG_DRIVE",
+   "campo": "Ribagolfe II",
+   "dataTorneio": "2018-11-24",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 8,
+     "de": 20,
+     "total": "8",
+     "gross": "47",
+     "voltas": [
+      "8"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 6,
+     "de": 20,
+     "total": "14",
+     "gross": "47",
+     "voltas": [
+      "14"
+     ]
+    }
+   ]
+  },
+  "2018-11-01|Torneio do Presidente": {
+   "data": "2018-11-01",
+   "torneio": "Torneio do Presidente",
+   "torneioScoring": "Torneio do Presidente",
+   "tcode": "10107",
+   "clube": "992",
+   "clubeNome": "FPG_CNF Jamor",
+   "campo": "Jamor",
+   "dataTorneio": "2018-11-01",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 21,
+     "de": 22,
+     "total": "7",
+     "gross": "57",
+     "voltas": [
+      "7"
+     ]
+    }
+   ]
+  },
+  "2018-09-30|Circuito Lisboa Junior 2018 - Sub 10B": {
+   "data": "2018-09-30",
+   "torneio": "Circuito Lisboa Junior 2018 - Sub 10B",
+   "torneioScoring": "Circuito Lisboa Junior 2018 - Sub 10B",
+   "tcode": "10088",
+   "clube": "031",
+   "clubeNome": "Montado",
+   "campo": "Montado",
+   "dataTorneio": "2018-09-30",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 1,
+     "de": 2,
+     "total": "25",
+     "gross": "47",
+     "voltas": [
+      "25"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 1,
+     "de": 2,
+     "total": "7",
+     "gross": "47",
+     "voltas": [
+      "7"
+     ]
+    }
+   ]
+  },
+  "2018-09-09|6 Torneio Circuito Lisboa Júnior - Escalão Sub 10B": {
+   "data": "2018-09-09",
+   "torneio": "6 Torneio Circuito Lisboa Júnior - Escalão Sub 10B",
+   "torneioScoring": "6 Torneio Circuito Lisboa Júnior - Escalão Sub 10B",
+   "tcode": "10353",
+   "clube": "002",
+   "clubeNome": "Lisbon SC",
+   "campo": "Lisbon Sports Club",
+   "dataTorneio": "2018-09-09",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 4,
+     "de": 6,
+     "total": "22",
+     "gross": "51",
+     "voltas": [
+      "22"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 4,
+     "de": 6,
+     "total": "4",
+     "gross": "51",
+     "voltas": [
+      "4"
+     ]
+    }
+   ]
+  },
+  "2018-09-08|Drive Challenge Tejo - Oeiras - Sub 10": {
+   "data": "2018-09-08",
+   "torneio": "Drive Challenge Tejo - Oeiras - Sub 10",
+   "torneioScoring": "Drive Challenge Tejo - Oeiras - Sub 10",
+   "tcode": "10258",
+   "clube": "174",
+   "clubeNome": "Oeiras",
+   "campo": "Oeiras",
+   "dataTorneio": "2018-09-08",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 7,
+     "de": 17,
+     "total": "8",
+     "gross": "47",
+     "voltas": [
+      "8"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 5,
+     "de": 17,
+     "total": "18",
+     "gross": "47",
+     "voltas": [
+      "18"
+     ]
+    }
+   ]
+  },
+  "2018-08-28|Taça VISCONDE PEREIRA MACHADO - Benjamins": {
+   "data": "2018-08-28",
+   "torneio": "Taça VISCONDE PEREIRA MACHADO - Benjamins",
+   "torneioScoring": "Taça VISCONDE PEREIRA MACHADO - Benjamins",
+   "tcode": "10131",
+   "clube": "004",
+   "clubeNome": "Estoril",
+   "campo": "Estoril",
+   "dataTorneio": "2018-08-28",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual Agregada",
+     "pos": "-",
+     "de": 6,
+     "total": "-",
+     "gross": "-",
+     "voltas": [
+      "NS",
+      "-"
+     ]
+    }
+   ]
+  },
+  "2018-07-30|Campeonato Nacional de Sub 10 S": {
+   "data": "2018-07-30",
+   "torneio": "Campeonato Nacional de Sub 10 S",
+   "torneioScoring": "Campeonato Nacional de Sub 10 S",
+   "tcode": "10135",
+   "clube": "000",
+   "clubeNome": "FPG",
+   "campo": "Jamor",
+   "dataTorneio": "2018-07-30",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual Agregada",
+     "pos": 2,
+     "de": 7,
+     "total": "9",
+     "gross": "102",
+     "voltas": [
+      "3",
+      "6"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual Agregada",
+     "pos": 3,
+     "de": 7,
+     "total": "26",
+     "gross": "102",
+     "voltas": [
+      "11",
+      "15"
+     ]
+    }
+   ]
+  },
+  "2018-07-24|Oceanico World Kids Golf - Boys / Girls U9": {
+   "data": "2018-07-24",
+   "torneio": "Oceanico World Kids Golf - Boys / Girls U9",
+   "torneioScoring": "Oceanico World Kids Golf - Boys / Girls U9",
+   "tcode": "10117",
+   "clube": "179",
+   "clubeNome": "Amendoeira",
+   "campo": "Oceânico O'Connor",
+   "dataTorneio": "2018-07-24",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual Agregada",
+     "pos": 17,
+     "de": 18,
+     "total": "14",
+     "gross": "159",
+     "voltas": [
+      "4",
+      "5",
+      "5"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual Aggregate - Ladies",
+     "pos": 1,
+     "de": 2,
+     "total": "14",
+     "gross": "159",
+     "voltas": [
+      "4",
+      "5",
+      "5"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual Agregada",
+     "pos": 17,
+     "de": 18,
+     "total": "39",
+     "gross": "159",
+     "voltas": [
+      "12",
+      "13",
+      "14"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 17,
+     "de": 18,
+     "total": "5",
+     "gross": "52",
+     "voltas": [
+      "5"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual  - Ladies",
+     "pos": 2,
+     "de": 2,
+     "total": "5",
+     "gross": "52",
+     "voltas": [
+      "5"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 17,
+     "de": 18,
+     "total": "14",
+     "gross": "52",
+     "voltas": [
+      "14"
+     ]
+    }
+   ]
+  },
+  "2018-07-21|Drive Challenge - Tejo - Qta. Peru - Sub 10": {
+   "data": "2018-07-21",
+   "torneio": "Drive Challenge - Tejo - Qta. Peru - Sub 10",
+   "torneioScoring": "Drive Challenge - Tejo - Qta. Peru - Sub 10",
+   "tcode": "10179",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2018-07-21",
+   "vistas": [
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 10,
+     "de": 14,
+     "total": "5",
+     "gross": "52",
+     "voltas": [
+      "5"
+     ]
+    },
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 14,
+     "de": 14,
+     "total": "13",
+     "gross": "52",
+     "voltas": [
+      "13"
+     ]
+    }
+   ]
+  },
+  "2018-06-09|4ª Prova do Circuito Lisboa Jr. 2018 Sub 10B": {
+   "data": "2018-06-09",
+   "torneio": "4ª Prova do Circuito Lisboa Jr. 2018 Sub 10B",
+   "torneioScoring": "4ª Prova do Circuito Lisboa Jr. 2018 Sub 10B",
+   "tcode": "10243",
+   "clube": "174",
+   "clubeNome": "Oeiras",
+   "campo": "Oeiras",
+   "dataTorneio": "2018-06-09",
+   "vistas": [
+    {
+     "classificacao": "Stableford Net Individual",
+     "pos": 2,
+     "de": 14,
+     "total": "29",
+     "gross": "52",
+     "voltas": [
+      "29"
+     ]
+    },
+    {
+     "classificacao": "Stableford Gross Individual",
+     "pos": 7,
+     "de": 14,
+     "total": "4",
+     "gross": "52",
+     "voltas": [
+      "4"
+     ]
+    }
+   ]
+  },
+  "2018-05-20|3º Torneio Circuito Lisboa Jr - Escalão - Sub 10B": {
+   "data": "2018-05-20",
+   "torneio": "3º Torneio Circuito Lisboa Jr - Escalão - Sub 10B",
+   "torneioScoring": "3º Torneio Circuito Lisboa Jr - Escalão - Sub 10B",
+   "tcode": "10164",
+   "clube": "038",
+   "clubeNome": "Quinta do Peru",
+   "campo": "Quinta do Peru",
+   "dataTorneio": "2018-05-20",
+   "vistas": [
+    {
+     "classificacao": "Classificação Individual Diária Stableford Net",
+     "pos": 3,
+     "de": 13,
+     "total": "23",
+     "gross": "59",
+     "voltas": [
+      "23"
+     ]
+    }
+   ]
+  },
+  "2018-04-22|Drive Challenge Tejo - Paço do Lumiar - Sub-10": {
+   "data": "2018-04-22",
+   "torneio": "Drive Challenge Tejo - Paço do Lumiar - Sub-10",
+   "tcodeTentado": "10164",
+   "erro": "sem linha dela na classificação"
+  },
+  "2018-02-24|Drive Challenge Tejo - Ribagolfe II - Sub 10": {
+   "data": "2018-02-24",
+   "torneio": "Drive Challenge Tejo - Ribagolfe II - Sub 10",
+   "tcodeTentado": "10054",
+   "erro": "sem linha dela na classificação"
   }
  }
 }
