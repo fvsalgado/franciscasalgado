@@ -85,6 +85,37 @@ jobs:
             "copia/repositorio-$DATA.bundle" \
             copia/MANIFESTO.md
 
+      # Duas cópias, e não uma pilha a crescer para sempre.
+      #
+      # Guardar menos custa menos do que parece: o `.bundle` leva o histórico
+      # inteiro do repositório, não um instantâneo. Um ficheiro apagado há seis
+      # meses recupera-se da cópia de ontem na mesma, porque o apagamento está
+      # no histórico e o histórico está lá todo. O que duas cópias dão, e uma
+      # só não daria, é a segunda hipótese no dia em que a primeira estiver
+      # corrompida ou a ronda tiver corrido mal.
+      #
+      # Só as `copia-*`: se um dia houver releases de outra coisa, não é destas
+      # que se trata e não se lhes toca.
+      - name: Guardar só as duas cópias mais recentes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release list --limit 100 --json tagName,createdAt \
+            --jq '[.[] | select(.tagName | startswith("copia-"))]
+                  | sort_by(.createdAt) | reverse | .[2:] | .[].tagName' > antigas.txt
+
+          if [ ! -s antigas.txt ]; then
+            echo "Duas ou menos cópias — nada para arrumar."
+            exit 0
+          fi
+
+          while read -r tag; do
+            [ -n "$tag" ] || continue
+            echo "a apagar $tag"
+            gh release delete "$tag" --yes --cleanup-tag
+          done < antigas.txt
+
       - name: Pôr o manifesto no sumário da ação
         if: always()
         run: cat copia/MANIFESTO.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
