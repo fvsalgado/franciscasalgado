@@ -360,8 +360,22 @@ async function figuraHandicap(lingua = 'pt') {
  *
  * Se nenhuma tiver dados, a secção esconde-se: um cabeçalho com nada por baixo
  * lê-se como uma coisa que se partiu. */
+/* Desligado por decisão do tutor, em agosto de 2026, até nova indicação.
+ *
+ * É só o desenho que está desligado: o vigia continua a apontar os rankings
+ * todos os dias em data/rankings-historico.json, e o scripts/myfpg.mjs
+ * continua a trazer os degraus do índice para data/handicap-historico.json.
+ * No dia em que isto voltar a `true`, volta com a história toda que se
+ * entretanto acumulou — nada se perde por estar escondido.
+ *
+ * A secção inteira sai da página, e não fica um cabeçalho com um espaço em
+ * branco por baixo: `mostrar(cx, false)` esconde-a no navegador e o
+ * scripts/estatico.mjs tira-a do ficheiro, pela marca `data-se-vazio`. */
+const CURVAS_A_MOSTRAR = false;
+
 export async function curvas(cx, lingua = 'pt') {
   if (!cx) return;
+  if (!CURVAS_A_MOSTRAR) { cx.innerHTML = ''; mostrar(cx, false); return; }
   const [hcp, rk] = await Promise.all([figuraHandicap(lingua), figuraRankings(lingua)]);
   cx.innerHTML = hcp + rk;
   mostrar(cx, Boolean(hcp || rk));
