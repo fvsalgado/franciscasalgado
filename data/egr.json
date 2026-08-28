@@ -1,5 +1,5 @@
 {
-  "atualizado": "2026-08-27",
+  "atualizado": "2026-08-28",
   "playerId": 39992,
   "ficha": "https://www.europeangolfrankings.com/players/39992",
   "nome": "Francisca Salgado",
@@ -8,7 +8,7 @@
   "clube": "Vale de Janelas",
   "escalao": "U18",
   "provasContadas": 5,
-  "posicao": 630,
+  "posicao": 640,
   "pontos": 2745.91,
   "mediaVolta": 79.92,
   "mediaCr": 76.26,
@@ -83,5 +83,5 @@
       "pontos": 395.52
     }
   ],
-  "posicaoEscalao": 203
+  "posicaoEscalao": 204
 }

@@ -34,6 +34,13 @@
       "egr": 630,
       "egrEscalao": 203,
       "escalao": "U18"
+    },
+    {
+      "data": "2026-08-28",
+      "wagr": 1953,
+      "egr": 640,
+      "egrEscalao": 204,
+      "escalao": "U18"
     }
   ]
 }
