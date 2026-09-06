@@ -115,7 +115,7 @@ Por email para birdie@franciscasalgado.golf, ou por mensagem direta no Instagram
 - https://franciscasalgado.golf/data/witb.json — o equipamento, taco a taco
 - https://franciscasalgado.golf/data/handicap-historico.json — todas as alterações do índice WHS desde a primeira volta contada
 - https://franciscasalgado.golf/data/perfil.json — factos, percurso e números
-- https://franciscasalgado.golf/data/imprensa.json — 42 peças de imprensa com endereço
+- https://franciscasalgado.golf/data/imprensa.json — 43 peças de imprensa com endereço
 - https://franciscasalgado.golf/api/wagr e https://franciscasalgado.golf/api/egr — classificações em direto
 
 ## Cuidados

@@ -48,6 +48,15 @@
   "pecas": [
     {
       "o": "FPG",
+      "data": "2026-09",
+      "t": {
+        "pt": "Francisca Salgado no Internacional de Itália Sub-18",
+        "en": "Francisca Salgado no Internacional de Itália Sub-18"
+      },
+      "url": "https://portal.fpg.pt/noticias/francisca-salgado-no-internacional-de-italia-sub-18/"
+    },
+    {
+      "o": "FPG",
       "data": "2026-08",
       "t": {
         "pt": "Atletas nacionais de Portugal de cabeça erguida na despedida de Málaga",
