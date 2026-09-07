@@ -1,5 +1,5 @@
 {
-  "atualizado": "2026-09-06",
+  "atualizado": "2026-09-07",
   "playerId": 39992,
   "ficha": "https://www.europeangolfrankings.com/players/39992",
   "nome": "Francisca Salgado",
@@ -7,12 +7,25 @@
   "pais": "Portugal",
   "clube": "Vale de Janelas",
   "escalao": "U18",
-  "provasContadas": 5,
-  "posicao": 628,
-  "pontos": 2745.91,
-  "mediaVolta": 79.92,
-  "mediaCr": 76.26,
+  "provasContadas": 6,
+  "posicao": 561,
+  "pontos": 3279.1,
+  "mediaVolta": 79.8,
+  "mediaCr": 76.24,
   "provas": [
+    {
+      "pos": 69,
+      "evento": "Italian International U18 Girls Stroke Play Championship 2026",
+      "campo": "Golf Club Villa Condulmer",
+      "pais": "Italy",
+      "data": "2026-09-03",
+      "voltas": [
+        78,
+        80
+      ],
+      "total": 158,
+      "pontos": 533.2
+    },
     {
       "pos": 28,
       "evento": "English Girls' Open Stroke Play Championship 2026",
@@ -83,5 +96,5 @@
       "pontos": 395.52
     }
   ],
-  "posicaoEscalao": 201
+  "posicaoEscalao": 192
 }
