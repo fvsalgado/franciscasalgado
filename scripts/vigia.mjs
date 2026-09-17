@@ -421,7 +421,7 @@ await passo('myFPG', async () => {
      *
      * Nota importante desde agosto de 2026: **o número de provas do sítio já
      * vem daqui**. Uma prova sem cartão não é um buraco na contagem — é só uma
-     * prova de que não se sabe a classificação. Ver docs/dados.md. */
+     * prova de que não se sabe a classificação. */
     const CLUBE_OU_SOCIAL = /nacional|national|internacional|international|european|europe|masters|espa[ñn]a|espanha|andaluc|galicia|madrid|world|juvenil|absoluto|infantil|interterritorial|fexgolf/i;
     const dia = 86400000;
     const mesmoArco = (nossa, dela) => {
