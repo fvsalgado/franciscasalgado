@@ -1,6 +1,43 @@
 {
  "fotos": [
   {
+   "f": "taca-2026-trofeu.webp",
+   "formato": "largo",
+   "ano": "2026",
+   "original": "kit/taca-2026-trofeu.jpg",
+   "dim": [
+    1600,
+    1066
+   ],
+   "alt": {
+    "pt": "Francisca Salgado sorridente, com a taça de vice-campeã da Taça da FPG 2026, em frente ao painel da Federação e do BPI",
+    "en": "Francisca Salgado smiling, holding the 2026 FPG Cup runner-up trophy in front of the Federation and BPI backdrop"
+   },
+   "l": {
+    "pt": "Vice-campeã da Taça da FPG pelo segundo ano, Santo Estêvão",
+    "en": "FPG Cup runner-up for the second year, Santo Estêvão"
+   }
+  },
+  {
+   "f": "taca-2026-saida.webp",
+   "formato": "alto",
+   "ano": "2026",
+   "pos": "center 75%",
+   "original": "kit/taca-2026-saida.jpg",
+   "dim": [
+    1066,
+    1600
+   ],
+   "alt": {
+    "pt": "Francisca Salgado no fim do swing, depois de uma saída de driver na Taça da FPG",
+    "en": "Francisca Salgado holding her finish after a drive at the FPG Cup"
+   },
+   "l": {
+    "pt": "Taça da FPG – BPI, Santo Estêvão",
+    "en": "FPG Cup, Santo Estêvão"
+   }
+  },
+  {
    "f": "english.webp",
    "formato": "alto",
    "ano": "2026",

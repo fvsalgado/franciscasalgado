@@ -48,7 +48,7 @@ oficiais em vez de escritas à mão.
 - 2023 — Quatro convocatórias num ano: Fevereiro em Cádis, no Match Hexagonal Feminino, contra Espanha, Irlanda, Alemanha, França e Suécia. Abril em Chantilly, nos Internacionais de França de Sub-14. Julho no Royal Waterloo, sexta no Campeonato Internacional da Bélgica e a melhor portuguesa da prova — 78, 75, 73 —, e depois na Eslováquia, no European Young Masters. Setembro de volta a Évian. E, em novembro, vice-campeã nacional de Sub-14 pelo segundo ano seguido.
 - 2024 — O ano em que ganhou tudo o que havia para ganhar: Em janeiro jogou o Internacional Amador de Portugal e, em fevereiro, dois torneios do circuito profissional português — a Penina e a Quinta do Peru — com catorze anos. Venceu os dois primeiros torneios do Circuito Aquapor e fechou a época como primeira do ranking «Ouro» feminino. No Drive Tour ganhou duas das quatro provas que jogou e foi segunda nas outras duas. No verão foi à Finlândia — quinta no Campeonato Internacional Júnior, o ponto mais a norte do percurso dela — e à Eslováquia, onde fez 72 no European Young Masters, a melhor volta que tem ao serviço da Seleção. Durante o verão chegou a primeira do Ranking Nacional BPI, o ranking amador da federação, e fechou o ano em segundo, atrás de Inês Belchior. Foi vice-campeã nacional de Sub-16, em Tróia. E acabou o ano a ganhar o GJG Algarve Juniors International, em Castro Marim, à frente de todas as jogadoras e do escalão Sub-18 — com a única volta abaixo do par da prova.
 - 2025 — A época que a pôs no mapa europeu: Estreou-se num Europeu de equipas absoluto, aos dezasseis anos. Foi convidada a jogar, como amadora, o Super Bock Ladies Open at Vidago Palace — a primeira prova do circuito profissional europeu feminino em Portugal em oito anos. Venceu o Drive Tour no Tejo, foi vice-campeã da Taça da FPG em Santo Estêvão, e fechou o ano em terceiro nas Astúrias, no Memorial Celia Barquín.
-- 2026 — Campeã nacional Sub-18 e de Pares: Dois títulos nacionais em dois meses: os Pares Amador no Montado, com Rodrigo Constantino, e o Sub-18 na Aroeira, liderado do princípio ao fim. Pelo meio, mais uma vitória no Circuito Aquapor. E o calendário a abrir-se para fora: Penina, Guadalmina, Saint-Cloud, Slieve Russell com a Seleção, Prestbury — onde chegou a ser quinta no English Girls' Open — e Málaga.
+- 2026 — Campeã nacional Sub-18 e de Pares: Dois títulos nacionais em dois meses: os Pares Amador no Montado, com Rodrigo Constantino, e o Sub-18 na Aroeira, liderado do princípio ao fim. Pelo meio, mais uma vitória no Circuito Aquapor. E o calendário a abrir-se para fora: Penina, Guadalmina, Saint-Cloud, Slieve Russell com a Seleção, Prestbury — onde chegou a ser quinta no English Girls' Open — e Málaga. Em outubro voltou à final da Taça da FPG, em Santo Estêvão, e foi vice-campeã pelo segundo ano seguido.
 
 ## Línguas
 
@@ -115,7 +115,7 @@ Por email para birdie@franciscasalgado.golf, ou por mensagem direta no Instagram
 - https://franciscasalgado.golf/data/witb.json — o equipamento, taco a taco
 - https://franciscasalgado.golf/data/handicap-historico.json — todas as alterações do índice WHS desde a primeira volta contada
 - https://franciscasalgado.golf/data/perfil.json — factos, percurso e números
-- https://franciscasalgado.golf/data/imprensa.json — 43 peças de imprensa com endereço
+- https://franciscasalgado.golf/data/imprensa.json — 44 peças de imprensa com endereço
 - https://franciscasalgado.golf/api/wagr e https://franciscasalgado.golf/api/egr — classificações em direto
 
 ## Cuidados
@@ -127,4 +127,4 @@ Por email para birdie@franciscasalgado.golf, ou por mensagem direta no Instagram
 - Não lhe atribua patrocínios sem confirmar: a Lusíadas Saúde e a Skip Portugal
   são parceiras das Seleções Nacionais, e não da jogadora a título individual.
 
-Última revisão dos dados: 2026-08.
+Última revisão dos dados: 2026-10.

@@ -1,11 +1,56 @@
 {
- "atualizado": "2026-08",
+ "atualizado": "2026-10",
  "nota": {
   "pt": "O número de provas de cada época vem do registo federado dela na Federação Portuguesa de Golfe; a lista mostra as que têm classificação apurada. Voltas e classificações da FPG, do European Golf Rankings, das federações organizadoras e da imprensa desportiva. Cada prova indica a sua fonte.",
   "en": "The number of events in each season comes from her federated record at the Portuguese Golf Federation; the list shows those with a confirmed placing. Rounds and placings from the FPG, the European Golf Rankings, the organising federations and the sports press. Every event names its source."
  },
  "proximas": [],
  "provas": [
+  {
+   "id": "taca-fpg-2026",
+   "ano": 2026,
+   "data": "2026-10-13",
+   "dataTexto": {
+    "pt": "10–13 outubro 2026",
+    "en": "10–13 October 2026"
+   },
+   "torneio": {
+    "pt": "Taça da FPG – BPI",
+    "en": "Portuguese Golf Federation Cup"
+   },
+   "campo": "Santo Estêvão Golfe",
+   "local": {
+    "pt": "Benavente, Portugal",
+    "en": "Benavente, Portugal"
+   },
+   "pais": "PT",
+   "pos": 2,
+   "posTexto": {
+    "pt": "Vice-campeã",
+    "en": "Runner-up"
+   },
+   "voltas": [
+    74,
+    78
+   ],
+   "total": 152,
+   "par": 6,
+   "escalao": {
+    "pt": "Absoluto",
+    "en": "Open"
+   },
+   "selos": [
+    "podio"
+   ],
+   "nota": {
+    "pt": "40.ª edição, e vice-campeã pelo segundo ano seguido. Segunda na fase de stroke play (74-78), bateu Maria Cunha por 3&2 nos quartos de final e a campeã nacional absoluta, Francisca Ferreira da Costa, por 5&4 nas meias-finais. Perdeu a final com Laura Santos, por 5&3.",
+    "en": "The 40th edition, and runner-up for the second year running. Second in the stroke-play stage (74-78), she beat Maria Cunha 3&2 in the quarter-finals and the national champion, Francisca Ferreira da Costa, 5&4 in the semi-finals. She lost the final to Laura Santos, 5&3."
+   },
+   "fonte": {
+    "nome": "FPG",
+    "url": "https://portal.fpg.pt/noticias/taca-da-fpg-bpi-em-santo-estevao-da-a-conhecer-as-finalistas-e-os-semifinalistas-para-ultimo-dia/"
+   }
+  },
   {
    "id": "clube-2026",
    "ano": 2026,

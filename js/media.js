@@ -24,12 +24,21 @@ export async function galeria(cx, lingua = 'pt', quantas = 99) {
   const { fotos = [] } = await ler('galeria');
   if (!fotos.length) { cx.innerHTML = ''; return; }
 
+  /* `pos` acerta o recorte quando a fotografia não cabe inteira no quadro — uma
+     saída de driver vertical perdia os pés ao centro. `original` é o ficheiro
+     a descarregar, em img/kit/: o crédito fica escrito antes da ligação, num
+     <span> que o creditos.js reconhece e preenche, para a ligação fechar a
+     legenda em vez de ficar entalada entre a legenda e o crédito. */
+  const en = lingua === 'en';
   cx.className = 'galeria faixa';
   cx.innerHTML = fotos.slice(0, quantas).map((p) => `
     <figure class="gal ${p.formato === 'largo' ? 'gal--largo' : 'gal--alto'} sobe-i">
-      <img src="/img/${p.f}" alt="${tx(p.alt, lingua).replace(/"/g, '&quot;')}"
+      <img src="/img/${p.f}" alt="${tx(p.alt, lingua).replace(/"/g, '&quot;')}"${
+        p.pos ? ` style="object-position:${p.pos}"` : ''}
            loading="lazy" decoding="async" />
-      <figcaption class="gal__l"><span class="gal__a num">${p.ano}</span> ${tx(p.l, lingua)}</figcaption>
+      <figcaption class="gal__l"><span class="gal__a num">${p.ano}</span> ${tx(p.l, lingua)}${p.original
+        ? `<span class="credito-i"></span><a class="gal__dl" href="/img/${p.original}" download>${
+          icone('descarregar', 'ic')}<span>${en ? 'Download' : 'Descarregar'} JPG</span></a>` : ''}</figcaption>
     </figure>`).join('');
 }
 
