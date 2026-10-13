@@ -1,5 +1,53 @@
 {
+  "comunicados": [
+    {
+      "id": "taca-fpg-2026",
+      "data": "2026-10-13",
+      "t": {
+        "pt": "Francisca Salgado vice-campeã da Taça da Federação pelo segundo ano consecutivo",
+        "en": "Francisca Salgado runner-up in the Portuguese Golf Federation Cup for the second year running"
+      },
+      "sub": {
+        "pt": "Resultado junta-se aos títulos de campeã nacional de sub-18 e de pares conquistados em 2026.",
+        "en": "The result adds to the national U18 and pairs titles she won in 2026."
+      },
+      "corpo": {
+        "pt": [
+          "Francisca Salgado conquistou, pelo segundo ano consecutivo, o vice-campeonato feminino da Taça da Federação Portuguesa de Golfe BPI, um dos majors da federação. A atleta do Vale de Janelas disputou a final da 40.ª edição, no Santo Estêvão Golfe, frente a Laura Santos, que venceu por 5&3.",
+          "Depois de terminar a fase de qualificação em segundo lugar, Francisca venceu Maria Cunha por 3&2, nos quartos de final, e a campeã nacional absoluta, Francisca Ferreira da Costa, por 5&4, nas meias-finais, garantindo o regresso à decisão da prova.",
+          "Este resultado marca a reta final de um ano em que conquistou o Campeonato Nacional de Sub-18, no PGA Aroeira, e o Campeonato Nacional de Pares, ao lado de Rodrigo Constantino, no Montado."
+        ],
+        "en": [
+          "For the second year running, Francisca Salgado finished runner-up in the women's Taça da Federação Portuguesa de Golfe BPI, one of the federation's majors. The Vale de Janelas player contested the final of the 40th edition, at Santo Estêvão Golfe, against Laura Santos, who won 5&3.",
+          "After finishing the qualifying stage in second place, Francisca beat Maria Cunha 3&2 in the quarter-finals and the national champion, Francisca Ferreira da Costa, 5&4 in the semi-finals, earning her return to the deciding match.",
+          "The result comes in the closing stretch of a year in which she won the National U18 Championship, at PGA Aroeira, and the National Pairs Championship, alongside Rodrigo Constantino, at Montado."
+        ]
+      },
+      "citacao": {
+        "t": {
+          "pt": "Queria muito vencer esta final, mas estou orgulhosa do meu percurso. Voltar à final, num ano em que fui campeã nacional de sub-18 e de pares, dá-me ainda mais motivação para continuar a trabalhar. Obrigada a todos os que me acompanham e me ajudam a evoluir.",
+          "en": "I really wanted to win this final, but I'm proud of my journey. Getting back to the final, in a year in which I became national U18 and pairs champion, gives me even more motivation to keep working. Thank you to everyone who follows me and helps me improve."
+        },
+        "f": "Francisca Salgado"
+      },
+      "fotos": [
+        "taca-2026-trofeu.webp",
+        "taca-2026-saida.webp"
+      ]
+    }
+  ],
   "citacoes": [
+    {
+      "t": {
+        "pt": "Queria muito vencer esta final, mas estou orgulhosa do meu percurso. Voltar à final, num ano em que fui campeã nacional de sub-18 e de pares, dá-me ainda mais motivação para continuar a trabalhar. Obrigada a todos os que me acompanham e me ajudam a evoluir.",
+        "en": "I really wanted to win this final, but I'm proud of my journey. Getting back to the final, in a year in which I became national U18 and pairs champion, gives me even more motivation to keep working. Thank you to everyone who follows me and helps me improve."
+      },
+      "f": {
+        "pt": "Francisca Salgado · Taça da FPG, outubro de 2026",
+        "en": "Francisca Salgado · FPG Cup, October 2026"
+      },
+      "url": "#taca-fpg-2026"
+    },
     {
       "t": {
         "pt": "Tentei manter o foco na minha rotina e jogar um golfe inteligente. Estou satisfeita com o resultado e motivada para o próximo torneio.",
@@ -48,12 +96,23 @@
   "pecas": [
     {
       "o": "FPG",
+      "data": "2026-10",
+      "t": {
+        "pt": "Taça da FPG – BPI em Santo Estêvão dá a conhecer as finalistas e os semifinalistas para último dia",
+        "en": "Taça da FPG – BPI em Santo Estêvão dá a conhecer as finalistas e os semifinalistas para último dia"
+      },
+      "url": "https://portal.fpg.pt/noticias/taca-da-fpg-bpi-em-santo-estevao-da-a-conhecer-as-finalistas-e-os-semifinalistas-para-ultimo-dia/",
+      "capa": "portal-taca-da-fpg-bpi-em-santo-estevao-da-a-conhecer-as-finalistas-e-.webp"
+    },
+    {
+      "o": "FPG",
       "data": "2026-09",
       "t": {
         "pt": "Francisca Salgado no Internacional de Itália Sub-18",
         "en": "Francisca Salgado no Internacional de Itália Sub-18"
       },
-      "url": "https://portal.fpg.pt/noticias/francisca-salgado-no-internacional-de-italia-sub-18/"
+      "url": "https://portal.fpg.pt/noticias/francisca-salgado-no-internacional-de-italia-sub-18/",
+      "capa": "portal-francisca-salgado-no-internacional-de-italia-sub-18.webp"
     },
     {
       "o": "FPG",

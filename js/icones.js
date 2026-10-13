@@ -37,6 +37,9 @@ const P = {
     '<path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M9 4.2 3.6 6.4v13.4L9 17.6l6 2.2 5.4-2.2V4.2L15 6.4 9 4.2Z"/><path fill="none" stroke="currentColor" stroke-width="1.7" d="M9 4.2v13.4M15 6.4v13.4"/>',
   seta:
     '<path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9.2 7H17v7.8"/>',
+  /* Seta para baixo, sobre uma linha: o original de uma fotografia do kit. */
+  descarregar:
+    '<path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11M7.4 10.6 12 15.2l4.6-4.6M4.6 19.6h14.8"/>',
 
   /* ── redes e ligações ──────────────────────────────────── */
   instagram:

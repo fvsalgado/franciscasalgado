@@ -59,7 +59,7 @@ const GUARDAR = [
   'nav', 'pe',                                        // menu e rodapé: as ligações
   'nums', 'citacoes', 'saiuEm', 'rankings', // inicial
   'proximas', 'contagens', 'filtros', 'epocas', 'videos', 'notaFonte', // épocas
-  'factos', 'plats', 'gal',                           // imprensa
+  'comunicado', 'factos', 'plats', 'gal',             // imprensa
   'numsApoio', 'apoios', 'escadas',                   // parcerias
   'recNums', 'curva', 'witbL', 'equipaL', 'swingV',             // a jogadora
 ];

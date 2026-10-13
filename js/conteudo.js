@@ -171,14 +171,100 @@ export async function citacoes(cx, lingua = 'pt', quantas = 99, { grande = false
     return;
   }
 
+  /* Uma citação que saiu de um comunicado aponta para ele, mais acima na
+     mesma página (`"url": "#id"`). Essa não abre janela nova — é um salto. */
+  const fonte = (c) => {
+    if (!c.url) return tx(c.f, lingua);
+    if (c.url.startsWith('#')) return `<a href="${c.url}" data-mag>${tx(c.f, lingua)}</a>`;
+    return `<a href="${c.url}" target="_blank" rel="noopener" data-mag>${tx(c.f, lingua)}</a>`;
+  };
+
   cx.className = 'citacoes';
   cx.innerHTML = cs.slice(0, quantas).map((c) => `
     <figure class="cit sobe-i">
       <blockquote class="cit__t">“${tx(c.t, lingua)}”</blockquote>
-      <figcaption class="cit__f">${c.url
-        ? `<a href="${c.url}" target="_blank" rel="noopener" data-mag>${tx(c.f, lingua)}</a>`
-        : tx(c.f, lingua)}</figcaption>
+      <figcaption class="cit__f">${fonte(c)}</figcaption>
     </figure>`).join('');
+}
+
+/* ── comunicados ────────────────────────────────────────────
+ *
+ * O comunicado mais recente, inteiro, à cabeça do kit. Quem o recebe chega
+ * aqui à procura de duas coisas — o texto e as fotografias — e as duas estão
+ * no mesmo sítio, as fotografias com o original para descarregar.
+ *
+ * As fotografias vêm da galeria, pelo nome do ficheiro: a legenda, o texto
+ * alternativo e o original escrevem-se uma vez, em data/galeria.json, e o
+ * crédito vem de data/creditos.json como em qualquer outra imagem. Os
+ * comunicados anteriores ficam por baixo, fechados — o kit abre no que é
+ * notícia agora, e não numa pilha de outubros. */
+export async function comunicados(cx, lingua = 'pt') {
+  if (!cx) return;
+  const [{ comunicados: cs = [] }, { fotos = [] }] = await Promise.all([ler('imprensa'), ler('galeria')]);
+  if (!cs.length) { cx.innerHTML = ''; mostrar(cx, false); return; }
+  mostrar(cx, true);
+
+  const en = lingua === 'en';
+  const quando = (d) => new Intl.DateTimeFormat(en ? 'en-GB' : 'pt-PT',
+    { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(d));
+
+  const foto = (nome) => {
+    const p = fotos.find((x) => x.f === nome);
+    if (!p) return '';
+    const [w, h] = p.dim || [];
+    /* A figura fica só com o crédito; a ligação para o original vai por baixo
+       dela. Dentro da legenda, o creditos.js punha-lhe o crédito à frente com
+       um separador, e a linha lia-se ao contrário. `--r` é a proporção: as
+       fotografias dividem a fila na medida dela, e saem todas da mesma altura,
+       deitadas ou de pé. */
+    return `
+      <div class="com__f"${w ? ` style="--r:${(w / h).toFixed(3)}"` : ''}>
+        <figure>
+          <img src="/img/${p.f}" alt="${tx(p.alt, lingua).replace(/"/g, '&quot;')}"${w ? ` width="${w}" height="${h}"` : ''}
+               loading="lazy" decoding="async" />
+          <figcaption></figcaption>
+        </figure>
+        ${p.original ? `<a class="com__dl" href="/img/${p.original}" download data-mag>${
+          icone('descarregar', 'ic')}<span>${en ? 'Download' : 'Descarregar'} JPG${w ? ` · ${w} × ${h}` : ''}</span></a>` : ''}
+      </div>`;
+  };
+
+  const corpo = (c) => `
+    <div class="com__g">
+      <div class="com__txt txt">
+        ${(c.corpo?.[lingua] || c.corpo?.pt || []).map((p) => `<p>${p}</p>`).join('')}
+      </div>
+      ${c.citacao ? `
+      <figure class="cit com__cit">
+        <blockquote class="cit__t">“${tx(c.citacao.t, lingua)}”</blockquote>
+        <figcaption class="cit__f">${tx(c.citacao.f, lingua)}</figcaption>
+      </figure>` : ''}
+    </div>
+    ${c.fotos?.length ? `<div class="com__fotos">${c.fotos.map(foto).join('')}</div>` : ''}`;
+
+  const data = (c) => `<time datetime="${c.data}">${quando(c.data)}</time>`;
+  const [ultimo, ...antes] = cs;
+
+  cx.className = 'com';
+  cx.innerHTML = `
+    <article class="com__a sobe-i" id="${ultimo.id}">
+      <header class="com__cab">
+        <p class="rot"><span>${en ? 'Press release' : 'Comunicado de imprensa'} · ${data(ultimo)}</span></p>
+        <h2 class="d d--m">${tx(ultimo.t, lingua)}</h2>
+        ${ultimo.sub ? `<p class="com__sub">${tx(ultimo.sub, lingua)}</p>` : ''}
+      </header>
+      ${corpo(ultimo)}
+    </article>
+    ${antes.length ? `
+    <div class="com__antes">
+      <p class="rot">${en ? 'Earlier press releases' : 'Comunicados anteriores'}</p>
+      ${antes.map((c) => `
+      <details class="com__d" id="${c.id}">
+        <summary><span class="com__dd num">${data(c)}</span> <span class="com__dt">${tx(c.t, lingua)}</span></summary>
+        ${c.sub ? `<p class="com__sub">${tx(c.sub, lingua)}</p>` : ''}
+        ${corpo(c)}
+      </details>`).join('')}
+    </div>` : ''}`;
 }
 
 /* Cada casa que já escreveu sobre ela, com o símbolo e a ligação para o sítio.

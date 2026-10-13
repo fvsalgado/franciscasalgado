@@ -724,6 +724,35 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
         font-variation-settings:'opsz' 36}
 .cit__f{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.17em;color:var(--relva)}
 
+/* O comunicado lê-se como uma peça: o título, a entrada, o texto com a frase
+   dela ao lado, e as fotografias numa fila por baixo — da mesma altura,
+   deitadas ou de pé, cada uma com o original à mão. No telemóvel empilha. */
+.com__cab{display:flex;flex-direction:column;gap:1.1rem;max-width:min(100%,940px)}
+.com__sub{margin:0;font-size:clamp(1rem,1.5vw,1.18rem);font-weight:600;line-height:1.5;
+          color:var(--tinta);max-width:60ch}
+.com__g{display:grid;gap:clamp(1.8rem,4vw,4rem);margin-top:clamp(1.8rem,4vw,3rem)}
+@media (min-width:900px){.com__g{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:start}}
+.com__cit .cit__t{font-size:clamp(1.15rem,1.9vw,1.55rem)}
+.com__fotos{display:flex;flex-direction:column;gap:1.4rem;margin-top:clamp(2rem,4vw,3.2rem)}
+@media (min-width:640px){
+  .com__fotos{flex-direction:row;align-items:flex-start;gap:clamp(.9rem,1.8vw,1.4rem)}
+  .com__f{flex:var(--r,1) 1 0;min-width:0}
+}
+.com__f figure{margin:0}
+.com__f img{width:100%;height:auto;display:block;border:1px solid var(--linha);background:var(--superficie)}
+.com__f figcaption{margin-top:.55rem;font-size:.72rem;color:var(--tinta-fraca)}
+.com__f figcaption:empty{display:none}
+.com__dl{display:inline-flex;align-items:center;gap:.45rem;margin-top:.5rem;
+         font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:var(--relva)}
+.com__dl .ic{width:1rem;height:1rem;flex:none}
+.com__dl:hover span{text-decoration:underline;text-underline-offset:.25em}
+.com__antes{margin-top:clamp(2.5rem,5vw,4rem);display:flex;flex-direction:column;gap:.4rem}
+.com__d{border-bottom:1px solid var(--linha)}
+.com__d summary{cursor:pointer;padding:.9rem 0;display:flex;flex-wrap:wrap;gap:.3rem 1.1rem;align-items:baseline}
+.com__dd{font-size:.72rem;color:var(--tinta-fraca);white-space:nowrap}
+.com__dt{font-weight:700}
+.com__d[open]{padding-bottom:2rem}
+
 .dizem{display:grid;gap:clamp(2rem,5vw,4rem)}
 @media (min-width:900px){.dizem{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}}
 .saiu__l{list-style:none;margin:1rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
@@ -865,6 +894,11 @@ a.numo--ir:hover .numo__r::after,a.numo--ir:focus-visible .numo__r::after{transf
 @media (hover:none),(pointer:coarse){.gal__l{opacity:1;transform:none}}
 /* o crédito da imagem, posto pelo creditos.js, vive por baixo do véu */
 .gal .credito-i{display:block;font-weight:600;opacity:.72;margin-top:.2rem}
+/* o original, para quem vem buscar a fotografia para uma peça */
+.gal__dl{display:inline-flex;align-items:center;gap:.35rem;margin-top:.45rem;
+         font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:var(--relva-viva)}
+.gal__dl .ic{width:.9rem;height:.9rem;flex:none}
+.gal__dl:hover span{text-decoration:underline;text-underline-offset:.25em}
 
 /* ── vídeos ─────────────────────────────────────────────── */
 .videos{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
@@ -1637,7 +1671,7 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 .recs--ficha .rec__n{font-size:.58rem}
 
 /* A imprensa abre como um kit: o índice é a própria abertura. Quem chega vê
-   as cinco peças e vai direto à que precisa — sem ninguém lhe explicar. */
+   as seis peças e vai direto à que precisa — sem ninguém lhe explicar. */
 .kit-nav{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem}
 
 /* A página do saco, sozinha, mostra tudo. Na secção da jogadora os tacos

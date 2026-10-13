@@ -6,7 +6,7 @@ import { iniciar } from './base.js';
 import { iniciarCampo } from './campo.js';
 import { reduzido } from './movimento.js';
 import { porEpoca, contagens, carregar } from './resultados.js';
-import { factos, citacoes, escadas, ligacoes, numeros, equipa } from './conteudo.js';
+import { factos, citacoes, comunicados, escadas, ligacoes, numeros, equipa } from './conteudo.js';
 import { fichaRecruiting, curvas, witb, swing } from './recruiting.js';
 import { galeria, videos, apoios } from './media.js';
 import { reels } from './instagram.js';
@@ -28,6 +28,7 @@ const PINTAR = {
 
   async imprensa(l) {
     await Promise.all([
+      comunicados($('comunicado'), l),
       factos($('factos'), l),
       citacoes($('citacoes'), l),
       ligacoes($('plats'), l, 'ficha'),
