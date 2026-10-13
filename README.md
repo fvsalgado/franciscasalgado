@@ -214,11 +214,11 @@ da casa e o título.
 
 ### Comunicados
 
-Também em `data/imprensa.json`, na lista `comunicados`, o mais recente
-primeiro. O primeiro aparece inteiro à cabeça do kit de imprensa — título,
-entrada, texto, a citação dela e as fotografias com o original para
-descarregar —, e os anteriores ficam por baixo, fechados. Sem nenhum, a
-secção sai da página.
+Também em `data/imprensa.json`, na lista `comunicados`, o mais recente primeiro.
+O primeiro aparece inteiro à cabeça do kit — título, entrada, texto, a citação
+dela e as fotografias com o original para descarregar (cada uma com o crédito e
+uma ligação «Descarregar JPG») — e os anteriores ficam por baixo, fechados. Sem
+nenhum, a secção desaparece da página.
 
 ```json
 {
@@ -232,11 +232,11 @@ secção sai da página.
 }
 ```
 
-- `id` é a âncora: `imprensa.html#taca-fpg-2026` vai direto ao comunicado. Uma
-  citação em `citacoes` com `"url": "#taca-fpg-2026"` liga para ele sem abrir
+- `id` — a âncora: `imprensa.html#taca-fpg-2026` vai direto ao comunicado, e
+  uma citação em `citacoes` com `"url": "#taca-fpg-2026"` liga-lhe sem abrir
   janela nova.
-- `fotos` são nomes de ficheiro da galeria: a legenda, o texto alternativo e o
-  original escrevem-se uma vez, em `data/galeria.json`, e o crédito vem de
+- `fotos` — nomes de ficheiros da galeria: a legenda, o texto alternativo e o
+  original escrevem-se uma só vez, em `data/galeria.json`, e o crédito vem de
   `creditos.json`.
 
 ### Galeria, vídeos e apoios
