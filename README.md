@@ -373,6 +373,12 @@ recuperar esses números.
   `eu-assets.i.posthog.com`. O navegador nunca fala com um servidor de fora, e
   os bloqueadores que cortam por domínio não cortam isto. Se o projeto mudar de
   região, são essas três linhas que mudam.
+- **Um salto a mais, de propósito.** O PostHog envia para `/bola/e/`, com
+  barra, e o `trailingSlash: false` do sítio responde 308 para `/bola/e`. O
+  navegador repete o pedido sem barra — o `fetch` e o `sendBeacon` seguem o
+  308 com o corpo intacto, e o PostHog aceita os dois endereços. Tirar o salto
+  obrigava a mexer na regra das barras do sítio inteiro, de que os canónicos
+  dependem; não compensa.
 - **Só em `franciscasalgado.golf`.** As pré-visualizações da Vercel e o
   servidor local não carregam nada.
 - **Sem gravação de sessões nem perfis de pessoa**, identificador em
