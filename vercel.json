@@ -83,6 +83,18 @@
   ],
   "rewrites": [
     {
+      "source": "/bola/static/:caminho(.*)",
+      "destination": "https://eu-assets.i.posthog.com/static/:caminho"
+    },
+    {
+      "source": "/bola/array/:caminho(.*)",
+      "destination": "https://eu-assets.i.posthog.com/array/:caminho"
+    },
+    {
+      "source": "/bola/:caminho(.*)",
+      "destination": "https://eu.i.posthog.com/:caminho"
+    },
+    {
       "source": "/en",
       "destination": "/en/index.html"
     }
