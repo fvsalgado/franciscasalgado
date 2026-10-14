@@ -308,7 +308,6 @@ nenhuma delas parte o sítio enquanto estiver por ligar:
 | O quê | Onde | Como |
 |---|---|---|
 | Receção do correio | registos MX de `franciscasalgado.golf` | **é a única ponta que importa**: sem MX, `birdie@` não recebe nada, e o email é agora a via principal de contacto |
-| Medição de tráfego | `js/cookies.js`, `const MEDICAO` | o identificador `G-…` do Google Analytics. Vazio significa que não há nada a carregar — e o banner continua a perguntar na mesma |
 | Publicações do Instagram | `IG_TOKEN`, nas variáveis de ambiente | ver a secção «Instagram» |
 
 ### Não há formulário
@@ -357,11 +356,30 @@ prova, que citam dezenas de jogadoras — fica para revisão e não entra.
 
 ## Privacidade
 
-Nada de medição antes de consentimento — o Consent Mode arranca tudo negado e
-o script do Google só é sequer descarregado depois do clique. A escolha fica
-em `localStorage`, e não num cookie, para que recusar não implique escrever
-aquilo que a pessoa acabou de recusar. Língua e tema também ficam só no
-navegador de quem visita.
+Nada de medição antes de consentimento — o PostHog só é sequer descarregado
+depois do clique em «Aceitar». A escolha fica em `localStorage`, e não num
+cookie, para que recusar não implique escrever aquilo que a pessoa acabou de
+recusar. Língua e tema também ficam só no navegador de quem visita.
+
+## Medição
+
+É o PostHog, no projeto «Franciscasalgado.golf», na região europeia
+(Frankfurt): `eu.posthog.com`, separador *Web analytics*. Começou a contar a
+14 de outubro de 2026 — antes disso o sítio não media nada, e não há como
+recuperar esses números.
+
+- **Passa pelo próprio domínio, em `/bola`.** O `vercel.json` reencaminha
+  `/bola/*` para `eu.i.posthog.com` e `/bola/static/*` para
+  `eu-assets.i.posthog.com`. O navegador nunca fala com um servidor de fora, e
+  os bloqueadores que cortam por domínio não cortam isto. Se o projeto mudar de
+  região, são essas três linhas que mudam.
+- **Só em `franciscasalgado.golf`.** As pré-visualizações da Vercel e o
+  servidor local não carregam nada.
+- **Sem gravação de sessões nem perfis de pessoa**, identificador em
+  `localStorage`, e o IP descartado no próprio projeto (*Discard client IP
+  data*). Retirar o consentimento apaga o identificador na visita seguinte.
+- A configuração está toda em `js/cookies.js`, em `POSTHOG`. O Google
+  Analytics (`MEDICAO`) continua montado e vazio.
 
 ## De onde vêm os resultados
 
