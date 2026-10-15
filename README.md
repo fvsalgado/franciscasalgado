@@ -369,21 +369,21 @@ recusar. Língua e tema também ficam só no navegador de quem visita.
 recuperar esses números.
 
 - **Passa pelo próprio domínio, em `/bola`.** O `vercel.json` reencaminha
-  `/bola/*` para `eu.i.posthog.com` e `/bola/static/*` para
+  `/bola/*` para `eu.i.posthog.com`, e `/bola/static/*` e `/bola/array/*` para
   `eu-assets.i.posthog.com`. O navegador nunca fala com um servidor de fora, e
   os bloqueadores que cortam por domínio não cortam isto. Se o projeto mudar de
-  região, são essas três linhas que mudam.
+  região, são só essas linhas que mudam.
 - **Um salto a mais, de propósito.** O PostHog envia para `/bola/e/`, com
   barra, e o `trailingSlash: false` do sítio responde 308 para `/bola/e`. O
-  navegador repete o pedido sem barra — o `fetch` e o `sendBeacon` seguem o
-  308 com o corpo intacto, e o PostHog aceita os dois endereços. Tirar o salto
-  obrigava a mexer na regra das barras do sítio inteiro, de que os canónicos
-  dependem; não compensa.
+  `fetch` e o `sendBeacon` seguem o 308 com o corpo intacto, e o PostHog aceita
+  os dois endereços. Tirar o salto obrigava a mexer na regra das barras do
+  sítio inteiro, de que os canónicos dependem.
 - **Só em `franciscasalgado.golf`.** As pré-visualizações da Vercel e o
   servidor local não carregam nada.
 - **Sem gravação de sessões nem perfis de pessoa**, identificador em
-  `localStorage`, e o IP descartado no próprio projeto (*Discard client IP
-  data*). Retirar o consentimento apaga o identificador na visita seguinte.
+  `localStorage`, e o IP do cliente descartado no próprio projeto (*Discard
+  client IP data*). Retirar o consentimento apaga o identificador na visita
+  seguinte; recusar a meio da visita pára a contagem ali mesmo.
 - A configuração está toda em `js/cookies.js`, em `POSTHOG`. O Google
   Analytics (`MEDICAO`) continua montado e vazio.
 
