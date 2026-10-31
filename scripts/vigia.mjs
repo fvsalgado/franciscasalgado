@@ -491,6 +491,48 @@ await passo('contagens', async () => {
   pôr(perfil.apoioNumeros, 'Peças de imprensa', imp.pecas.length);
   pôr(perfil.apoioNumeros, 'Épocas em prova', epocas);
 
+  /* Os títulos nacionais contam-se como na página das épocas: pelo campo
+     `nacional`, e não pelo nome da prova. O número da ficha entra sozinho,
+     como as vitórias. As frases que o dizem por extenso, não — são prosa, e
+     a prosa espera por uma pessoa. De 16 de agosto a 31 de outubro de 2026 a
+     ficha disse cinco e as perguntas frequentes, quatro, sem ninguém dar por
+     isso; agora o vigia levanta a mão.
+
+     Nas perguntas o número é o da carreira. No relato de uma época também
+     pode ser o desse ano: «Dois títulos nacionais em dois meses», em 2026,
+     está certo. */
+  const campeas = (ano) => res.provas
+    .filter((p) => p.nacional === 'campea' && (ano === undefined || p.ano === ano)).length;
+  const titulos = campeas();
+  pôr(perfil.numeros, 'Títulos nacionais', titulos);
+
+  const EXTENSO = { um: 1, dois: 2, três: 3, quatro: 4, cinco: 5, seis: 6, sete: 7, oito: 8,
+    nove: 9, dez: 10, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7,
+    eight: 8, nine: 9, ten: 10 };
+  const ditos = (s) => [...String(s || '').matchAll(/(\p{L}+) (?:títulos nacionais|national titles)/giu)]
+    .map((m) => m[1]).filter((w) => EXTENSO[w.toLowerCase()]);
+  const desfasados = [];
+  const conferir = (onde, s, certos) => {
+    for (const w of ditos(s)) if (!certos.includes(EXTENSO[w.toLowerCase()])) desfasados.push(`${onde}: «${w}»`);
+  };
+  for (const q of perfil.perguntas || []) {
+    for (const l of ['pt', 'en']) {
+      const r = q.r?.[l] || '';
+      /* «Quantos títulos nacionais tem?» responde-se com o número à cabeça. */
+      const cabeca = /títulos nacionais|national titles/i.test(q.p?.[l] || '') ? r.match(/^\p{L}+/u)?.[0] : '';
+      conferir(`pergunta «${q.p?.pt || ''}» (${l})`, `${cabeca ? `${cabeca} títulos nacionais ` : ''}${r}`, [titulos]);
+    }
+  }
+  for (const e of perfil.percurso || []) {
+    for (const l of ['pt', 'en']) {
+      conferir(`relato de ${e.ano} (${l})`, `${e.t?.[l] || ''} ${e.x?.[l] || ''}`, [titulos, campeas(Number(e.ano))]);
+    }
+  }
+  if (desfasados.length) {
+    atencao.push(`**Títulos nacionais: os dados dizem ${titulos}, e há frases que dizem outro número** — em \`data/perfil.json\`, à mão (o vigia não reescreve prosa):\n${
+      desfasados.map((d) => `  - ${d}`).join('\n')}`);
+  }
+
   /* As idas a Espanha vivem contadas por ano, e o cartão mostra a soma. Assim
      acrescenta-se uma viagem onde ela aconteceu e o número acerta-se sozinho —
      em vez de haver um total escrito à mão a envelhecer ao lado da lista que o
