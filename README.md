@@ -179,7 +179,10 @@ a ordem no sítio — mais recente primeiro):
   que faz as contagens de campeã e vice-campeã nacional.** Pelo nome não dava:
   o Drive Tour também se chama «Campeonato Nacional de Jovens», e ganhar uma
   etapa não é ser campeã nacional. Uma prova sem este campo não entra nas
-  contagens, o que é o comportamento certo por omissão.
+  contagens, o que é o comportamento certo por omissão. O vigia acerta
+  sozinho o número de «Títulos nacionais» da ficha; as frases que o dizem por
+  extenso (as perguntas frequentes e o relato de cada época) mudam-se à mão, e
+  o vigia avisa enquanto alguma disser outro número.
 
 Uma prova ganha (`pos: 1`) entra automaticamente no palmarès. Os contadores por
 época, as contagens da carreira e os filtros atualizam-se sozinhos.
