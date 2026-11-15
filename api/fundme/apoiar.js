@@ -16,7 +16,7 @@
  * /api/fundme tira o mural. Nada disto fica guardado noutro sítio.
  */
 
-import { baseDe, dados, demasiados, fotoValida, limpar, stripe, stripeLigada } from './_comum.js';
+import { baseDe, dados, demasiados, fotoValida, limpar, lerPedido, stripe, stripeLigada } from './_comum.js';
 
 const TXT = {
   pt: {
@@ -44,6 +44,7 @@ function corpo(req) {
 }
 
 export default async function handler(req, res) {
+  lerPedido(req);
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ erro: 'metodo' });

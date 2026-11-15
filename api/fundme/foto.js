@@ -11,7 +11,7 @@
  * esteja a false em data/fundme.json).
  */
 
-import { PENDENTES, blobGuardar, dados, demasiados, fotosAbertas } from './_comum.js';
+import { PENDENTES, blobGuardar, dados, demasiados, fotosAbertas, lerPedido } from './_comum.js';
 
 const MAXIMO = 3 * 1024 * 1024;
 
@@ -30,6 +30,7 @@ async function bytes(req) {
 }
 
 export default async function handler(req, res) {
+  lerPedido(req);
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');

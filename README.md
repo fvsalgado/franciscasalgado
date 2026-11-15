@@ -332,7 +332,9 @@ pagamento. As contas estão em `api/fundme/_comum.js`, separadas da rede.
 4. Experimentar primeiro com uma chave de teste (`sk_test_…`) numa
    pré-visualização, com o cartão 4242 4242 4242 4242.
 5. Para as fotografias: na Vercel, em *Storage → Create → Blob*, criar uma
-   loja **pública** e ligá-la ao projeto (isso cria `BLOB_READ_WRITE_TOKEN`).
+   loja **pública** e ligá-la ao projeto (isso cria `BLOB_STORE_ID`; a
+   função fala com a loja pelo token OIDC que a Vercel junta a cada pedido,
+   sem chave. Uma loja antiga, com `BLOB_READ_WRITE_TOKEN`, também serve).
    Depois, em *Settings → Environment Variables*, criar `FUNDME_CHAVE` com uma
    frase comprida (12 caracteres ou mais): é a chave de `/fundme/gerir`. Sem
    o Blob, a página simplesmente não oferece a fotografia.

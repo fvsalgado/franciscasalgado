@@ -17,7 +17,7 @@
 
 import {
   APROVADAS, PENDENTES, SESSAO, anfitriaoBlob, blobApagar, blobCopiar, blobLigado, blobListar,
-  caminhoAprovada, chaveCerta, curto, dados, demasiados, fotoValida, limpar, sessoesPagas, stripe, stripeLigada,
+  caminhoAprovada, chaveCerta, curto, dados, demasiados, fotoValida, lerPedido, limpar, sessoesPagas, stripe, stripeLigada,
 } from './_comum.js';
 
 const DOIS_DIAS = 2 * 86400000;
@@ -29,6 +29,7 @@ function corpo(req) {
 }
 
 export default async function handler(req, res) {
+  lerPedido(req);
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('X-Robots-Tag', 'noindex');
   if (!process.env.FUNDME_CHAVE) return res.status(503).json({ erro: 'chave_por_ligar' });

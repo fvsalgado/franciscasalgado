@@ -15,9 +15,10 @@
  * `stripe: 'por_ligar'` — a página mostra os números e fecha o botão.
  */
 
-import { APROVADAS, PENDENTES, SESSAO, blobLigado, blobListar, comAprovacao, dados, publico, resumo, sessoesPagas, stripe, stripeLigada } from './_comum.js';
+import { APROVADAS, PENDENTES, SESSAO, blobLigado, blobListar, comAprovacao, dados, publico, resumo, sessoesPagas, lerPedido, stripe, stripeLigada } from './_comum.js';
 
 export default async function handler(req, res) {
+  lerPedido(req);
   const d = dados();
   if (!d) return res.status(500).json({ erro: 'dados' });
 

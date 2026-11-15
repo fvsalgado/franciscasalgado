@@ -112,10 +112,33 @@ export async function sessoesPagas(d) {
 const BLOB = 'https://vercel.com/api/blob';
 const BLOB_VERSAO = '13';
 
-export const blobLigado = () => Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+/* Duas maneiras de a loja estar ligada ao projeto, como no @vercel/blob:
+ * - a antiga, com uma chave BLOB_READ_WRITE_TOKEN (vercel_blob_rw_<loja>_…);
+ * - a de agora, sem chave: BLOB_STORE_ID diz qual é a loja, e a função
+ *   identifica-se com o token OIDC que a Vercel junta a cada pedido
+ *   (cabeçalho x-vercel-oidc-token) ou, à falta dele, VERCEL_OIDC_TOKEN. */
+export const blobLigado = () => Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID);
 
-/** O id da loja vem dentro da chave: vercel_blob_rw_<loja>_<segredo>. */
-const loja = () => String(process.env.BLOB_READ_WRITE_TOKEN || '').split('_')[3] ?? '';
+/** O id da loja: de dentro da chave antiga, ou de BLOB_STORE_ID sem o «store_». */
+const loja = () => (process.env.BLOB_READ_WRITE_TOKEN
+  ? String(process.env.BLOB_READ_WRITE_TOKEN).split('_')[3] ?? ''
+  : String(process.env.BLOB_STORE_ID || '').replace(/^store_/, ''));
+
+const CONTEXTO = Symbol.for('@vercel/request-context');
+let oidcDoPedido = '';
+
+/** Cada função chama isto com o pedido: guarda o token OIDC que a Vercel lá
+ *  põe, para as conversas com o Blob que vêm a seguir. */
+export function lerPedido(req) {
+  const t = req?.headers?.['x-vercel-oidc-token'];
+  if (t) oidcDoPedido = String(t);
+}
+
+/** Com que se fala com o Blob: a chave antiga, ou o token OIDC mais recente. */
+function credencial() {
+  if (process.env.BLOB_READ_WRITE_TOKEN) return process.env.BLOB_READ_WRITE_TOKEN;
+  return globalThis[CONTEXTO]?.get?.()?.headers?.['x-vercel-oidc-token'] || oidcDoPedido || process.env.VERCEL_OIDC_TOKEN || '';
+}
 
 /** Onde ficam os ficheiros públicos desta loja. */
 export const anfitriaoBlob = () => `${loja().toLowerCase()}.public.blob.vercel-storage.com`;
@@ -128,8 +151,8 @@ export const fotosAbertas = (d) => blobLigado() && d?.fotos?.aceitar !== false;
 export const comAprovacao = (d) => d?.fotos?.aprovar === true;
 
 async function blob(caminho, init = {}) {
-  const chave = process.env.BLOB_READ_WRITE_TOKEN;
-  if (!chave) throw new Error('Blob por ligar');
+  const chave = credencial();
+  if (!chave || !loja()) throw new Error('Blob por ligar');
   const r = await fetch(`${BLOB}${caminho}`, {
     ...init,
     headers: { authorization: `Bearer ${chave}`, 'x-api-version': BLOB_VERSAO, 'x-vercel-blob-store-id': loja(), ...init.headers },
