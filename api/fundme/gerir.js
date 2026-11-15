@@ -1,10 +1,15 @@
-/* /api/fundme/gerir — as fotografias à espera de aprovação, para a página
+/* /api/fundme/gerir — as fotografias de quem apoia, para a página
  * /fundme/gerir. Só com a chave FUNDME_CHAVE (variável na Vercel), em
  * «Authorization: Bearer <chave>».
  *
- * GET  → { fotos: [{ id, nome, mensagem, quando, foto, estado }], soltas }
- *        estado: 'pendente' | 'aprovada' | 'recusada'. «soltas» são
- *        fotografias enviadas sem pagamento feito, com mais de dois dias.
+ * Sem `fotos.aprovar` (como está), as fotografias aparecem logo e aqui só se
+ * apagam as que não devem estar à vista. Com `fotos.aprovar: true`, também
+ * se aprovam as que estão à espera.
+ *
+ * GET  → { fotos: [{ id, nome, mensagem, quando, foto, estado }], soltas, aprovar }
+ *        estado: 'pendente' (sem aprovação: à vista) | 'aprovada' |
+ *        'recusada' (apagada). «soltas» são fotografias enviadas sem
+ *        pagamento feito, com mais de dois dias.
  * POST { id, acao } → acao: 'aprovar' (passa a aparecer), 'retirar' (deixa
  *        de aparecer, fica a pendente), 'recusar' (apaga-a), ou
  *        { acao: 'limpar' } (apaga as soltas).
@@ -63,7 +68,7 @@ export default async function handler(req, res) {
         // as pendentes primeiro; dentro de cada grupo, as mais recentes
         .sort((a, b) => (b.estado === 'pendente') - (a.estado === 'pendente') || b.quando - a.quando);
       const soltas = pendentes.filter((b) => !usadas.has(b.url) && Date.now() - Date.parse(b.uploadedAt) > DOIS_DIAS).length;
-      return res.status(200).json({ fotos, soltas, aprovar: d.fotos?.aprovar !== false });
+      return res.status(200).json({ fotos, soltas, aprovar: d.fotos?.aprovar === true });
     }
 
     if (req.method !== 'POST') {

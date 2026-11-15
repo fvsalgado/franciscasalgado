@@ -1,8 +1,10 @@
-/* /fundme/gerir — as fotografias de quem apoia, à espera de aprovação.
+/* /fundme/gerir — as fotografias de quem apoia.
  *
  * Só para a família, com a chave FUNDME_CHAVE (fica guardada neste
- * telemóvel). «Mostrar» põe a fotografia na página e no ecrã do clube;
- * «Recusar» apaga-a; «Retirar» tira de vista uma que já estava aprovada.
+ * telemóvel). Como está (sem `fotos.aprovar`), as fotografias aparecem logo
+ * e aqui apaga-se a que não deve estar à vista. Com aprovação: «Mostrar» põe
+ * a fotografia na página e no ecrã do clube; «Recusar» apaga-a; «Retirar»
+ * tira de vista uma que já estava aprovada.
  * Atualiza-se sozinha de 20 em 20 segundos, para o dia do evento.
  */
 
@@ -52,26 +54,34 @@ async function pedir(metodo, corpo) {
 function pintar() {
   const j = ultimo;
   if (!j) return;
-  const pendentes = j.fotos.filter((f) => f.estado === 'pendente').length;
+  // sem aprovação, «pendente» quer dizer «à vista»: não há nada à espera
+  document.body.classList.toggle('gr--direto', !j.aprovar);
+  const pendentes = j.aprovar ? j.fotos.filter((f) => f.estado === 'pendente').length : 0;
   document.title = `${pendentes ? `(${pendentes}) ` : ''}Fotografias — Rumo à Florida`;
   $('grN').textContent = pendentes ? `(${pendentes})` : '';
-  const lista = filtro === 'pendente' ? j.fotos.filter((f) => f.estado === 'pendente') : j.fotos;
+  const ver = j.aprovar ? filtro : 'todas';
+  const lista = ver === 'pendente' ? j.fotos.filter((f) => f.estado === 'pendente') : j.fotos;
+  const nome = (e) => (!j.aprovar && e === 'pendente' ? 'Na página' : ESTADOS[e]);
+  const classe = (e) => (!j.aprovar && e === 'pendente' ? 'aprovada' : e);
   $('grLista').innerHTML = lista.length ? lista.map((f) => `
-    <li class="gr-f gr-f--${f.estado}" data-id="${esc(f.id)}">
+    <li class="gr-f gr-f--${classe(f.estado)}" data-id="${esc(f.id)}">
       <img src="${esc(f.foto)}" alt="Fotografia de ${esc(f.nome || 'quem apoiou')}" loading="lazy" />
       <div>
-        <h2>${esc(f.nome || 'Sem nome')}<span class="gr-chip gr-chip--${f.estado}">${ESTADOS[f.estado]}</span></h2>
+        <h2>${esc(f.nome || 'Sem nome')}<span class="gr-chip gr-chip--${classe(f.estado)}">${nome(f.estado)}</span></h2>
         ${f.mensagem ? `<p class="gr-msg">«${esc(f.mensagem)}»</p>` : ''}
         <p>${quando(f.quando)}</p>
         <div class="gr-bts">
-          ${f.estado === 'pendente' ? '<button type="button" class="gr-sim" data-a="aprovar">Mostrar</button><button type="button" class="gr-nao" data-a="recusar">Recusar</button>' : ''}
+          ${f.estado === 'pendente' && j.aprovar ? '<button type="button" class="gr-sim" data-a="aprovar">Mostrar</button><button type="button" class="gr-nao" data-a="recusar">Recusar</button>' : ''}
+          ${f.estado === 'pendente' && !j.aprovar ? '<button type="button" class="gr-nao" data-a="recusar">Tirar da página e apagar</button>' : ''}
           ${f.estado === 'aprovada' ? '<button type="button" class="gr-nao" data-a="retirar">Retirar da página</button>' : ''}
         </div>
       </div>
-    </li>`).join('') : `<li class="gr-vazio">${filtro === 'pendente' ? 'Nenhuma fotografia à espera.' : 'Ainda não chegaram fotografias.'}</li>`;
+    </li>`).join('') : `<li class="gr-vazio">${ver === 'pendente' ? 'Nenhuma fotografia à espera.' : 'Ainda não chegaram fotografias.'}</li>`;
   $('grSoltas').hidden = !j.soltas;
   if (j.soltas) $('grSoltas').innerHTML = `${j.soltas} ${j.soltas === 1 ? 'fotografia enviada' : 'fotografias enviadas'} sem apoio pago, há mais de dois dias. <button type="button" id="grLimpar">Apagar</button>`;
-  if (!j.aprovar) $('grTxt').textContent = 'Atenção: em data/fundme.json, «fotos.aprovar» está a false — as fotografias aparecem sem passar por aqui.';
+  $('grTxt').textContent = j.aprovar
+    ? 'As fotografias de quem apoia o «Rumo à Florida». Só aparecem na página e no ecrã do clube depois de carregar em «Mostrar».'
+    : 'As fotografias de quem apoia o «Rumo à Florida». Aparecem logo na página e no ecrã do clube; se alguma não deve lá estar, apague-a aqui e sai em menos de um minuto.';
 }
 
 async function carregar() {
@@ -133,7 +143,7 @@ document.addEventListener('click', async (e) => {
   const b = e.target.closest('.gr-bts button');
   if (!b) return;
   const acao = b.dataset.a;
-  if (acao === 'recusar' && !confirm('Recusar e apagar esta fotografia?')) return;
+  if (acao === 'recusar' && !confirm('Apagar esta fotografia? Sai da página e do ecrã.')) return;
   const id = b.closest('.gr-f').dataset.id;
   b.closest('.gr-bts').querySelectorAll('button').forEach((x) => { x.disabled = true; });
   try {

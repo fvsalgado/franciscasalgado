@@ -27,8 +27,6 @@ const T = {
     de: (m) => `de ${m}`,
     apoios: (n, p) => `<b>${n}</b> ${n === 1 ? 'apoio' : 'apoios'} · ${p}%`,
     dias: (n) => (n === 0 ? '<b>embarca hoje</b>' : `faltam <b>${n}</b> ${n === 1 ? 'dia' : 'dias'}`),
-    bt: (v) => `Apoiar com ${v}`,
-    btOutro: 'Apoiar',
     fechado: 'Os apoios abrem em breve',
     aEnviar: 'A abrir o pagamento…',
     erros: {
@@ -42,9 +40,13 @@ const T = {
     },
     obrigado: (n) => `<strong>Obrigado${n ? `, ${n}` : ''}!</strong> O seu apoio já conta${n ? ', e o seu nome já está na bandeira' : ''}.`,
     aEntrar: '<strong>Obrigado!</strong> O pagamento está a ser confirmado. Com Multibanco, o apoio aparece aqui quando a referência for paga.',
-    fotoDepois: ' A fotografia aparece logo que a família a veja.',
+    fotoDepois: ' A sua fotografia já está num postal.',
+    cartao: {
+      nome: 'o seu nome, para a bandeira', frase: 'uma frase para a Francisca',
+      bt: 'Entregar o cartão', btS: (v) => `Apoio de ${v}, pago na Stripe`, btSOutro: 'Escreva o valor livre',
+    },
     foto: {
-      preparar: 'A preparar…', enviar: 'A enviar…', pronta: 'Fotografia pronta', aEsperar: 'A enviar a fotografia…',
+      preparar: 'A preparar…', enviar: 'A enviar…', pronta: 'Fotografia pronta', aEsperar: 'A enviar a fotografia…', alt: 'A sua fotografia',
       erro: { formato: 'Este formato não abre aqui. Experimente outra fotografia.', grande: 'A fotografia é grande demais.', demasiados: 'Demasiadas fotografias seguidas. Tente daqui a pouco.', fotos: 'As fotografias ainda não estão ligadas.', rede: 'A fotografia não seguiu. Pode apoiar na mesma, ou tentar outra vez.' },
     },
     fontes: { online: 'online', clube: 'no clube', empresas: 'empresas, pela Fundação do Desporto' },
@@ -76,8 +78,6 @@ const T = {
     de: (m) => `of ${m}`,
     apoios: (n, p) => `<b>${n}</b> ${n === 1 ? 'gift' : 'gifts'} · ${p}%`,
     dias: (n) => (n === 0 ? '<b>flies today</b>' : `<b>${n}</b> ${n === 1 ? 'day' : 'days'} to go`),
-    bt: (v) => `Give ${v}`,
-    btOutro: 'Give',
     fechado: 'Opening soon',
     aEnviar: 'Opening the payment…',
     erros: {
@@ -91,9 +91,13 @@ const T = {
     },
     obrigado: (n) => `<strong>Thank you${n ? `, ${n}` : ''}!</strong> Your gift already counts${n ? ', and your name is on the flag' : ''}.`,
     aEntrar: '<strong>Thank you!</strong> Your payment is being confirmed. With Multibanco, it shows here once the reference is paid.',
-    fotoDepois: ' Your photo will appear as soon as the family has seen it.',
+    fotoDepois: ' Your photo is already on a postcard.',
+    cartao: {
+      nome: 'your name, for the flag', frase: 'a few words for Francisca',
+      bt: 'Hand in the card', btS: (v) => `A ${v} gift, paid via Stripe`, btSOutro: 'Type your amount',
+    },
     foto: {
-      preparar: 'Preparing…', enviar: 'Uploading…', pronta: 'Photo ready', aEsperar: 'Uploading your photo…',
+      preparar: 'Preparing…', enviar: 'Uploading…', pronta: 'Photo ready', aEsperar: 'Uploading your photo…', alt: 'Your photo',
       erro: { formato: 'This format does not open here. Please try another photo.', grande: 'The photo is too large.', demasiados: 'Too many photos in a row. Please try again shortly.', fotos: 'Photos are not switched on yet.', rede: 'The photo did not upload. You can still give, or try again.' },
     },
     fontes: { online: 'online', clube: 'at the club', empresas: 'companies, via Fundação do Desporto' },
@@ -184,20 +188,47 @@ function bilhete(d, l) {
 
 /* ── o apoio ──────────────────────────────────────────────── */
 
+/* As marcas a caneta do cartão, como num cartão de golfe a sério: o par
+ * sublinha-se, o birdie circula-se, o eagle leva dois círculos, o albatroz
+ * três, o hole in one pinta-se. O valor livre leva um círculo. */
+const TRACO = 'M8 30C6 15 22 5 35 6c15 1 24 10 22 23-2 13-15 20-29 19C14 47 6 39 9 25';
+const TRACO2 = 'M3 29C1 11 20 0 35 1c18 1 28 12 26 27-2 16-17 24-33 23C11 50 1 41 4 24';
+const MARCAS = {
+  par: '<path d="M9 45c13 3 31 3 46-2"/>',
+  birdie: `<path d="${TRACO}"/>`,
+  eagle: `<path d="${TRACO}"/><path d="${TRACO2}"/>`,
+  albatroz: `<path d="${TRACO}"/><path d="${TRACO2}"/><path d="${TRACO2}" transform="translate(32 27) scale(1.16) translate(-32 -27)"/>`,
+  hio: `<ellipse cx="32" cy="27" rx="25" ry="21" class="fm-sc__disco"/><path d="${TRACO}"/>`,
+  livre: `<path d="${TRACO}"/>`,
+};
+const RESULTADOS = ['par', 'birdie', 'eagle', 'albatroz', 'hio'];
+const marca = (tipo) => `<svg viewBox="0 0 64 54" aria-hidden="true">${MARCAS[tipo] ?? MARCAS.birdie}</svg>`;
+
 function formulario(d, l) {
   const t = T[l];
   const f = $('fmForm');
   $('fmLingua').value = l;
   const origem = new URLSearchParams(location.search).get('o');
   if (origem && /^[a-z0-9-]{1,20}$/.test(origem)) $('fmOrigem').value = origem;
+  $('fmNome').placeholder = t.cartao.nome;
+  $('fmMsg').placeholder = t.cartao.frase;
 
-  // os valores vêm dos dados, para se poderem mudar sem tocar no HTML
-  const valores = d.valores?.length ? d.valores : [25, 50, 150, 300, 500];
+  // os valores vêm dos dados; cada um é um «buraco» do cartão, com a sua marca
+  const valores = (d.valores?.length ? d.valores : [25, 50, 150, 300, 500]).slice(0, 5);
   const inicial = valores.includes(d.valorInicial) ? d.valorInicial : valores[Math.min(2, valores.length - 1)];
-  const outroL = $('fmValores').querySelector('input[value="outro"]').closest('label');
-  $('fmValores').querySelectorAll('label').forEach((lb) => { if (lb !== outroL) lb.remove(); });
-  outroL.insertAdjacentHTML('beforebegin', valores.map((v) =>
-    `<label><input type="radio" name="valor" value="${v}"${v === inicial ? ' checked' : ''} /><span>${euros(v, l)}</span></label>`).join(''));
+  const g = $('fmValores');
+  g.style.setProperty('--n', valores.length + 1);
+  g.querySelectorAll('.fm-sc__v').forEach((c, i, todas) => { if (i < todas.length - 1) c.remove(); });
+  const livre = g.querySelector('.fm-sc__v--livre');
+  livre.insertAdjacentHTML('beforebegin', valores.map((v, i) =>
+    `<label class="fm-sc__v fm-sc__v--${RESULTADOS[i]}"><input type="radio" name="valor" value="${v}"${v === inicial ? ' checked' : ''} aria-label="${euros(v, l)}" /><span class="fm-sc__n">${grupos(v, l === 'en' ? ',' : '.')}<small>€</small></span>${marca(RESULTADOS[i])}</label>`).join(''));
+  if (!livre.querySelector('svg')) livre.insertAdjacentHTML('beforeend', marca('livre'));
+  // os cabeçalhos acompanham o número de valores
+  const cab = g.querySelectorAll('.fm-sc__h:not(.fm-sc__lab)');
+  const res = g.querySelectorAll('.fm-sc__r');
+  cab.forEach((c, i) => { c.hidden = i > valores.length; });
+  res.forEach((c, i) => { c.hidden = i < res.length - 1 && i >= valores.length; });
+
   const campo = $('fmOutro');
   campo.min = d.minimo ?? 5;
   campo.max = d.maximo ?? 5000;
@@ -208,7 +239,8 @@ function formulario(d, l) {
     const eOutro = v === 'outro';
     $('fmOutroC').classList.toggle('fm-outro--on', eOutro);
     const n = eOutro ? Number(campo.value) : Number(v);
-    $('fmBtT').textContent = !d.aberto ? t.fechado : n > 0 ? t.bt(euros(n, l)) : t.btOutro;
+    $('fmBtT').textContent = !d.aberto ? t.fechado : t.cartao.bt;
+    $('fmBtS').textContent = !d.aberto ? '' : n > 0 ? t.cartao.btS(euros(n, l)) : t.cartao.btSOutro;
   };
   f.addEventListener('change', (e) => {
     if (e.target.name === 'valor' && e.target.value === 'outro') campo.focus();
@@ -216,6 +248,17 @@ function formulario(d, l) {
   });
   campo.addEventListener('input', atualizar);
   campo.addEventListener('focus', () => { f.querySelector('input[value="outro"]').checked = true; atualizar(); });
+
+  // a frase: um «+» discreto que abre a linha do recado
+  if (!$('fmMsg').value) {
+    $('fmFraseC').hidden = true;
+    $('fmFraseBt').hidden = false;
+  }
+  $('fmFraseBt').addEventListener('click', () => {
+    $('fmFraseC').hidden = false;
+    $('fmFraseBt').hidden = true;
+    $('fmMsg').focus();
+  });
 
   const bt = $('fmBt');
   const fechar = !d.aberto;
@@ -249,9 +292,7 @@ function formulario(d, l) {
       const r = await fetch(f.action, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // quem escreve o nome, a mensagem ou junta uma fotografia abriu de
-        // propósito «juntar o meu nome à bandeira»: é isso que diz que quer
-        // aparecer
+        // quem assina, escreve uma frase ou junta uma fotografia quer aparecer
         body: JSON.stringify({ ...dadosF, mural: (dadosF.nome || dadosF.mensagem || dadosF.foto) ? '1' : '0' }),
       });
       const j = await r.json().catch(() => ({}));
@@ -302,15 +343,15 @@ function fotografia(d, l) {
   const t = T[l].foto;
   if (!d.fotos || !d.aberto || !window.fetch) return async () => '';
   $('fmFotoC').hidden = false;
-  $('fmFotoX').hidden = false;
   const campo = $('fmFoto');
   const pre = $('fmFotoPre');
-  const estado = (txt, classe = '') => { $('fmFotoEstado').textContent = txt; pre.className = `fm-foto__pre ${classe}`; };
+  const caixa = $('fmFotoC');
+  const estado = (txt, classe = '') => { $('fmFotoEstado').textContent = txt; caixa.className = `fm-foto ${classe}`; pre.className = `fm-sc__foto ${classe}`; };
   let envio = null;
   let vez = 0;
 
   $('fmFotoBt').addEventListener('click', () => campo.click());
-  pre.querySelector('img').addEventListener('click', () => campo.click());
+  pre.addEventListener('click', () => campo.click());
   campo.addEventListener('change', () => {
     const ficheiro = campo.files?.[0];
     campo.value = '';
@@ -318,30 +359,36 @@ function fotografia(d, l) {
     const esta = ++vez;
     $('fmFotoUrl').value = '';
     $('fmFotoBt').hidden = true;
-    pre.hidden = false;
+    $('fmFotoInfo').hidden = false;
+    $('fmFotoX').hidden = false;
     $('fmFotoImg').removeAttribute('src');
-    estado(t.preparar, 'fm-foto__pre--a');
+    $('fmFotoImg').alt = t.alt;
+    pre.hidden = false;
+    estado(t.preparar, 'fm-foto--a');
     envio = (async () => {
       const b = await reduzir(ficheiro);
       if (esta !== vez) return '';
       $('fmFotoImg').src = URL.createObjectURL(b);
-      estado(t.enviar, 'fm-foto__pre--a');
+      estado(t.enviar, 'fm-foto--a');
       const r = await fetch('/api/fundme/foto', { method: 'POST', headers: { 'Content-Type': 'application/octet-stream' }, body: b });
       const j = await r.json().catch(() => ({}));
       if (!r.ok || !j.foto) throw new Error(j.erro || 'rede');
       if (esta !== vez) return '';
       $('fmFotoUrl').value = j.foto;
-      estado(t.pronta, 'fm-foto__pre--ok');
+      estado(t.pronta, 'fm-foto--ok');
       return j.foto;
     })();
-    envio.catch((e) => { if (esta === vez) estado(t.erro[e.message] || t.erro.rede, 'fm-foto__pre--erro'); });
+    envio.catch((e) => { if (esta === vez) estado(t.erro[e.message] || t.erro.rede, 'fm-foto--erro'); });
   });
   $('fmFotoTirar').addEventListener('click', () => {
     vez++;
     envio = null;
     $('fmFotoUrl').value = '';
     pre.hidden = true;
+    $('fmFotoInfo').hidden = true;
+    $('fmFotoX').hidden = true;
     $('fmFotoBt').hidden = false;
+    caixa.className = 'fm-foto';
   });
 
   return async () => {

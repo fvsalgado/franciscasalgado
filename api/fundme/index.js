@@ -15,7 +15,7 @@
  * `stripe: 'por_ligar'` — a página mostra os números e fecha o botão.
  */
 
-import { APROVADAS, SESSAO, blobLigado, blobListar, comAprovacao, dados, publico, resumo, sessoesPagas, stripe, stripeLigada } from './_comum.js';
+import { APROVADAS, PENDENTES, SESSAO, blobLigado, blobListar, comAprovacao, dados, publico, resumo, sessoesPagas, stripe, stripeLigada } from './_comum.js';
 
 export default async function handler(req, res) {
   const d = dados();
@@ -57,14 +57,20 @@ export default async function handler(req, res) {
     }
   }
 
-  // as fotografias aprovadas: fundme/aprovadas/<curto(id)>.jpg
+  // as fotografias: com aprovação, as de fundme/aprovadas/<curto(id)>.jpg;
+  // sem ela, as que ainda existem em fundme/pendentes/ (apagar tira de vista)
   const aprovadas = new Map();
-  if (blobLigado() && comAprovacao(d) && sessoes.length) {
+  let existentes = new Set();
+  if (blobLigado() && sessoes.some((s) => s.metadata?.foto)) {
     try {
-      for (const b of await blobListar(APROVADAS)) {
-        const m = /\/([0-9a-f]{16})\.jpg$/.exec(b.pathname ?? '');
-        // o ?v= muda quando se volta a aprovar, para não ficar a antiga em cache
-        if (m) aprovadas.set(m[1], `${b.url}?v=${Date.parse(b.uploadedAt) || 0}`);
+      if (comAprovacao(d)) {
+        for (const b of await blobListar(APROVADAS)) {
+          const m = /\/([0-9a-f]{16})\.jpg$/.exec(b.pathname ?? '');
+          // o ?v= muda quando se volta a aprovar, para não ficar a antiga em cache
+          if (m) aprovadas.set(m[1], `${b.url}?v=${Date.parse(b.uploadedAt) || 0}`);
+        }
+      } else {
+        existentes = new Set((await blobListar(PENDENTES)).map((b) => b.url));
       }
     } catch (e) {
       console.error('fundme: fotografias', e.message);
@@ -73,7 +79,7 @@ export default async function handler(req, res) {
 
   return res.status(200).json({
     ...publico(d),
-    ...resumo({ sessoes, d, aprovadas }),
+    ...resumo({ sessoes, d, aprovadas, existentes }),
     stripe: estado,
     aberto: Boolean(d.aberto) && estado !== 'por_ligar',
     atualizado: new Date().toISOString(),

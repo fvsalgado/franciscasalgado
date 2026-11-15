@@ -307,7 +307,9 @@ feito, que é o argumento mais concreto para quem está a pensar entrar.
 
 A angariação para a viagem ao Junior Orange Bowl: `franciscasalgado.golf/fundme`
 e `/en/fundme` (o `vercel.json` reescreve as duas para o `.html`). Quem apoia
-escolhe o valor, deixa o nome e uma mensagem se quiser, e paga na Stripe com
+preenche um cartão de resultados de golfe: escolhe o «buraco» (o valor),
+assina (o nome vai para a bandeira), junta uma frase e uma fotografia se
+quiser, e paga na Stripe com
 MB WAY, Multibanco, cartão, Apple Pay ou Google Pay. O total, o gráfico dia a
 dia, o recibo da viagem e a bandeira com os nomes atualizam-se sozinhos.
 
@@ -342,7 +344,7 @@ pagamento. As contas estão em `api/fundme/_comum.js`, separadas da rede.
 | `aberto` | `false` fecha o botão, sem mexer em mais nada |
 | `meta`, `inicio`, `partida` | a meta em euros, o primeiro dia do gráfico e o dia da partida (a contagem «faltam N dias») |
 | `valores`, `valorInicial`, `minimo`, `maximo` | os botões de valor e os limites de um apoio |
-| `fotos` | `aceitar: false` tira o campo da fotografia; `aprovar: false` mostra as fotografias logo, sem passar por `/fundme/gerir` (não recomendado) |
+| `fotos` | `aceitar: false` tira o campo da fotografia; `aprovar: true` faz cada fotografia esperar por aprovação em `/fundme/gerir` (como está, `false`, aparecem logo) |
 | `etapas` | para onde vai o dinheiro, por ordem: cada uma fica «paga» quando o total lá chega. **Os valores atuais são estimativas** |
 | `evento` | `mostrar`, a `data` (`"2026-12-02"`, ou `null` para «a anunciar») e o `local`. Com data, o dia fica marcado no gráfico |
 | `manuais` | o que não passa pela Stripe: `{ "data": "2026-12-02", "valor": 640, "origem": "clube", "nome": "Grupo de quarta-feira", "mensagem": { "pt": "…", "en": "…" } }`. `origem` é `clube` ou `empresas` (Fundação do Desporto). Com `nome`, fica escrito na bandeira; com `mensagem`, aparece num postal; com `foto` (um caminho em `/img/…`), o postal leva a fotografia; `"mural": false` tira-o dos dois |
@@ -351,15 +353,18 @@ pagamento. As contas estão em `api/fundme/_comum.js`, separadas da rede.
 
 ### As fotografias e /fundme/gerir
 
-Quem apoia pode juntar uma fotografia (sua, ou com a Francisca). A página
-reduz-na no telemóvel (1600 px, JPEG, sem a localização) e manda-a para
-`api/fundme/foto.js`, que a guarda no Blob em `fundme/pendentes/`; o endereço
-segue com o pagamento, nos metadados da Stripe. Nada aparece sem aprovação:
+Quem apoia pode juntar uma fotografia (sua, ou com a Francisca), no próprio
+cartão. A página reduz-na no telemóvel (1600 px, JPEG, sem a localização) e
+manda-a para `api/fundme/foto.js`, que a guarda no Blob em
+`fundme/pendentes/`; o endereço segue com o pagamento, nos metadados da
+Stripe. Aparece logo com o postal, na página e no ecrã do clube.
+
 `franciscasalgado.golf/fundme/gerir` (com a `FUNDME_CHAVE`, guardada no
-telemóvel) mostra as fotografias dos apoios pagos, as que estão à espera
-primeiro. «Mostrar» copia-a para `fundme/aprovadas/` e ela entra na página e
-no ecrã do clube em menos de um minuto; «Retirar» tira-a de vista; «Recusar»
-apaga-a. A página atualiza-se sozinha, para se ir aprovando no dia do evento.
+telemóvel) mostra as fotografias dos apoios pagos; «Tirar da página e apagar»
+tira a que não deva estar à vista, em menos de um minuto. Com
+`fotos.aprovar: true`, as fotografias ficam à espera e a página passa a ter
+«Mostrar» (copia para `fundme/aprovadas/`), «Recusar» e «Retirar». Atualiza-se
+sozinha, para o dia do evento.
 
 ### O ecrã da clubhouse e os QR codes
 

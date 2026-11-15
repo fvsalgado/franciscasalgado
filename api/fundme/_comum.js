@@ -103,9 +103,10 @@ export async function sessoesPagas(d) {
 /* Quem apoia pode juntar uma fotografia. A página reduz-na e manda-a para
  * /api/fundme/foto, que a guarda no Vercel Blob em fundme/pendentes/, com um
  * nome que não se adivinha; o endereço segue nos metadados do pagamento.
- * Com `fotos.aprovar` (o normal), só aparece depois de alguém da família a
- * aprovar em /fundme/gerir: aprovar copia-a para fundme/aprovadas/<id>.jpg,
- * e é essa lista que a página e o ecrã mostram. Fala-se com o Blob pela API
+ * Sem `fotos.aprovar` (como está), aparece logo com o apoio, e apagá-la em
+ * /fundme/gerir tira-a de vista. Com `fotos.aprovar: true`, só aparece
+ * depois de aprovada lá: aprovar copia-a para fundme/aprovadas/<id>.jpg, e
+ * é essa lista que a página e o ecrã mostram. Fala-se com o Blob pela API
  * que o @vercel/blob usa, sem dependências, como com a Stripe. */
 
 const BLOB = 'https://vercel.com/api/blob';
@@ -122,8 +123,9 @@ export const anfitriaoBlob = () => `${loja().toLowerCase()}.public.blob.vercel-s
 /** Aceitar fotografias: com o Blob ligado e sem `fotos.aceitar: false`. */
 export const fotosAbertas = (d) => blobLigado() && d?.fotos?.aceitar !== false;
 
-/** Mostrar só as aprovadas (o normal), ou todas as dos pagamentos feitos. */
-export const comAprovacao = (d) => d?.fotos?.aprovar !== false;
+/** Mostrar só as aprovadas em /fundme/gerir, ou (o normal) todas as dos
+ *  pagamentos feitos, enquanto não forem apagadas lá. */
+export const comAprovacao = (d) => d?.fotos?.aprovar === true;
 
 async function blob(caminho, init = {}) {
   const chave = process.env.BLOB_READ_WRITE_TOKEN;
@@ -231,12 +233,18 @@ function dias(de, ate) {
  * - serie: o total acumulado, dia a dia, do início até hoje;
  * - mural: só quem pediu para aparecer, sem valores, o mais recente primeiro,
  *   com a fotografia quando a houver (aprovada, se `fotos.aprovar`);
- *   `aprovadas` é o Map curto(id) → endereço que o index.js lê do Blob.
+ *   `aprovadas` é o Map curto(id) → endereço que o index.js lê do Blob, e
+ *   `existentes` o Set das fotografias que ainda lá estão (sem aprovação).
  */
-export function resumo({ sessoes = [], d, agora = Date.now(), aprovadas = new Map() }) {
+export function resumo({ sessoes = [], d, agora = Date.now(), aprovadas = new Map(), existentes = null }) {
   const aprovar = comAprovacao(d);
-  /* a fotografia de um pagamento: a aprovada, ou (sem aprovação) a que veio */
-  const fotoDe = (s) => aprovadas.get(curto(s.id)) ?? (!aprovar && fotoValida(s.metadata?.foto) ? s.metadata.foto : null);
+  /* a fotografia de um pagamento: com aprovação, a aprovada; sem ela, a que
+     veio, se ainda existir (apagada em /fundme/gerir, deixa de aparecer) */
+  const fotoDe = (s) => {
+    if (aprovar) return aprovadas.get(curto(s.id)) ?? null;
+    const f = s.metadata?.foto;
+    return fotoValida(f) && (!existentes || existentes.has(f)) ? f : null;
+  };
   const excluir = new Set(d.excluir ?? []);
   const ocultar = new Set(d.ocultar ?? []);
 

@@ -16,7 +16,7 @@
   "maximo": 5000,
   "fotos": {
     "aceitar": true,
-    "aprovar": true
+    "aprovar": false
   },
   "etapas": [
     {
