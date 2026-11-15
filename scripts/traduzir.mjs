@@ -31,6 +31,9 @@ import { EN } from './en.mjs';
 const RAIZ = new URL('../', import.meta.url);
 const SECO = process.argv.includes('--seco');
 const SITIO = 'https://franciscasalgado.golf';
+/* As versões das imagens de partilha (scripts/og.mjs). O /fundme tem uma em
+   cada língua: a inglesa troca-se aqui, ao escrever o en/. */
+const OG = JSON.parse(await readFile(new URL('data/og.json', RAIZ), 'utf8').catch(() => '{}'));
 
 const PAGINAS = ['index.html', 'resultados.html', 'jogadora.html', 'witb.html',
                  'imprensa.html', 'parcerias.html', 'fundme.html', 'privacidade.html', 'termos.html'];
@@ -66,6 +69,7 @@ const CABECALHOS = {
     desc: 'Partnering with Francisca Salgado: who already backs her, the three ways in — season, event or groundwork — and how to get in touch.',
   },
   'fundme.html': {
+    ogAlt: 'Francisca Salgado smiling with her club championship trophy, in a polaroid: Road to Florida, Junior Orange Bowl 2027',
     titulo: 'Road to Florida — Francisca Salgado',
     desc: 'Help Francisca Salgado, Portuguese Under-18 golf champion, get to Florida for the Junior Orange Bowl. The target is €5,000 for the trip, and the total goes up in plain sight.',
   },
@@ -118,6 +122,10 @@ function arrumarCabeca(html, ficheiro, { en }) {
     s = s.replace(/(<meta name="description" content=")[^"]*(")/, `$1${cab.desc}$2`);
     s = s.replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${cab.titulo}$2`);
     s = s.replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${cab.desc}$2`);
+    if (cab.ogAlt) s = s.replace(/(<meta property="og:image:alt" content=")[^"]*(")/, `$1${cab.ogAlt}$2`);
+  }
+  if (en) {
+    s = s.replace(/\/img\/og-fundme\.jpg(\?v=[a-f0-9]+)?/g, `/img/og-fundme-en.jpg${OG.fundmeEn ? `?v=${OG.fundmeEn}` : ''}`);
   }
 
   /* hreflang nas duas: cada página aponta para si e para a irmã. x-default vai

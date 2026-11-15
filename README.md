@@ -55,7 +55,7 @@ Correm com `node scripts/<nome>.mjs`, a partir da raiz.
 | `traduzir.mjs` | escreve o `en/` inteiro a partir do HTML português e de `en.mjs` |
 | `seo.mjs` | dados estruturados, `sitemap.xml` e `llms.txt` |
 | `en.mjs` | o dicionário inglês. É dado, não é script: só `traduzir.mjs` o lê |
-| `og.mjs` | refaz a imagem de partilha e carimba-lhe a versão |
+| `og.mjs` | refaz as imagens de partilha (a geral, a do saco e o cartaz do `/fundme` em cada língua) e carimba-lhes a versão; `node scripts/og.mjs fundme` refaz só as do `/fundme` |
 | `estatico.mjs` | escreve no HTML o que o JavaScript pinta — ver «Sem JavaScript» |
 | `capas.mjs` | as miniaturas dos vídeos, guardadas cá |
 | `capas-imprensa.mjs` / `logos-imprensa.mjs` | as fotografias e os símbolos da lista de imprensa |

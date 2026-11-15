@@ -1968,8 +1968,6 @@ html:not([data-tema="escuro"]) .fm{--fm-papel:#FFFEFA}
 .fm-soma__m{color:var(--fm-fraca)}
 .fm-info{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.3rem 1rem;margin-top:.6rem;font-size:.86rem;color:var(--fm-fraca)}
 .fm-info b{color:var(--fm-tinta);font-weight:700}
-.fm-bilhete__barras{height:2.1rem;margin-top:1rem;color:var(--fm-tinta);opacity:.85;
-  background:repeating-linear-gradient(90deg,currentColor 0 2px,transparent 2px 4px,currentColor 4px 5px,transparent 5px 8px,currentColor 8px 11px,transparent 11px 12px,currentColor 12px 13px,transparent 13px 17px)}
 
 /* o apoio */
 .fm-cartao{grid-area:apo;scroll-margin-top:6rem}
