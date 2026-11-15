@@ -635,6 +635,8 @@ export function bandeiraSVG(nomes, { W = 640, max = 80, ondula = false, convite 
   const hh = alt * 0.27;
   const cx = x0 + larg / 2;
   const fc = Math.min(larg / 14, hh * 0.34);
+  // o nome dela no topo do pano: dezassete letras, que têm de caber com folga
+  const fh = Math.min(fc, larg / 17.5);
 
   // as assinaturas: escolhe-se a grelha que deixa a letra maior
   const ax0 = x0 + larg * 0.07;
@@ -712,7 +714,7 @@ export function bandeiraSVG(nomes, { W = 640, max = 80, ondula = false, convite 
       <path d="M${cx - fc * 0.22} ${topo + hh * 0.36}V${topo + hh * 0.06}l${fc * 0.42} ${hh * 0.055}-${fc * 0.42} ${hh * 0.055}" stroke-width="${Math.max(1.6, fc * 0.07)}"/>
       <path d="M${cx - fc * 2.1} ${topo + hh * 0.38}H${cx - fc * 0.6}M${cx + fc * 0.6} ${topo + hh * 0.38}H${cx + fc * 2.1}" stroke-width="${Math.max(.8, fc * 0.03)}" opacity=".6"/>
     </g>
-    <text x="${cx}" y="${topo + hh * 0.72}" text-anchor="middle" font-family="Fraunces,serif" font-weight="600" font-size="${fc.toFixed(1)}" letter-spacing="${(fc * 0.16).toFixed(1)}" fill="#14291F">VALE DE JANELAS</text>
+    <text x="${cx}" y="${topo + hh * 0.72}" text-anchor="middle" font-family="Fraunces,serif" font-weight="600" font-size="${fh.toFixed(1)}" letter-spacing="${(fh * 0.14).toFixed(1)}" fill="#14291F">FRANCISCA SALGADO</text>
     <text x="${cx}" y="${topo + hh * 0.97}" text-anchor="middle" font-family="Fraunces,serif" font-style="italic" font-size="${(fc * 0.56).toFixed(1)}" fill="#1B5E3F">Road to Florida · 2027</text>
     <g class="fm-flag__nomes" font-family="Caveat,cursive" font-weight="600">${assin}</g>
     ${convite && !n ? `<g class="fm-flag__convite"><text x="${cx}" y="${ay0 + ah * 0.45}" text-anchor="middle" font-family="Caveat,cursive" font-size="${(fc * 0.95).toFixed(1)}" fill="#1B5E3F" opacity=".55">O primeiro nome fica aqui · Your name here</text><line x1="${x0 + larg * 0.2}" x2="${x0 + larg * 0.8}" y1="${ay0 + ah * 0.58}" y2="${ay0 + ah * 0.58}"/></g>` : ''}
