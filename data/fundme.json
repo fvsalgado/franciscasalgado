@@ -81,6 +81,10 @@
     "local": {
       "pt": "Praia D'El Rey, Óbidos",
       "en": "Praia D'El Rey, Óbidos"
+    },
+    "coordenadas": {
+      "lat": 39.331,
+      "lon": -9.327
     }
   },
   "manuais": [],

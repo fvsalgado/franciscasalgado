@@ -22,7 +22,7 @@ const TXT = {
   pt: {
     produto: 'Rumo à Florida — Francisca Salgado',
     descricao: 'Apoio à viagem da Francisca ao Junior Orange Bowl, na Florida, em janeiro de 2027.',
-    aoPagar: 'Obrigado por apoiar a Francisca. O recibo segue para o seu email.',
+    aoPagar: 'Obrigada por apoiar a Francisca. O recibo segue para o seu email.',
     extrato: 'Rumo à Florida · apoio',
   },
   en: {

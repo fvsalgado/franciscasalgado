@@ -348,7 +348,7 @@ pagamento. As contas estão em `api/fundme/_comum.js`, separadas da rede.
 | `valores`, `valorInicial`, `minimo`, `maximo` | os botões de valor e os limites de um apoio |
 | `fotos` | `aceitar: false` tira o campo da fotografia; `aprovar: true` faz cada fotografia esperar por aprovação em `/fundme/gerir` (como está, `false`, aparecem logo) |
 | `etapas` | para onde vai o dinheiro, por ordem: cada uma fica «paga» quando o total lá chega. **Os valores atuais são estimativas** |
-| `evento` | `mostrar`, a `data` (`"2026-12-02"`, ou `null` para «a anunciar») e o `local`. Com data, o dia fica marcado no gráfico |
+| `evento` | `mostrar`, a `data` (`"2026-12-02"`, ou `null` para «a anunciar»), o `local` e as `coordenadas` (para o tempo no ecrã). Com data, o dia fica marcado no gráfico |
 | `manuais` | o que não passa pela Stripe: `{ "data": "2026-12-02", "valor": 640, "origem": "clube", "nome": "Grupo de quarta-feira", "mensagem": { "pt": "…", "en": "…" } }`. `origem` é `clube` ou `empresas` (Fundação do Desporto). Com `nome`, fica escrito na bandeira; com `mensagem`, aparece num postal; com `foto` (um caminho em `/img/…`), o postal leva a fotografia; `"mural": false` tira-o dos dois |
 | `excluir` | ids de sessões (`cs_…`) que não contam para o total: um reembolso, um teste |
 | `ocultar` | ids que saem da bandeira e dos postais mas continuam a contar: uma mensagem que não deve ficar à vista |
@@ -378,6 +378,12 @@ também ao alto, num ecrã vertical ou num telemóvel). Mostra:
 
 Atualiza-se de 20 em 20 segundos. Fala português e inglês, uma língua de
 cada vez, e troca num esbatido lento de 12 em 12 segundos.
+
+No topo há uma barra do campo: o sítio, a hora, o céu e a temperatura, o
+vento (de onde vem, e as rajadas), a chuva nas próximas três horas e o pôr do
+sol. O tempo vem do Open-Meteo, sem chave, pedido pelo browser do ecrã de 10
+em 10 minutos, para as coordenadas em `evento.coordenadas` de
+`data/fundme.json` (Praia D'El Rey). Se o serviço falhar, fica só a hora.
 
 **A viagem em fases.** O ambiente cresce com o total:
 - **na pista** (sem apoios): luzes de pista, o avião a trepidar, postais e

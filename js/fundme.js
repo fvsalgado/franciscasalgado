@@ -38,8 +38,8 @@ const T = {
       indisponivel: 'Não foi possível abrir o pagamento. Tente outra vez.',
       rede: 'Sem ligação. Tente outra vez.',
     },
-    obrigado: (n) => `<strong>Obrigado${n ? `, ${n}` : ''}!</strong> O seu apoio já conta${n ? ', e o seu nome já está na bandeira' : ''}.`,
-    aEntrar: '<strong>Obrigado!</strong> O pagamento está a ser confirmado. Com Multibanco, o apoio aparece aqui quando a referência for paga.',
+    obrigado: (n) => `<strong>Obrigada${n ? `, ${n}` : ''}!</strong> O seu apoio já conta${n ? ', e o seu nome já está na bandeira' : ''}.`,
+    aEntrar: '<strong>Obrigada!</strong> O pagamento está a ser confirmado. Com Multibanco, o apoio aparece aqui quando a referência for paga.',
     fotoDepois: ' A sua fotografia já está num postal.',
     cartao: {
       nome: 'o seu nome, para a bandeira', frase: 'uma mensagem para a Francisca',
@@ -64,7 +64,7 @@ const T = {
     recibo: {
       cab: 'Rumo à Florida', sub: 'Lisboa → Miami · janeiro de 2027', n: 'Recibo n.º 2027',
       faltam: (v) => `faltam ${v}`, pago: 'Pago', total: 'Total', juntamos: 'Já juntámos', falta: 'Falta',
-      obrigado: 'Obrigado!', completo: 'Viagem paga. Obrigado!',
+      obrigado: 'Obrigada!', completo: 'Viagem paga. Obrigada!',
     },
     bandeiraVazia: 'A bandeira está à espera do primeiro nome.',
     semNome: (n) => (n === 1 ? 'E mais um apoio sem nome.' : `E mais ${n} apoios sem nome.`),
@@ -730,7 +730,7 @@ function bolas(caixa, x, y, n = 26) {
 /** Um apoio sem nome: uma faixa no topo, com o valor (não diz de quem é). */
 function festa(valor) {
   const caixa = $('fmEcraFesta');
-  caixa.innerHTML = `<div class="fm-festa__faixa"><b>+${euros(valor, 'pt')}</b> ${bi('Novo apoio · Obrigado!', 'New gift · Thank you!')}</div>`;
+  caixa.innerHTML = `<div class="fm-festa__faixa"><b>+${euros(valor, 'pt')}</b> ${bi('Novo apoio · Obrigada!', 'New gift · Thank you!')}</div>`;
   bolas(caixa, '30vw', '62vh');
   caixa.classList.remove('fm-festa--on');
   void caixa.offsetWidth;
@@ -775,7 +775,7 @@ async function proximoDestaque() {
   const en = linguaEcra() === 'en';
   const msg = tx(m.mensagem, en ? 'en' : 'pt');
   const tipo = m.foto ? 'foto' : msg ? 'msg' : 'nome';
-  const texto = msg || (en ? `Thank you, ${m.nome}!` : `Obrigado, ${m.nome}!`);
+  const texto = msg || (en ? `Thank you, ${m.nome}!` : `Obrigada, ${m.nome}!`);
   const passo = Math.max(14, Math.min(55, 1900 / texto.length));
   caixa.innerHTML = `<div class="fm-destaque__fundo"></div>
     <div class="fm-destaque__palco">
@@ -894,7 +894,7 @@ function marco(caixa, m) {
       <span class="fm-marco__av" aria-hidden="true">${AVIAO}</span>
       ${m.marco > 1 ? `<p class="fm-marco__p">${pct}<small>%</small></p>` : ''}
       <p class="fm-marco__t d">${esc(en ? f.marcoEn : f.marco)}</p>
-      <p class="fm-marco__f">${m.falta > 0 ? falta : en ? 'Thank you, everyone' : 'Obrigado a todos'}</p>
+      <p class="fm-marco__f">${m.falta > 0 ? falta : en ? 'Thank you, everyone' : 'Obrigada a todos'}</p>
     </div>`;
   caixa.className = 'fm-destaque fm-destaque--marco';
   void caixa.offsetWidth;
@@ -970,6 +970,97 @@ function ecra(d) {
   if (fase > antes.fase) destacar({ marco: fase, falta: Math.max(0, d.meta - total) });
 }
 
+/* ── a hora e o tempo no campo ───────────────────────────────
+ * Uma barra fina no topo, como num quadro de resultados: o sítio, a hora,
+ * o céu e a temperatura, o vento (de onde vem, e as rajadas), a chuva nas
+ * próximas três horas e o pôr do sol. Vem do Open-Meteo (sem chave), pedido
+ * pelo próprio browser do ecrã de 10 em 10 minutos; se falhar, fica a hora.
+ * As coordenadas estão em data/fundme.json (evento.coordenadas). */
+
+const ICONES = {
+  sol: '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/>',
+  lua: '<path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1Z"/>',
+  parcial: '<circle cx="8.5" cy="8.5" r="3.2"/><path d="M8.5 2.6v1.4M2.6 8.5H4M4.3 4.3l1 1M12.7 4.3l-1 1"/><path d="M8 19.5h9.5a3.5 3.5 0 0 0 .2-7 5 5 0 0 0-9.4-.6A3.8 3.8 0 0 0 8 19.5Z"/>',
+  nuvem: '<path d="M7 19h10.5a4 4 0 0 0 .3-8 5.5 5.5 0 0 0-10.5-1A4.5 4.5 0 0 0 7 19Z"/>',
+  nevoeiro: '<path d="M4 9h16M3 13h18M5 17h14"/>',
+  chuva: '<path d="M7 15h10.5a4 4 0 0 0 .3-8 5.5 5.5 0 0 0-10.5-1A4.5 4.5 0 0 0 7 15Z"/><path d="M8.5 18l-1 2.5M12.5 18l-1 2.5M16.5 18l-1 2.5"/>',
+  trovoada: '<path d="M7 14h10.5a4 4 0 0 0 .3-8 5.5 5.5 0 0 0-10.5-1A4.5 4.5 0 0 0 7 14Z"/><path d="M12.5 15.5l-2.5 3.5h3l-2 3.5"/>',
+  neve: '<path d="M7 15h10.5a4 4 0 0 0 .3-8 5.5 5.5 0 0 0-10.5-1A4.5 4.5 0 0 0 7 15Z"/><path d="M8.5 19h.01M12 20.5h.01M15.5 19h.01"/>',
+  seta: '<path d="M12 3v18M12 21l-5-5M12 21l5-5"/>',
+  gota: '<path d="M12 3.5c3.5 4.3 6 7.6 6 10.6a6 6 0 0 1-12 0c0-3 2.5-6.3 6-10.6Z"/>',
+  ocaso: '<path d="M3 17h18M6 21h12M7.8 17a4.2 4.2 0 0 1 8.4 0M12 6v5M9.5 8.5 12 6l2.5 2.5"/>',
+  bandeira: '<path d="M6 21V3l11 4-11 4"/>',
+};
+const icone = (n, rodar = 0) => `<svg viewBox="0 0 24 24" aria-hidden="true"${rodar ? ` style="transform:rotate(${rodar}deg)"` : ''}>${ICONES[n]}</svg>`;
+
+/** O código WMO do céu: o ícone e as palavras. */
+function ceuAgora(codigo, dia) {
+  const c = Number(codigo);
+  if (c <= 1) return [dia ? 'sol' : 'lua', dia ? 'Sol' : 'Limpo', dia ? 'Sunny' : 'Clear'];
+  if (c === 2) return ['parcial', 'Pouco nublado', 'Partly cloudy'];
+  if (c === 3) return ['nuvem', 'Nublado', 'Cloudy'];
+  if (c === 45 || c === 48) return ['nevoeiro', 'Nevoeiro', 'Fog'];
+  if (c >= 51 && c <= 57) return ['chuva', 'Chuvisco', 'Drizzle'];
+  if ((c >= 61 && c <= 67) || (c >= 80 && c <= 82)) return ['chuva', 'Chuva', 'Rain'];
+  if ((c >= 71 && c <= 77) || c === 85 || c === 86) return ['neve', 'Neve', 'Snow'];
+  if (c >= 95) return ['trovoada', 'Trovoada', 'Thunderstorm'];
+  return ['nuvem', 'Nublado', 'Cloudy'];
+}
+const RUMOS_PT = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'];
+const RUMOS_EN = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+const rumo = (graus) => Math.round((((Number(graus) % 360) + 360) % 360) / 45) % 8;
+const horaLisboa = (ms = Date.now()) => new Intl.DateTimeFormat('pt-PT', { timeZone: 'Europe/Lisbon', hour: '2-digit', minute: '2-digit' }).format(ms);
+
+let meteo = null;
+function pintarTempo(d) {
+  const sitio = tx(d.evento?.local, 'pt') || "Praia D'El Rey";
+  const partes = [
+    `<span class="fm-tp__sitio">${icone('bandeira')}${esc(sitio)}</span>`,
+    `<span class="fm-tp__hora" id="fmEcraHora">${horaLisboa()}</span>`,
+  ];
+  if (meteo) {
+    const a = meteo.current;
+    const [ic, pt, en] = ceuAgora(a.weather_code, a.is_day);
+    const r = rumo(a.wind_direction_10m);
+    // a chuva: a maior probabilidade nas próximas três horas
+    const agora = Date.now() / 1000;
+    const prox = (meteo.hourly?.time ?? []).map((t, i) => [t, meteo.hourly.precipitation_probability?.[i]])
+      .filter(([t]) => t >= agora - 3600 && t <= agora + 3 * 3600).map(([, p]) => p ?? 0);
+    const chuva = prox.length ? Math.max(...prox) : null;
+    const ocaso = meteo.daily?.sunset?.[0];
+    partes.push(
+      `<span class="fm-tp__i">${icone(ic)}<b>${Math.round(a.temperature_2m)}°</b><small>${bi(pt, en)}</small></span>`,
+      // a seta aponta para onde o vento vai (vem de r)
+      `<span class="fm-tp__i fm-tp__vento">${icone('seta', (Number(a.wind_direction_10m) || 0))}<b>${Math.round(a.wind_speed_10m)}</b><small>km/h ${bi(RUMOS_PT[r], RUMOS_EN[r])} · ${bi('rajadas', 'gusts')} ${Math.round(a.wind_gusts_10m)}</small></span>`,
+      chuva !== null ? `<span class="fm-tp__i">${icone('gota')}<b>${chuva}%</b><small>${bi('chuva até 3 h', 'rain next 3 h')}</small></span>` : '',
+      ocaso ? `<span class="fm-tp__i">${icone('ocaso')}<b>${horaLisboa(ocaso * 1000)}</b><small>${bi('pôr do sol', 'sunset')}</small></span>` : '',
+    );
+  }
+  $('fmEcraTempo').innerHTML = partes.join('');
+}
+
+function tempo(d) {
+  const c = d.evento?.coordenadas ?? { lat: 39.331, lon: -9.327 };
+  const pedir = async () => {
+    try {
+      const q = new URLSearchParams({
+        latitude: c.lat, longitude: c.lon,
+        current: 'temperature_2m,is_day,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m',
+        hourly: 'precipitation_probability', daily: 'sunset',
+        timezone: 'Europe/Lisbon', timeformat: 'unixtime', forecast_days: '1', wind_speed_unit: 'kmh',
+      });
+      const r = await fetch(`https://api.open-meteo.com/v1/forecast?${q}`, { cache: 'no-store' });
+      const j = await r.json();
+      if (r.ok && j.current) meteo = j;
+    } catch { /* fica a hora */ }
+    pintarTempo(d);
+  };
+  pintarTempo(d);
+  pedir();
+  setInterval(pedir, 10 * 60000);
+  setInterval(() => { const h = $('fmEcraHora'); if (h) h.textContent = horaLisboa(); }, 5000);
+}
+
 /* ── o modo de demonstração (?ecra&demo) ─────────────────────
  * Para ver o ecrã a crescer sem apoios a sério: simula uma noite de Roll Up,
  * do zero à meta, e recomeça. `?ecra&demo=6` muda o intervalo (segundos). */
@@ -1028,6 +1119,7 @@ export async function fundme(l) {
     $('fmEcra').hidden = false;
     convites();
     linguas();
+    tempo(d);
     const q = new URLSearchParams(location.search);
     if (q.has('demo')) { demo(d, Math.max(3, Number(q.get('demo')) || 12)); return; }
     ecra(d);
