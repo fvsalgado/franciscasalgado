@@ -79,6 +79,16 @@
       "source": "/en/witb",
       "destination": "/en/witb.html",
       "permanent": true
+    },
+    {
+      "source": "/tv",
+      "destination": "/fundme?ecra",
+      "permanent": false
+    },
+    {
+      "source": "/ecra",
+      "destination": "/fundme?ecra",
+      "permanent": false
     }
   ],
   "rewrites": [
