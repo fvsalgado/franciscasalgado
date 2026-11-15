@@ -77,6 +77,40 @@ export async function stripe(caminho, params) {
   });
 }
 
+/* ── os modos de pagamento ─────────────────────────────────
+ *
+ * O cartão de apoio mostra com que se pode pagar, e tem de dizer a verdade.
+ * O apoiar.js não escolhe modos nenhuns: o Checkout usa a configuração por
+ * omissão da conta, a que se edita em dashboard.stripe.com/settings/payment_methods.
+ * É essa que se lê aqui — ligar ou desligar um modo no painel muda a página
+ * sozinho, em dez minutos no máximo.
+ *
+ * Só entram os que a página sabe desenhar, pela ordem que interessa a quem
+ * paga em Portugal. Se a Stripe não responder (ou a chave não puder ler a
+ * configuração), vale a lista `pagamentos` do data/fundme.json. */
+export const METODOS = ['mb_way', 'multibanco', 'card', 'apple_pay', 'google_pay', 'paypal', 'revolut_pay'];
+let metodosGuardados = null;
+
+export async function metodosPagamento(d) {
+  const reserva = { lista: (Array.isArray(d?.pagamentos) ? d.pagamentos : ['card']).filter((m) => METODOS.includes(m)), de: 'dados' };
+  if (!stripeLigada()) return reserva;
+  if (metodosGuardados && Date.now() - metodosGuardados.quando < 10 * 60000) return metodosGuardados.r;
+  try {
+    const r = await stripe('payment_method_configurations?limit=20');
+    if (!r?.ok) throw new Error(`HTTP ${r?.status}`);
+    const todas = (await r.json()).data || [];
+    const cfg = todas.find((c) => c.is_default && c.active !== false) || todas.find((c) => c.active && !c.parent);
+    if (!cfg) throw new Error('sem configuração por omissão');
+    const lista = METODOS.filter((m) => cfg[m]?.available === true);
+    if (!lista.length) throw new Error('nenhum modo que a página conheça');
+    metodosGuardados = { quando: Date.now(), r: { lista, de: 'stripe' } };
+    return metodosGuardados.r;
+  } catch (e) {
+    console.error('fundme: modos de pagamento', e.message);
+    return reserva;
+  }
+}
+
 /** As sessões do Checkout desta angariação, pagas. A conta pode ter outros
  *  pagamentos: só contam os que levam `metadata.kind = 'fundme'`. Vai à
  *  Stripe só desde a véspera do início, cem de cada vez. */

@@ -15,7 +15,7 @@
  * `stripe: 'por_ligar'` — a página mostra os números e fecha o botão.
  */
 
-import { APROVADAS, PENDENTES, SESSAO, blobLigado, blobListar, comAprovacao, dados, publico, resumo, sessoesPagas, lerPedido, stripe, stripeLigada } from './_comum.js';
+import { APROVADAS, PENDENTES, SESSAO, blobLigado, blobListar, comAprovacao, dados, metodosPagamento, publico, resumo, sessoesPagas, lerPedido, stripe, stripeLigada } from './_comum.js';
 
 export default async function handler(req, res) {
   lerPedido(req);
@@ -44,6 +44,8 @@ export default async function handler(req, res) {
   }
 
   res.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate=300');
+  // em paralelo com a lista de pagamentos; nunca falha (cai na lista dos dados)
+  const metodos = metodosPagamento(d);
   let sessoes = [];
   let estado = stripeLigada() ? 'ligada' : 'por_ligar';
   if (estado === 'ligada') {
@@ -78,9 +80,12 @@ export default async function handler(req, res) {
     }
   }
 
+  const { lista: pagamentos, de: pagamentosDe } = await metodos;
   return res.status(200).json({
     ...publico(d),
     ...resumo({ sessoes, d, aprovadas, existentes }),
+    pagamentos,
+    pagamentosDe,
     stripe: estado,
     aberto: Boolean(d.aberto) && estado !== 'por_ligar',
     atualizado: new Date().toISOString(),

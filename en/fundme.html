@@ -178,8 +178,8 @@
     <!-- o cartão de embarque: a cara dela, a viagem e quanto já se juntou -->
     <article class="fm-bilhete" aria-labelledby="fmTotal">
       <figure class="fm-bilhete__f">
-        <img src="/img/taca-2026-trofeu.webp" alt="Francisca Salgado com o troféu da Taça da Federação, em 2026"
-             width="1600" height="1066" fetchpriority="high" decoding="async" />
+        <img src="/img/fundme/francisca-campea-clube.webp" alt="Francisca Salgado, sorridente, com a taça de campeã do Campeonato do Clube"
+             width="1600" height="1001" fetchpriority="high" decoding="async" />
         <span class="fm-bilhete__selo"><img src="/img/fundme/junior-orange-bowl.webp" alt="Junior Orange Bowl" width="446" height="235" decoding="async" data-credito-feito="1" /><small>2027</small></span>
       </figure>
       <div class="fm-bilhete__rota">
@@ -204,67 +204,80 @@
       </div>
     </article>
 
-    <!-- o apoio: escolher o valor e carregar no botão -->
-    <!-- o apoio: um cartão de resultados de golfe. Escolhe-se o «buraco» (o
-         valor), assina-se (o nome vai para a bandeira) e, se quiser, junta-se
-         uma mensagem de apoio e uma fotografia. O JavaScript desenha as marcas a caneta. -->
+    <!-- o apoio, em três passos que se leem de cima para baixo: o valor (com
+         o que ele faz à meta), a assinatura (opcional: nome, mensagem,
+         fotografia) e o pagamento, com os modos que a Stripe tem ligados. -->
     <div class="fm-cartao" id="apoiar">
       <div class="fm-obrigado" id="fmObrigado" hidden></div>
-      <form class="fm-form" id="fmForm" method="post" action="/api/fundme/apoiar">
-        <h2 class="so-leitor" data-t="fm_apoiar">Support the trip</h2>
-        <div class="fm-sc">
-          <div class="fm-sc__top">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M6 21V3l11 4-11 4M3 21h8"/></svg>
-            <b data-t="fm_sc_tit">Support card</b>
-            <span data-t="fm_sc_sub">Road to Florida<br />January 2027</span>
+      <form class="fm-form fm-ap" id="fmForm" method="post" action="/api/fundme/apoiar">
+        <header class="fm-ap__cab">
+          <img class="fm-ap__eu" src="/img/fundme/francisca-rosto.webp" alt="" width="320" height="320" decoding="async" />
+          <div>
+            <h2 class="fm-ap__t" data-t="fm_ap_tit">Support Francisca</h2>
+            <p class="fm-ap__s" data-t="fm_ap_sub">Choose an amount, sign it if you like, and pay your way.</p>
           </div>
-          <figure class="fm-sc__foto" id="fmFotoPre" hidden><img id="fmFotoImg" alt="" /></figure>
-          <fieldset class="fm-sc__g" id="fmValores">
-            <legend class="so-leitor" data-t="fm_valor_leg">Amount</legend>
-            <span class="fm-sc__h fm-sc__lab" aria-hidden="true" data-t="fm_sc_buraco">Hole</span><span class="fm-sc__h" aria-hidden="true">1</span><span class="fm-sc__h" aria-hidden="true">2</span><span class="fm-sc__h" aria-hidden="true">3</span><span class="fm-sc__h" aria-hidden="true">4</span><span class="fm-sc__h" aria-hidden="true">5</span><span class="fm-sc__h" aria-hidden="true">6</span>
-            <span class="fm-sc__lab" aria-hidden="true" data-t="fm_sc_res">Score</span><span class="fm-sc__r" aria-hidden="true">Par</span><span class="fm-sc__r" aria-hidden="true">Birdie</span><span class="fm-sc__r" aria-hidden="true">Eagle</span><span class="fm-sc__r" aria-hidden="true" data-t="fm_sc_alb">Albatross</span><span class="fm-sc__r" aria-hidden="true">Hole in one</span><span class="fm-sc__r" aria-hidden="true" data-t="fm_sc_livre">Any</span>
-            <span class="fm-sc__lab" aria-hidden="true" data-t="fm_sc_apoio">Gift</span>
-          <label class="fm-sc__v fm-sc__v--par"><input type="radio" name="valor" value="25" /><span class="fm-sc__n">25<small>€</small></span></label>
-          <label class="fm-sc__v fm-sc__v--birdie"><input type="radio" name="valor" value="50" /><span class="fm-sc__n">50<small>€</small></span></label>
-          <label class="fm-sc__v fm-sc__v--eagle"><input type="radio" name="valor" value="150" checked /><span class="fm-sc__n">150<small>€</small></span></label>
-          <label class="fm-sc__v fm-sc__v--albatroz"><input type="radio" name="valor" value="300" /><span class="fm-sc__n">300<small>€</small></span></label>
-          <label class="fm-sc__v fm-sc__v--hio"><input type="radio" name="valor" value="500" /><span class="fm-sc__n">500<small>€</small></span></label>
-          <label class="fm-sc__v fm-sc__v--livre"><input type="radio" name="valor" value="outro" /><span class="fm-sc__n" data-t="fm_outro">Other</span></label>
+        </header>
+
+        <div class="fm-ap__passo">
+          <p class="fm-ap__n" id="fmValLeg"><span aria-hidden="true">1</span> <b data-t="fm_ap_p1">Choose an amount</b></p>
+          <fieldset class="fm-ap__vals" id="fmValores" aria-labelledby="fmValLeg">
+            <label class="fm-ap__v"><input type="radio" name="valor" value="25" /><b class="fm-ap__q">25 €</b><small>Par</small></label>
+            <label class="fm-ap__v"><input type="radio" name="valor" value="50" /><b class="fm-ap__q">50 €</b><small>Birdie</small></label>
+            <label class="fm-ap__v"><input type="radio" name="valor" value="150" checked /><b class="fm-ap__q">150 €</b><small>Eagle</small></label>
+            <label class="fm-ap__v"><input type="radio" name="valor" value="300" /><b class="fm-ap__q">300 €</b><small data-t="fm_sc_alb">Albatross</small></label>
+            <label class="fm-ap__v"><input type="radio" name="valor" value="500" /><b class="fm-ap__q">500 €</b><small>Hole in one</small></label>
+            <label class="fm-ap__v fm-ap__v--livre"><input type="radio" name="valor" value="outro" /><b class="fm-ap__q" data-t="fm_outro">Other</b><small data-t="fm_ap_livre">any amount</small></label>
           </fieldset>
-          <div class="fm-outro fm-sc__linha" id="fmOutroC">
-            <label class="fm-sc__lab" for="fmOutro" data-t="fm_sc_vlivre">Your amount</label>
-            <span class="fm-sc__euros"><input id="fmOutro" name="outro" type="number" inputmode="numeric" min="5" max="5000" step="1" placeholder="75" /><span aria-hidden="true">€</span></span>
+          <div class="fm-outro" id="fmOutroC">
+            <label for="fmOutro" data-t="fm_sc_vlivre">Your amount</label>
+            <span class="fm-ap__euros"><input id="fmOutro" name="outro" type="number" inputmode="numeric" min="5" max="5000" step="1" placeholder="75" /><span aria-hidden="true">€</span></span>
           </div>
-          <div class="fm-sc__linha">
-            <label class="fm-sc__lab" for="fmNome" data-t="fm_sc_ass">Signature</label>
-            <input id="fmNome" name="nome" type="text" maxlength="40" autocomplete="name" placeholder="o seu nome, para a bandeira" />
+          <div class="fm-ap__efeito" id="fmEfeito" hidden>
+            <div class="fm-ap__barra" aria-hidden="true"><i class="fm-ap__ja" id="fmEfJa"></i><i class="fm-ap__seu" id="fmEfSeu"></i></div>
+            <p id="fmEfeitoT" aria-live="polite"></p>
           </div>
-          <div class="fm-sc__linha fm-sc__frase" id="fmFraseC">
-            <label class="fm-sc__lab" for="fmMsg" data-t="fm_sc_recado">Message of support</label>
-            <textarea id="fmMsg" name="mensagem" maxlength="140" rows="2" placeholder="uma mensagem para a Francisca"></textarea>
+        </div>
+
+        <div class="fm-ap__passo">
+          <p class="fm-ap__n"><span aria-hidden="true">2</span> <b data-t="fm_ap_p2">Sign your gift</b> <em data-t="fm_ap_op">optional</em></p>
+          <label class="so-leitor" for="fmNome" data-t="fm_sc_ass">Your name</label>
+          <input class="fm-ap__campo" id="fmNome" name="nome" type="text" maxlength="40" autocomplete="name" placeholder="O seu nome" />
+          <p class="fm-ap__dica" data-t="fm_ap_dica">It goes on the supporters’ flag, here and on the club screen. Leave it blank to give anonymously. The amount is never shown.</p>
+          <div class="fm-ap__frase" id="fmFraseC">
+            <label for="fmMsg" data-t="fm_sc_recado">Message of support</label>
+            <textarea class="fm-ap__campo" id="fmMsg" name="mensagem" maxlength="140" rows="2" placeholder="Uma mensagem para a Francisca"></textarea>
           </div>
-          <div class="fm-sc__mais">
-            <button type="button" class="fm-sc__op" id="fmFraseBt" hidden><span aria-hidden="true">+</span> <span data-t="fm_sc_frase">A message of support</span></button>
+          <div class="fm-ap__mais">
+            <button type="button" class="fm-ap__op" id="fmFraseBt" hidden><span aria-hidden="true">+</span> <span data-t="fm_sc_recado">Message of support</span></button>
             <span class="fm-foto" id="fmFotoC" hidden>
               <input type="file" id="fmFoto" accept="image/*" class="so-leitor" tabindex="-1" />
-              <button type="button" class="fm-sc__op" id="fmFotoBt"><span aria-hidden="true">+</span> <span data-t="fm_sc_fotobt">A photo</span></button>
-              <span class="fm-foto__info" id="fmFotoInfo" hidden><span id="fmFotoEstado"></span><button type="button" class="fm-sc__op" id="fmFotoTirar" data-t="fm_foto_tirar">Remove</button></span>
+              <button type="button" class="fm-ap__op" id="fmFotoBt"><span aria-hidden="true">+</span> <span data-t="fm_ap_fotobt">Photo</span></button>
+              <span class="fm-foto__info" id="fmFotoInfo" hidden>
+                <figure class="fm-ap__foto" id="fmFotoPre" hidden><img id="fmFotoImg" alt="" /></figure>
+                <span id="fmFotoEstado"></span>
+                <button type="button" class="fm-ap__tirar" id="fmFotoTirar" data-t="fm_foto_tirar">Remove</button>
+              </span>
             </span>
           </div>
-          <button class="fm-sc__bt" type="submit" id="fmBt">
-            <span><span id="fmBtT" data-t="fm_bt">Hand in the card</span><small id="fmBtS" data-t="fm_bt_s">A €150 gift, paid via Stripe</small></span>
-            <span aria-hidden="true">→</span>
-          </button>
+          <p class="fm-ap__dica" id="fmFotoX" hidden data-t="fm_foto_x">By adding a photo, you confirm you may share it and that everyone in it agrees.</p>
         </div>
+
+        <div class="fm-ap__passo fm-ap__pagar">
+          <p class="fm-ap__n"><span aria-hidden="true">3</span> <b data-t="fm_ap_p3">Pay your way</b></p>
+          <ul class="fm-ap__met" id="fmMetodos" aria-hidden="true"></ul>
+          <p class="so-leitor" id="fmMetodosT">MB WAY, Multibanco, cartão, Apple Pay ou Google Pay.</p>
+          <button class="fm-ap__bt" type="submit" id="fmBt">
+            <span id="fmBtT" data-t="fm_bt">Give €150</span>
+            <span class="fm-ap__seta" aria-hidden="true">→</span>
+          </button>
+          <p class="fm-ap__seguro"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M6.5 10.5V8a5.5 5.5 0 0 1 11 0v2.5M5 10.5h14v10H5z"/></svg><span data-t="fm_seguro">Secure payment by Stripe. Emailed receipt, no account needed.</span></p>
+          <p class="fm-erro" id="fmErro" role="alert" hidden></p>
+        </div>
+
         <input type="hidden" name="foto" id="fmFotoUrl" value="" />
         <input type="hidden" name="mural" value="1" />
         <input type="hidden" name="lingua" value="pt" id="fmLingua" />
         <input type="hidden" name="origem" value="" id="fmOrigem" />
-        <p class="fm-erro" id="fmErro" role="alert" hidden></p>
-        <p class="fm-sc__x" data-t="fm_sc_x">Your name goes on the flag; your message and photo, on a postcard. The amount is never shown.</p>
-        <p class="fm-sc__x" id="fmFotoX" hidden data-t="fm_foto_x">By adding a photo, you confirm you may share it and that everyone in it agrees.</p>
-        <ul class="fm-metodos" aria-label="Formas de pagamento"><li>MB WAY</li><li>Apple Pay</li><li>Google Pay</li><li data-t="fm_cartao">Card</li><li>Multibanco</li></ul>
-        <p class="fm-seguro" data-t="fm_seguro">Secure payment by Stripe, with an emailed receipt.</p>
       </form>
     </div>
 
@@ -368,7 +381,7 @@
         </div>
         <div class="fm-ecra__meta"><span id="fmEcraMeta"></span><span class="fm-ecra__i" id="fmEcraInfo"></span></div>
         <figure class="fm-ecra__foto">
-        <img src="/img/swing.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" />
+        <img src="/img/fundme/francisca-campea-clube-4x5.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" />
         <figcaption>Francisca Salgado<span><span class="fm-bi"><span lang="pt">Campeã nacional Sub-18</span><span lang="en">Portuguese U18 champion</span></span></span></figcaption>
       </figure>
       </div>

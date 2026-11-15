@@ -12,6 +12,13 @@
     500
   ],
   "valorInicial": 150,
+  "pagamentos": [
+    "mb_way",
+    "multibanco",
+    "card",
+    "apple_pay",
+    "google_pay"
+  ],
   "minimo": 5,
   "maximo": 5000,
   "fotos": {

@@ -311,14 +311,30 @@ feito, que é o argumento mais concreto para quem está a pensar entrar.
 
 A angariação para a viagem ao Junior Orange Bowl: `franciscasalgado.golf/fundme`
 e `/en/fundme` (o `vercel.json` reescreve as duas para o `.html`). Quem apoia
-preenche um cartão de resultados de golfe: escolhe o «buraco» (o valor),
-assina (o nome vai para a bandeira), junta uma mensagem de apoio e uma
-fotografia se quiser, e paga na Stripe com
-MB WAY, Multibanco, cartão, Apple Pay ou Google Pay. O total, a volta de 18
-buracos, o gráfico dia a dia e a bandeira com os nomes atualizam-se sozinhos.
+segue um cartão de três passos numerados: **1** escolhe o valor (seis botões
+grandes, cada um com o seu nome de golfe, e uma barra que mostra o que aquele
+apoio faz à meta), **2** assina, se quiser (o nome vai para a bandeira; uma
+mensagem de apoio e uma fotografia são botões à parte), **3** vê com que pode
+pagar e carrega em «Apoiar com 150 €». O pagamento é na Stripe. O total, a
+volta de 18 buracos, o gráfico dia a dia e a bandeira com os nomes
+atualizam-se sozinhos.
 
-A página e o ecrã falam a mesma linguagem, a do golfe: o apoio é um cartão
-de resultados, a meta é uma volta de 18 buracos (com a ida e a volta no cartão
+**Os modos de pagamento que o cartão mostra são os que a Stripe tem ligados.**
+A `/api/fundme` lê a configuração por omissão da conta (a que se edita em
+dashboard.stripe.com/settings/payment_methods, e que o Checkout usa) e devolve
+`pagamentos` — ligar ou desligar MB WAY, Multibanco, PayPal… no painel muda a
+página sozinho, em dez minutos no máximo. Se a Stripe não responder, vale a
+lista `pagamentos` do `data/fundme.json`; `pagamentosDe` diz de onde veio
+(`stripe` ou `dados`). A página sabe desenhar MB WAY, Multibanco, cartão (Visa
+e Mastercard), Apple Pay, Google Pay, PayPal e Revolut Pay; outros modos
+ligados na Stripe aparecem no Checkout mas não no cartão.
+
+A fotografia da Francisca (no bilhete, no retrato do cartão de apoio e no
+polaroide do ecrã) é a da taça de campeã do clube:
+`img/fundme/francisca-campea-clube*.webp` e `francisca-rosto.webp`.
+
+A página e o ecrã falam a mesma linguagem, a do golfe: os valores têm nomes
+de golfe, a meta é uma volta de 18 buracos (com a ida e a volta no cartão
 de embarque e no ecrã), as fases têm nomes de golfe, a bandeira está no campo
 de Praia D'El Rey, e as condições de jogo aparecem no ecrã e, na secção do
 evento, como previsão para a manhã do Roll Up (quando o dia está a 16 dias ou
@@ -356,7 +372,8 @@ pagamento. As contas estão em `api/fundme/_comum.js`, separadas da rede.
 |---|---|
 | `aberto` | `false` fecha o botão, sem mexer em mais nada |
 | `meta`, `inicio`, `partida` | a meta em euros, o primeiro dia do gráfico e o dia da partida (a contagem «faltam N dias») |
-| `valores`, `valorInicial`, `minimo`, `maximo` | os botões de valor e os limites de um apoio |
+| `valores`, `valorInicial`, `minimo`, `maximo` | os botões de valor (até cinco, mais «Outro») e os limites de um apoio |
+| `pagamentos` | a lista de reserva dos modos de pagamento, só para quando a Stripe não responder (ver acima) |
 | `fotos` | `aceitar: false` tira o campo da fotografia; `aprovar: true` faz cada fotografia esperar por aprovação em `/fundme/gerir` (como está, `false`, aparecem logo) |
 | `evento` | `mostrar`, a `data` (`"2026-12-02"`, ou `null` para «a anunciar»), o `local` e as `coordenadas` (para o tempo no ecrã). Com data, o dia fica marcado no gráfico |
 | `manuais` | o que não passa pela Stripe: `{ "data": "2026-12-02", "valor": 640, "origem": "clube", "nome": "Grupo de quarta-feira", "mensagem": { "pt": "…", "en": "…" } }`. `origem` é `clube` ou `empresas` (Fundação do Desporto). Com `nome`, fica escrito na bandeira; com `mensagem`, aparece num postal; com `foto` (um caminho em `/img/…`), o postal leva a fotografia; `"mural": false` tira-o dos dois |
