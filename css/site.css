@@ -2248,9 +2248,9 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
 
 /* o placar */
 .fm-ecra__placar{grid-area:placar;min-width:0}
-.fm-ecra__t{margin:0;font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 144;font-size:2.5vw;line-height:1;letter-spacing:-.02em;color:var(--e-tinta)}
+.fm-ecra__t{margin:0;font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 144;font-size:2.8vw;line-height:1;letter-spacing:-.02em;color:var(--e-tinta)}
 .fm-ecra__t em{font-style:italic;color:var(--e-verde)}
-.fm-ecra__soma{display:flex;align-items:flex-end;gap:2vw;margin-top:1vw}
+.fm-ecra__soma{display:flex;align-items:stretch;gap:1.4vw;margin-top:1vw}
 .fm-ecra__quadro{background:var(--e-verde);padding:.5vw .8vw .7vw;border-radius:.3vw;box-shadow:inset 0 0 0 .25vw var(--e-verde2),0 .8vw 1.6vw -1vw rgba(20,41,31,.6)}
 .fm-ecra__lbl{display:block;color:#F6F2E6;font-weight:800;font-size:.7vw;letter-spacing:.24em;text-transform:uppercase;margin:0 0 .4vw .2vw;opacity:.85}
 .fm-ecra__placas{display:flex;gap:.35vw}
@@ -2259,10 +2259,19 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
 .fm-placa--s{width:1.7vw;font-size:2.8vw}
 .fm-placa--e{width:3.4vw;font-size:2.8vw}
 .fm-placa--v{width:.6vw;background:none;box-shadow:none}
-.fm-ecra__meta{display:flex;flex-direction:column;gap:.6vw;padding-bottom:.4vw}
-.fm-ecra__meta > span:first-child{font-family:var(--corpo);font-variant-numeric:tabular-nums lining-nums;font-weight:700;font-size:1.8vw;color:var(--e-fraca)}
-.fm-ecra__i{display:flex;flex-wrap:wrap;gap:.4vw 1.6vw;font-size:1.15vw;color:var(--e-fraca)}
-.fm-ecra__i b{color:var(--e-tinta);font-weight:800}
+/* «de 5.000 €», dentro do placar, por baixo das placas */
+.fm-ecra__de{display:block;margin:.45vw 0 0 .2vw;color:#F6F2E6;font-family:var(--corpo);font-variant-numeric:tabular-nums lining-nums;font-weight:700;font-size:1vw;opacity:.88}
+/* os números do dia: quatro cartões que enchem o resto da linha */
+.fm-ecra__nums{flex:1;min-width:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1vw}
+.fm-num{display:flex;flex-direction:column;justify-content:center;gap:.35vw;min-width:0;background:#FFF;border-radius:.35vw;padding:.8vw 1vw;
+  box-shadow:0 0 0 .1vw rgba(20,41,31,.1),0 .8vw 1.6vw -1.2vw rgba(20,41,31,.45)}
+.fm-num b{font-family:var(--corpo);font-variant-numeric:tabular-nums lining-nums;font-weight:800;font-size:2.9vw;line-height:1;letter-spacing:-.02em;color:var(--e-tinta);white-space:nowrap}
+.fm-num small{font-weight:800;font-size:.7vw;line-height:1.25;letter-spacing:.14em;text-transform:uppercase;color:var(--e-fraca)}
+.fm-num small .fm-bi{display:grid}
+.fm-num--meta b{color:var(--e-verde)}
+.fm-num--hoje b{color:var(--e-laranja)}
+.fm-num__barra{display:block;height:.42vw;margin-top:.2vw;border-radius:99px;background:#E9E5DA;overflow:hidden}
+.fm-num__barra i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--e-verde),var(--e-laranja));transition:width 1.6s cubic-bezier(.3,.7,.3,1)}
 
 /* o cartão dos 18 buracos */
 .fm-ecra__volta{display:flex;align-items:stretch;gap:1.2vw;margin-top:1vw}
@@ -2322,13 +2331,13 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
 .fm-ecra__qr{background:#FFF;color:var(--e-tinta);padding:.75vw 1vw .7vw;text-align:center;border:.25vw solid var(--e-verde);outline:.08vw solid var(--e-verde);outline-offset:.3vw;
   box-shadow:0 1vw 2vw -1.4vw rgba(20,41,31,.6);margin:0 .35vw}
 .fm-ecra__qr-t{display:block;font-weight:800;font-size:.95vw;letter-spacing:.24em;text-transform:uppercase;color:var(--e-verde);margin-bottom:.5vw}
-.fm-ecra__qr img{width:100%;max-width:10.6vw;height:auto;display:block;margin:0 auto;image-rendering:pixelated}
+.fm-ecra__qr img{width:100%;max-width:min(10.6vw,18.8vh);height:auto;display:block;margin:0 auto;image-rendering:pixelated}
 .fm-ecra__qr p{font-weight:800;font-size:1.15vw;margin:.45vw 0 0;line-height:1.2;transition:opacity .45s,transform .45s}
 .fm-ecra__url{display:block;font-size:.8vw;color:var(--e-fraca);margin-top:.2vw;font-weight:700;white-space:nowrap}
 .fm-ecra__cta--sai{opacity:0;transform:translateY(.4vw)}
 .fm-ecra[data-fase="0"] .fm-ecra__qr,.fm-ecra[data-fase="1"] .fm-ecra__qr{animation:fm-chama 2.4s ease-in-out infinite}
 @keyframes fm-chama{50%{box-shadow:0 1vw 2vw -1.4vw rgba(20,41,31,.6),0 0 0 .9vw rgba(224,122,31,.22)}}
-.fm-ecra__foto{margin:0 auto;align-self:center;width:12vw;flex:none;background:#FFF;padding:.6vw .6vw 0;transform:rotate(2.5deg);box-shadow:0 1vw 2vw -1.2vw rgba(20,41,31,.6)}
+.fm-ecra__foto{margin:0 auto;align-self:center;width:min(12vw,21.4vh);flex:none;background:#FFF;padding:.6vw .6vw 0;transform:rotate(2.5deg);box-shadow:0 1vw 2vw -1.2vw rgba(20,41,31,.6)}
 .fm-ecra__foto img{width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 30%;display:block}
 .fm-ecra__foto figcaption{position:static;margin:0;padding:.6vw 0 .7vw;text-align:center;font:800 .74vw/1.3 var(--corpo);letter-spacing:.1em;text-transform:uppercase;color:var(--e-tinta);white-space:nowrap}
 .fm-ecra__foto figcaption > span{display:block;font-family:var(--display);font-style:italic;font-weight:400;font-size:.92vw;letter-spacing:0;text-transform:none;color:var(--e-fraca);margin-top:.2vw;white-space:nowrap}
@@ -2538,8 +2547,10 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
   .fm-ecra__quadro{padding:1.6vw 2vw 2vw}
   .fm-ecra__lbl{font-size:2vw}
   .fm-placa{width:10vw;height:14vw;font-size:10vw}.fm-placa--s{width:5.4vw;font-size:8vw}.fm-placa--e{width:10vw;font-size:8vw}.fm-placa--v{width:1.4vw}
-  .fm-ecra__meta > span:first-child{font-size:4.6vw}
-  .fm-ecra__i{font-size:3vw}
+  .fm-ecra__de{font-size:3vw;margin-top:1vw}
+  .fm-ecra__nums{flex:1 1 100%;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.4vw}
+  .fm-num{padding:2.4vw 2.8vw;gap:1vw;border-radius:1vw}
+  .fm-num b{font-size:7vw}.fm-num small{font-size:2vw}.fm-num__barra{height:1.2vw}
   .fm-ecra__volta{flex-direction:column;gap:2vw;margin-top:3.4vw}
   .fm-bur{grid-template-columns:repeat(9,minmax(0,1fr)) 6.4vw repeat(9,minmax(0,1fr)) 6.4vw}
   .fm-bur__lab{display:none!important}
