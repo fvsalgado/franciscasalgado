@@ -41,8 +41,15 @@ const T = {
     aEntrar: '<strong>Obrigada!</strong> O pagamento está a ser confirmado. Com Multibanco, o apoio aparece aqui quando a referência for paga.',
     fotoDepois: ' A sua fotografia já está num postal.',
     cartao: {
-      nome: 'o seu nome, para a bandeira', frase: 'uma mensagem para a Francisca',
-      bt: 'Entregar o cartão', btS: (v) => `Apoio de ${v}, pago na Stripe`, btSOutro: 'Escreva o valor livre',
+      nome: 'O seu nome', frase: 'Uma mensagem para a Francisca',
+      bt: (v) => `Apoiar com ${v}`, btOutro: 'Escreva o seu valor',
+      alb: 'Albatroz',
+      efeito: (v, f) => `Com <b>${v}</b>, a Francisca fica a <b>${f}</b> da meta.`,
+      chega: (v) => `Com <b>${v}</b>, a meta fica cumprida.`,
+      faltaSo: (f) => `Faltam <b>${f}</b> para a meta.`,
+      alem: 'A meta já foi alcançada. Cada apoio a mais dá folga à viagem.',
+      pagar: (lista) => `Pode pagar com ${lista}.`,
+      metodos: { mb_way: 'MB WAY', multibanco: 'Multibanco', card: 'cartão', apple_pay: 'Apple Pay', google_pay: 'Google Pay', paypal: 'PayPal', revolut_pay: 'Revolut Pay' },
     },
     foto: {
       preparar: 'A preparar…', enviar: 'A enviar…', pronta: 'Fotografia pronta', aEsperar: 'A enviar a fotografia…', alt: 'A sua fotografia',
@@ -87,8 +94,15 @@ const T = {
     aEntrar: '<strong>Thank you!</strong> Your payment is being confirmed. With Multibanco, it shows here once the reference is paid.',
     fotoDepois: ' Your photo is already on a postcard.',
     cartao: {
-      nome: 'your name, for the flag', frase: 'a message for Francisca',
-      bt: 'Hand in the card', btS: (v) => `A ${v} gift, paid via Stripe`, btSOutro: 'Type your amount',
+      nome: 'Your name', frase: 'A message for Francisca',
+      bt: (v) => `Give ${v}`, btOutro: 'Type your amount',
+      alb: 'Albatross',
+      efeito: (v, f) => `With <b>${v}</b>, Francisca is <b>${f}</b> from the target.`,
+      chega: (v) => `With <b>${v}</b>, the target is reached.`,
+      faltaSo: (f) => `<b>${f}</b> to go.`,
+      alem: 'The target has been reached. Every extra gift gives the trip some breathing room.',
+      pagar: (lista) => `You can pay by ${lista}.`,
+      metodos: { mb_way: 'MB WAY', multibanco: 'Multibanco', card: 'card', apple_pay: 'Apple Pay', google_pay: 'Google Pay', paypal: 'PayPal', revolut_pay: 'Revolut Pay' },
     },
     foto: {
       preparar: 'Preparing…', enviar: 'Uploading…', pronta: 'Photo ready', aEsperar: 'Uploading your photo…', alt: 'Your photo',
@@ -197,18 +211,39 @@ function voltaPagina(total, d, l) {
 /* As marcas a caneta do cartão, como num cartão de golfe a sério: o par
  * sublinha-se, o birdie circula-se, o eagle leva dois círculos, o albatroz
  * três, o hole in one pinta-se. O valor livre leva um círculo. */
-const TRACO = 'M8 30C6 15 22 5 35 6c15 1 24 10 22 23-2 13-15 20-29 19C14 47 6 39 9 25';
-const TRACO2 = 'M3 29C1 11 20 0 35 1c18 1 28 12 26 27-2 16-17 24-33 23C11 50 1 41 4 24';
-const MARCAS = {
-  par: '<path d="M9 45c13 3 31 3 46-2"/>',
-  birdie: `<path d="${TRACO}"/>`,
-  eagle: `<path d="${TRACO}"/><path d="${TRACO2}"/>`,
-  albatroz: `<path d="${TRACO}"/><path d="${TRACO2}"/><path d="${TRACO2}" transform="translate(32 27) scale(1.16) translate(-32 -27)"/>`,
-  hio: `<ellipse cx="32" cy="27" rx="25" ry="21" class="fm-sc__disco"/><path d="${TRACO}"/>`,
-  livre: `<path d="${TRACO}"/>`,
+/* ── o cartão de apoio ────────────────────────────────────── */
+
+/* Os nomes de golfe de cada valor, por ordem: estão lá pelo sorriso, o
+   número é que manda. */
+const GOLFE = ['Par', 'Birdie', 'Eagle', 'alb', 'Hole in one'];
+
+/* Os símbolos dos modos de pagamento, desenhados aqui para não depender de
+   ninguém: Apple, Visa, PayPal e Revolut são os do Simple Icons (CC0); o G é
+   o de quatro cores da Google; MB WAY e Multibanco são letras. */
+const SVG = (vb, corpo, cls = '') => `<svg viewBox="${vb}"${cls ? ` class="${cls}"` : ''} aria-hidden="true">${corpo}</svg>`;
+const PAGAMENTO = {
+  mb_way: ['<span class="fm-pg fm-pg--mbway"><b>MB</b>WAY</span>'],
+  multibanco: ['<span class="fm-pg fm-pg--mb"><i>MB</i>Multibanco</span>'],
+  card: [
+    `<span class="fm-pg fm-pg--visa">${SVG('0 7 24 10', '<path fill="#1A1F71" d="M9.112 8.262L5.97 15.758H3.92L2.374 9.775c-.094-.368-.175-.503-.461-.658C1.447 8.864.677 8.627 0 8.479l.046-.217h3.3a.904.904 0 01.894.764l.817 4.338 2.018-5.102zm8.033 5.049c.008-1.979-2.736-2.088-2.717-2.972.006-.269.262-.555.822-.628a3.66 3.66 0 011.913.336l.34-1.59a5.207 5.207 0 00-1.814-.333c-1.917 0-3.266 1.02-3.278 2.479-.012 1.079.963 1.68 1.698 2.04.756.367 1.01.603 1.006.931-.005.504-.602.725-1.16.734-.975.015-1.54-.263-1.992-.473l-.351 1.642c.453.208 1.289.39 2.156.398 2.037 0 3.37-1.006 3.377-2.564m5.061 2.447H24l-1.565-7.496h-1.656a.883.883 0 00-.826.55l-2.909 6.946h2.036l.405-1.12h2.488zm-2.163-2.656l1.02-2.815.588 2.815zm-8.16-4.84l-1.603 7.496H8.34l1.605-7.496z"/>')}</span>`,
+    `<span class="fm-pg fm-pg--mc">${SVG('0 0 38 24', '<circle cx="13" cy="12" r="9" fill="#EB001B"/><circle cx="25" cy="12" r="9" fill="#F79E1B"/><path fill="#FF5F00" d="M19 5.3a9 9 0 0 1 0 13.4 9 9 0 0 1 0-13.4Z"/>')}</span>`,
+  ],
+  apple_pay: [`<span class="fm-pg fm-pg--apple">${SVG('0 0 24 24', '<path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/>')}Pay</span>`],
+  google_pay: [`<span class="fm-pg fm-pg--google">${SVG('0 0 48 48', '<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>')}Pay</span>`],
+  paypal: [`<span class="fm-pg fm-pg--paypal">${SVG('0 0 24 24', '<path fill="#003087" d="M15.607 4.653H8.941L6.645 19.251H1.82L4.862 0h7.995c3.754 0 6.375 2.294 6.473 5.513-.648-.478-2.105-.86-3.722-.86m6.57 5.546c0 3.41-3.01 6.853-6.958 6.853h-2.493L11.595 24H6.74l1.845-11.538h3.592c4.208 0 7.346-3.634 7.153-6.949a5.24 5.24 0 0 1 2.848 4.686M9.653 5.546h6.408c.907 0 1.942.222 2.363.541-.195 2.741-2.655 5.483-6.441 5.483H8.714Z"/>')}PayPal</span>`],
+  revolut_pay: [`<span class="fm-pg fm-pg--revolut">${SVG('0 0 24 24', '<path fill="currentColor" d="M20.9133 6.9566C20.9133 3.1208 17.7898 0 13.9503 0H2.424v3.8605h10.9782c1.7376 0 3.177 1.3651 3.2087 3.043.016.84-.2994 1.633-.8878 2.2324-.5886.5998-1.375.9303-2.2144.9303H9.2322a.2756.2756 0 0 0-.2755.2752v3.431c0 .0585.018.1142.052.1612L16.2646 24h5.3114l-7.2727-10.094c3.6625-.1838 6.61-3.2612 6.61-6.9494zM6.8943 5.9229H2.424V24h4.4704z"/>')}Pay</span>`],
 };
-const RESULTADOS = ['par', 'birdie', 'eagle', 'albatroz', 'hio'];
-const marca = (tipo) => `<svg viewBox="0 0 64 54" aria-hidden="true">${MARCAS[tipo] ?? MARCAS.birdie}</svg>`;
+
+function metodos(d, l) {
+  const t = T[l].cartao;
+  const lista = (d.pagamentos?.length ? d.pagamentos : ['card']).filter((m) => PAGAMENTO[m]);
+  $('fmMetodos').innerHTML = lista.flatMap((m) => PAGAMENTO[m]).map((b) => `<li>${b}</li>`).join('');
+  const nomes = lista.map((m) => t.metodos[m]);
+  const junta = typeof Intl.ListFormat === 'function'
+    ? new Intl.ListFormat(l === 'en' ? 'en-GB' : 'pt-PT', { type: 'disjunction' }).format(nomes)
+    : nomes.join(', ');
+  $('fmMetodosT').textContent = t.pagar(junta);
+}
 
 function formulario(d, l) {
   const t = T[l];
@@ -219,25 +254,40 @@ function formulario(d, l) {
   $('fmNome').placeholder = t.cartao.nome;
   $('fmMsg').placeholder = t.cartao.frase;
 
-  // os valores vêm dos dados; cada um é um «buraco» do cartão, com a sua marca
+  // os valores vêm dos dados; o último botão é sempre o valor livre
   const valores = (d.valores?.length ? d.valores : [25, 50, 150, 300, 500]).slice(0, 5);
   const inicial = valores.includes(d.valorInicial) ? d.valorInicial : valores[Math.min(2, valores.length - 1)];
   const g = $('fmValores');
-  g.style.setProperty('--n', valores.length + 1);
-  g.querySelectorAll('.fm-sc__v').forEach((c, i, todas) => { if (i < todas.length - 1) c.remove(); });
-  const livre = g.querySelector('.fm-sc__v--livre');
-  livre.insertAdjacentHTML('beforebegin', valores.map((v, i) =>
-    `<label class="fm-sc__v fm-sc__v--${RESULTADOS[i]}"><input type="radio" name="valor" value="${v}"${v === inicial ? ' checked' : ''} aria-label="${euros(v, l)}" /><span class="fm-sc__n">${grupos(v, l === 'en' ? ',' : '.')}<small>€</small></span>${marca(RESULTADOS[i])}</label>`).join(''));
-  if (!livre.querySelector('svg')) livre.insertAdjacentHTML('beforeend', marca('livre'));
-  // os cabeçalhos acompanham o número de valores
-  const cab = g.querySelectorAll('.fm-sc__h:not(.fm-sc__lab)');
-  const res = g.querySelectorAll('.fm-sc__r');
-  cab.forEach((c, i) => { c.hidden = i > valores.length; });
-  res.forEach((c, i) => { c.hidden = i < res.length - 1 && i >= valores.length; });
+  g.querySelectorAll('.fm-ap__v:not(.fm-ap__v--livre)').forEach((c) => c.remove());
+  g.querySelector('.fm-ap__v--livre').insertAdjacentHTML('beforebegin', valores.map((v, i) => {
+    const golfe = GOLFE[i] === 'alb' ? t.cartao.alb : GOLFE[i];
+    return `<label class="fm-ap__v"><input type="radio" name="valor" value="${v}"${v === inicial ? ' checked' : ''} /><b class="fm-ap__q">${euros(v, l)}</b>${golfe ? `<small>${golfe}</small>` : ''}</label>`;
+  }).join(''));
+  g.classList.toggle('fm-ap__vals--4', valores.length === 3);
+
+  metodos(d, l);
 
   const campo = $('fmOutro');
   campo.min = d.minimo ?? 5;
   campo.max = d.maximo ?? 5000;
+
+  // o que este apoio faz à meta: a barra com o que já há e, a cor de laranja,
+  // o que este apoio lhe junta
+  const temTotal = d.aberto && Number.isFinite(d.total) && d.meta > 0;
+  $('fmEfeito').hidden = !temTotal;
+  const efeito = (n) => {
+    if (!temTotal) return;
+    const ja = Math.min(1, d.total / d.meta);
+    const seu = n > 0 ? Math.min(1 - ja, n / d.meta) : 0;
+    $('fmEfJa').style.width = `${ja * 100}%`;
+    $('fmEfSeu').style.width = `${seu * 100}%`;
+    $('fmEfSeu').style.minWidth = seu > 0 ? '.45rem' : '0';
+    const falta = d.meta - d.total - (n > 0 ? n : 0);
+    $('fmEfeitoT').innerHTML = d.total >= d.meta ? t.cartao.alem
+      : !(n > 0) ? t.cartao.faltaSo(euros(d.meta - d.total, l))
+        : falta <= 0 ? t.cartao.chega(euros(n, l))
+          : t.cartao.efeito(euros(n, l), euros(falta, l));
+  };
 
   const escolhido = () => f.querySelector('input[name="valor"]:checked')?.value;
   const atualizar = () => {
@@ -245,8 +295,8 @@ function formulario(d, l) {
     const eOutro = v === 'outro';
     $('fmOutroC').classList.toggle('fm-outro--on', eOutro);
     const n = eOutro ? Number(campo.value) : Number(v);
-    $('fmBtT').textContent = !d.aberto ? t.fechado : t.cartao.bt;
-    $('fmBtS').textContent = !d.aberto ? '' : n > 0 ? t.cartao.btS(euros(n, l)) : t.cartao.btSOutro;
+    $('fmBtT').textContent = !d.aberto ? t.fechado : n > 0 ? t.cartao.bt(euros(n, l)) : t.cartao.btOutro;
+    efeito(n);
   };
   f.addEventListener('change', (e) => {
     if (e.target.name === 'valor' && e.target.value === 'outro') campo.focus();
@@ -255,7 +305,7 @@ function formulario(d, l) {
   campo.addEventListener('input', atualizar);
   campo.addEventListener('focus', () => { f.querySelector('input[value="outro"]').checked = true; atualizar(); });
 
-  // a mensagem de apoio: um «+» discreto que abre a linha
+  // a mensagem de apoio: um botão que abre o campo
   if (!$('fmMsg').value) {
     $('fmFraseC').hidden = true;
     $('fmFraseBt').hidden = false;
@@ -352,7 +402,7 @@ function fotografia(d, l) {
   const campo = $('fmFoto');
   const pre = $('fmFotoPre');
   const caixa = $('fmFotoC');
-  const estado = (txt, classe = '') => { $('fmFotoEstado').textContent = txt; caixa.className = `fm-foto ${classe}`; pre.className = `fm-sc__foto ${classe}`; };
+  const estado = (txt, classe = '') => { $('fmFotoEstado').textContent = txt; caixa.className = `fm-foto ${classe}`; pre.className = `fm-ap__foto ${classe}`; };
   let envio = null;
   let vez = 0;
 
