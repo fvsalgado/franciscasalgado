@@ -2199,9 +2199,10 @@ html.fm-ecra-on .nav,html.fm-ecra-on .tabs,html.fm-ecra-on .pe,html.fm-ecra-on .
 html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
 .fm-ecra[hidden]{display:none}
 .fm-ecra{position:fixed;inset:0;z-index:300;color:#F7F5EE;overflow:hidden;
-         background:radial-gradient(120vw 80vh at 10% -10%,#163A2A 0%,transparent 60%),radial-gradient(90vw 70vh at 110% 110%,#13352A 0%,transparent 55%),#0B1A14}
-.fm-ecra__in{position:relative;width:100%;height:100%;display:grid;grid-template-columns:1.25fr .95fr .62fr;grid-template-rows:auto auto auto auto 1fr;
-             grid-template-areas:"cab cab qr" "rota rota qr" "num band qr" "info band qr" "post post post";column-gap:3vw;padding:3.6vw 4vw 2.6vw}
+         background:radial-gradient(120vw 80vh at 10% -10%,var(--ceu1) 0%,transparent 60%),radial-gradient(90vw 70vh at 110% 110%,var(--ceu2) 0%,transparent 55%),var(--ceu0);
+         transition:--ceu0 4s,--ceu1 4s,--ceu2 4s}
+.fm-ecra__in{position:relative;z-index:1;width:100%;height:100%;display:grid;grid-template-columns:1.25fr .95fr .62fr;grid-template-rows:auto auto auto auto auto 1fr;
+             grid-template-areas:"cab cab qr" "rota rota qr" "fase fase qr" "num band qr" "info band qr" "post post post";column-gap:3vw;padding:3.6vw 4vw 2.6vw}
 .fm-ecra__cab{grid-area:cab}
 .fm-ecra__r{margin:0;font-size:1vw;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:#8FD9AE}
 .fm-ecra__t{margin:.8vw 0 0;font-size:4.3vw;line-height:1;color:#F7F5EE}
@@ -2217,7 +2218,7 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
              filter:drop-shadow(0 .4vw .8vw rgba(0,0,0,.45));animation:fm-voo 3.2s ease-in-out infinite}
 .fm-ecra__av svg{width:100%;height:100%;transform:rotate(90deg)}
 @keyframes fm-voo{50%{transform:translateY(-.5vw) rotate(-2deg)}}
-.fm-ecra__n{grid-area:num;display:flex;align-items:flex-end;gap:1.6vw;margin-top:2.4vw;white-space:nowrap}
+.fm-ecra__n{grid-area:num;display:flex;align-items:flex-end;gap:1.6vw;margin-top:1.4vw;white-space:nowrap}
 .fm-ecra__n .num{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 144;font-size:9vw;line-height:.85;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
 .fm-ecra__m{font-size:1.6vw;line-height:1.3;color:rgba(247,245,238,.65);padding-bottom:.5vw}
 .fm-ecra__i{grid-area:info;display:flex;gap:2.2vw;margin-top:1.3vw;font-size:1.35vw;color:rgba(247,245,238,.72)}
@@ -2314,3 +2315,181 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
 .fm-festa--on .fm-festa__bola{animation:fm-bola var(--d) cubic-bezier(.2,.7,.4,1) forwards}
 @keyframes fm-bola{0%{opacity:1;transform:translate(0,0) scale(var(--t))}80%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(var(--t))}}
 @media (prefers-reduced-motion:reduce){.fm-ecra__fita,.fm-ecra__av,.fm-ecra__qr,.fm-ecra__foto{animation:none}}
+
+/* ══ o ecrã em fases: a viagem cresce com o total ══
+   data-fase no #fmEcra: 0 na pista, 1 descolagem, 2 cruzeiro, 3 Atlântico,
+   4 Miami à vista, 5 aterrámos. As cores do céu deslizam de uma para a outra. */
+@property --ceu0{syntax:'<color>';inherits:true;initial-value:#0B1A14}
+@property --ceu1{syntax:'<color>';inherits:true;initial-value:#163A2A}
+@property --ceu2{syntax:'<color>';inherits:true;initial-value:#13352A}
+.fm-ecra{--ceu0:#0B1A14;--ceu1:#163A2A;--ceu2:#13352A}
+.fm-ecra[data-fase="1"]{--ceu0:#0C1D17;--ceu1:#1C4A34;--ceu2:#2B4B2C}
+.fm-ecra[data-fase="2"]{--ceu0:#0D2119;--ceu1:#215C41;--ceu2:#3D5B31}
+.fm-ecra[data-fase="3"]{--ceu0:#08202A;--ceu1:#15514F;--ceu2:#1E4E66}
+.fm-ecra[data-fase="4"]{--ceu0:#1A1711;--ceu1:#2C4A35;--ceu2:#9A4E1C}
+.fm-ecra[data-fase="5"]{--ceu0:#26170B;--ceu1:#3B5E3B;--ceu2:#D2691F}
+
+.fm-ecra__ceu{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.fm-ecra__nuvens,.fm-ecra__estrelas,.fm-ecra__confettis{position:absolute;inset:0}
+/* as nuvens passam da direita para a esquerda: é o avião que anda */
+.fm-nuvem{position:absolute;left:0;top:var(--y);width:calc(22vw * var(--s));height:calc(7vw * var(--s));opacity:var(--o);
+  background:radial-gradient(closest-side at 30% 60%,#FFF 60%,transparent),radial-gradient(closest-side at 55% 40%,#FFF 60%,transparent),radial-gradient(closest-side at 78% 62%,#FFF 55%,transparent);
+  filter:blur(.6vw);animation:fm-nuvem var(--dur) linear var(--atraso) infinite}
+@keyframes fm-nuvem{from{transform:translateX(110vw)}to{transform:translateX(-40vw)}}
+.fm-ecra[data-fase="4"] .fm-nuvem,.fm-ecra[data-fase="5"] .fm-nuvem{filter:blur(.6vw) sepia(1) saturate(3) hue-rotate(-20deg)}
+.fm-ecra__estrelas i{position:absolute;width:.25vw;height:.25vw;border-radius:50%;background:#FFF;transform:scale(var(--t));opacity:.15;animation:fm-brilha var(--d) ease-in-out var(--a) infinite}
+@keyframes fm-brilha{50%{opacity:.85}}
+.fm-conf{position:absolute;top:-4vh;width:.8vw;height:1.3vw;background:var(--c);border-radius:.15vw;animation:fm-cai var(--dur) linear var(--atraso) infinite}
+.fm-conf--bola{width:1vw;height:1vw;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFF 0 40%,#E5E2D8 70%,#BDB9AC)}
+@keyframes fm-cai{to{transform:translate(var(--x),112vh) rotate(var(--r))}}
+
+/* a rota: luzes de pista à espera; mar no Atlântico; palmeiras em Miami */
+.fm-ecra__luzes{position:absolute;inset:-.4vw 0;border-radius:9px;opacity:0;transition:opacity 1.5s;
+  background:linear-gradient(90deg,transparent 0 40%,rgba(255,224,140,.95) 48%,rgba(255,224,140,.95) 52%,transparent 60% 100%) no-repeat;background-size:14% 100%;
+  animation:fm-luzes 2.6s linear infinite;filter:blur(.15vw)}
+@keyframes fm-luzes{from{background-position:-20% 0}to{background-position:120% 0}}
+.fm-ecra[data-fase="0"] .fm-ecra__luzes{opacity:1}
+.fm-ecra__mar{position:absolute;left:0;right:0;top:1.2vw;width:100%;height:1.4vw;opacity:0;transition:opacity 2s;overflow:visible}
+.fm-ecra__mar path{fill:none;stroke:#6FC3D9;stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-dasharray:6 6;animation:fm-mar 2s linear infinite}
+@keyframes fm-mar{to{stroke-dashoffset:-24}}
+.fm-ecra[data-fase="3"] .fm-ecra__mar{opacity:.7}
+.fm-ecra[data-fase="4"] .fm-ecra__mar{opacity:.35}
+.fm-ecra__palmeiras{position:absolute;right:-.6vw;bottom:.6vw;width:7vw;height:4.1vw;color:#0A140F;opacity:0;transform:translateY(1vw);transition:opacity 2s,transform 2s}
+.fm-ecra[data-fase="4"] .fm-ecra__palmeiras,.fm-ecra[data-fase="5"] .fm-ecra__palmeiras{opacity:.9;transform:none}
+/* o avião: parado a trepidar na pista, a subir na descolagem, a planar depois */
+.fm-ecra[data-fase="0"] .fm-ecra__av{animation:fm-pista .18s steps(2) infinite}
+@keyframes fm-pista{50%{transform:translate(.06vw,.05vw)}}
+.fm-ecra[data-fase="1"] .fm-ecra__av svg{transform:rotate(80deg)}
+.fm-ecra[data-fase="1"] .fm-ecra__av{animation:fm-sobe 2.4s ease-in-out infinite}
+@keyframes fm-sobe{50%{transform:translateY(-.9vw)}}
+.fm-ecra[data-fase="2"] .fm-ecra__av,.fm-ecra[data-fase="3"] .fm-ecra__av{animation:fm-voo 2.6s ease-in-out infinite}
+.fm-ecra[data-fase="4"] .fm-ecra__av svg{transform:rotate(100deg)}
+.fm-ecra[data-fase="5"] .fm-ecra__av{animation:fm-aterrou 1.4s ease-in-out infinite}
+@keyframes fm-aterrou{50%{transform:scale(1.15)}}
+.fm-ecra__av::after{content:"";position:absolute;right:70%;top:46%;height:.3vw;width:0;border-radius:9px;background:linear-gradient(90deg,transparent,rgba(247,245,238,.7));transition:width 1.5s}
+.fm-ecra:not([data-fase="0"]):not([data-fase="5"]) .fm-ecra__av::after{width:calc(4vw + var(--rasto, 0vw))}
+.fm-ecra[data-fase="2"]{--rasto:2vw}.fm-ecra[data-fase="3"]{--rasto:4vw}.fm-ecra[data-fase="4"]{--rasto:6vw}
+.fm-ecra[data-fase="0"] .fm-ecra__linha i{opacity:0}
+
+/* a fase, por escrito, debaixo da rota */
+.fm-ecra__fase{grid-area:fase;margin:1.1vw 0 0;display:flex;align-items:baseline;gap:1vw;font-size:1.15vw;color:rgba(247,245,238,.6)}
+.fm-ecra__fase b{display:inline-flex;align-items:center;gap:.6vw;font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.95vw;color:#8FD9AE}
+.fm-ecra__fase b::before{content:"";width:.7vw;height:.7vw;border-radius:50%;background:currentColor;box-shadow:0 0 0 0 currentColor;animation:fm-ponto 1.8s ease-out infinite}
+@keyframes fm-ponto{70%{box-shadow:0 0 0 .7vw transparent}}
+.fm-ecra[data-fase="4"] .fm-ecra__fase b,.fm-ecra[data-fase="5"] .fm-ecra__fase b{color:#FFB347}
+
+/* o QR chama mais quando ainda há pouco; o convite debaixo dele vai mudando */
+.fm-ecra__qr p{transition:opacity .45s,transform .45s}
+.fm-ecra__cta--sai{opacity:0;transform:translateY(.4vw)}
+.fm-ecra[data-fase="0"] .fm-ecra__qr{animation:fm-chama 2.2s ease-in-out infinite}
+.fm-ecra[data-fase="1"] .fm-ecra__qr{animation:fm-chama 3s ease-in-out infinite}
+@keyframes fm-chama{50%{box-shadow:0 2vw 4vw -2vw rgba(0,0,0,.6),0 0 0 1vw rgba(143,217,174,.32);transform:scale(1.02)}}
+
+/* os postais por escrever (antes da primeira mensagem) */
+.fm-postal--vazio{background:transparent;color:#F7F5EE;border:.15vw dashed rgba(247,245,238,.4);box-shadow:none}
+.fm-postal--vazio::before{display:none}
+.fm-postal--vazio .fm-postal__selo{background:transparent;border-color:rgba(247,245,238,.4);outline-color:transparent;color:rgba(247,245,238,.6)}
+.fm-postal--vazio .fm-postal__q{color:rgba(247,245,238,.55);border-top-color:rgba(247,245,238,.2)}
+.fm-postal--vazio .fm-postal__q b{color:#8FD9AE}
+
+/* a bandeira vazia: um lugar para o primeiro nome */
+.fm-flag__convite text{font-family:var(--display);font-style:italic;font-size:22px;fill:rgba(18,40,30,.42)}
+.fm-flag__convite .fm-flag__convite-en{font-size:15px;fill:rgba(18,40,30,.32)}
+.fm-flag__convite line{stroke:rgba(18,40,30,.3);stroke-width:1.5;stroke-dasharray:4 5;animation:fm-assina 2.4s ease-in-out infinite}
+@keyframes fm-assina{50%{stroke-dashoffset:-18;stroke:rgba(27,107,71,.7)}}
+
+/* o momento de passar de fase */
+.fm-marco{position:relative;z-index:1;text-align:center;color:#F7F5EE}
+.fm-marco__av{position:absolute;left:50%;top:-12vw;width:8vw;height:8vw;color:#F7F5EE;filter:drop-shadow(0 1vw 2vw rgba(0,0,0,.5))}
+.fm-marco__av svg{width:100%;height:100%;transform:rotate(90deg)}
+.fm-destaque--on .fm-marco__av{animation:fm-marco-voo 3.2s cubic-bezier(.4,0,.2,1) both}
+@keyframes fm-marco-voo{from{transform:translateX(-80vw) translateY(4vw) rotate(-8deg)}60%{transform:translateX(-4vw) translateY(-1vw)}to{transform:translateX(-4vw)}}
+.fm-marco__p{margin:0;font-family:var(--display);font-size:13vw;line-height:.85;letter-spacing:-.04em;color:#8FD9AE}
+.fm-marco__p small{font-size:.4em;margin-left:.1em}
+.fm-marco__t{margin:1vw 0 0;font-size:5vw;line-height:1}
+.fm-marco__en{margin:.8vw 0 0;font-family:var(--display);font-style:italic;font-size:2vw;color:rgba(247,245,238,.7)}
+.fm-marco__f{margin:2vw 0 0;font-size:1.5vw;color:rgba(247,245,238,.75)}
+.fm-marco__f b{color:#F7F5EE}
+.fm-destaque--on .fm-marco__p,.fm-destaque--on .fm-marco__t{animation:fm-marco-entra .9s .3s cubic-bezier(.2,1.3,.4,1) both}
+.fm-destaque--on .fm-marco__en,.fm-destaque--on .fm-marco__f{animation:fm-marco-entra .9s .6s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes fm-marco-entra{from{opacity:0;transform:translateY(3vw) scale(.9)}}
+.fm-destaque--sai .fm-marco{animation:fm-d-fora .6s both}
+.fm-destaque--marco .fm-destaque__fundo{background:radial-gradient(70vw 60vh at 50% 50%,rgba(16,46,33,.6),rgba(4,11,8,.94))}
+
+/* o aviso do modo de demonstração */
+.fm-ecra__demo{position:absolute;left:1.2vw;bottom:1vw;z-index:5;margin:0;padding:.3vw .8vw;border-radius:99px;background:rgba(247,245,238,.12);color:rgba(247,245,238,.7);
+  font:800 .7vw/1.4 var(--corpo);letter-spacing:.16em;text-transform:uppercase}
+.fm-ecra__demo[hidden]{display:none}
+
+@media (prefers-reduced-motion:reduce){
+  .fm-nuvem,.fm-conf,.fm-ecra__estrelas i,.fm-ecra__luzes,.fm-ecra__mar path,.fm-flag__convite line,.fm-ecra__fase b::before{animation:none}
+  .fm-ecra[data-fase] .fm-ecra__av,.fm-ecra[data-fase] .fm-ecra__qr{animation:none}
+}
+
+/* o ecrã ao alto (um telemóvel, um ecrã vertical): tudo numa coluna */
+@media (orientation:portrait){
+  .fm-ecra__in{grid-template-columns:1fr;grid-template-rows:none;grid-template-areas:"cab" "rota" "fase" "num" "info" "band" "qr" "post";
+               align-content:start;row-gap:0;padding:7vw 6vw 4vw;overflow-y:auto}
+  .fm-ecra__r{font-size:2.6vw}
+  .fm-ecra__t{font-size:7.6vw;margin-top:1.4vw}
+  .fm-ecra__rota{margin-top:4.5vw;gap:3vw}
+  .fm-ecra__c{font-size:7vw}
+  .fm-ecra__c small{font-size:1.9vw}
+  .fm-ecra__linha{height:1vw}
+  .fm-ecra__av{width:7vw;height:7vw;margin:-3.5vw 0 0 -3.5vw}
+  .fm-ecra__luzes{inset:-.8vw 0}
+  .fm-ecra__mar{top:2.4vw;height:3vw}
+  .fm-ecra__palmeiras{width:14vw;height:8vw;bottom:1.2vw}
+  .fm-ecra__fase{font-size:2.8vw;margin-top:3vw;flex-wrap:wrap;gap:.4vw 2vw}
+  .fm-ecra__fase b{font-size:2.4vw;gap:1.4vw}
+  .fm-ecra__fase b::before{width:1.6vw;height:1.6vw}
+  .fm-ecra__n{margin-top:3vw;gap:3vw}
+  .fm-ecra__n .num{font-size:18vw}
+  .fm-ecra__m{font-size:3.6vw}
+  .fm-ecra__i{font-size:3.2vw;gap:4vw;margin-top:2vw;flex-wrap:wrap}
+  .fm-ecra__band{width:78%;justify-self:center;margin-top:4vw}
+  .fm-ecra__lado{flex-direction:row;align-items:center;justify-content:center;gap:5vw;margin-top:4vw}
+  .fm-ecra__qr{width:44%;padding:3vw;border-radius:3vw}
+  .fm-ecra__qr p{font-size:2.8vw;margin-top:2vw}
+  .fm-ecra__qr span{font-size:2vw;margin-top:1vw}
+  .fm-ecra__foto{width:30%;padding:1.6vw 1.6vw 0}
+  .fm-ecra__foto span{font-size:2.2vw;padding:1.4vw 0}
+  .fm-ecra__foto .credito{display:none}
+  .fm-ecra__postais{align-self:start;margin:4vw -6vw 0;padding:3vw 0}
+  .fm-ecra__fita .fm-postal{width:62vw;min-height:26vw;padding:3vw 3.2vw 2.4vw;border-radius:1.4vw}
+  .fm-ecra__fita .fm-postal--foto{width:78vw;column-gap:3vw}
+  .fm-ecra__fita .fm-postal__t{font-size:3.6vw;margin-right:10vw}
+  .fm-ecra__fita .fm-postal__q{font-size:2.4vw}
+  .fm-ecra__fita .fm-postal__selo{width:6vw;height:7vw}
+  .fm-ecra__fita .fm-postal__foto{width:18vw;padding:.8vw .8vw 3vw}
+  .fm-nuvem{width:calc(50vw * var(--s));height:calc(16vw * var(--s))}
+  .fm-festa__faixa{font-size:3.6vw;padding:2.4vw 4vw;border-radius:0 0 3vw 3vw}
+  .fm-festa__faixa b{font-size:5vw}
+  .fm-festa__bola,.fm-conf--bola{width:2.6vw;height:2.6vw}
+  .fm-conf{width:1.8vw;height:3vw}
+  .fm-destaque__par{flex-direction:column}
+  .fm-destaque__foto{width:50vw;margin:0 0 -6vw;padding:2vw 2vw 7vw}
+  .fm-destaque__postal{width:88vw;min-height:50vw;padding:6vw 6vw 4vw}
+  .fm-destaque__t{font-size:6.4vw;margin-right:16vw}
+  .fm-destaque__postal--nome .fm-destaque__t{font-size:8vw}
+  .fm-destaque__q{font-size:3vw}
+  .fm-destaque__selo{width:11vw;height:13vw;top:4vw;right:4vw}
+  .fm-destaque__selo svg{width:6vw;height:6vw}
+  .fm-destaque__carimbo{width:17vw;height:17vw;top:9vw;right:11vw;font-size:1.6vw}
+  .fm-destaque__r{font-size:2.4vw;padding:2vw 3.6vw}
+  .fm-marco__av{width:18vw;height:18vw;top:-26vw}
+  .fm-marco__p{font-size:30vw}
+  .fm-marco__t{font-size:11vw}
+  .fm-marco__en{font-size:4.6vw}
+  .fm-marco__f{font-size:3.4vw}
+  .fm-ecra__demo{font-size:2vw;padding:1vw 2vw}
+}
+
+/* as duas línguas do ecrã, sobrepostas: troca-se de uma para a outra num
+   esbatido lento; o lugar é o da mais comprida, para nada saltar */
+.fm-bi{display:inline-grid;vertical-align:bottom}
+.fm-bi > span{grid-area:1/1;transition:opacity 1.4s ease}
+.fm-bi > [lang="en"]{opacity:0}
+.fm-ecra--en .fm-bi > [lang="pt"]{opacity:0}
+.fm-ecra--en .fm-bi > [lang="en"]{opacity:1}
+.fm-ecra__t .fm-bi,.fm-ecra__qr p .fm-bi,.fm-postal__t .fm-bi{display:grid}
