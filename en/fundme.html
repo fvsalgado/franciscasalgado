@@ -198,9 +198,7 @@
           <span class="fm-soma__v num" id="fmTotal">—</span>
           <span class="fm-soma__m" id="fmMeta" data-t="fm_meta">of €5,000</span>
         </div>
-        <div class="fm-barra" id="fmBarra" role="progressbar" aria-valuemin="0" aria-valuemax="5000" aria-valuenow="0" aria-labelledby="fmTotal">
-          <i id="fmBarraI"></i><span class="fm-barra__m" id="fmMarcos"></span>
-        </div>
+        <div class="fm-volta" id="fmVolta" role="progressbar" aria-valuemin="0" aria-valuemax="5000" aria-valuenow="0" aria-labelledby="fmTotal"></div>
         <div class="fm-info"><span id="fmApoios"></span><span id="fmDias"></span></div>
         <div class="fm-bilhete__barras" aria-hidden="true"></div>
       </div>
@@ -295,19 +293,6 @@
   </div>
 </section>
 
-<!-- ═══ PARA ONDE VAI: o recibo ════════════════════════ -->
-<section class="sec fm-sec" id="fmEtapasS">
-  <div class="env fm-conta">
-    <div class="fm-conta__q">
-      <p class="rot" data-t="fm_e_rot">Where it goes</p>
-      <h2 class="d d--m" data-t="fm_e_tit">The bill for the trip</h2>
-      <p class="txt" data-t="fm_e_txt">No small print: this is what the trip costs. As gifts come in, each line gets paid.</p>
-      <p class="fm-nota" data-t="fm_e_nota">Estimates at November prices. Anything above the target goes to the rest of her season, and we will say so here.</p>
-    </div>
-    <div class="fm-recibo" id="fmRecibo"></div>
-  </div>
-</section>
-
 <!-- ═══ QUEM ESTÁ COM ELA: a bandeira e os postais ═════ -->
 <section class="sec fm-sec">
   <div class="env">
@@ -340,9 +325,7 @@
           <li><span class="fm-evento__n">♪</span><div><strong data-t="fm_v4_t">A fado to close</strong><span data-t="fm_v4_x">Fado singer Marta Rosa, a member of Francisca's family, sings a song or two at prize-giving.</span></div></li>
         </ol>
       </div>
-      <figure class="fm-evento__f">
-        <img src="/img/campos/praia-del-rey-9.webp" alt="O buraco 9 de Praia D'El Rey, com o green junto às dunas" width="1400" height="933" loading="lazy" decoding="async" />
-      </figure>
+      <aside class="fm-prev" id="fmPrevisao" aria-live="off"></aside>
     </div>
   </div>
 </section>

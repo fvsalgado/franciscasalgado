@@ -310,8 +310,15 @@ e `/en/fundme` (o `vercel.json` reescreve as duas para o `.html`). Quem apoia
 preenche um cartão de resultados de golfe: escolhe o «buraco» (o valor),
 assina (o nome vai para a bandeira), junta uma mensagem de apoio e uma
 fotografia se quiser, e paga na Stripe com
-MB WAY, Multibanco, cartão, Apple Pay ou Google Pay. O total, o gráfico dia a
-dia, o recibo da viagem e a bandeira com os nomes atualizam-se sozinhos.
+MB WAY, Multibanco, cartão, Apple Pay ou Google Pay. O total, a volta de 18
+buracos, o gráfico dia a dia e a bandeira com os nomes atualizam-se sozinhos.
+
+A página e o ecrã falam a mesma linguagem, a do golfe: o apoio é um cartão
+de resultados, a meta é uma volta de 18 buracos (com a ida e a volta no cartão
+de embarque e no ecrã), as fases têm nomes de golfe, a bandeira está no campo
+de Praia D'El Rey, e as condições de jogo aparecem no ecrã e, na secção do
+evento, como previsão para a manhã do Roll Up (quando o dia está a 16 dias ou
+menos). Os números usam sempre Manrope em negrito, que não confunde o 3 com o 5.
 
 **A Stripe é o registo; não há base de dados.** `api/fundme/index.js` vai
 buscar à Stripe os pagamentos do Checkout com `metadata.kind = 'fundme'` desde
@@ -347,7 +354,6 @@ pagamento. As contas estão em `api/fundme/_comum.js`, separadas da rede.
 | `meta`, `inicio`, `partida` | a meta em euros, o primeiro dia do gráfico e o dia da partida (a contagem «faltam N dias») |
 | `valores`, `valorInicial`, `minimo`, `maximo` | os botões de valor e os limites de um apoio |
 | `fotos` | `aceitar: false` tira o campo da fotografia; `aprovar: true` faz cada fotografia esperar por aprovação em `/fundme/gerir` (como está, `false`, aparecem logo) |
-| `etapas` | para onde vai o dinheiro, por ordem: cada uma fica «paga» quando o total lá chega. **Os valores atuais são estimativas** |
 | `evento` | `mostrar`, a `data` (`"2026-12-02"`, ou `null` para «a anunciar»), o `local` e as `coordenadas` (para o tempo no ecrã). Com data, o dia fica marcado no gráfico |
 | `manuais` | o que não passa pela Stripe: `{ "data": "2026-12-02", "valor": 640, "origem": "clube", "nome": "Grupo de quarta-feira", "mensagem": { "pt": "…", "en": "…" } }`. `origem` é `clube` ou `empresas` (Fundação do Desporto). Com `nome`, fica escrito na bandeira; com `mensagem`, aparece num postal; com `foto` (um caminho em `/img/…`), o postal leva a fotografia; `"mural": false` tira-o dos dois |
 | `excluir` | ids de sessões (`cs_…`) que não contam para o total: um reembolso, um teste |
