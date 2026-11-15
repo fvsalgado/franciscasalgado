@@ -2609,6 +2609,9 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
 .fm-cena__luz{position:absolute;inset:0;z-index:-1;pointer-events:none;transition:opacity 2.5s ease;
   background:radial-gradient(120% 90% at var(--sol-x,12%) 0%,rgba(255,236,196,.42),transparent 55%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(20,41,31,.22))}
 .fm-cena .fm-flag{position:absolute;left:4%;bottom:0;width:92%;height:93%;max-width:none;margin:0;filter:drop-shadow(0 .3rem .6rem rgba(20,41,31,.22));transition:filter 2.5s ease}
+/* a bandeira de tecido (canvas): quando está a desenhar, o SVG fica escondido por baixo */
+.fm-cena .fm-flag--tecido{display:block}
+.fm-cena:not(.fm-cena--tecido) .fm-flag--tecido,.fm-cena--tecido svg.fm-flag{visibility:hidden}
 
 /* a luz do dia, pela altura do sol */
 .fm-cena[data-luz="manha"]{--b1:1.03}

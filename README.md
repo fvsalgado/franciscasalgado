@@ -333,6 +333,16 @@ A fotografia da Francisca (no bilhete, no retrato do cartão de apoio e no
 polaroide do ecrã) é a da taça de campeã do clube:
 `img/fundme/francisca-campea-clube*.webp` e `francisca-rosto.webp`.
 
+**A bandeira é de pano** (canvas, `tecer()` em `js/fundme.js`). O desenho
+da bandeira — a trama, a manga verde cosida à volta da vara, o nome dela
+bordado, as assinaturas — pinta-se uma vez numa textura; cada quadro corta-a
+em tiras verticais que sobem e descem numa onda que nasce quieta junto à
+vara e cresce até à ponta, com luz e sombra conforme a inclinação do pano.
+Os nomes deformam-se com as dobras. O vento manda na onda, e uma rajada faz
+o pano estalar. Corre a 30 quadros por segundo e pára quando não está à
+vista. Se o canvas falhar, fica o SVG de antes; com movimento reduzido, um
+quadro parado.
+
 **A bandeira no campo acompanha Praia D'El Rey a sério** (na página e no
 ecrã). A luz é a da hora que é: a altura do sol em Óbidos, calculada no
 próprio browser, dá manhã, dia, hora dourada, crepúsculo ou noite (com
