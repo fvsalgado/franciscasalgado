@@ -733,7 +733,307 @@ export function bandeiraCena(nomes, opcoes = {}) {
     <span class="fm-cena__nuvens" aria-hidden="true"></span>
     <span class="fm-cena__luz" aria-hidden="true"></span>
     ${bandeiraSVG(nomes, { ...opcoes, cena: true })}
+    <canvas class="fm-flag fm-flag--tecido" aria-hidden="true"></canvas>
     <span class="fm-cena__tempo" aria-hidden="true"></span>`;
+}
+
+/* ── a bandeira de tecido ─────────────────────────────────────
+ * O SVG de cima é uma bandeira desenhada: só as orlas ondulam, e o resto é
+ * um cartão. Esta é de pano. O desenho da bandeira (a trama, a manga verde
+ * cosida à volta da vara, o nome dela bordado, as assinaturas) pinta-se uma
+ * vez numa textura, e cada quadro corta-a em tiras verticais que sobem e
+ * descem numa onda que nasce quieta junto à vara e cresce até à ponta. Cada
+ * tira apanha luz ou sombra conforme a inclinação do pano, e o pano encolhe
+ * na horizontal onde dobra. É assim que os nomes se deformam com as dobras.
+ * O vento da cena manda na onda; uma rajada faz o pano estalar. Se o canvas
+ * falhar, fica o SVG. Com movimento reduzido, um quadro parado. */
+function texturaBandeira(nomes, { larg, alt, max = 80, convite = false }) {
+  const TW = 1500;
+  const q = TW / larg;
+  const c = document.createElement('canvas');
+  c.width = TW;
+  c.height = Math.round(alt * q);
+  const g = c.getContext('2d');
+  g.scale(q, q);
+  // o pano: branco-creme, um pouco mais quente em baixo
+  const fundo = g.createLinearGradient(0, 0, 0, alt);
+  fundo.addColorStop(0, '#FFFEF9');
+  fundo.addColorStop(1, '#F1EDE2');
+  g.fillStyle = fundo;
+  g.fillRect(0, 0, larg, alt);
+  // a trama: fios finos nas duas direcções e um grão leve
+  g.lineWidth = 0.3;
+  g.strokeStyle = 'rgba(110,98,74,.045)';
+  g.beginPath();
+  for (let y = 0.8; y < alt; y += 1.9) { g.moveTo(0, y); g.lineTo(larg, y); }
+  g.stroke();
+  let semente = 7;
+  const acaso = () => { semente = (semente * 16807) % 2147483647; return semente / 2147483647; };
+  for (let i = 0; i < 2600; i++) {
+    g.fillStyle = acaso() < 0.5 ? 'rgba(90,78,55,.05)' : 'rgba(255,255,255,.5)';
+    g.fillRect(acaso() * larg, acaso() * alt, 0.9, 0.9);
+  }
+  // a manga do lado da vara: verde, com a costura à vista
+  const manga = Math.max(10, larg * 0.034);
+  const mg = g.createLinearGradient(0, 0, manga, 0);
+  mg.addColorStop(0, '#123F2B');
+  mg.addColorStop(0.45, '#1F6B48');
+  mg.addColorStop(1, '#174F36');
+  g.fillStyle = mg;
+  g.fillRect(0, 0, manga, alt);
+  g.setLineDash([larg * 0.007, larg * 0.005]);
+  g.lineWidth = larg * 0.0018;
+  g.strokeStyle = 'rgba(255,255,255,.55)';
+  g.beginPath(); g.moveTo(manga - larg * 0.007, 0); g.lineTo(manga - larg * 0.007, alt); g.stroke();
+  // a orla cosida nos outros três lados
+  const m = larg * 0.02;
+  g.strokeStyle = 'rgba(27,94,63,.42)';
+  g.strokeRect(manga + m * 0.7, m, larg - manga - m * 1.7, alt - 2 * m);
+  g.setLineDash([]);
+
+  // o cabeçalho bordado: a bandeirinha, os traços, o nome dela e a viagem
+  const hh = alt * 0.27;
+  const cx = manga + (larg - manga) / 2;
+  const fc = Math.min(larg / 14, hh * 0.34);
+  const fh = Math.min(fc, larg / 17.5);
+  g.strokeStyle = '#1B5E3F';
+  g.lineCap = 'round';
+  g.lineJoin = 'round';
+  g.lineWidth = Math.max(1.4, fc * 0.07);
+  g.beginPath();
+  g.moveTo(cx - fc * 0.22, hh * 0.36); g.lineTo(cx - fc * 0.22, hh * 0.06);
+  g.lineTo(cx + fc * 0.2, hh * 0.115); g.lineTo(cx - fc * 0.22, hh * 0.17);
+  g.stroke();
+  g.lineWidth = Math.max(0.7, fc * 0.03);
+  g.globalAlpha = 0.6;
+  g.beginPath();
+  g.moveTo(cx - fc * 2.1, hh * 0.38); g.lineTo(cx - fc * 0.6, hh * 0.38);
+  g.moveTo(cx + fc * 0.6, hh * 0.38); g.lineTo(cx + fc * 2.1, hh * 0.38);
+  g.stroke();
+  g.globalAlpha = 1;
+  const espacado = (txt, x, y, esp) => {
+    const letras = [...txt];
+    const w = letras.map((l) => g.measureText(l).width);
+    let px = x - (w.reduce((a, b) => a + b, 0) + esp * (letras.length - 1)) / 2;
+    g.textAlign = 'left';
+    letras.forEach((l, i) => { g.fillText(l, px, y); px += w[i] + esp; });
+  };
+  g.fillStyle = '#14291F';
+  g.font = `600 ${fh.toFixed(1)}px Fraunces, Georgia, serif`;
+  // bordado: uma sombra curta por baixo da linha
+  g.shadowColor = 'rgba(20,41,31,.25)';
+  g.shadowOffsetY = fh * 0.04;
+  espacado('FRANCISCA SALGADO', cx, hh * 0.72, fh * 0.14);
+  g.shadowColor = 'transparent';
+  g.fillStyle = '#1B5E3F';
+  g.font = `italic 400 ${(fc * 0.56).toFixed(1)}px Fraunces, Georgia, serif`;
+  g.textAlign = 'center';
+  g.fillText('Road to Florida · 2027', cx, hh * 0.97);
+
+  // as assinaturas, a marcador: a mesma grelha do SVG
+  const lista = nomes.slice(0, max);
+  const n = lista.length;
+  const ax0 = manga + larg * 0.05;
+  const ax1 = larg - larg * 0.05;
+  const ay0 = hh + alt * 0.03;
+  const ay1 = alt - alt * 0.06;
+  const aw = ax1 - ax0;
+  const ah = ay1 - ay0;
+  const sorte = (nome, k) => { let h = 2166136261 ^ k; for (const ch of nome) h = Math.imul(h ^ ch.charCodeAt(0), 16777619); return ((h >>> 0) % 1000) / 1000; };
+  const medio = n ? lista.reduce((t, x) => t + Math.max(5, x.length), 0) / n : 10;
+  let melhor = { c: 1, tam: 0 };
+  for (let col = 1; col <= 8 && n; col++) {
+    const linhas = Math.ceil(n / col);
+    const tam = Math.min((ah / linhas) * 0.74, ((aw / col) * 0.9) / (medio * 0.44), fc * 1.15);
+    if (tam > melhor.tam) melhor = { c: col, tam };
+  }
+  const cols = melhor.c;
+  const linhas = Math.max(1, Math.ceil(n / cols));
+  const celW = aw / cols;
+  const celH = ah / linhas;
+  const tintas = ['#1C1C1C', '#1E3A8A', '#14532D', '#1C1C1C', '#7A2E0E', '#273449'];
+  g.textAlign = 'center';
+  g.textBaseline = 'alphabetic';
+  lista.forEach((nome, i) => {
+    const r = Math.floor(i / cols);
+    const col = i % cols;
+    const nessa = r === linhas - 1 ? n - r * cols : cols;
+    const desvio = (cols - nessa) / 2 + (r % 2 ? 0.16 : -0.16) * (nessa > 1 ? 1 : 0);
+    const tam = Math.min(melhor.tam * (0.88 + sorte(nome, 4) * 0.26), (celW * 0.94) / (Math.max(4, nome.length) * 0.44));
+    const meia = nome.length * tam * 0.23;
+    let x = ax0 + celW * (col + 0.5 + desvio) + (sorte(nome, 1) - 0.5) * celW * 0.14;
+    x = Math.max(ax0 + meia, Math.min(ax1 - meia, x));
+    const y = ay0 + celH * (r + 0.66) + (sorte(nome, 2) - 0.5) * celH * 0.22;
+    g.save();
+    g.translate(x, y);
+    g.rotate(((sorte(nome, 3) - 0.5) * 16 * Math.PI) / 180);
+    g.fillStyle = tintas[Math.floor(sorte(nome, 5) * tintas.length)];
+    g.globalAlpha = 0.92;
+    g.font = `600 ${tam.toFixed(1)}px Caveat, cursive`;
+    g.fillText(nome, 0, 0);
+    g.restore();
+  });
+  if (convite && !n) {
+    g.fillStyle = 'rgba(27,94,63,.55)';
+    g.font = `600 ${(fc * 0.95).toFixed(1)}px Caveat, cursive`;
+    g.fillText('O primeiro nome fica aqui · Your name here', cx, ay0 + ah * 0.45);
+    g.setLineDash([larg * 0.004, larg * 0.004]);
+    g.strokeStyle = 'rgba(27,94,63,.45)';
+    g.lineWidth = larg * 0.0012;
+    g.beginPath(); g.moveTo(ax0 + aw * 0.15, ay0 + ah * 0.58); g.lineTo(ax1 - aw * 0.15, ay0 + ah * 0.58); g.stroke();
+  }
+  return c;
+}
+
+async function tecer(caixa, nomes, { W = 900, max = 80, vento = 1, convite = false, varaAbaixo = 0.3, proporcao = 1.45 } = {}) {
+  caixa._tecido?.parar();
+  const cv = caixa.querySelector('canvas.fm-flag--tecido');
+  const ctx = cv?.getContext?.('2d');
+  if (!ctx) return;
+  try {
+    await Promise.all(['600 40px Caveat', '600 40px Fraunces', 'italic 400 40px Fraunces'].map((f) => document.fonts.load(f)));
+  } catch { /* desenha com o que houver */ }
+  if (!cv.isConnected) return;
+
+  // a mesma geometria do SVG, para a bandeira ficar no mesmo sítio
+  const x0 = 40;
+  const larg = W - 16 - x0;
+  const topo = 30;
+  const alt = Math.round(larg / proporcao);
+  const H = Math.round(topo + alt + alt * varaAbaixo);
+  const vara = Math.max(10, larg * 0.017);
+  const tex = texturaBandeira(nomes, { larg, alt, max, convite });
+  const TW = tex.width;
+  const TH = tex.height;
+  // tiras de 2 unidades: mais finas, e a orla ondula sem degraus
+  const N = Math.round(larg / 2);
+  const dy = new Float32Array(N + 1);
+  const xs = new Float32Array(N + 1);
+  const est = new Float32Array(N + 1);
+
+  let dpr = 1;
+  let cw = 0;
+  let chh = 0;
+  // o pano pinta-se à parte, para a luz e a sombra caírem só sobre ele
+  const off = document.createElement('canvas');
+  const octx = off.getContext('2d');
+  const medir = () => {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    cw = cv.clientWidth;
+    chh = cv.clientHeight;
+    cv.width = Math.max(1, Math.round(cw * dpr));
+    cv.height = Math.max(1, Math.round(chh * dpr));
+    off.width = cv.width;
+    off.height = cv.height;
+  };
+  medir();
+
+  let fase = 0;
+  let antes = null;
+  let rajadaT0 = -99;
+  const desenhar = (t) => {
+    const dt = antes == null ? 0 : Math.min(0.1, t - antes);
+    antes = t;
+    // a rajada: entra depressa e morre devagar
+    const tr = t - rajadaT0;
+    const raj = tr < 0 || tr > 4 ? 0 : Math.min(1, tr / 0.25) * Math.exp(-tr / 1.1);
+    const v = vento * (1 + 1.3 * raj);
+    fase += dt * 2.3 * v;
+    // a onda: viva, mas sem dobrar os nomes ao ponto de não se lerem de longe
+    const A = alt * 0.04 * Math.pow(v, 0.5);
+    const queda = (alt * 0.035) / Math.max(0.7, v);
+    const k = Math.PI * 2 * 1.2;
+    for (let i = 0; i <= N; i++) {
+      const u = i / N;
+      const env = 0.08 + 0.92 * Math.pow(u, 0.85);
+      const ph = k * u - fase;
+      dy[i] = A * env * (Math.sin(ph) + 0.26 * Math.sin(2.13 * ph + 0.9 + 3 * u)) + queda * u * u;
+      est[i] = 1 + 0.03 * env * v * Math.sin(ph + 1.1);
+    }
+    xs[0] = x0;
+    const passo = larg / N;
+    for (let i = 1; i <= N; i++) {
+      const incl = (dy[i] - dy[i - 1]) / passo;
+      xs[i] = xs[i - 1] + passo / Math.sqrt(1 + incl * incl);
+    }
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, cw, chh);
+    const sc = Math.min(cw / W, chh / H);
+    ctx.translate(0, chh - H * sc);
+    ctx.scale(sc, sc);
+
+    // a vara: fibra branca, redonda, com a bola no topo
+    const px = x0 - vara - 3;
+    const gv = ctx.createLinearGradient(px, 0, px + vara, 0);
+    gv.addColorStop(0, '#9E9786'); gv.addColorStop(0.35, '#FFFFFF'); gv.addColorStop(0.7, '#E2DCCB'); gv.addColorStop(1, '#8F887A');
+    ctx.fillStyle = gv;
+    ctx.fillRect(px, 10, vara, H);
+    const gb = ctx.createRadialGradient(px + vara * 0.35, 6, 1, px + vara / 2, 11, vara * 0.8);
+    gb.addColorStop(0, '#FFFFFF'); gb.addColorStop(1, '#B5AE9E');
+    ctx.fillStyle = gb;
+    ctx.beginPath(); ctx.arc(px + vara / 2, 11, vara * 0.75, 0, Math.PI * 2); ctx.fill();
+
+    // o pano, tira a tira, no canvas de trabalho
+    octx.setTransform(1, 0, 0, 1, 0, 0);
+    octx.clearRect(0, 0, off.width, off.height);
+    octx.setTransform(dpr * sc, 0, 0, dpr * sc, 0, dpr * (chh - H * sc));
+    octx.imageSmoothingQuality = 'high';
+    const sw = TW / N;
+    for (let i = 0; i < N; i++) {
+      const h = alt * est[i];
+      octx.drawImage(tex, i * sw, 0, sw + 0.6, TH, xs[i], topo + dy[i] - (h - alt) / 2, xs[i + 1] - xs[i] + 0.6, h);
+    }
+    // a luz e a sombra das dobras: o pano que sobe para a ponta apanha luz, o
+    // que desce fica na sombra. Dois gradientes de lado a lado, pintados só
+    // por cima do pano (source-atop), sem as costuras de tira para tira.
+    const xa = xs[0];
+    const xb = xs[N];
+    const claro = octx.createLinearGradient(xa, 0, xb, 0);
+    const escuro = octx.createLinearGradient(xa, 0, xb, 0);
+    for (let i = 0; i < N; i += 2) {
+      const incl = (dy[i + 1] - dy[i]) / (larg / N);
+      const luz = Math.max(-0.65, Math.min(0.65, -incl * 2.6));
+      const pos = (xs[i] - xa) / (xb - xa);
+      claro.addColorStop(pos, `rgba(255,252,242,${Math.max(0, luz * 0.62).toFixed(3)})`);
+      escuro.addColorStop(pos, `rgba(46,36,20,${Math.max(0, -luz * 0.55).toFixed(3)})`);
+    }
+    octx.globalCompositeOperation = 'source-atop';
+    octx.fillStyle = claro;
+    octx.fillRect(xa - 2, 0, xb - xa + 4, H);
+    octx.fillStyle = escuro;
+    octx.fillRect(xa - 2, 0, xb - xa + 4, H);
+    // a manga é um tubo: sombra e brilho redondos por cima do verde
+    const manga = Math.max(10, larg * 0.034);
+    const gm = octx.createLinearGradient(x0, 0, x0 + manga, 0);
+    gm.addColorStop(0, 'rgba(0,0,0,.3)'); gm.addColorStop(0.45, 'rgba(255,255,255,.18)'); gm.addColorStop(1, 'rgba(0,0,0,.22)');
+    octx.fillStyle = gm;
+    octx.fillRect(x0, 0, manga, H);
+    octx.globalCompositeOperation = 'source-over';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.drawImage(off, 0, 0);
+  };
+
+  caixa.classList.add('fm-cena--tecido');
+  let raf = 0;
+  let visivel = true;
+  let ultimo = 0;
+  const parado = quieto();
+  const quadro = (ms) => {
+    raf = requestAnimationFrame(quadro);
+    if (document.hidden || !visivel || ms - ultimo < 33) return;
+    ultimo = ms;
+    desenhar(ms / 1000);
+  };
+  const io = typeof IntersectionObserver === 'function' ? new IntersectionObserver((e) => { visivel = e.some((x) => x.isIntersecting); }) : null;
+  io?.observe(cv);
+  const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { medir(); if (parado) desenhar(1.4); }) : null;
+  ro?.observe(cv);
+  if (parado) desenhar(1.4); else raf = requestAnimationFrame(quadro);
+  caixa._tecido = {
+    parar() { cancelAnimationFrame(raf); io?.disconnect(); ro?.disconnect(); },
+    rajada() { rajadaT0 = performance.now() / 1000; },
+  };
 }
 
 /* ── o céu da cena ────────────────────────────────────────────
@@ -844,6 +1144,7 @@ function rajada(caixa) {
   caixa.classList.remove('fm-cena--rajada');
   void caixa.offsetWidth;
   caixa.classList.add('fm-cena--rajada');
+  caixa._tecido?.rajada();
   const sopro = document.createElement('span');
   sopro.className = 'fm-cena__sopro';
   sopro.setAttribute('aria-hidden', 'true');
@@ -914,8 +1215,10 @@ function bandeira(d, l) {
   const caixa = $('fmBandeira');
   const estreita = caixa.clientWidth < 560;
   caixa.classList.add('fm-cena');
-  caixa.innerHTML = bandeiraCena(nomes, { W: 900, ondula: !quieto(), convite: !nomes.length, vento: ventoDaBandeira() });
+  const op = { W: 900, ondula: !quieto(), convite: !nomes.length, vento: ventoDaBandeira() };
+  caixa.innerHTML = bandeiraCena(nomes, op);
   aplicarCeu(caixa);
+  tecer(caixa, nomes, op);
   const semNome = Math.max(0, (d.apoios ?? 0) - (d.mural ?? []).filter((m) => m.nome).length);
   const partes = [];
   if (nomes.length) partes.push(t.nomes(nomes.length)); else partes.push(t.bandeiraVazia);
@@ -1363,8 +1666,10 @@ let nomesBandeira = [];
 function desenharBandeira(nomes = nomesBandeira) {
   nomesBandeira = nomes;
   // a bandeira ondula mais depressa quando há mais vento no campo
-  $('fmEcraBandeira').innerHTML = bandeiraCena(nomes, { W: 900, max: 70, ondula: true, convite: !nomes.length, vento: ventoDaBandeira(), varaAbaixo: 0.1 });
+  const op = { W: 900, max: 70, ondula: true, convite: !nomes.length, vento: ventoDaBandeira(), varaAbaixo: 0.1 };
+  $('fmEcraBandeira').innerHTML = bandeiraCena(nomes, op);
   aplicarCeu($('fmEcraBandeira'));
+  tecer($('fmEcraBandeira'), nomes, op);
 }
 
 /* ── as condições de jogo em Praia D'El Rey ────────────────────
