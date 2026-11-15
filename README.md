@@ -516,6 +516,13 @@ depois do clique em «Aceitar». A escolha fica em `localStorage`, e não num
 cookie, para que recusar não implique escrever aquilo que a pessoa acabou de
 recusar. Língua e tema também ficam só no navegador de quem visita.
 
+O tema é **claro por omissão**, seja qual for a preferência do sistema; quem
+carrega no botão e escolhe o escuro fica com ele (guardado em `fs-tema`). A
+escolha aplica-se num script de uma linha no `<head>` de cada página, antes do
+primeiro desenho — se ficasse para o módulo, que corre depois, a página
+nasceria com o tema do HTML e trocaria a seguir, e piscava em cada mudança de
+página.
+
 ## Medição
 
 É o PostHog, no projeto «Franciscasalgado.golf», na região europeia
