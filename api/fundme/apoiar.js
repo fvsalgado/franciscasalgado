@@ -92,6 +92,9 @@ export default async function handler(req, res) {
         },
       },
     },
+    // sempre em euros: sem a conversão automática para a moeda de quem paga
+    // (a Stripe cobra 4% a mais por ela, e um apoio é em euros)
+    adaptive_pricing: { enabled: false },
     custom_text: { submit: { message: t.aoPagar } },
     metadata: meta,
     payment_intent_data: { description: `${t.extrato} · ${valor} €`, metadata: meta },
