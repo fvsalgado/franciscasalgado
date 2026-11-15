@@ -167,66 +167,86 @@
 
 <main id="conteudo" class="fm">
 
-<!-- ═══ ABERTURA: quem, porquê, e o cartão para apoiar ═════ -->
+<!-- ═══ ABERTURA: o cartão de embarque e o apoio ═══════════ -->
 <section class="fm-abre">
   <div class="env fm-abre__in">
-    <div class="fm-abre__q">
+    <div class="fm-abre__cab">
       <p class="rot" data-t="fm_rot">Road to Florida · Junior Orange Bowl 2027</p>
       <h1 class="d d--l fm-abre__t" data-t="fm_tit">Help Francisca <em>get to Florida.</em></h1>
-      <p class="fm-abre__l" data-t="fm_lead">Portuguese Under-18 champion Francisca has been invited to the <strong>63rd Junior Orange Bowl</strong> in Coral Gables, Florida, in January. It will be her first time playing in the United States. Our target is <strong>€5,000</strong> for the trip.</p>
     </div>
 
-    <aside class="fm-cartao" id="apoiar" aria-labelledby="fmApoiarT">
-      <div class="fm-soma">
-        <span class="fm-soma__v num" id="fmTotal">—</span>
-        <span class="fm-soma__m" id="fmMeta" data-t="fm_meta">raised of €5,000</span>
+    <!-- o cartão de embarque: a cara dela, a viagem e quanto já se juntou -->
+    <article class="fm-bilhete" aria-labelledby="fmTotal">
+      <figure class="fm-bilhete__f">
+        <img src="/img/taca-2026-trofeu.webp" alt="Francisca Salgado com o troféu da Taça da Federação, em 2026"
+             width="1600" height="1066" fetchpriority="high" decoding="async" />
+        <span class="fm-bilhete__selo" aria-hidden="true">Junior<br />Orange<br />Bowl<br />2027</span>
+      </figure>
+      <div class="fm-bilhete__rota">
+        <div class="fm-bilhete__c">LIS<small data-t="fm_b_lis">Lisbon</small></div>
+        <svg class="fm-bilhete__av" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5Z"/></svg>
+        <div class="fm-bilhete__c">MIA<small data-t="fm_b_mia">Miami</small></div>
       </div>
-      <div class="fm-barra" id="fmBarra" role="progressbar" aria-valuemin="0" aria-valuemax="5000" aria-valuenow="0" aria-labelledby="fmTotal">
-        <i id="fmBarraI"></i><span class="fm-barra__m" id="fmMarcos"></span>
+      <dl class="fm-bilhete__l">
+        <div><dt data-t="fm_b_pass">Passenger</dt><dd>F. Salgado</dd></div>
+        <div><dt data-t="fm_b_emb">Boarding</dt><dd id="fmEmbarque">3 jan.</dd></div>
+        <div><dt data-t="fm_b_dest">Destination</dt><dd>Biltmore</dd></div>
+      </dl>
+      <div class="fm-bilhete__corte" aria-hidden="true"></div>
+      <div class="fm-bilhete__conta">
+        <div class="fm-soma">
+          <span class="fm-soma__v num" id="fmTotal">—</span>
+          <span class="fm-soma__m" id="fmMeta" data-t="fm_meta">of €5,000</span>
+        </div>
+        <div class="fm-barra" id="fmBarra" role="progressbar" aria-valuemin="0" aria-valuemax="5000" aria-valuenow="0" aria-labelledby="fmTotal">
+          <i id="fmBarraI"></i><span class="fm-barra__m" id="fmMarcos"></span>
+        </div>
+        <div class="fm-info"><span id="fmApoios"></span><span id="fmDias"></span></div>
+        <div class="fm-bilhete__barras" aria-hidden="true"></div>
       </div>
-      <div class="fm-info"><span id="fmApoios"></span><span id="fmDias"></span></div>
+    </article>
 
+    <!-- o apoio: escolher o valor e carregar no botão -->
+    <div class="fm-cartao" id="apoiar">
       <div class="fm-obrigado" id="fmObrigado" hidden></div>
-
       <form class="fm-form" id="fmForm" method="post" action="/api/fundme/apoiar">
-        <h2 class="fm-form__t" id="fmApoiarT" data-t="fm_apoiar">Support the trip</h2>
+        <h2 class="so-leitor" data-t="fm_apoiar">Support the trip</h2>
         <fieldset class="fm-valores" id="fmValores">
           <legend class="so-leitor" data-t="fm_valor_leg">Amount</legend>
-          <label><input type="radio" name="valor" value="20" /><span>20 €</span></label>
-          <label><input type="radio" name="valor" value="50" checked /><span>50 €</span></label>
-          <label><input type="radio" name="valor" value="100" /><span>100 €</span></label>
-          <label><input type="radio" name="valor" value="250" /><span>250 €</span></label>
+          <label><input type="radio" name="valor" value="25" /><span>25 €</span></label>
+          <label><input type="radio" name="valor" value="50" /><span>50 €</span></label>
+          <label><input type="radio" name="valor" value="150" checked /><span>150 €</span></label>
+          <label><input type="radio" name="valor" value="300" /><span>300 €</span></label>
+          <label><input type="radio" name="valor" value="500" /><span>500 €</span></label>
           <label><input type="radio" name="valor" value="outro" /><span data-t="fm_outro">Other</span></label>
         </fieldset>
         <div class="fm-outro" id="fmOutroC">
           <label for="fmOutro" data-t="fm_outro_l">Another amount, in euros</label>
           <input id="fmOutro" name="outro" type="number" inputmode="numeric" min="5" max="5000" step="1" placeholder="75" />
         </div>
-        <div class="fm-campo">
-          <label for="fmNome" data-t="fm_nome_l">Your name on the wall (optional)</label>
-          <input id="fmNome" name="nome" type="text" maxlength="40" autocomplete="name" />
-        </div>
-        <div class="fm-campo">
-          <label for="fmMsg" data-t="fm_msg_l">A message for Francisca (optional)</label>
-          <textarea id="fmMsg" name="mensagem" maxlength="140" rows="2"></textarea>
-        </div>
-        <label class="fm-check"><input type="checkbox" name="mural" value="1" id="fmMural" /><span data-t="fm_mural">Show my name and message on the wall</span></label>
+        <button class="fm-bt" type="submit" id="fmBt"><span id="fmBtT" data-t="fm_bt">Give €150</span></button>
+        <details class="fm-nome">
+          <summary data-t="fm_nome_s">Add my name to the flag</summary>
+          <div class="fm-campo">
+            <label for="fmNome" data-t="fm_nome_l">Your name</label>
+            <input id="fmNome" name="nome" type="text" maxlength="40" autocomplete="name" />
+          </div>
+          <div class="fm-campo">
+            <label for="fmMsg" data-t="fm_msg_l">A message for Francisca (optional)</label>
+            <textarea id="fmMsg" name="mensagem" maxlength="140" rows="2"></textarea>
+          </div>
+          <p class="fm-nome__x" data-t="fm_nome_x">Your name is written on the flag and your message goes on a postcard. The amount is never shown.</p>
+        </details>
+        <input type="hidden" name="mural" value="1" />
         <input type="hidden" name="lingua" value="pt" id="fmLingua" />
         <input type="hidden" name="origem" value="" id="fmOrigem" />
-        <button class="fm-bt" type="submit" id="fmBt"><span id="fmBtT" data-t="fm_bt">Give</span></button>
         <p class="fm-erro" id="fmErro" role="alert" hidden></p>
-        <ul class="fm-metodos" aria-label="Formas de pagamento"><li>MB WAY</li><li>Multibanco</li><li>Visa</li><li>Mastercard</li><li>Apple Pay</li><li>Google Pay</li></ul>
+        <ul class="fm-metodos" aria-label="Formas de pagamento"><li>MB WAY</li><li>Apple Pay</li><li>Google Pay</li><li data-t="fm_cartao">Card</li><li>Multibanco</li></ul>
         <p class="fm-seguro" data-t="fm_seguro">Secure payment by Stripe, with an emailed receipt.</p>
       </form>
-    </aside>
+    </div>
 
-    <figure class="fm-foto">
-      <div class="fm-foto__i">
-        <img src="/img/taca-2026-trofeu.webp" alt="Francisca Salgado com o troféu de vice-campeã da Taça da Federação, em 2026"
-             width="1600" height="1066" fetchpriority="high" decoding="async" />
-        <div class="fm-selo"><span class="num">63.º</span><span><strong>Junior Orange Bowl</strong><span data-t="fm_selo">Invitation only · January 2027</span></span></div>
-      </div>
-    </figure>
+    <p class="fm-abre__l" data-t="fm_lead">Portuguese Under-18 champion Francisca has been invited to the <strong>63rd Junior Orange Bowl</strong> in Coral Gables, Florida, in January. It will be her first time playing in the United States. Our target is <strong>€5,000</strong> for the trip.</p>
   </div>
 </section>
 
@@ -251,33 +271,33 @@
   </div>
 </section>
 
-<!-- ═══ PARA ONDE VAI ══════════════════════════════════ -->
+<!-- ═══ PARA ONDE VAI: o recibo ════════════════════════ -->
 <section class="sec fm-sec" id="fmEtapasS">
-  <div class="env">
-    <div class="cab">
-      <div class="cab__t">
-        <p class="rot" data-t="fm_e_rot">Where it goes</p>
-        <h2 class="d d--m" data-t="fm_e_tit">Every euro has a job</h2>
-      </div>
-      <div class="cab__x"><p class="txt" data-t="fm_e_txt">The target is what the trip costs. As each amount is reached, that part of the trip is paid for.</p></div>
+  <div class="env fm-conta">
+    <div class="fm-conta__q">
+      <p class="rot" data-t="fm_e_rot">Where it goes</p>
+      <h2 class="d d--m" data-t="fm_e_tit">The bill for the trip</h2>
+      <p class="txt" data-t="fm_e_txt">No small print: this is what the trip costs. As gifts come in, each line gets paid.</p>
+      <p class="fm-nota" data-t="fm_e_nota">Estimates at November prices. Anything above the target goes to the rest of her season, and we will say so here.</p>
     </div>
-    <ol class="fm-etapas" id="fmEtapas"></ol>
-    <p class="fm-nota" data-t="fm_e_nota">Estimates at November prices. Anything above the target goes to the rest of her season, and we will say so here.</p>
+    <div class="fm-recibo" id="fmRecibo"></div>
   </div>
 </section>
 
-<!-- ═══ O MURAL ════════════════════════════════════════ -->
+<!-- ═══ QUEM ESTÁ COM ELA: a bandeira e os postais ═════ -->
 <section class="sec fm-sec">
   <div class="env">
     <div class="cab">
       <div class="cab__t">
         <p class="rot" data-t="fm_m_rot">Who is behind her</p>
-        <h2 class="d d--m" data-t="fm_m_tit">The wall</h2>
+        <h2 class="d d--m" data-t="fm_m_tit">The flag</h2>
       </div>
-      <div class="cab__x"><p class="txt" data-t="fm_m_txt">Only those who choose to appear, with the name and message they wrote. Amounts are never shown.</p></div>
+      <div class="cab__x"><p class="txt" data-t="fm_m_txt">Every name that joins is written on the flag that travels with her to Florida. Messages arrive as postcards. Amounts are never shown.</p></div>
     </div>
-    <ul class="fm-mural" id="fmMuralL"></ul>
-    <button class="cap fm-mais" type="button" id="fmMais" hidden data-t="fm_mais">Show more</button>
+    <figure class="fm-bandeira" id="fmBandeira" aria-describedby="fmBandeiraMais"></figure>
+    <p class="fm-bandeira__mais" id="fmBandeiraMais"></p>
+    <ul class="fm-postais" id="fmPostais"></ul>
+    <button class="cap fm-mais" type="button" id="fmMais" hidden data-t="fm_mais">Show more postcards</button>
   </div>
 </section>
 
@@ -296,19 +316,8 @@
           <li><span class="fm-evento__n">♪</span><div><strong data-t="fm_v4_t">A fado to close</strong><span data-t="fm_v4_x">Fado singer Marta Rosa, a member of Francisca's family, sings a song or two at prize-giving.</span></div></li>
         </ol>
       </div>
-      <figure class="fm-bandeira" aria-hidden="true">
-        <svg viewBox="0 0 420 380">
-          <rect x="70" y="20" width="7" height="350" rx="3" class="fm-bandeira__m"/>
-          <path d="M77 30 C150 18 230 46 330 30 L330 200 C230 216 150 188 77 200 Z" class="fm-bandeira__p"/>
-          <path d="M77 30 C150 18 230 46 330 30 L330 52 C230 68 150 40 77 52 Z" class="fm-bandeira__f"/>
-          <text x="203" y="104" text-anchor="middle" class="fm-bandeira__n">Vale de Janelas</text>
-          <text x="203" y="130" text-anchor="middle" class="fm-bandeira__s">ROAD TO THE ORANGE BOWL · 2027</text>
-          <g class="fm-bandeira__a">
-            <text x="104" y="164" transform="rotate(-6 104 164)">Francisca</text><text x="214" y="160" transform="rotate(-3 214 160)">boa sorte!</text>
-            <text x="128" y="188" transform="rotate(4 128 188)">obrigada!</text><text x="232" y="186" transform="rotate(5 232 186)">Florida 2027</text>
-          </g>
-          <ellipse cx="74" cy="370" rx="60" ry="7" class="fm-bandeira__g"/>
-        </svg>
+      <figure class="fm-evento__f">
+        <img src="/img/campos/praia-del-rey-9.webp" alt="O buraco 9 de Praia D'El Rey, com o green junto às dunas" width="1400" height="933" loading="lazy" decoding="async" />
       </figure>
     </div>
   </div>
@@ -337,20 +346,32 @@
 <!-- ═══ O ECRÃ DA CLUBHOUSE (só com ?ecra) ═════════════ -->
 <div class="fm-ecra" id="fmEcra" hidden>
   <div class="fm-ecra__in">
-    <div class="fm-ecra__q">
+    <div class="fm-ecra__cab">
       <p class="fm-ecra__r">Road to Florida · Rumo à Florida</p>
       <p class="d fm-ecra__t">Help Francisca <em>get to Florida.</em></p>
-      <div class="fm-ecra__n"><span class="num" id="fmEcraTotal">—</span><span class="fm-ecra__m" id="fmEcraMeta"></span></div>
-      <div class="fm-ecra__b"><i id="fmEcraBarra"></i></div>
-      <div class="fm-ecra__i" id="fmEcraInfo"></div>
-      <p class="fm-ecra__u" id="fmEcraUlt"></p>
     </div>
-    <div class="fm-ecra__qr">
-      <img src="/img/fundme/qr-ecra.svg" alt="" width="33" height="33" />
-      <p>Aponte a câmara<br />Point your camera</p>
-      <span>franciscasalgado.golf/fundme</span>
+    <div class="fm-ecra__rota" aria-hidden="true">
+      <span class="fm-ecra__c">LIS<small>Lisboa</small></span>
+      <div class="fm-ecra__linha"><i id="fmEcraFeito"></i><span class="fm-ecra__av" id="fmEcraAviao"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5Z"/></svg></span></div>
+      <span class="fm-ecra__c">MIA<small>Miami</small></span>
     </div>
+    <div class="fm-ecra__n"><span class="num" id="fmEcraTotal">—</span><span class="fm-ecra__m" id="fmEcraMeta"></span></div>
+    <div class="fm-ecra__i" id="fmEcraInfo"></div>
+    <div class="fm-ecra__band" id="fmEcraBandeira"></div>
+    <div class="fm-ecra__lado">
+      <div class="fm-ecra__qr">
+        <img src="/img/fundme/qr-ecra.svg" alt="" width="33" height="33" />
+        <p>Aponte a câmara<br />Point your camera</p>
+        <span>franciscasalgado.golf/fundme</span>
+      </div>
+      <div class="fm-ecra__foto" aria-hidden="true">
+        <img src="/img/retrato.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" />
+        <span>Campeã nacional Sub-18<br />Portuguese U18 champion</span>
+      </div>
+    </div>
+    <div class="fm-ecra__postais"><div class="fm-ecra__fita" id="fmEcraFita"></div></div>
   </div>
+  <div class="fm-ecra__festa" id="fmEcraFesta" aria-live="polite"></div>
 </div>
 
 </main>

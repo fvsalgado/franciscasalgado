@@ -1,25 +1,32 @@
 /* A angariação «Rumo à Florida» (/fundme).
  *
- * Tudo o que mexe vem de /api/fundme: o total, o acumulado dia a dia, o mural
- * e o que está em data/fundme.json (meta, etapas, evento). Se a função não
- * responder, a página lê o data/fundme.json e mostra o que lá está, sem total.
+ * Tudo o que mexe vem de /api/fundme: o total, o acumulado dia a dia, os
+ * nomes e as mensagens, e o que está em data/fundme.json (meta, etapas,
+ * evento). Se a função não responder, a página lê o data/fundme.json e
+ * mostra o que lá está, sem total.
  *
- * O formulário funciona sem JavaScript (é um POST para /api/fundme/apoiar,
- * que responde com um 303 para a Stripe). Com JavaScript, o botão diz o
- * valor, o «Outro» abre o seu campo, e o pedido vai em JSON.
+ * A página: o cartão de embarque (a viagem e quanto já se juntou), o apoio
+ * (um valor e um botão; o nome e a mensagem só para quem quiser), o gráfico,
+ * a conta da viagem em forma de recibo, a bandeira com os nomes de quem
+ * apoiou e os postais com as mensagens.
  *
- * Com ?ecra na morada, a página passa a ser o ecrã da clubhouse: o total em
- * grande e o QR code, a atualizar-se sozinho de 30 em 30 segundos.
+ * O formulário funciona sem JavaScript (um POST para /api/fundme/apoiar, que
+ * responde com um 303 para a Stripe). Com JavaScript vai em JSON.
+ *
+ * Com ?ecra na morada, a página passa a ser o ecrã da clubhouse: o avião a
+ * andar de Lisboa para Miami, o total, a bandeira a ondular com os nomes, os
+ * postais a passar e uma festa a cada apoio novo. Atualiza-se sozinho.
  */
 
 const $ = (id) => document.getElementById(id);
 const DIA = 86400000;
+const AVIAO = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5Z"/></svg>';
 
 const T = {
   pt: {
-    de: (m) => `angariados de ${m}`,
-    apoios: (n, p) => `<b>${n}</b> ${n === 1 ? 'apoio' : 'apoios'} · ${p}% da meta`,
-    dias: (n) => (n === 0 ? '<b>é hoje</b>' : `faltam <b>${n}</b> ${n === 1 ? 'dia' : 'dias'}`),
+    de: (m) => `de ${m}`,
+    apoios: (n, p) => `<b>${n}</b> ${n === 1 ? 'apoio' : 'apoios'} · ${p}%`,
+    dias: (n) => (n === 0 ? '<b>embarca hoje</b>' : `faltam <b>${n}</b> ${n === 1 ? 'dia' : 'dias'}`),
     bt: (v) => `Apoiar com ${v}`,
     btOutro: 'Apoiar',
     fechado: 'Os apoios abrem em breve',
@@ -33,33 +40,35 @@ const T = {
       indisponivel: 'Não foi possível abrir o pagamento. Tente outra vez.',
       rede: 'Sem ligação. Tente outra vez.',
     },
-    obrigado: (n) => `<strong>Obrigado${n ? `, ${n}` : ''}!</strong> O seu apoio já conta.`,
+    obrigado: (n) => `<strong>Obrigado${n ? `, ${n}` : ''}!</strong> O seu apoio já conta${n ? ', e o seu nome já está na bandeira' : ''}.`,
     aEntrar: '<strong>Obrigado!</strong> O pagamento está a ser confirmado. Com Multibanco, o apoio aparece aqui quando a referência for paga.',
     fontes: { online: 'online', clube: 'no clube', empresas: 'empresas, pela Fundação do Desporto' },
     hoje: 'hoje',
+    nesseDia: 'nesse dia',
     semFontes: 'Ainda sem apoios. O primeiro pode ser o seu.',
     meta: 'Meta',
     roll: 'Roll Up no Vale de Janelas',
     partida: 'Florida',
-    pago: '✓ Paga',
-    caminho: 'A caminho',
     anonimo: 'Anónimo',
     quando: (d) => (d === 0 ? 'hoje' : d === 1 ? 'ontem' : `há ${d} dias`),
-    noClube: 'no clube',
-    muralVazio: 'O mural está à espera do primeiro nome.',
     eventoData: (d, l) => `${d} · ${l}`,
     eventoSemData: (l) => `Data a anunciar · ${l}`,
     tabela: ['Dia', 'Nesse dia', 'Acumulado'],
-    ecraMeta: (m) => `de ${m}`,
-    ecraInfo: (n, h) => `<span><b>${n}</b> apoios</span>${h ? `<span><b>+${h}</b> hoje</span>` : ''}`,
-    ecraUlt: (n, m) => `Último apoio: <b>«${m}»</b> — ${n}`,
-    desatualizado: 'O total pode estar uns minutos atrasado.',
-    mil: 'mil',
+    recibo: {
+      cab: 'Rumo à Florida', sub: 'Lisboa → Miami · janeiro de 2027', n: 'Recibo n.º 2027',
+      faltam: (v) => `faltam ${v}`, pago: 'Pago', total: 'Total', juntamos: 'Já juntámos', falta: 'Falta',
+      obrigado: 'Obrigado!', completo: 'Viagem paga. Obrigado!',
+    },
+    bandeiraVazia: 'A bandeira está à espera do primeiro nome.',
+    semNome: (n) => (n === 1 ? 'E mais um apoio sem nome.' : `E mais ${n} apoios sem nome.`),
+    nomes: (n) => (n === 1 ? '1 nome na bandeira.' : `${n} nomes na bandeira.`),
+    postaisVazio: 'Ainda não chegaram postais. O primeiro pode ser o seu.',
+    noClube: 'no clube',
   },
   en: {
-    de: (m) => `raised of ${m}`,
-    apoios: (n, p) => `<b>${n}</b> ${n === 1 ? 'gift' : 'gifts'} · ${p}% of the target`,
-    dias: (n) => (n === 0 ? '<b>today</b>' : `<b>${n}</b> ${n === 1 ? 'day' : 'days'} to go`),
+    de: (m) => `of ${m}`,
+    apoios: (n, p) => `<b>${n}</b> ${n === 1 ? 'gift' : 'gifts'} · ${p}%`,
+    dias: (n) => (n === 0 ? '<b>flies today</b>' : `<b>${n}</b> ${n === 1 ? 'day' : 'days'} to go`),
     bt: (v) => `Give ${v}`,
     btOutro: 'Give',
     fechado: 'Opening soon',
@@ -73,28 +82,30 @@ const T = {
       indisponivel: 'The payment could not be opened. Please try again.',
       rede: 'No connection. Please try again.',
     },
-    obrigado: (n) => `<strong>Thank you${n ? `, ${n}` : ''}!</strong> Your gift already counts.`,
+    obrigado: (n) => `<strong>Thank you${n ? `, ${n}` : ''}!</strong> Your gift already counts${n ? ', and your name is on the flag' : ''}.`,
     aEntrar: '<strong>Thank you!</strong> Your payment is being confirmed. With Multibanco, it shows here once the reference is paid.',
     fontes: { online: 'online', clube: 'at the club', empresas: 'companies, via Fundação do Desporto' },
     hoje: 'today',
+    nesseDia: 'that day',
     semFontes: 'No gifts yet. The first one could be yours.',
     meta: 'Target',
     roll: 'Roll Up at Vale de Janelas',
     partida: 'Florida',
-    pago: '✓ Paid',
-    caminho: 'In progress',
     anonimo: 'Anonymous',
     quando: (d) => (d === 0 ? 'today' : d === 1 ? 'yesterday' : `${d} days ago`),
-    noClube: 'at the club',
-    muralVazio: 'The wall is waiting for its first name.',
     eventoData: (d, l) => `${d} · ${l}`,
     eventoSemData: (l) => `Date to be announced · ${l}`,
     tabela: ['Day', 'That day', 'Running total'],
-    ecraMeta: (m) => `of ${m}`,
-    ecraInfo: (n, h) => `<span><b>${n}</b> gifts</span>${h ? `<span><b>+${h}</b> today</span>` : ''}`,
-    ecraUlt: (n, m) => `Latest: <b>«${m}»</b> — ${n}`,
-    desatualizado: 'The total may be a few minutes behind.',
-    mil: 'k',
+    recibo: {
+      cab: 'Road to Florida', sub: 'Lisbon → Miami · January 2027', n: 'Receipt no. 2027',
+      faltam: (v) => `${v} to go`, pago: 'Paid', total: 'Total', juntamos: 'Raised so far', falta: 'Still to go',
+      obrigado: 'Thank you!', completo: 'Trip paid for. Thank you!',
+    },
+    bandeiraVazia: 'The flag is waiting for its first name.',
+    semNome: (n) => (n === 1 ? 'And one more gift without a name.' : `And ${n} more gifts without a name.`),
+    nomes: (n) => (n === 1 ? '1 name on the flag.' : `${n} names on the flag.`),
+    postaisVazio: 'No postcards yet. The first one could be yours.',
+    noClube: 'at the club',
   },
 };
 
@@ -111,6 +122,7 @@ const dataCurta = (dia, l) => new Intl.DateTimeFormat(l === 'en' ? 'en-GB' : 'pt
   .format(new Date(ms(dia))).replace('.', '');
 const dataLonga = (dia, l) => new Intl.DateTimeFormat(l === 'en' ? 'en-GB' : 'pt-PT', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' })
   .format(new Date(ms(dia)));
+const quieto = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ── os dados ─────────────────────────────────────────────── */
 
@@ -130,13 +142,18 @@ async function carregar() {
   }
 }
 
-/* ── o cartão ─────────────────────────────────────────────── */
+/* ── o cartão de embarque ─────────────────────────────────── */
 
-function cartao(d, l) {
+function bilhete(d, l) {
   const t = T[l];
   const total = d.total ?? 0;
   $('fmTotal').textContent = d.total == null ? '—' : euros(total, l);
   $('fmMeta').textContent = t.de(euros(d.meta, l));
+  if (d.partida) {
+    const dia = new Date(d.partida + 'T12:00:00Z');
+    const mes = new Intl.DateTimeFormat(l === 'en' ? 'en-GB' : 'pt-PT', { month: 'short', timeZone: 'UTC' }).format(dia).replace('.', '');
+    $('fmEmbarque').textContent = `${dia.getUTCDate()} ${mes.toUpperCase()}`;
+  }
   const p = Math.min(100, (total / d.meta) * 100);
   const barra = $('fmBarra');
   barra.setAttribute('aria-valuemax', d.meta);
@@ -149,10 +166,9 @@ function cartao(d, l) {
   $('fmApoios').innerHTML = d.total == null ? '' : t.apoios(d.apoios ?? 0, Math.floor(p));
   const faltam = d.partida ? diasEntre(diaLisboa(), d.partida) : -1;
   $('fmDias').innerHTML = faltam >= 0 ? t.dias(faltam) : '';
-  if (d.stripe === 'erro') $('fmApoios').insertAdjacentHTML('beforeend', ` <span class="fm-aviso">· ${t.desatualizado}</span>`);
 }
 
-/* ── o formulário ─────────────────────────────────────────── */
+/* ── o apoio ──────────────────────────────────────────────── */
 
 function formulario(d, l) {
   const t = T[l];
@@ -162,11 +178,11 @@ function formulario(d, l) {
   if (origem && /^[a-z0-9-]{1,20}$/.test(origem)) $('fmOrigem').value = origem;
 
   // os valores vêm dos dados, para se poderem mudar sem tocar no HTML
-  const valores = d.valores?.length ? d.valores : [20, 50, 100, 250];
-  const inicial = valores.includes(d.valorInicial) ? d.valorInicial : valores[1] ?? valores[0];
-  $('fmValores').querySelectorAll('label:not(:last-of-type)').forEach((lb) => lb.remove());
-  const outro = $('fmValores').querySelector('label');
-  outro.insertAdjacentHTML('beforebegin', valores.map((v) =>
+  const valores = d.valores?.length ? d.valores : [25, 50, 150, 300, 500];
+  const inicial = valores.includes(d.valorInicial) ? d.valorInicial : valores[Math.min(2, valores.length - 1)];
+  const outroL = $('fmValores').querySelector('input[value="outro"]').closest('label');
+  $('fmValores').querySelectorAll('label').forEach((lb) => { if (lb !== outroL) lb.remove(); });
+  outroL.insertAdjacentHTML('beforebegin', valores.map((v) =>
     `<label><input type="radio" name="valor" value="${v}"${v === inicial ? ' checked' : ''} /><span>${euros(v, l)}</span></label>`).join(''));
   const campo = $('fmOutro');
   campo.min = d.minimo ?? 5;
@@ -186,13 +202,6 @@ function formulario(d, l) {
   });
   campo.addEventListener('input', atualizar);
   campo.addEventListener('focus', () => { f.querySelector('input[value="outro"]').checked = true; atualizar(); });
-
-  // quem escreve o nome para o mural quer, em princípio, aparecer nele; quem
-  // desmarca a caixa decide o contrário, e isso não se desfaz
-  const mural = $('fmMural');
-  let mexeu = false;
-  mural.addEventListener('change', () => { mexeu = true; });
-  $('fmNome').addEventListener('input', (e) => { if (!mexeu) mural.checked = e.target.value.trim().length > 0; });
 
   const bt = $('fmBt');
   const fechar = !d.aberto;
@@ -221,7 +230,9 @@ function formulario(d, l) {
       const r = await fetch(f.action, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...dadosF, mural: mural.checked ? '1' : '0' }),
+        // quem escreve o nome ou a mensagem abriu de propósito «juntar o meu
+        // nome à bandeira»: é isso que diz que quer aparecer
+        body: JSON.stringify({ ...dadosF, mural: (dadosF.nome || dadosF.mensagem) ? '1' : '0' }),
       });
       const j = await r.json().catch(() => ({}));
       if (r.ok && j.url) { location.assign(j.url); return; }
@@ -239,7 +250,7 @@ function formulario(d, l) {
 async function obrigado(l) {
   const q = new URLSearchParams(location.search);
   const sessao = q.get('obrigado');
-  if (!sessao) return;
+  if (!sessao) return false;
   const caixa = $('fmObrigado');
   // a morada fica limpa: recarregar ou partilhar não repete o agradecimento
   q.delete('obrigado');
@@ -313,7 +324,7 @@ function grafico(d, l) {
   s += `<text class="fm-g__fim-t" x="${x(ult.dia) + (aDireita ? 12 : -12)}" y="${y(ult.total) + 6}" text-anchor="${aDireita ? 'start' : 'end'}">${euros(ult.total, l)}</text>`;
   s += '<line class="fm-g__cruz" id="fmCruz" x1="0" x2="0" y1="0" y2="0" visibility="hidden"/><circle class="fm-g__cruz-p" id="fmCruzP" r="5" visibility="hidden"/>';
 
-  const resumoTxt = `${t.de(euros(d.meta, l))}: ${euros(d.total ?? 0, l)}`;
+  const resumoTxt = `${euros(d.total ?? 0, l)} ${t.de(euros(d.meta, l))}`;
   caixa.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(resumoTxt)}">${s}</svg><div class="fm-g__dica" id="fmDica" hidden></div>`;
 
   // a dica ao passar: o dia mais perto do ponteiro
@@ -331,7 +342,7 @@ function grafico(d, l) {
     cruz.setAttribute('x1', cx); cruz.setAttribute('x2', cx); cruz.setAttribute('y1', M.t); cruz.setAttribute('y2', y(0));
     cruzP.setAttribute('cx', cx); cruzP.setAttribute('cy', cy);
     cruz.setAttribute('visibility', 'visible'); cruzP.setAttribute('visibility', 'visible');
-    dica.innerHTML = `<span>${dataCurta(melhor.dia, l)}</span><b>${euros(melhor.total, l)}</b>${melhor.dia_valor ? `<span>+${euros(melhor.dia_valor, l)} ${t.hoje === 'hoje' ? 'nesse dia' : 'that day'}</span>` : ''}`;
+    dica.innerHTML = `<span>${dataCurta(melhor.dia, l)}</span><b>${euros(melhor.total, l)}</b>${melhor.dia_valor ? `<span>+${euros(melhor.dia_valor, l)} ${t.nesseDia}</span>` : ''}`;
     dica.hidden = false;
     const esq = (cx / W) * r.width;
     dica.style.left = `${Math.min(Math.max(esq, 60), r.width - 60)}px`;
@@ -360,53 +371,155 @@ function fontes(d, l) {
   $('fmFontes').innerHTML = itens.length ? itens.join('') : `<p class="fm-fonte__vazio">${t.semFontes}</p>`;
 }
 
-/* ── as etapas ────────────────────────────────────────────── */
+/* ── a conta da viagem, em recibo ─────────────────────────── */
 
-function etapas(d, l) {
-  const t = T[l];
+function recibo(d, l) {
+  const t = T[l].recibo;
   const lista = d.etapas ?? [];
   if (!lista.length) { $('fmEtapasS').hidden = true; return; }
-  let acc = 0;
   const total = d.total ?? 0;
-  $('fmEtapas').innerHTML = lista.map((e) => {
+  const meta = lista.reduce((s, e) => s + e.valor, 0) || d.meta;
+  let acc = 0;
+  let pagas = 0;
+  const linhas = lista.map((e) => {
     const ini = acc;
     acc += e.valor;
     const p = Math.max(0, Math.min(1, (total - ini) / e.valor));
-    const cls = p >= 1 ? 'fm-etapa--feita' : p > 0 ? 'fm-etapa--agora' : '';
-    const est = p >= 1 ? t.pago : p > 0 ? t.caminho : '';
-    return `<li class="fm-etapa ${cls}">
-      <span class="fm-etapa__e">${est}</span>
-      <span class="fm-etapa__v num">${euros(e.valor, l)}</span>
-      <span class="fm-etapa__t">${esc(tx(e.t, l))}</span>
-      <span class="fm-etapa__x">${esc(tx(e.x, l))}</span>
-      <span class="fm-etapa__b" aria-hidden="true"><i style="width:${p * 100}%"></i></span>
+    if (p >= 1) pagas++;
+    const estado = p >= 1 ? 'fm-r__l--pago' : p > 0 ? 'fm-r__l--meio' : '';
+    const nota = p > 0 && p < 1 ? t.faltam(euros(Math.ceil(e.valor - (total - ini)), l)) : tx(e.x, l);
+    return `<li class="fm-r__l ${estado}">
+      <span class="fm-r__t"><span>${esc(tx(e.t, l))}</span></span>
+      <span class="fm-r__v">${euros(e.valor, l)}</span>
+      <span class="fm-r__x">${esc(nota)}</span>
+      ${p > 0 && p < 1 ? `<span class="fm-r__b" aria-hidden="true"><i style="width:${p * 100}%"></i></span>` : ''}
     </li>`;
-  }).join('');
+  });
+  const falta = Math.max(0, meta - total);
+  const completo = falta === 0 && total > 0;
+  $('fmRecibo').innerHTML = `
+    <div class="fm-r">
+      <div class="fm-r__cab">
+        <svg class="fm-r__ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M8 20.2V3.6l9.2 3.3L8 10.2"/><ellipse cx="12" cy="20.4" rx="6.8" ry="1.7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <b>${t.cab}</b>
+        <span>${t.sub}</span>
+        <span class="fm-r__n">${t.n}</span>
+      </div>
+      <ol class="fm-r__ls">${linhas.join('')}</ol>
+      ${pagas ? `<span class="fm-r__selo" style="--linhas:${pagas}" aria-hidden="true">${t.pago}<small>${euros(lista.slice(0, pagas).reduce((s, e) => s + e.valor, 0), l)}</small></span>` : ''}
+      <div class="fm-r__tot"><span>${t.total}</span><span>${euros(meta, l)}</span></div>
+      <div class="fm-r__tot fm-r__tot--j"><span>${t.juntamos}</span><span>${euros(total, l)}</span></div>
+      ${completo ? '' : `<div class="fm-r__tot fm-r__tot--f"><span>${t.falta}</span><span>${euros(falta, l)}</span></div>`}
+      <div class="fm-r__pe">
+        <p>${completo ? t.completo : t.obrigado}</p>
+        <span class="fm-r__barras" aria-hidden="true"></span>
+        <span class="fm-r__url">franciscasalgado.golf/fundme</span>
+      </div>
+    </div>`;
 }
 
-/* ── o mural ──────────────────────────────────────────────── */
+/* ── a bandeira com os nomes ──────────────────────────────── */
 
-function mural(d, l) {
+const unicos = (mural) => {
+  const vistos = new Set();
+  return (mural ?? []).map((m) => m.nome).filter((n) => {
+    if (!n) return false;
+    const k = n.toLocaleLowerCase('pt');
+    if (vistos.has(k)) return false;
+    vistos.add(k);
+    return true;
+  });
+};
+
+/** A bandeira desenhada em SVG, com os nomes escritos como assinaturas. A
+ *  largura decide quantos cabem por linha; o pano cresce para baixo com o
+ *  número de linhas. `ondula` põe o pano a mexer (o ecrã da clubhouse). */
+export function bandeiraSVG(nomes, { W = 640, letra = 20, max = 80, ondula = false } = {}) {
+  const x0 = 54;
+  const larg = W - x0 - 34;
+  const passo = letra * 1.7;
+  const linhas = [];
+  let fila = [];
+  let usado = 0;
+  const lista = nomes.slice(0, max);
+  for (const n of lista) {
+    const w = n.length * letra * 0.5 + letra * 1.2;
+    if (usado + w > larg && fila.length) { linhas.push(fila); fila = []; usado = 0; }
+    fila.push([n, w]);
+    usado += w;
+  }
+  if (fila.length) linhas.push(fila);
+  const yNomes = 150;
+  const fundo = Math.max(250, yNomes + linhas.length * passo + 14);
+  const H = fundo + 60;
+  // um sorteio fixo por nome: a mesma pessoa fica sempre com a mesma inclinação
+  const roda = (n) => { let h = 7; for (const c of n) h = (h * 31 + c.charCodeAt(0)) % 997; return (h % 11) - 5; };
+  let txt = '';
+  linhas.forEach((f, r) => {
+    const tot = f.reduce((s, [, w]) => s + w, 0);
+    let x = x0 + (larg - tot) / 2;
+    const y = yNomes + r * passo;
+    for (const [n, w] of f) {
+      const cx = (x + w / 2).toFixed(0);
+      const tam = letra + (roda(n) % 3);
+      txt += `<text x="${cx}" y="${y}" text-anchor="middle" font-size="${tam}" transform="rotate(${roda(n)} ${cx} ${y})">${esc(n)}</text>`;
+      x += w;
+    }
+  });
+  const R = W - 20;
+  const pano = (o) => `M${x0} 24 C${W * 0.3} ${8 + o} ${W * 0.62} ${44 - o} ${R} 22 L${R} ${fundo} C${W * 0.62} ${fundo + 22 - o} ${W * 0.3} ${fundo - 18 + o} ${x0} ${fundo + 6} Z`;
+  const faixa = (o) => `M${x0} 24 C${W * 0.3} ${8 + o} ${W * 0.62} ${44 - o} ${R} 22 L${R} 52 C${W * 0.62} ${72 - o} ${W * 0.3} ${38 + o} ${x0} 54 Z`;
+  const anima = (f) => (ondula ? `<animate attributeName="d" dur="5s" repeatCount="indefinite" values="${f(0)};${f(14)};${f(0)}" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1"/>` : '');
+  return `<svg viewBox="0 0 ${W} ${H}" class="fm-flag${ondula ? ' fm-flag--ondula' : ''}" aria-hidden="true">
+    <rect x="${x0 - 8}" y="14" width="8" height="${H - 22}" rx="4" class="fm-flag__mastro"/>
+    <path d="${pano(0)}" class="fm-flag__pano">${anima(pano)}</path>
+    <path d="${faixa(0)}" class="fm-flag__faixa">${anima(faixa)}</path>
+    <text x="${x0 + larg / 2}" y="98" text-anchor="middle" class="fm-flag__clube">Vale de Janelas</text>
+    <text x="${x0 + larg / 2}" y="121" text-anchor="middle" class="fm-flag__sub">ROAD TO THE ORANGE BOWL · 2027</text>
+    <g class="fm-flag__nomes">${txt}</g>
+    <ellipse cx="${x0 - 4}" cy="${H - 8}" rx="64" ry="7" class="fm-flag__chao"/>
+  </svg>`;
+}
+
+function bandeira(d, l) {
   const t = T[l];
-  const lista = d.mural ?? [];
-  const ul = $('fmMuralL');
-  if (!lista.length) { ul.innerHTML = `<li class="fm-msg fm-msg--vazio">${t.muralVazio}</li>`; return; }
+  const nomes = unicos(d.mural);
+  const caixa = $('fmBandeira');
+  const W = caixa.clientWidth < 560 ? 420 : 680;
+  caixa.innerHTML = bandeiraSVG(nomes.length ? nomes : [], { W, letra: 20, ondula: !quieto() });
+  const semNome = Math.max(0, (d.apoios ?? 0) - (d.mural ?? []).filter((m) => m.nome).length);
+  const partes = [];
+  if (nomes.length) partes.push(t.nomes(nomes.length)); else partes.push(t.bandeiraVazia);
+  if (semNome > 0 && nomes.length) partes.push(t.semNome(semNome));
+  $('fmBandeiraMais').textContent = partes.join(' ');
+}
+
+/* ── os postais ───────────────────────────────────────────── */
+
+const postal = (m, l, i) => {
+  const t = T[l];
   const hoje = diaLisboa();
-  const cartaoMsg = (m) => {
-    const msg = tx(m.mensagem, l);
-    const quem = m.nome || t.anonimo;
-    const quando = m.origem === 'clube' ? `${t.noClube}, ${dataCurta(m.dia, l)}` : t.quando(Math.max(0, diasEntre(m.dia, hoje)));
-    return `<li class="fm-msg${m.origem === 'clube' ? ' fm-msg--clube' : ''}">
-      ${msg ? `<p class="fm-msg__t">«${esc(msg)}»</p>` : ''}
-      <p class="fm-msg__q"><b>${esc(quem)}</b><span>${esc(quando)}</span></p></li>`;
-  };
-  const POR = 8;
+  const carimbo = dataCurta(m.dia, l).toUpperCase();
+  const quando = m.origem === 'clube' ? t.noClube : t.quando(Math.max(0, diasEntre(m.dia, hoje)));
+  return `<li class="fm-postal" style="--r:${[-2.2, 1.6, -1, 2, -1.6, 1.1][i % 6]}deg">
+    <span class="fm-postal__selo" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M8 20.2V3.6l9.2 3.3L8 10.2"/></svg></span>
+    <span class="fm-postal__carimbo" aria-hidden="true">${esc(carimbo)}</span>
+    <p class="fm-postal__t">${esc(tx(m.mensagem, l))}</p>
+    <p class="fm-postal__q"><b>${esc(m.nome || t.anonimo)}</b><span>${esc(quando)}</span></p>
+  </li>`;
+};
+
+function postais(d, l) {
+  const lista = (d.mural ?? []).filter((m) => tx(m.mensagem, l));
+  const ul = $('fmPostais');
+  if (!lista.length) { ul.innerHTML = `<li class="fm-postais__vazio">${T[l].postaisVazio}</li>`; $('fmMais').hidden = true; return; }
+  const POR = 6;
   let mostrados = POR;
   const pintar = () => {
-    ul.innerHTML = lista.slice(0, mostrados).map(cartaoMsg).join('');
+    ul.innerHTML = lista.slice(0, mostrados).map((m, i) => postal(m, l, i)).join('');
     $('fmMais').hidden = mostrados >= lista.length;
   };
-  $('fmMais').onclick = () => { mostrados += POR * 2; pintar(); };
+  $('fmMais').onclick = () => { mostrados += POR; pintar(); };
   pintar();
 }
 
@@ -420,15 +533,80 @@ function evento(d, l) {
 
 /* ── o ecrã da clubhouse ──────────────────────────────────── */
 
+/* Um número a subir até ao valor novo, em vez de saltar. */
+function contar(el, de, ate, dur = 1800) {
+  if (quieto() || de === ate) { el.textContent = euros(ate, 'pt'); return; }
+  const t0 = performance.now();
+  const passo = (agora) => {
+    const k = Math.min(1, (agora - t0) / dur);
+    const e = 1 - (1 - k) ** 3;
+    el.textContent = euros(de + (ate - de) * e, 'pt');
+    if (k < 1) requestAnimationFrame(passo);
+  };
+  requestAnimationFrame(passo);
+}
+
+/* A festa de um apoio novo: uma faixa a descer com o nome (se o houver) e
+   uma chuva de bolas de golfe a sair do número. */
+function festa(novo, valor) {
+  const caixa = $('fmEcraFesta');
+  const quem = novo?.nome ? ` · Obrigado, ${esc(novo.nome)}!` : ' · Obrigado!';
+  caixa.innerHTML = `<div class="fm-festa__faixa"><b>+${euros(valor, 'pt')}</b> Novo apoio · New gift${quem}</div>`;
+  if (!quieto()) {
+    for (let i = 0; i < 26; i++) {
+      const b = document.createElement('i');
+      b.className = 'fm-festa__bola';
+      b.style.setProperty('--x', `${(Math.random() - 0.5) * 70}vw`);
+      b.style.setProperty('--y', `${-20 - Math.random() * 50}vh`);
+      b.style.setProperty('--d', `${1.4 + Math.random() * 1.2}s`);
+      b.style.setProperty('--t', `${0.6 + Math.random() * 0.9}`);
+      caixa.append(b);
+    }
+  }
+  caixa.classList.remove('fm-festa--on');
+  void caixa.offsetWidth;
+  caixa.classList.add('fm-festa--on');
+  setTimeout(() => caixa.classList.remove('fm-festa--on'), 7000);
+}
+
+let ecraAntes = null;
 function ecra(d) {
-  // bilingue de propósito: os sócios são de muitos sítios
-  const pt = T.pt;
-  $('fmEcraTotal').textContent = euros(d.total ?? 0, 'pt');
-  $('fmEcraMeta').innerHTML = `${pt.ecraMeta(euros(d.meta, 'pt'))}<br />${T.en.ecraMeta(euros(d.meta, 'en'))}`;
-  $('fmEcraBarra').style.width = `${Math.min(100, ((d.total ?? 0) / d.meta) * 100)}%`;
-  $('fmEcraInfo').innerHTML = `<span><b>${d.apoios ?? 0}</b> apoios · gifts</span>${d.hoje ? `<span><b>+${euros(d.hoje, 'pt')}</b> hoje · today</span>` : ''}${d.partida ? `<span>Junior Orange Bowl · <b>${dataCurta(d.partida, 'pt')}</b></span>` : ''}`;
-  const u = (d.mural ?? []).find((m) => m.mensagem);
-  $('fmEcraUlt').innerHTML = u ? `<b>«${esc(tx(u.mensagem, 'pt'))}»</b> — ${esc(u.nome || 'Anónimo')}` : '';
+  const total = d.total ?? 0;
+  const p = Math.min(100, (total / d.meta) * 100);
+  const antes = ecraAntes;
+  const chaveDe = (m) => `${m.nome ?? ''}|${tx(m.mensagem, 'pt') ?? ''}|${m.dia}`;
+  ecraAntes = { total, nomes: unicos(d.mural).join('|'), vistos: new Set((d.mural ?? []).map(chaveDe)) };
+
+  contar($('fmEcraTotal'), antes ? antes.total : 0, total, antes ? 2200 : 2600);
+  $('fmEcraMeta').innerHTML = `de ${euros(d.meta, 'pt')}<br />of ${euros(d.meta, 'en')}`;
+  $('fmEcraFeito').style.width = `${p}%`;
+  $('fmEcraAviao').style.left = `${p}%`;
+  const faltam = d.partida ? diasEntre(diaLisboa(), d.partida) : -1;
+  $('fmEcraInfo').innerHTML = [
+    `<span><b>${d.apoios ?? 0}</b> apoios · gifts</span>`,
+    d.hoje ? `<span><b>+${euros(d.hoje, 'pt')}</b> hoje · today</span>` : '',
+    faltam >= 0 ? `<span><b>${faltam}</b> dias · days to go</span>` : '',
+  ].join('');
+
+  // a bandeira só se redesenha quando entra um nome novo
+  const nomes = unicos(d.mural);
+  if (!antes || antes.nomes !== ecraAntes.nomes) {
+    $('fmEcraBandeira').innerHTML = bandeiraSVG(nomes, { W: 620, letra: 22, max: 60, ondula: true });
+  }
+
+  // os postais a passar, numa fita sem fim (a lista vai duas vezes)
+  const msgs = (d.mural ?? []).filter((m) => tx(m.mensagem, 'pt')).slice(0, 14);
+  const fita = $('fmEcraFita');
+  const chave = msgs.map((m) => `${m.nome}${tx(m.mensagem, 'pt')}`).join('|');
+  if (fita.dataset.chave !== chave) {
+    fita.dataset.chave = chave;
+    const um = msgs.map((m, i) => postal(m, 'pt', i)).join('');
+    fita.innerHTML = msgs.length ? `<ul>${um}</ul><ul aria-hidden="true">${um}</ul>` : '';
+    fita.style.setProperty('--dur', `${Math.max(30, msgs.length * 7)}s`);
+  }
+
+  // agradece pelo nome só a quem acabou de entrar no mural
+  if (antes && total > antes.total) festa((d.mural ?? []).find((m) => m.nome && !antes.vistos.has(chaveDe(m))), total - antes.total);
 }
 
 /* ── tudo ─────────────────────────────────────────────────── */
@@ -441,27 +619,24 @@ export async function fundme(l) {
   if (noEcra) {
     $('fmEcra').hidden = false;
     ecra(d);
-    setInterval(async () => { const n = await carregar(); if (n) ecra(n); }, 30000);
+    setInterval(async () => { const n = await carregar(); if (n) ecra(n); }, 20000);
     return;
   }
 
-  cartao(d, l);
+  const pintar = (x) => { bilhete(x, l); grafico(x, l); fontes(x, l); recibo(x, l); bandeira(x, l); postais(x, l); };
+  pintar(d);
   formulario(d, l);
-  grafico(d, l);
-  fontes(d, l);
-  etapas(d, l);
-  mural(d, l);
   evento(d, l);
 
   let largura = $('fmGrafico').clientWidth;
   addEventListener('resize', () => {
     const w = $('fmGrafico').clientWidth;
-    if (Math.abs(w - largura) > 20) { largura = w; grafico(d, l); }
+    if (Math.abs(w - largura) > 20) { largura = w; grafico(d, l); bandeira(d, l); }
   });
 
   // quem volta da Stripe: agradece, e quando o pagamento entrar refaz os números
   if (await obrigado(l)) {
     const n = await carregar();
-    if (n) { cartao(n, l); grafico(n, l); fontes(n, l); etapas(n, l); mural(n, l); }
+    if (n) pintar(n);
   }
 }

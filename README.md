@@ -309,7 +309,7 @@ A angariação para a viagem ao Junior Orange Bowl: `franciscasalgado.golf/fundm
 e `/en/fundme` (o `vercel.json` reescreve as duas para o `.html`). Quem apoia
 escolhe o valor, deixa o nome e uma mensagem se quiser, e paga na Stripe com
 MB WAY, Multibanco, cartão, Apple Pay ou Google Pay. O total, o gráfico dia a
-dia, as etapas e o mural atualizam-se sozinhos.
+dia, o recibo da viagem e a bandeira com os nomes atualizam-se sozinhos.
 
 **A Stripe é o registo; não há base de dados.** `api/fundme/index.js` vai
 buscar à Stripe os pagamentos do Checkout com `metadata.kind = 'fundme'` desde
@@ -339,14 +339,18 @@ pagamento. As contas estão em `api/fundme/_comum.js`, separadas da rede.
 | `valores`, `valorInicial`, `minimo`, `maximo` | os botões de valor e os limites de um apoio |
 | `etapas` | para onde vai o dinheiro, por ordem: cada uma fica «paga» quando o total lá chega. **Os valores atuais são estimativas** |
 | `evento` | `mostrar`, a `data` (`"2026-12-02"`, ou `null` para «a anunciar») e o `local`. Com data, o dia fica marcado no gráfico |
-| `manuais` | o que não passa pela Stripe: `{ "data": "2026-12-02", "valor": 640, "origem": "clube", "nome": "Grupo de quarta-feira", "mensagem": { "pt": "…", "en": "…" } }`. `origem` é `clube` ou `empresas` (Fundação do Desporto). Com `nome`, aparece no mural; `"mural": false` tira-o |
+| `manuais` | o que não passa pela Stripe: `{ "data": "2026-12-02", "valor": 640, "origem": "clube", "nome": "Grupo de quarta-feira", "mensagem": { "pt": "…", "en": "…" } }`. `origem` é `clube` ou `empresas` (Fundação do Desporto). Com `nome`, fica escrito na bandeira; com `mensagem`, aparece num postal; `"mural": false` tira-o dos dois |
 | `excluir` | ids de sessões (`cs_…`) que não contam para o total: um reembolso, um teste |
-| `ocultar` | ids que saem do mural mas continuam a contar: uma mensagem que não deve ficar à vista |
+| `ocultar` | ids que saem da bandeira e dos postais mas continuam a contar: uma mensagem que não deve ficar à vista |
 
 ### O ecrã da clubhouse e os QR codes
 
-`franciscasalgado.golf/fundme?ecra` é a página para o ecrã grande: o total, a
-barra, o último recado e o QR code, a atualizar-se de 30 em 30 segundos. O QR
+`franciscasalgado.golf/fundme?ecra` é a página para o ecrã grande, em 16:9:
+o avião a voar de Lisboa para Miami à medida do total, o total a contar, a
+bandeira com os nomes, os postais a passar em fita, uma fotografia da Francisca
+e o QR code. Atualiza-se de 20 em 20 segundos; quando entra um apoio novo, há
+uma faixa com o valor (e o nome, se o deixou) e uma chuva de bolas de golfe.
+Abrir no browser do ecrã em ecrã inteiro (F11). O QR
 (`img/fundme/qr-ecra.svg`) leva a `/fundme?o=ecra`; o `o=` segue para os
 metadados do pagamento, para se saber de onde veio cada apoio.
 
