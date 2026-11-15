@@ -371,35 +371,39 @@ sozinha, para o dia do evento.
 ### O ecrã da clubhouse e os QR codes
 
 `franciscasalgado.golf/fundme?ecra` é a página para o ecrã grande (16:9, e
-também ao alto, num ecrã vertical ou num telemóvel). Mostra:
-- o avião a voar de Lisboa para Miami à medida do total, e o total a contar;
-- a bandeira com os nomes e os postais a passar em fita;
-- uma fotografia da Francisca e o QR code.
+também ao alto, num ecrã vertical ou num telemóvel). É claro, para a manhã ao
+sol, e desenhado como um quadro de resultados de golfe:
+- uma barra verde com o dia e a hora;
+- o total em placas brancas, como as dos quadros dos torneios;
+- o cartão dos 18 buracos: a meta dividida em 18 (cerca de 278 € cada), com
+  os buracos feitos marcados, a bola no buraco que se joga e os «buracos
+  feitos» ao lado;
+- a bandeira do clube com as assinaturas de quem apoia, a ondular mais ou
+  menos com o vento que está no campo;
+- o QR e uma fotografia da Francisca;
+- ao lado, as **condições de jogo** em Praia D'El Rey: rosa dos ventos com
+  de onde vem o vento, velocidade, rajadas e quantos tacos contar
+  (±1 taco por cada 16 km/h), temperatura e sensação, humidade, chuva nas
+  próximas três horas, a previsão hora a hora e o nascer e pôr do sol;
+- em baixo, os postais com as mensagens.
 
-Atualiza-se de 20 em 20 segundos. Fala português e inglês, uma língua de
-cada vez, e troca num esbatido lento de 12 em 12 segundos.
+O tempo vem do Open-Meteo, sem chave, pedido pelo browser do ecrã de 10 em 10
+minutos, para as coordenadas em `evento.coordenadas` de `data/fundme.json`.
+Se o serviço falhar, ficam o dia e a hora. Atualiza-se de 20 em 20 segundos.
+Fala português e inglês, uma língua de cada vez, num esbatido lento de 12 em
+12 segundos.
 
-No topo há uma barra do campo: o sítio, a hora, o céu e a temperatura, o
-vento (de onde vem, e as rajadas), a chuva nas próximas três horas e o pôr do
-sol. O tempo vem do Open-Meteo, sem chave, pedido pelo browser do ecrã de 10
-em 10 minutos, para as coordenadas em `evento.coordenadas` de
-`data/fundme.json` (Praia D'El Rey). Se o serviço falhar, fica só a hora.
+**A volta em fases.** No 1.º tee (sem apoios: a bola no tee, a bandeira à
+espera do primeiro nome, postais por escrever e o QR a chamar); na ida; a
+caminho da volta (25%); na volta (50%); últimos buracos (75%); embocou (100%,
+confettis). Cada passagem tem um momento em grande, com a bola a rolar até ao
+buraco. Um apoio com nome, mensagem ou fotografia entra em grande no meio do
+ecrã; vários seguidos fazem fila, e encurtam. Um apoio sem nome dá só uma
+faixa com o valor; o valor nunca aparece ao lado de um nome.
 
-**A viagem em fases.** O ambiente cresce com o total:
-- **na pista** (sem apoios): luzes de pista, o avião a trepidar, postais e
-  bandeira por escrever a convidar, o QR a chamar;
-- **descolagem**, **cruzeiro** (25%), **sobre o Atlântico** (50%, com mar e
-  estrelas) e **Miami à vista** (75%, pôr do sol e palmeiras);
-- **aterrámos** (100%, confettis).
-
-Cada passagem de fase tem um momento em grande. Um apoio com nome, mensagem
-ou fotografia entra em grande no meio do ecrã; vários seguidos fazem fila, e
-encurtam. Um apoio sem nome dá só uma faixa com o valor; o valor nunca aparece
-ao lado de um nome.
-
-**Demonstração.** `?ecra&demo` simula apoios a chegar, do zero à meta, e
-recomeça; `?ecra&demo=6` muda o intervalo, em segundos. Diz «Demonstração» no
-canto, para ninguém se enganar.
+**Demonstração.** `?ecra&demo` simula uma manhã com uns 40 apoios, do zero à
+meta, e recomeça; `?ecra&demo=6` muda o intervalo, em segundos. Diz
+«Demonstração» no canto.
 
 Abrir no browser do ecrã em ecrã inteiro (F11). O QR
 (`img/fundme/qr-ecra.svg`) leva a `/fundme?o=ecra`; o `o=` segue para os

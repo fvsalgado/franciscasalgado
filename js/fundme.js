@@ -583,54 +583,83 @@ const unicos = (mural) => {
   });
 };
 
-/** A bandeira desenhada em SVG, com os nomes escritos como assinaturas. A
- *  largura decide quantos cabem por linha; o pano cresce para baixo com o
- *  número de linhas. `ondula` põe o pano a mexer (o ecrã da clubhouse). */
-export function bandeiraSVG(nomes, { W = 640, letra = 20, max = 80, ondula = false, convite = false } = {}) {
-  const x0 = 54;
-  const larg = W - x0 - 34;
-  const passo = letra * 1.7;
-  const linhas = [];
-  let fila = [];
-  let usado = 0;
+/** A bandeira do clube, desenhada em SVG: uma bandeira de buraco a sério,
+ *  presa à vara, com o pano a ondular em dobras, a bainha cosida, o nome do
+ *  clube bordado e os nomes de quem apoia assinados a marcador, cada um com
+ *  a sua cor e inclinação. O pano cresce para caber os nomes (60 cabem bem).
+ *  `ondula` põe-na a mexer; `convite` deixa um lugar para o primeiro nome. */
+export function bandeiraSVG(nomes, { W = 640, letra = 24, max = 80, ondula = false, convite = false, vento = 1 } = {}) {
+  const x0 = 40;
+  const R = W - 16;
+  const larg = R - x0;
+  const topo = 30;
   const lista = nomes.slice(0, max);
-  for (const n of lista) {
-    const w = n.length * letra * 0.5 + letra * 1.2;
-    if (usado + w > larg && fila.length) { linhas.push(fila); fila = []; usado = 0; }
-    fila.push([n, w]);
-    usado += w;
-  }
-  if (fila.length) linhas.push(fila);
-  const yNomes = 150;
-  const fundo = Math.max(250, yNomes + linhas.length * passo + 14);
-  const H = fundo + 60;
-  // um sorteio fixo por nome: a mesma pessoa fica sempre com a mesma inclinação
-  const roda = (n) => { let h = 7; for (const c of n) h = (h * 31 + c.charCodeAt(0)) % 997; return (h % 11) - 5; };
-  let txt = '';
-  linhas.forEach((f, r) => {
-    const tot = f.reduce((s, [, w]) => s + w, 0);
-    let x = x0 + (larg - tot) / 2;
-    const y = yNomes + r * passo;
-    for (const [n, w] of f) {
-      const cx = (x + w / 2).toFixed(0);
-      const tam = letra + (roda(n) % 3);
-      txt += `<text x="${cx}" y="${y}" text-anchor="middle" font-size="${tam}" transform="rotate(${roda(n)} ${cx} ${y})">${esc(n)}</text>`;
-      x += w;
-    }
+  // as assinaturas: uma grelha desencontrada (como tijolos), com acaso fixo por nome
+  const sorte = (n, k) => { let h = 2166136261 ^ k; for (const c of n) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return ((h >>> 0) % 1000) / 1000; };
+  const cols = Math.max(2, Math.min(5, Math.floor(larg / (letra * 6.2))));
+  const celW = (larg - 48) / cols;
+  const celH = letra * 1.62;
+  const yNomes = topo + 112;
+  const linhas = Math.max(convite ? 2 : 1, Math.ceil(lista.length / cols));
+  const fundo = Math.max(topo + 230, yNomes + linhas * celH + 18);
+  const H = fundo + 54;
+  const tintas = ['#1C1C1C', '#1E3A8A', '#14532D', '#1C1C1C', '#7A2E0E', '#273449'];
+  let assin = '';
+  lista.forEach((n, i) => {
+    const r = Math.floor(i / cols);
+    const c = i % cols;
+    // as linhas ímpares desencontradas meia célula, e cada nome um pouco ao lado
+    const meio = r % 2 ? 0.25 : -0.25;
+    const tam = Math.min(letra * (0.95 + sorte(n, 4) * 0.4), (celW * 0.92) / (Math.max(4, n.length) * 0.42));
+    const meiaLarg = n.length * tam * 0.255;
+    let cx = x0 + 24 + celW * (c + 0.5 + meio) + (sorte(n, 1) - 0.5) * celW * 0.18;
+    cx = Math.max(x0 + 26 + meiaLarg, Math.min(R - 30 - meiaLarg, cx));
+    const cy = yNomes + r * celH + celH * 0.62 + (sorte(n, 2) - 0.5) * celH * 0.28;
+    const rot = ((sorte(n, 3) - 0.5) * 18).toFixed(1);
+    const cor = tintas[Math.floor(sorte(n, 5) * tintas.length)];
+    assin += `<text x="${cx.toFixed(0)}" y="${cy.toFixed(0)}" font-size="${tam.toFixed(1)}" fill="${cor}" transform="rotate(${rot} ${cx.toFixed(0)} ${cy.toFixed(0)})">${esc(n)}</text>`;
   });
-  const R = W - 20;
-  const pano = (o) => `M${x0} 24 C${W * 0.3} ${8 + o} ${W * 0.62} ${44 - o} ${R} 22 L${R} ${fundo} C${W * 0.62} ${fundo + 22 - o} ${W * 0.3} ${fundo - 18 + o} ${x0} ${fundo + 6} Z`;
-  const faixa = (o) => `M${x0} 24 C${W * 0.3} ${8 + o} ${W * 0.62} ${44 - o} ${R} 22 L${R} 52 C${W * 0.62} ${72 - o} ${W * 0.3} ${38 + o} ${x0} 54 Z`;
-  const anima = (f) => (ondula ? `<animate attributeName="d" dur="5s" repeatCount="indefinite" values="${f(0)};${f(14)};${f(0)}" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1"/>` : '');
+  // o pano: a orla de cima e a de baixo ondulam; `o` é o momento da onda
+  const a = 9 * vento;
+  const pano = (o, d = 0) => {
+    const t = topo + d;
+    const b = fundo - d;
+    const xl = x0 + d;
+    const xr = R - d - Math.sin(o) * 4;
+    return `M${xl} ${t} C${x0 + larg * 0.3} ${t - a * Math.sin(o)} ${x0 + larg * 0.62} ${t + a * Math.sin(o + 1.6)} ${xr} ${t + 2 + a * 0.4 * Math.sin(o + 0.8)}`
+      + ` C${xr + 3} ${t + (b - t) * 0.35} ${xr - 3} ${t + (b - t) * 0.7} ${xr} ${b + a * 0.4 * Math.sin(o + 2)}`
+      + ` C${x0 + larg * 0.62} ${b + a * Math.sin(o + 1.6)} ${x0 + larg * 0.3} ${b - a * Math.sin(o)} ${xl} ${b} Z`;
+  };
+  const anima = (d) => (ondula ? `<animate attributeName="d" dur="${(5.5 / vento).toFixed(1)}s" repeatCount="indefinite" values="${pano(0, d)};${pano(1.4, d)};${pano(2.8, d)};${pano(1.4, d)};${pano(0, d)}" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1"/>` : '');
+  const id = `fl${W}${lista.length}`;
+  const cx = x0 + larg / 2;
   return `<svg viewBox="0 0 ${W} ${H}" class="fm-flag${ondula ? ' fm-flag--ondula' : ''}" aria-hidden="true">
-    <rect x="${x0 - 8}" y="14" width="8" height="${H - 22}" rx="4" class="fm-flag__mastro"/>
-    <path d="${pano(0)}" class="fm-flag__pano">${anima(pano)}</path>
-    <path d="${faixa(0)}" class="fm-flag__faixa">${anima(faixa)}</path>
-    <text x="${x0 + larg / 2}" y="98" text-anchor="middle" class="fm-flag__clube">Vale de Janelas</text>
-    <text x="${x0 + larg / 2}" y="121" text-anchor="middle" class="fm-flag__sub">ROAD TO THE ORANGE BOWL · 2027</text>
-    <g class="fm-flag__nomes">${txt}</g>
-    ${convite ? `<g class="fm-flag__convite"><text x="${x0 + larg / 2}" y="${yNomes + 28}" text-anchor="middle">O primeiro nome fica aqui</text><text x="${x0 + larg / 2}" y="${yNomes + 56}" text-anchor="middle" class="fm-flag__convite-en">Your name here</text><line x1="${x0 + larg * 0.22}" x2="${x0 + larg * 0.78}" y1="${yNomes + 38}" y2="${yNomes + 38}"/></g>` : ''}
-    <ellipse cx="${x0 - 4}" cy="${H - 8}" rx="64" ry="7" class="fm-flag__chao"/>
+    <defs>
+      <linearGradient id="${id}v" x1="0" x2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#F1EEE6"/><stop offset="1" stop-color="#C9C3B4"/></linearGradient>
+      <linearGradient id="${id}d" x1="0" x2="1">
+        <stop offset="0" stop-color="#6B5B3E" stop-opacity=".06"/><stop offset=".16" stop-color="#FFF" stop-opacity=".38"/><stop offset=".31" stop-color="#6B5B3E" stop-opacity=".05"/>
+        <stop offset=".48" stop-color="#FFF" stop-opacity=".34"/><stop offset=".64" stop-color="#6B5B3E" stop-opacity=".06"/><stop offset=".81" stop-color="#FFF" stop-opacity=".3"/><stop offset="1" stop-color="#6B5B3E" stop-opacity=".09"/>
+        ${ondula ? `<animateTransform attributeName="gradientTransform" type="translate" values="-.06 0;.06 0;-.06 0" dur="${(5.5 / vento).toFixed(1)}s" repeatCount="indefinite"/>` : ''}
+      </linearGradient>
+      <filter id="${id}s" x="-5%" y="-5%" width="115%" height="125%"><feDropShadow dx="2" dy="6" stdDeviation="6" flood-color="#14291F" flood-opacity=".22"/></filter>
+    </defs>
+    <ellipse cx="${x0 - 8}" cy="${H - 10}" rx="70" ry="7" fill="#14291F" opacity=".14"/>
+    <rect x="${x0 - 13}" y="10" width="9" height="${H - 20}" rx="4.5" fill="url(#${id}v)" stroke="#BDB6A6" stroke-width=".6"/>
+    <circle cx="${x0 - 8.5}" cy="11" r="6.5" fill="#F4F1E8" stroke="#BDB6A6" stroke-width=".6"/>
+    <g filter="url(#${id}s)">
+      <path d="${pano(0)}" fill="#FCFAF3">${anima(0)}</path>
+    </g>
+    <path d="${pano(0)}" fill="url(#${id}d)">${anima(0)}</path>
+    <path d="${pano(0, 9)}" fill="none" stroke="#1B5E3F" stroke-width="1.1" stroke-dasharray="5 4" opacity=".5">${anima(9)}</path>
+    <rect x="${x0 - 4}" y="${topo - 2}" width="11" height="${fundo - topo + 4}" fill="#1B5E3F" opacity=".92"/>
+    <g class="fm-flag__brasao">
+      <path d="M${cx - 7} ${topo + 40}V${topo + 16}l13 4.5-13 4.5" fill="none" stroke="#1B5E3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M${cx - 60} ${topo + 44}H${cx - 20}M${cx + 20} ${topo + 44}H${cx + 60}" stroke="#1B5E3F" stroke-width=".8" opacity=".6"/>
+      <text x="${cx}" y="${topo + 76}" text-anchor="middle" font-family="Fraunces,serif" font-weight="600" font-size="${Math.min(30, larg / 15)}" letter-spacing="${(Math.min(30, larg / 15) * 0.16).toFixed(1)}" fill="#14291F">VALE DE JANELAS</text>
+      <text x="${cx}" y="${topo + 98}" text-anchor="middle" font-family="Fraunces,serif" font-style="italic" font-size="${Math.min(17, larg / 28)}" fill="#1B5E3F">Road to Florida · 2027</text>
+    </g>
+    <g class="fm-flag__nomes" font-family="Caveat,cursive" font-weight="600">${assin}</g>
+    ${convite && !lista.length ? `<g class="fm-flag__convite"><text x="${cx}" y="${yNomes + 34}" text-anchor="middle" font-family="Caveat,cursive" font-size="${letra * 1.15}" fill="#1B5E3F" opacity=".55">O primeiro nome fica aqui · Your name here</text><line x1="${x0 + larg * 0.2}" x2="${x0 + larg * 0.8}" y1="${yNomes + 46}" y2="${yNomes + 46}"/></g>` : ''}
   </svg>`;
 }
 
@@ -639,7 +668,7 @@ function bandeira(d, l) {
   const nomes = unicos(d.mural);
   const caixa = $('fmBandeira');
   const W = caixa.clientWidth < 560 ? 420 : 680;
-  caixa.innerHTML = bandeiraSVG(nomes.length ? nomes : [], { W, letra: 20, ondula: !quieto() });
+  caixa.innerHTML = bandeiraSVG(nomes.length ? nomes : [], { W, letra: W < 500 ? 22 : 27, ondula: !quieto() });
   const semNome = Math.max(0, (d.apoios ?? 0) - (d.mural ?? []).filter((m) => m.nome).length);
   const partes = [];
   if (nomes.length) partes.push(t.nomes(nomes.length)); else partes.push(t.bandeiraVazia);
@@ -805,20 +834,20 @@ async function proximoDestaque() {
   }, dura);
 }
 
-/* ── a viagem em fases ──────────────────────────────────────
- * O ecrã muda com o total, como uma viagem: na pista (sem apoios, tudo a
- * convidar), descolagem, cruzeiro, sobre o Atlântico, Miami à vista e
- * aterragem na meta. Cada fase tem o seu céu (data-fase no #fmEcra, as cores
- * no CSS) e mais movimento do que a anterior; passar de fase tem um momento
- * em grande. */
+/* ── o ecrã: um quadro de resultados de golfe ────────────────
+ * Claro (é de manhã, ao sol), como os quadros dos torneios: uma barra verde
+ * com o dia e a hora, o total em placas, o cartão dos 18 buracos (a meta
+ * dividida em 18; «buracos feitos» como nos quadros), a bandeira com as
+ * assinaturas, o QR, e ao lado as condições de jogo em Praia D'El Rey.
+ * A volta cresce em fases, e cada fase tem o seu momento em grande. */
 
 const FASES = [
-  { pt: 'Na pista · à espera do primeiro apoio', en: 'On the runway · waiting for the first gift', marco: '' },
-  { pt: 'Descolagem', en: 'Take-off', marco: 'Descolámos!', marcoEn: 'We have take-off!' },
-  { pt: 'Velocidade de cruzeiro', en: 'Cruising', marco: 'Um quarto do caminho!', marcoEn: 'A quarter of the way!' },
-  { pt: 'Sobre o Atlântico', en: 'Over the Atlantic', marco: 'A meio do Atlântico', marcoEn: 'Halfway across the Atlantic' },
-  { pt: 'Miami à vista', en: 'Miami in sight', marco: 'Miami à vista!', marcoEn: 'Miami in sight!' },
-  { pt: 'Aterrámos em Miami!', en: 'Landed in Miami!', marco: 'Aterrámos!', marcoEn: 'We made it!' },
+  { pt: 'No 1.º tee · à espera da primeira pancada', en: 'On the 1st tee · waiting for the first shot' },
+  { pt: 'Na ida', en: 'Front nine', marco: 'Primeira pancada!', marcoEn: 'First shot!' },
+  { pt: 'Na ida · a caminho da volta', en: 'Front nine · heading to the turn', marco: 'Bom arranque!', marcoEn: 'Great start!' },
+  { pt: 'Na volta', en: 'Back nine', marco: 'Na volta!', marcoEn: 'At the turn!' },
+  { pt: 'Últimos buracos', en: 'Coming home', marco: 'A caminho do 18!', marcoEn: 'Heading for the 18th!' },
+  { pt: 'Embocou! Meta atingida', en: 'Holed out! Target reached', marco: 'Embocou!', marcoEn: 'Holed out!' },
 ];
 const faseDe = (total, meta, apoios) => {
   if (!apoios || total <= 0) return 0;
@@ -838,22 +867,14 @@ function linguas() {
   setInterval(() => $('fmEcra').classList.toggle('fm-ecra--en'), 12000);
 }
 
-/** O céu de cada fase: nuvens a passar (o avião anda), estrelas, confettis. */
-function ceu(fase) {
-  const calmo = quieto();
-  const nuvens = [1, 3, 5, 6, 5, 3][fase];
-  const dur = [110, 80, 55, 42, 48, 70][fase];
-  $('fmEcraNuvens').innerHTML = calmo ? '' : Array.from({ length: nuvens }, (_, i) =>
-    `<i class="fm-nuvem" style="--y:${acaso(4, 60).toFixed(1)}vh;--s:${acaso(0.6, 1.5).toFixed(2)};--dur:${(dur * acaso(0.8, 1.25)).toFixed(0)}s;--atraso:-${(dur * i / nuvens + acaso(0, 8)).toFixed(0)}s;--o:${acaso(0.08, 0.2).toFixed(2)}"></i>`).join('');
-  const estrelas = [0, 0, 0, 34, 50, 70][fase];
-  $('fmEcraEstrelas').innerHTML = calmo ? '' : Array.from({ length: estrelas }, () =>
-    `<i style="left:${acaso(0, 100).toFixed(1)}vw;top:${acaso(0, 75).toFixed(1)}vh;--t:${acaso(0.5, 1.6).toFixed(2)};--d:${acaso(2, 5).toFixed(1)}s;--a:-${acaso(0, 5).toFixed(1)}s"></i>`).join('');
-  const cores = ['#F7F5EE', '#8FD9AE', '#F28C28', '#FFB347', '#1B6B47'];
-  $('fmEcraConfettis').innerHTML = calmo || fase < 5 ? '' : Array.from({ length: 70 }, (_, i) =>
+/** Na meta: confettis e bolas de golfe a cair, sem parar. */
+function confettis(fase) {
+  const cores = ['#1B5E3F', '#E07A1F', '#F2C14E', '#2E8B57', '#FFFFFF'];
+  $('fmEcraConfettis').innerHTML = quieto() || fase < 5 ? '' : Array.from({ length: 80 }, (_, i) =>
     `<i class="${i % 4 ? 'fm-conf' : 'fm-conf fm-conf--bola'}" style="left:${acaso(0, 100).toFixed(1)}vw;--c:${cores[i % cores.length]};--dur:${acaso(6, 12).toFixed(1)}s;--atraso:-${acaso(0, 12).toFixed(1)}s;--r:${acaso(-360, 360).toFixed(0)}deg;--x:${acaso(-8, 8).toFixed(1)}vw"></i>`).join('');
 }
 
-/** Os convites de quando ainda há pouco: o texto debaixo do QR vai mudando. */
+/** O convite debaixo do QR vai mudando. */
 const CONVITES = [
   bi('Aponte a câmara', 'Point your camera'),
   bi('Escolha o seu buraco', 'Pick your hole'),
@@ -883,7 +904,7 @@ const postalVazio = (p, i) => `<li class="fm-postal fm-postal--vazio" style="--r
     <p class="fm-postal__q"><b>${bi(esc(p.q[0]), esc(p.q[1]))}</b><span>✎</span></p>
   </li>`;
 
-/** O momento de passar de fase: o avião atravessa o ecrã e a fase em grande. */
+/** O momento de passar de fase: uma bola rola até à bandeira e cai no buraco. */
 function marco(caixa, m) {
   const f = FASES[m.marco];
   const en = linguaEcra() === 'en';
@@ -891,7 +912,7 @@ function marco(caixa, m) {
   const falta = en ? `<b>${euros(m.falta, 'en')}</b> to go` : `Faltam <b>${euros(m.falta, 'pt')}</b>`;
   caixa.innerHTML = `<div class="fm-destaque__fundo"></div>
     <div class="fm-marco">
-      <span class="fm-marco__av" aria-hidden="true">${AVIAO}</span>
+      <div class="fm-marco__green" aria-hidden="true"><span class="fm-marco__pino">${icone('bandeira')}</span><span class="fm-marco__copo"></span><span class="fm-marco__bola"></span></div>
       ${m.marco > 1 ? `<p class="fm-marco__p">${pct}<small>%</small></p>` : ''}
       <p class="fm-marco__t d">${esc(en ? f.marcoEn : f.marco)}</p>
       <p class="fm-marco__f">${m.falta > 0 ? falta : en ? 'Thank you, everyone' : 'Obrigada a todos'}</p>
@@ -899,17 +920,53 @@ function marco(caixa, m) {
   caixa.className = 'fm-destaque fm-destaque--marco';
   void caixa.offsetWidth;
   caixa.classList.add('fm-destaque--on');
-  setTimeout(() => bolas(caixa, '50vw', '55vh', 30 + m.marco * 10), 700);
+  setTimeout(() => bolas(caixa, '50vw', '45vh', 30 + m.marco * 10), 2300);
   setTimeout(() => {
     caixa.classList.add('fm-destaque--sai');
     setTimeout(proximoDestaque, 1000);
-  }, (m.marco >= 5 ? 12000 : 8000) * pressa());
+  }, (m.marco >= 5 ? 12000 : 8500) * pressa());
+}
+
+/** O total em placas, como os números pendurados num quadro de torneio. */
+function placas(el, valor) {
+  el.innerHTML = [...euros(valor, 'pt')].map((c) => (c === ' ' ? '<i class="fm-placa fm-placa--v"></i>'
+    : `<i class="fm-placa${/[0-9]/.test(c) ? '' : c === '€' ? ' fm-placa--e' : ' fm-placa--s'}">${c}</i>`)).join('');
+}
+function contarPlacas(el, de, ate, dur = 1800) {
+  if (quieto() || de === ate) { placas(el, ate); return; }
+  const t0 = performance.now();
+  const passo = (agora) => {
+    const k = Math.min(1, (agora - t0) / dur);
+    placas(el, Math.round(de + (ate - de) * (1 - (1 - k) ** 3)));
+    if (k < 1) requestAnimationFrame(passo);
+  };
+  requestAnimationFrame(passo);
+}
+
+/** O cartão dos 18 buracos: a meta dividida em 18. Os feitos ficam marcados,
+ *  a bola está no buraco que se joga, e ao lado os «buracos feitos». */
+function buracos(total, meta) {
+  const porBuraco = meta / 18;
+  const feitos = Math.min(18, Math.floor(total / porBuraco + 1e-9));
+  const parte = feitos >= 18 ? 0 : (total - feitos * porBuraco) / porBuraco;
+  const cel = (n) => {
+    if (n <= feitos) return `<span class="fm-bur__c fm-bur__c--feito"><i class="fm-bur__ok"></i></span>`;
+    if (n === feitos + 1 && total > 0) return `<span class="fm-bur__c fm-bur__c--agora" style="--f:${parte.toFixed(2)}"><i class="fm-bur__bola"></i></span>`;
+    if (n === 1 && total <= 0) return `<span class="fm-bur__c fm-bur__c--agora fm-bur__c--tee" style="--f:0"><i class="fm-bur__bola"></i></span>`;
+    return '<span class="fm-bur__c"></span>';
+  };
+  const num = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => `<span class="fm-bur__n">${a + i}</span>`).join('');
+  const linha = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => cel(a + i)).join('');
+  return `<div class="fm-bur">
+      <span class="fm-bur__lab fm-bur__lab--h">${bi('Buraco', 'Hole')}</span>${num(1, 9)}<span class="fm-bur__t fm-bur__t--h">${bi('Ida', 'Out')}</span>${num(10, 18)}<span class="fm-bur__t fm-bur__t--h">${bi('Volta', 'In')}</span>
+      <span class="fm-bur__lab">${bi('Feito', 'Done')}</span>${linha(1, 9)}<span class="fm-bur__t">${Math.min(9, feitos)}</span>${linha(10, 18)}<span class="fm-bur__t">${Math.max(0, feitos - 9)}</span>
+    </div>
+    <div class="fm-bur__thru"><small>${bi('Buracos feitos', 'Thru')}</small><b>${feitos >= 18 ? 'F' : feitos}</b><span>${bi(`1 buraco ≈ ${euros(porBuraco, 'pt')}`, `1 hole ≈ ${euros(porBuraco, 'en')}`)}</span></div>`;
 }
 
 let ecraAntes = null;
 function ecra(d) {
   const total = d.total ?? 0;
-  const p = Math.min(100, (total / d.meta) * 100);
   const mural = d.mural ?? [];
   const fase = faseDe(total, d.meta, d.apoios);
   const antes = ecraAntes;
@@ -921,61 +978,61 @@ function ecra(d) {
     fotos: new Set(mural.filter((m) => m.foto).map((m) => m.id)),
   };
 
-  // a fase: o céu e o movimento
-  const caixaEcra = $('fmEcra');
   if (!antes || antes.fase !== fase) {
     faseAtual = fase;
-    caixaEcra.dataset.fase = String(fase);
-    ceu(fase);
+    $('fmEcra').dataset.fase = String(fase);
+    confettis(fase);
   }
   $('fmEcraFase').innerHTML = `<b>${bi(esc(FASES[fase].pt), esc(FASES[fase].en))}</b>`;
 
-  contar($('fmEcraTotal'), antes ? antes.total : 0, total, antes ? 2200 : 2600);
+  contarPlacas($('fmEcraTotal'), antes ? antes.total : 0, total, antes ? 2200 : 2600);
   $('fmEcraMeta').innerHTML = bi(`de ${euros(d.meta, 'pt')}`, `of ${euros(d.meta, 'en')}`);
-  $('fmEcraFeito').style.width = `${p}%`;
-  $('fmEcraAviao').style.left = `${p}%`;
   const faltam = d.partida ? diasEntre(diaLisboa(), d.partida) : -1;
   $('fmEcraInfo').innerHTML = [
     `<span><b>${d.apoios ?? 0}</b> ${bi(d.apoios === 1 ? 'apoio' : 'apoios', d.apoios === 1 ? 'gift' : 'gifts')}</span>`,
     d.hoje ? `<span><b>+${euros(d.hoje, 'pt')}</b> ${bi('hoje', 'today')}</span>` : '',
-    faltam >= 0 ? `<span><b>${faltam}</b> ${bi(faltam === 1 ? 'dia' : 'dias', faltam === 1 ? 'day to go' : 'days to go')}</span>` : '',
+    faltam >= 0 ? `<span><b>${faltam}</b> ${bi(faltam === 1 ? 'dia para partir' : 'dias para partir', faltam === 1 ? 'day to go' : 'days to go')}</span>` : '',
   ].join('');
+  $('fmEcraBuracos').innerHTML = buracos(total, d.meta);
 
-  // a bandeira só se redesenha quando entra um nome novo
+  // a bandeira só se redesenha quando entra um nome novo (e ondula com o vento)
   const nomes = unicos(mural);
-  if (!antes || antes.nomes !== ecraAntes.nomes) {
-    $('fmEcraBandeira').innerHTML = bandeiraSVG(nomes, { W: 620, letra: 22, max: 60, ondula: true, convite: !nomes.length });
-  }
+  if (!antes || antes.nomes !== ecraAntes.nomes) desenharBandeira(nomes);
 
   // os postais a passar, numa fita sem fim (a lista vai duas vezes); sem
   // mensagens ainda, passam postais por escrever, a convidar
-  const msgs = mural.filter((m) => tx(m.mensagem, 'pt') || m.foto).slice(0, 14);
+  const msgs = mural.filter((m) => tx(m.mensagem, 'pt') || m.foto).slice(0, 30);
   const fita = $('fmEcraFita');
   const chave = msgs.length ? msgs.map((m) => `${m.id}${m.foto ? 'f' : ''}`).join('|') : 'vazio';
   if (fita.dataset.chave !== chave) {
     fita.dataset.chave = chave;
     const um = msgs.length ? msgs.map((m, i) => postal(m, 'pt', i, true)).join('') : POR_ESCREVER.map(postalVazio).join('');
     fita.innerHTML = `<ul>${um}</ul><ul aria-hidden="true">${um}</ul>`;
-    // a fita anda mais depressa à medida que a viagem avança
-    fita.style.setProperty('--dur', `${Math.max(26, (msgs.length || 4) * [9, 8, 7, 6, 6, 5][fase])}s`);
+    fita.style.setProperty('--dur', `${Math.max(30, (msgs.length || 4) * 7)}s`);
   }
 
   if (!antes) return;
-  // quem entrou agora no mural, e as fotografias que acabaram de aparecer
   const novos = mural.filter((m) => !antes.ids.has(m.id));
   const fotosNovas = mural.filter((m) => m.foto && antes.ids.has(m.id) && !antes.fotos.has(m.id));
   [...novos, ...fotosNovas].reverse().forEach(destacar);
   if (total > antes.total && !novos.length) festa(total - antes.total);
-  // passar de fase: depois dos postais, o momento da fase nova
   if (fase > antes.fase) destacar({ marco: fase, falta: Math.max(0, d.meta - total) });
 }
 
-/* ── a hora e o tempo no campo ───────────────────────────────
- * Uma barra fina no topo, como num quadro de resultados: o sítio, a hora,
- * o céu e a temperatura, o vento (de onde vem, e as rajadas), a chuva nas
- * próximas três horas e o pôr do sol. Vem do Open-Meteo (sem chave), pedido
- * pelo próprio browser do ecrã de 10 em 10 minutos; se falhar, fica a hora.
- * As coordenadas estão em data/fundme.json (evento.coordenadas). */
+let nomesBandeira = [];
+function desenharBandeira(nomes = nomesBandeira) {
+  nomesBandeira = nomes;
+  // a bandeira ondula mais depressa quando há mais vento no campo
+  const kmh = meteo?.current?.wind_speed_10m;
+  const vento = kmh == null ? 1 : Math.max(0.7, Math.min(2.2, 0.6 + kmh / 22));
+  $('fmEcraBandeira').innerHTML = bandeiraSVG(nomes, { W: 860, letra: 30, max: 70, ondula: true, convite: !nomes.length, vento });
+}
+
+/* ── as condições de jogo em Praia D'El Rey ────────────────────
+ * Do Open-Meteo (sem chave), pedido pelo browser do ecrã de 10 em 10 minutos,
+ * para as coordenadas em data/fundme.json (evento.coordenadas). Se falhar,
+ * ficam o dia e a hora. O efeito do vento é a regra dos jogadores: cerca de
+ * um taco por cada 16 km/h (10 mph) de vento de frente. */
 
 const ICONES = {
   sol: '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/>',
@@ -988,7 +1045,10 @@ const ICONES = {
   neve: '<path d="M7 15h10.5a4 4 0 0 0 .3-8 5.5 5.5 0 0 0-10.5-1A4.5 4.5 0 0 0 7 15Z"/><path d="M8.5 19h.01M12 20.5h.01M15.5 19h.01"/>',
   seta: '<path d="M12 3v18M12 21l-5-5M12 21l5-5"/>',
   gota: '<path d="M12 3.5c3.5 4.3 6 7.6 6 10.6a6 6 0 0 1-12 0c0-3 2.5-6.3 6-10.6Z"/>',
-  ocaso: '<path d="M3 17h18M6 21h12M7.8 17a4.2 4.2 0 0 1 8.4 0M12 6v5M9.5 8.5 12 6l2.5 2.5"/>',
+  termometro: '<path d="M10 14.5V5a2 2 0 0 1 4 0v9.5a4 4 0 1 1-4 0Z"/><path d="M12 9v7"/>',
+  humidade: '<path d="M7 4c2.3 2.8 4 5 4 7a4 4 0 0 1-8 0c0-2 1.7-4.2 4-7ZM17 9c1.7 2 3 3.7 3 5.2a3 3 0 0 1-6 0c0-1.5 1.3-3.2 3-5.2Z"/>',
+  nascer: '<path d="M3 17h18M6 21h12M7.8 17a4.2 4.2 0 0 1 8.4 0M12 11V6M9.5 8.5 12 6l2.5 2.5"/>',
+  ocaso: '<path d="M3 17h18M6 21h12M7.8 17a4.2 4.2 0 0 1 8.4 0M12 6v5M9.5 8.5 12 11l2.5-2.5"/>',
   bandeira: '<path d="M6 21V3l11 4-11 4"/>',
 };
 const icone = (n, rodar = 0) => `<svg viewBox="0 0 24 24" aria-hidden="true"${rodar ? ` style="transform:rotate(${rodar}deg)"` : ''}>${ICONES[n]}</svg>`;
@@ -1008,35 +1068,85 @@ function ceuAgora(codigo, dia) {
 }
 const RUMOS_PT = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'];
 const RUMOS_EN = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+const RUMOS_LONGOS_PT = ['norte', 'nordeste', 'leste', 'sueste', 'sul', 'sudoeste', 'oeste', 'noroeste'];
+const RUMOS_LONGOS_EN = ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'];
 const rumo = (graus) => Math.round((((Number(graus) % 360) + 360) % 360) / 45) % 8;
 const horaLisboa = (ms = Date.now()) => new Intl.DateTimeFormat('pt-PT', { timeZone: 'Europe/Lisbon', hour: '2-digit', minute: '2-digit' }).format(ms);
+const diaPorExtenso = (l, ms = Date.now()) => {
+  const t = new Intl.DateTimeFormat(l === 'en' ? 'en-GB' : 'pt-PT', { timeZone: 'Europe/Lisbon', weekday: 'long', day: 'numeric', month: 'long' }).format(ms);
+  return t.charAt(0).toUpperCase() + t.slice(1);
+};
+
+/** Quantos tacos o vento vale, como se conta no campo. */
+function efeitoVento(kmh) {
+  const v = Number(kmh) || 0;
+  if (v < 8) return ['Calmo · sem efeito', 'Calm · no effect'];
+  const tacos = Math.max(0.5, Math.round((v / 16) * 2) / 2);
+  const t = String(tacos).replace('.5', '½').replace(/^0½$/, '½');
+  const forca = v < 16 ? ['Ligeiro', 'Light'] : v < 28 ? ['Moderado', 'Moderate'] : v < 40 ? ['Forte', 'Strong'] : ['Muito forte', 'Very strong'];
+  return [`${forca[0]} · ±${t} ${tacos > 1 ? 'tacos' : 'taco'}`, `${forca[1]} · ±${t} ${tacos > 1 ? 'clubs' : 'club'}`];
+}
+
+/** A rosa dos ventos: a seta aponta para onde o vento vai. */
+function rosa(graus, kmh) {
+  const marcas = Array.from({ length: 16 }, (_, i) => {
+    const a = (i * 22.5 * Math.PI) / 180;
+    const r1 = i % 4 ? 84 : 78;
+    return `<line x1="${(100 + Math.sin(a) * r1).toFixed(1)}" y1="${(100 - Math.cos(a) * r1).toFixed(1)}" x2="${(100 + Math.sin(a) * 92).toFixed(1)}" y2="${(100 - Math.cos(a) * 92).toFixed(1)}" class="${i % 4 ? 'fm-rosa__m' : 'fm-rosa__M'}"/>`;
+  }).join('');
+  const letra = (x, y, pt, en) => `<text x="${x}" y="${y}" class="fm-rosa__l"><tspan class="l-pt">${pt}</tspan></text><text x="${x}" y="${y}" class="fm-rosa__l l-en">${en}</text>`;
+  return `<svg class="fm-rosa" viewBox="0 0 200 200" aria-hidden="true">
+    <circle cx="100" cy="100" r="92" class="fm-rosa__o"/>${marcas}
+    ${letra(100, 30, 'N', 'N')}${letra(172, 105, 'E', 'E')}${letra(100, 180, 'S', 'S')}${letra(28, 105, 'O', 'W')}
+    <g class="fm-rosa__seta" style="--g:${(Number(graus) || 0).toFixed(0)}deg"><path d="M100 30 L100 160" /><path d="M100 172 L91 152 L109 152 Z" class="fm-rosa__ponta"/><circle cx="100" cy="30" r="5" class="fm-rosa__cauda"/></g>
+    <circle cx="100" cy="100" r="34" class="fm-rosa__c"/>
+    <text x="100" y="104" class="fm-rosa__v">${Math.round(kmh)}</text><text x="100" y="121" class="fm-rosa__u">km/h</text>
+  </svg>`;
+}
 
 let meteo = null;
-function pintarTempo(d) {
-  const sitio = tx(d.evento?.local, 'pt') || "Praia D'El Rey";
-  const partes = [
-    `<span class="fm-tp__sitio">${icone('bandeira')}${esc(sitio)}</span>`,
-    `<span class="fm-tp__hora" id="fmEcraHora">${horaLisboa()}</span>`,
-  ];
-  if (meteo) {
-    const a = meteo.current;
-    const [ic, pt, en] = ceuAgora(a.weather_code, a.is_day);
-    const r = rumo(a.wind_direction_10m);
-    // a chuva: a maior probabilidade nas próximas três horas
-    const agora = Date.now() / 1000;
-    const prox = (meteo.hourly?.time ?? []).map((t, i) => [t, meteo.hourly.precipitation_probability?.[i]])
-      .filter(([t]) => t >= agora - 3600 && t <= agora + 3 * 3600).map(([, p]) => p ?? 0);
-    const chuva = prox.length ? Math.max(...prox) : null;
-    const ocaso = meteo.daily?.sunset?.[0];
-    partes.push(
-      `<span class="fm-tp__i">${icone(ic)}<b>${Math.round(a.temperature_2m)}°</b><small>${bi(pt, en)}</small></span>`,
-      // a seta aponta para onde o vento vai (vem de r)
-      `<span class="fm-tp__i fm-tp__vento">${icone('seta', (Number(a.wind_direction_10m) || 0))}<b>${Math.round(a.wind_speed_10m)}</b><small>km/h ${bi(RUMOS_PT[r], RUMOS_EN[r])} · ${bi('rajadas', 'gusts')} ${Math.round(a.wind_gusts_10m)}</small></span>`,
-      chuva !== null ? `<span class="fm-tp__i">${icone('gota')}<b>${chuva}%</b><small>${bi('chuva até 3 h', 'rain next 3 h')}</small></span>` : '',
-      ocaso ? `<span class="fm-tp__i">${icone('ocaso')}<b>${horaLisboa(ocaso * 1000)}</b><small>${bi('pôr do sol', 'sunset')}</small></span>` : '',
-    );
+function pintarCondicoes(d) {
+  $('fmEcraData').innerHTML = bi(diaPorExtenso('pt'), diaPorExtenso('en'));
+  $('fmEcraHora').textContent = horaLisboa();
+  const sitio = tx(d.evento?.local, 'pt') || "Praia D'El Rey, Óbidos";
+  const cab = `<div class="fm-cond__cab"><b>${bi('Condições de jogo', 'Playing conditions')}</b><span>${esc(sitio)}</span></div>`;
+  if (!meteo) {
+    $('fmEcraCond').innerHTML = `${cab}<p class="fm-cond__sem">${bi('A obter as condições do campo…', 'Fetching course conditions…')}</p>`;
+    return;
   }
-  $('fmEcraTempo').innerHTML = partes.join('');
+  const a = meteo.current;
+  const [ic, cpt, cen] = ceuAgora(a.weather_code, a.is_day);
+  const r = rumo(a.wind_direction_10m);
+  const [ept, een] = efeitoVento(a.wind_speed_10m);
+  const agora = Date.now() / 1000;
+  const h = meteo.hourly ?? {};
+  const prox = (h.time ?? []).map((t, i) => ({ t, i })).filter(({ t }) => t > agora - 1800).slice(0, 5);
+  const chuva3 = prox.slice(0, 3).map(({ i }) => h.precipitation_probability?.[i] ?? 0);
+  const horas = prox.slice(1, 5).map(({ t, i }) => {
+    const [hic] = ceuAgora(h.weather_code?.[i], 1);
+    return `<li><span class="fm-cond__h">${horaLisboa(t * 1000).replace(':00', 'h')}</span>${icone(hic)}<b>${Math.round(h.temperature_2m?.[i])}°</b>
+      <span class="fm-cond__hv">${icone('seta', h.wind_direction_10m?.[i] || 0)}${Math.round(h.wind_speed_10m?.[i] ?? 0)}</span><small>${h.precipitation_probability?.[i] ?? 0}%</small></li>`;
+  }).join('');
+  const nascer = meteo.daily?.sunrise?.[0];
+  const ocaso = meteo.daily?.sunset?.[0];
+  $('fmEcraCond').innerHTML = `${cab}
+    <div class="fm-cond__vento">
+      ${rosa(a.wind_direction_10m, a.wind_speed_10m)}
+      <div class="fm-cond__vt">
+        <small>${bi('Vento', 'Wind')}</small>
+        <b>${bi(`de ${RUMOS_LONGOS_PT[r]}`, `from the ${RUMOS_LONGOS_EN[r]}`)}</b>
+        <span>${bi('rajadas', 'gusts')} <b>${Math.round(a.wind_gusts_10m)}</b> km/h</span>
+        <em>${bi(ept, een)}</em>
+      </div>
+    </div>
+    <div class="fm-cond__grelha">
+      <div>${icone(ic)}<b>${Math.round(a.temperature_2m)}°</b><small>${bi(cpt, cen)}</small></div>
+      <div>${icone('termometro')}<b>${Math.round(a.apparent_temperature)}°</b><small>${bi('sensação', 'feels like')}</small></div>
+      <div>${icone('humidade')}<b>${Math.round(a.relative_humidity_2m)}%</b><small>${bi('humidade', 'humidity')}</small></div>
+      <div>${icone('gota')}<b>${chuva3.length ? Math.max(...chuva3) : 0}%</b><small>${bi('chuva até 3 h', 'rain, next 3 h')}</small></div>
+    </div>
+    ${horas ? `<p class="fm-cond__st">${bi('Próximas horas', 'Next hours')}</p><ul class="fm-cond__horas">${horas}</ul>` : ''}
+    <div class="fm-cond__sol">${nascer ? `<span>${icone('nascer')}${horaLisboa(nascer * 1000)}</span>` : ''}${ocaso ? `<span>${icone('ocaso')}${horaLisboa(ocaso * 1000)}</span>` : ''}</div>`;
 }
 
 function tempo(d) {
@@ -1045,38 +1155,40 @@ function tempo(d) {
     try {
       const q = new URLSearchParams({
         latitude: c.lat, longitude: c.lon,
-        current: 'temperature_2m,is_day,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m',
-        hourly: 'precipitation_probability', daily: 'sunset',
-        timezone: 'Europe/Lisbon', timeformat: 'unixtime', forecast_days: '1', wind_speed_unit: 'kmh',
+        current: 'temperature_2m,apparent_temperature,relative_humidity_2m,is_day,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m',
+        hourly: 'temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,precipitation_probability',
+        daily: 'sunrise,sunset',
+        timezone: 'Europe/Lisbon', timeformat: 'unixtime', forecast_days: '2', wind_speed_unit: 'kmh',
       });
       const r = await fetch(`https://api.open-meteo.com/v1/forecast?${q}`, { cache: 'no-store' });
       const j = await r.json();
-      if (r.ok && j.current) meteo = j;
-    } catch { /* fica a hora */ }
-    pintarTempo(d);
+      if (r.ok && j.current) {
+        const antes = meteo?.current?.wind_speed_10m;
+        meteo = j;
+        if (antes == null || Math.abs(antes - j.current.wind_speed_10m) > 6) desenharBandeira();
+      }
+    } catch { /* ficam o dia e a hora */ }
+    pintarCondicoes(d);
   };
-  pintarTempo(d);
+  pintarCondicoes(d);
   pedir();
   setInterval(pedir, 10 * 60000);
-  setInterval(() => { const h = $('fmEcraHora'); if (h) h.textContent = horaLisboa(); }, 5000);
+  setInterval(() => { $('fmEcraHora').textContent = horaLisboa(); }, 5000);
+  setInterval(() => { $('fmEcraData').innerHTML = bi(diaPorExtenso('pt'), diaPorExtenso('en')); }, 10 * 60000);
 }
 
 /* ── o modo de demonstração (?ecra&demo) ─────────────────────
- * Para ver o ecrã a crescer sem apoios a sério: simula uma noite de Roll Up,
- * do zero à meta, e recomeça. `?ecra&demo=6` muda o intervalo (segundos). */
-const DEMO = [
-  { nome: 'Rita M.', mensagem: 'Vai com tudo, Francisca!', foto: '/img/retrato.webp', valor: 150 },
-  { nome: 'Joana P.', valor: 50 },
-  { valor: 25 },
-  { nome: 'Grupo de quarta-feira', mensagem: 'Do Vale de Janelas para a Florida.', valor: 640 },
-  { nome: 'Peter & Claire', mensagem: 'Go get them, Francisca! The whole Wednesday group is behind you.', valor: 300 },
-  { nome: 'Avó Lena', mensagem: 'Já tens a mala feita?', valor: 500 },
-  { valor: 1000 },
-  { nome: 'Duarte', valor: 150 },
-  { nome: 'Luísa F.', mensagem: 'Que orgulho! Traz a bandeira de volta cheia de histórias.', valor: 300 },
-  { valor: 1500 },
-  { nome: 'Teresa C.', mensagem: 'Biltmore, here she comes.', valor: 500 },
-];
+ * Para ver o ecrã a crescer sem apoios a sério: simula uma manhã de Roll Up
+ * com uns 40 apoios, do zero à meta, e recomeça. `?ecra&demo=6` muda o
+ * intervalo (segundos). */
+const DEMO_NOMES = ['Rita M.', 'Joana P.', null, 'Grupo de quarta-feira', 'Peter & Claire', 'Avó Lena', null, 'Duarte', 'Luísa F.', 'Família Costa', 'Teresa C.', 'Zé Pedro', null, 'Inês', 'Carlos & Paula', 'Tio Manel', 'Os do Baleal', null, 'Gonçalo', 'Rui Bastos', 'Clara', 'The Thompsons', 'Beatriz V.', null, 'Helena & João', 'Pedro S.', 'Mariana', 'Francisco L.', 'Sara', 'Nuno', null, 'Vasco & Rita', 'Leonor', 'Tomás', 'Madalena', 'Henrique', 'Catarina M.', 'Diogo'];
+const DEMO_MSGS = {
+  'Rita M.': 'Vai com tudo, Francisca!', 'Grupo de quarta-feira': 'Do Vale de Janelas para a Florida.', 'Peter & Claire': 'Go get them, Francisca! The whole Wednesday group is behind you.',
+  'Avó Lena': 'Já tens a mala feita?', 'Luísa F.': 'Que orgulho! Traz a bandeira de volta cheia de histórias.', 'Teresa C.': 'Biltmore, here she comes.',
+  'Os do Baleal': 'Fairways e greens, campeã!', 'The Thompsons': 'All the best in Coral Gables!', 'Mariana': 'Um birdie por cada um de nós!', 'Henrique': 'Força, Francisca!',
+};
+const DEMO_FOTOS = { 'Rita M.': '/img/retrato.webp', 'Os do Baleal': '/img/taca-2026-saida.webp' };
+const DEMO_VALORES = [150, 50, 25, 640, 300, 500, 25, 150, 300, 150, 150, 50, 25, 50, 150, 50, 300, 25, 150, 50, 50, 150, 50, 25, 300, 150, 50, 150, 50, 50, 25, 150, 50, 150, 300, 500, 150, 50];
 function demo(d, passo) {
   $('fmEcraDemo').hidden = false;
   const vazio = () => ({ ...d, total: 0, apoios: 0, hoje: 0, mural: [] });
@@ -1084,8 +1196,7 @@ function demo(d, passo) {
   let i = 0;
   ecra(estado);
   const seguinte = () => {
-    if (i >= DEMO.length) {
-      // a meta foi atingida: uns segundos de festa, e volta ao início
+    if (i >= DEMO_VALORES.length) {
       i = 0;
       estado = vazio();
       fila.length = 0;
@@ -1094,16 +1205,17 @@ function demo(d, passo) {
       setTimeout(seguinte, passo * 1000);
       return;
     }
-    const e = DEMO[i++];
+    const nome = DEMO_NOMES[i];
+    const valor = DEMO_VALORES[i++];
     estado = {
       ...estado,
-      total: estado.total + e.valor,
+      total: estado.total + valor,
       apoios: estado.apoios + 1,
-      hoje: estado.hoje + e.valor,
-      mural: e.nome || e.mensagem ? [{ id: `demo${i}`, nome: e.nome ?? null, mensagem: e.mensagem ?? null, foto: e.foto ?? null, dia: diaLisboa(), origem: 'online' }, ...estado.mural] : estado.mural,
+      hoje: estado.hoje + valor,
+      mural: nome ? [{ id: `demo${i}`, nome, mensagem: DEMO_MSGS[nome] ?? null, foto: DEMO_FOTOS[nome] ?? null, dia: diaLisboa(), origem: 'online' }, ...estado.mural] : estado.mural,
     };
     ecra(estado);
-    setTimeout(seguinte, (i >= DEMO.length ? 45 : passo) * 1000);
+    setTimeout(seguinte, (i >= DEMO_VALORES.length ? 45 : passo) * 1000);
   };
   setTimeout(seguinte, passo * 1000);
 }
