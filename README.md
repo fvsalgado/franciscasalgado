@@ -17,12 +17,12 @@ npx serve .          # ou: python3 -m http.server
 
 | | |
 |---|---|
-| Páginas | `index.html`, `resultados.html`, `imprensa.html`, `parcerias.html`, `privacidade.html`, `termos.html` |
+| Páginas | `index.html`, `resultados.html`, `imprensa.html`, `parcerias.html`, `fundme.html`, `privacidade.html`, `termos.html` |
 | Em inglês | `en/` — **gerado**, não se mexe à mão: ver «Idiomas» |
 | Estilo | `css/site.css` — um ficheiro, com as variáveis de tema no topo |
 | Comportamento | `js/` — módulos ES, sem empacotador |
 | Conteúdo | `data/*.json` — é aqui que se mexe no dia a dia |
-| Funções | `api/` — `wagr.js`, `egr.js` e `instagram.js` |
+| Funções | `api/` — `wagr.js`, `egr.js`, `instagram.js` e `fundme/` (a angariação) |
 | Manutenção | `scripts/*.mjs` — correm à mão ou pelo GitHub Actions, e nunca chegam ao servidor (`.vercelignore`) |
 | Tipos de letra | `fonts/` — Fraunces e Manrope, alojados aqui e não no Google |
 | Fotografias | `img/` — ver «Fotografias», mais abaixo |
@@ -302,6 +302,53 @@ Creator; numa conta pessoal a Graph API dá as publicações mas não as contas.
 **As parcerias em vídeo** (`parcerias`, em `data/instagram.json`) são os reels
 de marca, e aparecem na página de apoios. Mostram o trabalho de patrocínio já
 feito, que é o argumento mais concreto para quem está a pensar entrar.
+
+## Rumo à Florida (/fundme)
+
+A angariação para a viagem ao Junior Orange Bowl: `franciscasalgado.golf/fundme`
+e `/en/fundme` (o `vercel.json` reescreve as duas para o `.html`). Quem apoia
+escolhe o valor, deixa o nome e uma mensagem se quiser, e paga na Stripe com
+MB WAY, Multibanco, cartão, Apple Pay ou Google Pay. O total, o gráfico dia a
+dia, as etapas e o mural atualizam-se sozinhos.
+
+**A Stripe é o registo; não há base de dados.** `api/fundme/index.js` vai
+buscar à Stripe os pagamentos do Checkout com `metadata.kind = 'fundme'` desde
+`inicio`, junta o que está escrito à mão em `data/fundme.json` e devolve tudo
+à página, com trinta segundos de cache. `api/fundme/apoiar.js` abre o
+pagamento. As contas estão em `api/fundme/_comum.js`, separadas da rede.
+
+### Ligar
+
+1. Na Stripe, em *Developers → API keys*, criar uma chave restrita com
+   *Checkout Sessions: Write* e guardá-la na Vercel como `STRIPE_SECRET_KEY`.
+   Sem ela a página mostra os números escritos à mão e o botão diz «Os apoios
+   abrem em breve».
+2. Em *Settings → Payment methods*, ligar MB WAY e Multibanco (os cartões, o
+   Apple Pay e o Google Pay vêm ligados).
+3. Em *Settings → Customer emails*, ligar *Successful payments*: é a Stripe que
+   manda o recibo.
+4. Experimentar primeiro com uma chave de teste (`sk_test_…`) numa
+   pré-visualização, com o cartão 4242 4242 4242 4242.
+
+### `data/fundme.json`
+
+| | |
+|---|---|
+| `aberto` | `false` fecha o botão, sem mexer em mais nada |
+| `meta`, `inicio`, `partida` | a meta em euros, o primeiro dia do gráfico e o dia da partida (a contagem «faltam N dias») |
+| `valores`, `valorInicial`, `minimo`, `maximo` | os botões de valor e os limites de um apoio |
+| `etapas` | para onde vai o dinheiro, por ordem: cada uma fica «paga» quando o total lá chega. **Os valores atuais são estimativas** |
+| `evento` | `mostrar`, a `data` (`"2026-12-02"`, ou `null` para «a anunciar») e o `local`. Com data, o dia fica marcado no gráfico |
+| `manuais` | o que não passa pela Stripe: `{ "data": "2026-12-02", "valor": 640, "origem": "clube", "nome": "Grupo de quarta-feira", "mensagem": { "pt": "…", "en": "…" } }`. `origem` é `clube` ou `empresas` (Fundação do Desporto). Com `nome`, aparece no mural; `"mural": false` tira-o |
+| `excluir` | ids de sessões (`cs_…`) que não contam para o total: um reembolso, um teste |
+| `ocultar` | ids que saem do mural mas continuam a contar: uma mensagem que não deve ficar à vista |
+
+### O ecrã da clubhouse e os QR codes
+
+`franciscasalgado.golf/fundme?ecra` é a página para o ecrã grande: o total, a
+barra, o último recado e o QR code, a atualizar-se de 30 em 30 segundos. O QR
+(`img/fundme/qr-ecra.svg`) leva a `/fundme?o=ecra`; o `o=` segue para os
+metadados do pagamento, para se saber de onde veio cada apoio.
 
 ## Ligar as coisas que faltam
 

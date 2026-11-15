@@ -117,19 +117,19 @@ const NOMES = {
   pt: { inicio: 'Francisca', resultados: 'Época a época', jogadora: 'A jogadora',
         witb: 'O que leva no saco',
         listaS: 'O que Francisca Salgado leva no saco',
-        imprensa: 'Imprensa', parcerias: 'Parcerias',
+        imprensa: 'Imprensa', parcerias: 'Parcerias', fundme: 'Rumo à Florida',
         listaR: 'Resultados de Francisca Salgado',
         listaI: 'Imprensa sobre Francisca Salgado',
         cargo: 'Golfista amadora', desporto: 'Golfe', lugar: 'lugar' },
   en: { inicio: 'Francisca', resultados: 'Season by season', jogadora: 'The player',
         witb: "What's in the bag",
         listaS: "What's in Francisca Salgado's bag",
-        imprensa: 'Press', parcerias: 'Partnerships',
+        imprensa: 'Press', parcerias: 'Partnerships', fundme: 'Road to Florida',
         listaR: 'Francisca Salgado — results',
         listaI: 'Press coverage of Francisca Salgado',
         cargo: 'Amateur golfer', desporto: 'Golf', lugar: 'place' },
 };
-const base = (l) => (l === 'en' ? `${SITIO}/en` : `${SITIO}/`);
+const base = (l) => (l === 'en' ? `${SITIO}/en/` : `${SITIO}/`);
 /* A página de entrada de cada língua. A inglesa leva barra no fim: sem ela, as
    ligações relativas das páginas inglesas resolvem contra a raiz e devolvem o
    português. */
@@ -324,6 +324,13 @@ const PAGINAS = {
       availableLanguage: ['pt', 'en'],
     },
   }],
+  /* A angariação: uma página com um fim só, dita como tal. */
+  'fundme.html': async (html, l) => [quemE(l), migalhas('fundme', 'fundme.html', l), {
+    '@type': 'WebPage',
+    name: l === 'en' ? 'Road to Florida — Francisca Salgado' : 'Rumo à Florida — Francisca Salgado',
+    inLanguage: l === 'en' ? 'en' : 'pt-PT',
+    about: { '@id': `${SITIO}/#francisca` },
+  }],
 };
 
 const INICIO = '<!-- dados:início -->';
@@ -421,6 +428,7 @@ const MAPA = [
   ['witb.html', 'monthly', '0.6', ['witb.html', 'data/witb.json']],
   ['imprensa.html', 'monthly', '0.7', ['imprensa.html', 'data/imprensa.json']],
   ['parcerias.html', 'monthly', '0.7', ['parcerias.html', 'data/apoios.json', 'data/canais.json']],
+  ['fundme.html', 'daily', '0.7', ['fundme.html', 'data/fundme.json']],
 ];
 
 /* A data vem do git, e uma por página.
