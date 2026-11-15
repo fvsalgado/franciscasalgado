@@ -329,6 +329,11 @@ pagamento. As contas estão em `api/fundme/_comum.js`, separadas da rede.
    manda o recibo.
 4. Experimentar primeiro com uma chave de teste (`sk_test_…`) numa
    pré-visualização, com o cartão 4242 4242 4242 4242.
+5. Para as fotografias: na Vercel, em *Storage → Create → Blob*, criar uma
+   loja **pública** e ligá-la ao projeto (isso cria `BLOB_READ_WRITE_TOKEN`).
+   Depois, em *Settings → Environment Variables*, criar `FUNDME_CHAVE` com uma
+   frase comprida (12 caracteres ou mais): é a chave de `/fundme/gerir`. Sem
+   o Blob, a página simplesmente não oferece a fotografia.
 
 ### `data/fundme.json`
 
@@ -337,11 +342,24 @@ pagamento. As contas estão em `api/fundme/_comum.js`, separadas da rede.
 | `aberto` | `false` fecha o botão, sem mexer em mais nada |
 | `meta`, `inicio`, `partida` | a meta em euros, o primeiro dia do gráfico e o dia da partida (a contagem «faltam N dias») |
 | `valores`, `valorInicial`, `minimo`, `maximo` | os botões de valor e os limites de um apoio |
+| `fotos` | `aceitar: false` tira o campo da fotografia; `aprovar: false` mostra as fotografias logo, sem passar por `/fundme/gerir` (não recomendado) |
 | `etapas` | para onde vai o dinheiro, por ordem: cada uma fica «paga» quando o total lá chega. **Os valores atuais são estimativas** |
 | `evento` | `mostrar`, a `data` (`"2026-12-02"`, ou `null` para «a anunciar») e o `local`. Com data, o dia fica marcado no gráfico |
-| `manuais` | o que não passa pela Stripe: `{ "data": "2026-12-02", "valor": 640, "origem": "clube", "nome": "Grupo de quarta-feira", "mensagem": { "pt": "…", "en": "…" } }`. `origem` é `clube` ou `empresas` (Fundação do Desporto). Com `nome`, fica escrito na bandeira; com `mensagem`, aparece num postal; `"mural": false` tira-o dos dois |
+| `manuais` | o que não passa pela Stripe: `{ "data": "2026-12-02", "valor": 640, "origem": "clube", "nome": "Grupo de quarta-feira", "mensagem": { "pt": "…", "en": "…" } }`. `origem` é `clube` ou `empresas` (Fundação do Desporto). Com `nome`, fica escrito na bandeira; com `mensagem`, aparece num postal; com `foto` (um caminho em `/img/…`), o postal leva a fotografia; `"mural": false` tira-o dos dois |
 | `excluir` | ids de sessões (`cs_…`) que não contam para o total: um reembolso, um teste |
 | `ocultar` | ids que saem da bandeira e dos postais mas continuam a contar: uma mensagem que não deve ficar à vista |
+
+### As fotografias e /fundme/gerir
+
+Quem apoia pode juntar uma fotografia (sua, ou com a Francisca). A página
+reduz-na no telemóvel (1600 px, JPEG, sem a localização) e manda-a para
+`api/fundme/foto.js`, que a guarda no Blob em `fundme/pendentes/`; o endereço
+segue com o pagamento, nos metadados da Stripe. Nada aparece sem aprovação:
+`franciscasalgado.golf/fundme/gerir` (com a `FUNDME_CHAVE`, guardada no
+telemóvel) mostra as fotografias dos apoios pagos, as que estão à espera
+primeiro. «Mostrar» copia-a para `fundme/aprovadas/` e ela entra na página e
+no ecrã do clube em menos de um minuto; «Retirar» tira-a de vista; «Recusar»
+apaga-a. A página atualiza-se sozinha, para se ir aprovando no dia do evento.
 
 ### O ecrã da clubhouse e os QR codes
 
@@ -349,7 +367,11 @@ pagamento. As contas estão em `api/fundme/_comum.js`, separadas da rede.
 o avião a voar de Lisboa para Miami à medida do total, o total a contar, a
 bandeira com os nomes, os postais a passar em fita, uma fotografia da Francisca
 e o QR code. Atualiza-se de 20 em 20 segundos; quando entra um apoio novo, há
-uma faixa com o valor (e o nome, se o deixou) e uma chuva de bolas de golfe.
+uma chuva de bolas de golfe e, se a pessoa deixou nome, mensagem ou
+fotografia, o ecrã escurece e o postal dela entra em grande no meio, com a
+fotografia ao lado e a mensagem a escrever-se letra a letra, durante uns dez
+segundos (vários seguidos fazem fila). Um apoio sem nome dá só uma faixa com o
+valor; o valor nunca aparece ao lado de um nome.
 Abrir no browser do ecrã em ecrã inteiro (F11). O QR
 (`img/fundme/qr-ecra.svg`) leva a `/fundme?o=ecra`; o `o=` segue para os
 metadados do pagamento, para se saber de onde veio cada apoio.

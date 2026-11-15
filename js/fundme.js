@@ -42,6 +42,11 @@ const T = {
     },
     obrigado: (n) => `<strong>Obrigado${n ? `, ${n}` : ''}!</strong> O seu apoio já conta${n ? ', e o seu nome já está na bandeira' : ''}.`,
     aEntrar: '<strong>Obrigado!</strong> O pagamento está a ser confirmado. Com Multibanco, o apoio aparece aqui quando a referência for paga.',
+    fotoDepois: ' A fotografia aparece logo que a família a veja.',
+    foto: {
+      preparar: 'A preparar…', enviar: 'A enviar…', pronta: 'Fotografia pronta', aEsperar: 'A enviar a fotografia…',
+      erro: { formato: 'Este formato não abre aqui. Experimente outra fotografia.', grande: 'A fotografia é grande demais.', demasiados: 'Demasiadas fotografias seguidas. Tente daqui a pouco.', fotos: 'As fotografias ainda não estão ligadas.', rede: 'A fotografia não seguiu. Pode apoiar na mesma, ou tentar outra vez.' },
+    },
     fontes: { online: 'online', clube: 'no clube', empresas: 'empresas, pela Fundação do Desporto' },
     hoje: 'hoje',
     nesseDia: 'nesse dia',
@@ -64,6 +69,8 @@ const T = {
     nomes: (n) => (n === 1 ? '1 nome na bandeira.' : `${n} nomes na bandeira.`),
     postaisVazio: 'Ainda não chegaram postais. O primeiro pode ser o seu.',
     noClube: 'no clube',
+    fotoDe: (n) => (n ? `Fotografia de ${n}` : 'Fotografia de quem apoia'),
+    comFoto: (n) => `${n} está com a Francisca.`,
   },
   en: {
     de: (m) => `of ${m}`,
@@ -84,6 +91,11 @@ const T = {
     },
     obrigado: (n) => `<strong>Thank you${n ? `, ${n}` : ''}!</strong> Your gift already counts${n ? ', and your name is on the flag' : ''}.`,
     aEntrar: '<strong>Thank you!</strong> Your payment is being confirmed. With Multibanco, it shows here once the reference is paid.',
+    fotoDepois: ' Your photo will appear as soon as the family has seen it.',
+    foto: {
+      preparar: 'Preparing…', enviar: 'Uploading…', pronta: 'Photo ready', aEsperar: 'Uploading your photo…',
+      erro: { formato: 'This format does not open here. Please try another photo.', grande: 'The photo is too large.', demasiados: 'Too many photos in a row. Please try again shortly.', fotos: 'Photos are not switched on yet.', rede: 'The photo did not upload. You can still give, or try again.' },
+    },
     fontes: { online: 'online', clube: 'at the club', empresas: 'companies, via Fundação do Desporto' },
     hoje: 'today',
     nesseDia: 'that day',
@@ -106,6 +118,8 @@ const T = {
     nomes: (n) => (n === 1 ? '1 name on the flag.' : `${n} names on the flag.`),
     postaisVazio: 'No postcards yet. The first one could be yours.',
     noClube: 'at the club',
+    fotoDe: (n) => (n ? `Photo from ${n}` : 'Photo from a supporter'),
+    comFoto: (n) => `${n} is with Francisca.`,
   },
 };
 
@@ -218,6 +232,8 @@ function formulario(d, l) {
   const doLink = new URLSearchParams(location.search).get('erro');
   if (doLink) erro(doLink);
 
+  const esperarFoto = fotografia(d, l);
+
   f.addEventListener('submit', async (e) => {
     e.preventDefault();
     $('fmErro').hidden = true;
@@ -225,14 +241,18 @@ function formulario(d, l) {
     const v = dadosF.valor === 'outro' ? Number(dadosF.outro) : Number(dadosF.valor);
     if (!(v >= (d.minimo ?? 5) && v <= (d.maximo ?? 5000))) { erro('valor'); campo.focus(); return; }
     bt.disabled = true;
+    // se a fotografia ainda vai a caminho, espera-se por ela (sem ela, segue)
+    $('fmBtT').textContent = t.foto.aEsperar;
+    dadosF.foto = await esperarFoto();
     $('fmBtT').textContent = t.aEnviar;
     try {
       const r = await fetch(f.action, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // quem escreve o nome ou a mensagem abriu de propósito «juntar o meu
-        // nome à bandeira»: é isso que diz que quer aparecer
-        body: JSON.stringify({ ...dadosF, mural: (dadosF.nome || dadosF.mensagem) ? '1' : '0' }),
+        // quem escreve o nome, a mensagem ou junta uma fotografia abriu de
+        // propósito «juntar o meu nome à bandeira»: é isso que diz que quer
+        // aparecer
+        body: JSON.stringify({ ...dadosF, mural: (dadosF.nome || dadosF.mensagem || dadosF.foto) ? '1' : '0' }),
       });
       const j = await r.json().catch(() => ({}));
       if (r.ok && j.url) { location.assign(j.url); return; }
@@ -243,6 +263,91 @@ function formulario(d, l) {
     bt.disabled = false;
     atualizar();
   });
+}
+
+/* ── a fotografia de quem apoia ───────────────────────────── */
+
+/** Reduz no próprio telemóvel: no máximo 1600 px, em JPEG. Desenhar num
+ *  canvas também deita fora a localização e o resto dos dados da câmara. */
+async function reduzir(ficheiro, lado = 1600) {
+  let img;
+  try {
+    img = await createImageBitmap(ficheiro, { imageOrientation: 'from-image' });
+  } catch {
+    img = await new Promise((ok, falha) => {
+      const i = new Image();
+      i.onload = () => ok(i);
+      i.onerror = () => falha(new Error('formato'));
+      i.src = URL.createObjectURL(ficheiro);
+    });
+  }
+  const w = img.width || img.naturalWidth;
+  const h = img.height || img.naturalHeight;
+  if (!w || !h) throw new Error('formato');
+  const k = Math.min(1, lado / Math.max(w, h));
+  const c = document.createElement('canvas');
+  c.width = Math.round(w * k);
+  c.height = Math.round(h * k);
+  c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+  img.close?.();
+  const b = await new Promise((ok) => c.toBlob(ok, 'image/jpeg', 0.84));
+  if (!b) throw new Error('formato');
+  return b;
+}
+
+/** O campo da fotografia: escolher, reduzir, enviar logo (enquanto a pessoa
+ *  escreve o resto) e mostrar como ficou. Devolve a função que o envio do
+ *  formulário chama para ter o endereço — espera pelo envio, se for preciso. */
+function fotografia(d, l) {
+  const t = T[l].foto;
+  if (!d.fotos || !d.aberto || !window.fetch) return async () => '';
+  $('fmFotoC').hidden = false;
+  $('fmFotoX').hidden = false;
+  const campo = $('fmFoto');
+  const pre = $('fmFotoPre');
+  const estado = (txt, classe = '') => { $('fmFotoEstado').textContent = txt; pre.className = `fm-foto__pre ${classe}`; };
+  let envio = null;
+  let vez = 0;
+
+  $('fmFotoBt').addEventListener('click', () => campo.click());
+  pre.querySelector('img').addEventListener('click', () => campo.click());
+  campo.addEventListener('change', () => {
+    const ficheiro = campo.files?.[0];
+    campo.value = '';
+    if (!ficheiro) return;
+    const esta = ++vez;
+    $('fmFotoUrl').value = '';
+    $('fmFotoBt').hidden = true;
+    pre.hidden = false;
+    $('fmFotoImg').removeAttribute('src');
+    estado(t.preparar, 'fm-foto__pre--a');
+    envio = (async () => {
+      const b = await reduzir(ficheiro);
+      if (esta !== vez) return '';
+      $('fmFotoImg').src = URL.createObjectURL(b);
+      estado(t.enviar, 'fm-foto__pre--a');
+      const r = await fetch('/api/fundme/foto', { method: 'POST', headers: { 'Content-Type': 'application/octet-stream' }, body: b });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || !j.foto) throw new Error(j.erro || 'rede');
+      if (esta !== vez) return '';
+      $('fmFotoUrl').value = j.foto;
+      estado(t.pronta, 'fm-foto__pre--ok');
+      return j.foto;
+    })();
+    envio.catch((e) => { if (esta === vez) estado(t.erro[e.message] || t.erro.rede, 'fm-foto__pre--erro'); });
+  });
+  $('fmFotoTirar').addEventListener('click', () => {
+    vez++;
+    envio = null;
+    $('fmFotoUrl').value = '';
+    pre.hidden = true;
+    $('fmFotoBt').hidden = false;
+  });
+
+  return async () => {
+    if (!envio) return $('fmFotoUrl').value;
+    try { return (await envio) || ''; } catch { return ''; }
+  };
 }
 
 /* ── a volta da Stripe ────────────────────────────────────── */
@@ -260,7 +365,7 @@ async function obrigado(l) {
       const r = await fetch(`/api/fundme?sessao=${encodeURIComponent(sessao)}`, { cache: 'no-store' });
       const j = await r.json();
       if (j.pago) {
-        caixa.innerHTML = T[l].obrigado(esc(j.nome || ''));
+        caixa.innerHTML = T[l].obrigado(esc(j.nome || '')) + (j.foto ? T[l].fotoDepois : '');
         caixa.hidden = false;
         return true;
       }
@@ -496,21 +601,29 @@ function bandeira(d, l) {
 
 /* ── os postais ───────────────────────────────────────────── */
 
+const SELO = '<svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M8 20.2V3.6l9.2 3.3L8 10.2"/></svg>';
+
 const postal = (m, l, i) => {
   const t = T[l];
   const hoje = diaLisboa();
   const carimbo = dataCurta(m.dia, l).toUpperCase();
   const quando = m.origem === 'clube' ? t.noClube : t.quando(Math.max(0, diasEntre(m.dia, hoje)));
-  return `<li class="fm-postal" style="--r:${[-2.2, 1.6, -1, 2, -1.6, 1.1][i % 6]}deg">
-    <span class="fm-postal__selo" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M8 20.2V3.6l9.2 3.3L8 10.2"/></svg></span>
+  const msg = tx(m.mensagem, l);
+  // a fotografia vem presa ao postal, como uma polaroide (sem crédito: é de quem apoia)
+  const foto = m.foto
+    ? `<figure class="fm-postal__foto"><img src="${esc(m.foto)}" alt="${esc(t.fotoDe(m.nome))}" loading="lazy" decoding="async" data-credito-feito="1" /></figure>`
+    : '';
+  return `<li class="fm-postal${m.foto ? ' fm-postal--foto' : ''}" style="--r:${[-2.2, 1.6, -1, 2, -1.6, 1.1][i % 6]}deg">
+    <span class="fm-postal__selo" aria-hidden="true">${SELO}</span>
     <span class="fm-postal__carimbo" aria-hidden="true">${esc(carimbo)}</span>
-    <p class="fm-postal__t">${esc(tx(m.mensagem, l))}</p>
+    ${foto}
+    ${msg ? `<p class="fm-postal__t">${esc(msg)}</p>` : `<p class="fm-postal__t fm-postal__t--so">${esc(m.nome ? t.comFoto(m.nome) : t.anonimo)}</p>`}
     <p class="fm-postal__q"><b>${esc(m.nome || t.anonimo)}</b><span>${esc(quando)}</span></p>
   </li>`;
 };
 
 function postais(d, l) {
-  const lista = (d.mural ?? []).filter((m) => tx(m.mensagem, l));
+  const lista = (d.mural ?? []).filter((m) => tx(m.mensagem, l) || m.foto);
   const ul = $('fmPostais');
   if (!lista.length) { ul.innerHTML = `<li class="fm-postais__vazio">${T[l].postaisVazio}</li>`; $('fmMais').hidden = true; return; }
   const POR = 6;
@@ -548,34 +661,105 @@ function contar(el, de, ate, dur = 1800) {
 
 /* A festa de um apoio novo: uma faixa a descer com o nome (se o houver) e
    uma chuva de bolas de golfe a sair do número. */
-function festa(novo, valor) {
-  const caixa = $('fmEcraFesta');
-  const quem = novo?.nome ? ` · Obrigado, ${esc(novo.nome)}!` : ' · Obrigado!';
-  caixa.innerHTML = `<div class="fm-festa__faixa"><b>+${euros(valor, 'pt')}</b> Novo apoio · New gift${quem}</div>`;
-  if (!quieto()) {
-    for (let i = 0; i < 26; i++) {
-      const b = document.createElement('i');
-      b.className = 'fm-festa__bola';
-      b.style.setProperty('--x', `${(Math.random() - 0.5) * 70}vw`);
-      b.style.setProperty('--y', `${-20 - Math.random() * 50}vh`);
-      b.style.setProperty('--d', `${1.4 + Math.random() * 1.2}s`);
-      b.style.setProperty('--t', `${0.6 + Math.random() * 0.9}`);
-      caixa.append(b);
-    }
+/** Um punhado de bolas de golfe a saltar de um ponto do ecrã. */
+function bolas(caixa, x, y, n = 26) {
+  if (quieto()) return;
+  caixa.querySelectorAll('.fm-festa__bola').forEach((b) => b.remove());
+  for (let i = 0; i < n; i++) {
+    const b = document.createElement('i');
+    b.className = 'fm-festa__bola';
+    b.style.left = x;
+    b.style.top = y;
+    b.style.setProperty('--x', `${(Math.random() - 0.5) * 80}vw`);
+    b.style.setProperty('--y', `${-15 - Math.random() * 55}vh`);
+    b.style.setProperty('--d', `${1.4 + Math.random() * 1.3}s`);
+    b.style.setProperty('--t', `${0.6 + Math.random() * 1}`);
+    caixa.append(b);
   }
+}
+
+/** Um apoio sem nome: uma faixa no topo, com o valor (não diz de quem é). */
+function festa(valor) {
+  const caixa = $('fmEcraFesta');
+  caixa.innerHTML = `<div class="fm-festa__faixa"><b>+${euros(valor, 'pt')}</b> Novo apoio · New gift · Obrigado!</div>`;
+  bolas(caixa, '30vw', '62vh');
   caixa.classList.remove('fm-festa--on');
   void caixa.offsetWidth;
   caixa.classList.add('fm-festa--on');
   setTimeout(() => caixa.classList.remove('fm-festa--on'), 7000);
 }
 
+/* ── o destaque: quem acabou de apoiar com mensagem, fotografia ou nome ──
+ * O ecrã escurece e o postal entra em grande no meio, com a fotografia
+ * presa ao lado; a mensagem escreve-se letra a letra e cai o carimbo
+ * «Novo apoio». Uns segundos depois, o postal desce para a fita. Se
+ * chegarem vários de uma vez, vão um a seguir ao outro. O valor nunca
+ * aparece aqui. */
+
+const fila = [];
+let emDestaque = false;
+
+/** O texto letra a letra, sem partir palavras. */
+function letras(texto) {
+  let k = 0;
+  return String(texto).split(/\s+/).map((p) =>
+    `<span class="fm-d__p">${[...p].map((c) => `<span style="--i:${k++}">${esc(c)}</span>`).join('')}</span>`).join(' ');
+}
+
+function destacar(m) {
+  fila.push(m);
+  if (!emDestaque) proximoDestaque();
+}
+
+async function proximoDestaque() {
+  const caixa = $('fmEcraDestaque');
+  const m = fila.shift();
+  if (!m) { emDestaque = false; caixa.className = 'fm-destaque'; return; }
+  emDestaque = true;
+  const msg = tx(m.mensagem, 'pt');
+  const tipo = m.foto ? 'foto' : msg ? 'msg' : 'nome';
+  const texto = msg || `Obrigado, ${m.nome}!`;
+  const passo = Math.max(14, Math.min(55, 1900 / texto.length));
+  caixa.innerHTML = `<div class="fm-destaque__fundo"></div>
+    <div class="fm-destaque__palco">
+      <p class="fm-destaque__r">Acabou de chegar · Just in</p>
+      <div class="fm-destaque__par">
+        ${m.foto ? `<figure class="fm-destaque__foto"><img src="${esc(m.foto)}" alt="" data-credito-feito="1" /></figure>` : ''}
+        <article class="fm-destaque__postal fm-destaque__postal--${tipo}" style="--passo:${passo.toFixed(0)}ms">
+          <span class="fm-destaque__selo" aria-hidden="true">${SELO}</span>
+          <span class="fm-destaque__carimbo" aria-hidden="true">Novo apoio<br />New gift</span>
+          <p class="fm-destaque__t">${letras(texto)}</p>
+          ${msg ? `<p class="fm-destaque__q"><b>${esc(m.nome || 'Anónimo')}</b><span>Rumo à Florida · 2027</span></p>`
+            : `<p class="fm-destaque__q"><span>O nome já está na bandeira · Now on the flag</span></p>`}
+        </article>
+      </div>
+    </div>`;
+  // com fotografia, espera que ela chegue (no máximo três segundos)
+  const img = caixa.querySelector('img');
+  if (img && !img.complete) await Promise.race([new Promise((ok) => { img.onload = ok; img.onerror = ok; }), new Promise((ok) => setTimeout(ok, 3000))]);
+  caixa.className = 'fm-destaque';
+  void caixa.offsetWidth;
+  caixa.classList.add('fm-destaque--on');
+  setTimeout(() => bolas(caixa, '50vw', '58vh', 34), 900);
+  const dura = { foto: 11000, msg: 9000, nome: 6500 }[tipo] + (msg ? Math.min(3000, msg.length * 18) : 0);
+  setTimeout(() => {
+    caixa.classList.add('fm-destaque--sai');
+    setTimeout(proximoDestaque, 1000);
+  }, dura);
+}
+
 let ecraAntes = null;
 function ecra(d) {
   const total = d.total ?? 0;
   const p = Math.min(100, (total / d.meta) * 100);
+  const mural = d.mural ?? [];
   const antes = ecraAntes;
-  const chaveDe = (m) => `${m.nome ?? ''}|${tx(m.mensagem, 'pt') ?? ''}|${m.dia}`;
-  ecraAntes = { total, nomes: unicos(d.mural).join('|'), vistos: new Set((d.mural ?? []).map(chaveDe)) };
+  ecraAntes = {
+    total,
+    nomes: unicos(mural).join('|'),
+    ids: new Set(mural.map((m) => m.id)),
+    fotos: new Set(mural.filter((m) => m.foto).map((m) => m.id)),
+  };
 
   contar($('fmEcraTotal'), antes ? antes.total : 0, total, antes ? 2200 : 2600);
   $('fmEcraMeta').innerHTML = `de ${euros(d.meta, 'pt')}<br />of ${euros(d.meta, 'en')}`;
@@ -589,15 +773,15 @@ function ecra(d) {
   ].join('');
 
   // a bandeira só se redesenha quando entra um nome novo
-  const nomes = unicos(d.mural);
+  const nomes = unicos(mural);
   if (!antes || antes.nomes !== ecraAntes.nomes) {
     $('fmEcraBandeira').innerHTML = bandeiraSVG(nomes, { W: 620, letra: 22, max: 60, ondula: true });
   }
 
   // os postais a passar, numa fita sem fim (a lista vai duas vezes)
-  const msgs = (d.mural ?? []).filter((m) => tx(m.mensagem, 'pt')).slice(0, 14);
+  const msgs = mural.filter((m) => tx(m.mensagem, 'pt') || m.foto).slice(0, 14);
   const fita = $('fmEcraFita');
-  const chave = msgs.map((m) => `${m.nome}${tx(m.mensagem, 'pt')}`).join('|');
+  const chave = msgs.map((m) => `${m.id}${m.foto ? 'f' : ''}`).join('|');
   if (fita.dataset.chave !== chave) {
     fita.dataset.chave = chave;
     const um = msgs.map((m, i) => postal(m, 'pt', i)).join('');
@@ -605,8 +789,12 @@ function ecra(d) {
     fita.style.setProperty('--dur', `${Math.max(30, msgs.length * 7)}s`);
   }
 
-  // agradece pelo nome só a quem acabou de entrar no mural
-  if (antes && total > antes.total) festa((d.mural ?? []).find((m) => m.nome && !antes.vistos.has(chaveDe(m))), total - antes.total);
+  if (!antes) return;
+  // quem entrou agora no mural, e as fotografias que acabaram de ser aprovadas
+  const novos = mural.filter((m) => !antes.ids.has(m.id));
+  const fotosNovas = mural.filter((m) => m.foto && antes.ids.has(m.id) && !antes.fotos.has(m.id));
+  [...novos, ...fotosNovas].reverse().forEach(destacar);
+  if (total > antes.total && !novos.length) festa(total - antes.total);
 }
 
 /* ── tudo ─────────────────────────────────────────────────── */

@@ -9,11 +9,13 @@
  * revalida: a Stripe não é chamada por cada visita, e um apoio novo aparece
  * em menos de um minuto.
  *
+ * As fotografias aprovadas vêm do Vercel Blob (ver _comum.js).
+ *
  * Sem STRIPE_SECRET_KEY responde na mesma, com o que está escrito à mão, e
  * `stripe: 'por_ligar'` — a página mostra os números e fecha o botão.
  */
 
-import { SESSAO, dados, publico, resumo, sessoesPagas, stripe, stripeLigada } from './_comum.js';
+import { APROVADAS, SESSAO, blobLigado, blobListar, comAprovacao, dados, publico, resumo, sessoesPagas, stripe, stripeLigada } from './_comum.js';
 
 export default async function handler(req, res) {
   const d = dados();
@@ -32,6 +34,7 @@ export default async function handler(req, res) {
         pago: s.payment_status === 'paid',
         concluida: s.status === 'complete',
         nome: s.metadata?.nome || null,
+        foto: Boolean(s.metadata?.foto),
       });
     } catch (e) {
       console.error('fundme: sessão', e.message);
@@ -54,9 +57,23 @@ export default async function handler(req, res) {
     }
   }
 
+  // as fotografias aprovadas: fundme/aprovadas/<curto(id)>.jpg
+  const aprovadas = new Map();
+  if (blobLigado() && comAprovacao(d) && sessoes.length) {
+    try {
+      for (const b of await blobListar(APROVADAS)) {
+        const m = /\/([0-9a-f]{16})\.jpg$/.exec(b.pathname ?? '');
+        // o ?v= muda quando se volta a aprovar, para não ficar a antiga em cache
+        if (m) aprovadas.set(m[1], `${b.url}?v=${Date.parse(b.uploadedAt) || 0}`);
+      }
+    } catch (e) {
+      console.error('fundme: fotografias', e.message);
+    }
+  }
+
   return res.status(200).json({
     ...publico(d),
-    ...resumo({ sessoes, d }),
+    ...resumo({ sessoes, d, aprovadas }),
     stripe: estado,
     aberto: Boolean(d.aberto) && estado !== 'por_ligar',
     atualizado: new Date().toISOString(),

@@ -235,7 +235,20 @@
             <label for="fmMsg" data-t="fm_msg_l">Uma mensagem para a Francisca (opcional)</label>
             <textarea id="fmMsg" name="mensagem" maxlength="140" rows="2"></textarea>
           </div>
+          <div class="fm-foto" id="fmFotoC" hidden>
+            <input type="file" id="fmFoto" accept="image/*" class="so-leitor" tabindex="-1" />
+            <button class="fm-foto__bt" type="button" id="fmFotoBt">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M4 8h3l1.6-2.2h6.8L17 8h3v11H4z"/><circle cx="12" cy="13.2" r="3.4" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+              <span><b data-t="fm_foto_t">Juntar uma fotografia</b><small data-t="fm_foto_s">Sua, ou com a Francisca</small></span>
+            </button>
+            <figure class="fm-foto__pre" id="fmFotoPre" hidden>
+              <img id="fmFotoImg" alt="" />
+              <figcaption><span id="fmFotoEstado"></span><button type="button" id="fmFotoTirar" data-t="fm_foto_tirar">Tirar</button></figcaption>
+            </figure>
+            <input type="hidden" name="foto" id="fmFotoUrl" value="" />
+          </div>
           <p class="fm-nome__x" data-t="fm_nome_x">O nome fica escrito na bandeira e a mensagem segue num postal. O valor nunca aparece.</p>
+          <p class="fm-nome__x" id="fmFotoX" hidden data-t="fm_foto_x">A fotografia aparece depois de a família a ver. Ao juntá-la, confirma que a pode partilhar e que quem lá está concorda.</p>
         </details>
         <input type="hidden" name="mural" value="1" />
         <input type="hidden" name="lingua" value="pt" id="fmLingua" />
@@ -372,6 +385,7 @@
     <div class="fm-ecra__postais"><div class="fm-ecra__fita" id="fmEcraFita"></div></div>
   </div>
   <div class="fm-ecra__festa" id="fmEcraFesta" aria-live="polite"></div>
+  <div class="fm-destaque" id="fmEcraDestaque" aria-live="polite"></div>
 </div>
 
 </main>

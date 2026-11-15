@@ -105,6 +105,10 @@
     {
       "source": "/en/fundme",
       "destination": "/en/fundme.html"
+    },
+    {
+      "source": "/fundme/gerir",
+      "destination": "/fundme-gerir.html"
     }
   ],
   "headers": [

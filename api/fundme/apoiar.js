@@ -5,6 +5,7 @@
  *   nome      para o mural (opcional, até 40 caracteres)
  *   mensagem  para a Francisca (opcional, até 140)
  *   mural     '1' para aparecer no mural
+ *   foto      o endereço que /api/fundme/foto devolveu (opcional)
  *   lingua    'pt' ou 'en'
  *   origem    de onde veio quem apoia (o QR do clube, o ecrã…), só para saber
  *
@@ -15,7 +16,7 @@
  * /api/fundme tira o mural. Nada disto fica guardado noutro sítio.
  */
 
-import { baseDe, dados, demasiados, limpar, stripe, stripeLigada } from './_comum.js';
+import { baseDe, dados, demasiados, fotoValida, limpar, stripe, stripeLigada } from './_comum.js';
 
 const TXT = {
   pt: {
@@ -70,11 +71,12 @@ export default async function handler(req, res) {
 
   const nome = limpar(c.nome, 40);
   const mensagem = limpar(c.mensagem, 140);
-  const mural = (c.mural === '1' || c.mural === 'on' || c.mural === true) && Boolean(nome || mensagem);
+  const foto = fotoValida(c.foto) ? c.foto : '';
+  const mural = (c.mural === '1' || c.mural === 'on' || c.mural === true) && Boolean(nome || mensagem || foto);
   const origem = /^[a-z0-9-]{1,20}$/.test(String(c.origem || '')) ? c.origem : '';
   const t = TXT[lingua];
 
-  const meta = { kind: 'fundme', lingua, nome, mensagem, mural: mural ? '1' : '0', origem };
+  const meta = { kind: 'fundme', lingua, nome, mensagem, mural: mural ? '1' : '0', origem, foto };
   const params = {
     mode: 'payment',
     submit_type: 'donate',

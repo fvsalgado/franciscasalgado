@@ -1,5 +1,6 @@
-/* O que as duas funções da angariação «Rumo à Florida» partilham: os dados de
- * data/fundme.json, a conversa com a Stripe e as contas.
+/* O que as funções da angariação «Rumo à Florida» partilham: os dados de
+ * data/fundme.json, a conversa com a Stripe e com o Vercel Blob (as
+ * fotografias), e as contas.
  *
  * A Stripe é o registo. Não há base de dados: o total, o gráfico e o mural
  * saem dos pagamentos que lá estão, mais o que se escreveu à mão em
@@ -10,6 +11,7 @@
  * testar sozinhas.
  */
 
+import { createHash, timingSafeEqual } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -38,6 +40,7 @@ export function publico(d) {
     maximo: d.maximo,
     etapas: d.etapas ?? [],
     evento: d.evento ?? null,
+    fotos: fotosAbertas(d),
   };
 }
 
@@ -95,6 +98,105 @@ export async function sessoesPagas(d) {
   return todas.filter((s) => s.metadata?.kind === 'fundme' && s.payment_status === 'paid');
 }
 
+/* ── as fotografias (Vercel Blob) ─────────────────────────── */
+
+/* Quem apoia pode juntar uma fotografia. A página reduz-na e manda-a para
+ * /api/fundme/foto, que a guarda no Vercel Blob em fundme/pendentes/, com um
+ * nome que não se adivinha; o endereço segue nos metadados do pagamento.
+ * Com `fotos.aprovar` (o normal), só aparece depois de alguém da família a
+ * aprovar em /fundme/gerir: aprovar copia-a para fundme/aprovadas/<id>.jpg,
+ * e é essa lista que a página e o ecrã mostram. Fala-se com o Blob pela API
+ * que o @vercel/blob usa, sem dependências, como com a Stripe. */
+
+const BLOB = 'https://vercel.com/api/blob';
+const BLOB_VERSAO = '13';
+
+export const blobLigado = () => Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+
+/** O id da loja vem dentro da chave: vercel_blob_rw_<loja>_<segredo>. */
+const loja = () => String(process.env.BLOB_READ_WRITE_TOKEN || '').split('_')[3] ?? '';
+
+/** Onde ficam os ficheiros públicos desta loja. */
+export const anfitriaoBlob = () => `${loja().toLowerCase()}.public.blob.vercel-storage.com`;
+
+/** Aceitar fotografias: com o Blob ligado e sem `fotos.aceitar: false`. */
+export const fotosAbertas = (d) => blobLigado() && d?.fotos?.aceitar !== false;
+
+/** Mostrar só as aprovadas (o normal), ou todas as dos pagamentos feitos. */
+export const comAprovacao = (d) => d?.fotos?.aprovar !== false;
+
+async function blob(caminho, init = {}) {
+  const chave = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!chave) throw new Error('Blob por ligar');
+  const r = await fetch(`${BLOB}${caminho}`, {
+    ...init,
+    headers: { authorization: `Bearer ${chave}`, 'x-api-version': BLOB_VERSAO, 'x-vercel-blob-store-id': loja(), ...init.headers },
+    signal: AbortSignal.timeout(15000),
+  });
+  if (!r.ok) throw new Error(`Blob HTTP ${r.status} ${(await r.text().catch(() => '')).slice(0, 200)}`);
+  return r.json();
+}
+
+/** Guarda bytes num caminho; o Blob junta-lhe um sufixo ao acaso. */
+export const blobGuardar = (caminho, bytes, tipo) => blob(`/?${new URLSearchParams({ pathname: caminho })}`, {
+  method: 'PUT',
+  body: bytes,
+  headers: { 'x-vercel-blob-access': 'public', 'x-content-type': tipo, 'x-add-random-suffix': '1', 'x-cache-control-max-age': '31536000' },
+});
+
+/** Copia um ficheiro da loja para um caminho fixo (substitui se já houver). */
+export const blobCopiar = (de, caminho) => blob(`/?${new URLSearchParams({ pathname: caminho, fromUrl: de })}`, {
+  method: 'PUT',
+  headers: { 'x-vercel-blob-access': 'public', 'x-add-random-suffix': '0', 'x-allow-overwrite': '1', 'x-content-type': 'image/jpeg', 'x-cache-control-max-age': '300' },
+});
+
+export const blobApagar = (urls) => (urls.length
+  ? blob('/delete', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ urls }) })
+  : Promise.resolve(null));
+
+/** Os ficheiros com um prefixo, mil de cada vez. */
+export async function blobListar(prefixo) {
+  const todos = [];
+  let cursor = null;
+  for (let pagina = 0; pagina < 10; pagina++) {
+    const q = new URLSearchParams({ prefix: prefixo, limit: '1000' });
+    if (cursor) q.set('cursor', cursor);
+    const j = await blob(`?${q}`, { method: 'GET' });
+    todos.push(...(j.blobs ?? []));
+    if (!j.hasMore || !j.cursor) break;
+    cursor = j.cursor;
+  }
+  return todos;
+}
+
+/** Um nome curto e estável para um apoio, que não deixa ver o id da Stripe. */
+export const curto = (id) => createHash('sha256').update(String(id)).digest('hex').slice(0, 16);
+
+export const PENDENTES = 'fundme/pendentes/';
+export const APROVADAS = 'fundme/aprovadas/';
+export const caminhoAprovada = (id) => `${APROVADAS}${curto(id)}.jpg`;
+
+/** Uma fotografia que veio desta loja, por /api/fundme/foto. Nada de outros
+ *  endereços nos metadados. */
+export function fotoValida(url) {
+  if (!blobLigado() || typeof url !== 'string' || url.length > 400) return false;
+  try {
+    const u = new URL(url);
+    return u.protocol === 'https:' && u.host === anfitriaoBlob() && /^\/fundme\/pendentes\/[A-Za-z0-9._-]{1,120}$/.test(u.pathname) && !u.search;
+  } catch {
+    return false;
+  }
+}
+
+/** A chave de /fundme/gerir, comparada sem dar pistas pelo tempo. */
+export function chaveCerta(dada) {
+  const certa = process.env.FUNDME_CHAVE;
+  if (!certa || certa.length < 12 || !dada) return false;
+  const a = createHash('sha256').update(String(dada)).digest();
+  const b = createHash('sha256').update(certa).digest();
+  return timingSafeEqual(a, b);
+}
+
 /* ── as contas ────────────────────────────────────────────── */
 
 const LISBOA = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Lisbon', year: 'numeric', month: '2-digit', day: '2-digit' });
@@ -127,9 +229,14 @@ function dias(de, ate) {
  * - total e apoios (cada pagamento ou registo conta um);
  * - porOrigem: online, clube, empresas (e o que mais se escrever à mão);
  * - serie: o total acumulado, dia a dia, do início até hoje;
- * - mural: só quem pediu para aparecer, sem valores, o mais recente primeiro.
+ * - mural: só quem pediu para aparecer, sem valores, o mais recente primeiro,
+ *   com a fotografia quando a houver (aprovada, se `fotos.aprovar`);
+ *   `aprovadas` é o Map curto(id) → endereço que o index.js lê do Blob.
  */
-export function resumo({ sessoes = [], d, agora = Date.now() }) {
+export function resumo({ sessoes = [], d, agora = Date.now(), aprovadas = new Map() }) {
+  const aprovar = comAprovacao(d);
+  /* a fotografia de um pagamento: a aprovada, ou (sem aprovação) a que veio */
+  const fotoDe = (s) => aprovadas.get(curto(s.id)) ?? (!aprovar && fotoValida(s.metadata?.foto) ? s.metadata.foto : null);
   const excluir = new Set(d.excluir ?? []);
   const ocultar = new Set(d.ocultar ?? []);
 
@@ -142,6 +249,7 @@ export function resumo({ sessoes = [], d, agora = Date.now() }) {
       origem: 'online',
       nome: limpar(s.metadata?.nome, 40) || null,
       mensagem: limpar(s.metadata?.mensagem, 140) || null,
+      foto: fotoDe(s),
       mural: s.metadata?.mural === '1',
     })),
     ...(d.manuais ?? []).filter((m) => Number(m.valor) > 0 && /^\d{4}-\d{2}-\d{2}$/.test(m.data ?? '')).map((m, i) => ({
@@ -152,6 +260,7 @@ export function resumo({ sessoes = [], d, agora = Date.now() }) {
       origem: m.origem || 'clube',
       nome: limpar(m.nome, 60) || null,
       mensagem: m.mensagem ?? null, // à mão pode vir em {pt, en}
+      foto: /^(\/img\/|https:\/\/)[^\s"'<>]{1,300}$/.test(m.foto ?? '') ? m.foto : null,
       mural: m.mural !== false && Boolean(m.nome),
     })),
   ];
@@ -171,10 +280,10 @@ export function resumo({ sessoes = [], d, agora = Date.now() }) {
   });
 
   const mural = entradas
-    .filter((e) => e.mural && (e.nome || e.mensagem) && !ocultar.has(e.id))
+    .filter((e) => e.mural && (e.nome || e.mensagem || e.foto) && !ocultar.has(e.id))
     .sort((a, b) => b.quando - a.quando)
     .slice(0, 60)
-    .map((e) => ({ nome: e.nome, mensagem: e.mensagem, dia: e.dia, origem: e.origem }));
+    .map((e) => ({ id: curto(e.id), nome: e.nome, mensagem: e.mensagem, foto: e.foto, dia: e.dia, origem: e.origem }));
 
   return {
     total,
