@@ -10,6 +10,7 @@ import { factos, citacoes, comunicados, escadas, ligacoes, numeros, equipa } fro
 import { fichaRecruiting, curvas, witb, swing } from './recruiting.js';
 import { galeria, videos, apoios } from './media.js';
 import { reels } from './instagram.js';
+import { fundme } from './fundme.js';
 
 const $ = (id) => document.getElementById(id);
 const qual = document.currentScript?.dataset.pagina
@@ -51,6 +52,9 @@ const PINTAR = {
      partilhada: um endereço curto, uma imagem de partilha própria, e um
      assunto que se explica sem o resto do sítio à volta. */
   async witb(l) { await witb($('witbL'), l); },
+
+  /* A angariação «Rumo à Florida»: tudo o que mexe vem de /api/fundme. */
+  async fundme(l) { await fundme(l); },
 
   async legal() { /* as páginas legais são só texto */ },
 };

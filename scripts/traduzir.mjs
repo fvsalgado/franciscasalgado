@@ -33,7 +33,7 @@ const SECO = process.argv.includes('--seco');
 const SITIO = 'https://franciscasalgado.golf';
 
 const PAGINAS = ['index.html', 'resultados.html', 'jogadora.html', 'witb.html',
-                 'imprensa.html', 'parcerias.html', 'privacidade.html', 'termos.html'];
+                 'imprensa.html', 'parcerias.html', 'fundme.html', 'privacidade.html', 'termos.html'];
 
 /* Os títulos e as descrições não têm `data-t` — vivem no <head>, onde não há
    elementos para marcar. Ficam aqui, ao lado do resto do inglês. */
@@ -64,6 +64,10 @@ const CABECALHOS = {
   'parcerias.html': {
     titulo: 'Partnerships — Francisca Salgado',
     desc: 'Partnering with Francisca Salgado: who already backs her, the three ways in — season, event or groundwork — and how to get in touch.',
+  },
+  'fundme.html': {
+    titulo: 'Road to Florida — Francisca Salgado',
+    desc: 'Help Francisca Salgado, Portuguese Under-18 golf champion, get to Florida for the Junior Orange Bowl. The target is €5,000 for the trip, and the total goes up in plain sight.',
   },
   'privacidade.html': { titulo: 'Privacy — Francisca Salgado', desc: 'How this site handles personal data.' },
   'termos.html': { titulo: 'Terms — Francisca Salgado', desc: 'Terms of use for this site.' },

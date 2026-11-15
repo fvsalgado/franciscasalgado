@@ -51,7 +51,7 @@ const RAIZ = new URL('../', import.meta.url);
 const SECO = process.argv.includes('--seco');
 
 const PAGINAS = ['index.html', 'resultados.html', 'jogadora.html', 'witb.html',
-                 'imprensa.html', 'parcerias.html'];
+                 'imprensa.html', 'parcerias.html', 'fundme.html'];
 
 /* Os contentores que valem a pena guardar, por ordem de nada. Um id que não
    exista numa página é ignorado sem barulho — cada página tem os seus. */

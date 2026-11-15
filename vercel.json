@@ -97,6 +97,18 @@
     {
       "source": "/en",
       "destination": "/en/index.html"
+    },
+    {
+      "source": "/fundme",
+      "destination": "/fundme.html"
+    },
+    {
+      "source": "/en/fundme",
+      "destination": "/en/fundme.html"
+    },
+    {
+      "source": "/fundme/gerir",
+      "destination": "/fundme-gerir.html"
     }
   ],
   "headers": [
@@ -181,5 +193,10 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/fundme/*.js": {
+      "includeFiles": "data/fundme.json"
+    }
+  }
 }
