@@ -422,6 +422,9 @@ sozinha, para o dia do evento.
 também ao alto, num ecrã vertical ou num telemóvel). É claro, para a manhã ao
 sol, e desenhado como um quadro de resultados de golfe:
 - uma barra verde com o dia e a hora;
+- à direita, uma coluna com a Francisca em grande (o polaroide), o QR em
+  grande para apoiar e, em baixo, as condições de jogo compactas (o vento e
+  o que vale em tacos, a temperatura, a chuva nas próximas 3 horas);
 - o total em placas brancas, como as dos quadros dos torneios;
 - o cartão dos 18 buracos: a meta dividida em 18 (cerca de 278 € cada), com
   os buracos feitos marcados, a bola no buraco que se joga e os «buracos
