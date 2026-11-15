@@ -2243,6 +2243,7 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
                   -webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .fm-ecra__fita{display:flex;width:max-content;animation:fm-fita var(--dur,40s) linear infinite}
 .fm-ecra__fita ul{list-style:none;display:flex;gap:1.6vw;margin:0;padding:0 .8vw}
+.fm-ecra__fita .fm-postal{flex:none;align-self:auto;scroll-snap-align:none}
 .fm-ecra__fita .fm-postal{width:19vw;min-height:9vw;padding:1vw 1.1vw .8vw;border-radius:.4vw}
 .fm-ecra__fita .fm-postal__t{font-size:1.15vw;margin-right:3.6vw}
 .fm-ecra__fita .fm-postal__q{font-size:.78vw}
