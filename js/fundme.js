@@ -1462,33 +1462,23 @@ function pintarCondicoes(d) {
   const [ept, een] = efeitoVento(a.wind_speed_10m);
   const agora = Date.now() / 1000;
   const h = meteo.hourly ?? {};
-  const prox = (h.time ?? []).map((t, i) => ({ t, i })).filter(({ t }) => t > agora - 1800).slice(0, 5);
-  const chuva3 = prox.slice(0, 3).map(({ i }) => h.precipitation_probability?.[i] ?? 0);
-  const horas = prox.slice(1, 5).map(({ t, i }) => {
-    const [hic] = ceuAgora(h.weather_code?.[i], 1);
-    return `<li><span class="fm-cond__h">${horaLisboa(t * 1000).replace(':00', 'h')}</span>${icone(hic)}<b>${Math.round(h.temperature_2m?.[i])}°</b>
-      <span class="fm-cond__hv">${icone('seta', h.wind_direction_10m?.[i] || 0)}${Math.round(h.wind_speed_10m?.[i] ?? 0)}</span><small>${h.precipitation_probability?.[i] ?? 0}%</small></li>`;
-  }).join('');
-  const nascer = meteo.daily?.sunrise?.[0];
-  const ocaso = meteo.daily?.sunset?.[0];
+  const prox = (h.time ?? []).map((t, i) => ({ t, i })).filter(({ t }) => t > agora - 1800).slice(0, 3);
+  const chuva3 = prox.map(({ i }) => h.precipitation_probability?.[i] ?? 0);
+  /* Compacto: o que interessa a quem vai jogar (o vento e o que ele vale em
+     tacos, a temperatura, a chuva). A coluna é da Francisca e do QR. */
   $('fmEcraCond').innerHTML = `${cab}
     <div class="fm-cond__vento">
       ${rosa(a.wind_direction_10m, a.wind_speed_10m)}
       <div class="fm-cond__vt">
-        <small>${bi('Vento', 'Wind')}</small>
-        <b>${bi(`de ${RUMOS_LONGOS_PT[r]}`, `from the ${RUMOS_LONGOS_EN[r]}`)}</b>
+        <b>${bi(`Vento de ${RUMOS_LONGOS_PT[r]}`, `Wind from the ${RUMOS_LONGOS_EN[r]}`)}</b>
         <span>${bi('rajadas', 'gusts')} <b>${Math.round(a.wind_gusts_10m)}</b> km/h</span>
         <em>${bi(ept, een)}</em>
       </div>
     </div>
-    <div class="fm-cond__grelha">
-      <div>${icone(ic)}<b>${Math.round(a.temperature_2m)}°</b><small>${bi(cpt, cen)}</small></div>
-      <div>${icone('termometro')}<b>${Math.round(a.apparent_temperature)}°</b><small>${bi('sensação', 'feels like')}</small></div>
-      <div>${icone('humidade')}<b>${Math.round(a.relative_humidity_2m)}%</b><small>${bi('humidade', 'humidity')}</small></div>
-      <div>${icone('gota')}<b>${chuva3.length ? Math.max(...chuva3) : 0}%</b><small>${bi('chuva até 3 h', 'rain, next 3 h')}</small></div>
-    </div>
-    ${horas ? `<p class="fm-cond__st">${bi('Próximas horas', 'Next hours')}</p><ul class="fm-cond__horas">${horas}</ul>` : ''}
-    <div class="fm-cond__sol">${nascer ? `<span>${icone('nascer')}${horaLisboa(nascer * 1000)}</span>` : ''}${ocaso ? `<span>${icone('ocaso')}${horaLisboa(ocaso * 1000)}</span>` : ''}</div>`;
+    <div class="fm-cond__linha">
+      <span>${icone(ic)}<b>${Math.round(a.temperature_2m)}°</b>${bi(cpt, cen)}</span>
+      <span>${icone('gota')}<b>${chuva3.length ? Math.max(...chuva3) : 0}%</b>${bi('chuva, 3 h', 'rain, 3 h')}</span>
+    </div>`;
 }
 
 function tempo(d) {
