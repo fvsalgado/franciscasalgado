@@ -457,7 +457,10 @@ faixa com o valor; o valor nunca aparece ao lado de um nome.
 meta, e recomeça; `?ecra&demo=6` muda o intervalo, em segundos. Diz
 «Demonstração» no canto.
 
-Abrir no browser do ecrã em ecrã inteiro (F11). O QR
+Abrir no browser do ecrã em ecrã inteiro (F11). **O endereço curto é
+`franciscasalgado.golf/tv`** (ou `/ecra`): redireciona para `/fundme?ecra`, e
+escreve-se depressa com o comando de uma TV ou de uma box (`vercel.json`,
+redireccionamento não permanente, para se poder mudar o destino). O QR
 (`img/fundme/qr-ecra.svg`) leva a `/fundme?o=ecra`; o `o=` segue para os
 metadados do pagamento, para se saber de onde veio cada apoio.
 
