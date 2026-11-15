@@ -584,91 +584,128 @@ const unicos = (mural) => {
 };
 
 /** A bandeira do clube, desenhada em SVG: uma bandeira de buraco a sério,
- *  presa à vara, com o pano a ondular em dobras, a bainha cosida, o nome do
- *  clube bordado e os nomes de quem apoia assinados a marcador, cada um com
- *  a sua cor e inclinação. O pano cresce para caber os nomes (60 cabem bem).
- *  `ondula` põe-na a mexer; `convite` deixa um lugar para o primeiro nome. */
-export function bandeiraSVG(nomes, { W = 640, letra = 24, max = 80, ondula = false, convite = false, vento = 1 } = {}) {
+ *  com a proporção de uma bandeira de green (cerca de 3 por 2), o pano a
+ *  ondular em dobras, a bainha cosida, o nome do clube bordado e os nomes de
+ *  quem apoia assinados a marcador, cada um com a sua cor e inclinação.
+ *  O pano não cresce: com mais nomes, as assinaturas ficam mais pequenas e
+ *  mais juntas, como numa bandeira assinada de verdade. `ondula` põe-na a
+ *  mexer; `convite` deixa um lugar para o primeiro nome; `cena` prolonga a
+ *  vara até sair da imagem (a fotografia do campo atrás). */
+export function bandeiraSVG(nomes, { W = 640, max = 80, ondula = false, convite = false, vento = 1, cena = false, proporcao = 1.45, varaAbaixo = 0.3 } = {}) {
   const x0 = 40;
   const R = W - 16;
   const larg = R - x0;
   const topo = 30;
+  const alt = Math.round(larg / proporcao);
+  const fundo = topo + alt;
+  const H = cena ? Math.round(fundo + alt * varaAbaixo) : fundo + 54;
   const lista = nomes.slice(0, max);
-  // as assinaturas: uma grelha desencontrada (como tijolos), com acaso fixo por nome
   const sorte = (n, k) => { let h = 2166136261 ^ k; for (const c of n) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return ((h >>> 0) % 1000) / 1000; };
-  const cols = Math.max(2, Math.min(5, Math.floor(larg / (letra * 6.2))));
-  const celW = (larg - 48) / cols;
-  const celH = letra * 1.62;
-  const yNomes = topo + 112;
-  const linhas = Math.max(convite ? 2 : 1, Math.ceil(lista.length / cols));
-  const fundo = Math.max(topo + 230, yNomes + linhas * celH + 18);
-  const H = fundo + 54;
+
+  // o cabeçalho bordado
+  const hh = alt * 0.27;
+  const cx = x0 + larg / 2;
+  const fc = Math.min(larg / 14, hh * 0.34);
+
+  // as assinaturas: escolhe-se a grelha que deixa a letra maior
+  const ax0 = x0 + larg * 0.07;
+  const ax1 = R - larg * 0.05;
+  const ay0 = topo + hh + alt * 0.03;
+  const ay1 = fundo - alt * 0.06;
+  const aw = ax1 - ax0;
+  const ah = ay1 - ay0;
+  const n = lista.length;
+  const medio = n ? lista.reduce((t, x) => t + Math.max(5, x.length), 0) / n : 10;
+  let melhor = { c: 1, tam: 0 };
+  for (let c = 1; c <= 8 && n; c++) {
+    const linhas = Math.ceil(n / c);
+    const tam = Math.min((ah / linhas) * 0.74, ((aw / c) * 0.9) / (medio * 0.44), fc * 1.15);
+    if (tam > melhor.tam) melhor = { c, tam };
+  }
+  const cols = melhor.c;
+  const linhas = Math.max(1, Math.ceil(n / cols));
+  const celW = aw / cols;
+  const celH = ah / linhas;
   const tintas = ['#1C1C1C', '#1E3A8A', '#14532D', '#1C1C1C', '#7A2E0E', '#273449'];
   let assin = '';
-  lista.forEach((n, i) => {
+  lista.forEach((nome, i) => {
     const r = Math.floor(i / cols);
     const c = i % cols;
-    // as linhas ímpares desencontradas meia célula, e cada nome um pouco ao lado
-    const meio = r % 2 ? 0.25 : -0.25;
-    const tam = Math.min(letra * (0.95 + sorte(n, 4) * 0.4), (celW * 0.92) / (Math.max(4, n.length) * 0.42));
-    const meiaLarg = n.length * tam * 0.255;
-    let cx = x0 + 24 + celW * (c + 0.5 + meio) + (sorte(n, 1) - 0.5) * celW * 0.18;
-    cx = Math.max(x0 + 26 + meiaLarg, Math.min(R - 30 - meiaLarg, cx));
-    const cy = yNomes + r * celH + celH * 0.62 + (sorte(n, 2) - 0.5) * celH * 0.28;
-    const rot = ((sorte(n, 3) - 0.5) * 18).toFixed(1);
-    const cor = tintas[Math.floor(sorte(n, 5) * tintas.length)];
-    assin += `<text x="${cx.toFixed(0)}" y="${cy.toFixed(0)}" font-size="${tam.toFixed(1)}" fill="${cor}" transform="rotate(${rot} ${cx.toFixed(0)} ${cy.toFixed(0)})">${esc(n)}</text>`;
+    const nessa = r === linhas - 1 ? n - r * cols : cols; // a última linha, centrada
+    const desvio = (cols - nessa) / 2 + (r % 2 ? 0.16 : -0.16) * (nessa > 1 ? 1 : 0);
+    const tam = Math.min(melhor.tam * (0.88 + sorte(nome, 4) * 0.26), (celW * 0.94) / (Math.max(4, nome.length) * 0.44));
+    const meia = nome.length * tam * 0.23;
+    let x = ax0 + celW * (c + 0.5 + desvio) + (sorte(nome, 1) - 0.5) * celW * 0.14;
+    x = Math.max(ax0 + meia, Math.min(ax1 - meia, x));
+    const y = ay0 + celH * (r + 0.66) + (sorte(nome, 2) - 0.5) * celH * 0.22;
+    const rot = ((sorte(nome, 3) - 0.5) * 16).toFixed(1);
+    const cor = tintas[Math.floor(sorte(nome, 5) * tintas.length)];
+    assin += `<text x="${x.toFixed(0)}" y="${y.toFixed(0)}" font-size="${tam.toFixed(1)}" fill="${cor}" text-anchor="middle" transform="rotate(${rot} ${x.toFixed(0)} ${y.toFixed(0)})">${esc(nome)}</text>`;
   });
-  // o pano: a orla de cima e a de baixo ondulam; `o` é o momento da onda
-  const a = 9 * vento;
+
+  // o pano: as orlas de cima e de baixo ondulam; `o` é o momento da onda
+  const a = larg * 0.016 * vento;
   const pano = (o, d = 0) => {
     const t = topo + d;
     const b = fundo - d;
     const xl = x0 + d;
-    const xr = R - d - Math.sin(o) * 4;
+    const xr = R - d - Math.sin(o) * larg * 0.006;
     return `M${xl} ${t} C${x0 + larg * 0.3} ${t - a * Math.sin(o)} ${x0 + larg * 0.62} ${t + a * Math.sin(o + 1.6)} ${xr} ${t + 2 + a * 0.4 * Math.sin(o + 0.8)}`
       + ` C${xr + 3} ${t + (b - t) * 0.35} ${xr - 3} ${t + (b - t) * 0.7} ${xr} ${b + a * 0.4 * Math.sin(o + 2)}`
       + ` C${x0 + larg * 0.62} ${b + a * Math.sin(o + 1.6)} ${x0 + larg * 0.3} ${b - a * Math.sin(o)} ${xl} ${b} Z`;
   };
-  const anima = (d) => (ondula ? `<animate attributeName="d" dur="${(5.5 / vento).toFixed(1)}s" repeatCount="indefinite" values="${pano(0, d)};${pano(1.4, d)};${pano(2.8, d)};${pano(1.4, d)};${pano(0, d)}" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1"/>` : '');
-  const id = `fl${W}${lista.length}`;
-  const cx = x0 + larg / 2;
-  return `<svg viewBox="0 0 ${W} ${H}" class="fm-flag${ondula ? ' fm-flag--ondula' : ''}" aria-hidden="true">
+  const dur = (5.5 / vento).toFixed(1);
+  const anima = (d) => (ondula ? `<animate attributeName="d" dur="${dur}s" repeatCount="indefinite" values="${pano(0, d)};${pano(1.4, d)};${pano(2.8, d)};${pano(1.4, d)};${pano(0, d)}" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1"/>` : '');
+  const id = `fl${W}${n}${cena ? 'c' : ''}`;
+  const bainha = Math.max(9, larg * 0.016);
+  const vara = Math.max(10, larg * 0.017);
+  const camadas = (fill) => `<path d="${pano(0)}" fill="${fill}">${anima(0)}</path>`;
+  return `<svg viewBox="0 0 ${W} ${H}" class="fm-flag${ondula ? ' fm-flag--ondula' : ''}"${cena ? ' preserveAspectRatio="xMinYMax meet"' : ''} aria-hidden="true">
     <defs>
-      <linearGradient id="${id}v" x1="0" x2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#F1EEE6"/><stop offset="1" stop-color="#C9C3B4"/></linearGradient>
+      <linearGradient id="${id}p" x1="0" x2="1"><stop offset="0" stop-color="#E4DECD"/><stop offset=".35" stop-color="#FFFFFF"/><stop offset=".7" stop-color="#EAE5D7"/><stop offset="1" stop-color="#A39C8B"/></linearGradient>
       <linearGradient id="${id}d" x1="0" x2="1">
-        <stop offset="0" stop-color="#6B5B3E" stop-opacity=".06"/><stop offset=".16" stop-color="#FFF" stop-opacity=".38"/><stop offset=".31" stop-color="#6B5B3E" stop-opacity=".05"/>
-        <stop offset=".48" stop-color="#FFF" stop-opacity=".34"/><stop offset=".64" stop-color="#6B5B3E" stop-opacity=".06"/><stop offset=".81" stop-color="#FFF" stop-opacity=".3"/><stop offset="1" stop-color="#6B5B3E" stop-opacity=".09"/>
-        ${ondula ? `<animateTransform attributeName="gradientTransform" type="translate" values="-.06 0;.06 0;-.06 0" dur="${(5.5 / vento).toFixed(1)}s" repeatCount="indefinite"/>` : ''}
+        <stop offset="0" stop-color="#6B5B3E" stop-opacity=".06"/><stop offset=".16" stop-color="#FFF" stop-opacity=".38"/><stop offset=".31" stop-color="#6B5B3E" stop-opacity=".06"/>
+        <stop offset=".48" stop-color="#FFF" stop-opacity=".34"/><stop offset=".64" stop-color="#6B5B3E" stop-opacity=".07"/><stop offset=".81" stop-color="#FFF" stop-opacity=".3"/><stop offset="1" stop-color="#6B5B3E" stop-opacity=".1"/>
+        ${ondula ? `<animateTransform attributeName="gradientTransform" type="translate" values="-.06 0;.06 0;-.06 0" dur="${dur}s" repeatCount="indefinite"/>` : ''}
       </linearGradient>
-      <filter id="${id}s" x="-5%" y="-5%" width="115%" height="125%"><feDropShadow dx="2" dy="6" stdDeviation="6" flood-color="#14291F" flood-opacity=".22"/></filter>
+      <linearGradient id="${id}l" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF3D6" stop-opacity=".32"/><stop offset=".45" stop-color="#FFF" stop-opacity="0"/><stop offset="1" stop-color="#3B3122" stop-opacity=".14"/></linearGradient>
+      <linearGradient id="${id}b" x1="0" y1="0" x2="0" y2="1"><stop offset=".8" stop-color="#3B3122" stop-opacity="0"/><stop offset="1" stop-color="#3B3122" stop-opacity=".13"/></linearGradient>
+      <filter id="${id}s" x="-5%" y="-5%" width="115%" height="125%"><feDropShadow dx="${cena ? 1 : 2}" dy="${cena ? 3 : 6}" stdDeviation="${cena ? 3 : 6}" flood-color="#14291F" flood-opacity="${cena ? '.18' : '.22'}"/></filter>
     </defs>
-    <ellipse cx="${x0 - 8}" cy="${H - 10}" rx="70" ry="7" fill="#14291F" opacity=".14"/>
-    <rect x="${x0 - 13}" y="10" width="9" height="${H - 20}" rx="4.5" fill="url(#${id}v)" stroke="#BDB6A6" stroke-width=".6"/>
-    <circle cx="${x0 - 8.5}" cy="11" r="6.5" fill="#F4F1E8" stroke="#BDB6A6" stroke-width=".6"/>
-    <g filter="url(#${id}s)">
-      <path d="${pano(0)}" fill="#FCFAF3">${anima(0)}</path>
+    ${cena ? '' : `<ellipse cx="${x0 - 8}" cy="${H - 10}" rx="70" ry="7" fill="#14291F" opacity=".14"/>`}
+    <rect x="${x0 - vara - 3}" y="10" width="${vara}" height="${cena ? H : H - 20}" ${cena ? '' : `rx="${vara / 2}"`} fill="url(#${id}p)"/>
+    <circle cx="${x0 - 3 - vara / 2}" cy="11" r="${vara * 0.72}" fill="#F7F4EB" stroke="#B9B2A1" stroke-width=".8"/>
+    <g filter="url(#${id}s)"><path d="${pano(0)}" fill="#FCFAF3">${anima(0)}</path></g>
+    ${camadas(`url(#${id}d)`)}${camadas(`url(#${id}l)`)}${camadas(`url(#${id}b)`)}
+    <path d="${pano(0, larg * 0.016)}" fill="none" stroke="#1B5E3F" stroke-width="${Math.max(1, larg * 0.0018)}" stroke-dasharray="${larg * 0.008} ${larg * 0.0065}" opacity=".5">${anima(larg * 0.016)}</path>
+    <rect x="${x0 - 4}" y="${topo - 2}" width="${bainha}" height="${alt + 4}" fill="#1B5E3F" opacity=".94"/>
+    <g class="fm-flag__brasao" fill="none" stroke="#1B5E3F" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M${cx - fc * 0.22} ${topo + hh * 0.36}V${topo + hh * 0.06}l${fc * 0.42} ${hh * 0.055}-${fc * 0.42} ${hh * 0.055}" stroke-width="${Math.max(1.6, fc * 0.07)}"/>
+      <path d="M${cx - fc * 2.1} ${topo + hh * 0.38}H${cx - fc * 0.6}M${cx + fc * 0.6} ${topo + hh * 0.38}H${cx + fc * 2.1}" stroke-width="${Math.max(.8, fc * 0.03)}" opacity=".6"/>
     </g>
-    <path d="${pano(0)}" fill="url(#${id}d)">${anima(0)}</path>
-    <path d="${pano(0, 9)}" fill="none" stroke="#1B5E3F" stroke-width="1.1" stroke-dasharray="5 4" opacity=".5">${anima(9)}</path>
-    <rect x="${x0 - 4}" y="${topo - 2}" width="11" height="${fundo - topo + 4}" fill="#1B5E3F" opacity=".92"/>
-    <g class="fm-flag__brasao">
-      <path d="M${cx - 7} ${topo + 40}V${topo + 16}l13 4.5-13 4.5" fill="none" stroke="#1B5E3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M${cx - 60} ${topo + 44}H${cx - 20}M${cx + 20} ${topo + 44}H${cx + 60}" stroke="#1B5E3F" stroke-width=".8" opacity=".6"/>
-      <text x="${cx}" y="${topo + 76}" text-anchor="middle" font-family="Fraunces,serif" font-weight="600" font-size="${Math.min(30, larg / 15)}" letter-spacing="${(Math.min(30, larg / 15) * 0.16).toFixed(1)}" fill="#14291F">VALE DE JANELAS</text>
-      <text x="${cx}" y="${topo + 98}" text-anchor="middle" font-family="Fraunces,serif" font-style="italic" font-size="${Math.min(17, larg / 28)}" fill="#1B5E3F">Road to Florida · 2027</text>
-    </g>
+    <text x="${cx}" y="${topo + hh * 0.72}" text-anchor="middle" font-family="Fraunces,serif" font-weight="600" font-size="${fc.toFixed(1)}" letter-spacing="${(fc * 0.16).toFixed(1)}" fill="#14291F">VALE DE JANELAS</text>
+    <text x="${cx}" y="${topo + hh * 0.97}" text-anchor="middle" font-family="Fraunces,serif" font-style="italic" font-size="${(fc * 0.56).toFixed(1)}" fill="#1B5E3F">Road to Florida · 2027</text>
     <g class="fm-flag__nomes" font-family="Caveat,cursive" font-weight="600">${assin}</g>
-    ${convite && !lista.length ? `<g class="fm-flag__convite"><text x="${cx}" y="${yNomes + 34}" text-anchor="middle" font-family="Caveat,cursive" font-size="${letra * 1.15}" fill="#1B5E3F" opacity=".55">O primeiro nome fica aqui · Your name here</text><line x1="${x0 + larg * 0.2}" x2="${x0 + larg * 0.8}" y1="${yNomes + 46}" y2="${yNomes + 46}"/></g>` : ''}
+    ${convite && !n ? `<g class="fm-flag__convite"><text x="${cx}" y="${ay0 + ah * 0.45}" text-anchor="middle" font-family="Caveat,cursive" font-size="${(fc * 0.95).toFixed(1)}" fill="#1B5E3F" opacity=".55">O primeiro nome fica aqui · Your name here</text><line x1="${x0 + larg * 0.2}" x2="${x0 + larg * 0.8}" y1="${ay0 + ah * 0.58}" y2="${ay0 + ah * 0.58}"/></g>` : ''}
   </svg>`;
+}
+
+/** A bandeira «no campo»: a fotografia do buraco 9 de Praia D'El Rey, onde
+ *  é o Roll Up, desfocada como numa fotografia tirada junto à bandeira, e a
+ *  bandeira à frente, com a vara a sair da imagem. */
+export function bandeiraCena(nomes, opcoes = {}) {
+  return `<img class="fm-cena__f" src="/img/campos/praia-del-rey-9.webp" alt="" width="1400" height="933" decoding="async" />
+    <span class="fm-cena__luz" aria-hidden="true"></span>
+    ${bandeiraSVG(nomes, { ...opcoes, cena: true })}`;
 }
 
 function bandeira(d, l) {
   const t = T[l];
   const nomes = unicos(d.mural);
   const caixa = $('fmBandeira');
-  const W = caixa.clientWidth < 560 ? 420 : 680;
-  caixa.innerHTML = bandeiraSVG(nomes.length ? nomes : [], { W, letra: W < 500 ? 22 : 27, ondula: !quieto() });
+  const estreita = caixa.clientWidth < 560;
+  caixa.classList.add('fm-cena');
+  caixa.innerHTML = bandeiraCena(nomes, { W: 900, ondula: !quieto(), convite: !nomes.length });
   const semNome = Math.max(0, (d.apoios ?? 0) - (d.mural ?? []).filter((m) => m.nome).length);
   const partes = [];
   if (nomes.length) partes.push(t.nomes(nomes.length)); else partes.push(t.bandeiraVazia);
@@ -842,12 +879,12 @@ async function proximoDestaque() {
  * A volta cresce em fases, e cada fase tem o seu momento em grande. */
 
 const FASES = [
-  { pt: 'No 1.º tee · à espera da primeira pancada', en: 'On the 1st tee · waiting for the first shot' },
+  { pt: 'No 1.º tee', en: 'On the 1st tee' },
   { pt: 'Na ida', en: 'Front nine', marco: 'Primeira pancada!', marcoEn: 'First shot!' },
-  { pt: 'Na ida · a caminho da volta', en: 'Front nine · heading to the turn', marco: 'Bom arranque!', marcoEn: 'Great start!' },
+  { pt: 'A caminho da volta', en: 'Heading to the turn', marco: 'Bom arranque!', marcoEn: 'Great start!' },
   { pt: 'Na volta', en: 'Back nine', marco: 'Na volta!', marcoEn: 'At the turn!' },
   { pt: 'Últimos buracos', en: 'Coming home', marco: 'A caminho do 18!', marcoEn: 'Heading for the 18th!' },
-  { pt: 'Embocou! Meta atingida', en: 'Holed out! Target reached', marco: 'Embocou!', marcoEn: 'Holed out!' },
+  { pt: 'Embocou! Meta atingida', en: 'Holed out!', marco: 'Embocou!', marcoEn: 'Holed out!' },
 ];
 const faseDe = (total, meta, apoios) => {
   if (!apoios || total <= 0) return 0;
@@ -999,16 +1036,17 @@ function ecra(d) {
   const nomes = unicos(mural);
   if (!antes || antes.nomes !== ecraAntes.nomes) desenharBandeira(nomes);
 
-  // os postais a passar, numa fita sem fim (a lista vai duas vezes); sem
-  // mensagens ainda, passam postais por escrever, a convidar
+  // os postais: um de cada vez, pousados na fotografia do campo ao lado da
+  // bandeira; sem mensagens ainda, postais por escrever, a convidar
   const msgs = mural.filter((m) => tx(m.mensagem, 'pt') || m.foto).slice(0, 30);
-  const fita = $('fmEcraFita');
+  const caixaR = $('fmEcraFita');
   const chave = msgs.length ? msgs.map((m) => `${m.id}${m.foto ? 'f' : ''}`).join('|') : 'vazio';
-  if (fita.dataset.chave !== chave) {
-    fita.dataset.chave = chave;
+  if (caixaR.dataset.chave !== chave) {
+    caixaR.dataset.chave = chave;
     const um = msgs.length ? msgs.map((m, i) => postal(m, 'pt', i, true)).join('') : POR_ESCREVER.map(postalVazio).join('');
-    fita.innerHTML = `<ul>${um}</ul><ul aria-hidden="true">${um}</ul>`;
-    fita.style.setProperty('--dur', `${Math.max(30, (msgs.length || 4) * 7)}s`);
+    caixaR.innerHTML = `<ul>${um}</ul>`;
+    recadoN = -1;
+    proximoRecado();
   }
 
   if (!antes) return;
@@ -1019,13 +1057,31 @@ function ecra(d) {
   if (fase > antes.fase) destacar({ marco: fase, falta: Math.max(0, d.meta - total) });
 }
 
+/** Os postais rodam de 7 em 7 segundos: o que sai voa para trás, o seguinte
+ *  pousa por cima. */
+let recadoN = -1;
+let recadoT = null;
+function proximoRecado() {
+  const lista = [...$('fmEcraFita').querySelectorAll('li')];
+  clearTimeout(recadoT);
+  if (!lista.length) return;
+  const antes = lista[recadoN];
+  recadoN = (recadoN + 1) % lista.length;
+  lista.forEach((li, i) => li.classList.toggle('fm-postal--on', i === recadoN));
+  if (antes && antes !== lista[recadoN]) {
+    antes.classList.add('fm-postal--sai');
+    setTimeout(() => antes.classList.remove('fm-postal--sai'), 900);
+  }
+  if (lista.length > 1) recadoT = setTimeout(proximoRecado, 7000);
+}
+
 let nomesBandeira = [];
 function desenharBandeira(nomes = nomesBandeira) {
   nomesBandeira = nomes;
   // a bandeira ondula mais depressa quando há mais vento no campo
   const kmh = meteo?.current?.wind_speed_10m;
   const vento = kmh == null ? 1 : Math.max(0.7, Math.min(2.2, 0.6 + kmh / 22));
-  $('fmEcraBandeira').innerHTML = bandeiraSVG(nomes, { W: 860, letra: 30, max: 70, ondula: true, convite: !nomes.length, vento });
+  $('fmEcraBandeira').innerHTML = bandeiraCena(nomes, { W: 900, max: 70, ondula: true, convite: !nomes.length, vento, varaAbaixo: 0.1 });
 }
 
 /* ── as condições de jogo em Praia D'El Rey ────────────────────

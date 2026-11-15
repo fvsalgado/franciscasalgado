@@ -378,14 +378,18 @@ sol, e desenhado como um quadro de resultados de golfe:
 - o cartão dos 18 buracos: a meta dividida em 18 (cerca de 278 € cada), com
   os buracos feitos marcados, a bola no buraco que se joga e os «buracos
   feitos» ao lado;
-- a bandeira do clube com as assinaturas de quem apoia, a ondular mais ou
-  menos com o vento que está no campo;
+- a bandeira do clube «no campo»: à frente da fotografia do buraco 9 de
+  Praia D'El Rey, desfocada como numa fotografia tirada junto ao green, com
+  a vara a sair da imagem. Tem a proporção de uma bandeira de green; com mais
+  nomes, as assinaturas ficam mais pequenas e mais juntas (50 leem-se bem).
+  Ondula mais ou menos com o vento que está no campo;
+- os postais com as mensagens, pousados na fotografia ao lado da bandeira,
+  um de cada vez (de 7 em 7 segundos);
 - o QR e uma fotografia da Francisca;
 - ao lado, as **condições de jogo** em Praia D'El Rey: rosa dos ventos com
   de onde vem o vento, velocidade, rajadas e quantos tacos contar
   (±1 taco por cada 16 km/h), temperatura e sensação, humidade, chuva nas
   próximas três horas, a previsão hora a hora e o nascer e pôr do sol;
-- em baixo, os postais com as mensagens.
 
 O tempo vem do Open-Meteo, sem chave, pedido pelo browser do ecrã de 10 em 10
 minutos, para as coordenadas em `evento.coordenadas` de `data/fundme.json`.
