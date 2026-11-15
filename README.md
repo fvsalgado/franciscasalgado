@@ -333,6 +333,18 @@ A fotografia da Francisca (no bilhete, no retrato do cartão de apoio e no
 polaroide do ecrã) é a da taça de campeã do clube:
 `img/fundme/francisca-campea-clube*.webp` e `francisca-rosto.webp`.
 
+**A bandeira no campo acompanha Praia D'El Rey a sério** (na página e no
+ecrã). A luz é a da hora que é: a altura do sol em Óbidos, calculada no
+próprio browser, dá manhã, dia, hora dourada, crepúsculo ou noite (com
+estrelas, e a bandeira iluminada). O céu é o do tempo que faz, do Open-Meteo:
+nublado, nevoeiro, chuva, trovoada. E de vez em quando há uma rajada — o pano
+estica a partir da vara, passam linhas de vento e às vezes uma folha —, mais
+seguidas e mais fortes quando o vento sopra a sério. Por baixo da bandeira,
+na página, uma linha diz o tempo de agora. Com movimento reduzido, não há
+rajadas nem chuva a cair. Para ver um estado sem esperar por ele:
+`/fundme?ceu=noite,chuva,40,rajada` (uma luz, um tempo, o vento em km/h e
+rajadas de quatro em quatro segundos; também com `?ecra`).
+
 **O selo no resto do sítio** (`js/selo.js`): um carimbo redondo com o
 logótipo do Junior Orange Bowl, «Apoie a Francisca» e «Rumo à Florida · 2027»
 à volta e uma patilha «Apoiar →», que leva ao `/fundme`. Na página inicial

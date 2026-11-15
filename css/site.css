@@ -2575,11 +2575,87 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
    como numa fotografia tirada junto à bandeira, e a bandeira à frente, com a
    vara a sair da imagem; uma luz quente da manhã e o fundo a respirar */
 .fm-cena{position:relative;overflow:hidden;isolation:isolate;border-radius:20px;background:#9DB98A}
-.fm-cena__f{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%;z-index:-2;
-  filter:blur(2.2px) saturate(1.06);transform:scale(1.06)}
-.fm-cena__luz{position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:radial-gradient(120% 90% at 12% 0%,rgba(255,236,196,.42),transparent 55%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(20,41,31,.22))}
-.fm-cena .fm-flag{position:absolute;left:4%;bottom:0;width:92%;height:93%;max-width:none;margin:0;filter:drop-shadow(0 .3rem .6rem rgba(20,41,31,.22))}
+/* A fotografia leva os filtros da luz (1) e do tempo (2) por variáveis, que se
+   multiplicam: noite e nublado escurecem os dois, sem um apagar o outro. */
+.fm-cena__f{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%;z-index:-3;transform:scale(1.06);
+  filter:blur(var(--cena-blur,2.2px)) saturate(var(--s1,1.06)) saturate(var(--s2,1)) brightness(var(--b1,1)) brightness(var(--b2,1)) sepia(var(--sp,0)) hue-rotate(var(--h,0deg));
+  transition:filter 2.5s ease}
+.fm-cena__ceu,.fm-cena__estrelas,.fm-cena__nuvens,.fm-cena__tempo{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 2.5s ease}
+.fm-cena__ceu,.fm-cena__estrelas{z-index:-2}
+.fm-cena__nuvens{z-index:-2}
+.fm-cena__luz{position:absolute;inset:0;z-index:-1;pointer-events:none;transition:opacity 2.5s ease;
+  background:radial-gradient(120% 90% at var(--sol-x,12%) 0%,rgba(255,236,196,.42),transparent 55%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(20,41,31,.22))}
+.fm-cena .fm-flag{position:absolute;left:4%;bottom:0;width:92%;height:93%;max-width:none;margin:0;filter:drop-shadow(0 .3rem .6rem rgba(20,41,31,.22));transition:filter 2.5s ease}
+
+/* a luz do dia, pela altura do sol */
+.fm-cena[data-luz="manha"]{--b1:1.03}
+.fm-cena[data-luz="manha"] .fm-cena__ceu{opacity:1;background:linear-gradient(180deg,rgba(185,212,240,.35),rgba(255,240,215,.14) 55%,transparent);mix-blend-mode:soft-light}
+.fm-cena[data-luz="dia"][data-tempo="limpo"]{--s1:1.14;--b1:1.05}
+.fm-cena[data-luz="dia"][data-tempo="limpo"] .fm-cena__luz{background:radial-gradient(70% 70% at var(--sol-x,12%) -5%,rgba(255,246,220,.62),transparent 55%),linear-gradient(180deg,rgba(255,255,255,.08),rgba(20,41,31,.18))}
+.fm-cena[data-luz="dourada"]{--s1:1.2;--sp:.2}
+.fm-cena[data-luz="dourada"] .fm-cena__ceu{opacity:1;background:linear-gradient(180deg,rgba(255,172,92,.45),rgba(255,128,64,.2) 50%,rgba(70,34,12,.24));mix-blend-mode:multiply}
+.fm-cena[data-luz="dourada"] .fm-cena__luz{background:radial-gradient(75% 65% at var(--sol-x,88%) 34%,rgba(255,206,128,.72),rgba(255,160,80,.24) 38%,transparent 66%)}
+.fm-cena[data-luz="dourada"] .fm-flag{filter:drop-shadow(0 .3rem .6rem rgba(70,34,12,.28)) sepia(.12)}
+.fm-cena[data-luz="crepusculo"]{--s1:.85;--b1:.7;--h:-8deg}
+.fm-cena[data-luz="crepusculo"] .fm-cena__ceu{opacity:1;background:linear-gradient(180deg,rgba(70,60,145,.58),rgba(205,112,140,.4) 46%,rgba(32,26,52,.48));mix-blend-mode:multiply}
+.fm-cena[data-luz="crepusculo"] .fm-cena__luz{background:radial-gradient(90% 50% at var(--sol-x,88%) 50%,rgba(255,150,120,.42),transparent 62%)}
+.fm-cena[data-luz="crepusculo"] .fm-flag{filter:drop-shadow(0 .3rem .7rem rgba(20,16,40,.38)) brightness(.95)}
+.fm-cena[data-luz="noite"]{--s1:.5;--b1:.36;--h:14deg;background:#0E1A2B}
+.fm-cena[data-luz="noite"] .fm-cena__ceu{opacity:1;background:linear-gradient(180deg,rgba(8,16,42,.78),rgba(10,22,46,.42) 55%,rgba(5,10,22,.6));mix-blend-mode:multiply}
+/* à noite, a luz que fica é a da bandeira, como se a iluminasse o clube */
+.fm-cena[data-luz="noite"] .fm-cena__luz{background:radial-gradient(55% 65% at 42% 55%,rgba(255,232,186,.18),transparent 70%)}
+.fm-cena[data-luz="noite"] .fm-flag{filter:drop-shadow(0 .4rem 1rem rgba(0,0,0,.5)) brightness(.9)}
+.fm-cena[data-luz="noite"]:not([data-tempo="nublado"]):not([data-tempo="chuva"]):not([data-tempo="trovoada"]):not([data-tempo="nevoeiro"]):not([data-tempo="neve"]) .fm-cena__estrelas{opacity:1}
+.fm-cena__estrelas{background:radial-gradient(1.4px 1.4px at 6% 8%,#FFF 50%,transparent 51%),radial-gradient(1px 1px at 13% 22%,#FFF 50%,transparent 51%),radial-gradient(1.2px 1.2px at 19% 5%,#FFF 50%,transparent 51%),radial-gradient(1.6px 1.6px at 27% 15%,#FFF 50%,transparent 51%),radial-gradient(1px 1px at 33% 30%,#FFF 50%,transparent 51%),radial-gradient(1.2px 1.2px at 41% 9%,#FFF 50%,transparent 51%),radial-gradient(1px 1px at 48% 20%,#FFF 50%,transparent 51%),radial-gradient(1.5px 1.5px at 55% 4%,#FFF 50%,transparent 51%),radial-gradient(1px 1px at 61% 27%,#FFF 50%,transparent 51%),radial-gradient(1.3px 1.3px at 68% 12%,#FFF 50%,transparent 51%),radial-gradient(1px 1px at 74% 24%,#FFF 50%,transparent 51%),radial-gradient(1.6px 1.6px at 80% 6%,#FFF 50%,transparent 51%),radial-gradient(1.1px 1.1px at 86% 18%,#FFF 50%,transparent 51%),radial-gradient(1.3px 1.3px at 92% 10%,#FFF 50%,transparent 51%),radial-gradient(1px 1px at 97% 28%,#FFF 50%,transparent 51%),radial-gradient(1px 1px at 9% 33%,#FFF 50%,transparent 51%),radial-gradient(1.1px 1.1px at 37% 36%,#FFF 50%,transparent 51%),radial-gradient(1px 1px at 58% 38%,#FFF 50%,transparent 51%),radial-gradient(1.2px 1.2px at 83% 35%,#FFF 50%,transparent 51%),radial-gradient(0.9px 0.9px at 23% 40%,#FFF 50%,transparent 51%);-webkit-mask-image:linear-gradient(180deg,#000 0 30%,transparent 50%);mask-image:linear-gradient(180deg,#000 0 30%,transparent 50%)}
+.fm-cena[data-luz="noite"] .fm-cena__estrelas{animation:fm-estrelas 5s ease-in-out infinite alternate}
+@keyframes fm-estrelas{from{filter:brightness(.7)}to{filter:brightness(1.15)}}
+
+/* o tempo que faz */
+.fm-cena[data-tempo="parcial"]{--s2:.94}
+.fm-cena[data-tempo="parcial"] .fm-cena__nuvens{opacity:1;background:linear-gradient(180deg,rgba(150,160,172,.2),transparent 60%)}
+.fm-cena[data-tempo="nublado"]{--s2:.7;--b2:.92}
+.fm-cena:is([data-tempo="nublado"],[data-tempo="chuva"],[data-tempo="trovoada"],[data-tempo="neve"]) .fm-cena__nuvens{opacity:1;background:linear-gradient(180deg,rgba(108,118,130,.48),rgba(120,130,140,.2) 60%,rgba(60,70,82,.16))}
+.fm-cena:is([data-tempo="nublado"],[data-tempo="chuva"],[data-tempo="trovoada"],[data-tempo="nevoeiro"],[data-tempo="neve"]) .fm-cena__luz{opacity:.25}
+.fm-cena[data-tempo="nevoeiro"]{--s2:.6;--b2:1.04;--cena-blur:5px}
+.fm-cena[data-tempo="nevoeiro"] .fm-cena__nuvens{opacity:1;background:linear-gradient(180deg,rgba(236,238,236,.82),rgba(236,238,236,.58) 55%,rgba(236,238,236,.36))}
+.fm-cena[data-tempo="nevoeiro"] .fm-cena__tempo{opacity:.14;background:#EEF0EE}
+.fm-cena[data-tempo="chuva"]{--s2:.62;--b2:.8}
+.fm-cena[data-tempo="trovoada"]{--s2:.55;--b2:.64}
+.fm-cena__tempo{z-index:1;inset:-12%}
+.fm-cena:is([data-tempo="chuva"],[data-tempo="trovoada"]) .fm-cena__tempo{opacity:.5;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cpath d='M18 8v16M66 36v20M108 4v14M38 78v18M92 94v16M128 66v12M8 116v14M58 122v16M84 52v12M122 118v14' stroke='%23FFF' stroke-width='1.3' stroke-linecap='round' opacity='.85'/%3E%3C/svg%3E");background-size:140px 140px;
+  transform:skewX(-14deg);animation:fm-chuva .42s linear infinite}
+@keyframes fm-chuva{to{background-position:0 140px}}
+.fm-cena[data-tempo="neve"] .fm-cena__tempo{opacity:.85;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='%23FFF'%3E%3Ccircle cx='20' cy='14' r='2'/%3E%3Ccircle cx='86' cy='40' r='2.6'/%3E%3Ccircle cx='140' cy='22' r='1.8'/%3E%3Ccircle cx='46' cy='92' r='2.4'/%3E%3Ccircle cx='118' cy='104' r='2'/%3E%3Ccircle cx='70' cy='146' r='2.2'/%3E%3Ccircle cx='150' cy='136' r='1.6'/%3E%3C/g%3E%3C/svg%3E");background-size:160px 160px;animation:fm-neve 7s linear infinite}
+@keyframes fm-neve{to{background-position:50px 160px}}
+.fm-cena[data-tempo="trovoada"]::after{content:"";position:absolute;inset:0;z-index:3;background:#FFF;opacity:0;pointer-events:none;animation:fm-relampago 9s infinite}
+@keyframes fm-relampago{0%,92%,100%{opacity:0}93%{opacity:.55}94%{opacity:.06}95.5%{opacity:.38}97%{opacity:0}}
+
+/* as rajadas: o pano estica a partir da vara, passam linhas de vento e às vezes uma folha */
+.fm-cena--rajada .fm-flag__pano{animation:fm-rajada 1.8s cubic-bezier(.3,.1,.3,1)}
+@keyframes fm-rajada{
+  0%{transform:none}
+  10%{transform:skewY(calc(-3.2deg * var(--rajada,.6))) scaleX(calc(1 + .035 * var(--rajada,.6)))}
+  24%{transform:skewY(calc(2.4deg * var(--rajada,.6))) scaleX(calc(1 - .02 * var(--rajada,.6)))}
+  40%{transform:skewY(calc(-1.7deg * var(--rajada,.6))) scaleX(calc(1 + .016 * var(--rajada,.6)))}
+  58%{transform:skewY(calc(1.1deg * var(--rajada,.6)))}
+  77%{transform:skewY(calc(-.5deg * var(--rajada,.6)))}
+  100%{transform:none}}
+.fm-cena__sopro{position:absolute;inset:0;z-index:2;pointer-events:none}
+.fm-cena__sopro svg{display:block;width:100%;height:100%}
+.fm-cena__sopro path{fill:none;stroke:rgba(255,255,255,.8);stroke-width:1.8;vector-effect:non-scaling-stroke;stroke-linecap:round;
+  stroke-dasharray:24 150;stroke-dashoffset:24;opacity:0;animation:fm-sopro 1.5s cubic-bezier(.4,0,.2,1) both}
+.fm-cena[data-luz="noite"] .fm-cena__sopro path{stroke:rgba(255,255,255,.45)}
+@keyframes fm-sopro{0%{stroke-dashoffset:24;opacity:0}15%{opacity:1}100%{stroke-dashoffset:-126;opacity:0}}
+.fm-cena__folha{position:absolute;left:-6%;z-index:2;width:clamp(14px,2.4%,28px);pointer-events:none;animation:fm-folha 3.2s cubic-bezier(.35,.15,.4,1) forwards}
+.fm-cena__folha svg{display:block;width:100%;height:auto;animation:fm-folha-gira .8s linear infinite}
+@keyframes fm-folha{0%{left:-6%;transform:translateY(0)}30%{transform:translateY(-2.2em)}60%{transform:translateY(1.2em)}100%{left:106%;transform:translateY(-1.6em)}}
+@keyframes fm-folha-gira{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.fm-cena__tempo,.fm-cena__estrelas,.fm-cena[data-tempo="trovoada"]::after{animation:none!important}}
+
+/* a linha por baixo da bandeira: o tempo de agora, para se perceber a cena */
+.fm-bandeira__agora{display:flex;align-items:center;justify-content:center;gap:.45rem;margin:.75rem 0 0;font-size:.82rem;color:var(--tinta-fraca);text-align:center}
+.fm-bandeira__agora[hidden]{display:none}
+.fm-bandeira__agora svg{width:1.05rem;height:1.05rem;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;color:var(--relva)}
 .fm-bandeira.fm-cena{aspect-ratio:16/9}
 .fm-ecra .fm-cena__f{animation:fm-cena-respira 40s ease-in-out infinite alternate}
 @keyframes fm-cena-respira{from{transform:scale(1.06)}to{transform:scale(1.13) translate(-1.5%,-1%)}}

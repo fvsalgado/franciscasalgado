@@ -706,6 +706,7 @@ export function bandeiraSVG(nomes, { W = 640, max = 80, ondula = false, convite 
     ${cena ? '' : `<ellipse cx="${x0 - 8}" cy="${H - 10}" rx="70" ry="7" fill="#14291F" opacity=".14"/>`}
     <rect x="${x0 - vara - 3}" y="10" width="${vara}" height="${cena ? H : H - 20}" ${cena ? '' : `rx="${vara / 2}"`} fill="url(#${id}p)"/>
     <circle cx="${x0 - 3 - vara / 2}" cy="11" r="${vara * 0.72}" fill="#F7F4EB" stroke="#B9B2A1" stroke-width=".8"/>
+    <g class="fm-flag__pano" style="transform-origin:${x0}px ${topo}px">
     <g filter="url(#${id}s)"><path d="${pano(0)}" fill="#FCFAF3">${anima(0)}</path></g>
     ${camadas(`url(#${id}d)`)}${camadas(`url(#${id}l)`)}${camadas(`url(#${id}b)`)}
     <path d="${pano(0, larg * 0.016)}" fill="none" stroke="#1B5E3F" stroke-width="${Math.max(1, larg * 0.0018)}" stroke-dasharray="${larg * 0.008} ${larg * 0.0065}" opacity=".5">${anima(larg * 0.016)}</path>
@@ -718,6 +719,7 @@ export function bandeiraSVG(nomes, { W = 640, max = 80, ondula = false, convite 
     <text x="${cx}" y="${topo + hh * 0.97}" text-anchor="middle" font-family="Fraunces,serif" font-style="italic" font-size="${(fc * 0.56).toFixed(1)}" fill="#1B5E3F">Road to Florida · 2027</text>
     <g class="fm-flag__nomes" font-family="Caveat,cursive" font-weight="600">${assin}</g>
     ${convite && !n ? `<g class="fm-flag__convite"><text x="${cx}" y="${ay0 + ah * 0.45}" text-anchor="middle" font-family="Caveat,cursive" font-size="${(fc * 0.95).toFixed(1)}" fill="#1B5E3F" opacity=".55">O primeiro nome fica aqui · Your name here</text><line x1="${x0 + larg * 0.2}" x2="${x0 + larg * 0.8}" y1="${ay0 + ah * 0.58}" y2="${ay0 + ah * 0.58}"/></g>` : ''}
+    </g>
   </svg>`;
 }
 
@@ -726,8 +728,184 @@ export function bandeiraSVG(nomes, { W = 640, max = 80, ondula = false, convite 
  *  bandeira à frente, com a vara a sair da imagem. */
 export function bandeiraCena(nomes, opcoes = {}) {
   return `<img class="fm-cena__f" src="/img/campos/praia-del-rey-9.webp" alt="" width="1400" height="933" decoding="async" />
+    <span class="fm-cena__ceu" aria-hidden="true"></span>
+    <span class="fm-cena__estrelas" aria-hidden="true"></span>
+    <span class="fm-cena__nuvens" aria-hidden="true"></span>
     <span class="fm-cena__luz" aria-hidden="true"></span>
-    ${bandeiraSVG(nomes, { ...opcoes, cena: true })}`;
+    ${bandeiraSVG(nomes, { ...opcoes, cena: true })}
+    <span class="fm-cena__tempo" aria-hidden="true"></span>`;
+}
+
+/* ── o céu da cena ────────────────────────────────────────────
+ * A cena da bandeira acompanha Praia D'El Rey a sério: a luz é a da hora que
+ * é (a altura do sol em Óbidos, calculada aqui, sem serviço nenhum), o céu é
+ * o do tempo que faz (o mesmo Open-Meteo das condições de jogo) e o vento
+ * dá rajadas à bandeira de vez em quando, mais seguidas e mais fortes quando
+ * sopra a sério. Os nomes têm de se ler sempre: a noite escurece o campo,
+ * não a bandeira.
+ *
+ * `?ceu=noite,chuva,40,rajada` força um estado, para ver como fica: uma luz
+ * (manha, dia, dourada, crepusculo, noite), um tempo (limpo, parcial,
+ * nublado, nevoeiro, chuva, trovoada, neve), o vento em km/h e rajadas de
+ * quatro em quatro segundos. */
+const CEU_LUZES = ['manha', 'dia', 'dourada', 'crepusculo', 'noite'];
+const CEU_TEMPOS = ['limpo', 'parcial', 'nublado', 'nevoeiro', 'chuva', 'trovoada', 'neve'];
+const ceu = { luz: null, manha: true, tempo: null, kmh: null, rajadaKmh: null, agora: null };
+let ceuForcado = null;
+function forcado() {
+  if (ceuForcado) return ceuForcado;
+  ceuForcado = {};
+  const q = typeof location === 'undefined' ? null : new URLSearchParams(location.search).get('ceu');
+  for (const p of (q || '').split(',').map((x) => x.trim().toLowerCase()).filter(Boolean)) {
+    if (CEU_LUZES.includes(p)) ceuForcado.luz = p;
+    else if (CEU_TEMPOS.includes(p)) ceuForcado.tempo = p;
+    else if (p === 'rajada') ceuForcado.rajada = true;
+    else if (/^\d{1,3}$/.test(p)) ceuForcado.kmh = Number(p);
+  }
+  return ceuForcado;
+}
+
+/** A altura do sol (graus acima do horizonte) num sítio e num instante, e se
+ *  ainda é de manhã. A fórmula curta do almanaque: chega e sobra para saber
+ *  se é noite, crepúsculo, hora dourada ou dia. */
+function alturaSol(lat, lon, ms = Date.now()) {
+  const r = Math.PI / 180;
+  const n = ms / 86400000 - 10957.5; // dias desde 1 jan 2000, 12h UTC
+  const g = (357.529 + 0.98560028 * n) * r;
+  const q = 280.459 + 0.98564736 * n;
+  const L = (q + 1.915 * Math.sin(g) + 0.02 * Math.sin(2 * g)) * r;
+  const e = (23.439 - 0.00000036 * n) * r;
+  const ar = Math.atan2(Math.cos(e) * Math.sin(L), Math.cos(L)) / r;
+  const dec = Math.asin(Math.sin(e) * Math.sin(L));
+  const tsg = (18.697374558 + 24.06570982441908 * n) * 15; // tempo sideral, em graus
+  const h = ((((tsg + lon - ar) % 360) + 540) % 360) - 180; // ângulo horário
+  const alt = Math.asin(Math.sin(lat * r) * Math.sin(dec) + Math.cos(lat * r) * Math.cos(dec) * Math.cos(h * r)) / r;
+  return { alt, manha: h < 0 };
+}
+
+function luzDoSol(lat, lon) {
+  const { alt, manha } = alturaSol(lat, lon);
+  if (alt < -6) return ['noite', manha];
+  if (alt < 0) return ['crepusculo', manha];
+  if (alt < 10) return ['dourada', manha];
+  if (alt < 25 && manha) return ['manha', manha];
+  return ['dia', manha];
+}
+
+function tempoDe(codigo) {
+  const c = Number(codigo);
+  if (!Number.isFinite(c)) return null;
+  if (c <= 1) return 'limpo';
+  if (c === 2) return 'parcial';
+  if (c === 45 || c === 48) return 'nevoeiro';
+  if ((c >= 51 && c <= 67) || (c >= 80 && c <= 82)) return 'chuva';
+  if ((c >= 71 && c <= 77) || c === 85 || c === 86) return 'neve';
+  if (c >= 95) return 'trovoada';
+  return 'nublado';
+}
+
+/** Quanto a bandeira ondula: mais depressa com mais vento. */
+const ventoDaBandeira = () => (ceu.kmh == null ? 1 : Math.max(0.7, Math.min(2.2, 0.6 + ceu.kmh / 22)));
+
+/** Refaz o estado do céu (a luz pela hora; o tempo, se vier) e pinta as cenas. */
+function atualizarCeu(d, atual = null) {
+  const c = d?.evento?.coordenadas ?? { lat: 39.331, lon: -9.327 };
+  const f = forcado();
+  const [luz, manha] = luzDoSol(c.lat, c.lon);
+  ceu.luz = f.luz || luz;
+  ceu.manha = manha;
+  if (atual) {
+    ceu.agora = atual;
+    ceu.tempo = tempoDe(atual.weather_code);
+    ceu.kmh = Number.isFinite(atual.wind_speed_10m) ? atual.wind_speed_10m : null;
+    ceu.rajadaKmh = Number.isFinite(atual.wind_gusts_10m) ? atual.wind_gusts_10m : null;
+  }
+  if (f.tempo) ceu.tempo = f.tempo;
+  if (f.kmh != null) { ceu.kmh = f.kmh; ceu.rajadaKmh = f.kmh * 1.4; }
+  if (typeof document !== 'undefined') document.querySelectorAll('.fm-cena').forEach(aplicarCeu);
+}
+
+function aplicarCeu(caixa) {
+  if (!ceu.luz) return;
+  caixa.dataset.luz = ceu.luz;
+  if (ceu.tempo) caixa.dataset.tempo = ceu.tempo; else delete caixa.dataset.tempo;
+  // o sol nasce do lado da vara e põe-se do lado da ponta do pano
+  caixa.style.setProperty('--sol-x', ceu.manha ? '12%' : '88%');
+  rajadas(caixa);
+}
+
+/* As rajadas: o pano dá um esticão a partir da vara, passam umas linhas de
+   vento e, às vezes, uma folha. Mais seguidas e mais fortes com mais vento. */
+const FOLHA = '<svg viewBox="0 0 24 24"><path d="M3.5 20.5C3.5 10 10 3.5 20.5 3.5c0 10.5-6.5 17-17 17Z" fill="#7F933F"/><path d="M3.5 20.5 15 9" stroke="#56662B" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg>';
+function rajada(caixa) {
+  if (!caixa.isConnected) return;
+  const forca = Math.min(1, Math.max(0.4, (ceu.rajadaKmh ?? ceu.kmh ?? 18) / 45));
+  caixa.style.setProperty('--rajada', forca.toFixed(2));
+  caixa.classList.remove('fm-cena--rajada');
+  void caixa.offsetWidth;
+  caixa.classList.add('fm-cena--rajada');
+  const sopro = document.createElement('span');
+  sopro.className = 'fm-cena__sopro';
+  sopro.setAttribute('aria-hidden', 'true');
+  const y0 = 14 + Math.random() * 30;
+  sopro.innerHTML = `<svg viewBox="0 0 100 60" preserveAspectRatio="none">${[0, 1, 2].map((k) => {
+    const y = (y0 + k * 8 + Math.random() * 4).toFixed(1);
+    return `<path d="M-6 ${y}C22 ${y - 4} 44 ${+y + 4} 68 ${y - 1}S94 ${y - 3} 106 ${y}" style="animation-delay:${(k * 0.14).toFixed(2)}s"/>`;
+  }).join('')}</svg>`;
+  caixa.append(sopro);
+  if (Math.random() < 0.45) {
+    const folha = document.createElement('span');
+    folha.className = 'fm-cena__folha';
+    folha.setAttribute('aria-hidden', 'true');
+    folha.style.top = `${22 + Math.random() * 45}%`;
+    folha.innerHTML = FOLHA;
+    caixa.append(folha);
+    setTimeout(() => folha.remove(), 3400);
+  }
+  setTimeout(() => { sopro.remove(); caixa.classList.remove('fm-cena--rajada'); }, 2300);
+}
+function rajadas(caixa) {
+  if (caixa.dataset.rajadas || quieto()) return;
+  caixa.dataset.rajadas = '1';
+  const proxima = () => {
+    if (!caixa.isConnected) return;
+    const base = forcado().rajada ? 4 : Math.max(7, 30 - (ceu.kmh ?? 12) * 0.55);
+    setTimeout(() => { rajada(caixa); proxima(); }, base * (0.7 + Math.random() * 0.6) * 1000);
+  };
+  proxima();
+}
+
+/** Na página: o tempo de agora em Praia D'El Rey, uma vez e depois de 15 em
+ *  15 minutos, e a linha que o diz por baixo da bandeira. */
+function ceuDaPagina(d, l) {
+  const c = d.evento?.coordenadas ?? { lat: 39.331, lon: -9.327 };
+  atualizarCeu(d);
+  const pedir = async () => {
+    try {
+      const q = new URLSearchParams({
+        latitude: c.lat, longitude: c.lon,
+        current: 'temperature_2m,is_day,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m',
+        timezone: 'Europe/Lisbon', wind_speed_unit: 'kmh',
+      });
+      const r = await fetch(`https://api.open-meteo.com/v1/forecast?${q}`);
+      const j = await r.json();
+      if (!r.ok || !j.current) throw new Error('meteo');
+      const antes = ceu.kmh;
+      atualizarCeu(d, j.current);
+      if (antes == null || Math.abs(antes - (ceu.kmh ?? 0)) > 6) bandeira(d, l);
+      const a = j.current;
+      const [ic, pt, en] = ceuAgora(a.weather_code, a.is_day);
+      const r8 = rumo(a.wind_direction_10m);
+      const linha = $('fmBandeiraAgora');
+      linha.innerHTML = `${icone(ic)}<span>${l === 'en'
+        ? `Right now at Praia D'El Rey: ${en.toLowerCase()}, ${Math.round(a.temperature_2m)}°, wind ${RUMOS_EN[r8]} at ${Math.round(a.wind_speed_10m)} km/h.`
+        : `Agora em Praia D'El Rey: ${pt.toLowerCase()}, ${Math.round(a.temperature_2m)}°, vento ${RUMOS_PT[r8]} a ${Math.round(a.wind_speed_10m)} km/h.`}</span>`;
+      linha.hidden = false;
+    } catch { /* fica a luz da hora, sem o tempo */ }
+  };
+  pedir();
+  setInterval(pedir, 15 * 60000);
+  setInterval(() => atualizarCeu(d), 5 * 60000);
 }
 
 function bandeira(d, l) {
@@ -736,7 +914,8 @@ function bandeira(d, l) {
   const caixa = $('fmBandeira');
   const estreita = caixa.clientWidth < 560;
   caixa.classList.add('fm-cena');
-  caixa.innerHTML = bandeiraCena(nomes, { W: 900, ondula: !quieto(), convite: !nomes.length });
+  caixa.innerHTML = bandeiraCena(nomes, { W: 900, ondula: !quieto(), convite: !nomes.length, vento: ventoDaBandeira() });
+  aplicarCeu(caixa);
   const semNome = Math.max(0, (d.apoios ?? 0) - (d.mural ?? []).filter((m) => m.nome).length);
   const partes = [];
   if (nomes.length) partes.push(t.nomes(nomes.length)); else partes.push(t.bandeiraVazia);
@@ -1184,9 +1363,8 @@ let nomesBandeira = [];
 function desenharBandeira(nomes = nomesBandeira) {
   nomesBandeira = nomes;
   // a bandeira ondula mais depressa quando há mais vento no campo
-  const kmh = meteo?.current?.wind_speed_10m;
-  const vento = kmh == null ? 1 : Math.max(0.7, Math.min(2.2, 0.6 + kmh / 22));
-  $('fmEcraBandeira').innerHTML = bandeiraCena(nomes, { W: 900, max: 70, ondula: true, convite: !nomes.length, vento, varaAbaixo: 0.1 });
+  $('fmEcraBandeira').innerHTML = bandeiraCena(nomes, { W: 900, max: 70, ondula: true, convite: !nomes.length, vento: ventoDaBandeira(), varaAbaixo: 0.1 });
+  aplicarCeu($('fmEcraBandeira'));
 }
 
 /* ── as condições de jogo em Praia D'El Rey ────────────────────
@@ -1327,14 +1505,17 @@ function tempo(d) {
       const r = await fetch(`https://api.open-meteo.com/v1/forecast?${q}`, { cache: 'no-store' });
       const j = await r.json();
       if (r.ok && j.current) {
-        const antes = meteo?.current?.wind_speed_10m;
+        const antes = ceu.kmh;
         meteo = j;
-        if (antes == null || Math.abs(antes - j.current.wind_speed_10m) > 6) desenharBandeira();
+        atualizarCeu(d, j.current);
+        if (antes == null || Math.abs(antes - (ceu.kmh ?? 0)) > 6) desenharBandeira();
       } else meteoFalhou = true;
     } catch { meteoFalhou = true; /* ficam o dia e a hora */ }
     pintarCondicoes(d);
   };
   pintarCondicoes(d);
+  atualizarCeu(d);
+  setInterval(() => atualizarCeu(d), 5 * 60000);
   // de 10 em 10 minutos; enquanto o serviço não responde, de 3 em 3
   const vez = async () => { await pedir(); setTimeout(vez, (meteo ? 10 : 3) * 60000); };
   vez();
@@ -1409,6 +1590,7 @@ export async function fundme(l) {
   formulario(d, l);
   evento(d, l);
   previsao(d, l);
+  ceuDaPagina(d, l);
 
   let largura = $('fmGrafico').clientWidth;
   addEventListener('resize', () => {
