@@ -333,13 +333,29 @@ A fotografia da Francisca (no bilhete, no retrato do cartão de apoio e no
 polaroide do ecrã) é a da taça de campeã do clube:
 `img/fundme/francisca-campea-clube*.webp` e `francisca-rosto.webp`.
 
+**Atualiza-se sozinha.** A página pergunta os números de 45 em 45 segundos
+(enquanto está à vista) e redesenha se entrou um apoio, uma mensagem ou uma
+fotografia. O ecrã pergunta de 20 em 20 segundos e, de 5 em 5 minutos,
+compara a assinatura (ETag) da página, do `js/fundme.js` e do
+`css/site.css`: se saiu uma versão nova, recarrega-se sozinho — uma TV
+ligada a manhã toda não fica com o ecrã de ontem.
+
+**As assinaturas têm letras diferentes**, como numa bandeira assinada por
+pessoas diferentes: Caveat, Kalam, Permanent Marker, Reenie Beanie, Homemade
+Apple, Nothing You Could Do e Covered By Your Grace (`fonts/assinatura-*.woff2`,
+do Google Fonts via Fontsource; OFL e Apache 2.0). A letra de cada nome sai do
+próprio nome, e é sempre a mesma para a mesma pessoa.
+
 **A bandeira é de pano** (canvas, `tecer()` em `js/fundme.js`). O desenho
 da bandeira — a trama, a manga verde cosida à volta da vara, o nome dela
 bordado, as assinaturas — pinta-se uma vez numa textura; cada quadro corta-a
 em tiras verticais que sobem e descem numa onda que nasce quieta junto à
 vara e cresce até à ponta, com luz e sombra conforme a inclinação do pano.
-Os nomes deformam-se com as dobras. O vento manda na onda, e uma rajada faz
-o pano estalar. Corre a 30 quadros por segundo e pára quando não está à
+Os nomes deformam-se com as dobras. O vento manda na onda, e não se repete:
+a força sobe e desce devagar (ondas lentas com períodos que não batem certo
+uns com os outros), três ondas correm a velocidades diferentes, a ponta
+treme, o pano descai com pouco vento e estica nas rajadas — cada rajada com a
+sua força. Corre a 30 quadros por segundo e pára quando não está à
 vista. Se o canvas falhar, fica o SVG de antes; com movimento reduzido, um
 quadro parado.
 

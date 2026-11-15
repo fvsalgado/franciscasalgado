@@ -671,7 +671,8 @@ export function bandeiraSVG(nomes, { W = 640, max = 80, ondula = false, convite 
     const y = ay0 + celH * (r + 0.66) + (sorte(nome, 2) - 0.5) * celH * 0.22;
     const rot = ((sorte(nome, 3) - 0.5) * 16).toFixed(1);
     const cor = tintas[Math.floor(sorte(nome, 5) * tintas.length)];
-    assin += `<text x="${x.toFixed(0)}" y="${y.toFixed(0)}" font-size="${tam.toFixed(1)}" fill="${cor}" text-anchor="middle" transform="rotate(${rot} ${x.toFixed(0)} ${y.toFixed(0)})">${esc(nome)}</text>`;
+    const letra = letraDe(nome);
+    assin += `<text x="${x.toFixed(0)}" y="${y.toFixed(0)}" font-size="${(tam * letra.s).toFixed(1)}" font-family="'${letra.f}',Caveat,cursive" font-weight="${letra.p}" fill="${cor}" text-anchor="middle" transform="rotate(${rot} ${x.toFixed(0)} ${y.toFixed(0)})">${esc(nome)}</text>`;
   });
 
   // o pano: as orlas de cima e de baixo ondulam; `o` é o momento da onda
@@ -747,6 +748,26 @@ export function bandeiraCena(nomes, opcoes = {}) {
  * na horizontal onde dobra. É assim que os nomes se deformam com as dobras.
  * O vento da cena manda na onda; uma rajada faz o pano estalar. Se o canvas
  * falhar, fica o SVG. Com movimento reduzido, um quadro parado. */
+/* As letras das assinaturas: cada pessoa assina com a sua mão. Uma bandeira
+   assinada a sério tem marcador grosso, letra redonda de escola, assinatura
+   corrida e rabiscos — com uma letra só, parecia impressa. A letra de cada
+   nome sai do próprio nome (sempre a mesma para a mesma pessoa). `s` acerta o
+   tamanho, porque cada letra tem a sua escala. */
+const ASSINATURAS = [
+  { f: 'Caveat', p: 600, s: 1 },
+  { f: 'Kalam', p: 400, s: 0.8 },
+  { f: 'Permanent Marker', p: 400, s: 0.66 },
+  { f: 'Reenie Beanie', p: 400, s: 1.14 },
+  { f: 'Homemade Apple', p: 400, s: 0.62 },
+  { f: 'Nothing You Could Do', p: 400, s: 0.72 },
+  { f: 'Covered By Your Grace', p: 400, s: 0.96 },
+];
+const letraDe = (nome) => {
+  let h = 2166136261 ^ 6;
+  for (const ch of nome) h = Math.imul(h ^ ch.charCodeAt(0), 16777619);
+  return ASSINATURAS[(h >>> 0) % ASSINATURAS.length];
+};
+
 function texturaBandeira(nomes, { larg, alt, max = 80, convite = false }) {
   const TW = 1500;
   const q = TW / larg;
@@ -859,17 +880,22 @@ function texturaBandeira(nomes, { larg, alt, max = 80, convite = false }) {
     const col = i % cols;
     const nessa = r === linhas - 1 ? n - r * cols : cols;
     const desvio = (cols - nessa) / 2 + (r % 2 ? 0.16 : -0.16) * (nessa > 1 ? 1 : 0);
-    const tam = Math.min(melhor.tam * (0.88 + sorte(nome, 4) * 0.26), (celW * 0.94) / (Math.max(4, nome.length) * 0.44));
-    const meia = nome.length * tam * 0.23;
-    let x = ax0 + celW * (col + 0.5 + desvio) + (sorte(nome, 1) - 0.5) * celW * 0.14;
+    const letra = letraDe(nome);
+    let tam = melhor.tam * (0.88 + sorte(nome, 4) * 0.26) * letra.s;
+    // mede-se a sério: cada letra tem a sua largura, e o nome tem de caber na célula
+    g.font = `${letra.p} ${tam.toFixed(1)}px "${letra.f}", Caveat, cursive`;
+    const largura = g.measureText(nome).width;
+    if (largura > celW * 0.82) { tam *= (celW * 0.82) / largura; g.font = `${letra.p} ${tam.toFixed(1)}px "${letra.f}", Caveat, cursive`; }
+    const meia = Math.min(largura, celW * 0.82) / 2;
+    let x = ax0 + celW * (col + 0.5 + desvio) + (sorte(nome, 1) - 0.5) * celW * 0.08;
     x = Math.max(ax0 + meia, Math.min(ax1 - meia, x));
     const y = ay0 + celH * (r + 0.66) + (sorte(nome, 2) - 0.5) * celH * 0.22;
     g.save();
     g.translate(x, y);
     g.rotate(((sorte(nome, 3) - 0.5) * 16 * Math.PI) / 180);
     g.fillStyle = tintas[Math.floor(sorte(nome, 5) * tintas.length)];
-    g.globalAlpha = 0.92;
-    g.font = `600 ${tam.toFixed(1)}px Caveat, cursive`;
+    // o marcador grosso cobre mais; a esferográfica fina deixa ver o pano
+    g.globalAlpha = letra.f === 'Permanent Marker' ? 0.88 : 0.93;
     g.fillText(nome, 0, 0);
     g.restore();
   });
@@ -891,7 +917,7 @@ async function tecer(caixa, nomes, { W = 900, max = 80, vento = 1, convite = fal
   const ctx = cv?.getContext?.('2d');
   if (!ctx) return;
   try {
-    await Promise.all(['600 40px Caveat', '600 40px Fraunces', 'italic 400 40px Fraunces'].map((f) => document.fonts.load(f)));
+    await Promise.all(['600 40px Caveat', '600 40px Fraunces', 'italic 400 40px Fraunces', ...ASSINATURAS.map((a) => `${a.p} 40px "${a.f}"`)].map((f) => document.fonts.load(f)));
   } catch { /* desenha com o que houver */ }
   if (!cv.isConnected) return;
 
@@ -929,25 +955,41 @@ async function tecer(caixa, nomes, { W = 900, max = 80, vento = 1, convite = fal
   medir();
 
   let fase = 0;
+  let fase2 = 0;
+  let fase3 = 0;
   let antes = null;
   let rajadaT0 = -99;
+  let rajadaF = 1;
+  // o vento a sério nunca é igual dois segundos seguidos: uma soma de ondas
+  // lentas com períodos que não batem certo uns com os outros (não se repete)
+  const sopro = (t) => 0.5 * Math.sin(t * 0.29 + 1.3) + 0.3 * Math.sin(t * 0.71 + 0.2) + 0.2 * Math.sin(t * 1.53 + 2.6);
+  const t0 = Math.random() * 100;
   const desenhar = (t) => {
     const dt = antes == null ? 0 : Math.min(0.1, t - antes);
     antes = t;
     // a rajada: entra depressa e morre devagar
     const tr = t - rajadaT0;
-    const raj = tr < 0 || tr > 4 ? 0 : Math.min(1, tr / 0.25) * Math.exp(-tr / 1.1);
-    const v = vento * (1 + 1.3 * raj);
-    fase += dt * 2.3 * v;
+    const raj = tr < 0 || tr > 5 ? 0 : Math.min(1, tr / 0.35) * Math.exp(-tr / 1.4) * rajadaF;
+    // a força do vento agora: a de base, a subir e a descer devagar, e as rajadas
+    const v = vento * (1 + 0.32 * sopro(t + t0)) * (1 + 1.1 * raj);
+    // três ondas a correr a velocidades diferentes: a grande, uma segunda mais
+    // curta e o tremor da ponta. Como andam desencontradas, o pano nunca repete
+    fase += dt * 2.1 * v;
+    fase2 += dt * 3.3 * v;
+    fase3 += dt * (6 + 5 * raj) * v;
     // a onda: viva, mas sem dobrar os nomes ao ponto de não se lerem de longe
-    const A = alt * 0.04 * Math.pow(v, 0.5);
-    const queda = (alt * 0.035) / Math.max(0.7, v);
-    const k = Math.PI * 2 * 1.2;
+    const A = alt * 0.038 * Math.pow(v, 0.55);
+    // com pouco vento o pano descai; com rajada estica
+    const queda = (alt * 0.05) / Math.max(0.6, v);
+    const k1 = Math.PI * 2 * 1.1;
+    const k2 = Math.PI * 2 * 1.85;
+    const k3 = Math.PI * 2 * 3.4;
     for (let i = 0; i <= N; i++) {
       const u = i / N;
       const env = 0.08 + 0.92 * Math.pow(u, 0.85);
-      const ph = k * u - fase;
-      dy[i] = A * env * (Math.sin(ph) + 0.26 * Math.sin(2.13 * ph + 0.9 + 3 * u)) + queda * u * u;
+      const ph = k1 * u - fase;
+      dy[i] = A * env * (Math.sin(ph) + 0.3 * Math.sin(k2 * u - fase2 + 1.3) + (0.1 + 0.25 * raj) * env * Math.sin(k3 * u - fase3))
+        + queda * u * u;
       est[i] = 1 + 0.03 * env * v * Math.sin(ph + 1.1);
     }
     xs[0] = x0;
@@ -1032,7 +1074,7 @@ async function tecer(caixa, nomes, { W = 900, max = 80, vento = 1, convite = fal
   if (parado) desenhar(1.4); else raf = requestAnimationFrame(quadro);
   caixa._tecido = {
     parar() { cancelAnimationFrame(raf); io?.disconnect(); ro?.disconnect(); },
-    rajada() { rajadaT0 = performance.now() / 1000; },
+    rajada() { rajadaT0 = performance.now() / 1000; rajadaF = 0.55 + Math.random() * 0.6; },
   };
 }
 
@@ -1145,16 +1187,7 @@ function rajada(caixa) {
   void caixa.offsetWidth;
   caixa.classList.add('fm-cena--rajada');
   caixa._tecido?.rajada();
-  const sopro = document.createElement('span');
-  sopro.className = 'fm-cena__sopro';
-  sopro.setAttribute('aria-hidden', 'true');
-  const y0 = 14 + Math.random() * 30;
-  sopro.innerHTML = `<svg viewBox="0 0 100 60" preserveAspectRatio="none">${[0, 1, 2].map((k) => {
-    const y = (y0 + k * 8 + Math.random() * 4).toFixed(1);
-    return `<path d="M-6 ${y}C22 ${y - 4} 44 ${+y + 4} 68 ${y - 1}S94 ${y - 3} 106 ${y}" style="animation-delay:${(k * 0.14).toFixed(2)}s"/>`;
-  }).join('')}</svg>`;
-  caixa.append(sopro);
-  if (Math.random() < 0.45) {
+  if (Math.random() < 0.3) {
     const folha = document.createElement('span');
     folha.className = 'fm-cena__folha';
     folha.setAttribute('aria-hidden', 'true');
@@ -1163,7 +1196,7 @@ function rajada(caixa) {
     caixa.append(folha);
     setTimeout(() => folha.remove(), 3400);
   }
-  setTimeout(() => { sopro.remove(); caixa.classList.remove('fm-cena--rajada'); }, 2300);
+  setTimeout(() => caixa.classList.remove('fm-cena--rajada'), 2300);
 }
 function rajadas(caixa) {
   if (caixa.dataset.rajadas || quieto()) return;
@@ -1879,6 +1912,7 @@ export async function fundme(l) {
     if (q.has('demo')) { demo(d, Math.max(3, Number(q.get('demo')) || 12)); return; }
     ecra(d);
     setInterval(async () => { const n = await carregar(); if (n) ecra(n); }, 20000);
+    vigiarVersao();
     return;
   }
 
@@ -1895,9 +1929,49 @@ export async function fundme(l) {
     if (Math.abs(w - largura) > 20) { largura = w; grafico(d, l); bandeira(d, l); }
   });
 
+  /* A página atualiza-se sozinha: de 45 em 45 segundos, enquanto estiver à
+     vista, pergunta os números outra vez e, se mudaram (um apoio novo, uma
+     mensagem, uma fotografia), redesenha. Os dados novos entram no mesmo
+     objeto, para o cartão de apoio e a bandeira usarem os de agora. */
+  const chave = (x) => `${x.total}|${x.apoios}|${(x.mural ?? []).map((m) => `${m.id}${m.foto ? 'f' : ''}`).join(',')}`;
+  let ultima = chave(d);
+  const refrescar = async () => {
+    if (document.hidden) return;
+    const n = await carregar();
+    if (!n || chave(n) === ultima) return;
+    ultima = chave(n);
+    Object.assign(d, n);
+    pintar(d);
+  };
+  setInterval(refrescar, 45000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) refrescar(); });
+
   // quem volta da Stripe: agradece, e quando o pagamento entrar refaz os números
   if (await obrigado(l)) {
     const n = await carregar();
-    if (n) pintar(n);
+    if (n) { ultima = chave(n); Object.assign(d, n); pintar(d); }
   }
+}
+
+/** O ecrã recarrega-se sozinho quando sai uma versão nova do sítio: de 5 em
+ *  5 minutos compara as assinaturas (ETag) da página, do script e da folha de
+ *  estilos com as que tinha. Assim uma TV ligada a manhã toda não fica com o
+ *  ecrã de ontem, e ninguém tem de lhe mexer. */
+function vigiarVersao() {
+  const ficheiros = [location.pathname, '/js/fundme.js', '/css/site.css'];
+  let antes = null;
+  const ver = async () => {
+    try {
+      const marcas = await Promise.all(ficheiros.map(async (f) => {
+        const r = await fetch(f, { method: 'HEAD', cache: 'no-store' });
+        return r.ok ? r.headers.get('etag') || r.headers.get('last-modified') || '' : '';
+      }));
+      const agora = marcas.join('|');
+      if (!marcas.every(Boolean)) return;
+      if (antes && agora !== antes) location.reload();
+      antes = agora;
+    } catch { /* sem rede: tenta outra vez daqui a 5 minutos */ }
+  };
+  ver();
+  setInterval(ver, 5 * 60000);
 }
