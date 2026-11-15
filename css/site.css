@@ -2053,6 +2053,9 @@ textarea.fm-ap__campo{resize:vertical;min-height:4.4rem}
 .fm-ap__op{font:700 .85rem/1 var(--corpo);color:var(--fm-verde);background:transparent;border:1.5px dashed rgba(27,107,71,.5);border-radius:99px;padding:.6rem .95rem;cursor:pointer;transition:background .2s}
 .fm-ap__op[hidden],.fm-foto[hidden],.fm-foto__info[hidden]{display:none}
 .fm-ap__op span[aria-hidden]{font-size:1.05rem;margin-right:.1rem}
+.fm-ap__op svg{width:1.1em;height:1.1em;margin-right:.35rem;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}
+.fm-foto__bts{display:inline-flex;flex-wrap:wrap;gap:.5rem}
+.fm-foto__bts[hidden]{display:none}
 @media (hover:hover){.fm-ap__op:hover{border-style:solid;background:var(--fm-verde-c)}}
 .fm-foto{display:inline-flex;align-items:center}
 .fm-foto__info{display:inline-flex;align-items:center;gap:.65rem;font-size:.84rem;color:var(--fm-fraca)}

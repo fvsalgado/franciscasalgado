@@ -314,7 +314,9 @@ e `/en/fundme` (o `vercel.json` reescreve as duas para o `.html`). Quem apoia
 segue um cartão de três passos numerados: **1** escolhe o valor (seis botões
 grandes, cada um com o seu nome de golfe, e uma barra que mostra o que aquele
 apoio faz à meta), **2** assina, se quiser (o nome vai para a bandeira; uma
-mensagem de apoio e uma fotografia são botões à parte), **3** vê com que pode
+mensagem de apoio e uma fotografia são botões à parte; a fotografia
+tira-se na hora — no telemóvel, «Tirar fotografia» abre logo a câmara da
+frente — ou escolhe-se da galeria), **3** vê com que pode
 apoiar e carrega em «Apoiar com 50 €» (o valor que escolheu: nenhum vem pré-escolhido). O apoio fecha-se na Stripe. O total, a
 volta de 18 buracos, o gráfico dia a dia e a bandeira com os nomes
 atualizam-se sozinhos.

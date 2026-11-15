@@ -251,11 +251,16 @@
             <button type="button" class="fm-ap__op" id="fmFraseBt" hidden><span aria-hidden="true">+</span> <span data-t="fm_sc_recado">Mensagem de apoio</span></button>
             <span class="fm-foto" id="fmFotoC" hidden>
               <input type="file" id="fmFoto" accept="image/*" class="so-leitor" tabindex="-1" />
-              <button type="button" class="fm-ap__op" id="fmFotoBt"><span aria-hidden="true">+</span> <span data-t="fm_ap_fotobt">Fotografia</span></button>
+              <!-- no telemóvel, um segundo campo que abre logo a câmara (a da frente, para a selfie com a Francisca) -->
+              <input type="file" id="fmFotoCam" accept="image/*" capture="user" class="so-leitor" tabindex="-1" />
+              <span class="fm-foto__bts" id="fmFotoBts">
+                <button type="button" class="fm-ap__op" id="fmFotoCamBt" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2h6.8L17 8h3v11H4z"/><circle cx="12" cy="13.2" r="3.4"/></svg><span data-t="fm_ap_fotocam">Tirar fotografia</span></button>
+                <button type="button" class="fm-ap__op" id="fmFotoBt"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m4 18 5.2-5.2 3.3 3.3 2.6-2.6L20 18"/></svg><span data-t="fm_ap_fotobt">Escolher fotografia</span></button>
+              </span>
               <span class="fm-foto__info" id="fmFotoInfo" hidden>
                 <figure class="fm-ap__foto" id="fmFotoPre" hidden><img id="fmFotoImg" alt="" /></figure>
                 <span id="fmFotoEstado"></span>
-                <button type="button" class="fm-ap__tirar" id="fmFotoTirar" data-t="fm_foto_tirar">Tirar</button>
+                <button type="button" class="fm-ap__tirar" id="fmFotoTirar" data-t="fm_foto_tirar">Remover</button>
               </span>
             </span>
           </div>
