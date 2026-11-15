@@ -313,6 +313,13 @@ fotografia se quiser, e paga na Stripe com
 MB WAY, Multibanco, cartão, Apple Pay ou Google Pay. O total, o gráfico dia a
 dia, o recibo da viagem e a bandeira com os nomes atualizam-se sozinhos.
 
+A página e o ecrã falam a mesma linguagem, a do golfe: o apoio é um cartão
+de resultados, a meta é uma volta de 18 buracos (com a ida e a volta no cartão
+de embarque e no ecrã), as fases têm nomes de golfe, a bandeira está no campo
+de Praia D'El Rey, e as condições de jogo aparecem no ecrã e, na secção do
+evento, como previsão para a manhã do Roll Up (quando o dia está a 16 dias ou
+menos). Os números usam sempre Manrope em negrito, que não confunde o 3 com o 5.
+
 **A Stripe é o registo; não há base de dados.** `api/fundme/index.js` vai
 buscar à Stripe os pagamentos do Checkout com `metadata.kind = 'fundme'` desde
 `inicio`, junta o que está escrito à mão em `data/fundme.json` e devolve tudo

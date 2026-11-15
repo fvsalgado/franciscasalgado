@@ -173,17 +173,34 @@ function bilhete(d, l) {
     $('fmEmbarque').textContent = `${dia.getUTCDate()} ${mes.toUpperCase()}`;
   }
   const p = Math.min(100, (total / d.meta) * 100);
-  const barra = $('fmBarra');
-  barra.setAttribute('aria-valuemax', d.meta);
-  barra.setAttribute('aria-valuenow', Math.round(total));
-  barra.setAttribute('aria-valuetext', `${euros(total, l)} / ${euros(d.meta, l)}`);
-  requestAnimationFrame(() => { $('fmBarraI').style.width = `${p}%`; });
-  let acc = 0;
-  $('fmMarcos').innerHTML = (d.etapas ?? []).slice(0, -1)
-    .map((e) => { acc += e.valor; return `<i style="left:${(acc / d.meta) * 100}%"></i>`; }).join('');
+  // a volta, como no ecrã: a meta em 18 buracos, a ida e a volta
+  const volta = $('fmVolta');
+  volta.setAttribute('aria-valuemax', d.meta);
+  volta.setAttribute('aria-valuenow', Math.round(total));
+  volta.setAttribute('aria-valuetext', `${euros(total, l)} / ${euros(d.meta, l)}`);
+  volta.innerHTML = voltaPagina(total, d, l);
   $('fmApoios').innerHTML = d.total == null ? '' : t.apoios(d.apoios ?? 0, Math.floor(p));
   const faltam = d.partida ? diasEntre(diaLisboa(), d.partida) : -1;
   $('fmDias').innerHTML = faltam >= 0 ? t.dias(faltam) : '';
+}
+
+/** A volta na página: a meta dividida em 18 buracos, em duas linhas (a ida
+ *  e a volta), com os feitos marcados, a bola no que se joga e a fase. É o
+ *  mesmo cartão do ecrã, à medida de um telemóvel. */
+function voltaPagina(total, d, l) {
+  const porBuraco = d.meta / 18;
+  const feitos = Math.min(18, Math.floor(total / porBuraco + 1e-9));
+  const parte = feitos >= 18 ? 0 : (total - feitos * porBuraco) / porBuraco;
+  const fase = FASES[faseDe(total, d.meta, d.apoios)];
+  const en = l === 'en';
+  const cel = (n) => {
+    if (n <= feitos) return `<span class="fm-vb fm-vb--feito"><small>${n}</small><i></i></span>`;
+    if (n === feitos + 1) return `<span class="fm-vb fm-vb--agora" style="--f:${parte.toFixed(2)}"><small>${n}</small><b></b></span>`;
+    return `<span class="fm-vb"><small>${n}</small></span>`;
+  };
+  const linha = (a, nome, soma) => `<div class="fm-volta__l"><span class="fm-volta__n">${nome}</span>${Array.from({ length: 9 }, (_, i) => cel(a + i)).join('')}<span class="fm-volta__s">${soma}</span></div>`;
+  return `${linha(1, en ? 'Out' : 'Ida', Math.min(9, feitos))}${linha(10, en ? 'In' : 'Volta', Math.max(0, feitos - 9))}
+    <p class="fm-volta__q"><span class="fm-volta__f">${esc(en ? fase.en : fase.pt)}</span><span><b>${feitos >= 18 ? 18 : feitos}</b> ${en ? 'holes played' : 'buracos feitos'} · ${en ? '1 hole' : '1 buraco'} ≈ ${euros(porBuraco, l)}</span></p>`;
 }
 
 /* ── o apoio ──────────────────────────────────────────────── */
@@ -759,6 +776,80 @@ function evento(d, l) {
   $('fmEventoQ').textContent = q.charAt(0).toUpperCase() + q.slice(1);
 }
 
+/* ── a previsão para o Roll Up ───────────────────────────────
+ * O mesmo cartão das condições de jogo do ecrã, na secção do evento: a
+ * previsão para a manhã do Roll Up (9h–13h) em Praia D'El Rey, do
+ * Open-Meteo, quando o dia está a 16 dias ou menos. Antes disso, diz quando
+ * aparece; no dia seguinte ao evento, some. */
+const maiuscula = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+
+async function previsao(d, l) {
+  const caixa = $('fmPrevisao');
+  const ev = d.evento;
+  if (!caixa) return;
+  if (!ev?.data || !ev.mostrar) { caixa.hidden = true; return; }
+  const en = l === 'en';
+  const dias = diasEntre(diaLisboa(), ev.data);
+  if (dias < 0) { caixa.hidden = true; return; }
+  caixa.classList.toggle('fm-prev--en', en);
+  const c = ev.coordenadas ?? { lat: 39.331, lon: -9.327 };
+  const local = tx(ev.local, l) || "Praia D'El Rey";
+  const cab = `<div class="fm-cond__cab"><b>${en ? 'Playing conditions' : 'Condições de jogo'}</b><span>${esc(local)}</span><span class="fm-prev__dia">${esc(maiuscula(dataLonga(ev.data, l)))} · ${en ? 'morning, 9am–1pm' : 'manhã, 9h–13h'}</span></div>`;
+  const aviso = (txt) => { caixa.innerHTML = `${cab}<p class="fm-cond__sem">${txt}</p>`; };
+  if (dias > 15) {
+    const desde = new Date(ms(ev.data) - 15 * DIA).toISOString().slice(0, 10);
+    aviso(en ? `The forecast for the morning of the Roll Up appears here from ${dataCurta(desde, l)}.` : `A previsão para a manhã do Roll Up aparece aqui a partir de ${dataCurta(desde, l)}.`);
+    return;
+  }
+  aviso(en ? 'Fetching the forecast…' : 'A obter a previsão…');
+  try {
+    const q = new URLSearchParams({
+      latitude: c.lat, longitude: c.lon, start_date: ev.data, end_date: ev.data,
+      hourly: 'temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation_probability',
+      daily: 'sunrise,sunset', timezone: 'Europe/Lisbon', timeformat: 'unixtime', wind_speed_unit: 'kmh',
+    });
+    const r = await fetch(`https://api.open-meteo.com/v1/forecast?${q}`, { cache: 'no-store' });
+    const j = await r.json();
+    if (!r.ok || !j.hourly?.time?.length) throw new Error('tempo');
+    const h = j.hourly;
+    const horaDe = (t) => Number(new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Lisbon', hour: '2-digit', hourCycle: 'h23' }).format(t * 1000));
+    const manha = h.time.map((t, i) => ({ t, i, hh: horaDe(t) })).filter((x) => x.hh >= 9 && x.hh <= 13);
+    if (!manha.length) throw new Error('tempo');
+    const meio = manha.find((x) => x.hh === 11) ?? manha[Math.floor(manha.length / 2)];
+    const i = meio.i;
+    const [ic, cpt, cen] = ceuAgora(h.weather_code[i], 1);
+    const rr = rumo(h.wind_direction_10m[i]);
+    const [ept, een] = efeitoVento(h.wind_speed_10m[i]);
+    const chuva = Math.max(...manha.map((x) => h.precipitation_probability?.[x.i] ?? 0));
+    const horas = manha.map((x) => {
+      const [hic] = ceuAgora(h.weather_code[x.i], 1);
+      return `<li><span class="fm-cond__h">${x.hh}h</span>${icone(hic)}<b>${Math.round(h.temperature_2m[x.i])}°</b>
+        <span class="fm-cond__hv">${icone('seta', h.wind_direction_10m[x.i] || 0)}${Math.round(h.wind_speed_10m[x.i])}</span><small>${h.precipitation_probability?.[x.i] ?? 0}%</small></li>`;
+    }).join('');
+    const nascer = j.daily?.sunrise?.[0];
+    const ocaso = j.daily?.sunset?.[0];
+    caixa.innerHTML = `${cab}
+      <div class="fm-cond__vento">
+        ${rosa(h.wind_direction_10m[i], h.wind_speed_10m[i])}
+        <div class="fm-cond__vt">
+          <small>${en ? 'Wind at 11am' : 'Vento às 11h'}</small>
+          <b>${en ? `from the ${RUMOS_LONGOS_EN[rr]}` : `de ${RUMOS_LONGOS_PT[rr]}`}</b>
+          <span>${en ? 'gusts' : 'rajadas'} <b>${Math.round(h.wind_gusts_10m[i])}</b> km/h</span>
+          <em>${en ? een : ept}</em>
+        </div>
+      </div>
+      <div class="fm-cond__grelha">
+        <div>${icone(ic)}<b>${Math.round(h.temperature_2m[i])}°</b><small>${en ? cen : cpt}</small></div>
+        <div>${icone('gota')}<b>${chuva}%</b><small>${en ? 'rain, 9am–1pm' : 'chuva, 9h–13h'}</small></div>
+      </div>
+      <ul class="fm-cond__horas">${horas}</ul>
+      <div class="fm-cond__sol">${nascer ? `<span>${icone('nascer')}${horaLisboa(nascer * 1000)}</span>` : ''}${ocaso ? `<span>${icone('ocaso')}${horaLisboa(ocaso * 1000)}</span>` : ''}</div>
+      <p class="fm-prev__fonte">${en ? 'Forecast: Open-Meteo, updated on each visit.' : 'Previsão: Open-Meteo, atualizada a cada visita.'}</p>`;
+  } catch {
+    aviso(en ? 'The forecast is unavailable right now. Try again later.' : 'A previsão não está disponível de momento. Volte a tentar mais logo.');
+  }
+}
+
 /* ── o ecrã da clubhouse ──────────────────────────────────── */
 
 /* Um número a subir até ao valor novo, em vez de saltar. */
@@ -1161,13 +1252,16 @@ function rosa(graus, kmh) {
 }
 
 let meteo = null;
+let meteoFalhou = false;
 function pintarCondicoes(d) {
   $('fmEcraData').innerHTML = bi(diaPorExtenso('pt'), diaPorExtenso('en'));
   $('fmEcraHora').textContent = horaLisboa();
   const sitio = tx(d.evento?.local, 'pt') || "Praia D'El Rey, Óbidos";
   const cab = `<div class="fm-cond__cab"><b>${bi('Condições de jogo', 'Playing conditions')}</b><span>${esc(sitio)}</span></div>`;
   if (!meteo) {
-    $('fmEcraCond').innerHTML = `${cab}<p class="fm-cond__sem">${bi('A obter as condições do campo…', 'Fetching course conditions…')}</p>`;
+    $('fmEcraCond').innerHTML = `${cab}<p class="fm-cond__sem">${meteoFalhou
+      ? bi('O serviço do tempo não respondeu. Volta a tentar dentro de minutos.', 'The weather service did not respond. Trying again in a few minutes.')
+      : bi('A obter as condições do campo…', 'Fetching course conditions…')}</p>`;
     return;
   }
   const a = meteo.current;
@@ -1222,13 +1316,14 @@ function tempo(d) {
         const antes = meteo?.current?.wind_speed_10m;
         meteo = j;
         if (antes == null || Math.abs(antes - j.current.wind_speed_10m) > 6) desenharBandeira();
-      }
-    } catch { /* ficam o dia e a hora */ }
+      } else meteoFalhou = true;
+    } catch { meteoFalhou = true; /* ficam o dia e a hora */ }
     pintarCondicoes(d);
   };
   pintarCondicoes(d);
-  pedir();
-  setInterval(pedir, 10 * 60000);
+  // de 10 em 10 minutos; enquanto o serviço não responde, de 3 em 3
+  const vez = async () => { await pedir(); setTimeout(vez, (meteo ? 10 : 3) * 60000); };
+  vez();
   setInterval(() => { $('fmEcraHora').textContent = horaLisboa(); }, 5000);
   setInterval(() => { $('fmEcraData').innerHTML = bi(diaPorExtenso('pt'), diaPorExtenso('en')); }, 10 * 60000);
 }
@@ -1299,6 +1394,7 @@ export async function fundme(l) {
   pintar(d);
   formulario(d, l);
   evento(d, l);
+  previsao(d, l);
 
   let largura = $('fmGrafico').clientWidth;
   addEventListener('resize', () => {

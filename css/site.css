@@ -1917,9 +1917,6 @@ html:not([data-tema="escuro"]) .fm{--fm-papel:#FFFEFA}
 .fm-soma{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem .6rem}
 .fm-soma__v{font-family:var(--corpo);font-variant-numeric:tabular-nums lining-nums;font-weight:800;letter-spacing:-.035em;font-size:clamp(2.4rem,4.2vw,3.1rem);line-height:.95}
 .fm-soma__m{color:var(--fm-fraca)}
-.fm-barra{position:relative;height:12px;border-radius:99px;background:var(--fm-verde-c);margin-top:.85rem;overflow:hidden}
-.fm-barra > i{position:absolute;inset:0 auto 0 0;width:0;background:var(--fm-verde);border-radius:99px;transition:width 1.6s var(--curva)}
-.fm-barra__m i{position:absolute;top:0;bottom:0;width:2px;background:var(--fm-papel);opacity:.85}
 .fm-info{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.3rem 1rem;margin-top:.6rem;font-size:.86rem;color:var(--fm-fraca)}
 .fm-info b{color:var(--fm-tinta);font-weight:700}
 .fm-bilhete__barras{height:2.1rem;margin-top:1rem;color:var(--fm-tinta);opacity:.85;
@@ -2136,8 +2133,6 @@ html:not([data-tema="escuro"]) .fm-sc{background:#FFF;box-shadow:0 24px 50px -30
 .fm-evento__n{width:2.5rem;height:2.5rem;border-radius:50%;background:rgba(143,217,174,.15);color:#8FD9AE;display:grid;place-items:center;font-family:var(--display);font-size:1.15rem}
 .fm-evento__l strong{display:block;font-weight:700}
 .fm-evento__l li span:not(.fm-evento__n){display:block;font-size:.92rem;line-height:1.5;color:rgba(247,245,238,.75)}
-.fm-evento__f{margin:0}
-.fm-evento__f img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:16px;display:block}
 
 .fm-duas{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem)}
 .fm-duas .d{margin:.8rem 0 1rem}
@@ -2178,7 +2173,6 @@ html:not([data-tema="escuro"]) .fm-sc{background:#FFF;box-shadow:0 24px 50px -30
   .fm-postal__foto{width:5.2rem}
   .fm-postais__vazio{flex:1 0 100%}
   .fm-evento{grid-template-columns:1fr;gap:1.6rem}
-  .fm-evento__f img{aspect-ratio:3/2}
   .fm-duas{grid-template-columns:1fr}
 }
 @media (max-width:420px){
@@ -2188,7 +2182,7 @@ html:not([data-tema="escuro"]) .fm-sc{background:#FFF;box-shadow:0 24px 50px -30
   .fm-bilhete__selo{width:5.4rem;height:5.4rem;right:.7rem;top:.7rem}
   .fm-r{padding:1.8rem 1.2rem 1.7rem}
 }
-@media (prefers-reduced-motion:reduce){.fm-barra > i{transition:none}.fm-flag--ondula .fm-flag__nomes{animation:none}}
+@media (prefers-reduced-motion:reduce){.fm-flag--ondula .fm-flag__nomes{animation:none}}
 
 /* ══ o ecrã da clubhouse (?ecra): um quadro de resultados de golfe ══
    Claro, para a manhã ao sol: creme com o corte da relva, verde de clube,
@@ -2557,3 +2551,63 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
 @media (max-width:600px){.fm-cena{border-radius:14px}.fm-bandeira.fm-cena{aspect-ratio:4/5}.fm-cena .fm-flag{left:3%;width:94%;height:96%}.fm-cena__f{object-position:42% 40%}}
 .fm-ecra .fm-ecra__band .fm-flag{position:absolute;left:2.5%;bottom:0;width:62%;height:97%;max-width:none;margin:0}
 @media (orientation:portrait){.fm-ecra .fm-ecra__band .fm-flag{left:2%;width:96%}}
+
+/* ══ a mesma linguagem na página: a volta (18 buracos) no cartão de embarque
+   e o cartão das condições de jogo na secção do evento, como no ecrã ══ */
+.fm{--e-verde:#1B5E3F;--e-verde2:#14472F;--e-tinta:#14291F;--e-fraca:#5E6B60;--e-linha:rgba(27,94,63,.22);--e-laranja:#E07A1F}
+.fm-volta{margin-top:.9rem;display:grid;gap:.3rem}
+.fm-volta__l{display:grid;grid-template-columns:2.6rem repeat(9,minmax(0,1fr)) 1.8rem;border:1.5px solid var(--e-verde);background:#FFF}
+.fm-volta__l + .fm-volta__l{border-top:0;margin-top:-.3rem}
+.fm-volta__n{display:grid;place-items:center;background:var(--e-verde);color:#F6F2E6;font:800 .55rem/1 var(--corpo);letter-spacing:.1em;text-transform:uppercase}
+.fm-volta__s{display:grid;place-items:center;background:#F3F0E6;font:800 .9rem/1 var(--corpo);font-variant-numeric:tabular-nums;color:var(--e-tinta);border-left:1px solid var(--e-linha)}
+.fm-vb{position:relative;height:2.1rem;display:grid;place-items:center;border-left:1px solid var(--e-linha);overflow:hidden}
+.fm-vb small{position:absolute;left:.18rem;top:.08rem;font:700 .5rem/1 var(--corpo);color:var(--e-fraca)}
+.fm-vb i{width:1rem;height:1rem;border-radius:50%;background:var(--e-verde);position:relative;box-shadow:0 0 0 2px #FFF,0 0 0 3px var(--e-verde)}
+.fm-vb i::after{content:"";position:absolute;left:.32rem;top:.18rem;width:.26rem;height:.48rem;border:solid #FFF;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.fm-vb--feito{animation:fm-bur-entra .6s cubic-bezier(.2,1.5,.4,1) both}
+.fm-vb--agora{background:linear-gradient(0deg,rgba(46,139,87,.22) calc(var(--f) * 100%),transparent 0)}
+.fm-vb--agora b{width:.95rem;height:.95rem;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFF 0 35%,#E8E5DC 70%,#BDB9AC);box-shadow:0 2px 3px rgba(0,0,0,.35);animation:fm-bola-salta 1.6s ease-in-out infinite}
+.fm-volta__q{margin:.45rem 0 0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.3rem .8rem;font-size:.8rem;color:var(--fm-fraca)}
+.fm-volta__q b{color:var(--fm-tinta);font-weight:800}
+.fm-volta__f{display:inline-flex;align-items:center;gap:.4rem;font-weight:800;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--e-verde)}
+.fm-volta__f::before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:var(--e-laranja);animation:fm-ponto-p 1.8s ease-out infinite}
+@keyframes fm-ponto-p{0%{box-shadow:0 0 0 0 rgba(224,122,31,.6)}70%{box-shadow:0 0 0 .5rem rgba(224,122,31,0)}100%{box-shadow:0 0 0 0 rgba(224,122,31,0)}}
+
+/* o cartão das condições de jogo, na página */
+.fm-prev{align-self:center;background:#FFF;color:var(--e-tinta);border:2px solid var(--e-verde);box-shadow:0 18px 40px -24px rgba(0,0,0,.7);display:flex;flex-direction:column;border-radius:4px;overflow:hidden}
+.fm-prev[hidden]{display:none}
+.fm-prev .fm-cond__cab{background:var(--e-verde);color:#F6F2E6;padding:.75rem 1.1rem;display:flex;flex-direction:column;gap:.15rem}
+.fm-prev .fm-cond__cab b{font-weight:800;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}
+.fm-prev .fm-cond__cab > span{font-family:var(--display);font-style:italic;font-size:.98rem;opacity:.9}
+.fm-prev .fm-prev__dia{font-family:var(--corpo)!important;font-style:normal!important;font-size:.78rem!important;opacity:.8}
+.fm-prev .fm-cond__sem{margin:0;padding:1.2rem 1.1rem;color:var(--e-fraca);font-size:.92rem;line-height:1.5}
+.fm-prev .fm-cond__vento{display:grid;grid-template-columns:7.5rem 1fr;gap:1rem;align-items:center;padding:.9rem 1.1rem .5rem}
+.fm-prev .fm-cond__vt{display:flex;flex-direction:column;gap:.3rem}
+.fm-prev .fm-cond__vt small{font-weight:800;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--e-fraca)}
+.fm-prev .fm-cond__vt > b{font-family:var(--display);font-weight:400;font-size:1.3rem;line-height:1.1}
+.fm-prev .fm-cond__vt > span{font-size:.84rem;color:var(--e-fraca)}
+.fm-prev .fm-cond__vt > span b{color:var(--e-tinta)}
+.fm-prev .fm-cond__vt em{font-style:normal;font-weight:800;font-size:.75rem;color:var(--e-verde);background:#E8F0E2;padding:.25rem .45rem;align-self:flex-start}
+.fm-prev .fm-cond__grelha{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--e-linha)}
+.fm-prev .fm-cond__grelha > div{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:.5rem;align-items:center;padding:.55rem 1.1rem;border-bottom:1px solid var(--e-linha)}
+.fm-prev .fm-cond__grelha > div:nth-child(odd){border-right:1px solid var(--e-linha)}
+.fm-prev svg:not(.fm-rosa){width:1.35rem;height:1.35rem;fill:none;stroke:var(--e-verde);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.fm-prev .fm-cond__grelha svg{grid-row:span 2}
+.fm-prev .fm-cond__grelha b{font-family:var(--corpo);font-variant-numeric:tabular-nums;font-weight:800;font-size:1.25rem;line-height:1}
+.fm-prev .fm-cond__grelha small{font-size:.7rem;color:var(--e-fraca)}
+.fm-prev .fm-cond__horas{list-style:none;margin:0;padding:.6rem .8rem;display:grid;grid-template-columns:repeat(5,1fr);gap:.35rem}
+.fm-prev .fm-cond__horas li{display:flex;flex-direction:column;align-items:center;gap:.1rem;padding:.35rem 0;background:#F6F3EA;font-size:.72rem}
+.fm-prev .fm-cond__h{font-weight:800}
+.fm-prev .fm-cond__horas b{font-family:var(--corpo);font-variant-numeric:tabular-nums;font-weight:800;font-size:.95rem}
+.fm-prev .fm-cond__hv{display:inline-flex;align-items:center;gap:.1rem;font-weight:700}
+.fm-prev .fm-cond__hv svg{width:.85rem;height:.85rem;stroke:var(--e-laranja)}
+.fm-prev .fm-cond__horas small{color:#3E7FA3;font-weight:700}
+.fm-prev .fm-cond__sol{display:flex;justify-content:space-around;padding:.45rem 1.1rem;border-top:1px solid var(--e-linha);font-family:var(--corpo);font-variant-numeric:tabular-nums;font-weight:700;font-size:.92rem}
+.fm-prev .fm-cond__sol span{display:inline-flex;align-items:center;gap:.4rem}
+.fm-prev__fonte{margin:0;padding:.35rem 1.1rem .6rem;font-size:.66rem;color:var(--e-fraca);text-align:right}
+.fm-prev .l-en{opacity:0}
+.fm-prev--en .fm-rosa .l-pt{opacity:0}
+.fm-prev--en .fm-rosa .l-en{opacity:1}
+.fm-prev .fm-rosa__seta{animation:none}
+@media (max-width:420px){.fm-prev .fm-cond__vento{grid-template-columns:6.2rem 1fr}.fm-prev .fm-cond__horas{gap:.25rem;padding:.5rem}}
+@media (prefers-reduced-motion:reduce){.fm-vb--agora b,.fm-volta__f::before{animation:none}}
