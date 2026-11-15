@@ -4,21 +4,80 @@
   "meta": 5000,
   "inicio": "2026-11-16",
   "partida": "2027-01-03",
-  "valores": [20, 50, 100, 250],
-  "valorInicial": 50,
+  "valores": [
+    25,
+    50,
+    150,
+    300,
+    500
+  ],
+  "valorInicial": 150,
   "minimo": 5,
   "maximo": 5000,
   "etapas": [
-    { "valor": 1100, "t": { "pt": "Voo da Francisca", "en": "Francisca's flight" }, "x": { "pt": "Lisboa–Miami, ida e volta", "en": "Lisbon–Miami return" } },
-    { "valor": 1100, "t": { "pt": "Voo do acompanhante", "en": "Chaperone's flight" }, "x": { "pt": "Tem 17 anos e não pode ir sozinha", "en": "She is 17 and cannot travel alone" } },
-    { "valor": 1400, "t": { "pt": "Alojamento", "en": "Accommodation" }, "x": { "pt": "Oito noites em Coral Gables", "en": "Eight nights in Coral Gables" } },
-    { "valor": 600, "t": { "pt": "Carro e deslocações", "en": "Car and transport" }, "x": { "pt": "Campo, treinos e aeroporto", "en": "Course, practice and airport" } },
-    { "valor": 800, "t": { "pt": "Inscrição e seguro", "en": "Entry and insurance" }, "x": { "pt": "E as despesas da semana", "en": "And the week's expenses" } }
+    {
+      "valor": 1100,
+      "t": {
+        "pt": "Voo da Francisca",
+        "en": "Francisca's flight"
+      },
+      "x": {
+        "pt": "Lisboa–Miami, ida e volta",
+        "en": "Lisbon–Miami return"
+      }
+    },
+    {
+      "valor": 1100,
+      "t": {
+        "pt": "Voo do acompanhante",
+        "en": "Chaperone's flight"
+      },
+      "x": {
+        "pt": "Tem 17 anos e não pode ir sozinha",
+        "en": "She is 17 and cannot travel alone"
+      }
+    },
+    {
+      "valor": 1400,
+      "t": {
+        "pt": "Alojamento",
+        "en": "Accommodation"
+      },
+      "x": {
+        "pt": "Oito noites em Coral Gables",
+        "en": "Eight nights in Coral Gables"
+      }
+    },
+    {
+      "valor": 600,
+      "t": {
+        "pt": "Carro e deslocações",
+        "en": "Car and transport"
+      },
+      "x": {
+        "pt": "Campo, treinos e aeroporto",
+        "en": "Course, practice and airport"
+      }
+    },
+    {
+      "valor": 800,
+      "t": {
+        "pt": "Inscrição e seguro",
+        "en": "Entry and insurance"
+      },
+      "x": {
+        "pt": "E as despesas da semana",
+        "en": "And the week's expenses"
+      }
+    }
   ],
   "evento": {
     "mostrar": true,
-    "data": null,
-    "local": { "pt": "Praia D'El Rey, Óbidos", "en": "Praia D'El Rey, Óbidos" }
+    "data": "2026-11-25",
+    "local": {
+      "pt": "Praia D'El Rey, Óbidos",
+      "en": "Praia D'El Rey, Óbidos"
+    }
   },
   "manuais": [],
   "excluir": [],

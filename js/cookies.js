@@ -51,15 +51,15 @@ const POSTHOG = {
 const T = {
   pt: {
     titulo: 'Cookies',
-    texto: 'Este site usa cookies essenciais para funcionar. Com a sua autorização, passa também a medir o tráfego, para saber que páginas são lidas.',
-    politica: 'Política de privacidade',
-    aceitar: 'Aceitar', recusar: 'Recusar medição',
+    texto: 'Medimos as visitas só se aceitar.',
+    politica: 'Privacidade',
+    aceitar: 'Aceitar', recusar: 'Recusar',
   },
   en: {
     titulo: 'Cookies',
-    texto: 'This site uses essential cookies to work. With your permission, it will also measure traffic, to know which pages get read.',
-    politica: 'Privacy policy',
-    aceitar: 'Accept', recusar: 'Decline measurement',
+    texto: 'We measure visits only if you agree.',
+    politica: 'Privacy',
+    aceitar: 'Accept', recusar: 'Decline',
   },
 };
 

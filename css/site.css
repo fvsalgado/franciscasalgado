@@ -1595,18 +1595,21 @@ html[data-tema="escuro"] .marcas__m{filter:invert(1) grayscale(1)}
 .pe__ck{font-size:inherit;color:inherit;padding:0;border-bottom:1px solid var(--linha)}
 
 /* ── cookies ────────────────────────────────────────────── */
-.ck{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:180;max-width:36rem;
-    background:var(--papel);border:1px solid var(--linha-forte);border-radius:16px;
-    padding:1.3rem 1.4rem;box-shadow:var(--sombra);display:flex;flex-direction:column;gap:.9rem}
+/* Uma tira e não uma caixa: uma linha de texto e dois botões pequenos,
+   encostada ao fundo. Pediu-se mais pequena — o consentimento continua
+   igual, só deixou de tapar meia página no telemóvel. */
+.ck{position:fixed;left:50%;transform:translateX(-50%);bottom:.9rem;z-index:180;width:min(42rem,calc(100% - 1.6rem));
+    background:var(--papel);border:1px solid var(--linha-forte);border-radius:999px;
+    padding:.45rem .5rem .45rem 1.1rem;box-shadow:var(--sombra);display:flex;align-items:center;gap:.8rem}
 .ck[hidden]{display:none}
-.ck__t{margin:0;font-size:.88rem;color:var(--tinta-fraca)}
-@media (max-width:560px){
-  .ck{padding:1.05rem 1.1rem;gap:.75rem}
-  .ck__t{font-size:.82rem;line-height:1.45}
-  .ck__b .cap{flex:1 1 auto;justify-content:center}
-}
+.ck__t{margin:0;font-size:.78rem;line-height:1.35;color:var(--tinta-fraca);flex:1 1 auto}
 .ck__t a{color:var(--relva);border-bottom:1px solid var(--linha)}
-.ck__b{display:flex;flex-wrap:wrap;gap:.6rem}
+.ck__b{display:flex;gap:.35rem;flex:none}
+.ck__b .cap{padding:.42rem .85rem;font-size:.62rem}
+@media (max-width:560px){
+  .ck{border-radius:16px;padding:.55rem .55rem .55rem .9rem;gap:.6rem}
+  .ck__t{font-size:.74rem}
+}
 
 /* ── páginas interiores ─────────────────────────────────── */
 /* O topo já foi mais alto — um ecrã de telemóvel inteiro de rótulo, título e
@@ -1903,7 +1906,7 @@ html[data-tema="escuro"] .fm{--fm-cartao:var(--superficie);--fm-cartao-l:var(--l
 
 .fm-form{margin-top:1.3rem;padding-top:1.3rem;border-top:1px solid var(--linha)}
 .fm-form__t{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 36;font-size:1.4rem;letter-spacing:-.01em;margin:0}
-.fm-valores{border:0;padding:0;margin:.9rem 0 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.5rem}
+.fm-valores{border:0;padding:0;margin:.9rem 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}
 .fm-valores label{position:relative}
 .fm-valores input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
 .fm-valores span{display:block;text-align:center;font-weight:700;font-size:.98rem;padding:.72rem 0;border-radius:11px;
@@ -2039,7 +2042,6 @@ html[data-tema="escuro"] .fm{--fm-cartao:var(--superficie);--fm-cartao-l:var(--l
   .fm-duas{grid-template-columns:1fr}
 }
 @media (max-width:520px){
-  .fm-valores{grid-template-columns:repeat(3,minmax(0,1fr))}
   .fm-selo{left:.6rem;bottom:.6rem;padding:.5rem .75rem}
   .fm-selo .num{font-size:1.5rem}
 }
