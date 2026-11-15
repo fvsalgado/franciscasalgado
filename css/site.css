@@ -8,6 +8,13 @@
 @font-face{font-family:'Fraunces';font-style:italic;font-weight:300 600;font-display:swap;src:url('../fonts/fraunces-italic.woff2') format('woff2')}
 @font-face{font-family:'Manrope';font-style:normal;font-weight:300 800;font-display:swap;src:url('../fonts/manrope.woff2') format('woff2')}
 @font-face{font-family:'Caveat';font-style:normal;font-weight:500 700;font-display:swap;src:url('../fonts/caveat.woff2') format('woff2')}
+/* as letras das assinaturas na bandeira (só se descarregam no /fundme, quando a bandeira as pede) */
+@font-face{font-family:'Kalam';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/assinatura-kalam.woff2') format('woff2')}
+@font-face{font-family:'Permanent Marker';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/assinatura-marker.woff2') format('woff2')}
+@font-face{font-family:'Reenie Beanie';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/assinatura-reenie.woff2') format('woff2')}
+@font-face{font-family:'Homemade Apple';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/assinatura-apple.woff2') format('woff2')}
+@font-face{font-family:'Nothing You Could Do';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/assinatura-nothing.woff2') format('woff2')}
+@font-face{font-family:'Covered By Your Grace';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/assinatura-grace.woff2') format('woff2')}
 
 :root{
   --papel:#F7F5EE;
@@ -2338,7 +2345,7 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
 .fm-ecra[data-fase="0"] .fm-ecra__qr,.fm-ecra[data-fase="1"] .fm-ecra__qr{animation:fm-chama 2.4s ease-in-out infinite}
 @keyframes fm-chama{50%{box-shadow:0 1vw 2vw -1.4vw rgba(20,41,31,.6),0 0 0 .9vw rgba(224,122,31,.22)}}
 .fm-ecra__foto{margin:0 auto;align-self:center;width:min(12vw,21.4vh);flex:none;background:#FFF;padding:.6vw .6vw 0;transform:rotate(2.5deg);box-shadow:0 1vw 2vw -1.2vw rgba(20,41,31,.6)}
-.fm-ecra__foto img{width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 30%;display:block}
+.fm-ecra__foto img{width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 40%;display:block}
 .fm-ecra__foto figcaption{position:static;margin:0;padding:.6vw 0 .7vw;text-align:center;font:800 .74vw/1.3 var(--corpo);letter-spacing:.1em;text-transform:uppercase;color:var(--e-tinta);white-space:nowrap}
 .fm-ecra__foto figcaption > span{display:block;font-family:var(--display);font-style:italic;font-weight:400;font-size:.92vw;letter-spacing:0;text-transform:none;color:var(--e-fraca);margin-top:.2vw;white-space:nowrap}
 .fm-ecra__foto .credito,.fm-ecra__foto figcaption .credito-i{display:block;margin-top:.15vw;font:600 .4vw/1.2 var(--corpo);letter-spacing:.02em;text-transform:none;color:var(--e-fraca)}
@@ -2677,13 +2684,7 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
   58%{transform:skewY(calc(1.1deg * var(--rajada,.6)))}
   77%{transform:skewY(calc(-.5deg * var(--rajada,.6)))}
   100%{transform:none}}
-.fm-cena__sopro{position:absolute;inset:0;z-index:2;pointer-events:none}
-.fm-cena__sopro svg{display:block;width:100%;height:100%}
-.fm-cena__sopro path{fill:none;stroke:rgba(255,255,255,.8);stroke-width:1.8;vector-effect:non-scaling-stroke;stroke-linecap:round;
-  stroke-dasharray:24 150;stroke-dashoffset:24;opacity:0;animation:fm-sopro 1.5s cubic-bezier(.4,0,.2,1) both}
-.fm-cena[data-luz="noite"] .fm-cena__sopro path{stroke:rgba(255,255,255,.45)}
-@keyframes fm-sopro{0%{stroke-dashoffset:24;opacity:0}15%{opacity:1}100%{stroke-dashoffset:-126;opacity:0}}
-.fm-cena__folha{position:absolute;left:-6%;z-index:2;width:clamp(14px,2.4%,28px);pointer-events:none;animation:fm-folha 3.2s cubic-bezier(.35,.15,.4,1) forwards}
+.fm-cena[data-luz="noite"] .fm-cena__folha{position:absolute;left:-6%;z-index:2;width:clamp(14px,2.4%,28px);pointer-events:none;animation:fm-folha 3.2s cubic-bezier(.35,.15,.4,1) forwards}
 .fm-cena__folha svg{display:block;width:100%;height:auto;animation:fm-folha-gira .8s linear infinite}
 @keyframes fm-folha{0%{left:-6%;transform:translateY(0)}30%{transform:translateY(-2.2em)}60%{transform:translateY(1.2em)}100%{left:106%;transform:translateY(-1.6em)}}
 @keyframes fm-folha-gira{to{transform:rotate(360deg)}}
