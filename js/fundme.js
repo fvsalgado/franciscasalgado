@@ -426,15 +426,19 @@ function fotografia(d, l) {
   let envio = null;
   let vez = 0;
 
+  // tirar na hora (só onde há câmara à mão: telemóveis e tablets) ou escolher
+  const camara = $('fmFotoCam');
+  if (matchMedia('(pointer: coarse)').matches) $('fmFotoCamBt').hidden = false;
+  $('fmFotoCamBt').addEventListener('click', () => camara.click());
   $('fmFotoBt').addEventListener('click', () => campo.click());
   pre.addEventListener('click', () => campo.click());
-  campo.addEventListener('change', () => {
-    const ficheiro = campo.files?.[0];
-    campo.value = '';
+  const escolhida = (entrada) => {
+    const ficheiro = entrada.files?.[0];
+    entrada.value = '';
     if (!ficheiro) return;
     const esta = ++vez;
     $('fmFotoUrl').value = '';
-    $('fmFotoBt').hidden = true;
+    $('fmFotoBts').hidden = true;
     $('fmFotoInfo').hidden = false;
     $('fmFotoX').hidden = false;
     $('fmFotoImg').removeAttribute('src');
@@ -455,7 +459,9 @@ function fotografia(d, l) {
       return j.foto;
     })();
     envio.catch((e) => { if (esta === vez) estado(t.erro[e.message] || t.erro.rede, 'fm-foto--erro'); });
-  });
+  };
+  campo.addEventListener('change', () => escolhida(campo));
+  camara.addEventListener('change', () => escolhida(camara));
   $('fmFotoTirar').addEventListener('click', () => {
     vez++;
     envio = null;
@@ -463,7 +469,7 @@ function fotografia(d, l) {
     pre.hidden = true;
     $('fmFotoInfo').hidden = true;
     $('fmFotoX').hidden = true;
-    $('fmFotoBt').hidden = false;
+    $('fmFotoBts').hidden = false;
     caixa.className = 'fm-foto';
   });
 
