@@ -39,7 +39,13 @@ const hoje = new Date().toISOString().slice(0, 10);
 const ler = async (p) => JSON.parse(await readFile(new URL(p, RAIZ), 'utf8'));
 const gravar = async (p, d) => {
   if (SECO) return;
-  await writeFile(new URL(p, RAIZ), `${JSON.stringify(d, null, 2)}\n`);
+  const url = new URL(p, RAIZ);
+  /* Mantém o recuo que o ficheiro já tem. O data/resultados.json usa um
+     espaço; regravá-lo com dois mudava todas as linhas, e no diff perdia-se
+     a única que interessava. */
+  const antes = await readFile(url, 'utf8').catch(() => '');
+  const recuo = /\n( +)"/.exec(antes)?.[1].length || 2;
+  await writeFile(url, `${JSON.stringify(d, null, recuo)}\n`);
 };
 
 /* Comparar provas entre fontes diferentes: o EGR escreve «Portuguese
@@ -48,26 +54,80 @@ const gravar = async (p, d) => {
    Casam pela data — uma jogadora não está em dois sítios no mesmo fim de
    semana — com margem larga, porque o EGR data pelo primeiro dia e nós às
    vezes datámos pelo último. E casam também por palavras em comum, para o
-   caso de as datas estarem ambas erradas. */
+   caso de as datas estarem ambas erradas.
+
+   Casam uma a uma, e a mais próxima primeiro. Antes cada prova de fora ia
+   buscar a primeira nossa que servisse, e duas coisas correram mal: o
+   Internacional de Itália Sub-18 (setembro de 2026) «casou» com o English
+   Girls (julho) por terem em comum «girls stroke play», e nunca entrou no
+   sítio; e duas provas de fora a seis dias uma da outra podiam ficar ambas
+   presas à mesma nossa. Agora as palavras de golfe que todas as provas têm
+   não contam, um país diferente desfaz o par, e uma prova nossa só serve
+   uma prova de fora. */
 const CHOQUE_DIAS = 10;
 const dist = (a, b) => Math.abs((new Date(a) - new Date(b)) / 86400000);
 
 const VAZIAS = new Set(['de', 'da', 'do', 'the', 'of', 'and', 'e', 'a', 'o', 'no', 'na',
-  'championship', 'campeonato', 'torneio', 'tournament', 'open', 'cup', 'taca', 'taça']);
+  'championship', 'campeonato', 'torneio', 'tournament', 'open', 'cup', 'taca', 'taça',
+  'girls', 'boys', 'ladies', 'women', 'womens', 'feminino', 'femenino', 'femenina', 'feminin',
+  'amateur', 'amador', 'stroke', 'play', 'international', 'internacional', 'internacionais',
+  'internationaux', 'junior', 'juniors', 'juniores', 'u16', 'u18', 'u21', 'sub', 'team',
+  'equipas', 'national', 'nacional']);
 const fichas = (s) => new Set(String(s || '')
   .normalize('NFD').replace(/[̀-ͯ]/g, '')
   .toLowerCase().replace(/[^a-z0-9 ]/g, ' ')
   .split(/\s+/)
   .filter((w) => w.length > 2 && !VAZIAS.has(w) && !/^\d{4}$/.test(w)));
 
-function mesmaProva(nossa, dela) {
-  if (nossa.data && dela.data && dist(nossa.data, dela.data) <= CHOQUE_DIAS) return true;
+/* O EGR e o WAGR dão o país por extenso, em inglês; nós guardamos o código. */
+const PAISES = {
+  portugal: 'PT', spain: 'ES', espana: 'ES', france: 'FR', italy: 'IT', ireland: 'IE',
+  england: 'GB', scotland: 'GB', wales: 'GB', 'northern ireland': 'GB', 'united kingdom': 'GB',
+  'great britain': 'GB', belgium: 'BE', finland: 'FI', slovakia: 'SK', germany: 'DE',
+  netherlands: 'NL', switzerland: 'CH', austria: 'AT', sweden: 'SE', denmark: 'DK',
+  norway: 'NO', iceland: 'IS', poland: 'PL', 'czech republic': 'CZ', czechia: 'CZ',
+  slovenia: 'SI', hungary: 'HU', greece: 'GR', morocco: 'MA', 'united states': 'US', usa: 'US',
+};
+const codigoPais = (nome) => PAISES[String(nome || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
+  .toLowerCase().trim()] || null;
+
+function mesmoNome(nossa, dela) {
   if (nossa.ano !== Number(String(dela.data || '').slice(0, 4))) return false;
   const a = fichas(nossa.torneio?.pt);
   const b = fichas(dela.evento);
   let comuns = 0;
   for (const w of b) if (a.has(w)) comuns += 1;
   return comuns >= 2;
+}
+
+/* Devolve um Map: índice da prova de fora → a nossa prova com que casou. */
+function casar(nossas, delas) {
+  const pares = [];
+  delas.forEach((p, i) => {
+    if (!p.data) return;
+    for (const q of nossas) {
+      if (!q.data) continue;
+      if (q.pais && p.pais && q.pais !== p.pais) continue;
+      const x = dist(q.data, p.data);
+      if (x <= CHOQUE_DIAS) pares.push({ i, q, x });
+    }
+  });
+  pares.sort((a, b) => a.x - b.x);
+
+  const casadas = new Map();
+  const usadas = new Set();
+  for (const { i, q } of pares) {
+    if (casadas.has(i) || usadas.has(q)) continue;
+    casadas.set(i, q);
+    usadas.add(q);
+  }
+  delas.forEach((p, i) => {
+    if (casadas.has(i)) return;
+    const q = nossas.find((n) => !usadas.has(n)
+      && !(n.pais && p.pais && n.pais !== p.pais) && mesmoNome(n, p));
+    if (q) { casadas.set(i, q); usadas.add(q); }
+  });
+  return casadas;
 }
 
 const novidades = [];
@@ -168,19 +228,22 @@ async function egr() {
 
   const res = await ler('data/resultados.json');
   const conhecidas = res.provas.filter((p) => p.data);
+  const delas = (d.provas || []).filter((p) => p.data);
+  const casadas = casar(conhecidas, delas.map((p) => ({ ...p, pais: codigoPais(p.pais) })));
   const porEntrar = [];
+  let mexeu = false;
 
-  for (const p of d.provas || []) {
-    if (!p.data) continue;
-    const ja = conhecidas.find((q) => mesmaProva(q, p));
+  delas.forEach((p, i) => {
+    const ja = casadas.get(i);
     if (ja) {
       // já cá está; só se aproveita para corrigir a posição, se faltava
       if (ja.pos == null && p.pos != null) {
         ja.pos = p.pos;
         ja.fonte = ja.fonte || { nome: 'European Golf Rankings', url: d.ficha };
+        mexeu = true;
         novidades.push(`posição preenchida: ${ja.torneio?.pt || ja.id} → ${p.pos}.º (EGR)`);
       }
-      continue;
+      return;
     }
     porEntrar.push({
       id: `egr-${p.data}`,
@@ -189,12 +252,15 @@ async function egr() {
       torneio: { pt: p.evento, en: p.evento },
       campo: p.campo || '',
       local: { pt: p.pais || '', en: p.pais || '' },
+      ...(codigoPais(p.pais) ? { pais: codigoPais(p.pais) } : {}),
       pos: p.pos ?? null,
       voltas: p.voltas || [],
       total: p.total ?? null,
       par: null,
       escalao: { pt: d.escalao || '', en: d.escalao || '' },
-      selos: ['wagr'],
+      /* Contar para o EGR não é contar para o WAGR. O selo vem do passo
+         seguinte, que lê a lista do próprio WAGR. */
+      selos: [],
       nota: {
         pt: 'Entrada automática a partir da ficha no European Golf Rankings. Falta confirmar o nome em português, o par e a nota de prova.',
         en: 'Added automatically from the European Golf Rankings profile. The Portuguese name, the score to par and the event note are still to be confirmed.',
@@ -202,18 +268,20 @@ async function egr() {
       porRever: true,
       fonte: { nome: 'European Golf Rankings', url: d.ficha },
     });
-  }
+  });
 
   if (porEntrar.length) {
     res.provas = [...porEntrar, ...res.provas].sort((a, b) => (b.data || '').localeCompare(a.data || ''));
-    res.atualizado = hoje.slice(0, 7);
-    await gravar('data/resultados.json', res);
     for (const p of porEntrar) {
       novidades.push(`prova nova: ${p.data} · ${p.torneio.pt} · ${p.pos ?? 's/ posição'}`);
       atencao.push(`**Prova nova (entrou já no sítio, marcada \`porRever\`)** — ${p.data} · ${p.torneio.pt}, ${p.campo}. Falta o nome em português, o par e a nota. Fonte: ${d.ficha}`);
     }
-  } else if (porEntrar.length === 0) {
-    // mesmo sem provas novas, a posição pode ter mudado — o ficheiro já foi gravado
+  }
+  /* Uma posição preenchida também se grava — antes só se gravava quando
+     entrava prova nova, e a posição perdia-se. */
+  if (porEntrar.length || mexeu) {
+    res.atualizado = hoje.slice(0, 7);
+    await gravar('data/resultados.json', res);
   }
 
   return d;
@@ -250,6 +318,105 @@ async function wagr() {
   }
   await gravar('data/wagr.json', d);
   return d;
+}
+
+/* ── 2b. as provas que contam para o WAGR ──────────────────────────────────
+ *
+ * O selo «WAGR» de cada prova era posto à mão, e o vigia só lia a posição
+ * mundial — nunca a lista de provas que a fazem. Em novembro de 2026 faltava
+ * o selo a oito provas que o WAGR conta, entre elas os dois nacionais, o
+ * Europeu por Equipas e a Taça da FPG, e o filtro «Ranking mundial» da página
+ * de resultados escondia-as.
+ *
+ * A ficha do WAGR tem a lista (o mesmo pedido público que o perfil deles faz):
+ * semana, país, nome e posição. É estrutura, por isso entra sozinha: o selo
+ * e, quando a nossa prova ainda não tem posição, a posição. Nunca se tira um
+ * selo — a janela do WAGR é de dois anos, e uma prova que sai dela não deixou
+ * de ter contado. Uma prova que o WAGR conta e o sítio não tem fica para uma
+ * pessoa: o WAGR não diz o campo, as voltas nem o nome em português. */
+const WAGR_PROVAS = 'https://worldgolfranking2021api.wagr.com/api/wagr/playerprofile/getPlayerEvents';
+
+/* O WAGR data por semana («41/2026»). A quinta-feira dessa semana fica a três
+   dias de qualquer ponta de uma prova de quatro dias, o que chega para casar. */
+function quintaDaSemana(semanaAno) {
+  const [s, a] = String(semanaAno || '').split('/').map(Number);
+  if (!s || !a) return null;
+  const d = new Date(Date.UTC(a, 0, 4));
+  d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7) + (s - 1) * 7 + 3);
+  return d.toISOString().slice(0, 10);
+}
+
+async function wagrProvas() {
+  const ano = Number(hoje.slice(0, 4));
+  const porId = new Map();
+  /* «RS» é a janela que conta para a posição; os anos apanham o resto. */
+  for (const tab of ['RS', ano, ano - 1]) {
+    const r = await fetch(`${WAGR_PROVAS}?profileId=${WAGR_ID}&tab=${tab}&pageNumber=1&pageSize=100`, {
+      headers: { Accept: 'application/json' },
+    });
+    if (!r.ok) throw new Error(`lista de provas: HTTP ${r.status}`);
+    const j = await r.json();
+    for (const e of j.playerProfileEvents || []) if (e.eventId) porId.set(e.eventId, e);
+  }
+  if (!porId.size) throw new Error('lista de provas vazia — o WAGR mudou de formato?');
+
+  const delas = [...porId.values()].map((e) => ({
+    id: e.eventId,
+    evento: e.eventName,
+    semana: e.weekYear,
+    data: quintaDaSemana(e.weekYear),
+    pais: codigoPais(e.country),
+    paisNome: e.country,
+    lugar: String(e.finishPosition || '').trim(),
+    url: e.eventDetailsLink ? `https://www.wagr.com/events/${e.eventDetailsLink}` : null,
+  }));
+
+  const res = await ler('data/resultados.json');
+  const casadas = casar(res.provas.filter((p) => p.data), delas);
+  const faltam = [];
+  let mexeu = false;
+
+  delas.forEach((p, i) => {
+    const q = casadas.get(i);
+    if (!q) { faltam.push(p); return; }
+    const nome = q.torneio?.pt || q.id;
+    q.selos = q.selos || [];
+    if (!q.selos.includes('wagr')) {
+      q.selos.push('wagr');
+      mexeu = true;
+      novidades.push(`selo WAGR: ${nome}`);
+    }
+    const m = /^(T)?(\d+)$/i.exec(p.lugar);
+    if (q.pos == null && m) {
+      q.pos = Number(m[2]);
+      if (m[1]) q.posT = true;
+      mexeu = true;
+      novidades.push(`posição preenchida: ${nome} → ${q.pos}.º (WAGR)`);
+    }
+  });
+
+  if (mexeu) {
+    res.atualizado = hoje.slice(0, 7);
+    await gravar('data/resultados.json', res);
+  }
+
+  /* Uma vez cada, como as outras listas do vigia. */
+  if (faltam.length) {
+    const vistas = await ler('data/vigia-vistas.json').catch(() => ({}));
+    const jaVistas = new Set(vistas.wagr || []);
+    const novas = faltam.filter((p) => !jaVistas.has(p.id))
+      .sort((a, b) => (b.data || '').localeCompare(a.data || ''));
+    if (novas.length) {
+      atencao.push(`**${novas.length} prova(s) que contam para o WAGR e não têm cartão no sítio** — o WAGR dá a semana, o país e a posição; o nome em português, o campo e as voltas ficam para uma pessoa. Cada uma é listada uma vez só:\n${
+        novas.map((p) => `  - semana ${p.semana} · ${p.url ? `[${p.evento}](${p.url})` : p.evento} · ${p.paisNome} · ${/^\d+$/.test(p.lugar) ? `${p.lugar}.º` : p.lugar}`).join('\n')}`);
+      await gravar('data/vigia-vistas.json', {
+        ...vistas,
+        wagr: [...jaVistas, ...novas.map((p) => p.id)].sort((a, b) => a - b),
+      });
+    }
+  }
+
+  return delas.length;
 }
 
 /* ── 3. Federação Portuguesa de Golfe ──────────────────────────────────── */
@@ -340,7 +507,10 @@ async function fpg() {
       atencao.push(`**${frescas.length} peça(s) que a mencionam sem ser no título** — cobertura de prova, listas de convocadas, tabelas de resultados. Entram só se alguém decidir que valem:\n${
         frescas.slice(0, 25).map((m) => `  - ${m.data} · [${m.titulo}](${m.url}/)${m.futuro ? ' · *pode anunciar prova futura*' : ''}`).join('\n')}${
         frescas.length > 25 ? `\n  - …e mais ${frescas.length - 25}.` : ''}`);
+      /* Com o resto do caderno: sem o `...vistas`, esta escrita apagava as
+         listas de provas que os outros passos lá guardam. */
       await gravar('data/vigia-vistas.json', {
+        ...vistas,
         '_leia-me': 'Endereços de peças que o vigia já mostrou em VIGIA-ATENCAO.md e não deve voltar a mostrar. Apagar uma linha faz a peça reaparecer no próximo aviso.',
         urls: [...jaMostradas, ...frescas.map((m) => m.url)].sort(),
       });
@@ -360,6 +530,7 @@ const passo = async (nome, fn) => {
 
 await passo('EGR', egr);
 await passo('WAGR', wagr);
+await passo('WAGR (provas)', wagrProvas);
 await passo('histórico', historico);
 await passo('handicap', handicap);
 await passo('FPG', fpg);

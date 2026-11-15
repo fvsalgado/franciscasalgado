@@ -174,7 +174,11 @@ a ordem no sítio — mais recente primeiro):
   não se souber.
 - `dataTexto` — quando só se sabe o mês, ou quando a prova durou vários dias
   («5–7 dezembro 2025»). Substitui a data formatada.
-- `selos` — `titulo`, `podio`, `wagr`, `selecao`.
+- `selos` — `titulo`, `podio`, `wagr`, `selecao`. **O `wagr` não se põe à
+  mão**: o vigia lê todos os dias a lista de provas que o WAGR conta e
+  acrescenta-o sozinho (e a posição, se a prova ainda não a tiver). Nunca o
+  tira — a janela do WAGR é de dois anos, e uma prova que sai dela não deixou
+  de ter contado.
 - `nacional` — `"campea"` ou `"vice"`. **É este campo, e não o nome da prova,
   que faz as contagens de campeã e vice-campeã nacional.** Pelo nome não dava:
   o Drive Tour também se chama «Campeonato Nacional de Jovens», e ganhar uma
@@ -468,6 +472,12 @@ seguem para o sítio; uma notícia nova, uma prova que mude de sítio ou
 qualquer coisa que precise de uma frase escrita fica anotada em
 `VIGIA-ATENCAO.md`, que abre um *issue* no GitHub. Uma prova que entre por
 esta via fica marcada `porRever` até alguém confirmar.
+
+Do WAGR vêm duas coisas: a posição mundial e a **lista das provas que
+contam**. Cada prova dessa lista casa com uma nossa pela semana e pelo país
+(uma a uma, a mais próxima primeiro) e ganha o selo `wagr`. Uma prova que o
+WAGR conta e o sítio não tem vai para o `VIGIA-ATENCAO.md`, uma vez só: o
+WAGR não diz o campo, as voltas nem o nome em português.
 
 Uma notícia só entra sozinha na lista se o **título** trouxer o nome dela. Se
 o nome aparecer apenas no corpo — o que acontece em quase todas as crónicas de

@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-10",
+ "atualizado": "2026-11",
  "nota": {
   "pt": "O número de provas de cada época vem do registo federado dela na Federação Portuguesa de Golfe; a lista mostra as que têm classificação apurada. Voltas e classificações da FPG, do European Golf Rankings, das federações organizadoras e da imprensa desportiva. Cada prova indica a sua fonte.",
   "en": "The number of events in each season comes from her federated record at the Portuguese Golf Federation; the list shows those with a confirmed placing. Rounds and placings from the FPG, the European Golf Rankings, the organising federations and the sports press. Every event names its source."
@@ -40,7 +40,8 @@
     "en": "Open"
    },
    "selos": [
-    "podio"
+    "podio",
+    "wagr"
    ],
    "nota": {
     "pt": "40.ª edição, e vice-campeã pelo segundo ano seguido. Segunda na fase de stroke play (74-78), bateu Maria Cunha por 3&2 nos quartos de final e a campeã nacional absoluta, Francisca Ferreira da Costa, por 5&4 nas meias-finais. Perdeu a final com Laura Santos, por 5&3.",
@@ -49,6 +50,43 @@
    "fonte": {
     "nome": "FPG",
     "url": "https://portal.fpg.pt/noticias/taca-da-fpg-bpi-em-santo-estevao-da-a-conhecer-as-finalistas-e-os-semifinalistas-para-ultimo-dia/"
+   }
+  },
+  {
+   "id": "italia-sub18-2026",
+   "ano": 2026,
+   "data": "2026-09-03",
+   "torneio": {
+    "pt": "Campeonato Internacional de Itália Sub-18 Feminino",
+    "en": "Italian International Girls' U18 Championship"
+   },
+   "campo": "Golf Club Villa Condulmer",
+   "local": {
+    "pt": "Treviso, Itália",
+    "en": "Treviso, Italy"
+   },
+   "pais": "IT",
+   "pos": 69,
+   "voltas": [
+    78,
+    80
+   ],
+   "total": 158,
+   "par": 16,
+   "escalao": {
+    "pt": "Sub-18",
+    "en": "U18"
+   },
+   "selos": [
+    "wagr"
+   ],
+   "nota": {
+    "pt": "Noventa e seis jogadoras em campo, no Golf Club Villa Condulmer, perto de Treviso. Abriu com 78 (+7), juntou-lhe um 80 e ficou em 69.º.",
+    "en": "A field of ninety-six at Golf Club Villa Condulmer, near Treviso. She opened with a 78 (+7), added an 80 and finished 69th."
+   },
+   "fonte": {
+    "nome": "European Golf Rankings",
+    "url": "https://www.europeangolfrankings.com/players/39992"
    }
   },
   {
@@ -192,7 +230,8 @@
     "en": "Open"
    },
    "selos": [
-    "selecao"
+    "selecao",
+    "wagr"
    ],
    "nota": {
     "pt": "Ao serviço da Seleção Nacional, em stroke play e depois em match play. Nenhum dos dois cartões de qualificação foi contabilizado para a equipa. Portugal acabou a fase inicial em 21.º. Individualmente, o European Golf Rankings coloca-a em 131.º entre todas as jogadoras da prova.",
@@ -221,7 +260,7 @@
     "en": "Espinho, Portugal"
    },
    "pais": "PT",
-   "pos": null,
+   "pos": 6,
    "voltas": [
     80,
     80,
@@ -234,7 +273,9 @@
     "pt": "Absoluto",
     "en": "Open"
    },
-   "selos": [],
+   "selos": [
+    "wagr"
+   ],
    "nota": {
     "pt": "Quatro voltas no campo mais antigo da Península Ibérica, contra o quadro absoluto — vinte e duas jogadoras, quase todas mais velhas.",
     "en": "Four rounds on the oldest course in the Iberian Peninsula, against the senior field — twenty-two players, nearly all of them older."
@@ -279,7 +320,8 @@
     "en": "U18"
    },
    "selos": [
-    "titulo"
+    "titulo",
+    "wagr"
    ],
    "nota": {
     "pt": "Liderou do princípio ao fim: 78 no primeiro dia, cinco pancadas de vantagem às 36 voltas, e um 77 a fechar. É o título de campeã nacional Sub-18.",
@@ -569,7 +611,8 @@
     "en": "Open"
    },
    "selos": [
-    "podio"
+    "podio",
+    "wagr"
    ],
    "nota": {
     "pt": "Apurada entre as oito melhores em stroke play, bateu Eva Silva no buraco 18 por 1 up e Matilde Leal Gouveia por 2&1 antes de perder a final com Francisca Rocha, por 4&3.",
@@ -611,7 +654,8 @@
     "en": "U18"
    },
    "selos": [
-    "selecao"
+    "selecao",
+    "wagr"
    ],
    "fonte": {
     "nome": "FPG",
@@ -648,7 +692,8 @@
     "en": "Open"
    },
    "selos": [
-    "selecao"
+    "selecao",
+    "wagr"
    ],
    "nota": {
     "pt": "A primeira presença dela num Europeu de equipas absoluto, aos dezasseis anos. Portugal acabou em 14.º entre vinte países.",
@@ -756,7 +801,7 @@
     "en": "Vidago, Portugal"
    },
    "pais": "PT",
-   "pos": null,
+   "pos": 121,
    "voltas": [],
    "total": null,
    "par": null,
@@ -764,7 +809,9 @@
     "pt": "Profissional (LETAS)",
     "en": "Professional (LETAS)"
    },
-   "selos": [],
+   "selos": [
+    "wagr"
+   ],
    "nota": {
     "pt": "Convidada a jogar, como amadora, a primeira prova do circuito profissional europeu feminino em Portugal em oito anos. Foram seis portuguesas em campo, um recorde.",
     "en": "Invited to play, as an amateur, the first women's European professional event held in Portugal in eight years. Six Portuguese players teed it up — a record."
@@ -792,7 +839,7 @@
     "en": "Portimão, Portugal"
    },
    "pais": "PT",
-   "pos": null,
+   "pos": 83,
    "voltas": [
     81,
     81,
