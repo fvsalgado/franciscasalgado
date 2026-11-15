@@ -2201,8 +2201,8 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
 .fm-ecra{position:fixed;inset:0;z-index:300;color:#F7F5EE;overflow:hidden;
          background:radial-gradient(120vw 80vh at 10% -10%,var(--ceu1) 0%,transparent 60%),radial-gradient(90vw 70vh at 110% 110%,var(--ceu2) 0%,transparent 55%),var(--ceu0);
          transition:--ceu0 4s,--ceu1 4s,--ceu2 4s}
-.fm-ecra__in{position:relative;z-index:1;width:100%;height:100%;display:grid;grid-template-columns:1.25fr .95fr .62fr;grid-template-rows:auto auto auto auto auto 1fr;
-             grid-template-areas:"cab cab qr" "rota rota qr" "fase fase qr" "num band qr" "info band qr" "post post post";column-gap:3vw;padding:3.6vw 4vw 2.6vw}
+.fm-ecra__in{position:relative;z-index:1;width:100%;height:100%;display:grid;grid-template-columns:1.25fr .95fr .62fr;grid-template-rows:auto auto auto auto auto auto 1fr;
+             grid-template-areas:"tempo tempo tempo" "cab cab qr" "rota rota qr" "fase fase qr" "num band qr" "info band qr" "post post post";column-gap:3vw;padding:0 4vw 2.6vw}
 .fm-ecra__cab{grid-area:cab}
 .fm-ecra__r{margin:0;font-size:1vw;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:#8FD9AE}
 .fm-ecra__t{margin:.8vw 0 0;font-size:4.3vw;line-height:1;color:#F7F5EE}
@@ -2231,7 +2231,7 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
              box-shadow:0 2vw 4vw -2vw rgba(0,0,0,.6);animation:fm-pulsa 4s ease-in-out infinite}
 @keyframes fm-pulsa{50%{box-shadow:0 2vw 4vw -2vw rgba(0,0,0,.6),0 0 0 .6vw rgba(143,217,174,.25)}}
 .fm-ecra__qr img{width:66%;height:auto;display:block;margin:0 auto;image-rendering:pixelated}
-.fm-ecra__foto{position:relative;width:56%;background:#F7F5EE;padding:.7vw .7vw 0;border-radius:.3vw;transform:rotate(3.5deg);box-shadow:0 1.6vw 3vw -1.4vw rgba(0,0,0,.7);
+.fm-ecra__foto{position:relative;width:46%;background:#F7F5EE;padding:.7vw .7vw 0;border-radius:.3vw;transform:rotate(3.5deg);box-shadow:0 1.6vw 3vw -1.4vw rgba(0,0,0,.7);
                animation:fm-foto 7s ease-in-out infinite}
 .fm-ecra__foto img{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:50% 22%;display:block}
 .fm-ecra__foto span{display:block;font-family:var(--display);font-style:italic;color:#12281E;font-size:.82vw;line-height:1.25;text-align:center;padding:.5vw 0 .55vw}
@@ -2429,7 +2429,7 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
 
 /* o ecrã ao alto (um telemóvel, um ecrã vertical): tudo numa coluna */
 @media (orientation:portrait){
-  .fm-ecra__in{grid-template-columns:1fr;grid-template-rows:none;grid-template-areas:"cab" "rota" "fase" "num" "info" "band" "qr" "post";
+  .fm-ecra__in{grid-template-columns:1fr;grid-template-rows:none;grid-template-areas:"tempo" "cab" "rota" "fase" "num" "info" "band" "qr" "post";
                align-content:start;row-gap:0;padding:7vw 6vw 4vw;overflow-y:auto}
   .fm-ecra__r{font-size:2.6vw}
   .fm-ecra__t{font-size:7.6vw;margin-top:1.4vw}
@@ -2448,9 +2448,9 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
   .fm-ecra__n .num{font-size:18vw}
   .fm-ecra__m{font-size:3.6vw}
   .fm-ecra__i{font-size:3.2vw;gap:4vw;margin-top:2vw;flex-wrap:wrap}
-  .fm-ecra__band{width:78%;justify-self:center;margin-top:4vw}
-  .fm-ecra__lado{flex-direction:row;align-items:center;justify-content:center;gap:5vw;margin-top:4vw}
-  .fm-ecra__qr{width:44%;padding:3vw;border-radius:3vw}
+  .fm-ecra__band{width:64%;justify-self:center;margin-top:3vw}
+  .fm-ecra__lado{flex-direction:row;align-items:center;justify-content:center;gap:5vw;margin-top:3vw}
+  .fm-ecra__qr{width:40%;padding:2.6vw;border-radius:3vw}
   .fm-ecra__qr p{font-size:2.8vw;margin-top:2vw}
   .fm-ecra__qr span{font-size:2vw;margin-top:1vw}
   .fm-ecra__foto{width:30%;padding:1.6vw 1.6vw 0}
@@ -2494,3 +2494,27 @@ html.fm-ecra-on .convite-l,html.fm-ecra-on .fm > section{display:none!important}
 .fm-ecra--en .fm-bi > [lang="pt"]{opacity:0}
 .fm-ecra--en .fm-bi > [lang="en"]{opacity:1}
 .fm-ecra__t .fm-bi,.fm-ecra__qr p .fm-bi,.fm-postal__t .fm-bi{display:grid}
+
+/* a barra do campo: o sítio, a hora, o céu, o vento, a chuva, o pôr do sol */
+.fm-ecra__tempo{grid-area:tempo;display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:0 -4vw 2.4vw;padding:.9vw 4vw;
+  background:rgba(0,0,0,.22);border-bottom:1px solid rgba(247,245,238,.12);font-size:1vw;color:rgba(247,245,238,.7);min-height:3.6vw}
+.fm-ecra__tempo{margin-bottom:1.8vw}
+.fm-tp__sitio,.fm-tp__hora,.fm-tp__i{display:inline-flex;align-items:center;gap:.6vw;padding:0 1.6vw;border-left:1px solid rgba(247,245,238,.16)}
+.fm-tp__sitio{padding-left:0;border-left:0;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.85vw;color:#8FD9AE}
+.fm-tp__hora{font-family:var(--display);font-size:2vw;line-height:1;color:#F7F5EE;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.fm-tp__i b{font-family:var(--display);font-weight:400;font-size:1.7vw;line-height:1;color:#F7F5EE}
+.fm-tp__i small{font-size:.9vw;color:rgba(247,245,238,.65)}
+.fm-ecra__tempo svg{width:1.6vw;height:1.6vw;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;color:#F7F5EE}
+.fm-tp__sitio svg{width:1.1vw;height:1.1vw;color:#8FD9AE}
+.fm-tp__vento svg{transition:transform 1.5s var(--curva)}
+@media (orientation:portrait){
+  .fm-ecra__in{padding-top:0}
+  .fm-ecra__tempo{margin:0 -6vw 4vw;padding:2.4vw 6vw;font-size:2.6vw;row-gap:2vw}
+  .fm-tp__sitio{width:100%;font-size:2.2vw;gap:1.4vw}
+  .fm-tp__sitio svg{width:3vw;height:3vw}
+  .fm-tp__hora{font-size:5.6vw;padding:0 3vw 0 0;border-left:0}
+  .fm-tp__i{gap:1.4vw;padding:0 3vw}
+  .fm-tp__i b{font-size:4.4vw}
+  .fm-tp__i small{font-size:2.3vw}
+  .fm-ecra__tempo svg{width:4vw;height:4vw}
+}
