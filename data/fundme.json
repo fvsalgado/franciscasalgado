@@ -18,63 +18,6 @@
     "aceitar": true,
     "aprovar": false
   },
-  "etapas": [
-    {
-      "valor": 1100,
-      "t": {
-        "pt": "Voo da Francisca",
-        "en": "Francisca's flight"
-      },
-      "x": {
-        "pt": "Lisboa–Miami, ida e volta",
-        "en": "Lisbon–Miami return"
-      }
-    },
-    {
-      "valor": 1100,
-      "t": {
-        "pt": "Voo do acompanhante",
-        "en": "Chaperone's flight"
-      },
-      "x": {
-        "pt": "Tem 17 anos e não pode ir sozinha",
-        "en": "She is 17 and cannot travel alone"
-      }
-    },
-    {
-      "valor": 1400,
-      "t": {
-        "pt": "Alojamento",
-        "en": "Accommodation"
-      },
-      "x": {
-        "pt": "Oito noites em Coral Gables",
-        "en": "Eight nights in Coral Gables"
-      }
-    },
-    {
-      "valor": 600,
-      "t": {
-        "pt": "Carro e deslocações",
-        "en": "Car and transport"
-      },
-      "x": {
-        "pt": "Campo, treinos e aeroporto",
-        "en": "Course, practice and airport"
-      }
-    },
-    {
-      "valor": 800,
-      "t": {
-        "pt": "Inscrição e seguro",
-        "en": "Entry and insurance"
-      },
-      "x": {
-        "pt": "E as despesas da semana",
-        "en": "And the week's expenses"
-      }
-    }
-  ],
   "evento": {
     "mostrar": true,
     "data": "2026-11-25",

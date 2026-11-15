@@ -38,7 +38,6 @@ export function publico(d) {
     valorInicial: d.valorInicial,
     minimo: d.minimo,
     maximo: d.maximo,
-    etapas: d.etapas ?? [],
     evento: d.evento ?? null,
     fotos: fotosAbertas(d),
   };

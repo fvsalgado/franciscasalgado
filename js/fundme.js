@@ -1,14 +1,13 @@
 /* A angariação «Rumo à Florida» (/fundme).
  *
  * Tudo o que mexe vem de /api/fundme: o total, o acumulado dia a dia, os
- * nomes e as mensagens, e o que está em data/fundme.json (meta, etapas,
+ * nomes e as mensagens, e o que está em data/fundme.json (meta,
  * evento). Se a função não responder, a página lê o data/fundme.json e
  * mostra o que lá está, sem total.
  *
- * A página: o cartão de embarque (a viagem e quanto já se juntou), o apoio
- * (um valor e um botão; o nome e a mensagem só para quem quiser), o gráfico,
- * a conta da viagem em forma de recibo, a bandeira com os nomes de quem
- * apoiou e os postais com as mensagens.
+ * A página: o cartão de embarque (a viagem, quanto já se juntou e a volta
+ * de 18 buracos), o cartão de apoio, o gráfico, a bandeira com os nomes de
+ * quem apoiou, os postais com as mensagens e a previsão para o Roll Up.
  *
  * O formulário funciona sem JavaScript (um POST para /api/fundme/apoiar, que
  * responde com um 303 para a Stripe). Com JavaScript vai em JSON.
@@ -61,11 +60,6 @@ const T = {
     eventoData: (d, l) => `${d} · ${l}`,
     eventoSemData: (l) => `Data a anunciar · ${l}`,
     tabela: ['Dia', 'Nesse dia', 'Acumulado'],
-    recibo: {
-      cab: 'Rumo à Florida', sub: 'Lisboa → Miami · janeiro de 2027', n: 'Recibo n.º 2027',
-      faltam: (v) => `faltam ${v}`, pago: 'Pago', total: 'Total', juntamos: 'Já juntámos', falta: 'Falta',
-      obrigado: 'Obrigada!', completo: 'Viagem paga. Obrigada!',
-    },
     bandeiraVazia: 'A bandeira está à espera do primeiro nome.',
     semNome: (n) => (n === 1 ? 'E mais um apoio sem nome.' : `E mais ${n} apoios sem nome.`),
     nomes: (n) => (n === 1 ? '1 nome na bandeira.' : `${n} nomes na bandeira.`),
@@ -112,11 +106,6 @@ const T = {
     eventoData: (d, l) => `${d} · ${l}`,
     eventoSemData: (l) => `Date to be announced · ${l}`,
     tabela: ['Day', 'That day', 'Running total'],
-    recibo: {
-      cab: 'Road to Florida', sub: 'Lisbon → Miami · January 2027', n: 'Receipt no. 2027',
-      faltam: (v) => `${v} to go`, pago: 'Paid', total: 'Total', juntamos: 'Raised so far', falta: 'Still to go',
-      obrigado: 'Thank you!', completo: 'Trip paid for. Thank you!',
-    },
     bandeiraVazia: 'The flag is waiting for its first name.',
     semNome: (n) => (n === 1 ? 'And one more gift without a name.' : `And ${n} more gifts without a name.`),
     nomes: (n) => (n === 1 ? '1 name on the flag.' : `${n} names on the flag.`),
@@ -538,53 +527,6 @@ function fontes(d, l) {
     `<div class="fm-fonte"><span class="fm-fonte__v num">${euros(o[k], l)}</span><span class="fm-fonte__r">${esc(t.fontes[k] ?? k)}</span></div>`);
   if (d.hoje > 0) itens.push(`<div class="fm-fonte fm-fonte--hoje"><span class="fm-fonte__v num">+${euros(d.hoje, l)}</span><span class="fm-fonte__r">${t.hoje}</span></div>`);
   $('fmFontes').innerHTML = itens.length ? itens.join('') : `<p class="fm-fonte__vazio">${t.semFontes}</p>`;
-}
-
-/* ── a conta da viagem, em recibo ─────────────────────────── */
-
-function recibo(d, l) {
-  const t = T[l].recibo;
-  const lista = d.etapas ?? [];
-  if (!lista.length) { $('fmEtapasS').hidden = true; return; }
-  const total = d.total ?? 0;
-  const meta = lista.reduce((s, e) => s + e.valor, 0) || d.meta;
-  let acc = 0;
-  let pagas = 0;
-  const linhas = lista.map((e) => {
-    const ini = acc;
-    acc += e.valor;
-    const p = Math.max(0, Math.min(1, (total - ini) / e.valor));
-    if (p >= 1) pagas++;
-    const estado = p >= 1 ? 'fm-r__l--pago' : p > 0 ? 'fm-r__l--meio' : '';
-    const nota = p > 0 && p < 1 ? t.faltam(euros(Math.ceil(e.valor - (total - ini)), l)) : tx(e.x, l);
-    return `<li class="fm-r__l ${estado}">
-      <span class="fm-r__t"><span>${esc(tx(e.t, l))}</span></span>
-      <span class="fm-r__v">${euros(e.valor, l)}</span>
-      <span class="fm-r__x">${esc(nota)}</span>
-      ${p > 0 && p < 1 ? `<span class="fm-r__b" aria-hidden="true"><i style="width:${p * 100}%"></i></span>` : ''}
-    </li>`;
-  });
-  const falta = Math.max(0, meta - total);
-  const completo = falta === 0 && total > 0;
-  $('fmRecibo').innerHTML = `
-    <div class="fm-r">
-      <div class="fm-r__cab">
-        <svg class="fm-r__ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M8 20.2V3.6l9.2 3.3L8 10.2"/><ellipse cx="12" cy="20.4" rx="6.8" ry="1.7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-        <b>${t.cab}</b>
-        <span>${t.sub}</span>
-        <span class="fm-r__n">${t.n}</span>
-      </div>
-      <ol class="fm-r__ls">${linhas.join('')}</ol>
-      ${pagas ? `<span class="fm-r__selo" style="--linhas:${pagas}" aria-hidden="true">${t.pago}<small>${euros(lista.slice(0, pagas).reduce((s, e) => s + e.valor, 0), l)}</small></span>` : ''}
-      <div class="fm-r__tot"><span>${t.total}</span><span>${euros(meta, l)}</span></div>
-      <div class="fm-r__tot fm-r__tot--j"><span>${t.juntamos}</span><span>${euros(total, l)}</span></div>
-      ${completo ? '' : `<div class="fm-r__tot fm-r__tot--f"><span>${t.falta}</span><span>${euros(falta, l)}</span></div>`}
-      <div class="fm-r__pe">
-        <p>${completo ? t.completo : t.obrigado}</p>
-        <span class="fm-r__barras" aria-hidden="true"></span>
-        <span class="fm-r__url">franciscasalgado.golf/fundme</span>
-      </div>
-    </div>`;
 }
 
 /* ── a bandeira com os nomes ──────────────────────────────── */
@@ -1390,7 +1332,7 @@ export async function fundme(l) {
     return;
   }
 
-  const pintar = (x) => { bilhete(x, l); grafico(x, l); fontes(x, l); recibo(x, l); bandeira(x, l); postais(x, l); };
+  const pintar = (x) => { bilhete(x, l); grafico(x, l); fontes(x, l); bandeira(x, l); postais(x, l); };
   pintar(d);
   formulario(d, l);
   evento(d, l);
