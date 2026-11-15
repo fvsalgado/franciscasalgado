@@ -209,7 +209,7 @@
     <!-- o apoio: escolher o valor e carregar no botão -->
     <!-- o apoio: um cartão de resultados de golfe. Escolhe-se o «buraco» (o
          valor), assina-se (o nome vai para a bandeira) e, se quiser, junta-se
-         uma frase e uma fotografia. O JavaScript desenha as marcas a caneta. -->
+         uma mensagem de apoio e uma fotografia. O JavaScript desenha as marcas a caneta. -->
     <div class="fm-cartao" id="apoiar">
       <div class="fm-obrigado" id="fmObrigado" hidden></div>
       <form class="fm-form" id="fmForm" method="post" action="/api/fundme/apoiar">
@@ -242,11 +242,11 @@
             <input id="fmNome" name="nome" type="text" maxlength="40" autocomplete="name" placeholder="o seu nome, para a bandeira" />
           </div>
           <div class="fm-sc__linha fm-sc__frase" id="fmFraseC">
-            <label class="fm-sc__lab" for="fmMsg" data-t="fm_sc_recado">Note</label>
-            <textarea id="fmMsg" name="mensagem" maxlength="140" rows="2" placeholder="uma frase para a Francisca"></textarea>
+            <label class="fm-sc__lab" for="fmMsg" data-t="fm_sc_recado">Message of support</label>
+            <textarea id="fmMsg" name="mensagem" maxlength="140" rows="2" placeholder="uma mensagem para a Francisca"></textarea>
           </div>
           <div class="fm-sc__mais">
-            <button type="button" class="fm-sc__op" id="fmFraseBt" hidden><span aria-hidden="true">+</span> <span data-t="fm_sc_frase">A few words</span></button>
+            <button type="button" class="fm-sc__op" id="fmFraseBt" hidden><span aria-hidden="true">+</span> <span data-t="fm_sc_frase">A message of support</span></button>
             <span class="fm-foto" id="fmFotoC" hidden>
               <input type="file" id="fmFoto" accept="image/*" class="so-leitor" tabindex="-1" />
               <button type="button" class="fm-sc__op" id="fmFotoBt"><span aria-hidden="true">+</span> <span data-t="fm_sc_fotobt">A photo</span></button>
@@ -263,7 +263,7 @@
         <input type="hidden" name="lingua" value="pt" id="fmLingua" />
         <input type="hidden" name="origem" value="" id="fmOrigem" />
         <p class="fm-erro" id="fmErro" role="alert" hidden></p>
-        <p class="fm-sc__x" data-t="fm_sc_x">Your name goes on the flag; your words and photo, on a postcard. The amount is never shown.</p>
+        <p class="fm-sc__x" data-t="fm_sc_x">Your name goes on the flag; your message and photo, on a postcard. The amount is never shown.</p>
         <p class="fm-sc__x" id="fmFotoX" hidden data-t="fm_foto_x">By adding a photo, you confirm you may share it and that everyone in it agrees.</p>
         <ul class="fm-metodos" aria-label="Formas de pagamento"><li>MB WAY</li><li>Apple Pay</li><li>Google Pay</li><li data-t="fm_cartao">Card</li><li>Multibanco</li></ul>
         <p class="fm-seguro" data-t="fm_seguro">Secure payment by Stripe, with an emailed receipt.</p>

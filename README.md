@@ -308,8 +308,8 @@ feito, que é o argumento mais concreto para quem está a pensar entrar.
 A angariação para a viagem ao Junior Orange Bowl: `franciscasalgado.golf/fundme`
 e `/en/fundme` (o `vercel.json` reescreve as duas para o `.html`). Quem apoia
 preenche um cartão de resultados de golfe: escolhe o «buraco» (o valor),
-assina (o nome vai para a bandeira), junta uma frase e uma fotografia se
-quiser, e paga na Stripe com
+assina (o nome vai para a bandeira), junta uma mensagem de apoio e uma
+fotografia se quiser, e paga na Stripe com
 MB WAY, Multibanco, cartão, Apple Pay ou Google Pay. O total, o gráfico dia a
 dia, o recibo da viagem e a bandeira com os nomes atualizam-se sozinhos.
 

@@ -42,7 +42,7 @@ const T = {
     aEntrar: '<strong>Obrigado!</strong> O pagamento está a ser confirmado. Com Multibanco, o apoio aparece aqui quando a referência for paga.',
     fotoDepois: ' A sua fotografia já está num postal.',
     cartao: {
-      nome: 'o seu nome, para a bandeira', frase: 'uma frase para a Francisca',
+      nome: 'o seu nome, para a bandeira', frase: 'uma mensagem para a Francisca',
       bt: 'Entregar o cartão', btS: (v) => `Apoio de ${v}, pago na Stripe`, btSOutro: 'Escreva o valor livre',
     },
     foto: {
@@ -93,7 +93,7 @@ const T = {
     aEntrar: '<strong>Thank you!</strong> Your payment is being confirmed. With Multibanco, it shows here once the reference is paid.',
     fotoDepois: ' Your photo is already on a postcard.',
     cartao: {
-      nome: 'your name, for the flag', frase: 'a few words for Francisca',
+      nome: 'your name, for the flag', frase: 'a message for Francisca',
       bt: 'Hand in the card', btS: (v) => `A ${v} gift, paid via Stripe`, btSOutro: 'Type your amount',
     },
     foto: {
@@ -249,7 +249,7 @@ function formulario(d, l) {
   campo.addEventListener('input', atualizar);
   campo.addEventListener('focus', () => { f.querySelector('input[value="outro"]').checked = true; atualizar(); });
 
-  // a frase: um «+» discreto que abre a linha do recado
+  // a mensagem de apoio: um «+» discreto que abre a linha
   if (!$('fmMsg').value) {
     $('fmFraseC').hidden = true;
     $('fmFraseBt').hidden = false;
@@ -292,7 +292,7 @@ function formulario(d, l) {
       const r = await fetch(f.action, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // quem assina, escreve uma frase ou junta uma fotografia quer aparecer
+        // quem assina, escreve uma mensagem ou junta uma fotografia quer aparecer
         body: JSON.stringify({ ...dadosF, mural: (dadosF.nome || dadosF.mensagem || dadosF.foto) ? '1' : '0' }),
       });
       const j = await r.json().catch(() => ({}));
