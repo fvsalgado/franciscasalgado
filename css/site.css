@@ -2086,6 +2086,14 @@ textarea.fm-ap__campo{resize:vertical;min-height:4.4rem}
   transition:transform .25s var(--curva)}
 @media (hover:hover){.fm-ap__bt:hover{background:#155A3B}.fm-ap__bt:hover .fm-ap__seta{transform:translateX(.2rem)}}
 .fm-ap__bt:active{transform:scale(.99)}
+/* sem valor escolhido: o botão espera, mais apagado, e ao carregar abana o grupo dos valores */
+.fm-ap__bt--espera{background:#7E9A8A;box-shadow:none}
+.fm-ap__bt--espera .fm-ap__seta{background:rgba(255,255,255,.28)}
+@media (hover:hover){.fm-ap__bt--espera:hover{background:#6E8B7B}}
+.fm-ap__vals--falta{animation:fm-abana .45s cubic-bezier(.36,.07,.19,.97)}
+.fm-ap__vals--falta .fm-ap__v{border-color:var(--fm-laranja)}
+@keyframes fm-abana{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+@media (prefers-reduced-motion:reduce){.fm-ap__vals--falta{animation:none}}
 .fm-ap__bt:disabled{cursor:default;opacity:.7}
 .fm-ap__seguro{margin:.75rem 0 0;font-size:.78rem;line-height:1.4;color:var(--fm-fraca);text-align:center;text-wrap:balance}
 .fm-ap__seguro svg{display:inline-block;width:.95rem;height:.95rem;vertical-align:-.17rem;margin-right:.3rem;color:var(--fm-verde)}

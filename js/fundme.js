@@ -27,18 +27,19 @@ const T = {
     apoios: (n, p) => `<b>${n}</b> ${n === 1 ? 'apoio' : 'apoios'} · ${p}%`,
     dias: (n) => (n === 0 ? '<b>embarca hoje</b>' : `faltam <b>${n}</b> ${n === 1 ? 'dia' : 'dias'}`),
     fechado: 'Os apoios abrem em breve',
-    aEnviar: 'A abrir o pagamento…',
+    aEnviar: 'A preparar o seu apoio…',
     erros: {
       valor: 'Escolha um valor entre {min} e {max}.',
+      semValor: 'Escolha primeiro o valor do seu apoio.',
       demasiados: 'Demasiadas tentativas seguidas. Tente outra vez daqui a pouco.',
       fechado: 'A angariação está fechada.',
-      pagamento: 'Os pagamentos ainda não estão ligados.',
+      pagamento: 'Os apoios online ainda não estão ligados.',
       stripe: 'A Stripe não respondeu. Tente outra vez.',
-      indisponivel: 'Não foi possível abrir o pagamento. Tente outra vez.',
+      indisponivel: 'Não foi possível seguir com o apoio. Tente outra vez.',
       rede: 'Sem ligação. Tente outra vez.',
     },
     obrigado: (n) => `<strong>Obrigada${n ? `, ${n}` : ''}!</strong> O seu apoio já conta${n ? ', e o seu nome já está na bandeira' : ''}.`,
-    aEntrar: '<strong>Obrigada!</strong> O pagamento está a ser confirmado. Com Multibanco, o apoio aparece aqui quando a referência for paga.',
+    aEntrar: '<strong>Obrigada!</strong> O seu apoio está a ser confirmado. Com Multibanco, aparece aqui quando a referência for confirmada.',
     fotoDepois: ' A sua fotografia já está num postal.',
     cartao: {
       nome: 'O seu nome', frase: 'Uma mensagem para a Francisca',
@@ -48,7 +49,8 @@ const T = {
       chega: (v) => `Com <b>${v}</b>, a meta fica cumprida.`,
       faltaSo: (f) => `Faltam <b>${f}</b> para a meta.`,
       alem: 'A meta já foi alcançada. Cada apoio a mais dá folga à viagem.',
-      pagar: (lista) => `Pode pagar com ${lista}.`,
+      pagar: (lista) => `Pode apoiar com ${lista}.`,
+      escolha: 'Escolha um valor',
       metodos: { mb_way: 'MB WAY', multibanco: 'Multibanco', card: 'cartão', apple_pay: 'Apple Pay', google_pay: 'Google Pay', paypal: 'PayPal', revolut_pay: 'Revolut Pay' },
     },
     foto: {
@@ -80,18 +82,19 @@ const T = {
     apoios: (n, p) => `<b>${n}</b> ${n === 1 ? 'gift' : 'gifts'} · ${p}%`,
     dias: (n) => (n === 0 ? '<b>flies today</b>' : `<b>${n}</b> ${n === 1 ? 'day' : 'days'} to go`),
     fechado: 'Opening soon',
-    aEnviar: 'Opening the payment…',
+    aEnviar: 'Getting your gift ready…',
     erros: {
       valor: 'Please choose an amount between {min} and {max}.',
+      semValor: 'Please choose the amount of your gift first.',
       demasiados: 'Too many attempts in a row. Please try again shortly.',
       fechado: 'The appeal is closed.',
-      pagamento: 'Payments are not switched on yet.',
+      pagamento: 'Online gifts are not switched on yet.',
       stripe: 'Stripe did not respond. Please try again.',
-      indisponivel: 'The payment could not be opened. Please try again.',
+      indisponivel: 'Your gift could not be started. Please try again.',
       rede: 'No connection. Please try again.',
     },
     obrigado: (n) => `<strong>Thank you${n ? `, ${n}` : ''}!</strong> Your gift already counts${n ? ', and your name is on the flag' : ''}.`,
-    aEntrar: '<strong>Thank you!</strong> Your payment is being confirmed. With Multibanco, it shows here once the reference is paid.',
+    aEntrar: '<strong>Thank you!</strong> Your gift is being confirmed. With Multibanco, it shows here once the reference is confirmed.',
     fotoDepois: ' Your photo is already on a postcard.',
     cartao: {
       nome: 'Your name', frase: 'A message for Francisca',
@@ -101,7 +104,8 @@ const T = {
       chega: (v) => `With <b>${v}</b>, the target is reached.`,
       faltaSo: (f) => `<b>${f}</b> to go.`,
       alem: 'The target has been reached. Every extra gift gives the trip some breathing room.',
-      pagar: (lista) => `You can pay by ${lista}.`,
+      pagar: (lista) => `You can give by ${lista}.`,
+      escolha: 'Choose an amount',
       metodos: { mb_way: 'MB WAY', multibanco: 'Multibanco', card: 'card', apple_pay: 'Apple Pay', google_pay: 'Google Pay', paypal: 'PayPal', revolut_pay: 'Revolut Pay' },
     },
     foto: {
@@ -256,7 +260,8 @@ function formulario(d, l) {
 
   // os valores vêm dos dados; o último botão é sempre o valor livre
   const valores = (d.valores?.length ? d.valores : [25, 50, 150, 300, 500]).slice(0, 5);
-  const inicial = valores.includes(d.valorInicial) ? d.valorInicial : valores[Math.min(2, valores.length - 1)];
+  // nenhum valor vem escolhido: quem apoia escolhe (`valorInicial` nos dados pré-escolhe um, se um dia se quiser)
+  const inicial = valores.includes(d.valorInicial) ? d.valorInicial : null;
   const g = $('fmValores');
   g.querySelectorAll('.fm-ap__v:not(.fm-ap__v--livre)').forEach((c) => c.remove());
   g.querySelector('.fm-ap__v--livre').insertAdjacentHTML('beforebegin', valores.map((v, i) => {
@@ -295,11 +300,16 @@ function formulario(d, l) {
     const eOutro = v === 'outro';
     $('fmOutroC').classList.toggle('fm-outro--on', eOutro);
     const n = eOutro ? Number(campo.value) : Number(v);
-    $('fmBtT').textContent = !d.aberto ? t.fechado : n > 0 ? t.cartao.bt(euros(n, l)) : t.cartao.btOutro;
+    $('fmBtT').textContent = !d.aberto ? t.fechado : n > 0 ? t.cartao.bt(euros(n, l)) : eOutro ? t.cartao.btOutro : t.cartao.escolha;
+    $('fmBt').classList.toggle('fm-ap__bt--espera', d.aberto && !(n > 0));
     efeito(n);
   };
   f.addEventListener('change', (e) => {
-    if (e.target.name === 'valor' && e.target.value === 'outro') campo.focus();
+    if (e.target.name === 'valor') {
+      $('fmErro').hidden = true;
+      g.classList.remove('fm-ap__vals--falta');
+      if (e.target.value === 'outro') campo.focus();
+    }
     atualizar();
   });
   campo.addEventListener('input', atualizar);
@@ -337,6 +347,16 @@ function formulario(d, l) {
     e.preventDefault();
     $('fmErro').hidden = true;
     const dadosF = Object.fromEntries(new FormData(f));
+    if (!dadosF.valor) {
+      erro('semValor');
+      // o grupo dos valores abana, para se ver onde é
+      g.classList.remove('fm-ap__vals--falta');
+      void g.offsetWidth;
+      g.classList.add('fm-ap__vals--falta');
+      g.querySelector('input')?.focus({ preventScroll: true });
+      g.scrollIntoView({ behavior: quieto() ? 'auto' : 'smooth', block: 'center' });
+      return;
+    }
     const v = dadosF.valor === 'outro' ? Number(dadosF.outro) : Number(dadosF.valor);
     if (!(v >= (d.minimo ?? 5) && v <= (d.maximo ?? 5000))) { erro('valor'); campo.focus(); return; }
     bt.disabled = true;

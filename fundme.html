@@ -206,7 +206,7 @@
 
     <!-- o apoio, em três passos que se leem de cima para baixo: o valor (com
          o que ele faz à meta), a assinatura (opcional: nome, mensagem,
-         fotografia) e o pagamento, com os modos que a Stripe tem ligados. -->
+         fotografia) e o fecho do apoio, com os modos que a Stripe tem ligados. -->
     <div class="fm-cartao" id="apoiar">
       <div class="fm-obrigado" id="fmObrigado" hidden></div>
       <form class="fm-form fm-ap" id="fmForm" method="post" action="/api/fundme/apoiar">
@@ -214,7 +214,7 @@
           <img class="fm-ap__eu" src="/img/fundme/francisca-rosto.webp" alt="" width="320" height="320" decoding="async" />
           <div>
             <h2 class="fm-ap__t" data-t="fm_ap_tit">Apoie a Francisca</h2>
-            <p class="fm-ap__s" data-t="fm_ap_sub">Escolha o valor, assine se quiser e pague como preferir.</p>
+            <p class="fm-ap__s" data-t="fm_ap_sub">Escolha o valor, assine se quiser e conclua o seu apoio.</p>
           </div>
         </header>
 
@@ -223,7 +223,7 @@
           <fieldset class="fm-ap__vals" id="fmValores" aria-labelledby="fmValLeg">
             <label class="fm-ap__v"><input type="radio" name="valor" value="25" /><b class="fm-ap__q">25 €</b><small>Par</small></label>
             <label class="fm-ap__v"><input type="radio" name="valor" value="50" /><b class="fm-ap__q">50 €</b><small>Birdie</small></label>
-            <label class="fm-ap__v"><input type="radio" name="valor" value="150" checked /><b class="fm-ap__q">150 €</b><small>Eagle</small></label>
+            <label class="fm-ap__v"><input type="radio" name="valor" value="150" /><b class="fm-ap__q">150 €</b><small>Eagle</small></label>
             <label class="fm-ap__v"><input type="radio" name="valor" value="300" /><b class="fm-ap__q">300 €</b><small data-t="fm_sc_alb">Albatroz</small></label>
             <label class="fm-ap__v"><input type="radio" name="valor" value="500" /><b class="fm-ap__q">500 €</b><small>Hole in one</small></label>
             <label class="fm-ap__v fm-ap__v--livre"><input type="radio" name="valor" value="outro" /><b class="fm-ap__q" data-t="fm_outro">Outro</b><small data-t="fm_ap_livre">valor livre</small></label>
@@ -263,14 +263,14 @@
         </div>
 
         <div class="fm-ap__passo fm-ap__pagar">
-          <p class="fm-ap__n"><span aria-hidden="true">3</span> <b data-t="fm_ap_p3">Pague como preferir</b></p>
+          <p class="fm-ap__n"><span aria-hidden="true">3</span> <b data-t="fm_ap_p3">Conclua o seu apoio</b></p>
           <ul class="fm-ap__met" id="fmMetodos" aria-hidden="true"></ul>
-          <p class="so-leitor" id="fmMetodosT">MB WAY, Multibanco, cartão, Apple Pay ou Google Pay.</p>
+          <p class="so-leitor" id="fmMetodosT">Pode apoiar com MB WAY, Multibanco, cartão, Apple Pay ou Google Pay.</p>
           <button class="fm-ap__bt" type="submit" id="fmBt">
-            <span id="fmBtT" data-t="fm_bt">Apoiar com 150 €</span>
+            <span id="fmBtT" data-t="fm_bt">Escolha um valor</span>
             <span class="fm-ap__seta" aria-hidden="true">→</span>
           </button>
-          <p class="fm-ap__seguro"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M6.5 10.5V8a5.5 5.5 0 0 1 11 0v2.5M5 10.5h14v10H5z"/></svg><span data-t="fm_seguro">Pagamento seguro na Stripe. Recibo por email, sem criar conta.</span></p>
+          <p class="fm-ap__seguro"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M6.5 10.5V8a5.5 5.5 0 0 1 11 0v2.5M5 10.5h14v10H5z"/></svg><span data-t="fm_seguro">Apoio seguro, através da Stripe. Recibo por email, sem criar conta.</span></p>
           <p class="fm-erro" id="fmErro" role="alert" hidden></p>
         </div>
 
@@ -356,8 +356,8 @@
       <div class="fm-perg">
         <details><summary data-t="fm_p1">Quem recebe o dinheiro?</summary><p data-t="fm_p1r">A família da Francisca. Cada euro vai para a viagem e, se sobrar, para as provas da época.</p></details>
         <details><summary data-t="fm_p2">E se passar dos 5.000 €?</summary><p data-t="fm_p2r">O que passar da meta vai para as provas da época, e dizemo-lo nesta página.</p></details>
-        <details><summary data-t="fm_p3">Há recibo?</summary><p data-t="fm_p3r">Sim. A Stripe envia-o por email logo a seguir ao pagamento.</p></details>
-        <details><summary data-t="fm_p4">Posso apoiar sem pagar online?</summary><p data-t="fm_p4r">Sim: no clube, no dia do evento, ou por transferência. Escreva para birdie@franciscasalgado.golf.</p></details>
+        <details><summary data-t="fm_p3">Há recibo?</summary><p data-t="fm_p3r">Sim. A Stripe envia-o por email logo a seguir ao apoio.</p></details>
+        <details><summary data-t="fm_p4">Posso apoiar sem ser online?</summary><p data-t="fm_p4r">Sim: no clube, no dia do evento, ou por transferência. Escreva para birdie@franciscasalgado.golf.</p></details>
       </div>
     </div>
   </div>
