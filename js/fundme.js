@@ -586,7 +586,7 @@ const unicos = (mural) => {
 /** A bandeira desenhada em SVG, com os nomes escritos como assinaturas. A
  *  largura decide quantos cabem por linha; o pano cresce para baixo com o
  *  número de linhas. `ondula` põe o pano a mexer (o ecrã da clubhouse). */
-export function bandeiraSVG(nomes, { W = 640, letra = 20, max = 80, ondula = false } = {}) {
+export function bandeiraSVG(nomes, { W = 640, letra = 20, max = 80, ondula = false, convite = false } = {}) {
   const x0 = 54;
   const larg = W - x0 - 34;
   const passo = letra * 1.7;
@@ -629,6 +629,7 @@ export function bandeiraSVG(nomes, { W = 640, letra = 20, max = 80, ondula = fal
     <text x="${x0 + larg / 2}" y="98" text-anchor="middle" class="fm-flag__clube">Vale de Janelas</text>
     <text x="${x0 + larg / 2}" y="121" text-anchor="middle" class="fm-flag__sub">ROAD TO THE ORANGE BOWL · 2027</text>
     <g class="fm-flag__nomes">${txt}</g>
+    ${convite ? `<g class="fm-flag__convite"><text x="${x0 + larg / 2}" y="${yNomes + 28}" text-anchor="middle">O primeiro nome fica aqui</text><text x="${x0 + larg / 2}" y="${yNomes + 56}" text-anchor="middle" class="fm-flag__convite-en">Your name here</text><line x1="${x0 + larg * 0.22}" x2="${x0 + larg * 0.78}" y1="${yNomes + 38}" y2="${yNomes + 38}"/></g>` : ''}
     <ellipse cx="${x0 - 4}" cy="${H - 8}" rx="64" ry="7" class="fm-flag__chao"/>
   </svg>`;
 }
@@ -650,11 +651,12 @@ function bandeira(d, l) {
 
 const SELO = '<svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M8 20.2V3.6l9.2 3.3L8 10.2"/></svg>';
 
-const postal = (m, l, i) => {
+const postal = (m, l, i, duas = false) => {
   const t = T[l];
   const hoje = diaLisboa();
   const carimbo = dataCurta(m.dia, l).toUpperCase();
-  const quando = m.origem === 'clube' ? t.noClube : t.quando(Math.max(0, diasEntre(m.dia, hoje)));
+  const quandoEm = (x) => (m.origem === 'clube' ? T[x].noClube : T[x].quando(Math.max(0, diasEntre(m.dia, hoje))));
+  const quando = quandoEm(l);
   const msg = tx(m.mensagem, l);
   // a fotografia vem presa ao postal, como uma polaroide (sem crédito: é de quem apoia)
   const foto = m.foto
@@ -665,7 +667,7 @@ const postal = (m, l, i) => {
     <span class="fm-postal__carimbo" aria-hidden="true">${esc(carimbo)}</span>
     ${foto}
     ${msg ? `<p class="fm-postal__t">${esc(msg)}</p>` : `<p class="fm-postal__t fm-postal__t--so">${esc(m.nome ? t.comFoto(m.nome) : t.anonimo)}</p>`}
-    <p class="fm-postal__q"><b>${esc(m.nome || t.anonimo)}</b><span>${esc(quando)}</span></p>
+    <p class="fm-postal__q"><b>${duas && !m.nome ? bi(T.pt.anonimo, T.en.anonimo) : esc(m.nome || t.anonimo)}</b><span>${duas ? bi(esc(quandoEm('pt')), esc(quandoEm('en'))) : esc(quando)}</span></p>
   </li>`;
 };
 
@@ -728,7 +730,7 @@ function bolas(caixa, x, y, n = 26) {
 /** Um apoio sem nome: uma faixa no topo, com o valor (não diz de quem é). */
 function festa(valor) {
   const caixa = $('fmEcraFesta');
-  caixa.innerHTML = `<div class="fm-festa__faixa"><b>+${euros(valor, 'pt')}</b> Novo apoio · New gift · Obrigado!</div>`;
+  caixa.innerHTML = `<div class="fm-festa__faixa"><b>+${euros(valor, 'pt')}</b> ${bi('Novo apoio · Obrigado!', 'New gift · Thank you!')}</div>`;
   bolas(caixa, '30vw', '62vh');
   caixa.classList.remove('fm-festa--on');
   void caixa.offsetWidth;
@@ -754,30 +756,38 @@ function letras(texto) {
 }
 
 function destacar(m) {
+  // muitos de seguida: um apoio só com nome deixa de ter momento próprio
+  // (o nome já entrou na bandeira), para a fila não ficar para trás
+  if (m.marco === undefined && fila.length >= 2 && !m.foto && !tx(m.mensagem, 'pt')) return;
   fila.push(m);
   if (!emDestaque) proximoDestaque();
 }
+
+/** Com gente à espera, cada momento dura menos. */
+const pressa = () => (fila.length >= 3 ? 0.5 : fila.length >= 1 ? 0.7 : 1);
 
 async function proximoDestaque() {
   const caixa = $('fmEcraDestaque');
   const m = fila.shift();
   if (!m) { emDestaque = false; caixa.className = 'fm-destaque'; return; }
   emDestaque = true;
-  const msg = tx(m.mensagem, 'pt');
+  if (m.marco !== undefined) { marco(caixa, m); return; }
+  const en = linguaEcra() === 'en';
+  const msg = tx(m.mensagem, en ? 'en' : 'pt');
   const tipo = m.foto ? 'foto' : msg ? 'msg' : 'nome';
-  const texto = msg || `Obrigado, ${m.nome}!`;
+  const texto = msg || (en ? `Thank you, ${m.nome}!` : `Obrigado, ${m.nome}!`);
   const passo = Math.max(14, Math.min(55, 1900 / texto.length));
   caixa.innerHTML = `<div class="fm-destaque__fundo"></div>
     <div class="fm-destaque__palco">
-      <p class="fm-destaque__r">Acabou de chegar · Just in</p>
+      <p class="fm-destaque__r">${en ? 'Just in' : 'Acabou de chegar'}</p>
       <div class="fm-destaque__par">
         ${m.foto ? `<figure class="fm-destaque__foto"><img src="${esc(m.foto)}" alt="" data-credito-feito="1" /></figure>` : ''}
         <article class="fm-destaque__postal fm-destaque__postal--${tipo}" style="--passo:${passo.toFixed(0)}ms">
           <span class="fm-destaque__selo" aria-hidden="true">${SELO}</span>
           <span class="fm-destaque__carimbo" aria-hidden="true">Novo apoio<br />New gift</span>
           <p class="fm-destaque__t">${letras(texto)}</p>
-          ${msg ? `<p class="fm-destaque__q"><b>${esc(m.nome || 'Anónimo')}</b><span>Rumo à Florida · 2027</span></p>`
-            : `<p class="fm-destaque__q"><span>O nome já está na bandeira · Now on the flag</span></p>`}
+          ${msg ? `<p class="fm-destaque__q"><b>${esc(m.nome || (en ? 'Anonymous' : 'Anónimo'))}</b><span>${en ? 'Road to Florida' : 'Rumo à Florida'} · 2027</span></p>`
+            : `<p class="fm-destaque__q"><span>${en ? 'Their name is now on the flag' : 'O nome já está na bandeira'}</span></p>`}
         </article>
       </div>
     </div>`;
@@ -787,12 +797,113 @@ async function proximoDestaque() {
   caixa.className = 'fm-destaque';
   void caixa.offsetWidth;
   caixa.classList.add('fm-destaque--on');
-  setTimeout(() => bolas(caixa, '50vw', '58vh', 34), 900);
-  const dura = { foto: 11000, msg: 9000, nome: 6500 }[tipo] + (msg ? Math.min(3000, msg.length * 18) : 0);
+  setTimeout(() => bolas(caixa, '50vw', '58vh', 24 + faseAtual * 8), 900);
+  const dura = ({ foto: 11000, msg: 9000, nome: 6500 }[tipo] + (msg ? Math.min(3000, msg.length * 18) : 0)) * pressa();
   setTimeout(() => {
     caixa.classList.add('fm-destaque--sai');
     setTimeout(proximoDestaque, 1000);
   }, dura);
+}
+
+/* ── a viagem em fases ──────────────────────────────────────
+ * O ecrã muda com o total, como uma viagem: na pista (sem apoios, tudo a
+ * convidar), descolagem, cruzeiro, sobre o Atlântico, Miami à vista e
+ * aterragem na meta. Cada fase tem o seu céu (data-fase no #fmEcra, as cores
+ * no CSS) e mais movimento do que a anterior; passar de fase tem um momento
+ * em grande. */
+
+const FASES = [
+  { pt: 'Na pista · à espera do primeiro apoio', en: 'On the runway · waiting for the first gift', marco: '' },
+  { pt: 'Descolagem', en: 'Take-off', marco: 'Descolámos!', marcoEn: 'We have take-off!' },
+  { pt: 'Velocidade de cruzeiro', en: 'Cruising', marco: 'Um quarto do caminho!', marcoEn: 'A quarter of the way!' },
+  { pt: 'Sobre o Atlântico', en: 'Over the Atlantic', marco: 'A meio do Atlântico', marcoEn: 'Halfway across the Atlantic' },
+  { pt: 'Miami à vista', en: 'Miami in sight', marco: 'Miami à vista!', marcoEn: 'Miami in sight!' },
+  { pt: 'Aterrámos em Miami!', en: 'Landed in Miami!', marco: 'Aterrámos!', marcoEn: 'We made it!' },
+];
+const faseDe = (total, meta, apoios) => {
+  if (!apoios || total <= 0) return 0;
+  const p = total / meta;
+  return p >= 1 ? 5 : p >= 0.75 ? 4 : p >= 0.5 ? 3 : p >= 0.25 ? 2 : 1;
+};
+let faseAtual = 0;
+
+const acaso = (a, b) => a + Math.random() * (b - a);
+
+/* O ecrã fala as duas línguas, uma de cada vez: cada texto tem as duas
+ * versões sobrepostas e o ecrã troca de uma para a outra num esbatido lento,
+ * de 12 em 12 segundos. Os momentos em grande saem na língua do momento. */
+const bi = (pt, en) => `<span class="fm-bi"><span lang="pt">${pt}</span><span lang="en">${en}</span></span>`;
+const linguaEcra = () => ($('fmEcra')?.classList.contains('fm-ecra--en') ? 'en' : 'pt');
+function linguas() {
+  setInterval(() => $('fmEcra').classList.toggle('fm-ecra--en'), 12000);
+}
+
+/** O céu de cada fase: nuvens a passar (o avião anda), estrelas, confettis. */
+function ceu(fase) {
+  const calmo = quieto();
+  const nuvens = [1, 3, 5, 6, 5, 3][fase];
+  const dur = [110, 80, 55, 42, 48, 70][fase];
+  $('fmEcraNuvens').innerHTML = calmo ? '' : Array.from({ length: nuvens }, (_, i) =>
+    `<i class="fm-nuvem" style="--y:${acaso(4, 60).toFixed(1)}vh;--s:${acaso(0.6, 1.5).toFixed(2)};--dur:${(dur * acaso(0.8, 1.25)).toFixed(0)}s;--atraso:-${(dur * i / nuvens + acaso(0, 8)).toFixed(0)}s;--o:${acaso(0.08, 0.2).toFixed(2)}"></i>`).join('');
+  const estrelas = [0, 0, 0, 34, 50, 70][fase];
+  $('fmEcraEstrelas').innerHTML = calmo ? '' : Array.from({ length: estrelas }, () =>
+    `<i style="left:${acaso(0, 100).toFixed(1)}vw;top:${acaso(0, 75).toFixed(1)}vh;--t:${acaso(0.5, 1.6).toFixed(2)};--d:${acaso(2, 5).toFixed(1)}s;--a:-${acaso(0, 5).toFixed(1)}s"></i>`).join('');
+  const cores = ['#F7F5EE', '#8FD9AE', '#F28C28', '#FFB347', '#1B6B47'];
+  $('fmEcraConfettis').innerHTML = calmo || fase < 5 ? '' : Array.from({ length: 70 }, (_, i) =>
+    `<i class="${i % 4 ? 'fm-conf' : 'fm-conf fm-conf--bola'}" style="left:${acaso(0, 100).toFixed(1)}vw;--c:${cores[i % cores.length]};--dur:${acaso(6, 12).toFixed(1)}s;--atraso:-${acaso(0, 12).toFixed(1)}s;--r:${acaso(-360, 360).toFixed(0)}deg;--x:${acaso(-8, 8).toFixed(1)}vw"></i>`).join('');
+}
+
+/** Os convites de quando ainda há pouco: o texto debaixo do QR vai mudando. */
+const CONVITES = [
+  bi('Aponte a câmara', 'Point your camera'),
+  bi('Escolha o seu buraco', 'Pick your hole'),
+  bi('Assine a bandeira', 'Sign the flag'),
+  bi('Deixe uma mensagem', 'Leave a message'),
+];
+function convites() {
+  let n = 0;
+  setInterval(() => {
+    const el = $('fmEcraCta');
+    n = (n + 1) % CONVITES.length;
+    el.classList.add('fm-ecra__cta--sai');
+    setTimeout(() => { el.innerHTML = CONVITES[n]; el.classList.remove('fm-ecra__cta--sai'); }, 450);
+  }, 4500);
+}
+
+/** Postais por escrever, para a fita não ficar vazia antes da primeira mensagem. */
+const POR_ESCREVER = [
+  { t: ['A primeira mensagem pode ser a sua.', 'The first message could be yours.'], q: ['Aponte a câmara ao QR', 'Point your camera at the QR'] },
+  { t: ['Deixe uma mensagem para a viagem.', 'Leave Francisca a message for the trip.'], q: ['Mensagem de apoio', 'Message of support'] },
+  { t: ['Junte uma fotografia consigo, ou com ela.', 'Add a photo of you, or with her.'], q: ['Uma fotografia', 'A photo'] },
+  { t: ['O seu nome vai na bandeira para a Florida.', 'Your name goes on the flag to Florida.'], q: ['Assine a bandeira', 'Sign the flag'] },
+];
+const postalVazio = (p, i) => `<li class="fm-postal fm-postal--vazio" style="--r:${[-2, 1.5, -1, 2][i % 4]}deg">
+    <span class="fm-postal__selo" aria-hidden="true">${SELO}</span>
+    <p class="fm-postal__t">${bi(esc(p.t[0]), esc(p.t[1]))}</p>
+    <p class="fm-postal__q"><b>${bi(esc(p.q[0]), esc(p.q[1]))}</b><span>✎</span></p>
+  </li>`;
+
+/** O momento de passar de fase: o avião atravessa o ecrã e a fase em grande. */
+function marco(caixa, m) {
+  const f = FASES[m.marco];
+  const en = linguaEcra() === 'en';
+  const pct = m.marco >= 5 ? '100' : String([0, 0, 25, 50, 75][m.marco] || '');
+  const falta = en ? `<b>${euros(m.falta, 'en')}</b> to go` : `Faltam <b>${euros(m.falta, 'pt')}</b>`;
+  caixa.innerHTML = `<div class="fm-destaque__fundo"></div>
+    <div class="fm-marco">
+      <span class="fm-marco__av" aria-hidden="true">${AVIAO}</span>
+      ${m.marco > 1 ? `<p class="fm-marco__p">${pct}<small>%</small></p>` : ''}
+      <p class="fm-marco__t d">${esc(en ? f.marcoEn : f.marco)}</p>
+      <p class="fm-marco__f">${m.falta > 0 ? falta : en ? 'Thank you, everyone' : 'Obrigado a todos'}</p>
+    </div>`;
+  caixa.className = 'fm-destaque fm-destaque--marco';
+  void caixa.offsetWidth;
+  caixa.classList.add('fm-destaque--on');
+  setTimeout(() => bolas(caixa, '50vw', '55vh', 30 + m.marco * 10), 700);
+  setTimeout(() => {
+    caixa.classList.add('fm-destaque--sai');
+    setTimeout(proximoDestaque, 1000);
+  }, (m.marco >= 5 ? 12000 : 8000) * pressa());
 }
 
 let ecraAntes = null;
@@ -800,48 +911,110 @@ function ecra(d) {
   const total = d.total ?? 0;
   const p = Math.min(100, (total / d.meta) * 100);
   const mural = d.mural ?? [];
+  const fase = faseDe(total, d.meta, d.apoios);
   const antes = ecraAntes;
   ecraAntes = {
     total,
+    fase,
     nomes: unicos(mural).join('|'),
     ids: new Set(mural.map((m) => m.id)),
     fotos: new Set(mural.filter((m) => m.foto).map((m) => m.id)),
   };
 
+  // a fase: o céu e o movimento
+  const caixaEcra = $('fmEcra');
+  if (!antes || antes.fase !== fase) {
+    faseAtual = fase;
+    caixaEcra.dataset.fase = String(fase);
+    ceu(fase);
+  }
+  $('fmEcraFase').innerHTML = `<b>${bi(esc(FASES[fase].pt), esc(FASES[fase].en))}</b>`;
+
   contar($('fmEcraTotal'), antes ? antes.total : 0, total, antes ? 2200 : 2600);
-  $('fmEcraMeta').innerHTML = `de ${euros(d.meta, 'pt')}<br />of ${euros(d.meta, 'en')}`;
+  $('fmEcraMeta').innerHTML = bi(`de ${euros(d.meta, 'pt')}`, `of ${euros(d.meta, 'en')}`);
   $('fmEcraFeito').style.width = `${p}%`;
   $('fmEcraAviao').style.left = `${p}%`;
   const faltam = d.partida ? diasEntre(diaLisboa(), d.partida) : -1;
   $('fmEcraInfo').innerHTML = [
-    `<span><b>${d.apoios ?? 0}</b> apoios · gifts</span>`,
-    d.hoje ? `<span><b>+${euros(d.hoje, 'pt')}</b> hoje · today</span>` : '',
-    faltam >= 0 ? `<span><b>${faltam}</b> dias · days to go</span>` : '',
+    `<span><b>${d.apoios ?? 0}</b> ${bi(d.apoios === 1 ? 'apoio' : 'apoios', d.apoios === 1 ? 'gift' : 'gifts')}</span>`,
+    d.hoje ? `<span><b>+${euros(d.hoje, 'pt')}</b> ${bi('hoje', 'today')}</span>` : '',
+    faltam >= 0 ? `<span><b>${faltam}</b> ${bi(faltam === 1 ? 'dia' : 'dias', faltam === 1 ? 'day to go' : 'days to go')}</span>` : '',
   ].join('');
 
   // a bandeira só se redesenha quando entra um nome novo
   const nomes = unicos(mural);
   if (!antes || antes.nomes !== ecraAntes.nomes) {
-    $('fmEcraBandeira').innerHTML = bandeiraSVG(nomes, { W: 620, letra: 22, max: 60, ondula: true });
+    $('fmEcraBandeira').innerHTML = bandeiraSVG(nomes, { W: 620, letra: 22, max: 60, ondula: true, convite: !nomes.length });
   }
 
-  // os postais a passar, numa fita sem fim (a lista vai duas vezes)
+  // os postais a passar, numa fita sem fim (a lista vai duas vezes); sem
+  // mensagens ainda, passam postais por escrever, a convidar
   const msgs = mural.filter((m) => tx(m.mensagem, 'pt') || m.foto).slice(0, 14);
   const fita = $('fmEcraFita');
-  const chave = msgs.map((m) => `${m.id}${m.foto ? 'f' : ''}`).join('|');
+  const chave = msgs.length ? msgs.map((m) => `${m.id}${m.foto ? 'f' : ''}`).join('|') : 'vazio';
   if (fita.dataset.chave !== chave) {
     fita.dataset.chave = chave;
-    const um = msgs.map((m, i) => postal(m, 'pt', i)).join('');
-    fita.innerHTML = msgs.length ? `<ul>${um}</ul><ul aria-hidden="true">${um}</ul>` : '';
-    fita.style.setProperty('--dur', `${Math.max(30, msgs.length * 7)}s`);
+    const um = msgs.length ? msgs.map((m, i) => postal(m, 'pt', i, true)).join('') : POR_ESCREVER.map(postalVazio).join('');
+    fita.innerHTML = `<ul>${um}</ul><ul aria-hidden="true">${um}</ul>`;
+    // a fita anda mais depressa à medida que a viagem avança
+    fita.style.setProperty('--dur', `${Math.max(26, (msgs.length || 4) * [9, 8, 7, 6, 6, 5][fase])}s`);
   }
 
   if (!antes) return;
-  // quem entrou agora no mural, e as fotografias que acabaram de ser aprovadas
+  // quem entrou agora no mural, e as fotografias que acabaram de aparecer
   const novos = mural.filter((m) => !antes.ids.has(m.id));
   const fotosNovas = mural.filter((m) => m.foto && antes.ids.has(m.id) && !antes.fotos.has(m.id));
   [...novos, ...fotosNovas].reverse().forEach(destacar);
   if (total > antes.total && !novos.length) festa(total - antes.total);
+  // passar de fase: depois dos postais, o momento da fase nova
+  if (fase > antes.fase) destacar({ marco: fase, falta: Math.max(0, d.meta - total) });
+}
+
+/* ── o modo de demonstração (?ecra&demo) ─────────────────────
+ * Para ver o ecrã a crescer sem apoios a sério: simula uma noite de Roll Up,
+ * do zero à meta, e recomeça. `?ecra&demo=6` muda o intervalo (segundos). */
+const DEMO = [
+  { nome: 'Rita M.', mensagem: 'Vai com tudo, Francisca!', foto: '/img/retrato.webp', valor: 150 },
+  { nome: 'Joana P.', valor: 50 },
+  { valor: 25 },
+  { nome: 'Grupo de quarta-feira', mensagem: 'Do Vale de Janelas para a Florida.', valor: 640 },
+  { nome: 'Peter & Claire', mensagem: 'Go get them, Francisca! The whole Wednesday group is behind you.', valor: 300 },
+  { nome: 'Avó Lena', mensagem: 'Já tens a mala feita?', valor: 500 },
+  { valor: 1000 },
+  { nome: 'Duarte', valor: 150 },
+  { nome: 'Luísa F.', mensagem: 'Que orgulho! Traz a bandeira de volta cheia de histórias.', valor: 300 },
+  { valor: 1500 },
+  { nome: 'Teresa C.', mensagem: 'Biltmore, here she comes.', valor: 500 },
+];
+function demo(d, passo) {
+  $('fmEcraDemo').hidden = false;
+  const vazio = () => ({ ...d, total: 0, apoios: 0, hoje: 0, mural: [] });
+  let estado = vazio();
+  let i = 0;
+  ecra(estado);
+  const seguinte = () => {
+    if (i >= DEMO.length) {
+      // a meta foi atingida: uns segundos de festa, e volta ao início
+      i = 0;
+      estado = vazio();
+      fila.length = 0;
+      ecraAntes = null;
+      ecra(estado);
+      setTimeout(seguinte, passo * 1000);
+      return;
+    }
+    const e = DEMO[i++];
+    estado = {
+      ...estado,
+      total: estado.total + e.valor,
+      apoios: estado.apoios + 1,
+      hoje: estado.hoje + e.valor,
+      mural: e.nome || e.mensagem ? [{ id: `demo${i}`, nome: e.nome ?? null, mensagem: e.mensagem ?? null, foto: e.foto ?? null, dia: diaLisboa(), origem: 'online' }, ...estado.mural] : estado.mural,
+    };
+    ecra(estado);
+    setTimeout(seguinte, (i >= DEMO.length ? 45 : passo) * 1000);
+  };
+  setTimeout(seguinte, passo * 1000);
 }
 
 /* ── tudo ─────────────────────────────────────────────────── */
@@ -853,6 +1026,10 @@ export async function fundme(l) {
 
   if (noEcra) {
     $('fmEcra').hidden = false;
+    convites();
+    linguas();
+    const q = new URLSearchParams(location.search);
+    if (q.has('demo')) { demo(d, Math.max(3, Number(q.get('demo')) || 12)); return; }
     ecra(d);
     setInterval(async () => { const n = await carregar(); if (n) ecra(n); }, 20000);
     return;

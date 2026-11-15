@@ -370,15 +370,31 @@ sozinha, para o dia do evento.
 
 ### O ecrã da clubhouse e os QR codes
 
-`franciscasalgado.golf/fundme?ecra` é a página para o ecrã grande, em 16:9:
-o avião a voar de Lisboa para Miami à medida do total, o total a contar, a
-bandeira com os nomes, os postais a passar em fita, uma fotografia da Francisca
-e o QR code. Atualiza-se de 20 em 20 segundos; quando entra um apoio novo, há
-uma chuva de bolas de golfe e, se a pessoa deixou nome, mensagem ou
-fotografia, o ecrã escurece e o postal dela entra em grande no meio, com a
-fotografia ao lado e a mensagem a escrever-se letra a letra, durante uns dez
-segundos (vários seguidos fazem fila). Um apoio sem nome dá só uma faixa com o
-valor; o valor nunca aparece ao lado de um nome.
+`franciscasalgado.golf/fundme?ecra` é a página para o ecrã grande (16:9, e
+também ao alto, num ecrã vertical ou num telemóvel). Mostra:
+- o avião a voar de Lisboa para Miami à medida do total, e o total a contar;
+- a bandeira com os nomes e os postais a passar em fita;
+- uma fotografia da Francisca e o QR code.
+
+Atualiza-se de 20 em 20 segundos. Fala português e inglês, uma língua de
+cada vez, e troca num esbatido lento de 12 em 12 segundos.
+
+**A viagem em fases.** O ambiente cresce com o total:
+- **na pista** (sem apoios): luzes de pista, o avião a trepidar, postais e
+  bandeira por escrever a convidar, o QR a chamar;
+- **descolagem**, **cruzeiro** (25%), **sobre o Atlântico** (50%, com mar e
+  estrelas) e **Miami à vista** (75%, pôr do sol e palmeiras);
+- **aterrámos** (100%, confettis).
+
+Cada passagem de fase tem um momento em grande. Um apoio com nome, mensagem
+ou fotografia entra em grande no meio do ecrã; vários seguidos fazem fila, e
+encurtam. Um apoio sem nome dá só uma faixa com o valor; o valor nunca aparece
+ao lado de um nome.
+
+**Demonstração.** `?ecra&demo` simula apoios a chegar, do zero à meta, e
+recomeça; `?ecra&demo=6` muda o intervalo, em segundos. Diz «Demonstração» no
+canto, para ninguém se enganar.
+
 Abrir no browser do ecrã em ecrã inteiro (F11). O QR
 (`img/fundme/qr-ecra.svg`) leva a `/fundme?o=ecra`; o `o=` segue para os
 metadados do pagamento, para se saber de onde veio cada apoio.
