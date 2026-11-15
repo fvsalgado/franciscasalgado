@@ -315,7 +315,7 @@ segue um cartão de três passos numerados: **1** escolhe o valor (seis botões
 grandes, cada um com o seu nome de golfe, e uma barra que mostra o que aquele
 apoio faz à meta), **2** assina, se quiser (o nome vai para a bandeira; uma
 mensagem de apoio e uma fotografia são botões à parte), **3** vê com que pode
-pagar e carrega em «Apoiar com 150 €». O pagamento é na Stripe. O total, a
+apoiar e carrega em «Apoiar com 50 €» (o valor que escolheu: nenhum vem pré-escolhido). O apoio fecha-se na Stripe. O total, a
 volta de 18 buracos, o gráfico dia a dia e a bandeira com os nomes
 atualizam-se sozinhos.
 
@@ -381,7 +381,7 @@ pagamento. As contas estão em `api/fundme/_comum.js`, separadas da rede.
 |---|---|
 | `aberto` | `false` fecha o botão, sem mexer em mais nada |
 | `meta`, `inicio`, `partida` | a meta em euros, o primeiro dia do gráfico e o dia da partida (a contagem «faltam N dias») |
-| `valores`, `valorInicial`, `minimo`, `maximo` | os botões de valor (até cinco, mais «Outro») e os limites de um apoio |
+| `valores`, `valorInicial`, `minimo`, `maximo` | os botões de valor (até cinco, mais «Outro») e os limites de um apoio. `valorInicial: null` — nenhum vem escolhido, é quem apoia que escolhe (decisão da família); um número pré-escolhe esse |
 | `pagamentos` | a lista de reserva dos modos de pagamento, só para quando a Stripe não responder (ver acima) |
 | `fotos` | `aceitar: false` tira o campo da fotografia; `aprovar: true` faz cada fotografia esperar por aprovação em `/fundme/gerir` (como está, `false`, aparecem logo) |
 | `evento` | `mostrar`, a `data` (`"2026-12-02"`, ou `null` para «a anunciar»), o `local` e as `coordenadas` (para o tempo no ecrã). Com data, o dia fica marcado no gráfico |
