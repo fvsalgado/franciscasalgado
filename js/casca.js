@@ -210,13 +210,21 @@ export function tema() {
   const raiz = document.documentElement;
   let guardado = null;
   try { guardado = localStorage.getItem('fs-tema'); } catch { /* modo privado */ }
-  /* Escuro por omissão — decisão do tutor. A preferência do sistema deixa de
-     mandar no primeiro contacto; quem preferir claro carrega uma vez e fica
-     guardado. */
-  raiz.dataset.tema = guardado || 'escuro';
+  /* Claro por omissão — decisão da família, a 15 nov 2026 (antes era o
+     escuro). A preferência do sistema não manda: quem quiser o escuro carrega
+     uma vez e fica guardado.
+
+     O tema escreve-se primeiro no HTML (`data-tema="claro"`) e é um pequeno
+     script no <head> de cada página que aplica a escolha guardada, antes do
+     primeiro desenho. Aqui só se confirma. Quando o HTML dizia «escuro» e era
+     este módulo a trocar para claro, a troca chegava depois do primeiro
+     desenho: em cada mudança de página, a página inteira piscava a escuro. */
+  raiz.dataset.tema = guardado === 'escuro' ? 'escuro' : 'claro';
 
   const pintar = () => {
     const escuro = raiz.dataset.tema === 'escuro';
+    // a barra do navegador acompanha o tema escolhido, e não o do sistema
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', escuro ? '#091411' : '#F7F5EE');
     const cx = document.getElementById('btTemaI');
     if (cx) cx.innerHTML = icone(escuro ? 'sol' : 'lua', 'ic');
     document.getElementById('btTema')?.setAttribute('aria-pressed', String(escuro));
