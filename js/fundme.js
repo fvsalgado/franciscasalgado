@@ -1612,10 +1612,12 @@ function ecra(d) {
   contarPlacas($('fmEcraTotal'), antes ? antes.total : 0, total, antes ? 2200 : 2600);
   $('fmEcraMeta').innerHTML = bi(`de ${euros(d.meta, 'pt')}`, `of ${euros(d.meta, 'en')}`);
   const faltam = d.partida ? diasEntre(diaLisboa(), d.partida) : -1;
+  const parte = d.meta > 0 ? total / d.meta : 0;
   $('fmEcraInfo').innerHTML = [
-    `<span><b>${d.apoios ?? 0}</b> ${bi(d.apoios === 1 ? 'apoio' : 'apoios', d.apoios === 1 ? 'gift' : 'gifts')}</span>`,
-    d.hoje ? `<span><b>+${euros(d.hoje, 'pt')}</b> ${bi('hoje', 'today')}</span>` : '',
-    faltam >= 0 ? `<span><b>${faltam}</b> ${bi(faltam === 1 ? 'dia para partir' : 'dias para partir', faltam === 1 ? 'day to go' : 'days to go')}</span>` : '',
+    `<div class="fm-num fm-num--meta"><b>${Math.round(parte * 100)}%</b><small>${bi('da meta', 'of the target')}</small><span class="fm-num__barra"><i style="width:${(Math.min(1, parte) * 100).toFixed(1)}%"></i></span></div>`,
+    `<div class="fm-num"><b>${d.apoios ?? 0}</b><small>${bi(d.apoios === 1 ? 'apoio' : 'apoios', d.apoios === 1 ? 'gift' : 'gifts')}</small></div>`,
+    `<div class="fm-num${d.hoje ? ' fm-num--hoje' : ''}"><b>${d.hoje ? `+${euros(d.hoje, 'pt')}` : euros(0, 'pt')}</b><small>${bi('hoje', 'today')}</small></div>`,
+    faltam >= 0 ? `<div class="fm-num"><b>${faltam}</b><small>${bi(faltam === 1 ? 'dia para partir' : 'dias para partir', faltam === 1 ? 'day to go' : 'days to go')}</small></div>` : '',
   ].join('');
   $('fmEcraBuracos').innerHTML = buracos(total, d.meta);
 
