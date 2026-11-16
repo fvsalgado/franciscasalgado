@@ -423,11 +423,12 @@ pagamento. As contas estão em `api/fundme/_comum.js`, separadas da rede.
 | `meta`, `inicio`, `partida` | a meta em euros, o primeiro dia do gráfico e o dia da partida (a contagem «faltam N dias») |
 | `valores`, `valorInicial`, `minimo`, `maximo` | os botões de valor (até cinco, mais «Outro») e os limites de um apoio. `valorInicial: null` — nenhum vem escolhido, é quem apoia que escolhe (decisão da família); um número pré-escolhe esse |
 | `pagamentos` | a lista de reserva dos modos de pagamento, só para quando a Stripe não responder (ver acima) |
-| `fotos` | `aceitar: false` tira o campo da fotografia; `aprovar: true` faz cada fotografia esperar por aprovação em `/fundme/gerir` (como está, `false`, aparecem logo) |
+| `fotos` | `aceitar: false` tira o campo da fotografia; `aprovar: true` (como está) faz cada fotografia esperar por aprovação em `/fundme/gerir`; com `false`, aparecem logo |
+| `mural` | `aprovar: true` (como está) faz o nome e a mensagem de cada apoio esperarem por aprovação em `/fundme/gerir`; com `false`, aparecem logo. O total e o número de apoios contam sempre |
 | `evento` | `mostrar`, a `data` (`"2026-12-02"`, ou `null` para «a anunciar»), o `local` e as `coordenadas` (para o tempo no ecrã). Com data, o dia fica marcado no gráfico |
 | `manuais` | o que não passa pela Stripe: `{ "data": "2026-12-02", "valor": 640, "origem": "clube", "nome": "Grupo de quarta-feira", "mensagem": { "pt": "…", "en": "…" } }`. `origem` é `clube` ou `empresas` (Fundação do Desporto). Com `nome`, fica escrito na bandeira; com `mensagem`, aparece num postal; com `foto` (um caminho em `/img/…`), o postal leva a fotografia; `"mural": false` tira-o dos dois |
 | `excluir` | ids de sessões (`cs_…`) que não contam para o total: um reembolso, um teste |
-| `ocultar` | ids que saem da bandeira e dos postais mas continuam a contar: uma mensagem que não deve ficar à vista |
+| `ocultar` | ids que saem da bandeira e dos postais mas continuam a contar. Já não é preciso para esconder um apoio: faz-se em `/fundme/gerir`, com «Não mostrar» |
 
 ### As fotografias e /fundme/gerir
 
@@ -435,14 +436,36 @@ Quem apoia pode juntar uma fotografia (sua, ou com a Francisca), no próprio
 cartão. A página reduz-na no telemóvel (1600 px, JPEG, sem a localização) e
 manda-a para `api/fundme/foto.js`, que a guarda no Blob em
 `fundme/pendentes/`; o endereço segue com o pagamento, nos metadados da
-Stripe. Aparece logo com o postal, na página e no ecrã do clube.
+Stripe.
+
+**Nada do que quem apoia escreve ou junta aparece antes de a família o ver**
+(decisão de 16 de novembro de 2026: `mural.aprovar` e `fotos.aprovar` a
+`true`). O dinheiro conta logo, no total e no número de apoios; o nome, a
+mensagem e a fotografia ficam à espera, e o `/api/fundme` não os devolve —
+não é a página que os esconde.
 
 `franciscasalgado.golf/fundme/gerir` (com a `FUNDME_CHAVE`, guardada no
-telemóvel) mostra as fotografias dos apoios pagos; «Tirar da página e apagar»
-tira a que não deva estar à vista, em menos de um minuto. Com
-`fotos.aprovar: true`, as fotografias ficam à espera e a página passa a ter
-«Mostrar» (copia para `fundme/aprovadas/`), «Recusar» e «Retirar». Atualiza-se
-sozinha, para o dia do evento.
+telemóvel) mostra cada apoio que traz nome, mensagem ou fotografia, os que
+esperam primeiro:
+
+- **«Mostrar»** põe o nome na bandeira, a mensagem num postal e a fotografia
+  com ele (copia-a para `fundme/aprovadas/`), na página e no ecrã do clube, em
+  menos de um minuto;
+- **«Sem a fotografia»** mostra o nome e a mensagem e deixa a fotografia de
+  fora;
+- **«Não mostrar»** esconde tudo (o apoio continua a contar);
+- **«Apagar a fotografia»** apaga-a de vez — é a única que não volta atrás.
+
+Pode mudar-se de ideias: vale a última decisão. As decisões ficam no Blob, ao
+lado das fotografias, em `fundme/vistos/<apoio>/` (um ficheiro por decisão,
+cujo nome é a decisão); não se escreve nada na Stripe. A página atualiza-se sozinha, de
+20 em 20 segundos, para o dia do evento. Se o Blob falhar, a página pública
+serve as decisões de há menos de dez minutos; passado isso, deixa de mostrar
+nomes até ele voltar, em vez de os mostrar sem saber o que foi decidido. Para desligar a aprovação, `mural.aprovar: false` e
+`fotos.aprovar: false` em `data/fundme.json`: tudo volta a aparecer logo,
+menos o que tiver «Não mostrar».
+
+Os testes disto correm sem rede: `node --test scripts/fundme.test.mjs`.
 
 ### O ecrã da clubhouse e os QR codes
 

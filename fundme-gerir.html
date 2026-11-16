@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Fotografias — Rumo à Florida</title>
+<title>Por aprovar — Rumo à Florida</title>
 <meta name="robots" content="noindex, nofollow" />
 <meta name="theme-color" content="#F7F5EE" />
 <script>/* o tema antes do primeiro desenho: claro, a não ser que a pessoa tenha escolhido o escuro (js/casca.js) */try{var t=localStorage.getItem('fs-tema');if(t==='escuro'||t==='claro'){document.documentElement.dataset.tema=t;if(t==='escuro')document.querySelector('meta[name="theme-color"]').content='#091411';}}catch(e){}</script>
@@ -12,7 +12,7 @@
 <link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="/css/site.css" />
 <style>
-  /* /fundme/gerir — só para a família: aprovar as fotografias de quem apoia */
+  /* /fundme/gerir — só para a família: aprovar os nomes, as mensagens e as fotografias de quem apoia */
   [hidden]{display:none!important}
   body{min-height:100vh;background:var(--papel)}
   .gr{width:min(46rem,100% - 2rem);margin:0 auto;padding:calc(1.4rem + env(safe-area-inset-top)) 0 4rem}
@@ -34,17 +34,20 @@
   .gr-lista{list-style:none;padding:0;margin:0;display:grid;gap:1rem}
   .gr-f{display:grid;grid-template-columns:7.5rem 1fr;gap:1rem;padding:1rem;border:1px solid var(--linha);border-radius:16px;background:var(--superficie)}
   .gr-f--pendente{border-color:var(--relva);box-shadow:0 0 0 1px var(--relva)}
+  .gr-f.gr-f--semfoto{grid-template-columns:1fr}
+  .gr-f--escondido h2,.gr-f--escondido p,.gr-f--escondido img{opacity:.62}
   .gr-f img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:8px;background:var(--linha);cursor:zoom-in;display:block}
   .gr-f h2{font-size:1rem;margin:0;font-weight:800}
   .gr-f p{margin:.3rem 0 0;font-size:.9rem;color:var(--tinta-fraca);line-height:1.45}
   .gr-f .gr-msg{font-family:var(--display);font-style:italic;color:var(--tinta);font-size:1.02rem}
   .gr-chip{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .5rem;border-radius:99px;margin-left:.4rem;vertical-align:.1em}
   .gr-chip--pendente{background:var(--relva);color:var(--papel)}
-  .gr-chip--aprovada{background:var(--relva-clara);color:var(--tinta)}
-  .gr-chip--recusada{background:var(--linha);color:var(--tinta-fraca)}
+  .gr-chip--aprovado{background:var(--relva-clara);color:var(--tinta)}
+  .gr-chip--escondido{background:var(--linha);color:var(--tinta-fraca)}
   .gr-bts{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
   .gr-bts button{padding:.65rem .95rem;font-size:.92rem}
   .gr-bts .gr-nao{background:transparent;color:var(--tinta);border:1px solid var(--linha-forte)}
+  .gr-bts .gr-apagar{background:none;border:0;color:var(--tinta-fraca);font-weight:600;text-decoration:underline;text-underline-offset:3px;padding:.65rem .3rem}
   .gr-bts button:disabled{opacity:.5;cursor:default}
   .gr-vazio{color:var(--tinta-fraca);font-style:italic}
   .gr-soltas{margin-top:2rem;font-size:.86rem;color:var(--tinta-fraca);display:flex;flex-wrap:wrap;align-items:center;gap:.6rem}
@@ -58,10 +61,10 @@
 <main class="gr">
   <div class="gr-cab">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M6 21V3l11 4-11 4"/></svg>
-    <h1>Fotografias</h1>
+    <h1>Por aprovar</h1>
     <button type="button" id="grSair" hidden>Sair</button>
   </div>
-  <p class="gr-txt" id="grTxt">As fotografias de quem apoia o «Rumo à Florida». Só aparecem na página e no ecrã do clube depois de carregar em «Mostrar».</p>
+  <p class="gr-txt" id="grTxt">Os nomes, as mensagens e as fotografias de quem apoia o «Rumo à Florida». Só aparecem na página e no ecrã do clube depois de carregar em «Mostrar». O apoio conta sempre.</p>
 
   <form class="gr-ligar" id="grLigar" hidden>
     <label for="grChave" class="so-leitor">Chave</label>
@@ -73,7 +76,7 @@
   <div id="grConteudo" hidden>
     <div class="gr-filtro" role="group" aria-label="Mostrar">
       <button type="button" data-f="pendente" aria-pressed="true">À espera <span id="grN"></span></button>
-      <button type="button" data-f="todas" aria-pressed="false">Todas</button>
+      <button type="button" data-f="todos" aria-pressed="false">Todos</button>
     </div>
     <ul class="gr-lista" id="grLista"></ul>
     <p class="gr-soltas" id="grSoltas" hidden></p>

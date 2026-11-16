@@ -23,7 +23,10 @@
   "maximo": 5000,
   "fotos": {
     "aceitar": true,
-    "aprovar": false
+    "aprovar": true
+  },
+  "mural": {
+    "aprovar": true
   },
   "evento": {
     "mostrar": true,

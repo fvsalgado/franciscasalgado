@@ -40,6 +40,7 @@ export function publico(d) {
     maximo: d.maximo,
     evento: d.evento ?? null,
     fotos: fotosAbertas(d),
+    aprovar: aprovarMural(d),
   };
 }
 
@@ -136,10 +137,10 @@ export async function sessoesPagas(d) {
 /* Quem apoia pode juntar uma fotografia. A página reduz-na e manda-a para
  * /api/fundme/foto, que a guarda no Vercel Blob em fundme/pendentes/, com um
  * nome que não se adivinha; o endereço segue nos metadados do pagamento.
- * Sem `fotos.aprovar` (como está), aparece logo com o apoio, e apagá-la em
- * /fundme/gerir tira-a de vista. Com `fotos.aprovar: true`, só aparece
- * depois de aprovada lá: aprovar copia-a para fundme/aprovadas/<id>.jpg, e
- * é essa lista que a página e o ecrã mostram. Fala-se com o Blob pela API
+ * Com `fotos.aprovar: true` (como está), só aparece depois de aprovada em
+ * /fundme/gerir: aprovar copia-a para fundme/aprovadas/<id>.jpg, e é essa
+ * lista que a página e o ecrã mostram. Sem ele, aparece logo com o apoio, e
+ * apagá-la lá tira-a de vista. Fala-se com o Blob pela API
  * que o @vercel/blob usa, sem dependências, como com a Stripe. */
 
 const BLOB = 'https://vercel.com/api/blob';
@@ -182,6 +183,114 @@ export const fotosAbertas = (d) => blobLigado() && d?.fotos?.aceitar !== false;
 /** Mostrar só as aprovadas em /fundme/gerir, ou (o normal) todas as dos
  *  pagamentos feitos, enquanto não forem apagadas lá. */
 export const comAprovacao = (d) => d?.fotos?.aprovar === true;
+
+/* ── a aprovação dos nomes e das mensagens ─────────────────
+ *
+ * Com `mural.aprovar: true` em data/fundme.json, o nome e a mensagem de um
+ * apoio só aparecem (na bandeira, nos postais, no ecrã e no /api/fundme)
+ * depois de alguém da família os ver em /fundme/gerir. O dinheiro conta logo:
+ * o total e o número de apoios não esperam por ninguém.
+ *
+ * A decisão fica no Blob, ao lado das fotografias, num ficheiro vazio de
+ * interesse cujo NOME é a decisão: fundme/vistos/<curto(id)>/<decisão>.txt.
+ * Guarda-se com a mesma chamada das fotografias (o Blob junta-lhe um sufixo
+ * ao acaso), e a lista de fundme/ — que já se pedia por causa das
+ * fotografias — traz as decisões de borla. Mudar de ideias é guardar outro:
+ * vale o mais recente.
+ *   sim      o nome, a mensagem e a fotografia aparecem
+ *   semfoto  o nome e a mensagem aparecem, a fotografia não
+ *   nao      nada aparece (o apoio continua a contar)
+ */
+
+/** Esperar por aprovação antes de mostrar nomes e mensagens. */
+export const aprovarMural = (d) => d?.mural?.aprovar === true;
+
+export const RAIZ = 'fundme/';
+export const VISTOS = 'fundme/vistos/';
+export const DECISOES = ['sim', 'semfoto', 'nao'];
+export const caminhoVisto = (id, decisao) => `${VISTOS}${curto(id)}/${decisao}.txt`;
+
+/** Guarda a decisão sobre um apoio. */
+export const guardarVisto = (id, decisao) => blobGuardar(caminhoVisto(id, decisao), Buffer.from(decisao), 'text/plain');
+
+/** Arruma a lista de fundme/ no que as contas precisam:
+ *  - aprovadas: curto(id) → endereço da fotografia aprovada;
+ *  - existentes: os endereços das fotografias que ainda estão em pendentes/;
+ *  - vistos: curto(id) → a decisão mais recente sobre esse apoio;
+ *  - pendentes: os ficheiros de pendentes/, tal como vieram. */
+export function arrumar(ficheiros) {
+  const aprovadas = new Map();
+  const existentes = new Set();
+  const vistos = new Map();
+  const quandoVisto = new Map();
+  const pendentes = [];
+  for (const b of ficheiros ?? []) {
+    const p = String(b?.pathname ?? '');
+    if (p.startsWith(APROVADAS)) {
+      const m = /\/([0-9a-f]{16})\.jpg$/.exec(p);
+      // o ?v= muda quando se volta a aprovar, para não ficar a antiga em cache
+      if (m) aprovadas.set(m[1], `${b.url}?v=${Date.parse(b.uploadedAt) || 0}`);
+    } else if (p.startsWith(PENDENTES)) {
+      existentes.add(b.url);
+      pendentes.push(b);
+    } else if (p.startsWith(VISTOS)) {
+      // o sufixo ao acaso que o Blob junta ao nome vem depois da decisão
+      const m = /^([0-9a-f]{16})\/(sim|semfoto|nao)(?![a-z])[^/]*$/.exec(p.slice(VISTOS.length));
+      if (!m) continue;
+      const quando = Date.parse(b.uploadedAt) || 0;
+      if (!quandoVisto.has(m[1]) || quando >= quandoVisto.get(m[1])) {
+        quandoVisto.set(m[1], quando);
+        vistos.set(m[1], m[2]);
+      }
+    }
+  }
+  return { aprovadas, existentes, vistos, pendentes };
+}
+
+/* A última lista que chegou bem, por instância: se o Blob falhar a meio de um
+ * dia de evento, servem-se as decisões de há pouco em vez de esconder tudo.
+ * O preço: uma decisão tomada nesses minutos só se vê quando o Blob voltar. */
+let ultimaLista = null;
+const DEZ_MINUTOS = 10 * 60000;
+
+/** A lista de fundme/, arrumada. Se o Blob falhar, a de há menos de dez
+ *  minutos; sem ela, lança o erro (e quem chama esconde o que não sabe). */
+export async function ficheirosDoMural(agora = Date.now()) {
+  try {
+    const r = arrumar(await blobListar(RAIZ));
+    ultimaLista = { quando: agora, r };
+    return r;
+  } catch (e) {
+    if (ultimaLista && agora - ultimaLista.quando < DEZ_MINUTOS) {
+      console.error('fundme: lista do Blob (serve-se a de há pouco)', e.message);
+      return ultimaLista.r;
+    }
+    throw e;
+  }
+}
+
+/** O que está decidido sobre um apoio: 'aprovado', 'escondido' ou 'pendente'.
+ *  `vistos` é o Map de arrumar(); null quer dizer que não se conseguiu ler.
+ *  Um «nao» esconde sempre. Sem decisão: com aprovação, espera; sem ela,
+ *  aparece. Sem se saber (null) e com aprovação, espera: não se mostra um
+ *  nome sem se saber o que foi decidido sobre ele. */
+export function decisaoDe(s, d, vistos) {
+  const v = vistos?.get(curto(s.id));
+  if (v === 'nao') return 'escondido';
+  if (v === 'sim' || v === 'semfoto') return 'aprovado';
+  return aprovarMural(d) ? 'pendente' : 'aprovado';
+}
+
+/** A fotografia de um apoio que pode aparecer, ou null. Só com o apoio
+ *  aprovado e sem «semfoto»; depois, como sempre: com `fotos.aprovar`, a
+ *  cópia aprovada; sem ele, a que veio, se ainda existir. */
+export function fotoAVista(s, d, { aprovadas = new Map(), existentes = null, vistos = new Map() } = {}) {
+  if (decisaoDe(s, d, vistos) !== 'aprovado') return null;
+  if (vistos?.get(curto(s.id)) === 'semfoto') return null;
+  if (comAprovacao(d)) return aprovadas.get(curto(s.id)) ?? null;
+  const f = s.metadata?.foto;
+  return fotoValida(f) && (!existentes || existentes.has(f)) ? f : null;
+}
 
 async function blob(caminho, init = {}) {
   const chave = credencial();
@@ -287,35 +396,36 @@ function dias(de, ate) {
  * - total e apoios (cada pagamento ou registo conta um);
  * - porOrigem: online, clube, empresas (e o que mais se escrever à mão);
  * - serie: o total acumulado, dia a dia, do início até hoje;
- * - mural: só quem pediu para aparecer, sem valores, o mais recente primeiro,
- *   com a fotografia quando a houver (aprovada, se `fotos.aprovar`);
- *   `aprovadas` é o Map curto(id) → endereço que o index.js lê do Blob, e
- *   `existentes` o Set das fotografias que ainda lá estão (sem aprovação).
+ * - mural: só quem pediu para aparecer e já foi aprovado (ver decisaoDe),
+ *   sem valores, o mais recente primeiro, com a fotografia quando a houver
+ *   (ver fotoAVista). `aprovadas`, `existentes` e `vistos` vêm de arrumar();
+ * - aEntrar: quantos apoios com nome estão à espera de aprovação (só o
+ *   número: a página usa-o para não lhes chamar «sem nome»).
  */
-export function resumo({ sessoes = [], d, agora = Date.now(), aprovadas = new Map(), existentes = null }) {
-  const aprovar = comAprovacao(d);
-  /* a fotografia de um pagamento: com aprovação, a aprovada; sem ela, a que
-     veio, se ainda existir (apagada em /fundme/gerir, deixa de aparecer) */
-  const fotoDe = (s) => {
-    if (aprovar) return aprovadas.get(curto(s.id)) ?? null;
-    const f = s.metadata?.foto;
-    return fotoValida(f) && (!existentes || existentes.has(f)) ? f : null;
-  };
+export function resumo({ sessoes = [], d, agora = Date.now(), aprovadas = new Map(), existentes = null, vistos = new Map() }) {
   const excluir = new Set(d.excluir ?? []);
   const ocultar = new Set(d.ocultar ?? []);
 
   const entradas = [
-    ...sessoes.filter((s) => !excluir.has(s.id)).map((s) => ({
-      id: s.id,
-      dia: diaDe(s.created * 1000),
-      quando: s.created * 1000,
-      valor: (s.amount_total ?? 0) / 100,
-      origem: 'online',
-      nome: limpar(s.metadata?.nome, 40) || null,
-      mensagem: limpar(s.metadata?.mensagem, 140) || null,
-      foto: fotoDe(s),
-      mural: s.metadata?.mural === '1',
-    })),
+    ...sessoes.filter((s) => !excluir.has(s.id)).map((s) => {
+      // o que não está aprovado não leva nome, mensagem nem fotografia: daqui
+      // para a frente não há como aparecerem
+      const decisao = decisaoDe(s, d, vistos);
+      const aVista = decisao === 'aprovado';
+      const quer = s.metadata?.mural === '1';
+      return {
+        id: s.id,
+        dia: diaDe(s.created * 1000),
+        quando: s.created * 1000,
+        valor: (s.amount_total ?? 0) / 100,
+        origem: 'online',
+        nome: aVista ? limpar(s.metadata?.nome, 40) || null : null,
+        mensagem: aVista ? limpar(s.metadata?.mensagem, 140) || null : null,
+        foto: aVista ? fotoAVista(s, d, { aprovadas, existentes, vistos }) : null,
+        mural: quer,
+        aEntrar: quer && decisao === 'pendente' && Boolean(limpar(s.metadata?.nome, 40)),
+      };
+    }),
     ...(d.manuais ?? []).filter((m) => Number(m.valor) > 0 && /^\d{4}-\d{2}-\d{2}$/.test(m.data ?? '')).map((m, i) => ({
       id: m.id ?? `manual-${i}`,
       dia: m.data,
@@ -355,6 +465,7 @@ export function resumo({ sessoes = [], d, agora = Date.now(), aprovadas = new Ma
     porOrigem,
     serie,
     mural,
+    aEntrar: entradas.filter((e) => e.aEntrar).length,
     hoje: Math.round((porDia.get(hoje) ?? 0) * 100) / 100,
   };
 }
