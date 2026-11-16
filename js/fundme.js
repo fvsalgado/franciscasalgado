@@ -38,9 +38,10 @@ const T = {
       indisponivel: 'Não foi possível seguir com o apoio. Tente outra vez.',
       rede: 'Sem ligação. Tente outra vez.',
     },
-    obrigado: (n) => `<strong>Obrigada${n ? `, ${n}` : ''}!</strong> O seu apoio já conta${n ? ', e o seu nome já está na bandeira' : ''}.`,
+    obrigado: (n, aguarda) => `<strong>Obrigada${n ? `, ${n}` : ''}!</strong> O seu apoio já conta${n ? (aguarda ? ', e o seu nome entra na bandeira daqui a pouco' : ', e o seu nome já está na bandeira') : ''}.`,
     aEntrar: '<strong>Obrigada!</strong> O seu apoio está a ser confirmado. Com Multibanco, aparece aqui quando a referência for confirmada.',
     fotoDepois: ' A sua fotografia já está num postal.',
+    fotoEmBreve: ' A sua fotografia aparece num postal daqui a pouco.',
     cartao: {
       nome: 'O seu nome', frase: 'Uma mensagem para a Francisca',
       bt: (v) => `Apoiar com ${v}`, btOutro: 'Escreva o seu valor',
@@ -93,9 +94,10 @@ const T = {
       indisponivel: 'Your gift could not be started. Please try again.',
       rede: 'No connection. Please try again.',
     },
-    obrigado: (n) => `<strong>Thank you${n ? `, ${n}` : ''}!</strong> Your gift already counts${n ? ', and your name is on the flag' : ''}.`,
+    obrigado: (n, aguarda) => `<strong>Thank you${n ? `, ${n}` : ''}!</strong> Your gift already counts${n ? (aguarda ? ', and your name will be on the flag shortly' : ', and your name is on the flag') : ''}.`,
     aEntrar: '<strong>Thank you!</strong> Your gift is being confirmed. With Multibanco, it shows here once the reference is confirmed.',
     fotoDepois: ' Your photo is already on a postcard.',
+    fotoEmBreve: ' Your photo will be on a postcard shortly.',
     cartao: {
       nome: 'Your name', frase: 'A message for Francisca',
       bt: (v) => `Give ${v}`, btOutro: 'Type your amount',
@@ -494,7 +496,8 @@ async function obrigado(l) {
       const r = await fetch(`/api/fundme?sessao=${encodeURIComponent(sessao)}`, { cache: 'no-store' });
       const j = await r.json();
       if (j.pago) {
-        caixa.innerHTML = T[l].obrigado(esc(j.nome || '')) + (j.foto ? T[l].fotoDepois : '');
+        // com aprovação, o nome e a fotografia entram depois de vistos em /fundme/gerir
+        caixa.innerHTML = T[l].obrigado(esc(j.nome || ''), j.aguarda) + (j.foto ? (j.aguardaFoto ? T[l].fotoEmBreve : T[l].fotoDepois) : '');
         caixa.hidden = false;
         return true;
       }
@@ -1258,7 +1261,8 @@ function bandeira(d, l) {
   caixa.innerHTML = bandeiraCena(nomes, op);
   aplicarCeu(caixa);
   tecer(caixa, nomes, op);
-  const semNome = Math.max(0, (d.apoios ?? 0) - (d.mural ?? []).filter((m) => m.nome).length);
+  // os que têm nome e ainda esperam por aprovação não são «sem nome»
+  const semNome = Math.max(0, (d.apoios ?? 0) - (d.mural ?? []).filter((m) => m.nome).length - (d.aEntrar ?? 0));
   const partes = [];
   if (nomes.length) partes.push(t.nomes(nomes.length)); else partes.push(t.bandeiraVazia);
   if (semNome > 0 && nomes.length) partes.push(t.semNome(semNome));

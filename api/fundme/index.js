@@ -9,13 +9,16 @@
  * revalida: a Stripe não é chamada por cada visita, e um apoio novo aparece
  * em menos de um minuto.
  *
- * As fotografias aprovadas vêm do Vercel Blob (ver _comum.js).
+ * As fotografias e as decisões de /fundme/gerir vêm do Vercel Blob (ver
+ * _comum.js). Com `mural.aprovar`, um nome, uma mensagem ou uma fotografia
+ * que ainda ninguém aprovou não sai daqui: nem na resposta, nem em lado
+ * nenhum da página.
  *
  * Sem STRIPE_SECRET_KEY responde na mesma, com o que está escrito à mão, e
  * `stripe: 'por_ligar'` — a página mostra os números e fecha o botão.
  */
 
-import { APROVADAS, PENDENTES, SESSAO, blobLigado, blobListar, comAprovacao, dados, metodosPagamento, publico, resumo, sessoesPagas, lerPedido, stripe, stripeLigada } from './_comum.js';
+import { SESSAO, aprovarMural, blobLigado, comAprovacao, dados, ficheirosDoMural, metodosPagamento, publico, resumo, sessoesPagas, lerPedido, stripe, stripeLigada } from './_comum.js';
 
 export default async function handler(req, res) {
   lerPedido(req);
@@ -36,6 +39,10 @@ export default async function handler(req, res) {
         concluida: s.status === 'complete',
         nome: s.metadata?.nome || null,
         foto: Boolean(s.metadata?.foto),
+        // quem acabou de apoiar fica a saber se o nome e a fotografia entram
+        // já ou depois de vistos em /fundme/gerir
+        aguarda: aprovarMural(d),
+        aguardaFoto: aprovarMural(d) || comAprovacao(d),
       });
     } catch (e) {
       console.error('fundme: sessão', e.message);
@@ -60,30 +67,25 @@ export default async function handler(req, res) {
     }
   }
 
-  // as fotografias: com aprovação, as de fundme/aprovadas/<curto(id)>.jpg;
-  // sem ela, as que ainda existem em fundme/pendentes/ (apagar tira de vista)
-  const aprovadas = new Map();
-  let existentes = new Set();
-  if (blobLigado() && sessoes.some((s) => s.metadata?.foto)) {
+  // as fotografias e as decisões de /fundme/gerir, numa só lista do Blob.
+  // Se não se conseguir ler, `vistos` fica a null: com aprovação, nenhum nome
+  // aparece (não se mostra o que pode ter sido escondido), e a berma guarda
+  // isto só uns segundos.
+  let ficheiros = { aprovadas: new Map(), existentes: new Set(), vistos: new Map() };
+  if (blobLigado() && sessoes.some((s) => s.metadata?.mural === '1' || s.metadata?.foto)) {
     try {
-      if (comAprovacao(d)) {
-        for (const b of await blobListar(APROVADAS)) {
-          const m = /\/([0-9a-f]{16})\.jpg$/.exec(b.pathname ?? '');
-          // o ?v= muda quando se volta a aprovar, para não ficar a antiga em cache
-          if (m) aprovadas.set(m[1], `${b.url}?v=${Date.parse(b.uploadedAt) || 0}`);
-        }
-      } else {
-        existentes = new Set((await blobListar(PENDENTES)).map((b) => b.url));
-      }
+      ficheiros = await ficheirosDoMural();
     } catch (e) {
-      console.error('fundme: fotografias', e.message);
+      console.error('fundme: fotografias e decisões', e.message);
+      ficheiros = { aprovadas: new Map(), existentes: new Set(), vistos: null };
+      res.setHeader('Cache-Control', 's-maxage=5');
     }
   }
 
   const { lista: pagamentos, de: pagamentosDe } = await metodos;
   return res.status(200).json({
     ...publico(d),
-    ...resumo({ sessoes, d, aprovadas, existentes }),
+    ...resumo({ sessoes, d, ...ficheiros }),
     pagamentos,
     pagamentosDe,
     stripe: estado,
