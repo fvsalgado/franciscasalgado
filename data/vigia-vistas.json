@@ -56,6 +56,7 @@
     "https://portal.fpg.pt/noticias/estela-definiu-campeoes-e-vice-campeoes-do-5-o-torneio-drive-tour",
     "https://portal.fpg.pt/noticias/estela-definiu-vencedores-do-5o-torneio-do-drive-tour",
     "https://portal.fpg.pt/noticias/estrelas-do-golfe-amador-feminino-dao-cartas-no-montado",
+    "https://portal.fpg.pt/noticias/eva-silva-e-jose-miguel-franco-de-sousa-vencem-6o-torneio-do-circuito-aquapor",
     "https://portal.fpg.pt/noticias/fase-regular-do-drive-tour-concluida-venha-agora-a-final-nacional",
     "https://portal.fpg.pt/noticias/fase-regular-do-drive-tour-concluida-venha-agora-a-final-nacional-2",
     "https://portal.fpg.pt/noticias/favoritas-puxam-dos-galoes-no-primeiro-dia-do-internacional-de-portugal-de-senhoras",
@@ -179,5 +180,11 @@
     "2025-04-25|Campeonato Nacional de Jovens Sub 16 S",
     "2025-09-04|Cº DE ESPAÑA DE FF.AA. SUB-16 FEM. 2025",
     "2025-11-22|PJA Masters by Details - PGA  Aroeira 2"
+  ],
+  "wagr": [
+    255985,
+    259082,
+    262927,
+    274104
   ]
 }
