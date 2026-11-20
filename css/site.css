@@ -323,8 +323,6 @@ body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color
 @media (prefers-reduced-motion:reduce){.selo-fm__in{animation:none}}
 
 /* no hero da página inicial: por cima do arvoredo, do lado oposto à cara */
-.selo-fm--hero{--s:clamp(8.5rem,11vw,11rem);position:absolute;z-index:3;right:clamp(1.5rem,8vw,8rem);top:clamp(7rem,22vh,12rem)}
-@media (max-width:900px){.selo-fm--hero{--s:6.9rem;right:1rem;top:6.4rem}}
 
 /* nas outras páginas: no canto, por cima de tudo menos do aviso dos cookies */
 .selo-fm-x{position:fixed;right:clamp(1rem,2.4vw,2rem);bottom:clamp(1rem,2.4vw,2rem);z-index:150;transition:opacity .3s,transform .3s}
