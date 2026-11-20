@@ -1,9 +1,9 @@
 /* O selo «Rumo à Florida»: o logótipo do Junior Orange Bowl num carimbo
  * redondo, com «Apoie a Francisca» à volta, que leva ao /fundme.
  *
- * Na página inicial vive por cima da fotografia do hero, grande. Nas outras
- * páginas flutua no canto, mais pequeno, e tem um × que o fecha até ao fim da
- * visita. No /fundme não aparece (lá já está o bilhete, com o mesmo selo).
+ * Na página inicial não aparece (o hero fica limpo). Nas outras páginas flutua
+ * no canto, pequeno, e tem um × que o fecha até ao fim da visita. No /fundme
+ * não aparece (lá já está o bilhete, com o mesmo selo).
  *
  * Só aparece enquanto a angariação estiver aberta: lê o data/fundme.json e
  * esconde-se com `aberto: false` ou depois do dia da partida. Não entra no
@@ -11,7 +11,7 @@
  * lista), por isso nunca fica congelado num ficheiro depois de a campanha
  * acabar.
  *
- * A ligação leva `?o=site` (ou `site-inicio`): o formulário passa isso para os
+ * A ligação leva `?o=site`: o formulário passa isso para os
  * metadados do pagamento, e fica-se a saber quantos apoios vieram daqui. */
 
 const TEXTOS = {
@@ -59,25 +59,21 @@ function desenho(t) {
 export async function seloFundme(lingua = 'pt') {
   document.querySelectorAll('.selo-fm, .selo-fm-x').forEach((e) => e.remove());
   if (/fundme/.test(location.pathname)) return;
+  if (document.querySelector('.hero')) return; // página inicial: sem selo
   if (!(await campanhaAberta())) return;
   // a corrida pode ter repintado entretanto: só um selo de cada vez
   document.querySelectorAll('.selo-fm, .selo-fm-x').forEach((e) => e.remove());
 
   const t = TEXTOS[lingua] || TEXTOS.pt;
-  const hero = document.querySelector('.hero');
   const base = lingua === 'en' ? '/en/fundme' : '/fundme';
 
   const a = document.createElement('a');
-  a.className = `selo-fm ${hero ? 'selo-fm--hero' : 'selo-fm--flutua'}`;
-  a.href = `${base}?o=${hero ? 'site-inicio' : 'site'}`;
+  a.className = 'selo-fm selo-fm--flutua';
+  a.href = `${base}?o=site`;
   a.setAttribute('aria-label', t.rotulo);
   a.dataset.semSeta = '';
   a.innerHTML = desenho(t);
 
-  if (hero) {
-    hero.append(a);
-    return;
-  }
   if (ler(GUARDA) === 'fechado') return;
 
   const caixa = document.createElement('div');

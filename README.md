@@ -375,11 +375,11 @@ rajadas de quatro em quatro segundos; também com `?ecra`).
 
 **O selo no resto do sítio** (`js/selo.js`): um carimbo redondo com o
 logótipo do Junior Orange Bowl, «Apoie a Francisca» e «Rumo à Florida · 2027»
-à volta e uma patilha «Apoiar →», que leva ao `/fundme`. Na página inicial
-está por cima da fotografia do hero; nas outras flutua no canto, com um × que
-o fecha até ao fim da visita. Não aparece no `/fundme`. Lê o
+à volta e uma patilha «Apoiar →», que leva ao `/fundme`. Não aparece na página
+inicial nem no `/fundme`; nas outras flutua no canto, com um × que o fecha
+até ao fim da visita. Lê o
 `data/fundme.json` e só se mostra com `aberto: true` e até ao dia da
-`partida`. A ligação leva `?o=site-inicio` ou `?o=site`, que segue para os
+`partida`. A ligação leva `?o=site`, que segue para os
 metadados do pagamento: fica-se a saber quantos apoios vieram do selo.
 
 A página e o ecrã falam a mesma linguagem, a do golfe: os valores têm nomes
