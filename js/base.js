@@ -8,7 +8,6 @@ import { cursor, partirTitulos, rolagem, observar, reduzido } from './movimento.
 import { lingua, convidarLingua } from './i18n.js';
 import { cookies } from './cookies.js';
 import { canais } from './conteudo.js';
-import { seloFundme } from './selo.js';
 
 /* A marca que liga as animações de revelação. Está aqui, no topo do módulo,
    para correr no instante em que o JavaScript arranca: as regras que escondem
@@ -65,8 +64,6 @@ export function iniciar(pintar) {
        repetir-se em todas as páginas e nem sequer eram sítios que se sigam. */
     const lista = (await canais(l)).filter((c) => c.tipo === 'contacto');
     rodape(l, lista);
-    // o selo do «Rumo à Florida» não espera pela página
-    seloFundme(l);
     await pintar?.(l);
     // o que acabou de nascer entra no observador; sem isto ficava a zero de
     // opacidade para sempre

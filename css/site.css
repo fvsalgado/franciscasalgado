@@ -290,54 +290,6 @@ body.cur-mag .cur__a{transform:translate(-50%,-50%) scale(1.85);background:color
 
   body{padding-bottom:calc(3.9rem + env(safe-area-inset-bottom))}
 }
-
-/* ── o selo «Rumo à Florida» (js/selo.js) ─────────────────
-   Um carimbo redondo com o logótipo do Junior Orange Bowl, que leva ao
-   /fundme. Grande no hero da página inicial; pequeno e a flutuar no canto
-   das outras, com um × para o fechar. As cores são as do bilhete do /fundme,
-   fixas, para o carimbo ser o mesmo nos dois temas. */
-.selo-fm{--s:9rem;position:relative;display:block;width:var(--s);height:var(--s);border-radius:50%;text-decoration:none;
-  transition:transform .45s var(--curva)}
-.selo-fm__in{position:absolute;inset:0;display:block;border-radius:50%;transform:rotate(-9deg);
-  filter:drop-shadow(0 14px 20px rgba(0,0,0,.38));animation:selo-entra .9s cubic-bezier(.2,1.3,.4,1) .4s both,selo-mexe 8s ease-in-out 3s infinite}
-.selo-fm__anel{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.selo-fm__fundo{fill:#FFFEFA}
-.selo-fm__risco{fill:none;stroke:#1B6B47;stroke-width:2.2}
-.selo-fm__tracejado{fill:none;stroke:#E8711C;stroke-width:1.8;stroke-dasharray:4.5 4;opacity:.75}
-.selo-fm__txt{font-family:var(--corpo);font-weight:800;font-size:15px;letter-spacing:.13em;text-transform:uppercase;fill:#1B6B47}
-.selo-fm__txt--b{font-size:13px;letter-spacing:.12em;fill:#12281E}
-.selo-fm__estrela{fill:#E8711C}
-.selo-fm__logo{position:absolute;left:50%;top:43%;width:50%;height:auto;transform:translate(-50%,-50%)}
-.selo-fm__bt{position:absolute;left:50%;top:67%;transform:translate(-50%,-50%);white-space:nowrap;
-  background:#E8711C;color:#FFF;border-radius:99px;padding:.32em .75em .34em;font:800 max(.6rem,calc(var(--s) * .085))/1 var(--corpo);letter-spacing:.02em;
-  box-shadow:0 4px 10px -4px rgba(150,60,0,.6);transition:background .25s}
-@media (hover:hover){
-  .selo-fm:hover{transform:scale(1.06)}
-  .selo-fm:hover .selo-fm__in{animation-play-state:paused}
-  .selo-fm:hover .selo-fm__bt{background:#C95A0B}
-}
-.selo-fm:focus-visible{outline:3px solid #E8711C;outline-offset:4px}
-@keyframes selo-entra{from{opacity:0;transform:rotate(-40deg) scale(.5)}}
-/* de vez em quando, um abanão pequeno: chama sem incomodar */
-@keyframes selo-mexe{0%,86%,100%{transform:rotate(-9deg)}90%{transform:rotate(-2deg)}94%{transform:rotate(-14deg)}97%{transform:rotate(-7deg)}}
-@media (prefers-reduced-motion:reduce){.selo-fm__in{animation:none}}
-
-/* no hero da página inicial: por cima do arvoredo, do lado oposto à cara */
-
-/* nas outras páginas: no canto, por cima de tudo menos do aviso dos cookies */
-.selo-fm-x{position:fixed;right:clamp(1rem,2.4vw,2rem);bottom:clamp(1rem,2.4vw,2rem);z-index:150;transition:opacity .3s,transform .3s}
-.selo-fm-x .selo-fm{--s:7.4rem}
-.selo-fm-x__fechar{position:absolute;top:-.2rem;left:-.2rem;z-index:2;width:1.75rem;height:1.75rem;border-radius:50%;border:0;padding:0;cursor:pointer;
-  display:grid;place-items:center;background:var(--papel);color:var(--tinta);box-shadow:0 0 0 1px var(--linha-forte),0 4px 10px -4px rgba(0,0,0,.45)}
-.selo-fm-x__fechar svg{width:.8rem;height:.8rem;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round}
-body:has(.ck) .selo-fm-x{opacity:0;pointer-events:none;transform:translateY(1rem)}
-@media (max-width:1020px) and (pointer:coarse){
-  .selo-fm-x{right:.75rem;bottom:calc(4.7rem + env(safe-area-inset-bottom))}
-  .selo-fm-x .selo-fm{--s:5.6rem}
-  .selo-fm-x__fechar{width:1.55rem;height:1.55rem}
-}
-@media print{.selo-fm,.selo-fm-x{display:none}}
-
 /* ── HERO ───────────────────────────────────────────────── */
 /* A fotografia ocupa o ecrã inteiro e o nome vive por cima dela. Era um
    retrato pequeno numa caixa ao lado do nome, sobre fundo claro: arrumado,
